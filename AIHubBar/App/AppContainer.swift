@@ -69,6 +69,7 @@ final class AppContainer {
     let folders: FolderProjectStore
     let engine: CommandEngine
     let versionKeeper: VersionKeeper
+    let batches: BatchRunner
     let calendar: CalendarStore
 
     init() {
@@ -127,12 +128,25 @@ final class AppContainer {
         let versionKeeper = VersionKeeper(settings: settings, folders: folders)
         self.versionKeeper = versionKeeper
         engine.beforeRun = { [versionKeeper] path, title in versionKeeper.takeBeforeRun(projectPath: path, title: title) }
+        engine.tracksVersions = { [versionKeeper] in versionKeeper.isActive() }
+        runs.tracksVersions = { [versionKeeper] in versionKeeper.isActive() }
         let launcher = LaunchController(settings: settings, store: store, runs: runs, usage: usage)
         let telegramBot = TelegramBotController(settings: settings, sessions: sessions, runs: runs, usage: usage, approvals: telegramApprovals)
         self.telegramBot = telegramBot
         telegramApprovals.botReads = { [telegramBot] token in telegramBot.reads(token) }
         self.weeklySummary = WeeklySummarySender(settings: settings, usage: usage, runs: runs, hub: hub)
         self.launcher = launcher
+        let batches = BatchRunner(engine: engine)
+        self.batches = batches
+        batches.profile = { [modes] id in modes.modes.first { $0.id == id } }
+        batches.isHeld = { [launcher] in launcher.guardHold != nil }
+        batches.nightStart = { [settings] now in NightQueue.nextStart(hour: settings.nightStartHour, now: now) }
+        batches.resetsAt = { [usage] in usage.snapshot?.session?.resetsAt }
+        batches.announce = { [settings] batch in
+            let summary = batch.summary
+            Notifier.post(id: "batch-\(batch.id)", title: summary.title, body: summary.body)
+            Telegram.notify(.backgroundResults, html: "📦 <b>\(RunMessage.escape(summary.title))</b>\n\(RunMessage.escape(summary.body))", settings: settings)
+        }
         let quickPrompt = QuickPromptController(settings: settings, launcher: launcher, services: services)
         self.quickPrompt = quickPrompt
         let hooks = HookController(settings: settings)
@@ -316,6 +330,7 @@ final class AppContainer {
             calendar.start()
             if live {
                 launcher.start()
+                batches.start()
                 // After the menu bar item is up, so the alert is not the first thing of a login.
                 Task {
                     try? await Task.sleep(for: .seconds(3))
@@ -337,6 +352,9 @@ final class AppContainer {
                     requests.openWindow(.runLog)
                 case let .openFile(path):
                     NSWorkspace.shared.open(URL(fileURLWithPath: path))
+                case let .openChanges(projectPath, before):
+                    versionKeeper.shown = .init(projectPath: projectPath, before: before)
+                    requests.openWindow(.versions)
                 case let .openWindow(id):
                     // The id comes from a notification or a widget link, stored as text.
                     if let window = WindowID(rawValue: id) { requests.openWindow(window) }
@@ -451,6 +469,7 @@ private struct AppEnvironment: ViewModifier {
             .environment(app.services)
             .environment(app.folders)
             .environment(app.engine)
+            .environment(app.batches)
             .environment(app.calendar)
     }
 }

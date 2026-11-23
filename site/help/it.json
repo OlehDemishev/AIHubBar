@@ -409,8 +409,16 @@
               "name" : "Confronta"
             },
             {
+              "detail" : "«Scegli» sotto l’elenco dei progetti: spunta i progetti, scegli un comando del profilo e quando eseguirlo: «Ora», «Stanotte» o «Dopo l’azzeramento del limite». I progetti vanno uno dopo l’altro in background (Claude Code o un modello via API), vicino a un limite il gruppo attende l’azzeramento e alla fine arriva un solo riepilogo.",
+              "name" : "Più progetti insieme"
+            },
+            {
               "detail" : "Il modulo «Versioni» salva i testi e la scheda di un progetto-cartella prima di ogni avvio dell’IA e mentre scrivi, nella cartella dell’app, non nel progetto. Ogni quanto e per quanto tempo: Impostazioni → «Moduli» → «Versioni».",
               "name" : "Versioni"
+            },
+            {
+              "detail" : "«Versioni» in un progetto espanso apre l’elenco delle versioni: un file di una versione accanto a quello attuale, «Ripristina questo file» e «Ripristina tutta la versione». Prima del ripristino lo stato attuale viene salvato, e i file comparsi dopo restano. «Cosa è cambiato» nella notifica di un comando concluso e nel «Registro» mostra i testi prima dell’attività e adesso.",
+              "name" : "Ripristinare una versione"
             },
             {
               "detail" : "Le fasi del profilo, separate da virgole; la fase cambia con un pulsante nel progetto espanso. Parole, durata, tempo di lettura e pagine si contano sul file principale (.md, .txt, .rtf, .docx).",

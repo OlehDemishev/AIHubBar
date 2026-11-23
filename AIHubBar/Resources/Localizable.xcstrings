@@ -2020,6 +2020,310 @@
         }
       }
     },
+    "%@ — изменён с тех пор": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — changed since then"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — змінено відтоді"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ – seitdem geändert"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — modifié depuis"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: cambiado desde entonces"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — modificato da allora"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — alterado desde então"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — zmieniony od tamtej pory"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — その後変更あり"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — 그 뒤 변경됨"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — تغيّر منذ ذلك الحين"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — berubah sejak itu"
+          }
+        }
+      }
+    },
+    "%@ — как сейчас": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — same as now"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — як зараз"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ – wie jetzt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — identique à maintenant"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: igual que ahora"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — come adesso"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — igual a agora"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — jak teraz"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — 現在と同じ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — 지금과 같음"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — كما هو الآن"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — sama seperti sekarang"
+          }
+        }
+      }
+    },
+    "%@ — появился позже": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — appeared later"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — з’явився пізніше"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ – später hinzugekommen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — apparu plus tard"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: apareció después"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — comparso dopo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — apareceu depois"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — pojawił się później"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — 後から追加"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — 나중에 생김"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — ظهر لاحقًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — muncul belakangan"
+          }
+        }
+      }
+    },
+    "%@ — сейчас нет в папке": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — not in the folder now"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — зараз немає в папці"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ – jetzt nicht im Ordner"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — absent du dossier maintenant"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: ahora no está en la carpeta"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — ora non è nella cartella"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — não está na pasta agora"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — teraz nie ma w folderze"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — 現在はフォルダにありません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — 지금은 폴더에 없음"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — غير موجود في المجلد الآن"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — sekarang tidak ada di folder"
+          }
+        }
+      }
+    },
     "%@ — текущий": {
       "localizations": {
         "ar": {
@@ -3453,19 +3757,25 @@
     },
     "%lld МБ": {
       "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld م.ب"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld MB"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld MB"
           }
         },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld МБ"
-          }
-        },
-        "de": {
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld MB"
@@ -3477,25 +3787,13 @@
             "value": "%lld Mo"
           }
         },
-        "es": {
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld MB"
           }
         },
         "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld MB"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld MB"
-          }
-        },
-        "pl": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld MB"
@@ -3513,16 +3811,22 @@
             "value": "%lldMB"
           }
         },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld م.ب"
-          }
-        },
-        "id": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld MB"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld MB"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld МБ"
           }
         }
       }
@@ -14120,6 +14424,88 @@
         }
       }
     },
+    "«%@» станет таким, как в версии от %@. То, что есть сейчас, сначала сохранится отдельной версией.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "«%1$@» станет таким, как в версии от %2$@. То, что есть сейчас, сначала сохранится отдельной версией."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” will become what it was in the version of %@. What is there now is saved as a separate version first."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» стане таким, як у версії від %@. Те, що є зараз, спершу збережеться окремою версією."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@“ wird wieder so wie in der Version vom %@. Der jetzige Stand wird vorher als eigene Version gesichert."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %@ » redeviendra tel qu’il était dans la version du %@. L’état actuel est d’abord enregistré comme une version à part."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» quedará como en la versión del %@. Lo que hay ahora se guarda antes como una versión aparte."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» tornerà com’era nella versione del %@. Lo stato attuale viene prima salvato come versione a parte."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” ficará como estava na versão de %@. O que existe agora é salvo antes como uma versão separada."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@” stanie się taki, jak w wersji z %@. To, co jest teraz, najpierw zostanie zapisane jako osobna wersja."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」は%@のバージョンの内容に戻ります。現在の内容は、先に別のバージョンとして保存されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@”이(가) %@ 버전의 내용으로 돌아갑니다. 지금 내용은 먼저 별도의 버전으로 저장됩니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سيعود «%@» إلى ما كان عليه في نسخة %@. ما هو موجود الآن يُحفظ أولًا كنسخة مستقلة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” akan menjadi seperti di versi %@. Yang ada sekarang disimpan dulu sebagai versi tersendiri."
+          }
+        }
+      }
+    },
     "«%@» — в корзину?": {
       "localizations": {
         "ar": {
@@ -14268,6 +14654,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "«Найближче» бере дати з проєктів-папок: увімкніть «Проєкти» з папками."
+          }
+        }
+      }
+    },
+    "«Версии» в развёрнутом проекте открывает список версий: файл из версии рядом с текущим, «Вернуть этот файл» и «Вернуть всю версию». Перед возвратом текущее состояние сохраняется, а файлы, которые появились позже, остаются. «Что изменилось» в уведомлении о готовой команде и в «Журнале» показывает тексты до задачи и сейчас.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Versions” in an expanded project opens the list of versions: a file from a version next to the current one, “Restore This File” and “Restore the Whole Version”. The current state is saved before a restore, and files that appeared later stay. “What Changed” in the notification about a finished command and in the Log shows the texts before the task and now."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Версії» в розгорнутому проєкті відкриває список версій: файл із версії поруч із поточним, «Повернути цей файл» і «Повернути всю версію». Перед поверненням поточний стан зберігається, а файли, які з’явилися пізніше, залишаються. «Що змінилося» у сповіщенні про готову команду та в «Журналі» показує тексти до задачі й зараз."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Versionen“ in einem aufgeklappten Projekt öffnet die Versionsliste: eine Datei aus einer Version neben der aktuellen, „Diese Datei wiederherstellen“ und „Ganze Version wiederherstellen“. Vor dem Wiederherstellen wird der jetzige Stand gesichert, später hinzugekommene Dateien bleiben. „Was sich geändert hat“ in der Mitteilung über einen fertigen Befehl und im „Protokoll“ zeigt die Texte vor der Aufgabe und jetzt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Versions » dans un projet déplié ouvre la liste des versions : un fichier d’une version à côté du fichier actuel, « Rétablir ce fichier » et « Rétablir toute la version ». L’état actuel est enregistré avant un rétablissement, et les fichiers apparus plus tard restent. « Ce qui a changé » dans la notification d’une commande terminée et dans le « Journal » montre les textes avant la tâche et maintenant."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Versiones» en un proyecto desplegado abre la lista de versiones: un archivo de una versión junto al actual, «Restaurar este archivo» y «Restaurar toda la versión». Antes de restaurar se guarda el estado actual, y los archivos que aparecieron después se conservan. «Qué ha cambiado» en la notificación de un comando terminado y en el «Registro» muestra los textos antes de la tarea y ahora."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Versioni» in un progetto espanso apre l’elenco delle versioni: un file di una versione accanto a quello attuale, «Ripristina questo file» e «Ripristina tutta la versione». Prima del ripristino lo stato attuale viene salvato, e i file comparsi dopo restano. «Cosa è cambiato» nella notifica di un comando concluso e nel «Registro» mostra i testi prima dell’attività e adesso."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Versões” em um projeto expandido abre a lista de versões: um arquivo de uma versão ao lado do atual, “Restaurar este arquivo” e “Restaurar a versão inteira”. O estado atual é salvo antes da restauração, e os arquivos que apareceram depois ficam. “O que mudou” na notificação de um comando concluído e no “Registro” mostra os textos antes da tarefa e agora."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Wersje” w rozwiniętym projekcie otwiera listę wersji: plik z wersji obok obecnego, „Przywróć ten plik” i „Przywróć całą wersję”. Przed przywróceniem obecny stan jest zapisywany, a pliki, które pojawiły się później, zostają. „Co się zmieniło” w powiadomieniu o gotowym poleceniu i w „Dzienniku” pokazuje teksty przed zadaniem i teraz."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "展開したプロジェクトの「バージョン」でバージョンの一覧が開きます。バージョンのファイルと現在のファイルが並び、「このファイルを戻す」と「バージョン全体を戻す」が使えます。戻す前に現在の内容が保存され、後から追加されたファイルは残ります。完了したコマンドの通知と「ログ」の「変更内容」は、タスクの前と現在のテキストを表示します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "펼친 프로젝트의 “버전”은 버전 목록을 엽니다. 버전의 파일과 지금 파일이 나란히 보이고, “이 파일 되돌리기”와 “버전 전체 되돌리기”가 있습니다. 되돌리기 전에 지금 내용이 저장되며, 나중에 생긴 파일은 남습니다. 끝난 명령의 알림과 “로그”의 “바뀐 내용”은 작업 전과 지금의 텍스트를 보여 줍니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«النسخ» في المشروع الموسَّع يفتح قائمة النسخ: ملف من نسخة بجانب الملف الحالي، و«استعادة هذا الملف» و«استعادة النسخة كاملة». قبل الاستعادة تُحفظ الحالة الحالية، والملفات التي ظهرت لاحقًا تبقى. «ما الذي تغيّر» في إشعار الأمر المنتهي وفي «السجل» يعرض النصوص قبل المهمة والآن."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Versi” di proyek yang dibuka menampilkan daftar versi: file dari sebuah versi di samping file sekarang, “Pulihkan file ini” dan “Pulihkan seluruh versi”. Keadaan sekarang disimpan sebelum pemulihan, dan file yang muncul belakangan tetap ada. “Apa yang berubah” di notifikasi perintah yang selesai dan di “Log” menampilkan teks sebelum tugas dan sekarang."
+          }
+        }
+      }
+    },
+    "«Выбрать» под списком проектов: отметьте проекты, команду профиля и когда запустить — «Сейчас», «На ночь» или «После сброса лимита». Проекты идут по очереди в фоне (Claude Code или модель по API), у лимита пакет ждёт сброса, в конце приходит одна сводка.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Choose” under the list of projects: tick the projects, pick one of the profile’s commands and when to run it — “Now”, “Overnight” or “After the limit resets”. The projects go one after another in the background (Claude Code or a model by API), near a limit the batch waits for the reset, and one summary comes at the end."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Вибрати» під списком проєктів: позначте проєкти, команду профілю й коли запустити — «Зараз», «На ніч» або «Після скидання ліміту». Проєкти йдуть по черзі у фоні (Claude Code або модель через API), біля ліміту пакет чекає скидання, наприкінці надходить одне зведення."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Wählen“ unter der Projektliste: Projekte ankreuzen, einen Befehl des Profils wählen und wann er läuft – „Jetzt“, „Heute Nacht“ oder „Nach dem Zurücksetzen des Limits“. Die Projekte laufen nacheinander im Hintergrund (Claude Code oder ein Modell per API), am Limit wartet der Stapel auf das Zurücksetzen, am Ende kommt eine Zusammenfassung."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Choisir » sous la liste des projets : cochez les projets, choisissez une commande du profil et le moment — « Maintenant », « Cette nuit » ou « Après réinitialisation de la limite ». Les projets passent l’un après l’autre en arrière-plan (Claude Code ou un modèle par API), près d’une limite le lot attend la réinitialisation, et un seul résumé arrive à la fin."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Elegir» bajo la lista de proyectos: marca los proyectos, elige un comando del perfil y cuándo ejecutarlo: «Ahora», «Esta noche» o «Tras el reinicio del límite». Los proyectos van uno tras otro en segundo plano (Claude Code o un modelo por API), cerca de un límite el lote espera el reinicio y al final llega un solo resumen."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Scegli» sotto l’elenco dei progetti: spunta i progetti, scegli un comando del profilo e quando eseguirlo: «Ora», «Stanotte» o «Dopo l’azzeramento del limite». I progetti vanno uno dopo l’altro in background (Claude Code o un modello via API), vicino a un limite il gruppo attende l’azzeramento e alla fine arriva un solo riepilogo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Escolher” abaixo da lista de projetos: marque os projetos, escolha um comando do perfil e quando executar — “Agora”, “À noite” ou “Após o limite reiniciar”. Os projetos vão um após o outro em segundo plano (Claude Code ou um modelo por API), perto de um limite o lote espera o reinício e no fim chega um único resumo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Wybierz” pod listą projektów: zaznacz projekty, polecenie profilu i kiedy je uruchomić — „Teraz”, „Na noc” albo „Po resecie limitu”. Projekty idą po kolei w tle (Claude Code lub model przez API), przy limicie pakiet czeka na reset, a na końcu przychodzi jedno podsumowanie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクト一覧の下の「選択」で、プロジェクトにチェックを入れ、プロファイルのコマンドと実行のタイミング（「現在」「今夜」「上限のリセット後」）を選びます。プロジェクトはバックグラウンドで1つずつ順番に処理され（Claude CodeまたはAPI経由のモデル）、上限が近いとバッチはリセットを待ち、最後にまとめが1件届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트 목록 아래의 “선택”에서 프로젝트를 체크하고, 프로필의 명령과 실행 시점(“현재”, “오늘 밤”, “한도 초기화 후”)을 고릅니다. 프로젝트는 백그라운드에서 하나씩 차례로 처리되며(Claude Code 또는 API 모델), 한도에 가까워지면 묶음은 초기화를 기다리고, 끝나면 요약이 하나 옵니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«اختيار» تحت قائمة المشاريع: حدّد المشاريع، واختر أحد أوامر ملف التعريف ووقت التشغيل — «الآن» أو «الليلة» أو «بعد إعادة ضبط الحد». تُنفَّذ المشاريع واحدًا تلو الآخر في الخلفية (Claude Code أو نموذج عبر API)، وقرب الحد تنتظر الدفعة إعادة الضبط، وفي النهاية يصل ملخص واحد."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Pilih” di bawah daftar proyek: centang proyek, pilih salah satu perintah profil dan kapan menjalankannya — “Sekarang”, “Malam ini”, atau “Setelah batas direset”. Proyek dikerjakan satu per satu di latar belakang (Claude Code atau model lewat API), di dekat batas kumpulan itu menunggu reset, dan di akhir datang satu ringkasan."
           }
         }
       }
@@ -18681,6 +19219,88 @@
         }
       }
     },
+    "Было: %@. Сейчас: %@": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Было: %1$@. Сейчас: %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was: %@. Now: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Було: %@. Зараз: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorher: %@. Jetzt: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avant : %@. Maintenant : %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antes: %@. Ahora: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prima: %@. Adesso: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antes: %@. Agora: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Było: %@. Teraz: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "以前: %@。現在: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이전: %@. 지금: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كان: %@. الآن: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sebelumnya: %@. Sekarang: %@"
+          }
+        }
+      }
+    },
     "Быстрая команда AI Hub Bar": {
       "localizations": {
         "ar": {
@@ -21809,18 +22429,468 @@
         }
       }
     },
-    "Версии": {
+    "Вернуть": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Versions"
+            "value": "Restore"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Версії"
+            "value": "Повернути"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wiederherstellen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rétablir"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ripristina"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przywróć"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "戻す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "되돌리기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استعادة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulihkan"
+          }
+        }
+      }
+    },
+    "Вернуть версию": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restoring a version"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повернути версію"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version wiederherstellen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rétablir une version"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar una versión"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ripristinare una versione"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar uma versão"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przywracanie wersji"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョンを戻す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전 되돌리기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استعادة نسخة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memulihkan versi"
+          }
+        }
+      }
+    },
+    "Вернуть всю версию": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore the Whole Version"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повернути всю версію"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ganze Version wiederherstellen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rétablir toute la version"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar toda la versión"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ripristina tutta la versione"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar a versão inteira"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przywróć całą wersję"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョン全体を戻す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전 전체 되돌리기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استعادة النسخة كاملة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulihkan seluruh versi"
+          }
+        }
+      }
+    },
+    "Вернуть всю версию?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore the whole version?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повернути всю версію?"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ganze Version wiederherstellen?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rétablir toute la version ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Restaurar toda la versión?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ripristinare tutta la versione?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar a versão inteira?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przywrócić całą wersję?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョン全体を戻しますか？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전 전체를 되돌릴까요?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استعادة النسخة كاملة؟"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulihkan seluruh versi?"
+          }
+        }
+      }
+    },
+    "Вернуть этот файл": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore This File"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повернути цей файл"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Datei wiederherstellen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rétablir ce fichier"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar este archivo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ripristina questo file"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar este arquivo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przywróć ten plik"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このファイルを戻す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 파일 되돌리기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استعادة هذا الملف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulihkan file ini"
+          }
+        }
+      }
+    },
+    "Вернуть этот файл?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore this file?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повернути цей файл?"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Datei wiederherstellen?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rétablir ce fichier ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Restaurar este archivo?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ripristinare questo file?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar este arquivo?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przywrócić ten plik?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このファイルを戻しますか？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 파일을 되돌릴까요?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استعادة هذا الملف؟"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulihkan file ini?"
+          }
+        }
+      }
+    },
+    "Версии": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النسخ"
           }
         },
         "de": {
@@ -21829,7 +22899,7 @@
             "value": "Versionen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Versions"
@@ -21841,22 +22911,22 @@
             "value": "Versiones"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versions"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Versioni"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Versões"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wersje"
           }
         },
         "ja": {
@@ -21871,32 +22941,32 @@
             "value": "버전"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "النسخ"
+            "value": "Wersje"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Versi"
+            "value": "Versões"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Версії"
           }
         }
       }
     },
     "Версии всех проектов будут удалены. Сами проекты не меняются. Отменить нельзя.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The versions of every project will be deleted. The projects themselves don’t change. This can’t be undone."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Версії всіх проєктів буде видалено. Самі проєкти не змінюються. Скасувати не можна."
+            "value": "ستُحذف نسخ جميع المشاريع. المشاريع نفسها لا تتغير. لا يمكن التراجع."
           }
         },
         "de": {
@@ -21905,10 +22975,10 @@
             "value": "Die Versionen aller Projekte werden gelöscht. Die Projekte selbst ändern sich nicht. Das lässt sich nicht rückgängig machen."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les versions de tous les projets seront supprimées. Les projets eux-mêmes ne changent pas. Cette action est irréversible."
+            "value": "The versions of every project will be deleted. The projects themselves don’t change. This can’t be undone."
           }
         },
         "es": {
@@ -21917,22 +22987,22 @@
             "value": "Se eliminarán las versiones de todos los proyectos. Los proyectos en sí no cambian. No se puede deshacer."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les versions de tous les projets seront supprimées. Les projets eux-mêmes ne changent pas. Cette action est irréversible."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi semua proyek akan dihapus. Proyeknya sendiri tidak berubah. Tidak bisa dibatalkan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Le versioni di tutti i progetti verranno eliminate. I progetti in sé non cambiano. Non si può annullare."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "As versões de todos os projetos serão apagadas. Os projetos em si não mudam. Não dá para desfazer."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wersje wszystkich projektów zostaną usunięte. Same projekty się nie zmienią. Tego nie można cofnąć."
           }
         },
         "ja": {
@@ -21947,32 +23017,32 @@
             "value": "모든 프로젝트의 버전이 삭제됩니다. 프로젝트 자체는 바뀌지 않습니다. 되돌릴 수 없습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "ستُحذف نسخ جميع المشاريع. المشاريع نفسها لا تتغير. لا يمكن التراجع."
+            "value": "Wersje wszystkich projektów zostaną usunięte. Same projekty się nie zmienią. Tego nie można cofnąć."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Versi semua proyek akan dihapus. Proyeknya sendiri tidak berubah. Tidak bisa dibatalkan."
+            "value": "As versões de todos os projetos serão apagadas. Os projetos em si não mudam. Não dá para desfazer."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Версії всіх проєктів буде видалено. Самі проєкти не змінюються. Скасувати не можна."
           }
         }
       }
     },
     "Версии лежат в папке приложения, не в папке проекта. Версии проекта, папки которого больше нет, удаляются через месяц.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Versions are kept in the app’s folder, not in the project folder. The versions of a project whose folder is gone are removed after a month."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Версії лежать у папці застосунку, а не в папці проєкту. Версії проєкту, папки якого вже немає, видаляються через місяць."
+            "value": "تُحفظ النسخ في مجلد التطبيق لا في مجلد المشروع. نسخ المشروع الذي لم يعد مجلده موجودًا تُحذف بعد شهر."
           }
         },
         "de": {
@@ -21981,10 +23051,10 @@
             "value": "Versionen liegen im Ordner der App, nicht im Projektordner. Die Versionen eines Projekts, dessen Ordner es nicht mehr gibt, werden nach einem Monat entfernt."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les versions sont conservées dans le dossier de l’app, pas dans celui du projet. Les versions d’un projet dont le dossier n’existe plus sont supprimées au bout d’un mois."
+            "value": "Versions are kept in the app’s folder, not in the project folder. The versions of a project whose folder is gone are removed after a month."
           }
         },
         "es": {
@@ -21993,22 +23063,22 @@
             "value": "Las versiones se guardan en la carpeta de la app, no en la del proyecto. Las versiones de un proyecto cuya carpeta ya no existe se eliminan al cabo de un mes."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les versions sont conservées dans le dossier de l’app, pas dans celui du projet. Les versions d’un projet dont le dossier n’existe plus sont supprimées au bout d’un mois."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi disimpan di folder app, bukan di folder proyek. Versi proyek yang foldernya sudah tidak ada dihapus setelah sebulan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Le versioni stanno nella cartella dell’app, non in quella del progetto. Le versioni di un progetto la cui cartella non esiste più vengono rimosse dopo un mese."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "As versões ficam na pasta do app, não na pasta do projeto. As versões de um projeto cuja pasta não existe mais são removidas depois de um mês."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wersje leżą w folderze aplikacji, nie w folderze projektu. Wersje projektu, którego folderu już nie ma, są usuwane po miesiącu."
           }
         },
         "ja": {
@@ -22023,32 +23093,32 @@
             "value": "버전은 프로젝트 폴더가 아니라 앱의 폴더에 보관됩니다. 폴더가 없어진 프로젝트의 버전은 한 달 뒤에 삭제됩니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تُحفظ النسخ في مجلد التطبيق لا في مجلد المشروع. نسخ المشروع الذي لم يعد مجلده موجودًا تُحذف بعد شهر."
+            "value": "Wersje leżą w folderze aplikacji, nie w folderze projektu. Wersje projektu, którego folderu już nie ma, są usuwane po miesiącu."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Versi disimpan di folder app, bukan di folder proyek. Versi proyek yang foldernya sudah tidak ada dihapus setelah sebulan."
+            "value": "As versões ficam na pasta do app, não na pasta do projeto. As versões de um projeto cuja pasta não existe mais são removidas depois de um mês."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Версії лежать у папці застосунку, а не в папці проєкту. Версії проєкту, папки якого вже немає, видаляються через місяць."
           }
         }
       }
     },
     "Версии черновиков для проектов-папок: тексты и карточка проекта сохраняются перед каждым запуском AI и пока вы пишете. Хранятся в папке приложения, не в проекте, и никуда не отправляются.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Draft versions for folder projects: the texts and the project card are saved before every AI run and while you write. They are kept in the app’s folder, not in the project, and are not sent anywhere."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Версії чернеток для проєктів-папок: тексти й картка проєкту зберігаються перед кожним запуском AI і поки ви пишете. Лежать у папці застосунку, не в проєкті, і нікуди не надсилаються."
+            "value": "نسخ المسودات لمشاريع المجلدات: تُحفظ النصوص وبطاقة المشروع قبل كل تشغيل للذكاء الاصطناعي وأثناء كتابتك. تبقى في مجلد التطبيق لا في المشروع، ولا تُرسل إلى أي مكان."
           }
         },
         "de": {
@@ -22057,10 +23127,10 @@
             "value": "Entwurfsversionen für Ordnerprojekte: Texte und Projektkarte werden vor jedem KI-Lauf und während des Schreibens gesichert. Sie liegen im Ordner der App, nicht im Projekt, und werden nirgendwohin gesendet."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Versions des brouillons pour les projets-dossiers : les textes et la fiche du projet sont enregistrés avant chaque lancement de l’IA et pendant que vous écrivez. Elles restent dans le dossier de l’app, pas dans le projet, et ne sont envoyées nulle part."
+            "value": "Draft versions for folder projects: the texts and the project card are saved before every AI run and while you write. They are kept in the app’s folder, not in the project, and are not sent anywhere."
           }
         },
         "es": {
@@ -22069,22 +23139,22 @@
             "value": "Versiones de los borradores para proyectos de carpeta: los textos y la ficha del proyecto se guardan antes de cada ejecución de la IA y mientras escribes. Se guardan en la carpeta de la app, no en el proyecto, y no se envían a ningún sitio."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versions des brouillons pour les projets-dossiers : les textes et la fiche du projet sont enregistrés avant chaque lancement de l’IA et pendant que vous écrivez. Elles restent dans le dossier de l’app, pas dans le projet, et ne sont envoyées nulle part."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi draf untuk proyek folder: teks dan kartu proyek disimpan sebelum setiap AI dijalankan dan selama Anda menulis. Disimpan di folder app, bukan di proyek, dan tidak dikirim ke mana pun."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Versioni delle bozze per i progetti-cartella: i testi e la scheda del progetto vengono salvati prima di ogni avvio dell’IA e mentre scrivi. Restano nella cartella dell’app, non nel progetto, e non vengono inviate da nessuna parte."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Versões dos rascunhos para projetos de pasta: os textos e o cartão do projeto são salvos antes de cada execução da IA e enquanto você escreve. Ficam na pasta do app, não no projeto, e não são enviadas a lugar nenhum."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wersje szkiców dla projektów-folderów: teksty i karta projektu są zapisywane przed każdym uruchomieniem AI i gdy piszesz. Leżą w folderze aplikacji, nie w projekcie, i nigdzie nie są wysyłane."
           }
         },
         "ja": {
@@ -22099,16 +23169,22 @@
             "value": "폴더 프로젝트의 초안 버전: 텍스트와 프로젝트 카드를 AI를 실행하기 전마다, 그리고 글을 쓰는 동안 저장합니다. 프로젝트가 아니라 앱의 폴더에 보관되며 어디로도 전송되지 않습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "نسخ المسودات لمشاريع المجلدات: تُحفظ النصوص وبطاقة المشروع قبل كل تشغيل للذكاء الاصطناعي وأثناء كتابتك. تبقى في مجلد التطبيق لا في المشروع، ولا تُرسل إلى أي مكان."
+            "value": "Wersje szkiców dla projektów-folderów: teksty i karta projektu są zapisywane przed każdym uruchomieniem AI i gdy piszesz. Leżą w folderze aplikacji, nie w projekcie, i nigdzie nie są wysyłane."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Versi draf untuk proyek folder: teks dan kartu proyek disimpan sebelum setiap AI dijalankan dan selama Anda menulis. Disimpan di folder app, bukan di proyek, dan tidak dikirim ke mana pun."
+            "value": "Versões dos rascunhos para projetos de pasta: os textos e o cartão do projeto são salvos antes de cada execução da IA e enquanto você escreve. Ficam na pasta do app, não no projeto, e não são enviadas a lugar nenhum."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Версії чернеток для проєктів-папок: тексти й картка проєкту зберігаються перед кожним запуском AI і поки ви пишете. Лежать у папці застосунку, не в проєкті, і нікуди не надсилаються."
           }
         }
       }
@@ -22262,6 +23338,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Версія %@"
+          }
+        }
+      }
+    },
+    "Версия: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Версія: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version : %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versión: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versione: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versão: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wersja: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョン: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النسخة: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi: %@"
           }
         }
       }
@@ -25160,6 +26312,82 @@
         }
       }
     },
+    "Возвращено файлов: %lld. То, что было до этого, сохранено в списке версий.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Files restored: %lld. What was there before is saved in the list of versions."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повернуто файлів: %lld. Те, що було до цього, збережено у списку версій."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wiederhergestellte Dateien: %lld. Der vorherige Stand ist in der Versionsliste gesichert."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichiers rétablis : %lld. L’état précédent est enregistré dans la liste des versions."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivos restaurados: %lld. Lo que había antes está guardado en la lista de versiones."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File ripristinati: %lld. Lo stato precedente è salvato nell’elenco delle versioni."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arquivos restaurados: %lld. O que havia antes está salvo na lista de versões."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przywrócone pliki: %lld. To, co było wcześniej, jest zapisane na liście wersji."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "戻したファイル: %lld。それまでの内容はバージョンの一覧に保存されています。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "되돌린 파일: %lld개. 그 전의 내용은 버전 목록에 저장되어 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الملفات المستعادة: %lld. ما كان قبل ذلك محفوظ في قائمة النسخ."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File yang dipulihkan: %lld. Yang ada sebelumnya tersimpan di daftar versi."
+          }
+        }
+      }
+    },
     "Войдите в Claude Code: claude → /login": {
       "localizations": {
         "ar": {
@@ -25612,6 +26840,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Час читання"
+          }
+        }
+      }
+    },
+    "Все": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Усі"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutti"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wszystkie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべて"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모두"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الكل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semua"
           }
         }
       }
@@ -27056,6 +28360,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Виберіть файл ліворуч"
+          }
+        }
+      }
+    },
+    "Выбрано проектов: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projects chosen: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вибрано проєктів: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gewählte Projekte: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projets choisis : %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyectos elegidos: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progetti scelti: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projetos escolhidos: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybrane projekty: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択したプロジェクト: %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택한 프로젝트: %lld개"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المشاريع المختارة: %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyek dipilih: %lld"
           }
         }
       }
@@ -29413,6 +30793,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Виконати одну команду 2–3 сервісами й покласти результати поруч"
+          }
+        }
+      }
+    },
+    "Выполнить одну команду в нескольких проектах — по очереди, сейчас или ночью": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run one command in several projects — one after another, now or at night"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Виконати одну команду в кількох проєктах — по черзі, зараз або вночі"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einen Befehl in mehreren Projekten ausführen – nacheinander, jetzt oder nachts"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exécuter une commande dans plusieurs projets — l’un après l’autre, maintenant ou la nuit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ejecutar un comando en varios proyectos: uno tras otro, ahora o por la noche"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esegui un comando in più progetti: uno dopo l’altro, ora o di notte"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Executar um comando em vários projetos — um após o outro, agora ou à noite"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wykonaj jedno polecenie w kilku projektach — po kolei, teraz lub w nocy"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1つのコマンドを複数のプロジェクトで順番に実行します（今すぐ、または夜間）"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "하나의 명령을 여러 프로젝트에서 차례로 실행합니다(지금 또는 밤에)"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تنفيذ أمر واحد في عدة مشاريع — واحدًا تلو الآخر، الآن أو ليلًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jalankan satu perintah di beberapa proyek — satu per satu, sekarang atau malam hari"
           }
         }
       }
@@ -34058,16 +35514,10 @@
     },
     "Дней: %lld": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld days"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Днів: %lld"
+            "value": "%lld يومًا"
           }
         },
         "de": {
@@ -34076,10 +35526,10 @@
             "value": "%lld Tage"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld jours"
+            "value": "%lld days"
           }
         },
         "es": {
@@ -34088,22 +35538,22 @@
             "value": "%lld días"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld jours"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld hari"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld giorni"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld dias"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dni: %lld"
           }
         },
         "ja": {
@@ -34118,16 +35568,22 @@
             "value": "%lld일"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld يومًا"
+            "value": "Dni: %lld"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld hari"
+            "value": "%lld dias"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Днів: %lld"
           }
         }
       }
@@ -35192,6 +36648,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Додано профілів: %lld."
+          }
+        }
+      }
+    },
+    "Добавлено: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Added: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Додано: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hinzugefügt: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouté : %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadido: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiunto: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionado: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodano: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追加: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "추가됨: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أُضيف: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ditambahkan: %@"
           }
         }
       }
@@ -45773,16 +47305,10 @@
     },
     "Каждые 10 минут, если что-то изменилось": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Every 10 minutes, if something changed"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Кожні 10 хвилин, якщо щось змінилося"
+            "value": "كل 10 دقائق إذا تغيّر شيء"
           }
         },
         "de": {
@@ -45791,10 +47317,10 @@
             "value": "Alle 10 Minuten, wenn sich etwas geändert hat"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toutes les 10 minutes, si quelque chose a changé"
+            "value": "Every 10 minutes, if something changed"
           }
         },
         "es": {
@@ -45803,22 +47329,22 @@
             "value": "Cada 10 minutos, si algo cambió"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les 10 minutes, si quelque chose a changé"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Setiap 10 menit, jika ada yang berubah"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Ogni 10 minuti, se qualcosa è cambiato"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A cada 10 minutos, se algo mudou"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Co 10 minut, jeśli coś się zmieniło"
           }
         },
         "ja": {
@@ -45833,32 +47359,32 @@
             "value": "변경이 있으면 10분마다"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "كل 10 دقائق إذا تغيّر شيء"
+            "value": "Co 10 minut, jeśli coś się zmieniło"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Setiap 10 menit, jika ada yang berubah"
+            "value": "A cada 10 minutos, se algo mudou"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кожні 10 хвилин, якщо щось змінилося"
           }
         }
       }
     },
     "Каждые 30 минут, если что-то изменилось": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Every 30 minutes, if something changed"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Кожні 30 хвилин, якщо щось змінилося"
+            "value": "كل 30 دقيقة إذا تغيّر شيء"
           }
         },
         "de": {
@@ -45867,10 +47393,10 @@
             "value": "Alle 30 Minuten, wenn sich etwas geändert hat"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toutes les 30 minutes, si quelque chose a changé"
+            "value": "Every 30 minutes, if something changed"
           }
         },
         "es": {
@@ -45879,22 +47405,22 @@
             "value": "Cada 30 minutos, si algo cambió"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les 30 minutes, si quelque chose a changé"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Setiap 30 menit, jika ada yang berubah"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Ogni 30 minuti, se qualcosa è cambiato"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A cada 30 minutos, se algo mudou"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Co 30 minut, jeśli coś się zmieniło"
           }
         },
         "ja": {
@@ -45909,16 +47435,22 @@
             "value": "변경이 있으면 30분마다"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "كل 30 دقيقة إذا تغيّر شيء"
+            "value": "Co 30 minut, jeśli coś się zmieniło"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Setiap 30 menit, jika ada yang berubah"
+            "value": "A cada 30 minutos, se algo mudou"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кожні 30 хвилин, якщо щось змінилося"
           }
         }
       }
@@ -46305,16 +47837,10 @@
     },
     "Как часто сохранять": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "How often to save"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Як часто зберігати"
+            "value": "كم مرة يُحفظ"
           }
         },
         "de": {
@@ -46323,10 +47849,10 @@
             "value": "Wie oft sichern"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fréquence d’enregistrement"
+            "value": "How often to save"
           }
         },
         "es": {
@@ -46335,22 +47861,22 @@
             "value": "Cada cuánto guardar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fréquence d’enregistrement"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seberapa sering menyimpan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Ogni quanto salvare"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Com que frequência salvar"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jak często zapisywać"
           }
         },
         "ja": {
@@ -46365,16 +47891,22 @@
             "value": "저장 주기"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "كم مرة يُحفظ"
+            "value": "Jak często zapisywać"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Seberapa sering menyimpan"
+            "value": "Com que frequência salvar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Як часто зберігати"
           }
         }
       }
@@ -56962,16 +58494,10 @@
     },
     "Модуль «Версии» сохраняет тексты и карточку проекта-папки перед каждым запуском AI и пока вы пишете — в папке приложения, не в проекте. Как часто и сколько хранить — Настройки → «Модули» → «Версии».": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The Versions module saves the texts and the card of a folder project before every AI run and while you write — in the app’s folder, not in the project. How often and how long to keep: Settings → Modules → Versions."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Модуль «Версії» зберігає тексти й картку проєкту-папки перед кожним запуском AI і поки ви пишете — у папці застосунку, не в проєкті. Як часто й скільки зберігати — Параметри → «Модулі» → «Версії»."
+            "value": "وحدة «النسخ» تحفظ نصوص مشروع المجلد وبطاقته قبل كل تشغيل للذكاء الاصطناعي وأثناء كتابتك — في مجلد التطبيق لا في المشروع. كم مرة وكم تُحفظ: الإعدادات ← «الوحدات» ← «النسخ»."
           }
         },
         "de": {
@@ -56980,10 +58506,10 @@
             "value": "Das Modul „Versionen“ sichert die Texte und die Karte eines Ordnerprojekts vor jedem KI-Lauf und während des Schreibens – im Ordner der App, nicht im Projekt. Wie oft und wie lange: Einstellungen → „Module“ → „Versionen“."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le module « Versions » enregistre les textes et la fiche d’un projet-dossier avant chaque lancement de l’IA et pendant que vous écrivez — dans le dossier de l’app, pas dans le projet. Fréquence et durée de conservation : Réglages → « Modules » → « Versions »."
+            "value": "The Versions module saves the texts and the card of a folder project before every AI run and while you write — in the app’s folder, not in the project. How often and how long to keep: Settings → Modules → Versions."
           }
         },
         "es": {
@@ -56992,22 +58518,22 @@
             "value": "El módulo «Versiones» guarda los textos y la ficha de un proyecto de carpeta antes de cada ejecución de la IA y mientras escribes, en la carpeta de la app, no en el proyecto. Cada cuánto y cuánto tiempo: Ajustes → «Módulos» → «Versiones»."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le module « Versions » enregistre les textes et la fiche d’un projet-dossier avant chaque lancement de l’IA et pendant que vous écrivez — dans le dossier de l’app, pas dans le projet. Fréquence et durée de conservation : Réglages → « Modules » → « Versions »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modul “Versi” menyimpan teks dan kartu proyek folder sebelum setiap AI dijalankan dan selama Anda menulis — di folder app, bukan di proyek. Seberapa sering dan berapa lama disimpan: Pengaturan → “Modul” → “Versi”."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Il modulo «Versioni» salva i testi e la scheda di un progetto-cartella prima di ogni avvio dell’IA e mentre scrivi, nella cartella dell’app, non nel progetto. Ogni quanto e per quanto tempo: Impostazioni → «Moduli» → «Versioni»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O módulo “Versões” salva os textos e o cartão de um projeto de pasta antes de cada execução da IA e enquanto você escreve — na pasta do app, não no projeto. Com que frequência e por quanto tempo: Ajustes → “Módulos” → “Versões”."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Moduł „Wersje” zapisuje teksty i kartę projektu-folderu przed każdym uruchomieniem AI i gdy piszesz — w folderze aplikacji, nie w projekcie. Jak często i jak długo przechowywać: Ustawienia → „Moduły” → „Wersje”."
           }
         },
         "ja": {
@@ -57022,16 +58548,22 @@
             "value": "“버전” 모듈은 폴더 프로젝트의 텍스트와 카드를 AI를 실행하기 전마다, 그리고 글을 쓰는 동안 저장합니다. 저장 위치는 프로젝트가 아니라 앱의 폴더입니다. 주기와 보관 기간은 설정 → “모듈” → “버전”에서 정합니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "وحدة «النسخ» تحفظ نصوص مشروع المجلد وبطاقته قبل كل تشغيل للذكاء الاصطناعي وأثناء كتابتك — في مجلد التطبيق لا في المشروع. كم مرة وكم تُحفظ: الإعدادات ← «الوحدات» ← «النسخ»."
+            "value": "Moduł „Wersje” zapisuje teksty i kartę projektu-folderu przed każdym uruchomieniem AI i gdy piszesz — w folderze aplikacji, nie w projekcie. Jak często i jak długo przechowywać: Ustawienia → „Moduły” → „Wersje”."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Modul “Versi” menyimpan teks dan kartu proyek folder sebelum setiap AI dijalankan dan selama Anda menulis — di folder app, bukan di proyek. Seberapa sering dan berapa lama disimpan: Pengaturan → “Modul” → “Versi”."
+            "value": "O módulo “Versões” salva os textos e o cartão de um projeto de pasta antes de cada execução da IA e enquanto você escreve — na pasta do app, não no projeto. Com que frequência e por quanto tempo: Ajustes → “Módulos” → “Versões”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Модуль «Версії» зберігає тексти й картку проєкту-папки перед кожним запуском AI і поки ви пишете — у папці застосунку, не в проєкті. Як часто й скільки зберігати — Параметри → «Модулі» → «Версії»."
           }
         }
       }
@@ -57418,16 +58950,10 @@
     },
     "На диске": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "On disk"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "На диску"
+            "value": "على القرص"
           }
         },
         "de": {
@@ -57436,10 +58962,10 @@
             "value": "Auf dem Datenträger"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sur le disque"
+            "value": "On disk"
           }
         },
         "es": {
@@ -57448,22 +58974,22 @@
             "value": "En disco"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur le disque"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di disk"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Su disco"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No disco"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Na dysku"
           }
         },
         "ja": {
@@ -57478,16 +59004,22 @@
             "value": "디스크 사용량"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "على القرص"
+            "value": "Na dysku"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Di disk"
+            "value": "No disco"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "На диску"
           }
         }
       }
@@ -62208,6 +63740,158 @@
         }
       }
     },
+    "Начнётся в час ночного запуска из настроек; утром одна сводка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starts at the night start hour from Settings; one summary in the morning"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Почнеться в годину нічного запуску з налаштувань; уранці одне зведення"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beginnt zur Nachtstartstunde aus den Einstellungen; morgens eine Zusammenfassung"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commence à l’heure de lancement de nuit des réglages ; un résumé le matin"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empieza a la hora de inicio nocturno de los ajustes; un resumen por la mañana"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inizia all’ora di avvio notturno delle impostazioni; un riepilogo al mattino"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Começa na hora de início noturno dos ajustes; um resumo pela manhã"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zacznie się o godzinie nocnego startu z ustawień; rano jedno podsumowanie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定の夜間開始時刻に始まり、朝にまとめが1件届きます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정의 야간 시작 시각에 시작하며, 아침에 요약이 하나 옵니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تبدأ في ساعة التشغيل الليلي من الإعدادات؛ وملخص واحد في الصباح"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mulai pada jam mulai malam dari pengaturan; satu ringkasan di pagi hari"
+          }
+        }
+      }
+    },
+    "Начнётся через две минуты после сброса лимита сессии": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starts two minutes after the session limit resets"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Почнеться через дві хвилини після скидання ліміту сесії"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beginnt zwei Minuten nach dem Zurücksetzen des Sitzungslimits"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commence deux minutes après la réinitialisation de la limite de session"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empieza dos minutos después del reinicio del límite de sesión"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inizia due minuti dopo l’azzeramento del limite di sessione"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Começa dois minutos depois de o limite da sessão reiniciar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zacznie się dwie minuty po resecie limitu sesji"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッション上限のリセットから2分後に始まります"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션 한도가 초기화되고 2분 뒤에 시작합니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تبدأ بعد دقيقتين من إعادة ضبط حد الجلسة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mulai dua menit setelah batas sesi direset"
+          }
+        }
+      }
+    },
     "Не выбрана модель — Настройки → «Сервисы AI» → «Проверить»": {
       "localizations": {
         "ar": {
@@ -64191,6 +65875,82 @@
         }
       }
     },
+    "Не сохранены из-за размера: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not saved because of their size: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не збережено через розмір: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wegen ihrer Größe nicht gesichert: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non enregistrés à cause de leur taille : %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No guardados por su tamaño: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non salvati per le dimensioni: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não salvos por causa do tamanho: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niezapisane z powodu rozmiaru: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サイズが大きいため保存されていません: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "크기 때문에 저장되지 않음: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم تُحفظ بسبب حجمها: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak disimpan karena ukurannya: %@"
+          }
+        }
+      }
+    },
     "Не спать": {
       "localizations": {
         "ar": {
@@ -65270,6 +67030,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Не вдалося прочитати репозиторії"
+          }
+        }
+      }
+    },
+    "Не удалось прочитать файл из версии.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t read the file from the version."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не вдалося прочитати файл із версії."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Datei aus der Version konnte nicht gelesen werden."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de lire le fichier de la version."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo leer el archivo de la versión."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile leggere il file dalla versione."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível ler o arquivo da versão."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się odczytać pliku z wersji."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョンのファイルを読み込めませんでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전의 파일을 읽지 못했습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذّرت قراءة الملف من النسخة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File dari versi tidak dapat dibaca."
           }
         }
       }
@@ -66567,6 +68403,82 @@
         }
       }
     },
+    "Несколько проектов сразу": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Several projects at once"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кілька проєктів одразу"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mehrere Projekte auf einmal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plusieurs projets à la fois"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varios proyectos a la vez"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Più progetti insieme"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vários projetos de uma vez"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kilka projektów naraz"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "複数のプロジェクトをまとめて"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "여러 프로젝트 한꺼번에"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عدة مشاريع دفعة واحدة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beberapa proyek sekaligus"
+          }
+        }
+      }
+    },
     "Нет": {
       "localizations": {
         "ar": {
@@ -66867,6 +68779,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Немає швидкої команди «%@»"
+          }
+        }
+      }
+    },
+    "Нет выбранного проекта": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No project selected"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Проєкт не вибрано"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Projekt ausgewählt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun projet sélectionné"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ningún proyecto seleccionado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun progetto selezionato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum projeto selecionado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie wybrano projektu"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクトが選択されていません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택한 프로젝트 없음"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يُحدَّد مشروع"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada proyek yang dipilih"
           }
         }
       }
@@ -78592,6 +80580,158 @@
         }
       }
     },
+    "Открыть файл": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open File"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити файл"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datei öffnen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le fichier"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir archivo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri file"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir arquivo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz plik"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルを開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일 열기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح الملف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka file"
+          }
+        }
+      }
+    },
+    "Открыть файл, как он есть сейчас": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open the file as it is now"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити файл таким, яким він є зараз"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Datei im jetzigen Stand öffnen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le fichier tel qu’il est maintenant"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir el archivo tal como está ahora"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri il file così com’è adesso"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir o arquivo como ele está agora"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz plik w obecnym stanie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在の状態のファイルを開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금 상태의 파일 열기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح الملف كما هو الآن"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka file sebagaimana adanya sekarang"
+          }
+        }
+      }
+    },
     "Отложенные запуски": {
       "localizations": {
         "ar": {
@@ -78892,6 +81032,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Скасувати"
+          }
+        }
+      }
+    },
+    "Отменить пакет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel Batch"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скасувати пакет"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stapel abbrechen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler le lot"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar lote"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulla gruppo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar lote"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anuluj pakiet"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バッチをキャンセル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "묶음 취소"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إلغاء الدفعة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batalkan kumpulan"
+          }
+        }
+      }
+    },
+    "Отменить пакет?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel the batch?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скасувати пакет?"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stapel abbrechen?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler le lot ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Cancelar el lote?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annullare il gruppo?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar o lote?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anulować pakiet?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バッチをキャンセルしますか？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "묶음을 취소할까요?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إلغاء الدفعة؟"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batalkan kumpulan?"
           }
         }
       }
@@ -81553,6 +83845,164 @@
           "stringUnit": {
             "state": "translated",
             "value": "Помилка: %@"
+          }
+        }
+      }
+    },
+    "Пакет «%@»: ✅ %lld, ❌ %lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Пакет «%1$@»: ✅ %2$lld, ❌ %3$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batch “%@”: ✅ %lld, ❌ %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пакет «%@»: ✅ %lld, ❌ %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stapel „%@“: ✅ %lld, ❌ %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lot « %@ » : ✅ %lld, ❌ %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lote «%@»: ✅ %lld, ❌ %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gruppo «%@»: ✅ %lld, ❌ %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lote “%@”: ✅ %lld, ❌ %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pakiet „%@”: ✅ %lld, ❌ %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バッチ「%@」: ✅ %lld、❌ %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "묶음 “%@”: ✅ %lld, ❌ %lld"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الدفعة «%@»: ✅ %lld، ❌ %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kumpulan “%@”: ✅ %lld, ❌ %lld"
+          }
+        }
+      }
+    },
+    "Пакет работает только в фоне: нужен Claude Code с запуском в фоне или модель по API.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A batch runs only in the background: it needs Claude Code launched in the background or a model by API."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пакет працює лише у фоні: потрібен Claude Code із запуском у фоні або модель через API."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Stapel läuft nur im Hintergrund: Er braucht Claude Code mit Start im Hintergrund oder ein Modell per API."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un lot ne fonctionne qu’en arrière-plan : il faut Claude Code lancé en arrière-plan ou un modèle par API."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un lote solo funciona en segundo plano: necesita Claude Code con inicio en segundo plano o un modelo por API."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un gruppo funziona solo in background: serve Claude Code con avvio in background o un modello via API."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um lote só funciona em segundo plano: precisa do Claude Code iniciado em segundo plano ou de um modelo por API."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pakiet działa tylko w tle: potrzebny jest Claude Code uruchamiany w tle albo model przez API."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バッチはバックグラウンドでのみ動きます。バックグラウンド起動のClaude Code、またはAPI経由のモデルが必要です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "묶음은 백그라운드에서만 작동합니다. 백그라운드로 실행하는 Claude Code 또는 API 모델이 필요합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الدفعة تعمل في الخلفية فقط: تحتاج إلى Claude Code بتشغيل في الخلفية أو إلى نموذج عبر API."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kumpulan hanya berjalan di latar belakang: perlu Claude Code yang dijalankan di latar belakang atau model lewat API."
           }
         }
       }
@@ -85891,6 +88341,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "За записами Copilot CLI: токени запитів за тиждень (введення й виведення)."
+          }
+        }
+      }
+    },
+    "По одному проекту за раз, начиная сейчас": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One project at a time, starting now"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "По одному проєкту за раз, починаючи зараз"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Projekt nach dem anderen, ab jetzt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un projet à la fois, à partir de maintenant"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un proyecto cada vez, empezando ahora"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un progetto alla volta, a partire da adesso"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um projeto por vez, começando agora"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po jednym projekcie naraz, zaczynając teraz"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今から1プロジェクトずつ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금부터 프로젝트를 하나씩"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مشروع واحد في كل مرة، بدءًا من الآن"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satu proyek setiap kali, mulai sekarang"
           }
         }
       }
@@ -92279,6 +94805,82 @@
         }
       }
     },
+    "Прежние версии текстов: сравнить с текущими и вернуть": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Earlier versions of the texts: compare with the current ones and restore"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Попередні версії текстів: порівняти з поточними й повернути"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frühere Versionen der Texte: mit den aktuellen vergleichen und wiederherstellen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versions précédentes des textes : comparer avec les textes actuels et rétablir"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versiones anteriores de los textos: comparar con los actuales y restaurar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versioni precedenti dei testi: confronta con quelle attuali e ripristina"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versões anteriores dos textos: comparar com os atuais e restaurar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wcześniejsze wersje tekstów: porównaj z obecnymi i przywróć"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テキストの以前のバージョン: 現在の内容と比べて戻せます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "텍스트의 이전 버전: 지금 내용과 비교하고 되돌리기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النسخ السابقة من النصوص: قارنها بالحالية واستعدها"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi teks sebelumnya: bandingkan dengan yang sekarang dan pulihkan"
+          }
+        }
+      }
+    },
     "При темпе последних суток — %@, сброс %@.": {
       "localizations": {
         "ar": {
@@ -95332,6 +97934,82 @@
         }
       }
     },
+    "Проекты идут по очереди, не параллельно. У лимита пакет ждёт сброса; в конце придёт одна сводка.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The projects go one after another, not in parallel. Near a limit the batch waits for the reset; one summary comes at the end."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Проєкти йдуть по черзі, не паралельно. Біля ліміту пакет чекає скидання; наприкінці надійде одне зведення."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Projekte laufen nacheinander, nicht parallel. Am Limit wartet der Stapel auf das Zurücksetzen; am Ende kommt eine Zusammenfassung."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les projets passent l’un après l’autre, pas en parallèle. Près d’une limite, le lot attend la réinitialisation ; un seul résumé arrive à la fin."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los proyectos van uno tras otro, no en paralelo. Cerca de un límite el lote espera el reinicio; al final llega un solo resumen."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I progetti vanno uno dopo l’altro, non in parallelo. Vicino a un limite il gruppo attende l’azzeramento; alla fine arriva un solo riepilogo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os projetos vão um após o outro, não em paralelo. Perto de um limite o lote espera o reinício; no fim chega um único resumo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekty idą po kolei, nie równolegle. Przy limicie pakiet czeka na reset; na końcu przyjdzie jedno podsumowanie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクトは並行ではなく順番に処理されます。上限が近いとバッチはリセットを待ち、最後にまとめが1件届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트는 동시에가 아니라 차례로 처리됩니다. 한도에 가까워지면 묶음은 초기화를 기다리고, 끝나면 요약이 하나 옵니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُنفَّذ المشاريع واحدًا تلو الآخر لا بالتوازي. قرب الحد تنتظر الدفعة إعادة الضبط؛ وفي النهاية يصل ملخص واحد."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyek dikerjakan satu per satu, tidak paralel. Di dekat batas kumpulan menunggu reset; di akhir datang satu ringkasan."
+          }
+        }
+      }
+    },
     "Проекты профиля: git-репозитории или папки с работой — состояние, PR, этапы и команды для AI.": {
       "localizations": {
         "ar": {
@@ -95560,6 +98238,82 @@
         }
       }
     },
+    "Проекты, до которых очередь не дошла, не будут обработаны. Тот, что выполняется сейчас, закончит работу.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The projects whose turn hasn’t come won’t be processed. The one running now will finish."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Проєкти, до яких черга не дійшла, не буде оброблено. Той, що виконується зараз, завершить роботу."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekte, die noch nicht an der Reihe waren, werden nicht bearbeitet. Das gerade laufende wird fertig."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les projets dont le tour n’est pas venu ne seront pas traités. Celui qui est en cours ira jusqu’au bout."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los proyectos a los que aún no les ha llegado el turno no se procesarán. El que está en curso terminará."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I progetti il cui turno non è ancora arrivato non verranno elaborati. Quello in corso terminerà."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os projetos cuja vez ainda não chegou não serão processados. O que está em execução agora vai terminar."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekty, do których kolejka nie doszła, nie zostaną przetworzone. Ten, który jest teraz wykonywany, dokończy pracę."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "順番がまだ来ていないプロジェクトは処理されません。現在実行中のものは最後まで実行されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "차례가 오지 않은 프로젝트는 처리되지 않습니다. 지금 실행 중인 것은 끝까지 진행됩니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المشاريع التي لم يحن دورها لن تُعالَج. والمشروع الجاري تنفيذه الآن سيُكمل عمله."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyek yang belum mendapat giliran tidak akan diproses. Yang sedang berjalan akan selesai."
+          }
+        }
+      }
+    },
     "Проекты-папки": {
       "localizations": {
         "ar": {
@@ -95638,16 +98392,10 @@
     },
     "Пропускать файлы больше": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Skip files larger than"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Пропускати файли, більші за"
+            "value": "تخطّي الملفات الأكبر من"
           }
         },
         "de": {
@@ -95656,10 +98404,10 @@
             "value": "Dateien überspringen, die größer sind als"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ignorer les fichiers de plus de"
+            "value": "Skip files larger than"
           }
         },
         "es": {
@@ -95668,22 +98416,22 @@
             "value": "Omitir archivos de más de"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignorer les fichiers de plus de"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lewati file yang lebih besar dari"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Salta i file più grandi di"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ignorar arquivos maiores que"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pomijaj pliki większe niż"
           }
         },
         "ja": {
@@ -95698,16 +98446,22 @@
             "value": "이보다 큰 파일은 건너뛰기"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تخطّي الملفات الأكبر من"
+            "value": "Pomijaj pliki większe niż"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lewati file yang lebih besar dari"
+            "value": "Ignorar arquivos maiores que"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пропускати файли, більші за"
           }
         }
       }
@@ -106834,16 +109588,10 @@
     },
     "Сколько хранить": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "How long to keep"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Скільки зберігати"
+            "value": "مدة الحفظ"
           }
         },
         "de": {
@@ -106852,10 +109600,10 @@
             "value": "Wie lange aufbewahren"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Durée de conservation"
+            "value": "How long to keep"
           }
         },
         "es": {
@@ -106864,22 +109612,22 @@
             "value": "Cuánto tiempo conservar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durée de conservation"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berapa lama disimpan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Per quanto tempo conservare"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Por quanto tempo manter"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jak długo przechowywać"
           }
         },
         "ja": {
@@ -106894,16 +109642,22 @@
             "value": "보관 기간"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "مدة الحفظ"
+            "value": "Jak długo przechowywać"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Berapa lama disimpan"
+            "value": "Por quanto tempo manter"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скільки зберігати"
           }
         }
       }
@@ -108045,6 +110799,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сховати острів біля виїмки"
+          }
+        }
+      }
+    },
+    "Скрыть строки, которые не менялись": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide the lines that didn’t change"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сховати рядки, які не змінювалися"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unveränderte Zeilen ausblenden"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masquer les lignes qui n’ont pas changé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocultar las líneas que no han cambiado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nascondi le righe che non sono cambiate"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocultar as linhas que não mudaram"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ukryj wiersze, które się nie zmieniły"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更のない行を隠す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "바뀌지 않은 줄 숨기기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إخفاء الأسطر التي لم تتغيّر"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sembunyikan baris yang tidak berubah"
           }
         }
       }
@@ -109493,6 +112323,82 @@
         }
       }
     },
+    "Снять все": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deselect All"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зняти всі"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle abwählen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout désélectionner"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deseleccionar todo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deseleziona tutto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desmarcar tudo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odznacz wszystkie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべて解除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모두 해제"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إلغاء تحديد الكل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batalkan semua pilihan"
+          }
+        }
+      }
+    },
     "Снять ручной запрет сна: дальше решают правила": {
       "localizations": {
         "ar": {
@@ -109869,6 +112775,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сумісний з OpenAI"
+          }
+        }
+      }
+    },
+    "Содержимое файла «%@» в этой версии не найдено.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The content of “%@” wasn’t found in this version."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вміст файлу «%@» у цій версії не знайдено."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Inhalt von „%@“ wurde in dieser Version nicht gefunden."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le contenu de « %@ » est introuvable dans cette version."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró el contenido de «%@» en esta versión."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il contenuto di «%@» non è stato trovato in questa versione."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O conteúdo de “%@” não foi encontrado nesta versão."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie znaleziono zawartości pliku „%@” w tej wersji."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このバージョンに「%@」の内容が見つかりません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 버전에서 “%@”의 내용을 찾지 못했습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يُعثر على محتوى «%@» في هذه النسخة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isi “%@” tidak ditemukan di versi ini."
           }
         }
       }
@@ -110787,16 +113769,10 @@
     },
     "Сохраняются тексты (.md, .txt, .rtf, .docx, .fountain) и карточка проекта; картинки, звук и видео — нет. Все версии за последние сутки, дальше по одной в день. Перед каждым запуском AI версия снимается всегда. У git-проектов версий нет: там есть git.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Texts (.md, .txt, .rtf, .docx, .fountain) and the project card are saved; pictures, audio and video are not. Every version of the last 24 hours is kept, then one a day. A version is always taken before an AI run. Git projects have no versions: they have git."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Зберігаються тексти (.md, .txt, .rtf, .docx, .fountain) і картка проєкту; зображення, звук і відео — ні. Усі версії за останню добу, далі по одній на день. Перед кожним запуском AI версія знімається завжди. У git-проєктів версій немає: там є git."
+            "value": "تُحفظ النصوص (.md و.txt و.rtf و.docx و.fountain) وبطاقة المشروع؛ الصور والصوت والفيديو لا تُحفظ. تبقى كل نسخ آخر 24 ساعة ثم نسخة واحدة في اليوم. تؤخذ نسخة دائمًا قبل كل تشغيل للذكاء الاصطناعي. مشاريع git ليست لها نسخ: فيها git."
           }
         },
         "de": {
@@ -110805,10 +113781,10 @@
             "value": "Gesichert werden Texte (.md, .txt, .rtf, .docx, .fountain) und die Projektkarte; Bilder, Ton und Video nicht. Alle Versionen der letzten 24 Stunden bleiben, danach eine pro Tag. Vor jedem KI-Lauf wird immer eine Version angelegt. Git-Projekte haben keine Versionen: Dort gibt es git."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les textes (.md, .txt, .rtf, .docx, .fountain) et la fiche du projet sont enregistrés ; les images, le son et la vidéo ne le sont pas. Toutes les versions des dernières 24 heures sont conservées, puis une par jour. Une version est toujours prise avant un lancement de l’IA. Les projets git n’ont pas de versions : ils ont git."
+            "value": "Texts (.md, .txt, .rtf, .docx, .fountain) and the project card are saved; pictures, audio and video are not. Every version of the last 24 hours is kept, then one a day. A version is always taken before an AI run. Git projects have no versions: they have git."
           }
         },
         "es": {
@@ -110817,22 +113793,22 @@
             "value": "Se guardan los textos (.md, .txt, .rtf, .docx, .fountain) y la ficha del proyecto; las imágenes, el audio y el vídeo no. Se conservan todas las versiones de las últimas 24 horas y después una al día. Antes de cada ejecución de la IA siempre se toma una versión. Los proyectos git no tienen versiones: ya tienen git."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les textes (.md, .txt, .rtf, .docx, .fountain) et la fiche du projet sont enregistrés ; les images, le son et la vidéo ne le sont pas. Toutes les versions des dernières 24 heures sont conservées, puis une par jour. Une version est toujours prise avant un lancement de l’IA. Les projets git n’ont pas de versions : ils ont git."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yang disimpan adalah teks (.md, .txt, .rtf, .docx, .fountain) dan kartu proyek; gambar, audio, dan video tidak. Semua versi dari 24 jam terakhir disimpan, setelah itu satu per hari. Versi selalu dibuat sebelum AI dijalankan. Proyek git tidak punya versi: sudah ada git."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Vengono salvati i testi (.md, .txt, .rtf, .docx, .fountain) e la scheda del progetto; immagini, audio e video no. Restano tutte le versioni delle ultime 24 ore, poi una al giorno. Prima di ogni avvio dell’IA una versione viene sempre salvata. I progetti git non hanno versioni: hanno già git."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "São salvos os textos (.md, .txt, .rtf, .docx, .fountain) e o cartão do projeto; imagens, áudio e vídeo não. Ficam todas as versões das últimas 24 horas e depois uma por dia. Antes de cada execução da IA uma versão é sempre criada. Projetos git não têm versões: eles já têm o git."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zapisywane są teksty (.md, .txt, .rtf, .docx, .fountain) i karta projektu; obrazy, dźwięk i wideo nie. Zostają wszystkie wersje z ostatniej doby, potem jedna dziennie. Przed każdym uruchomieniem AI wersja jest tworzona zawsze. Projekty git nie mają wersji: mają git."
           }
         },
         "ja": {
@@ -110847,16 +113823,22 @@
             "value": "텍스트(.md, .txt, .rtf, .docx, .fountain)와 프로젝트 카드를 저장합니다. 이미지, 오디오, 비디오는 저장하지 않습니다. 최근 24시간의 버전은 모두, 그 이후는 하루에 하나씩 남깁니다. AI를 실행하기 전에는 항상 버전을 만듭니다. git 프로젝트에는 버전이 없습니다. git이 있기 때문입니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تُحفظ النصوص (.md و.txt و.rtf و.docx و.fountain) وبطاقة المشروع؛ الصور والصوت والفيديو لا تُحفظ. تبقى كل نسخ آخر 24 ساعة ثم نسخة واحدة في اليوم. تؤخذ نسخة دائمًا قبل كل تشغيل للذكاء الاصطناعي. مشاريع git ليست لها نسخ: فيها git."
+            "value": "Zapisywane są teksty (.md, .txt, .rtf, .docx, .fountain) i karta projektu; obrazy, dźwięk i wideo nie. Zostają wszystkie wersje z ostatniej doby, potem jedna dziennie. Przed każdym uruchomieniem AI wersja jest tworzona zawsze. Projekty git nie mają wersji: mają git."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Yang disimpan adalah teks (.md, .txt, .rtf, .docx, .fountain) dan kartu proyek; gambar, audio, dan video tidak. Semua versi dari 24 jam terakhir disimpan, setelah itu satu per hari. Versi selalu dibuat sebelum AI dijalankan. Proyek git tidak punya versi: sudah ada git."
+            "value": "São salvos os textos (.md, .txt, .rtf, .docx, .fountain) e o cartão do projeto; imagens, áudio e vídeo não. Ficam todas as versões das últimas 24 horas e depois uma por dia. Antes de cada execução da IA uma versão é sempre criada. Projetos git não têm versões: eles já têm o git."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зберігаються тексти (.md, .txt, .rtf, .docx, .fountain) і картка проєкту; зображення, звук і відео — ні. Усі версії за останню добу, далі по одній на день. Перед кожним запуском AI версія знімається завжди. У git-проєктів версій немає: там є git."
           }
         }
       }
@@ -111774,6 +114756,82 @@
         }
       }
     },
+    "Спрашивается один раз на весь пакет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asked once for the whole batch"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запитується один раз на весь пакет"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird einmal für den ganzen Stapel abgefragt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demandé une seule fois pour tout le lot"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se pregunta una vez para todo el lote"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiesto una sola volta per tutto il gruppo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perguntado uma vez para o lote inteiro"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pytanie pada raz na cały pakiet"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バッチ全体で1回だけ入力します"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "묶음 전체에 한 번만 묻습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُسأل مرة واحدة للدفعة كلها"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ditanyakan sekali untuk seluruh kumpulan"
+          }
+        }
+      }
+    },
     "Спрашивать": {
       "localizations": {
         "ar": {
@@ -112302,6 +115360,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Порівнянь поки не було: у розгорнутому проєкті увімкніть «Порівняти», виберіть сервіси й команду."
+          }
+        }
+      }
+    },
+    "Сравнивается начало файлов: строк %lld.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The beginning of the files is compared: %lld lines."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Порівнюється початок файлів: рядків %lld."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verglichen wird der Anfang der Dateien: %lld Zeilen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seul le début des fichiers est comparé : %lld lignes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se compara el principio de los archivos: %lld líneas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Viene confrontato l’inizio dei file: %lld righe."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O início dos arquivos é comparado: %lld linhas."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Porównywany jest początek plików: wierszy %lld."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルの先頭%lld行を比較しています。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일의 앞부분 %lld줄을 비교합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُقارَن بداية الملفات: %lld سطر."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yang dibandingkan adalah awal file: %lld baris."
           }
         }
       }
@@ -114511,6 +117645,82 @@
         }
       }
     },
+    "Тексты проекта до этой задачи и сейчас": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The project’s texts before this task and now"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тексти проєкту до цієї задачі й зараз"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Texte des Projekts vor dieser Aufgabe und jetzt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les textes du projet avant cette tâche et maintenant"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los textos del proyecto antes de esta tarea y ahora"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I testi del progetto prima di questa attività e adesso"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os textos do projeto antes desta tarefa e agora"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teksty projektu przed tym zadaniem i teraz"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このタスクの前と現在のプロジェクトのテキスト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 작업 전과 지금의 프로젝트 텍스트"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نصوص المشروع قبل هذه المهمة والآن"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teks proyek sebelum tugas ini dan sekarang"
+          }
+        }
+      }
+    },
     "Текущий профиль": {
       "localizations": {
         "ar": {
@@ -116716,18 +119926,88 @@
         }
       }
     },
-    "Только перед запуском AI": {
+    "Только отличия": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Only before an AI run"
+            "value": "Differences Only"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Лише перед запуском AI"
+            "value": "Лише відмінності"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur Unterschiede"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Différences seulement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo diferencias"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo differenze"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Só diferenças"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tylko różnice"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "違いのみ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "차이만"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاختلافات فقط"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya perbedaan"
+          }
+        }
+      }
+    },
+    "Только перед запуском AI": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قبل تشغيل الذكاء الاصطناعي فقط"
           }
         },
         "de": {
@@ -116736,10 +120016,10 @@
             "value": "Nur vor einem KI-Lauf"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Seulement avant un lancement de l’IA"
+            "value": "Only before an AI run"
           }
         },
         "es": {
@@ -116748,22 +120028,22 @@
             "value": "Solo antes de ejecutar la IA"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seulement avant un lancement de l’IA"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya sebelum AI dijalankan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Solo prima di un avvio dell’IA"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Só antes de executar a IA"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tylko przed uruchomieniem AI"
           }
         },
         "ja": {
@@ -116778,16 +120058,22 @@
             "value": "AI 실행 전에만"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "قبل تشغيل الذكاء الاصطناعي فقط"
+            "value": "Tylko przed uruchomieniem AI"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hanya sebelum AI dijalankan"
+            "value": "Só antes de executar a IA"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Лише перед запуском AI"
           }
         }
       }
@@ -118313,6 +121599,82 @@
         }
       }
     },
+    "У профиля нет команд: добавьте их в Настройки → «Профили».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The profile has no commands: add them in Settings → “Profiles”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У профілю немає команд: додайте їх у Налаштування → «Профілі»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Profil hat keine Befehle: Fügen Sie sie unter Einstellungen → „Profile“ hinzu."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le profil n’a pas de commandes : ajoutez-les dans Réglages → « Profils »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El perfil no tiene comandos: añádelos en Ajustes → «Perfiles»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il profilo non ha comandi: aggiungili in Impostazioni → «Profili»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O perfil não tem comandos: adicione-os em Ajustes → “Perfis”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil nie ma poleceń: dodaj je w Ustawienia → „Profile”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このプロファイルにはコマンドがありません。設定 →「プロファイル」で追加してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필에 명령이 없습니다. 설정 → “프로필”에서 추가하세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد أوامر في ملف التعريف: أضفها من الإعدادات ← «ملفات التعريف»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil tidak punya perintah: tambahkan di Pengaturan → “Profil”."
+          }
+        }
+      }
+    },
     "У этого Mac нет крышки: правило нужно только ноутбукам.": {
       "localizations": {
         "ar": {
@@ -118389,6 +121751,82 @@
         }
       }
     },
+    "У этого проекта пока нет версий. Они появляются перед запуском AI и когда тексты меняются.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This project has no versions yet. They appear before an AI run and when the texts change."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У цього проєкту поки немає версій. Вони з’являються перед запуском AI і коли тексти змінюються."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieses Projekt hat noch keine Versionen. Sie entstehen vor einem KI-Lauf und wenn sich die Texte ändern."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce projet n’a pas encore de versions. Elles apparaissent avant un lancement de l’IA et quand les textes changent."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este proyecto aún no tiene versiones. Aparecen antes de una ejecución de la IA y cuando cambian los textos."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questo progetto non ha ancora versioni. Compaiono prima di un’esecuzione dell’IA e quando i testi cambiano."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este projeto ainda não tem versões. Elas aparecem antes de uma execução da IA e quando os textos mudam."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ten projekt nie ma jeszcze wersji. Pojawiają się przed uruchomieniem AI i gdy teksty się zmieniają."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このプロジェクトにはまだバージョンがありません。AIを実行する前と、テキストが変わったときに作られます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 프로젝트에는 아직 버전이 없습니다. AI를 실행하기 전과 텍스트가 바뀔 때 만들어집니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد نسخ لهذا المشروع بعد. تظهر قبل تشغيل الذكاء الاصطناعي وعند تغيّر النصوص."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyek ini belum punya versi. Versi muncul sebelum AI dijalankan dan saat teks berubah."
+          }
+        }
+      }
+    },
     "У этого профиля нет папки проектов": {
       "localizations": {
         "ar": {
@@ -118461,6 +121899,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "У цього профілю немає папки проєктів"
+          }
+        }
+      }
+    },
+    "Убрано: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Removed: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрано: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entfernt: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimé : %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitado: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimosso: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Removido: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usunięto: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "削除: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "삭제됨: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أُزيل: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dihapus: %@"
           }
         }
       }
@@ -120595,16 +124109,10 @@
     },
     "Удалить все версии?": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Delete all versions?"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Видалити всі версії?"
+            "value": "حذف كل النسخ؟"
           }
         },
         "de": {
@@ -120613,10 +124121,10 @@
             "value": "Alle Versionen löschen?"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Supprimer toutes les versions ?"
+            "value": "Delete all versions?"
           }
         },
         "es": {
@@ -120625,22 +124133,22 @@
             "value": "¿Eliminar todas las versiones?"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer toutes les versions ?"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus semua versi?"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Eliminare tutte le versioni?"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apagar todas as versões?"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usunąć wszystkie wersje?"
           }
         },
         "ja": {
@@ -120655,16 +124163,22 @@
             "value": "모든 버전을 삭제할까요?"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "حذف كل النسخ؟"
+            "value": "Usunąć wszystkie wersje?"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hapus semua versi?"
+            "value": "Apagar todas as versões?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Видалити всі версії?"
           }
         }
       }
@@ -123034,6 +126548,158 @@
         }
       }
     },
+    "Файл": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файл"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datei"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichier"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arquivo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plik"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الملف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File"
+          }
+        }
+      }
+    },
+    "Файл «%@» сейчас больше лимита версий: сохранить его перед возвратом нельзя, поэтому он не тронут.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” is now over the versions’ size limit: it can’t be saved before the restore, so it was left untouched."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файл «%@» зараз більший за ліміт версій: зберегти його перед поверненням не можна, тому його не зачеплено."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@“ ist jetzt größer als das Größenlimit der Versionen: Die Datei lässt sich vor dem Wiederherstellen nicht sichern und bleibt deshalb unverändert."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %@ » dépasse maintenant la limite de taille des versions : il ne peut pas être enregistré avant le rétablissement, il n’a donc pas été modifié."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» supera ahora el límite de tamaño de las versiones: no se puede guardar antes de restaurar, así que no se ha tocado."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» ora supera il limite di dimensione delle versioni: non può essere salvato prima del ripristino, quindi non è stato toccato."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” agora está acima do limite de tamanho das versões: não pode ser salvo antes da restauração, por isso não foi alterado."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plik „%@” przekracza teraz limit rozmiaru wersji: nie da się go zapisać przed przywróceniem, więc został nietknięty."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」は現在、バージョンのサイズ上限を超えています。戻す前に保存できないため、変更していません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@”이(가) 지금 버전 크기 한도를 넘습니다. 되돌리기 전에 저장할 수 없어 그대로 두었습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» يتجاوز الآن حد حجم النسخ: لا يمكن حفظه قبل الاستعادة، لذلك لم يُمسّ."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” sekarang melebihi batas ukuran versi: tidak bisa disimpan sebelum pemulihan, jadi dibiarkan."
+          }
+        }
+      }
+    },
     "Файл журнала": {
       "localizations": {
         "ar": {
@@ -123414,6 +127080,82 @@
         }
       }
     },
+    "Файл такой же, как сейчас.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file is the same as now."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файл такий самий, як зараз."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Datei ist dieselbe wie jetzt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le fichier est identique à maintenant."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El archivo es igual que ahora."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il file è uguale ad adesso."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O arquivo é igual ao de agora."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plik jest taki sam jak teraz."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルは現在と同じです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일이 지금과 같습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الملف كما هو الآن."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File sama seperti sekarang."
+          }
+        }
+      }
+    },
     "Файлов инструкций не нашлось": {
       "localizations": {
         "ar": {
@@ -123486,6 +127228,88 @@
           "stringUnit": {
             "state": "translated",
             "value": "Файлів інструкцій не знайшлося"
+          }
+        }
+      }
+    },
+    "Файлов: %lld — станут такими, как в версии от %@. То, что есть сейчас, сначала сохранится отдельной версией. Файлы, которые появились позже, останутся.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Файлов: %1$lld — станут такими, как в версии от %2$@. То, что есть сейчас, сначала сохранится отдельной версией. Файлы, которые появились позже, останутся."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Files: %lld — they will become what they were in the version of %@. What is there now is saved as a separate version first. Files that appeared later stay."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файлів: %lld — стануть такими, як у версії від %@. Те, що є зараз, спершу збережеться окремою версією. Файли, які з’явилися пізніше, залишаться."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dateien: %lld – sie werden wieder so wie in der Version vom %@. Der jetzige Stand wird vorher als eigene Version gesichert. Später hinzugekommene Dateien bleiben."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichiers : %lld — ils redeviendront tels qu’ils étaient dans la version du %@. L’état actuel est d’abord enregistré comme une version à part. Les fichiers apparus plus tard restent."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivos: %lld. Quedarán como en la versión del %@. Lo que hay ahora se guarda antes como una versión aparte. Los archivos que aparecieron después se conservan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File: %lld — torneranno com’erano nella versione del %@. Lo stato attuale viene prima salvato come versione a parte. I file comparsi dopo restano."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arquivos: %lld — ficarão como estavam na versão de %@. O que existe agora é salvo antes como uma versão separada. Os arquivos que apareceram depois ficam."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pliki: %lld — staną się takie, jak w wersji z %@. To, co jest teraz, najpierw zostanie zapisane jako osobna wersja. Pliki, które pojawiły się później, zostaną."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル: %lld件 — %@のバージョンの内容に戻ります。現在の内容は、先に別のバージョンとして保存されます。後から追加されたファイルは残ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일 %lld개가 %@ 버전의 내용으로 돌아갑니다. 지금 내용은 먼저 별도의 버전으로 저장됩니다. 나중에 생긴 파일은 남습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الملفات: %lld — ستعود إلى ما كانت عليه في نسخة %@. ما هو موجود الآن يُحفظ أولًا كنسخة مستقلة. الملفات التي ظهرت لاحقًا تبقى."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File: %lld — akan menjadi seperti di versi %@. Yang ada sekarang disimpan dulu sebagai versi tersendiri. File yang muncul belakangan tetap ada."
           }
         }
       }
@@ -125785,16 +129609,10 @@
     },
     "Черновики не пропадают": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Drafts don’t get lost"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Чернетки не зникають"
+            "value": "المسودات لا تضيع"
           }
         },
         "de": {
@@ -125803,10 +129621,10 @@
             "value": "Entwürfe gehen nicht verloren"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les brouillons ne se perdent pas"
+            "value": "Drafts don’t get lost"
           }
         },
         "es": {
@@ -125815,22 +129633,22 @@
             "value": "Los borradores no se pierden"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les brouillons ne se perdent pas"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Draf tidak hilang"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Le bozze non vanno perse"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os rascunhos não se perdem"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Szkice nie przepadają"
           }
         },
         "ja": {
@@ -125845,16 +129663,22 @@
             "value": "초안이 사라지지 않습니다"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "المسودات لا تضيع"
+            "value": "Szkice nie przepadają"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Draf tidak hilang"
+            "value": "Os rascunhos não se perdem"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Чернетки не зникають"
           }
         }
       }
@@ -126844,6 +130668,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Що робить"
+          }
+        }
+      }
+    },
+    "Что изменилось": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What Changed"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що змінилося"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was sich geändert hat"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce qui a changé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qué ha cambiado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosa è cambiato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O que mudou"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Co się zmieniło"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更内容"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "바뀐 내용"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما الذي تغيّر"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apa yang berubah"
           }
         }
       }
@@ -130275,6 +134175,82 @@
         }
       }
     },
+    "автоматически": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "automatically"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "автоматично"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "automatisch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "automatiquement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "automáticamente"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "automaticamente"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "automaticamente"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "automatycznie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자동"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تلقائيًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "otomatis"
+          }
+        }
+      }
+    },
     "админский ключ Anthropic (sk-ant-admin…)": {
       "localizations": {
         "ar": {
@@ -132640,6 +136616,170 @@
           "stringUnit": {
             "state": "translated",
             "value": "готово"
+          }
+        }
+      }
+    },
+    "готово: %lld из %lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "готово: %1$lld из %2$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "done: %lld of %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "готово: %lld із %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fertig: %lld von %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "terminé : %lld sur %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "listo: %lld de %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fatto: %lld di %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pronto: %lld de %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gotowe: %lld z %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了: %lld / %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완료: %lld / %lld"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم: %lld من %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "selesai: %lld dari %lld"
+          }
+        }
+      }
+    },
+    "готово: %lld из %lld, не получилось: %lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "готово: %1$lld из %2$lld, не получилось: %3$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "done: %lld of %lld, failed: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "готово: %lld із %lld, не вдалося: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fertig: %lld von %lld, fehlgeschlagen: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "terminé : %lld sur %lld, échecs : %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "listo: %lld de %lld, con error: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fatto: %lld di %lld, non riusciti: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pronto: %lld de %lld, com falha: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gotowe: %lld z %lld, nie udało się: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了: %lld / %lld、失敗: %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완료: %lld / %lld, 실패: %lld"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم: %lld من %lld، فشل: %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "selesai: %lld dari %lld, gagal: %lld"
           }
         }
       }
@@ -136216,6 +140356,82 @@
         }
       }
     },
+    "как сейчас": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "same as now"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "як зараз"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wie jetzt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "identique à maintenant"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "igual que ahora"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "come adesso"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "igual a agora"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jak teraz"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在と同じ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금과 같음"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كما هو الآن"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sama seperti sekarang"
+          }
+        }
+      }
+    },
     "как у всех: %@ %%": {
       "localizations": {
         "ar": {
@@ -137961,6 +142177,88 @@
           "stringUnit": {
             "state": "translated",
             "value": "знайдено або налаштовано"
+          }
+        }
+      }
+    },
+    "начнётся в %@, проектов: %lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "начнётся в %1$@, проектов: %2$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "starts at %@, projects: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "почнеться о %@, проєктів: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "beginnt um %@, Projekte: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "commence à %@, projets : %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "empieza a las %@, proyectos: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "inizia alle %@, progetti: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "começa às %@, projetos: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "zacznie się o %@, projektów: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@に開始、プロジェクト: %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@에 시작, 프로젝트: %lld개"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تبدأ في %@، المشاريع: %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mulai pukul %@, proyek: %lld"
           }
         }
       }
@@ -141778,6 +146076,234 @@
         }
       }
     },
+    "папки больше нет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the folder is gone"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "папки більше немає"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "der Ordner ist nicht mehr da"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "le dossier n’existe plus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la carpeta ya no existe"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la cartella non c’è più"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "a pasta não existe mais"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "folderu już nie ma"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダがなくなりました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더가 더 이상 없습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المجلد لم يعد موجودًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "folder sudah tidak ada"
+          }
+        }
+      }
+    },
+    "перед «%@»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "before “%@”"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "перед «%@»"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "vor „%@“"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "avant « %@ »"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "antes de «%@»"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prima di «%@»"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "antes de “%@”"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "przed „%@”"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」の前"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” 전"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قبل «%@»"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sebelum “%@”"
+          }
+        }
+      }
+    },
+    "перед возвратом версии": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "before a version was restored"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "перед поверненням версії"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "vor dem Wiederherstellen einer Version"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "avant le rétablissement d’une version"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "antes de restaurar una versión"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prima del ripristino di una versione"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "antes de restaurar uma versão"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "przed przywróceniem wersji"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョンを戻す前"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전을 되돌리기 전"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قبل استعادة نسخة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sebelum versi dipulihkan"
+          }
+        }
+      }
+    },
     "переключение приложений": {
       "localizations": {
         "ar": {
@@ -142230,6 +146756,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "преміум-запити"
+          }
+        }
+      }
+    },
+    "прервано: приложение было закрыто": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "interrupted: the app was closed"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "перервано: застосунок було закрито"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "unterbrochen: Die App wurde beendet"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "interrompu : l’app a été fermée"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "interrumpido: la app se cerró"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "interrotto: l’app è stata chiusa"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "interrompido: o app foi fechado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "przerwano: aplikacja została zamknięta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "中断: アプリが終了しました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "중단됨: 앱이 종료되었습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قوطع: أُغلق التطبيق"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "terhenti: aplikasi ditutup"
           }
         }
       }
@@ -142914,6 +147516,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "профілю «%@»"
+          }
+        }
+      }
+    },
+    "профиля или сервиса больше нет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the profile or the service is gone"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "профілю або сервісу більше немає"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "das Profil oder der Dienst ist nicht mehr da"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "le profil ou le service n’existe plus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "el perfil o el servicio ya no existe"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "il profilo o il servizio non c’è più"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "o perfil ou o serviço não existe mais"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "profilu lub usługi już nie ma"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルまたはサービスがなくなりました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필 또는 서비스가 더 이상 없습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملف التعريف أو الخدمة لم يعد موجودًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "profil atau layanannya sudah tidak ada"
           }
         }
       }
@@ -146563,6 +151241,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "файлів"
+          }
+        }
+      }
+    },
+    "файлов с отличиями: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "files that differ: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "файлів із відмінностями: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dateien mit Unterschieden: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fichiers différents : %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "archivos con diferencias: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "file con differenze: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "arquivos com diferenças: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pliki z różnicami: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "違いのあるファイル: %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "차이가 있는 파일: %lld개"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملفات فيها اختلافات: %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "file yang berbeda: %lld"
           }
         }
       }

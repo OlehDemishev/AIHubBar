@@ -11,6 +11,9 @@ struct FolderProjectsView: View {
     @State private var newName = ""
     @State private var isCreating = false
     @State private var createError: String?
+    /// «Выбрать»: the projects checked for a batch.
+    @State private var isSelecting = false
+    @State private var selection: Set<String> = []
 
     private var mode: Profile? { modes.current }
 
@@ -40,13 +43,20 @@ struct FolderProjectsView: View {
                     stages: mode?.stageList ?? [],
                     metrics: (mode?.metrics ?? []).compactMap(FolderMetric.init(rawValue:)),
                     wordsPerMinute: mode?.wordsPerMinute ?? 150,
+                    isChecked: isSelecting ? Binding(
+                        get: { selection.contains(project.path) },
+                        set: { if $0 { selection.insert(project.path) } else { selection.remove(project.path) } }
+                    ) : nil,
                     isExpanded: Binding(
                         get: { expanded.contains(project.id) },
                         set: { if $0 { expanded.insert(project.id) } else { expanded.remove(project.id) } }
                     )
                 )
             }
-            if store.rootFolder != nil {
+            if let mode, !store.projects.isEmpty {
+                BatchBar(mode: mode, projects: store.projects, isSelecting: $isSelecting, selection: $selection)
+            }
+            if store.rootFolder != nil, !isSelecting {
                 newProject
             }
         }
@@ -104,10 +114,14 @@ private struct FolderProjectRow: View {
     let stages: [String]
     let metrics: [FolderMetric]
     let wordsPerMinute: Int
+    /// «Выбрать» is on: the row is a checkbox for the batch, not a card to open.
+    var isChecked: Binding<Bool>?
     @Binding var isExpanded: Bool
 
     @Environment(FolderProjectStore.self) private var store
     @Environment(CalendarStore.self) private var calendar
+    @Environment(VersionKeeper.self) private var versions
+    @Environment(\.openWindow) private var openWindow
     @State private var isHovered = false
 
     /// «просрочено 2 дн», unless the work is finished. The deadline itself may not be among the row's metrics.
@@ -119,15 +133,22 @@ private struct FolderProjectRow: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Button {
-                withAnimation(panelCalm ? nil : .snappy(duration: 0.25)) { isExpanded.toggle() }
-            } label: {
-                summary
+            if let isChecked {
+                Toggle(isOn: isChecked) { summary }
+                    .toggleStyle(.checkbox)
+                    .padding(.leading, 8)
+                    .onHover { isHovered = $0 }
+            } else {
+                Button {
+                    withAnimation(panelCalm ? nil : .snappy(duration: 0.25)) { isExpanded.toggle() }
+                } label: {
+                    summary
+                }
+                .buttonStyle(.plain)
+                .onHover { isHovered = $0 }
             }
-            .buttonStyle(.plain)
-            .onHover { isHovered = $0 }
 
-            if isExpanded {
+            if isExpanded, isChecked == nil {
                 details
                     .padding(.leading, 30)
                     .padding(.trailing, 12)
@@ -137,19 +158,21 @@ private struct FolderProjectRow: View {
         }
         .background(
             RoundedRectangle(cornerRadius: 7)
-                .fill(Color.primary.opacity(isExpanded ? 0.05 : isHovered ? 0.08 : 0))
+                .fill(Color.primary.opacity(isExpanded && isChecked == nil ? 0.05 : isHovered ? 0.08 : 0))
         )
         .animation(.easeOut(duration: 0.12), value: isHovered)
     }
 
     private var summary: some View {
         HStack(alignment: .firstTextBaseline, spacing: 8) {
-            Image(systemName: "chevron.right")
-                .scaledFont(.caption2, weight: .semibold)
-                .foregroundStyle(.tertiary)
-                .rotationEffect(.degrees(isExpanded ? 90 : 0))
-                .flipsForRightToLeftLayoutDirection(true)
-                .frame(width: 8)
+            if isChecked == nil {
+                Image(systemName: "chevron.right")
+                    .scaledFont(.caption2, weight: .semibold)
+                    .foregroundStyle(.tertiary)
+                    .rotationEffect(.degrees(isExpanded ? 90 : 0))
+                    .flipsForRightToLeftLayoutDirection(true)
+                    .frame(width: 8)
+            }
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 6) {
                     Text(project.name)
@@ -216,6 +239,13 @@ private struct FolderProjectRow: View {
                 } else {
                     Button("Создать \(ProjectCardFile.fileName)") { store.createCard(for: project, firstStage: stages.first) }
                         .help("Карточка проекта: этап, дедлайн, дата публикации, формат, главный файл")
+                }
+                if versions.isActive() {
+                    Button("Версии") {
+                        versions.shown = .init(projectPath: project.path)
+                        openWindow(.versions)
+                    }
+                    .help("Прежние версии текстов: сравнить с текущими и вернуть")
                 }
             }
             .buttonStyle(.link)

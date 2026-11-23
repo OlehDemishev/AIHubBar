@@ -409,8 +409,16 @@
               "name" : "Comparer"
             },
             {
+              "detail" : "« Choisir » sous la liste des projets : cochez les projets, choisissez une commande du profil et le moment — « Maintenant », « Cette nuit » ou « Après réinitialisation de la limite ». Les projets passent l’un après l’autre en arrière-plan (Claude Code ou un modèle par API), près d’une limite le lot attend la réinitialisation, et un seul résumé arrive à la fin.",
+              "name" : "Plusieurs projets à la fois"
+            },
+            {
               "detail" : "Le module « Versions » enregistre les textes et la fiche d’un projet-dossier avant chaque lancement de l’IA et pendant que vous écrivez — dans le dossier de l’app, pas dans le projet. Fréquence et durée de conservation : Réglages → « Modules » → « Versions ».",
               "name" : "Versions"
+            },
+            {
+              "detail" : "« Versions » dans un projet déplié ouvre la liste des versions : un fichier d’une version à côté du fichier actuel, « Rétablir ce fichier » et « Rétablir toute la version ». L’état actuel est enregistré avant un rétablissement, et les fichiers apparus plus tard restent. « Ce qui a changé » dans la notification d’une commande terminée et dans le « Journal » montre les textes avant la tâche et maintenant.",
+              "name" : "Rétablir une version"
             },
             {
               "detail" : "Les étapes du profil, séparées par des virgules ; l’étape change avec un bouton dans le projet déplié. Mots, durée, temps de lecture et pages sont comptés dans le fichier principal (.md, .txt, .rtf, .docx).",
