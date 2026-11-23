@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows 0.1.10 published as an unsigned pre-release (tag `desktop-v0.1.10`) on Oleh's «Да, выпускай»: the help window, other Claude accounts, «Сервисы AI» by service, feedback buttons, one task for Claude and Codex; installed on the laptop by the agent (0.1.8 → 0.1.9 → 0.1.10); «latest» stays the Mac's v0.12.0
 - 2026-11-23: Windows — «Сервисы AI» by service: capsules Claude Code, Codex, Gemini, Copilot, Cursor, «Другие» with a dot, each showing only its own agents, hooks, limits and keys (branch `feat/desktop-service-pages`; every capsule seen live)
 - 2026-11-23: Windows — «Предложить идею…» and «Сообщить о проблеме…» in Settings → «Основные» and under the help's topics: the repository's forms on GitHub, the bug form with the version and the system filled in (branch `feat/desktop-feedback`; the buttons seen, not pressed)
 - 2026-11-23: Windows — «Другие аккаунты Claude»: an account is a Claude Code config folder, its limits are a row in the panel under the main account's; Settings → «Сервисы AI» adds, names, signs in and removes one (branch `feat/desktop-claude-accounts`; seen live with two test accounts, «Войти» and the folder dialog not)
@@ -205,6 +206,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows 0.1.10 released (branch `chore/desktop-0.1.10-note`)
+
+Done: on Oleh's «Да, выпускай». The version set to 0.1.10 with the «Что нового» card's five lines and their 12 translations (PR 587; the lines of 0.1.9 left the catalog), the tag `desktop-v0.1.10` on that PR's merge commit, the release published as a pre-release and not «latest»: https://github.com/OlehDemishev/AIHubBar/releases/tag/desktop-v0.1.10. In it since 0.1.9: the help window, other Claude accounts, «Сервисы AI» by service, feedback buttons, one task for Claude and Codex at once; the notes also name three things of 0.1.9 its notes left out (a session's changed files, the panel's width and density, copied files in the clipboard history). On Oleh's «Обнови версию, которая установлена на компьютере» the laptop's copy was updated by the agent: 0.1.9's installer from its release run silently over 0.1.8, then 0.1.10's over 0.1.9; the profile and settings were kept.
+Checked: CI green on PR 587; `desktop-release.yml` green (it installs and uninstalls the installer) and the manifest workflow green; `latest.json` at `desktop-updates` read back and says 0.1.10. On the laptop: both installers exited 0, `AIHubBar.exe` says 0.1.10, `claudepult --version` 0.1.10, the app runs.
+Left: the update from inside the app was not used this time (the installers were run by hand), and the 0.1.10 build was not opened and looked at as installed — the «Что нового» card and the new windows are for Oleh to see. Unsigned, SmartScreen warns. What was not tried by hand is listed in the release notes' «Known».
 
 ## 2026-11-23 — Windows: «Сервисы AI» by service (branch `feat/desktop-service-pages`)
 
