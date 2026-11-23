@@ -153,7 +153,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - version 1.1: the iPhone app (Oleh, 2026-11-23: «приложение на версию 1.1») — not before 1.0 is out; the agent's offer for a first version: sessions, permission requests, limits and a Live Activity, the rest stays with the Telegram bot. Before any code agree with Oleh what it shows and how the data reaches the phone; the Apple side (App ID, signing, push keys) is his
-- batch tasks and «Версии», left to see live (the rest was seen 2026-11-21 in an isolated copy): a batch with a typed text, a model by API, the wait near the limit, the summary and «Что изменилось» as a banner and in Telegram
+- batch tasks and «Версии», left to see live (a typed-text batch to its summary and the wait at a full limit were seen 2026-11-23 in an isolated copy): a model by API, the batch going on by itself after the reset, the summary as a banner and in Telegram, the «Что изменилось» button of a finished run
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
 **Needs Oleh:**
@@ -201,6 +201,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Mac: a typed-text batch and the wait at the limit seen live (branch `chore/status-live-typed-batch`)
+
+Done: no code. Two passes in an isolated copy of `main` (own bundle id and home, the «Тексты» template over two scratch projects, background launch). 18:47 — Claude's session was at 100 %: a batch «Другой тон» with the typed «с юмором» over both projects was made and did not start; the panel showed «Другой тон · 0 из 2» with a clock and «Отменить», both items «waiting». 20:08, after the reset — the same batch ran: a version before each run, one project after the other, `тон-с юмором.md` in both folders with the text rewritten in that tone, one summary «Пакет «Другой тон»: ✅ 2, ❌ 0» in the log, the panel «готово: 2 из 2» with «Убрать». «Версии» opened by `--app-command versions` listed «перед «Другой тон»» and the automatic version, and did not take the focus from the front app.
+Checked: by the copy's log, its `batches.json`, the result files and the windows read through Accessibility. The two runs spent a little of Oleh's Claude limit.
+Left: the first batch was removed with the copy before the reset, so a batch going on by itself after the reset is not seen; the summary's banner (the copy has no notification permission) and Telegram; «Что изменилось» — its button is in the sessions block, which needs tracking switched on, and that was not pressed in a copy; a row of «Версии» could not be selected through Accessibility; a model by API (no key).
 
 ## 2026-11-23 — Mac: the header after 0.13.0; the version before a run stays on the main thread (branch `chore/status-after-0.13.0`)
 
