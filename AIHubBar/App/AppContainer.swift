@@ -41,6 +41,7 @@ final class AppContainer {
     let store: ProjectStore
     let launcher: LaunchController
     let sessions: SessionStore
+    let antigravityWaits: AntigravityWaitWatcher
     let telegramApprovals: TelegramApprovals
     let telegramBot: TelegramBotController
     let widgetStatus: WidgetStatusWriter
@@ -100,6 +101,9 @@ final class AppContainer {
         self.commands = commands
         let sessions = SessionStore()
         self.sessions = sessions
+        let antigravityWaits = AntigravityWaitWatcher()
+        antigravityWaits.isActive = { [modes] in modes.isOn(.sessions) }
+        self.antigravityWaits = antigravityWaits
         let telegramApprovals = TelegramApprovals(settings: settings, sessions: sessions)
         self.telegramApprovals = telegramApprovals
         let usage = UsageStore(settings: settings, sessions: sessions)
@@ -269,6 +273,7 @@ final class AppContainer {
                 followBetaUpdates()
                 Updates.start()
                 sessions.start()
+                antigravityWaits.start()
                 telegramApprovals.start()
                 widgetStatus.start { [keepAwake, widgetStatus] on in
                     AppLog.info("Keep awake \(on ? "on" : "off") from the widget or Control Center")

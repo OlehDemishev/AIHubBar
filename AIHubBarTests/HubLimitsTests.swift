@@ -156,6 +156,63 @@ struct HubLimitsTests {
         #expect(line.waitingConversation(isOpen: { false }) == nil, "agy was closed in the middle of the question")
     }
 
+    /// The notification of a wait: once per question, without the panel being opened.
+    @MainActor @Test func antigravityWaitIsAnnouncedOnce() throws {
+        let folder = FileManager.default.temporaryDirectory.appending(path: "agy-watch-\(UUID())")
+        defer { try? FileManager.default.removeItem(at: folder) }
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        let line = AntigravityStatusLine(settingsURL: folder.appending(path: "settings.json"), scriptURL: folder.appending(path: "statusline.sh"))
+        var isOpen = true
+        var posted: [String] = []
+        let thread = AgentThread(agent: .antigravity, id: "1e48", project: "Ambo", folder: "/P/Ambo", title: "Add the export", updatedAt: .now)
+        let watcher = AntigravityWaitWatcher(line: line, isOpen: { isOpen }, thread: { $0 == "1e48" ? thread : nil })
+        watcher.post = { id, title, body in posted.append("\(id) | \(title) | \(body)") }
+        var clock = Date.now
+        // Each write gets its own modification time, as a real rewrite does.
+        func keep(_ json: String) throws {
+            clock += 1
+            try data(json).write(to: line.statusURL)
+            try FileManager.default.setAttributes([.modificationDate: clock], ofItemAtPath: line.statusURL.path)
+            watcher.check(now: clock)
+        }
+        let pending = #"{"tool_confirmation_pending":true,"conversation_id":"1e48"}"#
+        let working = #"{"agent_state":"working","conversation_id":"1e48"}"#
+
+        watcher.check()
+        #expect(posted.isEmpty, "no file yet")
+        try keep(pending)
+        #expect(posted.count == 1)
+        #expect(posted.first?.hasPrefix("waiting-agy-1e48 | ") == true && posted.first?.hasSuffix("Ambo | Add the export") == true)
+        #expect(NotificationKind(id: "waiting-agy-1e48") == .waiting, "the frequency and the switch of «ждёт ответа»")
+        try keep(pending + " ")
+        #expect(posted.count == 1, "the status line runs again while the question stands")
+        try keep(working)
+        try keep(pending)
+        #expect(posted.count == 2, "answered and asked again")
+        // Another conversation with no row: still said, by the agent's name.
+        try keep(#"{"tool_confirmation_pending":true,"conversation_id":"77aa"}"#)
+        #expect(posted.count == 3 && posted.last?.hasPrefix("waiting-agy-77aa | Antigravity | ") == true)
+
+        // agy closed in the middle of a question leaves «pending» behind.
+        try keep(working)
+        isOpen = false
+        try keep(pending)
+        #expect(posted.count == 3)
+        // A wait from before the app started is not replayed.
+        isOpen = true
+        try keep(working)
+        clock += 1
+        try data(pending).write(to: line.statusURL)
+        try FileManager.default.setAttributes([.modificationDate: clock], ofItemAtPath: line.statusURL.path)
+        watcher.check(now: clock + 3600)
+        #expect(posted.count == 3)
+        // «Сессии» switched off: nothing.
+        watcher.isActive = { false }
+        try keep(working)
+        try keep(pending)
+        #expect(posted.count == 3)
+    }
+
     @Test func antigravityStatusLineIsAddedAndTakenOut() throws {
         let folder = FileManager.default.temporaryDirectory.appending(path: "agy-\(UUID())")
         defer { try? FileManager.default.removeItem(at: folder) }
