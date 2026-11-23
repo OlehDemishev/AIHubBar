@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — «Локальные серверы» in an open git project: what listens on a port from its folder or worktrees, «Открыть в браузере» and «Остановить процесс» asked twice (branch `feat/desktop-local-servers`; a scratch server seen and stopped live)
 - 2026-11-23: Windows — «Агент мог застрять»: a notification when a working session has done nothing for 20 minutes or runs the same command again and again, and «тихо N мин» on its row after 10 (branch `feat/desktop-stuck-watch`; the row and the quiet notification's trigger seen live on a scratch session)
 - 2026-11-23: Windows — the pair's «Сравнение» window: «Сравнить с …» under a run of a pair, both sides with their files, a file's changes line by line, «Различия между вариантами», «Оставить этот вариант», «Влить в …», «Убрать папку и ветку» (branch `feat/desktop-pair-compare`; seen live on a scratch pair)
 - 2026-11-23: Windows 0.1.10 published as an unsigned pre-release (tag `desktop-v0.1.10`) on Oleh's «Да, выпускай»: the help window, other Claude accounts, «Сервисы AI» by service, feedback buttons, one task for Claude and Codex; installed on the laptop by the agent (0.1.8 → 0.1.9 → 0.1.10); «latest» stays the Mac's v0.12.0
@@ -208,6 +209,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: local servers in a project (branch `feat/desktop-local-servers`)
+
+Done: the sixth Mac feature of «Надо догонять». The Mac's `LocalServers` and `LocalServersView`. An open git project in the panel lists «Локальные серверы»: each process that listens on a TCP port and works in the project's folder or one of its worktrees — the port, the program (its folder in the hint), «↗» «Открыть в браузере» (`http://localhost:<port>`, only for a server still there) and «■» «Остановить процесс», which turns into «Остановить?» for four seconds; the second press ends the process — only if it still listens on that port from that project. The Mac asks with SIGTERM; Windows has no polite signal for a console program, so the process and what it started are ended (`taskkill /T /F`, the app's own helper). The Mac reads `lsof`; here the system's TCP table names each listening port's process (`GetExtendedTcpTable`, IPv4 and IPv6; on Linux `/proc/net/tcp` and the processes' sockets) and `sysinfo` reads the process's working folder; folders are compared without regard to case on Windows. Read when a project is opened, off the main thread. `core/src/local_servers.rs` (`Win32_NetworkManagement_IpHelper`), `app/src/local_servers.rs`, `ui/panel.html`; all texts are the Mac's.
+Checked: `python scripts/strings.py --check`, `cargo test --workspace` on Windows (three new: which project a server belongs to — worktrees yes, «Shop2» next door no, case on Windows; Linux's listening rows; a real listening socket of the test itself found with its folder). Live on the laptop, the build from the branch, driven through WebView2's debugging port (a temporary line, not in the commit): `python -m http.server 8765` started in the AIHubBar folder; the opened project showed «:8765 python.exe ↗ ■»; «■» turned into «Остановить?», the second press ended it («asked to quit: true»), the block went away and `netstat` had nothing on 8765 any more. The installed app was started again.
+Left: «Открыть в браузере» not pressed live; a server started inside a worktree, and a process of another user or an elevated one (its folder can't be read, so it is not listed) not tried. Nothing run on Linux beyond CI (the Linux path reads `/proc`). Seen in Russian.
 
 ## 2026-11-23 — Windows: «Агент мог застрять» (branch `feat/desktop-stuck-watch`)
 
