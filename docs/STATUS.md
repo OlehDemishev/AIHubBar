@@ -2,7 +2,7 @@
 
 <!-- summary:start -->
 **Stage:** Mac: nine Claude and Codex features merged 2026-11-17 for 0.12.0 (not before Tuesday 2026-11-24), their windows seen live, the runs themselves not yet; 0.11.0 published 2026-11-17 (the main service can be another one than Claude, Antigravity's quota, what's new card, week pace, release notes, Homebrew cask, translations read against the original, the help up to date); releases once a week on Tuesday since 2026-11-11; 0.10.2 published 2026-11-10 (the Settings sidebar can no longer stay collapsed); 0.10.1 the same day (the stop button asks, Arabic percents, projects stay in sight); 0.10.0 the same day (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): resumed 2026-11-17 on Oleh's word — started on the Mac, carried on on his Windows laptop
-**Updated:** 2026-11-21
+**Updated:** 2026-11-23
 
 **Now:**
 - 2026-11-21: Windows — limit hits are counted, «Упирался в лимит: N» in «Сегодня» (branch `feat/desktop-limit-hits`; the line seen live from a made-up record)
@@ -125,7 +125,7 @@
 - 0.12.0-beta.2 is out (2026-11-20); before 0.12.0: Oleh uses the beta; seen 2026-11-21 in an isolated copy — the «Что нового» card, the header bell, the Telegram tile, a Codex approval from a made-up request; left to see — a real `codex` asking, handover, review, the pair's notification banner
 - 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; then `scripts/release-tools/update-cask.sh 0.12.0`
 - Antigravity «ждёт»: the notification is ready in PR 520 (`feat/antigravity-wait-notification`), **held until 0.12.0 is out**; then see it with a real `agy` question
-- towards 1.0: what is in, what is «бета» and what is out is agreed (journal 2026-11-21); next — a «бета» badge beside a feature (Codex, Antigravity, Copilot and Gemini, «Сравнить», «Версии», batch tasks, the 11 other languages) that hides nothing; left — release notes, translations read by people, feedback from strangers, the island at the real notch
+- towards 1.0: what is in, what is «бета» and what is out is agreed (journal 2026-11-21); the «бета» badge beside a feature is ready in branch `feat/beta-badge`, **held until 0.12.0 is out** (after it: the badge for «Версии» and batch tasks); left — release notes, translations read by people, feedback from strangers, the island at the real notch
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`, and PR 520; all four contain `main` as of 2026-11-21 and are green
@@ -176,6 +176,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Mac: a «бета» badge beside a feature (branch `feat/beta-badge`)
+
+Done: on Oleh's «Да, делай», the next step of the 1.0 list (journal 2026-11-21). Until now «бета» could only hide a whole module. The same `BetaBadge` now also stands beside a feature that stays in sight: the Codex, Gemini and Copilot tabs of Settings → «Сервисы AI» (`ServiceTab.isBeta`; Antigravity's quota lives on the Gemini tab), «Сравнить» in a folder project's commands while it is on, «И в Codex — сравнить» in «Быстрый запрос», and every interface language but Russian and English in Settings → «Основные» → «Язык интерфейса» («Deutsch — бета», `InterfaceLanguage.title`; a menu item can't hold the badge). The badge has a hover hint, one new string in 13 languages: «Бета: уже работает, но проверено меньше остального. Напишите, если что-то не так.»
+Checked: `scripts/check.sh`; tests `servicesOtherThanClaudeAreBeta`, `translationsNobodyReadAreBeta`. Live in an isolated copy («Panel debug», a «Тексты» profile): the badge beside «Сравнить» once it is on. That look found the hint in upper case (`textCase` reached it) — fixed, the fix itself not looked at again.
+Left: **held until 0.12.0 is out**, like the other features. Not seen live: the Settings tabs, the language list and «Быстрый запрос» (their windows take the keyboard). «Версии» and batch tasks get the badge after their branches are merged — they are not in `main`. Not marked: the Cursor tab (not in the agreed list), Codex in menus («Проверить в Codex», «Передать Codex»), the Homebrew line in the README. The catalog sync also re-sorted the languages of six older entries, no text changed.
 
 ## 2026-11-21 — Windows: limit hits are counted (branch `feat/desktop-limit-hits`)
 
