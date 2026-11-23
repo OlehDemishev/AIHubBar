@@ -192,6 +192,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: «Ждёт вас» in the day's summary (branch `feat/day-summary-waiting`)
+
+Done: the second of the ten ideas of 2026-11-23. «Итог дня» was already there (the «История расхода» window and a daily Telegram message: limits, spend by project, background runs); what it lacked was what is left for the person. New section «Ждёт вас» right under the limits: sessions that wait for an answer now («Проект: чего ждёт») and open pull requests with failed checks («❌ CI · Проект #7: название»), five of each and «и ещё N». A day with nothing done but with something waiting is now sent too. `DaySummary.waitingLines` / `failedPRLines`; `WeeklySummarySender` takes the session and project stores. One new text in 12 languages.
+Checked: not built locally (swap 10.4 of 11 GB): the PR's CI runs the tests and the catalog check (`DaySummaryTests.whatWaitsForThePerson`). `scripts/strings-check.py` passes.
+Left: **held until 0.12.0 is out.** Not seen live, neither in the window nor in Telegram. No card in the panel in the evening — the summary stays in the window and in Telegram. The failed checks come from the projects block's last report, so they are as old as its last refresh.
+
 ## 2026-11-23 — Mac: the stuck-agent notification seen live (branch `feat/stuck-agent`)
 
 Done: after Oleh restarted the Mac (swap 0) the batch's six branches were merged into a local-only branch and run as an isolated copy (own bundle id and home). Two made-up session files in the copy's own folder: one running and silent — its row said «тихо 19 мин» and at 20 minutes the log got «Notification: Claude мог застрять — Ambo»; one that alternated an edit and `npm test` every 3 seconds — the same notification on the fifth `npm test`, once. No code change.
