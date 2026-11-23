@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows 0.1.8 is released as a pre-release (`desktop-v0.1.8`) and installed on the laptop through the app; everything merged for Windows up to #541 is in it
 - 2026-11-23: Windows — «Открывать поиск с клавиатуры»: a hot key brings the panel up with the cursor in its search (branch `feat/desktop-search-key`; the command seen live, a real press of the key not)
 - 2026-11-23: Windows — the «Что нового» card with five lines for the next Windows version, 0.1.8 (branch `feat/desktop-whats-new`; seen live). In `main` and waiting for a Windows release: notes, clipboard history, the panel's search, saved prompts, theme and text size, limit hits
 - 2026-11-23: Windows — fixed: the Settings window froze after loading and held the whole app (a lock taken twice in the notes' settings, in `main` since PR 530, in no release) (branch `fix/desktop-settings-freeze`)
@@ -187,6 +188,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows 0.1.8 released (branch `chore/desktop-0.1.8-note`)
+
+Done: on Oleh's «Да, выпускай». The version set to 0.1.8 (#543), the tag `desktop-v0.1.8`, the release published as a pre-release and not «latest» (the Mac's v0.11.0 stays latest), with notes: notes, clipboard history, the panel's search and its hot key, saved prompts, theme and text size, limit hits, «Что нового». The update manifest serves 0.1.8.
+Checked: `python scripts/strings.py --check` (733 texts), `cargo test --workspace` on Windows, CI green on #543, `desktop-release.yml` and the manifest workflow green. Live on the laptop: the installed 0.1.7 → Settings → «Обновления» → «Проверить сейчас» said «Доступна версия 0.1.8», «Установить и перезапустить» installed it; the file says 0.1.8 and the panel came up with the search field and the «Что нового» card with its five lines (left open for Oleh).
+Left: `core/tests/ipc_roundtrip.rs` fails locally while an installed AI Hub Bar is running (it holds the pipe) — quit the app before `cargo test`; in CI it passes. The installed app started from a Windows PowerShell 5 `Start-Process -UseNewEnvironment` had no network and did not answer `--app-command`; started from PowerShell 7 it is fine — not looked into. What was not tried by hand before the release is listed in the release notes' «Known».
 
 ## 2026-11-23 — The iPhone app: after 0.12.0 (branch `chore/status-iphone-after-release`)
 
