@@ -190,6 +190,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: «Ждёт вас», the badge in Settings and the help window seen live (branch `chore/status-windows-seen`)
+
+Done: on Oleh's «Открывай окна», in an isolated copy built from `main` with the 0.13 card, each window opened once, read and closed. «История расхода»: «Сегодня» has «Ждёт вас» right under the limits with «✋ Ambo: Which port should the server use?» from a made-up waiting session. Settings → «Что показывать»: «Версии» carries «БЕТА» and its switch works as before. The help window opened on four topics and looks right. No code change.
+Checked: the windows' AX trees and screenshots; the copy and its files removed after.
+Left: the help's five new facts were not read in the window itself: they sit below the first screen of their topics and the window was not scrolled (a second pass was not made) — their presence rests on `--help-export`. A pull request with failed checks in «Ждёт вас» was not shown (the copy had no GitHub project). The window's title follows the open topic — a script that finds the help window by title must read it again after each switch.
+
 ## 2026-11-23 — Mac: the «Что нового» card for 0.13; what was left of the morning run (branch `feat/whats-new-0.13`)
 
 Done: on Oleh's «Доделай, что мы не успели» — the autonomous run of the morning was cut off at about 07:10 by the usage limit. `WhatsNew.version` is «0.13» with six lines: «Версии», batch tasks («Выбрать»), the stuck-agent notification, local servers, files and dictation in the quick prompt, the calendar's `.ics` and the word goal. The demo follows the card, as docs/RELEASE.md asks: `DemoData.servers(in:)` gives two of its projects made-up local servers and an open project row shows them in the demo copy (nothing of the Mac it runs on; «stop» finds nothing to stop); `DemoData.version` is «0.13». Six new card texts in 12 languages; the six lines of the 0.12 card left the catalog.
