@@ -8,6 +8,7 @@ pub mod ai;
 pub mod assistant;
 pub mod approvals;
 pub mod calendar;
+pub mod claude_config;
 pub mod clipboard;
 pub mod command;
 pub mod commands;

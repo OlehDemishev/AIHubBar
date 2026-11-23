@@ -164,6 +164,12 @@ impl Projects {
         state.projects.iter().any(|p| p.path == path || p.worktrees.iter().any(|w| Path::new(&w.path) == path)) || state.folders.iter().any(|p| p.path == path)
     }
 
+    /// Every project of the profile's folder, git or folder: name and path.
+    pub(crate) fn names(&self) -> Vec<(String, PathBuf)> {
+        let state = self.state.lock().unwrap();
+        state.projects.iter().map(|p| (p.name.clone(), p.path.clone())).chain(state.folders.iter().map(|p| (p.name.clone(), p.path.clone()))).collect()
+    }
+
     pub(crate) fn folder_project(&self, path: &Path) -> Option<FolderProject> {
         self.state.lock().unwrap().folders.iter().find(|p| p.path == path).cloned()
     }

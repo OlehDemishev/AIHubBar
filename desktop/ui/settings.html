@@ -199,6 +199,11 @@
       <p class="secondary" data-t="AI Hub Bar считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета."></p>
     </section>
     <section class="card">
+      <h2 data-t="CLAUDE.md и MCP"></h2>
+      <p><button id="open-claude-config" data-t="Открыть инструкции и MCP-серверы…"></button></p>
+      <p class="secondary" data-t="Отдельное окно: все CLAUDE.md и AGENTS.md (общие и проектов) с поиском и правкой, и MCP-серверы Claude Code с выключателем."></p>
+    </section>
+    <section class="card">
       <h2 data-t="Свои промпты"></h2>
       <div id="saved-prompts"></div>
       <p><button id="saved-prompt-add" data-t="Добавить промпт"></button></p>
@@ -1029,6 +1034,8 @@
     };
     quick = await invoke("quick_commands_library");
     showQuickLibrary();
+
+    document.getElementById("open-claude-config").onclick = () => invoke("open_claude_config");
 
     // «Свои промпты»: a title and a text each; the panel's search offers them by title.
     let savedPrompts = [];
