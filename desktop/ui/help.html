@@ -12,6 +12,10 @@
     <input type="search" id="help-search" autocomplete="off" spellcheck="false" data-t-placeholder="Поиск по справке">
     <div id="help-nav" class="settings-nav" role="tablist" aria-orientation="vertical"></div>
     <p class="secondary" id="help-nothing" data-t="Ничего не найдено" hidden></p>
+    <p class="help-feedback">
+      <button class="link" id="help-idea" data-t="Предложить идею…"></button>
+      <button class="link" id="help-problem" data-t="Сообщить о проблеме…"></button>
+    </p>
   </nav>
   <main class="settings help-page" id="help-page" role="tabpanel">
     <header class="pane-header">
@@ -125,6 +129,8 @@
     window.addEventListener("keydown", (event) => {
       if (event.ctrlKey && event.code === "KeyF") { search.focus(); search.select(); event.preventDefault(); }
     });
+    id("help-idea").onclick = () => invoke("open_feedback", { kind: "idea" });
+    id("help-problem").onclick = () => invoke("open_feedback", { kind: "bug" });
     show();
   </script>
 </body>

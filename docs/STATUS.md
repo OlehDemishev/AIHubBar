@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — «Предложить идею…» and «Сообщить о проблеме…» in Settings → «Основные» and under the help's topics: the repository's forms on GitHub, the bug form with the version and the system filled in (branch `feat/desktop-feedback`; the buttons seen, not pressed)
 - 2026-11-23: Windows — «Другие аккаунты Claude»: an account is a Claude Code config folder, its limits are a row in the panel under the main account's; Settings → «Сервисы AI» adds, names, signs in and removes one (branch `feat/desktop-claude-accounts`; seen live with two test accounts, «Войти» and the folder dialog not)
 - 2026-11-23: Windows — the «Справка» window: ten topics true for Windows with a search, «Как начать», what each part does and «Открыть в настройках»; «?» in the panel's header and `claudepult --app-command help` (branch `feat/desktop-help`; seen live). A first version: far fewer facts than the Mac's, no pictures
 - 2026-11-23: Mac 0.13.0 is out for everyone (tag `v0.13.0`, build 1361, «Latest»); the cask points at it; Oleh's installed copy is build 1341 of the same `main` and will be offered the update
@@ -203,6 +204,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: feedback buttons (branch `feat/desktop-feedback`)
+
+Done: the fourth of the four tasks of «Все предложенное подряд» (built before the third). The Mac's `Feedback`: «Предложить идею…» and «Сообщить о проблеме…» open the repository's issue forms in the browser — the idea form as it is, the bug form with the version and the system («Windows 11 Home (26100), x86_64») filled in through the link. The app sends nothing itself. The buttons are in Settings → «Основные» → «Обратная связь» with the Mac's note (a Windows twin: «версия и система» instead of «версия и macOS», 12 translations made from the Mac's) and under the topics of the help window. `core/src/feedback.rs`, `app/src/help.rs` (`open_feedback`).
+Checked: `python scripts/strings.py --check`, `python scripts/strings-check.py`, `cargo test --workspace` on Windows (two new: the forms' links with their escaping, the system in a line). Live: the two buttons are on «Основные» in the build from the branch.
+Left: the buttons were not pressed — the browser was not opened, so the form with its fields filled is unseen. The bug form itself still speaks of the Mac: its field is called «macOS version», its log hint names `~/Library/Logs`, its areas have no Windows row (`.github/ISSUE_TEMPLATE/bug_report.yml`, not changed here). The Mac's offer to report a crash after one is not built: Windows writes no report of its own to read, the app would need its own panic log first. No «Поддержать проект» row.
 
 ## 2026-11-23 — Windows: other Claude accounts (branch `feat/desktop-claude-accounts`)
 
