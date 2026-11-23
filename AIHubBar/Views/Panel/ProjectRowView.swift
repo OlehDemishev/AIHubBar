@@ -82,6 +82,11 @@ private struct ProjectDetailsView: View {
     @State private var servers: [LocalServer] = []
 
     private func readServers() async {
+        // The demo copy lists made-up servers: nothing of the Mac it runs on is shown, and «stop» finds nothing to stop.
+        guard !DemoMode.isActive else {
+            servers = DemoData.servers(in: project.path)
+            return
+        }
         let all = await LocalServers.scan()
         servers = LocalServers.servers(all, in: project.path)
     }
