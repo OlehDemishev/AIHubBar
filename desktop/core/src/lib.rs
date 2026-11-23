@@ -39,6 +39,7 @@ pub mod token_usage;
 pub mod toggles;
 pub mod tray_icon;
 pub mod usage;
+pub mod whats_new;
 
 /// The name people see. The programs are `AIHubBar` and `claudepult`; data folders keep the old name `ClaudePult`, as on the Mac.
 pub const APP_NAME: &str = "AI Hub Bar";

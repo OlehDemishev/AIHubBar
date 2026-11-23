@@ -17,6 +17,8 @@ pub struct Settings {
     pub language: Option<String>,
     /// The person has seen the hint about pinning the tray icon (Windows 11 hides new icons under «^»).
     pub tray_hint_seen: bool,
+    /// The `whats_new::VERSION` whose card was closed.
+    pub whats_new_seen: Option<String>,
     /// A background run is stopped after this many minutes.
     pub background_time_limit_minutes: u32,
     /// Notify when a PR's CI fails or is fixed and when a PR closes (on by default, as on the Mac).
@@ -86,6 +88,7 @@ impl Default for Settings {
         Settings {
             language: None,
             tray_hint_seen: false,
+            whats_new_seen: None,
             background_time_limit_minutes: crate::runs::DEFAULT_TIME_LIMIT_MINUTES,
             pull_request_alerts: true,
             profiles: Vec::new(),
@@ -140,6 +143,7 @@ impl Settings {
         let profiles = profiles.into_iter().filter(|p| seen.insert(p.id.clone())).collect();
         Settings {
             language: text("language").or(defaults.language),
+            whats_new_seen: value.get("whats_new_seen").and_then(Value::as_str).map(str::to_owned),
             tray_hint_seen: value.get("tray_hint_seen").and_then(Value::as_bool).unwrap_or(defaults.tray_hint_seen),
             background_time_limit_minutes: value
                 .get("background_time_limit_minutes")

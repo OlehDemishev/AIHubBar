@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — the «Что нового» card with five lines for the next Windows version, 0.1.8 (branch `feat/desktop-whats-new`; seen live). In `main` and waiting for a Windows release: notes, clipboard history, the panel's search, saved prompts, theme and text size, limit hits
 - 2026-11-23: Windows — fixed: the Settings window froze after loading and held the whole app (a lock taken twice in the notes' settings, in `main` since PR 530, in no release) (branch `fix/desktop-settings-freeze`)
 - 2026-11-23: Windows — «Тема» and «Размер текста» in Settings → «Основные» (branch `feat/desktop-appearance`; a dark theme with large text seen live)
 - 2026-11-23: Windows — the «История буфера» module: copied texts, search, pin, back to the clipboard in a click (branch `feat/desktop-clipboard`; seen live; its Settings card not seen)
@@ -184,6 +185,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: the «Что нового» card (branch `feat/desktop-whats-new`)
+
+Done: on Oleh's «Продолжай, пока не упрешься в текущую версию на маке». The Mac's `WhatsNew`: a card on top of the panel, once per version with news, until «Понятно» or «Открыть настройки»; shown to whoever already has a profile, and a first start marks it seen. The Windows and Linux version has its own versions, so its own value and lines — `whats_new::VERSION` is «0.1.8» with five lines about what went into `main` after 0.1.7: the two new modules, the search, saved prompts, theme and text size, limit hits. The version in `tauri.conf.json` is still 0.1.7 — the card belongs to the release that will carry these. `core/src/whats_new.rs`, `app/src/main.rs`, `ui/panel.html`; the setting is `whats_new_seen`. Five new texts in the catalog in 12 languages, the names of Settings' sections taken from the catalog's own translations.
+Checked: `python scripts/strings.py --check` (731 texts), `scripts/strings-check.py` (0 problems), `cargo test --workspace` on Windows (who sees the card). Live on the laptop, a build from the branch: the card stood under the search with «Что нового», the five lines, «Открыть настройки» and «Понятно»; «Понятно» took it away and wrote `whats_new_seen: 0.1.8`. The settings were put back after, so the released 0.1.8 will show Oleh the card.
+Left: whoever makes a Windows release with news changes `VERSION` and the lines (as the Mac's release does). «Открыть настройки» was not pressed. The translations of the five lines were written by the agent and read by no one. Seen in Russian only.
 
 ## 2026-11-23 — Windows: the Settings window froze the app (branch `fix/desktop-settings-freeze`)
 

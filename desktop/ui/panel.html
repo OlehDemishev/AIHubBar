@@ -21,6 +21,15 @@
       <button class="icon-button" id="search-clear" data-t-title="Очистить поиск (Esc)" hidden>✕</button>
     </div>
     <section class="card search-results" id="search-results" hidden></section>
+    <section class="card whats-new" id="whats-new" hidden>
+      <h2><span aria-hidden="true">✨</span> <span data-t="Что нового"></span></h2>
+      <ul id="whats-new-items"></ul>
+      <p class="buttons">
+        <span class="spacer"></span>
+        <button class="small" id="whats-new-settings" data-t="Открыть настройки"></button>
+        <button class="small prominent" id="whats-new-done" data-t="Понятно"></button>
+      </p>
+    </section>
     <section class="card hint" id="tray-hint" hidden>
       <p data-t="Windows прячет новые значки под «^». Чтобы AI Hub Bar был всегда виден: Параметры → Персонализация → Панель задач → Другие значки на панели задач."></p>
       <p style="margin-top: 8px"><button id="tray-hint-done" data-t="Готово"></button></p>
@@ -900,6 +909,22 @@ ${command.hotKey}` : command.value;
     window.addEventListener("focus", refreshClips);
     window.__TAURI__.event.listen("clipboard-changed", refreshClips);
     window.__TAURI__.event.listen("profiles-changed", refreshClips);
+
+    // «Что нового»: once per version with news, until «Понятно».
+    invoke("whats_new_view").then((items) => {
+      document.getElementById("whats-new").hidden = items.length === 0;
+      document.getElementById("whats-new-items").replaceChildren(...items.map((line) => {
+        const item = document.createElement("li");
+        item.textContent = line;
+        return item;
+      }));
+    });
+    const closeWhatsNew = async () => {
+      document.getElementById("whats-new").hidden = true;
+      await invoke("whats_new_seen");
+    };
+    document.getElementById("whats-new-done").onclick = closeWhatsNew;
+    document.getElementById("whats-new-settings").onclick = async () => { await closeWhatsNew(); invoke("open_settings"); };
 
     // «Заметки»: a note per .md file. What is typed is written a second after the last key, and when the note,
     // the panel or the window is left; a note changed in another editor is read again when the panel comes back.
