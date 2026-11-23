@@ -47,6 +47,13 @@ pub struct Limits {
     wake: Arc<(Mutex<bool>, Condvar)>,
 }
 
+impl Limits {
+    /// Claude's limits as last read.
+    pub fn snapshot(&self) -> Option<UsageSnapshot> {
+        self.state.lock().unwrap().snapshot.clone()
+    }
+}
+
 fn notified_file() -> std::path::PathBuf {
     paths::data_dir().join("usage-notified.json")
 }

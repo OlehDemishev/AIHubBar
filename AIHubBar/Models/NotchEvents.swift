@@ -51,6 +51,7 @@ enum NotchEventKind: String, Codable, CaseIterable, Sendable {
         switch kind {
         case .waiting: self = .waiting
         case .context: self = .context
+        case .stuck: self = .waiting
         case .background: self = .background
         case .limits: self = .limits
         case .pullRequests: self = .pullRequests

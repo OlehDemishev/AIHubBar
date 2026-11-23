@@ -75,6 +75,10 @@ final class AppSettings {
     /// `Profile.resultPatterns` of the current mode; set with the source, not stored.
     var activeResultPatterns: [String] = []
 
+    /// The current profile and its «Цель по словам» (0 = none), for the day's word count; set with the source, not stored.
+    var activeProfileID = ""
+    var activeWordGoal = 0
+
     /// Whose rules the developer prompts follow; set with the mode, not stored.
     var promptStyle: PromptStyle = .workspace
 
@@ -135,6 +139,11 @@ final class AppSettings {
     /// «Раскладка» (SPEC-layout §4).
     var layout: LayoutSettings {
         didSet { defaults.setEncoded(layout, forKey: Keys.layout) }
+    }
+
+    /// «Версии» (SPEC-content §6).
+    var versions: VersionsSettings {
+        didSet { defaults.setEncoded(versions, forKey: Keys.versions) }
     }
 
     /// «Telegram» (SPEC-telegram §6).
@@ -414,6 +423,7 @@ final class AppSettings {
         notch = defaults.decoded(NotchSettings.self, forKey: Keys.notch) ?? NotchSettings()
         betaUpdates = defaults.bool(forKey: Keys.betaUpdates)
         layout = defaults.decoded(LayoutSettings.self, forKey: Keys.layout) ?? LayoutSettings()
+        versions = defaults.decoded(VersionsSettings.self, forKey: Keys.versions) ?? VersionsSettings()
         quickPrompt = defaults.decoded(QuickPromptSettings.self, forKey: Keys.quickPrompt) ?? QuickPromptSettings()
         telegramBot = defaults.decoded(TelegramBotSettings.self, forKey: Keys.telegramBot) ?? TelegramBotSettings()
         resourceDiskBelowGB = defaults.positiveInt(Keys.resourceDiskBelowGB, default: 20)
@@ -483,6 +493,7 @@ final class AppSettings {
         static let keepAwakeRules = "keepAwakeRules"
         static let notch = "notch"
         static let layout = "layout"
+        static let versions = "versions"
         static let quickPrompt = "quickPrompt"
         static let telegramBot = "telegramBot"
         static let betaUpdates = "betaUpdates"
