@@ -62,6 +62,16 @@ impl Runs {
         self.state.lock().unwrap().runs.clone()
     }
 
+    /// A finished run's record changed by the app (a pair's variant kept, merged or tidied): kept and saved.
+    pub fn replace(&self, run: &Run) {
+        if let Some(at) = self.state.lock().unwrap().runs.iter_mut().find(|r| r.id == run.id) {
+            *at = run.clone();
+        }
+        if let Err(error) = runs::save(&paths::runs_dir(), run) {
+            eprintln!("run {} not saved: {error}", run.id);
+        }
+    }
+
     /// One pass: ended processes are finished, overdue ones stopped. True when something changed.
     fn check(&self, app: &AppHandle) -> bool {
         let now = Utc::now();
