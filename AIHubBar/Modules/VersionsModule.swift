@@ -13,6 +13,7 @@ extension ModuleDefinition {
         title: String(localized: "Версии"),
         summary: String(localized: "Версии черновиков для проектов-папок: тексты и карточка проекта сохраняются перед каждым запуском AI и пока вы пишете. Хранятся в папке приложения, не в проекте, и никуда не отправляются."),
         tagline: String(localized: "Черновики не пропадают"),
+        hasBetaMark: true,
         // Works behind the scenes: no block in the panel, nothing in the menu bar.
         isPanelBlock: false,
         places: [],
@@ -123,8 +124,23 @@ final class VersionKeeper {
     }
 
     func tick(now: Date = .now) async {
-        guard isActive(), Self.isDue(last: lastSweep, pace: settings.versions.pace, now: now) else { return }
-        await sweep(now: now)
+        guard isActive() else { return }
+        if Self.isDue(last: lastSweep, pace: settings.versions.pace, now: now) {
+            await sweep(now: now)
+        } else if settings.versions.pace.seconds == nil, lastCleanup.map({ now.timeIntervalSince($0) > 86_400 }) ?? true {
+            await cleanUp(now: now)
+        }
+    }
+
+    /// «Только перед запуском AI» takes no versions by the clock, but the old ones still have to go: once a day.
+    func cleanUp(now: Date = .now) async {
+        lastCleanup = now
+        let paths = folders.projects.map(\.path)
+        let store = store, keepDays = settings.versions.keepDays
+        await Task.detached(priority: .utility) {
+            for path in paths { store.prune(projectPath: path, now: now, keepDays: keepDays) }
+            store.removeOrphans(now: now, after: keepDays)
+        }.value
     }
 
     /// A version of every folder project of the current profile that changed, then the clean-up of old ones.

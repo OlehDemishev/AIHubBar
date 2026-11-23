@@ -75,7 +75,7 @@ pub fn sync(app: &AppHandle) {
 /// module off, Settings instead.
 pub fn show(app: &AppHandle) {
     if !app.state::<AppState>().settings.lock().unwrap().module_on(KIND) {
-        crate::open_settings_window(app);
+        crate::open_settings_page(app, Some("module.quickPrompt"));
         return;
     }
     *app.state::<QuickPrompt>().front.lock().unwrap() = quick_prompt::front_title();

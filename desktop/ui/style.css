@@ -63,7 +63,45 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .icon-button:hover { color: var(--text); }
 
 /* Settings */
-.settings { padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; }
+/* A sidebar and the chosen page, as the Mac's Settings (SPEC-settings §5b). Pinned to the window's edges rather
+   than 100vh tall: «Размер текста» zooms the page, and a zoomed 100vh is taller than the window. */
+.settings-split { position: fixed; inset: 0; display: flex; }
+.settings-sidebar { flex: none; width: 212px; display: flex; flex-direction: column; gap: 8px; padding: 14px 10px 10px; overflow-y: auto; scrollbar-width: thin; border-inline-end: 1px solid var(--line); background: color-mix(in srgb, var(--card) 55%, var(--bg)); }
+.settings-sidebar input[type="search"] { font: inherit; width: 100%; padding: 5px 9px; border-radius: 7px; border: 1px solid var(--line); background: var(--card); color: inherit; user-select: text; }
+.settings-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.settings-nav h2 { margin: 10px 8px 2px; }
+.nav-row { display: flex; align-items: center; gap: 9px; width: 100%; border: none; background: none; padding: 5px 8px; border-radius: 7px; text-align: start; min-width: 0; }
+.nav-row:hover { background: var(--line); border: none; }
+.nav-row[aria-selected="true"] { background: var(--accent); color: #fff; }
+.nav-row .name { flex: 1; min-width: 0; overflow-wrap: anywhere; line-height: 1.25; }
+#settings-nothing { padding: 0 8px; flex: 1; }
+#version { padding: 0 8px; }
+.pane-icon { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 6px; background: #8e8e93; color: #fff; }
+.pane-icon svg { width: 68%; height: 68%; }
+.pane-icon.services { background: #af52de; }
+.pane-icon.module { background: #30a0a8; }
+.pane-icon.telegram { background: #2aabee; }
+.settings { flex: 1; min-width: 0; overflow-y: auto; scrollbar-width: thin; padding: 18px 24px 24px; display: flex; flex-direction: column; gap: 14px; }
+.settings > * { flex: none; }
+.pane-header { display: flex; align-items: center; gap: 12px; min-height: 44px; }
+.pane-header .pane-icon { width: 40px; height: 40px; border-radius: 10px; }
+.pane-header .pane-title { flex: 1; min-width: 0; }
+.pane-header h1 { font-size: 19px; }
+.pane-back { flex: none; width: 30px; height: 30px; padding: 0; border: none; border-radius: 50%; background: var(--line); font-size: 20px; line-height: 1; }
+.pane-back:hover { border: none; background: color-mix(in srgb, currentColor 18%, transparent); }
+[dir="rtl"] .pane-back span, [dir="rtl"] .show-open::after { display: inline-block; transform: scaleX(-1); }
+.page, .group-block { display: flex; flex-direction: column; gap: 14px; }
+h2.group { margin: 4px 2px -8px; }
+.card > h3:first-child { margin-top: 0; }
+/* «Что показывать»: a module a row — its name and what it does open its page, the switch turns it on. */
+.show-list { padding: 4px 14px; }
+.show-row { display: flex; align-items: center; gap: 12px; }
+.show-row + .show-row { border-top: 1px solid var(--line); }
+.show-open { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; border: none; background: none; padding: 9px 0; text-align: start; position: relative; padding-inline-end: 18px; }
+.show-open:hover { border: none; }
+.show-open:hover strong { color: var(--accent); }
+.show-open::after { content: "›"; position: absolute; inset-inline-end: 2px; top: 50%; margin-top: -0.65em; color: var(--secondary); font-size: 16px; }
+.show-row:has(input.switch:not(:checked)) .show-open { opacity: 0.55; }
 .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; }
 .row + .row { border-top: 1px solid var(--line); }
 #updates-state { flex: 1; min-width: 0; overflow-wrap: anywhere; }

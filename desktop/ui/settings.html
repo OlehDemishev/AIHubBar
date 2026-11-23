@@ -6,425 +6,633 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="settings">
-    <h1 data-t="Основные"></h1>
-    <section class="card">
-      <div class="row">
-        <label for="language" data-t="Язык интерфейса"></label>
-        <select id="language"></select>
-      </div>
-      <div class="row">
-        <label for="search-key" data-t="Открывать поиск с клавиатуры"></label>
-        <select id="search-key"></select>
-      </div>
-      <div class="row">
-        <label for="theme" data-t="Тема"></label>
-        <select id="theme"></select>
-      </div>
-      <div class="row">
-        <label for="text-size" data-t="Размер текста"></label>
-        <select id="text-size"></select>
-      </div>
-      <div class="row">
-        <label for="panel-width" data-t="Ширина"></label>
-        <select id="panel-width"></select>
-      </div>
-      <div class="row">
-        <label for="panel-density" data-t="Плотность строк"></label>
-        <select id="panel-density"></select>
-      </div>
-      <div class="row">
-        <label for="autostart" data-t="Запускать при входе в систему"></label>
-        <input type="checkbox" id="autostart">
-      </div>
-    </section>
-    <div id="telegram" hidden>
-      <h1>Telegram</h1>
-      <section class="card">
-        <div class="row">
-          <span data-t="Токен бота"></span>
-          <span class="telegram-controls">
-            <span class="secondary" id="telegram-bot"></span>
-            <input type="password" id="telegram-token" placeholder="123456:ABC…" autocomplete="off" spellcheck="false" data-t-title="Токен бота">
-            <button id="telegram-save" data-t="Сохранить"></button>
-            <button id="telegram-remove" data-t="Удалить" hidden></button>
-          </span>
+  <!-- Laid out like the Mac's Settings (docs/specs/SPEC-settings.md §5b): a sidebar with a search and a row per area,
+       the chosen page on the right. A module's page and «Telegram» open from a row of another page and go back to it. -->
+  <div class="settings-split">
+    <nav class="settings-sidebar">
+      <input type="search" id="settings-search" autocomplete="off" spellcheck="false" data-t-placeholder="Поиск">
+      <div id="settings-nav" class="settings-nav" role="tablist" aria-orientation="vertical"></div>
+      <p class="secondary" id="settings-nothing" data-t="Ничего не найдено" hidden></p>
+      <p class="secondary" id="version"></p>
+    </nav>
+    <main class="settings" id="settings-main">
+      <header class="pane-header">
+        <button id="pane-back" class="pane-back" hidden><span aria-hidden="true">‹</span></button>
+        <span class="pane-icon" id="pane-icon" aria-hidden="true"></span>
+        <div class="pane-title">
+          <h1 id="pane-title"></h1>
+          <p class="secondary" id="pane-subtitle"></p>
         </div>
-        <div class="row">
-          <span data-t="Чат"></span>
-          <span class="telegram-controls">
-            <span class="secondary" id="telegram-chat"></span>
-            <input type="text" id="telegram-chat-id" inputmode="numeric" autocomplete="off" hidden>
-            <button id="telegram-chat-save" data-t="Сохранить" hidden></button>
-            <button id="telegram-cancel" data-t="Отмена" hidden></button>
-            <button id="telegram-unbind" data-t="Отвязать" hidden></button>
-            <button id="telegram-bind" data-t="Привязать чат" data-t-title="Откроется бот в Telegram — нажмите «Start», и бот будет отвечать только этому чату"></button>
-          </span>
+        <input type="checkbox" class="switch" id="pane-switch" data-t-title="Включить модуль" hidden>
+      </header>
+
+      <div class="page" id="page-general" role="tabpanel" hidden>
+        <section class="card">
+          <div class="row">
+            <label for="language" data-t="Язык интерфейса"></label>
+            <select id="language"></select>
+          </div>
+          <div class="row">
+            <label for="autostart" data-t="Запускать при входе в систему"></label>
+            <input type="checkbox" id="autostart">
+          </div>
+        </section>
+        <section class="card" id="telegram" hidden>
+          <div class="row">
+            <span>Telegram</span>
+            <button data-open="telegram" data-t="Открыть"></button>
+          </div>
+        </section>
+        <h2 class="group" data-t="Уведомления"></h2>
+        <section class="card">
+          <div class="row">
+            <label for="reminders" data-t="Напоминать"></label>
+            <select id="reminders"></select>
+          </div>
+          <div class="row">
+            <label for="pr-alerts" data-t="Уведомлять, когда CI упал или починился и когда PR закрыт"></label>
+            <input type="checkbox" id="pr-alerts">
+          </div>
+        </section>
+        <div id="updates" class="group-block" hidden>
+          <h2 class="group" data-t="Обновления"></h2>
+          <section class="card">
+            <div class="row">
+              <label for="updates-daily" data-t="Проверять раз в день"></label>
+              <input type="checkbox" id="updates-daily">
+            </div>
+            <div class="row">
+              <span id="updates-state" class="secondary"></span>
+              <span>
+                <button id="updates-install" data-t="Установить и перезапустить" hidden></button>
+                <button id="updates-check" data-t="Проверить сейчас"></button>
+              </span>
+            </div>
+          </section>
         </div>
-        <div class="row">
-          <label for="telegram-answers" data-t="Этот компьютер отвечает боту" data-t-title="Только один компьютер читает сообщения бота; уведомления присылают все"></label>
-          <span class="telegram-controls">
-            <span class="secondary" id="telegram-reading"></span>
-            <input type="checkbox" id="telegram-answers">
-          </span>
-        </div>
-        <div class="row">
-          <label for="telegram-requests" data-t="Запросы разрешений в этот бот" data-t-title="Когда Claude просит разрешение, бот присылает запрос с кнопками «Разрешить», «Отклонить», «Подробнее»"></label>
-          <input type="checkbox" id="telegram-requests">
-        </div>
-        <div class="row">
-          <span class="secondary" id="telegram-status"></span>
-          <button id="telegram-test" data-t="Проверить"></button>
-        </div>
-      </section>
-      <h2 data-t="Уведомления в Telegram"></h2>
-      <section class="card" id="telegram-events"></section>
-    </div>
-    <div id="updates" hidden>
-      <h1 data-t="Обновления"></h1>
-      <section class="card">
-        <div class="row">
-          <label for="updates-daily" data-t="Проверять раз в день"></label>
-          <input type="checkbox" id="updates-daily">
-        </div>
-        <div class="row">
-          <span id="updates-state" class="secondary"></span>
-          <span>
-            <button id="updates-install" data-t="Установить и перезапустить" hidden></button>
-            <button id="updates-check" data-t="Проверить сейчас"></button>
-          </span>
-        </div>
-      </section>
-    </div>
-    <h1 data-t="Профили"></h1>
-    <section class="card">
-      <div id="profile-rows"></div>
-      <div class="row">
-        <span class="secondary" id="profile-delete-note" data-t="Настройки профиля пропадут. Папки проектов останутся на месте." hidden></span>
-        <span class="profile-add">
-          <select id="profile-template" data-t-title="Добавить профиль из шаблона"></select>
-          <button id="profile-add" data-t="Добавить профиль"></button>
-          <button id="profile-assistant" data-t="Помощник…"></button>
-        </span>
+        <h2 class="group" data-t="Перенос и обмен"></h2>
+        <section class="card">
+          <div class="row">
+            <span data-t="Все настройки и профили"></span>
+            <span>
+              <button id="export-settings" data-t="Экспорт настроек…"></button>
+              <button id="import" data-t="Импорт…"></button>
+            </span>
+          </div>
+          <div class="import-pending" id="import-pending" hidden>
+            <strong id="import-title"></strong>
+            <p class="secondary" id="import-summary"></p>
+            <p>
+              <button id="import-replace" data-t="Заменить все настройки"></button>
+              <button id="import-add" data-t="Добавить профили"></button>
+              <button id="import-cancel" data-t="Отмена"></button>
+            </p>
+          </div>
+          <p class="secondary import-message" hidden></p>
+        </section>
       </div>
-    </section>
-    <section class="card">
-      <div class="card-title">
-        <h2 id="current-profile"></h2>
-        <button id="export-profile" data-t="Экспорт профиля…"></button>
+
+      <div class="page" id="page-telegram" role="tabpanel" hidden>
+        <section class="card">
+          <div class="row">
+            <span data-t="Токен бота"></span>
+            <span class="telegram-controls">
+              <span class="secondary" id="telegram-bot"></span>
+              <input type="password" id="telegram-token" placeholder="123456:ABC…" autocomplete="off" spellcheck="false" data-t-title="Токен бота">
+              <button id="telegram-save" data-t="Сохранить"></button>
+              <button id="telegram-remove" data-t="Удалить" hidden></button>
+            </span>
+          </div>
+          <div class="row">
+            <span data-t="Чат"></span>
+            <span class="telegram-controls">
+              <span class="secondary" id="telegram-chat"></span>
+              <input type="text" id="telegram-chat-id" inputmode="numeric" autocomplete="off" hidden>
+              <button id="telegram-chat-save" data-t="Сохранить" hidden></button>
+              <button id="telegram-cancel" data-t="Отмена" hidden></button>
+              <button id="telegram-unbind" data-t="Отвязать" hidden></button>
+              <button id="telegram-bind" data-t="Привязать чат" data-t-title="Откроется бот в Telegram — нажмите «Start», и бот будет отвечать только этому чату"></button>
+            </span>
+          </div>
+          <div class="row">
+            <label for="telegram-answers" data-t="Этот компьютер отвечает боту" data-t-title="Только один компьютер читает сообщения бота; уведомления присылают все"></label>
+            <span class="telegram-controls">
+              <span class="secondary" id="telegram-reading"></span>
+              <input type="checkbox" id="telegram-answers">
+            </span>
+          </div>
+          <div class="row">
+            <label for="telegram-requests" data-t="Запросы разрешений в этот бот" data-t-title="Когда Claude просит разрешение, бот присылает запрос с кнопками «Разрешить», «Отклонить», «Подробнее»"></label>
+            <input type="checkbox" id="telegram-requests">
+          </div>
+          <div class="row">
+            <span class="secondary" id="telegram-status"></span>
+            <button id="telegram-test" data-t="Проверить"></button>
+          </div>
+        </section>
+        <h2 class="group" data-t="Уведомления в Telegram"></h2>
+        <section class="card" id="telegram-events"></section>
       </div>
-      <div class="folder">
-        <div class="row">
-          <span data-t="Папка проектов"></span>
-          <span>
-            <button id="projects-folder-reset" data-t="По умолчанию" hidden></button>
-            <button id="projects-folder-choose" data-t="Выбрать…"></button>
-          </span>
-        </div>
-        <p class="secondary path" id="projects-folder-path"></p>
-        <p class="error" id="projects-folder-note" hidden></p>
+
+      <div class="page" id="page-show" role="tabpanel" hidden>
+        <section class="card show-list">
+          <div class="show-row">
+            <button class="show-open" data-open="module.resources">
+              <strong data-t="Ресурсы компьютера"></strong>
+              <span class="secondary" data-t="Процессор, память, диск, сеть, батарея и самые прожорливые приложения; уведомления о нагрузке, памяти, месте и заряде."></span>
+            </button>
+            <input type="checkbox" class="switch" id="module-resources">
+          </div>
+          <div class="show-row">
+            <button class="show-open" data-open="module.keepAwake">
+              <strong data-t="Не спать"></strong>
+              <span class="secondary" data-t="Компьютер не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения."></span>
+            </button>
+            <input type="checkbox" class="switch" id="module-keep-awake">
+          </div>
+          <div class="show-row">
+            <button class="show-open" data-open="module.quickCommands">
+              <strong data-t="Быстрые команды"></strong>
+              <span class="secondary" data-t="Свои кнопки: скрипт в фоне или в Терминале, ссылка, файл, папка или программа."></span>
+            </button>
+            <input type="checkbox" class="switch" id="module-quick-commands">
+          </div>
+          <div class="show-row">
+            <button class="show-open" data-open="module.toggles">
+              <strong data-t="Быстрые переключатели"></strong>
+              <span class="secondary" data-t="Тёмная тема, значки на рабочем столе, блокировка и выключение экрана, корзина — в один клик."></span>
+            </button>
+            <input type="checkbox" class="switch" id="module-toggles">
+          </div>
+          <div class="show-row">
+            <button class="show-open" data-open="module.clipboard">
+              <strong data-t="История буфера"></strong>
+              <span class="secondary" data-t="Последние копирования: поиск, закрепление, снова в буфер одним кликом. Пароли из менеджеров паролей не запоминаются."></span>
+            </button>
+            <input type="checkbox" class="switch" id="module-clipboard">
+          </div>
+          <div class="show-row">
+            <button class="show-open" data-open="module.notes">
+              <strong data-t="Заметки"></strong>
+              <span class="secondary" data-t="Заметки в Markdown прямо в панели: вкладки, обычные файлы .md в папке, которую откроет любой редактор."></span>
+            </button>
+            <input type="checkbox" class="switch" id="module-notes">
+          </div>
+          <div class="show-row">
+            <button class="show-open" data-open="module.quickPrompt">
+              <strong data-t="Быстрый запрос"></strong>
+              <span class="secondary" data-t="Горячая клавиша в любом приложении открывает окно: задача, проект и агент — и она уходит в фон или в новое окно Терминала."></span>
+            </button>
+            <input type="checkbox" class="switch" id="module-quick-prompt">
+          </div>
+        </section>
       </div>
-      <div class="row">
-        <label for="launch-mode" data-t="Где запускать Claude"></label>
-        <select id="launch-mode"></select>
+
+      <div class="page" id="page-module.resources" data-switch="module-resources" role="tabpanel" hidden>
+        <section class="card" id="resource-options" hidden>
+          <h3 data-t="Уведомления о ресурсах"></h3>
+          <label class="check-line"><input type="checkbox" id="resource-alerts"> <span data-t="Уведомлять о нагрузке, памяти, месте и заряде"></span></label>
+          <div class="row">
+            <label for="resource-disk" data-t="Мало места — свободно меньше"></label>
+            <select id="resource-disk"></select>
+          </div>
+          <p class="secondary" data-t="Процессор выше 90 % дольше 5 минут, критическая нехватка памяти, мало места, заряд ниже 15 % без зарядки — по одному уведомлению, пока не наладится."></p>
+        </section>
       </div>
-      <div class="row" id="calendar-row" hidden>
-        <label for="profile-calendar" data-t="Календарь"></label>
-        <select id="profile-calendar"></select>
+
+      <div class="page" id="page-module.keepAwake" data-switch="module-keep-awake" role="tabpanel" hidden>
+        <section class="card" id="keep-awake-rules" hidden>
+          <h3 data-t="Правила «Не спать»"></h3>
+          <label class="check-line"><input type="checkbox" data-rule="whileClaudeWorks"> <span data-t="Пока работает Claude (сессия или фоновая задача)"></span></label>
+          <label class="check-line"><input type="checkbox" data-rule="whileOnPower"> <span data-t="Пока подключено питание"></span></label>
+          <label class="check-line"><input type="checkbox" data-rule="whileExternalDisplay"> <span data-t="Пока подключён внешний монитор"></span></label>
+          <div class="row">
+            <span data-t="Пока открыты приложения"></span>
+            <span class="apps-line">
+              <span class="secondary" id="keep-awake-apps"></span>
+              <button id="keep-awake-choose" data-t="Выбрать…"></button>
+              <button id="keep-awake-clear" data-t="Очистить" hidden></button>
+            </span>
+          </div>
+          <label class="check-line"><input type="checkbox" data-rule="keepDisplayOn"> <span data-t="Не гасить и экран"></span></label>
+          <p class="secondary" data-t="Любое сработавшее правило не даёт компьютеру уснуть; вручную — переключателем и таймерами в панели. Системные настройки не меняются: как только правил нет, компьютер засыпает как обычно. Внешний монитор — второй экран ноутбука или любой экран компьютера без батареи."></p>
+        </section>
       </div>
-      <div class="row">
-        <label for="profile-service" data-t="Сервис по умолчанию"></label>
-        <select id="profile-service"></select>
+
+      <div class="page" id="page-module.quickCommands" data-switch="module-quick-commands" role="tabpanel" hidden>
+        <section class="card" id="quick-library" hidden>
+          <h3 data-t="Команды"></h3>
+          <div id="quick-editors"></div>
+          <button id="quick-add" data-t="Добавить команду"></button>
+          <p class="secondary" data-t="Скрипт в фоне запускается в домашней папке (PowerShell на Windows, sh на Linux), итог приходит уведомлением; «в Терминале» — открывает новое окно. Открыть — ссылка (https://…) или путь (~/…)."></p>
+        </section>
       </div>
-      <p class="secondary" data-t="Сервис команд-шаблонов профиля. Агенты и ключи — Настройки → «Сервисы AI»."></p>
-      <div id="profile-folder-fields" hidden>
-        <div class="row">
-          <label for="profile-permissions" data-t="Права Claude в фоне"></label>
-          <select id="profile-permissions"></select>
-        </div>
-        <h3 data-t="Карточка, этапы и метрики"></h3>
-        <div class="row">
-          <label for="profile-stages" data-t="Этапы"></label>
-          <input type="text" id="profile-stages" class="wide" data-t-placeholder="идея, черновик, готово">
-        </div>
-        <div class="metric-boxes" id="profile-metrics"></div>
-        <div class="row" id="profile-pace-row" hidden>
-          <label for="profile-pace" id="profile-pace-label"></label>
-          <input type="number" id="profile-pace" min="80" max="250" step="10">
-        </div>
-        <p class="secondary" data-t="Карточка проекта — файл проект.md в папке проекта (этап, дедлайн, публикация, формат, главный файл, площадка); этап меняется прямо из панели. Слова считаются по главному файлу."></p>
-        <h3 data-t="Команды проектов"></h3>
-        <div id="profile-commands"></div>
-        <button id="command-add" data-t="Добавить команду"></button>
-        <p class="secondary" data-t="Подстановки: {проект} {файл} {формат} {площадка} {хронометраж} {текст} {язык}; в имени файла ещё <время> и <файл>. Результат — всегда новый файл в папке проекта. «Своя задача» есть всегда."></p>
+
+      <div class="page" id="page-module.toggles" data-switch="module-toggles" role="tabpanel" hidden>
+        <section class="card" id="toggle-options" hidden>
+          <h3 data-t="Какие переключатели показывать"></h3>
+          <div id="toggle-choices"></div>
+          <p class="secondary" data-t="Корзина очищается только после подтверждения."></p>
+        </section>
       </div>
-    </section>
-    <h1 data-t="Сервисы AI"></h1>
-    <section class="card services">
-      <div class="card-title">
-        <h2 data-t="Агенты"></h2>
-        <button id="agents-refresh" data-t="Обновить"></button>
+
+      <div class="page" id="page-module.clipboard" data-switch="module-clipboard" role="tabpanel" hidden>
+        <section class="card" id="clipboard-options" hidden>
+          <div class="row">
+            <label for="clipboard-limit" data-t="Хранить последних"></label>
+            <select id="clipboard-limit"></select>
+          </div>
+          <div class="row">
+            <label for="clipboard-remember" data-t="Помнить после перезапуска"></label>
+            <input type="checkbox" class="switch" id="clipboard-remember">
+          </div>
+        </section>
       </div>
-      <div id="agent-rows"></div>
-    </section>
-    <section class="card services">
-      <h2 data-t="Модели по API"></h2>
-      <p class="secondary" id="no-key-store" data-t="На этой системе ключи API пока негде хранить: работают только серверы без ключа (Ollama, LM Studio)." hidden></p>
-      <div id="provider-rows"></div>
-    </section>
-    <section class="card services">
-      <h2 data-t="Другие AI"></h2>
-      <div class="row">
-        <label for="main-service" data-t="Главный сервис"></label>
-        <select id="main-service"></select>
+
+      <div class="page" id="page-module.notes" data-switch="module-notes" role="tabpanel" hidden>
+        <section class="card" id="notes-options" hidden>
+          <div class="row">
+            <span data-t="Папка"></span>
+            <span class="secondary notes-folder" id="notes-folder"></span>
+            <button id="notes-choose" data-t="Выбрать…"></button>
+            <button id="notes-open-folder" data-t="Открыть папку"></button>
+          </div>
+          <p class="secondary" data-t="Каждая заметка — файл .md в этой папке; удалённые уходят в корзину."></p>
+        </section>
       </div>
-      <p class="secondary" data-t="Лимиты главного сервиса идут первыми в панели и показаны на значке в трее. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты."></p>
-      <div class="row">
-        <label for="limit-thresholds" data-t="Уведомлять на, %"></label>
-        <input type="text" id="limit-thresholds" placeholder="50, 80, 95" inputmode="numeric" autocomplete="off" style="width: 9em">
+
+      <div class="page" id="page-module.quickPrompt" data-switch="module-quick-prompt" role="tabpanel" hidden>
+        <section class="card" id="quick-prompt-options" hidden>
+          <div class="row">
+            <label for="quick-prompt-key" data-t="Горячая клавиша"></label>
+            <select id="quick-prompt-key"></select>
+          </div>
+          <div class="row">
+            <span data-t="Окно быстрого запроса"></span>
+            <button id="quick-prompt-open" data-t="Открыть"></button>
+          </div>
+          <p class="secondary" data-t="Проект — тот, что в заголовке окна впереди, иначе прошлый. Claude Code и Codex — в фоне или в Терминале; другие агенты открываются в Терминале, задача — в буфере обмена. Из скрипта: claudepult --app-command quick-prompt."></p>
+        </section>
       </div>
-      <div class="row">
-        <label for="run-guard" data-t="Ставить фоновые задачи на паузу"></label>
-        <select id="run-guard"></select>
+
+      <div class="page" id="page-appearance" role="tabpanel" hidden>
+        <section class="card">
+          <div class="row">
+            <label for="theme" data-t="Тема"></label>
+            <select id="theme"></select>
+          </div>
+          <div class="row">
+            <label for="text-size" data-t="Размер текста"></label>
+            <select id="text-size"></select>
+          </div>
+          <div class="row">
+            <label for="panel-width" data-t="Ширина"></label>
+            <select id="panel-width"></select>
+          </div>
+          <div class="row">
+            <label for="panel-density" data-t="Плотность строк"></label>
+            <select id="panel-density"></select>
+          </div>
+        </section>
+        <section class="card services">
+          <h2 data-t="Значок в трее"></h2>
+          <div id="tray-styles" class="tray-styles" role="radiogroup"></div>
+          <p class="secondary" data-t="На значке — первые два лимита главного сервиса: у Claude это сессия и неделя. Цвет каждого — по его уровню. Образцы показаны для 62 % и 31 %."></p>
+        </section>
       </div>
-      <p class="secondary" data-t="Когда сессия или неделя дошла до порога, фоновые задачи замирают там, где были, а запланированные ждут. После сброса лимита работа продолжается сама. Так задача не обрывается на полпути из-за лимита."></p>
-      <div class="row">
-        <label for="renew-login" data-t="Продлевать вход Claude Code сам"></label>
-        <input type="checkbox" id="renew-login">
+
+      <div class="page" id="page-services" role="tabpanel" hidden>
+        <section class="card services">
+          <div class="card-title">
+            <h2 data-t="Агенты"></h2>
+            <button id="agents-refresh" data-t="Обновить"></button>
+          </div>
+          <div id="agent-rows"></div>
+        </section>
+        <h2 class="group">Hooks</h2>
+        <section class="card">
+          <div class="row">
+            <span data-t="Сессии Claude Code"></span>
+            <strong id="hooks-status"></strong>
+          </div>
+          <div class="row">
+            <span class="secondary" id="hooks-path"></span>
+            <span>
+              <button id="hooks-install"></button>
+              <button id="hooks-remove" data-t="Удалить"></button>
+            </span>
+          </div>
+          <p class="secondary" style="margin-top: 8px" data-t="Hooks добавляются в settings.json Claude Code (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом компьютере, чтобы AI Hub Bar показывал их в панели."></p>
+          <p class="error" id="hooks-error" hidden></p>
+        </section>
+        <section class="card agent-hooks" data-agent="codex">
+          <div class="row">
+            <span data-t="Состояние сессий Codex"></span>
+            <strong class="status"></strong>
+          </div>
+          <div class="row">
+            <span class="secondary path"></span>
+            <span><button class="install"></button> <button class="remove" data-t="Удалить"></button></span>
+          </div>
+          <p class="secondary note" style="margin-top: 8px" hidden></p>
+          <p class="error" hidden></p>
+        </section>
+        <section class="card agent-hooks" data-agent="copilot">
+          <div class="row">
+            <span data-t="Состояние сессий Copilot"></span>
+            <strong class="status"></strong>
+          </div>
+          <div class="row">
+            <span class="secondary path"></span>
+            <span><button class="install"></button> <button class="remove" data-t="Удалить"></button></span>
+          </div>
+          <p class="error" hidden></p>
+        </section>
+        <section class="card services">
+          <h2 data-t="Другие AI"></h2>
+          <div class="row">
+            <label for="main-service" data-t="Главный сервис"></label>
+            <select id="main-service"></select>
+          </div>
+          <p class="secondary" data-t="Лимиты главного сервиса идут первыми в панели и показаны на значке в трее. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты."></p>
+          <div class="row">
+            <label for="limit-thresholds" data-t="Уведомлять на, %"></label>
+            <input type="text" id="limit-thresholds" placeholder="50, 80, 95" inputmode="numeric" autocomplete="off" style="width: 9em">
+          </div>
+          <div class="row">
+            <label for="run-guard" data-t="Ставить фоновые задачи на паузу"></label>
+            <select id="run-guard"></select>
+          </div>
+          <p class="secondary" data-t="Когда сессия или неделя дошла до порога, фоновые задачи замирают там, где были, а запланированные ждут. После сброса лимита работа продолжается сама. Так задача не обрывается на полпути из-за лимита."></p>
+          <div class="row">
+            <label for="renew-login" data-t="Продлевать вход Claude Code сам"></label>
+            <input type="checkbox" id="renew-login">
+          </div>
+          <p class="secondary" data-t="Когда вход истёк (claude давно не запускался, а работа идёт в приложении Claude), AI Hub Bar отправляет через claude запрос из одного слова — самая маленькая модель, без инструментов, не чаще раза в час. Вход продлевается примерно на 8 часов."></p>
+          <div id="hub-sources"></div>
+        </section>
+        <h2 class="group" data-t="Фоновые задачи"></h2>
+        <section class="card">
+          <div class="row">
+            <label for="time-limit" data-t="Лимит времени"></label>
+            <select id="time-limit"></select>
+          </div>
+          <div class="row">
+            <label for="night-hour" data-t="Ночные задачи начинаются в"></label>
+            <select id="night-hour"></select>
+          </div>
+        </section>
+        <section class="card services">
+          <h2 data-t="Модели по API"></h2>
+          <p class="secondary" id="no-key-store" data-t="На этой системе ключи API пока негде хранить: работают только серверы без ключа (Ollama, LM Studio)." hidden></p>
+          <div id="provider-rows"></div>
+        </section>
+        <section class="card services">
+          <h2 data-t="Расход по API"></h2>
+          <div class="row"><span data-t="Сегодня"></span><span id="spend-today"></span></div>
+          <div class="row"><span data-t="В этом месяце"></span><span id="spend-month"></span></div>
+          <div class="row">
+            <label for="api-budget" data-t="Бюджет в месяц, $"></label>
+            <input type="number" id="api-budget" min="0" step="1" data-t-placeholder="нет">
+          </div>
+          <div id="price-rows"></div>
+          <p class="secondary" data-t="AI Hub Bar считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета."></p>
+        </section>
+        <section class="card">
+          <h2 data-t="CLAUDE.md и MCP"></h2>
+          <p><button id="open-claude-config" data-t="Открыть инструкции и MCP-серверы…"></button></p>
+          <p class="secondary" data-t="Отдельное окно: все CLAUDE.md и AGENTS.md (общие и проектов) с поиском и правкой, и MCP-серверы Claude Code с выключателем."></p>
+        </section>
+        <section class="card">
+          <h2 data-t="Свои промпты"></h2>
+          <div id="saved-prompts"></div>
+          <p><button id="saved-prompt-add" data-t="Добавить промпт"></button></p>
+          <p class="secondary" data-t="Наберите название в поиске, выберите проект — Claude запустится с этим текстом. Подстановки: {проект}, {ветка}."></p>
+        </section>
       </div>
-      <p class="secondary" data-t="Когда вход истёк (claude давно не запускался, а работа идёт в приложении Claude), AI Hub Bar отправляет через claude запрос из одного слова — самая маленькая модель, без инструментов, не чаще раза в час. Вход продлевается примерно на 8 часов."></p>
-      <div id="hub-sources"></div>
-    </section>
-    <section class="card services">
-      <h2 data-t="Значок в трее"></h2>
-      <div id="tray-styles" class="tray-styles" role="radiogroup"></div>
-      <p class="secondary" data-t="На значке — первые два лимита главного сервиса: у Claude это сессия и неделя. Цвет каждого — по его уровню. Образцы показаны для 62 % и 31 %."></p>
-    </section>
-    <section class="card services">
-      <h2 data-t="Расход по API"></h2>
-      <div class="row"><span data-t="Сегодня"></span><span id="spend-today"></span></div>
-      <div class="row"><span data-t="В этом месяце"></span><span id="spend-month"></span></div>
-      <div class="row">
-        <label for="api-budget" data-t="Бюджет в месяц, $"></label>
-        <input type="number" id="api-budget" min="0" step="1" data-t-placeholder="нет">
+
+      <div class="page" id="page-modes" role="tabpanel" hidden>
+        <section class="card">
+          <div id="profile-rows"></div>
+          <div class="row">
+            <span class="secondary" id="profile-delete-note" data-t="Настройки профиля пропадут. Папки проектов останутся на месте." hidden></span>
+            <span class="profile-add">
+              <select id="profile-template" data-t-title="Добавить профиль из шаблона"></select>
+              <button id="profile-add" data-t="Добавить профиль"></button>
+              <button id="profile-assistant" data-t="Помощник…"></button>
+            </span>
+          </div>
+        </section>
+        <section class="card">
+          <div class="card-title">
+            <h2 id="current-profile"></h2>
+            <button id="export-profile" data-t="Экспорт профиля…"></button>
+          </div>
+          <p class="secondary import-message" hidden></p>
+          <div class="folder">
+            <div class="row">
+              <span data-t="Папка проектов"></span>
+              <span>
+                <button id="projects-folder-reset" data-t="По умолчанию" hidden></button>
+                <button id="projects-folder-choose" data-t="Выбрать…"></button>
+              </span>
+            </div>
+            <p class="secondary path" id="projects-folder-path"></p>
+            <p class="error" id="projects-folder-note" hidden></p>
+          </div>
+          <div class="row">
+            <label for="launch-mode" data-t="Где запускать Claude"></label>
+            <select id="launch-mode"></select>
+          </div>
+          <div class="row" id="calendar-row" hidden>
+            <label for="profile-calendar" data-t="Календарь"></label>
+            <select id="profile-calendar"></select>
+          </div>
+          <div class="row">
+            <label for="profile-service" data-t="Сервис по умолчанию"></label>
+            <select id="profile-service"></select>
+          </div>
+          <p class="secondary" data-t="Сервис команд-шаблонов профиля. Агенты и ключи — Настройки → «Сервисы AI»."></p>
+          <div id="profile-folder-fields" hidden>
+            <div class="row">
+              <label for="profile-permissions" data-t="Права Claude в фоне"></label>
+              <select id="profile-permissions"></select>
+            </div>
+            <h3 data-t="Карточка, этапы и метрики"></h3>
+            <div class="row">
+              <label for="profile-stages" data-t="Этапы"></label>
+              <input type="text" id="profile-stages" class="wide" data-t-placeholder="идея, черновик, готово">
+            </div>
+            <div class="metric-boxes" id="profile-metrics"></div>
+            <div class="row" id="profile-pace-row" hidden>
+              <label for="profile-pace" id="profile-pace-label"></label>
+              <input type="number" id="profile-pace" min="80" max="250" step="10">
+            </div>
+            <p class="secondary" data-t="Карточка проекта — файл проект.md в папке проекта (этап, дедлайн, публикация, формат, главный файл, площадка); этап меняется прямо из панели. Слова считаются по главному файлу."></p>
+            <h3 data-t="Команды проектов"></h3>
+            <div id="profile-commands"></div>
+            <button id="command-add" data-t="Добавить команду"></button>
+            <p class="secondary" data-t="Подстановки: {проект} {файл} {формат} {площадка} {хронометраж} {текст} {язык}; в имени файла ещё <время> и <файл>. Результат — всегда новый файл в папке проекта. «Своя задача» есть всегда."></p>
+          </div>
+        </section>
       </div>
-      <div id="price-rows"></div>
-      <p class="secondary" data-t="AI Hub Bar считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета."></p>
-    </section>
-    <section class="card">
-      <h2 data-t="CLAUDE.md и MCP"></h2>
-      <p><button id="open-claude-config" data-t="Открыть инструкции и MCP-серверы…"></button></p>
-      <p class="secondary" data-t="Отдельное окно: все CLAUDE.md и AGENTS.md (общие и проектов) с поиском и правкой, и MCP-серверы Claude Code с выключателем."></p>
-    </section>
-    <section class="card">
-      <h2 data-t="Свои промпты"></h2>
-      <div id="saved-prompts"></div>
-      <p><button id="saved-prompt-add" data-t="Добавить промпт"></button></p>
-      <p class="secondary" data-t="Наберите название в поиске, выберите проект — Claude запустится с этим текстом. Подстановки: {проект}, {ветка}."></p>
-    </section>
-    <h1 data-t="Экспорт и импорт"></h1>
-    <section class="card">
-      <div class="row">
-        <span data-t="Все настройки и профили"></span>
-        <span>
-          <button id="export-settings" data-t="Экспорт настроек…"></button>
-          <button id="import" data-t="Импорт…"></button>
-        </span>
+
+      <div class="page" id="page-shortcuts" role="tabpanel" hidden>
+        <section class="card">
+          <div class="row">
+            <label for="search-key" data-t="Открывать поиск с клавиатуры"></label>
+            <select id="search-key"></select>
+          </div>
+          <div class="row">
+            <span data-t="Быстрый запрос"></span>
+            <button data-open="module.quickPrompt" data-t="Открыть"></button>
+          </div>
+          <div class="row">
+            <span data-t="Быстрые команды"></span>
+            <button data-open="module.quickCommands" data-t="Открыть"></button>
+          </div>
+        </section>
       </div>
-      <div class="import-pending" id="import-pending" hidden>
-        <strong id="import-title"></strong>
-        <p class="secondary" id="import-summary"></p>
-        <p>
-          <button id="import-replace" data-t="Заменить все настройки"></button>
-          <button id="import-add" data-t="Добавить профили"></button>
-          <button id="import-cancel" data-t="Отмена"></button>
-        </p>
-      </div>
-      <p class="secondary" id="import-message" hidden></p>
-    </section>
-    <h1 data-t="Модули"></h1>
-    <section class="card">
-      <div class="row">
-        <label for="module-resources"><strong data-t="Ресурсы компьютера"></strong></label>
-        <input type="checkbox" class="switch" id="module-resources">
-      </div>
-      <p class="secondary" data-t="Процессор, память, диск, сеть, батарея и самые прожорливые приложения; уведомления о нагрузке, памяти, месте и заряде."></p>
-      <div id="resource-options" hidden>
-        <h3 data-t="Уведомления о ресурсах"></h3>
-        <label class="check-line"><input type="checkbox" id="resource-alerts"> <span data-t="Уведомлять о нагрузке, памяти, месте и заряде"></span></label>
-        <div class="row">
-          <label for="resource-disk" data-t="Мало места — свободно меньше"></label>
-          <select id="resource-disk"></select>
-        </div>
-        <p class="secondary" data-t="Процессор выше 90 % дольше 5 минут, критическая нехватка памяти, мало места, заряд ниже 15 % без зарядки — по одному уведомлению, пока не наладится."></p>
-      </div>
-    </section>
-    <section class="card">
-      <div class="row">
-        <label for="module-keep-awake"><strong data-t="Не спать"></strong></label>
-        <input type="checkbox" class="switch" id="module-keep-awake">
-      </div>
-      <p class="secondary" data-t="Компьютер не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения."></p>
-      <div id="keep-awake-rules" hidden>
-        <h3 data-t="Правила «Не спать»"></h3>
-        <label class="check-line"><input type="checkbox" data-rule="whileClaudeWorks"> <span data-t="Пока работает Claude (сессия или фоновая задача)"></span></label>
-        <label class="check-line"><input type="checkbox" data-rule="whileOnPower"> <span data-t="Пока подключено питание"></span></label>
-        <label class="check-line"><input type="checkbox" data-rule="whileExternalDisplay"> <span data-t="Пока подключён внешний монитор"></span></label>
-        <div class="row">
-          <span data-t="Пока открыты приложения"></span>
-          <span class="apps-line">
-            <span class="secondary" id="keep-awake-apps"></span>
-            <button id="keep-awake-choose" data-t="Выбрать…"></button>
-            <button id="keep-awake-clear" data-t="Очистить" hidden></button>
-          </span>
-        </div>
-        <label class="check-line"><input type="checkbox" data-rule="keepDisplayOn"> <span data-t="Не гасить и экран"></span></label>
-        <p class="secondary" data-t="Любое сработавшее правило не даёт компьютеру уснуть; вручную — переключателем и таймерами в панели. Системные настройки не меняются: как только правил нет, компьютер засыпает как обычно. Внешний монитор — второй экран ноутбука или любой экран компьютера без батареи."></p>
-      </div>
-    </section>
-    <section class="card">
-      <div class="row">
-        <label for="module-quick-commands"><strong data-t="Быстрые команды"></strong></label>
-        <input type="checkbox" class="switch" id="module-quick-commands">
-      </div>
-      <p class="secondary" data-t="Свои кнопки: скрипт в фоне или в Терминале, ссылка, файл, папка или программа."></p>
-      <div id="quick-library" hidden>
-        <h3 data-t="Команды"></h3>
-        <div id="quick-editors"></div>
-        <button id="quick-add" data-t="Добавить команду"></button>
-        <p class="secondary" data-t="Скрипт в фоне запускается в домашней папке (PowerShell на Windows, sh на Linux), итог приходит уведомлением; «в Терминале» — открывает новое окно. Открыть — ссылка (https://…) или путь (~/…)."></p>
-      </div>
-    </section>
-    <section class="card">
-      <div class="row">
-        <label for="module-toggles"><strong data-t="Быстрые переключатели"></strong></label>
-        <input type="checkbox" class="switch" id="module-toggles">
-      </div>
-      <p class="secondary" data-t="Тёмная тема, значки на рабочем столе, блокировка и выключение экрана, корзина — в один клик."></p>
-      <div id="toggle-options" hidden>
-        <h3 data-t="Какие переключатели показывать"></h3>
-        <div id="toggle-choices"></div>
-        <p class="secondary" data-t="Корзина очищается только после подтверждения."></p>
-      </div>
-    </section>
-    <section class="card">
-      <div class="row">
-        <label for="module-clipboard"><strong data-t="История буфера"></strong></label>
-        <input type="checkbox" class="switch" id="module-clipboard">
-      </div>
-      <p class="secondary" data-t="Последние копирования: поиск, закрепление, снова в буфер одним кликом. Пароли из менеджеров паролей не запоминаются."></p>
-      <div id="clipboard-options" hidden>
-        <div class="row">
-          <label for="clipboard-limit" data-t="Хранить последних"></label>
-          <select id="clipboard-limit"></select>
-        </div>
-        <div class="row">
-          <label for="clipboard-remember" data-t="Помнить после перезапуска"></label>
-          <input type="checkbox" class="switch" id="clipboard-remember">
-        </div>
-      </div>
-    </section>
-    <section class="card">
-      <div class="row">
-        <label for="module-notes"><strong data-t="Заметки"></strong></label>
-        <input type="checkbox" class="switch" id="module-notes">
-      </div>
-      <p class="secondary" data-t="Заметки в Markdown прямо в панели: вкладки, обычные файлы .md в папке, которую откроет любой редактор."></p>
-      <div id="notes-options" hidden>
-        <div class="row">
-          <span data-t="Папка"></span>
-          <span class="secondary notes-folder" id="notes-folder"></span>
-          <button id="notes-choose" data-t="Выбрать…"></button>
-          <button id="notes-open-folder" data-t="Открыть папку"></button>
-        </div>
-        <p class="secondary" data-t="Каждая заметка — файл .md в этой папке; удалённые уходят в корзину."></p>
-      </div>
-    </section>
-    <section class="card">
-      <div class="row">
-        <label for="module-quick-prompt"><strong data-t="Быстрый запрос"></strong></label>
-        <input type="checkbox" class="switch" id="module-quick-prompt">
-      </div>
-      <p class="secondary" data-t="Горячая клавиша в любом приложении открывает окно: задача, проект и агент — и она уходит в фон или в новое окно Терминала."></p>
-      <div id="quick-prompt-options" hidden>
-        <div class="row">
-          <label for="quick-prompt-key" data-t="Горячая клавиша"></label>
-          <select id="quick-prompt-key"></select>
-        </div>
-        <div class="row">
-          <span data-t="Окно быстрого запроса"></span>
-          <button id="quick-prompt-open" data-t="Открыть"></button>
-        </div>
-        <p class="secondary" data-t="Проект — тот, что в заголовке окна впереди, иначе прошлый. Claude Code и Codex — в фоне или в Терминале; другие агенты открываются в Терминале, задача — в буфере обмена. Из скрипта: claudepult --app-command quick-prompt."></p>
-      </div>
-    </section>
-    <h1 data-t="Фоновые задачи"></h1>
-    <section class="card">
-      <div class="row">
-        <label for="time-limit" data-t="Лимит времени"></label>
-        <select id="time-limit"></select>
-      </div>
-      <div class="row">
-        <label for="night-hour" data-t="Ночные задачи начинаются в"></label>
-        <select id="night-hour"></select>
-      </div>
-    </section>
-    <h1 data-t="Проекты"></h1>
-    <section class="card">
-      <div class="row">
-        <label for="reminders" data-t="Напоминать"></label>
-        <select id="reminders"></select>
-      </div>
-      <div class="row">
-        <label for="pr-alerts" data-t="Уведомлять, когда CI упал или починился и когда PR закрыт"></label>
-        <input type="checkbox" id="pr-alerts">
-      </div>
-    </section>
-    <h1>Hooks</h1>
-    <section class="card">
-      <div class="row">
-        <span data-t="Сессии Claude Code"></span>
-        <strong id="hooks-status"></strong>
-      </div>
-      <div class="row">
-        <span class="secondary" id="hooks-path"></span>
-        <span>
-          <button id="hooks-install"></button>
-          <button id="hooks-remove" data-t="Удалить"></button>
-        </span>
-      </div>
-      <p class="secondary" style="margin-top: 8px" data-t="Hooks добавляются в settings.json Claude Code (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом компьютере, чтобы AI Hub Bar показывал их в панели."></p>
-      <p class="error" id="hooks-error" hidden></p>
-    </section>
-    <section class="card agent-hooks" data-agent="codex">
-      <div class="row">
-        <span data-t="Состояние сессий Codex"></span>
-        <strong class="status"></strong>
-      </div>
-      <div class="row">
-        <span class="secondary path"></span>
-        <span><button class="install"></button> <button class="remove" data-t="Удалить"></button></span>
-      </div>
-      <p class="secondary note" style="margin-top: 8px" hidden></p>
-      <p class="error" hidden></p>
-    </section>
-    <section class="card agent-hooks" data-agent="copilot">
-      <div class="row">
-        <span data-t="Состояние сессий Copilot"></span>
-        <strong class="status"></strong>
-      </div>
-      <div class="row">
-        <span class="secondary path"></span>
-        <span><button class="install"></button> <button class="remove" data-t="Удалить"></button></span>
-      </div>
-      <p class="error" hidden></p>
-    </section>
-    <p class="secondary" id="version"></p>
-  </main>
+    </main>
+  </div>
   <script type="module">
     import { loadTexts, invoke, t } from "./app.js";
     const ui = await loadTexts();
     document.getElementById("version").textContent = t("Версия %@", ui.version);
+
+    // The pages. An area has a row in the sidebar; a module's page and «Telegram» open from a row of their parent
+    // and go back to it (Alt+←). The page on screen is remembered, as on the Mac.
+    const icons = {
+      general: '<circle cx="8" cy="8" r="2.6"/><path d="M8 1.6v2M8 12.4v2M1.6 8h2M12.4 8h2M3.5 3.5l1.4 1.4M11.1 11.1l1.4 1.4M3.5 12.5l1.4-1.4M11.1 4.9l1.4-1.4"/>',
+      show: '<rect x="2.5" y="2.5" width="11" height="3.2" rx="1"/><rect x="2.5" y="7.4" width="11" height="3.2" rx="1"/><path d="M4 13.2h8"/>',
+      appearance: '<circle cx="8" cy="8" r="5.6"/><path d="M8 2.4a5.6 5.6 0 0 0 0 11.2z" fill="currentColor"/>',
+      services: '<path d="M8 1.8l1.5 4.7 4.7 1.5-4.7 1.5L8 14.2l-1.5-4.7L1.8 8l4.7-1.5z" fill="currentColor"/>',
+      modes: '<path d="M8 2l6 3-6 3-6-3z"/><path d="M2 8l6 3 6-3M2 11l6 3 6-3"/>',
+      shortcuts: '<rect x="1.6" y="4" width="12.8" height="8" rx="1.6"/><path d="M4.2 7h.6M7.7 7h.6M11.2 7h.6M5 9.6h6"/>',
+      module: '<rect x="2.5" y="2.5" width="4.4" height="4.4" rx="1"/><rect x="9.1" y="2.5" width="4.4" height="4.4" rx="1"/><rect x="2.5" y="9.1" width="4.4" height="4.4" rx="1"/><rect x="9.1" y="9.1" width="4.4" height="4.4" rx="1"/>',
+      telegram: '<path d="M14 2.5L1.8 7.3l3.6 1.3 1.3 4 2-2.4 3.1 2.3z"/>',
+    };
+    const icon = (name) => `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${icons[name] ?? icons.module}</svg>`;
+    const pages = new Map([
+      ["general", { title: t("Основные"), subtitle: t("Запуск, уведомления, Telegram и обновления") }],
+      ["show", { title: t("Что показывать"), subtitle: t("Модули панели и их настройки") }],
+      ["appearance", { title: t("Внешний вид"), subtitle: t("Тема, размер текста и значок в трее") }],
+      ["services", { title: t("Сервисы AI"), subtitle: t("Агенты, лимиты, ключи API и hooks") }],
+      ["modes", { title: t("Профили"), subtitle: t("Наборы проектов, модулей и команд") }],
+      ["shortcuts", { title: t("Клавиши"), subtitle: t("Все сочетания клавиш в одном месте") }],
+      ["telegram", { title: "Telegram", subtitle: t("Уведомления в Telegram"), parent: "general" }],
+    ]);
+    const areas = [...pages.keys()].filter((id) => !pages.get(id).parent);
+    // A module's name and what it does are the texts of its row in «Что показывать».
+    for (const row of document.querySelectorAll(".show-open")) {
+      pages.set(row.dataset.open, { title: row.querySelector("strong").textContent, subtitle: row.querySelector(".secondary").textContent, parent: "show" });
+      row.nextElementSibling.setAttribute("aria-label", row.querySelector("strong").textContent);
+    }
+    const pageElement = (id) => document.getElementById("page-" + id);
+    // Names the Mac's links use, and the sections this window had before the sidebar.
+    const aliases = { modules: "show", panel: "show", profiles: "modes", hooks: "services", updates: "general", keys: "shortcuts" };
+    const known = (id) => (pages.has(id) ? id : pages.has(aliases[id]) ? aliases[id] : null);
+    const remembered = () => { try { return localStorage.getItem("settingsPage"); } catch { return null; } };
+    const nav = document.getElementById("settings-nav");
+    const search = document.getElementById("settings-search");
+    const paneSwitch = document.getElementById("pane-switch");
+    const back = document.getElementById("pane-back");
+    let current = null;
+    function showNav() {
+      const query = search.value.trim().toLocaleLowerCase();
+      const found = (id) => !query || (pages.get(id).title + " " + pages.get(id).subtitle + " " + pageElement(id).textContent).toLocaleLowerCase().includes(query);
+      // A search finds any page: the modules and «Telegram» get rows of their own under the areas.
+      const rows = areas.filter(found);
+      const inner = query ? [...pages.keys()].filter((id) => pages.get(id).parent && found(id)) : [];
+      const chosen = query ? current : pages.get(current)?.parent ?? current;
+      const row = (id) => {
+        const button = document.createElement("button");
+        button.className = "nav-row";
+        button.dataset.page = id;
+        button.setAttribute("role", "tab");
+        button.setAttribute("aria-selected", String(id === chosen));
+        button.tabIndex = id === chosen ? 0 : -1;
+        button.innerHTML = `<span class="pane-icon ${id.startsWith("module.") ? "module" : id}">${icon(id)}</span>`;
+        button.append(Object.assign(document.createElement("span"), { className: "name", textContent: pages.get(id).title }));
+        button.onclick = () => go(id);
+        return button;
+      };
+      const children = rows.map(row);
+      if (inner.length) children.push(Object.assign(document.createElement("h2"), { textContent: t("Модули") }), ...inner.map(row));
+      nav.replaceChildren(...children);
+      if (!nav.querySelector('[tabindex="0"]') && nav.querySelector(".nav-row")) nav.querySelector(".nav-row").tabIndex = 0;
+      document.getElementById("settings-nothing").hidden = children.length > 0;
+    }
+    function go(id, focus) {
+      id = known(id) ?? "general";
+      // «Telegram» where the app can't offer it has no page either.
+      if (id === "telegram" && document.getElementById("telegram").hidden) id = "general";
+      const from = current;
+      current = id;
+      try { localStorage.setItem("settingsPage", id); } catch { /* the page is just not remembered */ }
+      for (const page of document.querySelectorAll(".page")) page.hidden = page !== pageElement(id);
+      const page = pages.get(id);
+      document.getElementById("pane-title").textContent = page.title;
+      document.getElementById("pane-subtitle").textContent = page.subtitle;
+      const tile = document.getElementById("pane-icon");
+      tile.className = "pane-icon " + (id.startsWith("module.") ? "module" : id);
+      tile.innerHTML = icon(id);
+      back.hidden = !page.parent;
+      if (page.parent) back.title = t("Назад: %@", pages.get(page.parent).title) + " (Alt+←)";
+      back.setAttribute("aria-label", back.title);
+      back.onclick = () => go(page.parent, "row");
+      showSwitch();
+      showNav();
+      document.getElementById("settings-main").scrollTop = 0;
+      if (focus === "back") back.focus();
+      // Back where the page was opened from: the row that led to it.
+      if (focus === "row") (pageElement(id).querySelector(`[data-open="${from}"]`) ?? nav.querySelector('[aria-selected="true"]'))?.focus();
+    }
+    // A module's main switch in the header stands for its switch in «Что показывать».
+    const moduleSwitch = () => document.getElementById(pageElement(current)?.dataset.switch ?? "");
+    function showSwitch() {
+      const real = moduleSwitch();
+      paneSwitch.hidden = !real;
+      if (!real) return;
+      paneSwitch.checked = real.checked;
+      paneSwitch.setAttribute("aria-label", pages.get(current).title);
+    }
+    paneSwitch.onchange = () => {
+      const real = moduleSwitch();
+      real.checked = paneSwitch.checked;
+      real.dispatchEvent(new Event("change"));
+    };
+    // A module's settings appear and go with its switch: that is when the header's copy is read again.
+    for (const page of document.querySelectorAll(".page[data-switch]")) {
+      new MutationObserver(showSwitch).observe(page.firstElementChild, { attributes: true, attributeFilter: ["hidden"] });
+    }
+    for (const opener of document.querySelectorAll("[data-open]")) opener.onclick = () => go(opener.dataset.open, "back");
+    search.oninput = showNav;
+    search.onkeydown = (event) => {
+      if (event.key === "Escape" && search.value) { search.value = ""; showNav(); }
+      if (event.key === "ArrowDown") { event.preventDefault(); nav.querySelector(".nav-row")?.focus(); }
+      if (event.key === "Enter") nav.querySelector(".nav-row")?.click();
+    };
+    // The sidebar from the keyboard: ↑ and ↓ choose a row as they move, Home and End the first and the last.
+    nav.onkeydown = (event) => {
+      const rows = [...nav.querySelectorAll(".nav-row")];
+      const index = rows.indexOf(document.activeElement);
+      const next = { ArrowDown: index + 1, ArrowUp: index - 1, Home: 0, End: rows.length - 1 }[event.key];
+      if (next === undefined || index < 0) return;
+      event.preventDefault();
+      if (next < 0) return search.focus();
+      const target = rows[Math.min(next, rows.length - 1)].dataset.page;
+      go(target);
+      nav.querySelector(`[data-page="${target}"]`)?.focus();
+    };
+    window.addEventListener("keydown", (event) => {
+      if (event.altKey && event.key === "ArrowLeft" && !back.hidden) { event.preventDefault(); back.click(); }
+      if (event.ctrlKey && event.key.toLowerCase() === "f") { event.preventDefault(); search.focus(); search.select(); }
+    });
+    // The page asked for by whoever opened the window (the panel's «hooks», a price in «История расхода»), else the
+    // one in the address, else the last one looked at.
+    go((await invoke("take_settings_page")) ?? (decodeURIComponent(location.hash.slice(1)) || remembered()));
+    window.__TAURI__.event.listen("settings-page", (event) => go(event.payload));
 
     const select = document.getElementById("language");
     const system = new Option(t("Как в системе"), "");
@@ -869,10 +1077,14 @@
       document.getElementById("import-title").textContent = view.title ?? "";
       document.getElementById("import-summary").textContent = view.summary ?? "";
       document.getElementById("import-replace").hidden = !view.mayReplace;
-      const message = document.getElementById("import-message");
-      message.hidden = !view.message;
-      message.textContent = view.message ?? "";
-      message.className = view.error ? "error" : "secondary";
+      // «Экспорт профиля…» is on «Профили», the rest on «Основные»: what came of it is said on both.
+      for (const message of document.querySelectorAll(".import-message")) {
+        message.hidden = !view.message;
+        message.textContent = view.message ?? "";
+        message.className = (view.error ? "error" : "secondary") + " import-message";
+      }
+      // A file that waits for «Заменить» / «Добавить» is on «Основные».
+      if (view.title && current !== "general") go("general");
     }
     document.getElementById("export-settings").onclick = async () => showImport(await invoke("export_settings"));
     document.getElementById("export-profile").onclick = async () => showImport(await invoke("export_profile"));
