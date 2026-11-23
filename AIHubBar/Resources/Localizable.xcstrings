@@ -21277,82 +21277,6 @@
         }
       }
     },
-    "В окне «История расхода» видно, сколько раз за день вы упёрлись в лимит.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "نافذة «سجل الاستهلاك» تعرض عدد المرات التي بلغت فيها الحد خلال اليوم."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das Fenster „Verbrauchsverlauf“ zeigt, wie oft Sie am Tag das Limit erreicht haben."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The “Usage History” window shows how many times you hit the limit during the day."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La ventana «Historial de consumo» muestra cuántas veces has alcanzado el límite en el día."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La fenêtre « Historique de consommation » indique combien de fois vous avez atteint la limite dans la journée."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jendela “Riwayat pemakaian” menunjukkan berapa kali Anda mencapai batas dalam sehari."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La finestra «Cronologia dei consumi» mostra quante volte hai raggiunto il limite durante la giornata."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「使用履歴」ウインドウに、その日に上限に達した回数が表示されます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "‘사용 기록’ 창에서 하루 동안 한도에 도달한 횟수를 볼 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Okno „Historia zużycia” pokazuje, ile razy w ciągu dnia osiągnięto limit."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A janela “Histórico de consumo” mostra quantas vezes você atingiu o limite no dia."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У вікні «Історія витрат» видно, скільки разів за день ви вперлися в ліміт."
-          }
-        }
-      }
-    },
     "В окне сравнения клик по файлу показывает изменения построчно. «Оставить этот вариант» удаляет другой, «Влить в …» вливает ветку варианта в ветку проекта (без push), а «Убрать папку и ветку» потом убирает за ним. Каждое действие спрашивает подтверждение.": {
       "localizations": {
         "ar": {
@@ -42509,82 +42433,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Нотатки"
-          }
-        }
-      }
-    },
-    "Заметки в Markdown и история буфера обмена — два новых модуля: Настройки → «Модули».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الملاحظات بتنسيق Markdown وسجل الحافظة وحدتان جديدتان: الإعدادات ← «الوحدات»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notizen in Markdown und der Verlauf der Zwischenablage sind zwei neue Module: Einstellungen → „Module“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Markdown notes and clipboard history are two new modules: Settings → “Modules”."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Las notas en Markdown y el historial del portapapeles son dos módulos nuevos: Ajustes → «Módulos»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les notes en Markdown et l’historique du presse-papiers sont deux nouveaux modules : Réglages → « Modules »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Catatan Markdown dan riwayat papan klip adalah dua modul baru: Pengaturan → “Modul”."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le note in Markdown e la cronologia degli appunti sono due nuovi moduli: Impostazioni → «Moduli»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Markdown のメモとクリップボード履歴の 2 つのモジュールが加わりました: 設定 →「モジュール」。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Markdown 메모와 클립보드 기록, 두 가지 모듈이 새로 생겼습니다: 설정 → ‘모듈’."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notatki w Markdown i historia schowka to dwa nowe moduły: Ustawienia → „Moduły”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notas em Markdown e histórico da área de transferência são dois módulos novos: Ajustes → “Módulos”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Нотатки в Markdown та історія буфера обміну — два нові модулі: Налаштування → «Модулі»."
           }
         }
       }
@@ -94425,82 +94273,6 @@
         }
       }
     },
-    "Поле поиска вверху панели находит проекты, сессии, быстрые команды и свои промпты.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "حقل البحث أعلى اللوحة يجد المشاريع والجلسات والأوامر السريعة وطلباتك المحفوظة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das Suchfeld oben im Panel findet Projekte, Sitzungen, Schnellbefehle und eigene Prompts."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The search field at the top of the panel finds projects, sessions, quick commands and your saved prompts."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El campo de búsqueda en la parte superior del panel encuentra proyectos, sesiones, comandos rápidos y tus prompts."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le champ de recherche en haut du panneau trouve les projets, les sessions, les commandes rapides et vos prompts."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kolom pencarian di bagian atas panel menemukan proyek, sesi, perintah cepat, dan prompt Anda."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il campo di ricerca in cima al pannello trova progetti, sessioni, comandi rapidi e i tuoi prompt."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パネル上部の検索欄で、プロジェクト、セッション、クイックコマンド、保存したプロンプトを探せます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "패널 위쪽 검색 필드에서 프로젝트, 세션, 빠른 명령, 저장한 프롬프트를 찾을 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pole wyszukiwania u góry panelu znajduje projekty, sesje, szybkie polecenia i własne prompty."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O campo de busca no topo do painel encontra projetos, sessões, comandos rápidos e seus prompts."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Поле пошуку вгорі панелі знаходить проєкти, сесії, швидкі команди та свої промпти."
-          }
-        }
-      }
-    },
     "Поле сверху панели ищет проекты, сессии, команды и свои промпты. Открыть с клавиатуры — сочетание в «Клавишах».": {
       "localizations": {
         "ar": {
@@ -108436,82 +108208,6 @@
         }
       }
     },
-    "Свои промпты: Настройки → «Сервисы AI». Выберите промпт в поиске, затем проект — Claude запустится с этим текстом.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "طلباتك المحفوظة: الإعدادات ← «خدمات الذكاء الاصطناعي». اختر طلبًا في البحث ثم مشروعًا، وسيبدأ Claude بهذا النص."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eigene Prompts: Einstellungen → „KI-Dienste“. Prompt in der Suche wählen, dann ein Projekt – Claude startet mit diesem Text."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Saved prompts: Settings → “AI Services”. Pick a prompt in the search, then a project: Claude starts with this text."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tus prompts: Ajustes → «Servicios de IA». Elige un prompt en la búsqueda y luego un proyecto: Claude se inicia con ese texto."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vos prompts : Réglages → « Services d’IA ». Choisissez un prompt dans la recherche, puis un projet : Claude démarre avec ce texte."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prompt Anda: Pengaturan → “Layanan AI”. Pilih prompt di pencarian, lalu proyek: Claude dimulai dengan teks ini."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I tuoi prompt: Impostazioni → «Servizi IA». Scegli un prompt nella ricerca, poi un progetto: Claude parte con questo testo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "保存したプロンプト: 設定 →「AI サービス」。検索でプロンプトを選び、次にプロジェクトを選ぶと、そのテキストで Claude が起動します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "저장한 프롬프트: 설정 → ‘AI 서비스’. 검색에서 프롬프트를 고르고 프로젝트를 고르면 이 텍스트로 Claude가 시작됩니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Własne prompty: Ustawienia → „Usługi AI”. Wybierz prompt w wyszukiwaniu, potem projekt — Claude uruchomi się z tym tekstem."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seus prompts: Ajustes → “Serviços de IA”. Escolha um prompt na busca e depois um projeto: o Claude inicia com este texto."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Свої промпти: Налаштування → «Сервіси AI». Виберіть промпт у пошуку, потім проєкт — Claude запуститься з цим текстом."
-          }
-        }
-      }
-    },
     "Своих настроек нет.": {
       "localizations": {
         "ar": {
@@ -121143,82 +120839,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Тема"
-          }
-        }
-      }
-    },
-    "Тема и размер текста: Настройки → «Основные».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "السمة وحجم النص: الإعدادات ← «عام»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Design und Textgröße: Einstellungen → „Allgemein“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Theme and text size: Settings → “General”."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tema y tamaño del texto: Ajustes → «General»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Thème et taille du texte : Réglages → « Général »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tema dan ukuran teks: Pengaturan → “Umum”."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tema e dimensione del testo: Impostazioni → «Generali»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "テーマと文字サイズ: 設定 →「一般」。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "테마와 글자 크기: 설정 → ‘일반’."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Motyw i rozmiar tekstu: Ustawienia → „Ogólne”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tema e tamanho do texto: Ajustes → “Geral”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Тема й розмір тексту: Налаштування → «Загальні»."
           }
         }
       }
@@ -157354,6 +156974,386 @@
           "stringUnit": {
             "state": "translated",
             "value": "Agen, batas, kunci API, dan hooks"
+          }
+        }
+      }
+    },
+    "Настройки устроены как на Mac: разделы слева, страница справа, сверху поиск.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإعدادات مرتبة كما في Mac: الأقسام على الجانب، والصفحة بجوارها، والبحث في الأعلى."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Einstellungen sind wie auf dem Mac aufgebaut: links die Bereiche, rechts die Seite, oben die Suche."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings are laid out as on the Mac: sections on the left, the page on the right, a search on top."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los ajustes están organizados como en el Mac: secciones a la izquierda, la página a la derecha y la búsqueda arriba."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les réglages sont organisés comme sur Mac : les sections à gauche, la page à droite, la recherche en haut."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan disusun seperti di Mac: bagian di kiri, halaman di kanan, pencarian di atas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le impostazioni sono organizzate come sul Mac: sezioni a sinistra, pagina a destra, ricerca in alto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定が Mac と同じ構成になりました。左にセクション、右にページ、上に検索があります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정이 Mac과 같은 구성으로 바뀌었습니다. 왼쪽에 섹션, 오른쪽에 페이지, 위에 검색이 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia są ułożone jak na Macu: sekcje po lewej, strona po prawej, wyszukiwanie u góry."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os ajustes estão organizados como no Mac: seções à esquerda, a página à direita e a busca em cima."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Налаштування влаштовані як на Mac: розділи зліва, сторінка справа, зверху пошук."
+          }
+        }
+      }
+    },
+    "Фоновую задачу можно отложить на ночь или до сброса лимита.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن تأجيل مهمة الخلفية إلى الليل أو إلى أن يُعاد ضبط الحد."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Hintergrundaufgabe lässt sich auf die Nacht oder bis zum Zurücksetzen des Limits verschieben."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A background task can be put off until the night or until the limit resets."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una tarea en segundo plano se puede aplazar hasta la noche o hasta que se restablezca el límite."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une tâche en arrière-plan peut être reportée à la nuit ou jusqu’à la réinitialisation de la limite."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tugas latar belakang bisa ditunda sampai malam atau sampai batas direset."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un’attività in background si può rimandare alla notte o fino al ripristino del limite."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンドタスクを夜まで、または制限のリセットまで延期できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 작업을 밤까지 또는 한도가 재설정될 때까지 미룰 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadanie w tle można odłożyć na noc albo do zresetowania limitu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma tarefa em segundo plano pode ser adiada para a noite ou até o limite ser redefinido."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Фонове завдання можна відкласти на ніч або до скидання ліміту."
+          }
+        }
+      }
+    },
+    "У лимита фоновые задачи Claude встают на паузу и продолжают после сброса.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عند الاقتراب من الحد تتوقف مهام Claude في الخلفية مؤقتًا وتستأنف بعد إعادة الضبط."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurz vor dem Limit pausieren Claudes Hintergrundaufgaben und laufen nach dem Zurücksetzen weiter."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Near the limit Claude’s background tasks pause and go on after the reset."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerca del límite, las tareas en segundo plano de Claude se pausan y continúan tras el restablecimiento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Près de la limite, les tâches en arrière-plan de Claude se mettent en pause et reprennent après la réinitialisation."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menjelang batas, tugas latar belakang Claude dijeda dan lanjut setelah reset."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vicino al limite le attività in background di Claude vanno in pausa e riprendono dopo il ripristino."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "制限が近づくと Claude のバックグラウンドタスクは一時停止し、リセット後に再開します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한도에 가까워지면 Claude의 백그라운드 작업이 일시 중지되고 재설정 후 계속됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blisko limitu zadania Claude’a w tle wstrzymują się i ruszają dalej po resecie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perto do limite, as tarefas em segundo plano do Claude pausam e continuam depois da redefinição."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Біля ліміту фонові завдання Claude стають на паузу й продовжують після скидання."
+          }
+        }
+      }
+    },
+    "Фоновую задачу можно передать Codex, а готовую — проверить другим сервисом.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن تسليم مهمة الخلفية إلى Codex، ومراجعة المهمة المنتهية بخدمة أخرى."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Hintergrundaufgabe lässt sich an Codex übergeben, eine fertige vom anderen Dienst prüfen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A background task can be handed over to Codex, and a finished one reviewed by the other service."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una tarea en segundo plano se puede pasar a Codex, y una terminada, revisarla con el otro servicio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une tâche en arrière-plan peut être transmise à Codex, et une tâche terminée vérifiée par l’autre service."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tugas latar belakang bisa diserahkan ke Codex, dan yang sudah selesai diperiksa oleh layanan lain."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un’attività in background si può passare a Codex, e una terminata farla verificare dall’altro servizio."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンドタスクを Codex に引き継いだり、完了したタスクをもう一方のサービスで確認したりできます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 작업을 Codex에 넘기고, 끝난 작업은 다른 서비스로 검토할 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadanie w tle można przekazać Codexowi, a gotowe sprawdzić drugą usługą."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma tarefa em segundo plano pode ser passada ao Codex, e uma concluída, revisada pelo outro serviço."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Фонове завдання можна передати Codex, а готове — перевірити іншим сервісом."
+          }
+        }
+      }
+    },
+    "Инструкции CLAUDE.md, MCP-серверы, skills и плагины собраны в одном окне.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعليمات CLAUDE.md وخوادم MCP والمهارات والإضافات مجموعة في نافذة واحدة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CLAUDE.md-Anweisungen, MCP-Server, Skills und Plugins stehen in einem Fenster."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CLAUDE.md instructions, MCP servers, skills and plugins are in one window."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las instrucciones CLAUDE.md, los servidores MCP, las skills y los plugins están en una sola ventana."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les instructions CLAUDE.md, les serveurs MCP, les skills et les plugins sont réunis dans une seule fenêtre."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instruksi CLAUDE.md, server MCP, skill, dan plugin ada dalam satu jendela."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le istruzioni CLAUDE.md, i server MCP, le skill e i plugin sono in un’unica finestra."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CLAUDE.md の指示、MCP サーバー、スキル、プラグインを 1 つのウインドウにまとめました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CLAUDE.md 지침, MCP 서버, 스킬, 플러그인을 한 창에 모았습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instrukcje CLAUDE.md, serwery MCP, skille i wtyczki są w jednym oknie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As instruções CLAUDE.md, os servidores MCP, as skills e os plugins estão em uma única janela."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Інструкції CLAUDE.md, MCP-сервери, skills і плагіни зібрано в одному вікні."
           }
         }
       }
