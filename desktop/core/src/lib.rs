@@ -42,6 +42,7 @@ pub mod session_changes;
 pub mod sessions;
 pub mod telegram;
 pub mod settings;
+pub mod stuck;
 pub mod texts;
 pub mod token_usage;
 pub mod toggles;
