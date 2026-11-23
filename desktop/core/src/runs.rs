@@ -157,6 +157,24 @@ impl Run {
         self.other.get("pair").and_then(Value::as_str)
     }
 
+    /// The variant of a pair that was removed (the Mac's `discarded`).
+    pub fn discarded(&self) -> bool {
+        self.other.get("discarded").and_then(Value::as_bool) == Some(true)
+    }
+
+    /// The branch this variant was merged into (the Mac's `mergedInto`).
+    pub fn merged_into(&self) -> Option<&str> {
+        self.other.get("mergedInto").and_then(Value::as_str)
+    }
+
+    pub fn mark_discarded(&mut self) {
+        self.other.insert("discarded".into(), Value::Bool(true));
+    }
+
+    pub fn mark_merged(&mut self, target: &str) {
+        self.other.insert("mergedInto".into(), Value::String(target.to_owned()));
+    }
+
     /// «Передать Codex» (the Mac's `Handover`): a Claude run that has not finished well and whose task was kept.
     pub fn can_hand_over(&self) -> bool {
         !self.is_codex() && self.other.get("agent").is_none() && self.has_prompt() && (self.is_paused() || matches!(self.state, RunState::Failed | RunState::Stopped))
