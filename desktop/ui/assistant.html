@@ -152,7 +152,7 @@
       service() {
         const services = start.services.map((s) => [s.id === "claude-code" ? null : s.id, s.id === "claude-code" ? "Claude Code" : s.name]);
         const more = el("button", { textContent: t("Подключить другой сервис…") });
-        more.onclick = () => invoke("open_settings");
+        more.onclick = () => invoke("open_settings", { page: "services" });
         return [
           secondary(t("Кто выполняет команды профиля. Модель по API получает только текст файла; агент (Claude Code и др.) работает с файлами в папке проекта.")),
           radios("service", services, draft.service ?? null, (value) => { if (value) draft.service = value; else delete draft.service; render(); }),

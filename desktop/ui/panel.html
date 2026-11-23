@@ -201,7 +201,7 @@
       const { available } = await invoke("updates_view");
       versionLine.textContent = available ? t("Версия %@", ui.version) + " · " + t("Доступна версия %@", available) : t("Версия %@", ui.version);
       versionLine.style.cursor = available ? "pointer" : "";
-      versionLine.onclick = available ? () => invoke("open_settings") : null;
+      versionLine.onclick = available ? () => invoke("open_settings", { page: "general" }) : null;
     }
     await showVersion();
     window.__TAURI__.event.listen("updates-changed", showVersion);
@@ -303,7 +303,7 @@
       error.hidden = !view.message;
       error.textContent = view.message ?? "";
       if (!view.title) return;
-      await invoke("open_settings");
+      await invoke("open_settings", { page: "general" });
       window.__TAURI__.event.emit("import-pending");
     };
     profileSwitch.onchange = () => invoke("select_profile", { id: profileSwitch.value });
@@ -578,7 +578,7 @@
       document.getElementById("no-hooks").hidden = view.hooks === "installed";
       document.getElementById("no-sessions").hidden = view.rows.length > 0 || queued.length > 0 || view.hooks !== "installed";
     }
-    document.getElementById("hooks-settings").onclick = () => invoke("open_settings");
+    document.getElementById("hooks-settings").onclick = () => invoke("open_settings", { page: "services" });
     await showSessions();
     window.__TAURI__.event.listen("sessions-changed", showSessions);
     // Finished sessions change without an event of their own: read them when the panel is opened.

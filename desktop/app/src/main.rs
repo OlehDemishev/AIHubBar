@@ -39,7 +39,7 @@ use serde::Serialize;
 use std::sync::Mutex;
 use tauri::menu::{Menu, MenuItem, PredefinedMenuItem};
 use tauri::tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent};
-use tauri::{AppHandle, Manager, RunEvent, WebviewUrl, WebviewWindowBuilder, WindowEvent};
+use tauri::{AppHandle, Emitter, Manager, RunEvent, WebviewUrl, WebviewWindowBuilder, WindowEvent};
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 use limits::Limits;
 use projects::Projects;
@@ -155,26 +155,45 @@ fn toggle_panel(app: &AppHandle) {
     }
 }
 
+/// The page Settings should open on, for a window that is not built yet: its page asks for it once loaded.
+static SETTINGS_PAGE: Mutex<Option<String>> = Mutex::new(None);
+
 fn open_settings_window(app: &AppHandle) {
+    open_settings_page(app, None);
+}
+
+/// Settings on one of its pages («services», «general», «module.quickPrompt»…); `None` leaves the page it has, and a
+/// new window comes up on the one looked at last.
+pub(crate) fn open_settings_page(app: &AppHandle, page: Option<&str>) {
     if let Some(panel) = app.get_webview_window("panel") {
         let _ = panel.hide();
     }
     if let Some(window) = app.get_webview_window("settings") {
+        if let Some(page) = page {
+            let _ = window.emit("settings-page", page);
+        }
         let _ = window.unminimize();
         let _ = window.show();
         let _ = window.set_focus();
         return;
     }
+    *SETTINGS_PAGE.lock().unwrap() = page.map(str::to_owned);
     let title = format!("{APP_NAME} — {}", strings(app).t("Настройки…").trim_end_matches('…'));
     let app = app.clone();
     off_main_thread(move || {
+        // The Mac's proportions (940 × 700, at least 820 × 560), smaller: a sidebar and a page beside it.
         let _ = WebviewWindowBuilder::new(&app, "settings", WebviewUrl::App("settings.html".into()))
             .title(title)
-            .inner_size(560.0, 420.0)
-            .min_inner_size(480.0, 360.0)
+            .inner_size(860.0, 640.0)
+            .min_inner_size(680.0, 480.0)
             .center()
             .build();
     });
+}
+
+#[tauri::command]
+fn take_settings_page() -> Option<String> {
+    SETTINGS_PAGE.lock().unwrap().take()
 }
 
 /// Where every window but the panel is built. Commands, the tray menu and the hot key run on the main thread, and
@@ -422,8 +441,8 @@ fn set_autostart(app: AppHandle, enabled: bool) -> bool {
 }
 
 #[tauri::command]
-fn open_settings(app: AppHandle) {
-    open_settings_window(&app);
+fn open_settings(app: AppHandle, page: Option<String>) {
+    open_settings_page(&app, page.as_deref());
 }
 
 #[tauri::command]
@@ -483,7 +502,7 @@ fn main() {
         .manage(command_hot_keys::CommandHotKeys::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
         .invoke_handler(tauri::generate_handler![
-            ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
+            ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, take_settings_page, hide_panel, quit,
             limits::limits_view, limits::spend_view, limits::limit_thresholds, limits::set_limit_thresholds, limits::renew_claude_login, limits::set_renew_claude_login, limits::open_status_page, limits::refresh_limits,
             sessions::sessions_view, sessions::decide_request, sessions::resume_session, sessions::hooks_state, sessions::install_hooks,
             sessions::uninstall_hooks, sessions::agent_hooks_state, sessions::install_agent_hooks, sessions::uninstall_agent_hooks,

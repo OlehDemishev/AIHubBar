@@ -351,7 +351,7 @@ pub(crate) fn open_import_file(app: &AppHandle, path: &Path) {
         let _ = app.notification().builder().title(claudepult_core::APP_NAME).body(view.message.unwrap_or_default()).show();
         return;
     }
-    crate::open_settings_window(app);
+    crate::open_settings_page(app, Some("general"));
     let _ = app.emit("import-pending", ());
 }
 
