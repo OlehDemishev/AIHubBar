@@ -33,6 +33,7 @@ pub mod resources;
 pub mod projects;
 pub mod runs;
 pub mod search;
+pub mod session_changes;
 pub mod sessions;
 pub mod telegram;
 pub mod settings;

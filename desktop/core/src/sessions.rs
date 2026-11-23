@@ -69,6 +69,8 @@ pub struct Session {
     pub task: Option<String>,
     /// Claude Code's journal of the session.
     pub transcript_path: Option<String>,
+    /// When the hook first heard of the session.
+    pub started_at: Option<DateTime<Utc>>,
 }
 
 fn text(value: &Value, key: &str) -> Option<String> {
@@ -101,6 +103,7 @@ impl Session {
             agent: text(&value, "agent"),
             task: text(&value, "first_prompt").or_else(|| text(&value, "last_prompt")),
             transcript_path: text(&value, "transcript_path"),
+            started_at: text(&value, "started_at").and_then(|at| DateTime::parse_from_rfc3339(&at).ok()).map(|at| at.with_timezone(&Utc)),
         })
     }
 

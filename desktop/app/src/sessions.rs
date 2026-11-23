@@ -157,6 +157,8 @@ pub struct SessionRow {
     request: Option<RequestRow>,
     /// A background run (`runs.rs`): it can be stopped while it runs, its log read.
     run: Option<RunRow>,
+    /// «Изменения: файлов: 3 +120 −8» — what it changed in its folder, by git.
+    changes: Option<crate::changes::ChangesRow>,
 }
 
 #[derive(Serialize)]
@@ -230,6 +232,7 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
     let shown = shown();
     let mut open = open_requests(&shown);
     let runs = app.state::<Runs>().list();
+    let changes = app.state::<crate::changes::ChangesStore>();
     let mut rows: Vec<SessionRow> = shown
         .into_iter()
         .map(|(session, state)| {
@@ -251,6 +254,7 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
             },
             progress: session.progress.map(|(done, total)| format!("{done}/{total}")),
             run: None,
+            changes: changes.get(&app, &session.cwd, session.started_at).map(|found| crate::changes::row(&texts, &session.cwd, &found)),
             }
         })
         .collect();
@@ -290,6 +294,7 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
                 context_full: false,
                 request: None,
                 run: Some(row),
+                changes: changes.get(&app, &run.folder, Some(run.started_at)).map(|found| crate::changes::row(&texts, &run.folder, &found)),
             });
         }
     }

@@ -8,6 +8,7 @@
 
 mod assistant;
 mod calendar;
+mod changes;
 mod claude_config;
 mod clipboard;
 mod commands;
@@ -475,6 +476,7 @@ fn main() {
         .manage(search::SearchKey::default())
         .manage(claude_config::ClaudeConfig::default())
         .manage(queue::Queue::default())
+        .manage(changes::ChangesStore::default())
         .manage(hub::Hub::default())
         .manage(updates::Updates::default())
         .manage(history::History::default())
@@ -503,7 +505,7 @@ fn main() {
             telegram::set_telegram_answers, telegram::set_telegram_requests,
             claude_config::open_claude_config, claude_config::claude_config_view, claude_config::claude_config_edit, claude_config::claude_config_save,
             claude_config::claude_config_open, claude_config::set_mcp_server, claude_config::set_agent_skill, claude_config::set_claude_plugin,
-            runs::hand_over_run, runs::review_run, queue::resume_run_now, queue::run_guard, queue::set_run_guard, queue::queue_launch, queue::queued_view, queue::cancel_queued, queue::night_hour, queue::set_night_hour,
+            changes::open_changed, runs::hand_over_run, runs::review_run, queue::resume_run_now, queue::run_guard, queue::set_run_guard, queue::queue_launch, queue::queued_view, queue::cancel_queued, queue::night_hour, queue::set_night_hour,
             history::open_history, history::history_view, history::set_plan_price, history::export_history,
             updates::updates_view, updates::set_updates_daily, updates::check_updates, updates::install_update,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,

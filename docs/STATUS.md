@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — «Изменения: файлов: N +… −…» under a session or background run, with the list of files (branch `feat/desktop-session-changes`; seen live)
 - 2026-11-23: Windows — «Передать Codex» on a Claude run that is paused or ended badly, and «Проверить в Codex / Claude Code» on a finished run (branch `feat/desktop-handover-review`; a review by Codex seen live, a handover not)
 - 2026-11-23: Windows — the limit guard: Claude's running background tasks freeze near a limit and go on after the reset, «Ставить фоновые задачи на паузу» in Settings, «Продолжить сейчас» on a paused run (branch `feat/desktop-run-guard`; a pause and a resume seen live with a development switch)
 - 2026-11-23: Windows — background runs for later: «На ночь» with a morning summary, «После сброса», the warning near the session's limit (branch `feat/desktop-night-queue`; a night run and its summary seen live). The pause of running tasks near a limit is not built yet
@@ -192,6 +193,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: what a session changed (branch `feat/desktop-session-changes`)
+
+Done: on Oleh's «Давай дальше» (to work by the plan without asking until 9:30). The Mac's `SessionChanges`: under a session's or a background run's row, «Изменения: файлов: 3 +120 −8» — the files and lines changed in its folder since it started, committed or not, plus new files, by git (`git diff --numstat` from the last commit before the start, `git ls-files --others --exclude-standard`). A click lists the files — «+12 −3», «новый», «двоичный» — a click on a file opens it (its folder when the file is gone), «Показать папку» opens the folder. Read off the main thread, at most every 30 seconds per folder; the panel is told when a reading differs. The session's start is the hook's `started_at`, which the app did not read until now. Only files a reading listed can be opened. `core/src/session_changes.rs`, `app/src/changes.rs`, `core/src/sessions.rs`, `ui/panel.html`. Differences from the Mac: the list opens inside the panel, not in a popover; ten thousand lines and more are written «23.9k» in every language; more than 200 files are counted, not listed. All texts are the Mac's.
+Checked: `python scripts/strings.py --check` (799 texts), `cargo test --workspace` on Windows (187; new: git's lines read, and a real repository — a commit before the session, one during, an uncommitted change and a new file with a Cyrillic name). Live on the laptop, a build from the branch: this session's row showed «Изменения: файлов: 182 +31.9k −811»; a click opened «Изменения сессии» with the files, green and red numbers, a scrolling list and «Показать папку» with the folder. A path starting with a dot was shown with the dot at its end; fixed and seen again.
+Left: not pressed — a file in the list and «Показать папку». Not seen: «новый» and «двоичный» rows, a run's row, a folder that is not a repository, Linux. Seen in Russian only.
 
 ## 2026-11-23 — Windows: handover to Codex and review by the other service (branch `feat/desktop-handover-review`)
 
