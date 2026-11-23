@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — «Ширина» and «Плотность строк» of the panel in Settings → «Основные» (branch `feat/desktop-panel-shape`; a wide, spacious panel seen live). The warning above 90 % of the session, not seen before, was seen with it
 - 2026-11-23: Windows — «Изменения: файлов: N +… −…» under a session or background run, with the list of files (branch `feat/desktop-session-changes`; seen live)
 - 2026-11-23: Windows — «Передать Codex» on a Claude run that is paused or ended badly, and «Проверить в Codex / Claude Code» on a finished run (branch `feat/desktop-handover-review`; a review by Codex seen live, a handover not)
 - 2026-11-23: Windows — the limit guard: Claude's running background tasks freeze near a limit and go on after the reset, «Ставить фоновые задачи на паузу» in Settings, «Продолжить сейчас» on a paused run (branch `feat/desktop-run-guard`; a pause and a resume seen live with a development switch)
@@ -193,6 +194,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: the panel's width and row density (branch `feat/desktop-panel-shape`)
+
+Done: on Oleh's «Давай дальше» (by the plan, without asking, until 9:30). The Mac's `PanelWidth` and `PanelDensity`: Settings → «Основные» → «Ширина» («Узкая», «Обычная», «Широкая») and «Плотность строк» («Плотно», «Обычно», «Просторно»), kept where the Mac's profiles keep them (`appearance.width`, `appearance.density`). The panel changes at once. Its width also grows with «Размер текста» now, as on the Mac: a larger text used to squeeze into the same 380. The density multiplies the space between the panel's cards and inside them, and the rows' own padding, by 0.5 / 1 / 1.5 — the Mac's numbers. `core/src/settings.rs`, `app/src/main.rs`, `ui/app.js`, `ui/style.css`. Difference from the Mac: the widths are 340 / 380 / 460 instead of 380 / 420 / 500 — this panel has been 380 wide since its first version, so that stays «Обычная». All texts are the Mac's.
+Checked: `python scripts/strings.py --check` (807 texts), `cargo test --workspace` on Windows (187, with the two settings read, written and refusing what is not a choice). Live on the laptop, a build from the branch with «wide» and «spacious» written to `settings.json`: the panel came up wider (about 460 against 380) with more air between and inside the cards. With the session at 91 % at that moment, the warning of the night queue's PR was seen too: «Запустить» on a background task said «Сессия использована на 91 %, сброс в 07:29. Фоновая задача может упереться в лимит.» with «Запустить после сброса», «Запустить сейчас», «В Codex», «Скрыть»; «Скрыть» took it away and nothing started. The settings were put back after.
+Left: not seen — the two lists in Settings and a change made from them while the panel is open, «Узкая» and «Плотно», a large text widening the panel, Linux. The Mac's «Вид лимитов» (bars or rings) and the glass background are not built: this panel draws rings only. Seen in Russian only.
 
 ## 2026-11-23 — Windows: what a session changed (branch `feat/desktop-session-changes`)
 
