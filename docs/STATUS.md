@@ -138,6 +138,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`, PR 520, PR 529 and PR 534; all four contain `main` as of 2026-11-21 and are green
+- the batch of 2026-11-23 (Oleh's «с 1 по 10»), each **held until 0.12.0 is out**: `feat/stuck-agent`
 - batch tasks and «Версии», left to see live (the rest was seen 2026-11-21 in an isolated copy): a batch with a typed text, a model by API, the wait near the limit, the summary and «Что изменилось» as a banner and in Telegram
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
@@ -185,6 +186,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Mac: a notification when an agent may be stuck (branch `feat/stuck-agent`)
+
+Done: on Oleh's «с 1 по 10 все сразу сделай» (the ten ideas of 2026-11-23). Checked against the code first: PR and CI in a project row with CI notifications, «Итог дня», spend by project, and memory and disk alerts were already there, so those ideas shrink to what is missing. This one was half there — a row says «тихо N мин» after 10 minutes — and had no notification. New `StuckWatch` (`AIHubBar/Models/StuckWatch.swift`): a running session with no sign of life for 20 minutes, or the same Bash command 5 times among its last 12 tool calls, gives one notification «… мог застрять — проект» with a click to the session; once per quiet stretch and once per command, the count starts again with a new request, an old quiet session is not announced at the app's start. A new notification kind «Агент мог застрять: молчит или ходит по кругу» on the «Сессии агентов» page (frequency, «не присылать»); in the island it comes as a waiting event. Four texts in 12 languages.
+Checked: not built locally — swap was 10.4 of 11 GB, above the line for a local build, so the PR's CI runs the tests and the catalog check (`StuckWatchTests`, 7 tests; `NotificationSettingsTests`). The catalog was edited by hand, `scripts/strings-check.py` passes.
+Left: **held until 0.12.0 is out.** Not seen live: no notification was produced by a real session. The repeats are a hint: the hook writes the same call again at most once a minute, so a command repeated back to back counts once a minute, and only Bash commands are counted. Not sent to Telegram. The translations were written by the agent and read by no one.
 
 ## 2026-11-23 — 1.0 list: the shared Telegram bot and the Mini App go in as ready (branch `chore/status-shared-bot-ready`)
 

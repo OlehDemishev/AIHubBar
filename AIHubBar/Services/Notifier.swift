@@ -257,7 +257,7 @@ final class NotificationRouter: NSObject, UNUserNotificationCenterDelegate, @unc
 
 /// Kinds of notifications, for Settings → Основные → «Какие уведомления и как часто».
 enum NotificationKind: String, CaseIterable, Identifiable, Sendable {
-    case waiting, context, background, limits, pullRequests, calendar, resources, commands
+    case waiting, context, stuck, background, limits, pullRequests, calendar, resources, commands
 
     var id: String { rawValue }
 
@@ -265,6 +265,7 @@ enum NotificationKind: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .waiting: String(localized: "Claude ждёт ответа или разрешения")
         case .context: String(localized: "Контекст сессии почти заполнен")
+        case .stuck: String(localized: "Агент мог застрять: молчит или ходит по кругу")
         case .background: String(localized: "Фоновые задачи: итог, пауза, ночная сводка")
         case .limits: String(localized: "Лимиты: Claude, другие AI, бюджет API")
         case .pullRequests: String(localized: "PR и CI")
@@ -279,7 +280,7 @@ enum NotificationKind: String, CaseIterable, Identifiable, Sendable {
     /// Every notification id starts with its kind's prefix (see the `Notifier.post` calls).
     init?(id: String) {
         let prefixes: [(String, NotificationKind)] = [
-            ("waiting-", .waiting), ("context-", .context), ("run-", .background), ("night-summary", .background),
+            ("waiting-", .waiting), ("context-", .context), ("stuck-", .stuck), ("run-", .background), ("night-summary", .background),
             ("limit-", .limits), ("week-forecast", .limits), ("hub-", .limits), ("spendWarned-", .limits),
             ("pr-", .pullRequests), ("calendar-", .calendar), ("resources-", .resources),
             ("command-", .commands), ("quick-", .commands),

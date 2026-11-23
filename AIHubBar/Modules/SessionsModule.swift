@@ -15,7 +15,7 @@ extension ModuleDefinition {
         places: ModulePlace.allCases,
         menuBarKinds: [.waiting, .running, .background, .queued],
         primaryMenuBarKinds: [.waiting],
-        notifications: [.waiting, .context, .background],
+        notifications: [.waiting, .context, .stuck, .background],
         island: IslandSlot(ears: [.sessions, .background], left: false),
         telegram: .backgroundResults,
         keywords: ["Hooks", String(localized: "Отслеживание сессий"), "Telegram", String(localized: "Ответы из Telegram"), String(localized: "Фоновые задачи"), String(localized: "Ночные задачи начинаются в")]
