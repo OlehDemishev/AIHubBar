@@ -203,10 +203,12 @@ pub(crate) fn off_main_thread(build: impl FnOnce() + Send + 'static) {
     std::thread::spawn(build);
 }
 
+const PANEL_HEIGHT: f64 = 600.0;
+
 fn build_panel(app: &AppHandle) -> tauri::Result<()> {
     let panel = WebviewWindowBuilder::new(app, "panel", WebviewUrl::App("panel.html".into()))
         .title(APP_NAME)
-        .inner_size(380.0, 600.0)
+        .inner_size(380.0, PANEL_HEIGHT)
         .resizable(false)
         .decorations(false)
         .always_on_top(true)
@@ -283,6 +285,8 @@ struct UiTexts {
     show_tray_hint: bool,
     /// «Размер текста»: every page is scaled by this.
     text_scale: f64,
+    /// «Плотность строк»: the panel's spacing is multiplied by this.
+    density: f64,
 }
 
 #[derive(Serialize)]
@@ -305,6 +309,7 @@ fn ui_texts(app: AppHandle) -> UiTexts {
         // Windows 11 hides new tray icons under «^».
         show_tray_hint: cfg!(target_os = "windows") && !settings.tray_hint_seen,
         text_scale: settings.text_size().1,
+        density: settings.panel_density().1,
     }
 }
 
@@ -337,6 +342,10 @@ struct AppearanceView {
     themes: Vec<Choice>,
     text_size: &'static str,
     text_sizes: Vec<Choice>,
+    width: &'static str,
+    widths: Vec<Choice>,
+    density: &'static str,
+    densities: Vec<Choice>,
 }
 
 /// The theme of every window: the system's, or the chosen one.
@@ -359,14 +368,34 @@ fn appearance_view(app: AppHandle) -> AppearanceView {
         themes: vec![choice("system", texts.t("Как в системе")), choice("light", texts.t("Светлая")), choice("dark", texts.t("Тёмная"))],
         text_size: settings.text_size().0,
         text_sizes: vec![choice("small", texts.t("Мелкий")), choice("normal", texts.t("Обычный")), choice("large", texts.t("Крупный")), choice("extraLarge", texts.t("Очень крупный"))],
+        width: settings.panel_width().0,
+        widths: vec![choice("narrow", texts.t("Узкая")), choice("normal", texts.t("Обычная")), choice("wide", texts.t("Широкая"))],
+        density: settings.panel_density().0,
+        densities: vec![choice("compact", texts.t("Плотно")), choice("normal", texts.t("Обычно")), choice("spacious", texts.t("Просторно"))],
     }
 }
 
-/// «Тема» and «Размер текста»: every window follows at once.
+/// The panel as wide as «Ширина» says, wider with a larger text.
+fn size_panel(app: &AppHandle) {
+    let settings = app.state::<AppState>().settings.lock().unwrap().clone();
+    if let Some(panel) = app.get_webview_window("panel") {
+        let _ = panel.set_size(tauri::LogicalSize::new((settings.panel_width().1 * settings.text_size().1).round(), PANEL_HEIGHT));
+    }
+}
+
+/// «Тема», «Размер текста», «Ширина» and «Плотность строк»: every window follows at once.
 #[tauri::command]
-fn set_appearance(app: AppHandle, theme: String, text_size: String) -> AppearanceView {
-    save(&app, |settings| settings.set_appearance(&theme, &text_size));
+fn set_appearance(app: AppHandle, theme: String, text_size: String, width: String, density: String) -> AppearanceView {
+    save(&app, |settings| {
+        settings.set_appearance(&theme, &text_size);
+        settings.set_panel_shape(&width, &density);
+    });
     apply_theme(&app);
+    size_panel(&app);
+    if let Some(panel) = app.get_webview_window("panel") {
+        let density = app.state::<AppState>().settings.lock().unwrap().panel_density().1;
+        let _ = panel.eval(format!("document.documentElement.style.setProperty('--density', {density})"));
+    }
     let scale = app.state::<AppState>().settings.lock().unwrap().text_size().1;
     for window in app.webview_windows().values() {
         let _ = window.eval(format!("document.documentElement.style.zoom = {scale}"));
@@ -552,6 +581,7 @@ fn main() {
             app.set_activation_policy(tauri::ActivationPolicy::Accessory);
             let handle = app.handle().clone();
             build_panel(&handle)?;
+            size_panel(&handle);
             build_tray(&handle)?;
             handle.state::<Limits>().start(handle.clone());
             handle.state::<Sessions>().start(handle.clone());

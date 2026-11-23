@@ -24,6 +24,8 @@ export async function loadTexts() {
   document.documentElement.dir = ui.rtl ? "rtl" : "ltr";
   // «Размер текста»: the whole page, as the Mac scales its panel's fonts.
   document.documentElement.style.zoom = ui.textScale ?? 1;
+  // «Плотность строк»: the panel's own spacing reads it; other windows have none of those rules.
+  document.documentElement.style.setProperty("--density", ui.density ?? 1);
   for (const element of document.querySelectorAll("[data-t]")) element.textContent = t(element.dataset.t);
   for (const element of document.querySelectorAll("[data-t-title]")) element.title = t(element.dataset.tTitle);
   for (const element of document.querySelectorAll("[data-t-placeholder]")) element.placeholder = t(element.dataset.tPlaceholder);

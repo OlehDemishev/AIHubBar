@@ -55,7 +55,7 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px s
 select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: inherit; }
 
 /* The panel at the tray icon */
-.panel { display: flex; flex-direction: column; gap: 10px; padding: 12px; height: 100vh; overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; }
+.panel { display: flex; flex-direction: column; gap: calc(10px * var(--density, 1)); padding: 12px; height: 100vh; overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; }
 .panel > * { flex: none; }
 .panel header { display: flex; align-items: center; gap: 8px; }
 .panel header .spacer { flex: 1; }
@@ -192,7 +192,7 @@ h2 { font-size: 12px; font-weight: 600; color: var(--secondary); margin: 0 0 8px
 @media (prefers-color-scheme: dark) { .error { color: #ff6961; } }
 
 /* Sessions */
-.session { display: flex; align-items: center; gap: 6px; padding: 3px 0; min-width: 0; }
+.session { display: flex; align-items: center; gap: 6px; padding: calc(3px * var(--density, 1)) 0; min-width: 0; }
 .session .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--secondary); flex: none; }
 .session.waiting .dot { background: #ff9500; }
 .session.running .dot { background: #0a84ff; }
@@ -570,3 +570,7 @@ button.changed-file:hover { background: var(--line); border: none; }
 .changes .added { color: #248a3d; }
 .changes .removed { color: #d70015; }
 @media (prefers-color-scheme: dark) { .changes .added { color: #30d158; } .changes .removed { color: #ff6961; } }
+
+/* «Плотность строк»: the panel's cards and rows closer or further apart */
+.panel .card { padding-top: calc(12px * var(--density, 1)); padding-bottom: calc(12px * var(--density, 1)); }
+.panel .row { padding-top: calc(6px * var(--density, 1)); padding-bottom: calc(6px * var(--density, 1)); }

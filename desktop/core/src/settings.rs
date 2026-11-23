@@ -355,6 +355,10 @@ impl Settings {
 // MARK: - Modules: the Mac's `installed` and `off` lists, so `.claudepult` files carry them both ways
 
 pub const THEMES: [&str; 3] = ["system", "light", "dark"];
+/// The Mac's panel is 380, 420 or 500 points wide; this one has been 380 since its first version, so that stays
+/// «Обычная» and the others stand as far from it.
+pub const PANEL_WIDTHS: [(&str, f64); 3] = [("narrow", 340.0), ("normal", 380.0), ("wide", 460.0)];
+pub const PANEL_DENSITIES: [(&str, f64); 3] = [("compact", 0.5), ("normal", 1.0), ("spacious", 1.5)];
 pub const TEXT_SIZES: [(&str, f64); 4] = [("small", 0.9), ("normal", 1.0), ("large", 1.15), ("extraLarge", 1.3)];
 
 /// The stage 6 modules this version has, as the Mac's `ModuleKind` names them.
@@ -457,6 +461,31 @@ impl Settings {
     pub fn text_size(&self) -> (&'static str, f64) {
         let saved = self.mac_settings.get("appearance").and_then(|a| a.get("textSize")).and_then(Value::as_str);
         TEXT_SIZES.into_iter().find(|(size, _)| Some(*size) == saved).unwrap_or(TEXT_SIZES[1])
+    }
+
+    /// «Ширина»: the Mac's `PanelWidth` and the panel's width here, before «Размер текста» widens it.
+    pub fn panel_width(&self) -> (&'static str, f64) {
+        let saved = self.mac_settings.get("appearance").and_then(|a| a.get("width")).and_then(Value::as_str);
+        PANEL_WIDTHS.into_iter().find(|(width, _)| Some(*width) == saved).unwrap_or(PANEL_WIDTHS[1])
+    }
+
+    /// «Плотность строк»: the Mac's `PanelDensity` and its multiplier of the rows' spacing.
+    pub fn panel_density(&self) -> (&'static str, f64) {
+        let saved = self.mac_settings.get("appearance").and_then(|a| a.get("density")).and_then(Value::as_str);
+        PANEL_DENSITIES.into_iter().find(|(density, _)| Some(*density) == saved).unwrap_or(PANEL_DENSITIES[1])
+    }
+
+    /// Values that are not a width or a density change nothing.
+    pub fn set_panel_shape(&mut self, width: &str, density: &str) {
+        let appearance = self.mac_settings.entry("appearance").or_insert_with(|| Value::Object(Map::new()));
+        if let Some(appearance) = appearance.as_object_mut() {
+            if PANEL_WIDTHS.iter().any(|(id, _)| *id == width) {
+                appearance.insert("width".into(), Value::String(width.to_owned()));
+            }
+            if PANEL_DENSITIES.iter().any(|(id, _)| *id == density) {
+                appearance.insert("density".into(), Value::String(density.to_owned()));
+            }
+        }
     }
 
     /// Values that are not a theme or a size change nothing.
@@ -612,6 +641,12 @@ mod tests {
         let mut kept = from_mac.clone();
         kept.set_appearance("system", "large");
         assert_eq!(kept.mac_settings["appearance"]["width"], "wide", "the Mac's other appearance settings stay");
+        assert_eq!((kept.panel_width(), kept.panel_density()), (("wide", 460.0), ("normal", 1.0)));
+        let mut shaped = Settings::default();
+        assert_eq!(shaped.panel_width(), ("normal", 380.0));
+        shaped.set_panel_shape("narrow", "spacious");
+        shaped.set_panel_shape("huge", "loose");
+        assert_eq!((shaped.panel_width().0, shaped.panel_density()), ("narrow", ("spacious", 1.5)), "what is not a choice changes nothing");
         let mut thresholds = Settings::default();
         assert_eq!(thresholds.limit_thresholds(), DEFAULT_LIMIT_THRESHOLDS);
         thresholds.set_limit_thresholds(&[90, 70, 70, 300]);
