@@ -12,6 +12,7 @@ mod changes;
 mod claude_config;
 mod clipboard;
 mod commands;
+mod help;
 mod history;
 mod hub;
 mod keep_awake;
@@ -266,6 +267,7 @@ fn run_command(app: &AppHandle, name: &str) -> bool {
         "quit" => app.exit(0),
         "quick-prompt" => quick_prompt::show(app),
         "search" => search::show(app),
+        "help" => help::show(app),
         _ => return false,
     }
     true
@@ -554,7 +556,7 @@ fn main() {
             claude_config::open_claude_config, claude_config::claude_config_view, claude_config::claude_config_edit, claude_config::claude_config_save,
             claude_config::claude_config_open, claude_config::set_mcp_server, claude_config::set_agent_skill, claude_config::set_claude_plugin,
             changes::open_changed, projects::launch_both, runs::hand_over_run, runs::review_run, queue::resume_run_now, queue::run_guard, queue::set_run_guard, queue::queue_launch, queue::queued_view, queue::cancel_queued, queue::night_hour, queue::set_night_hour,
-            history::open_history, history::history_view, history::set_plan_price, history::export_history,
+            help::open_help, help::help_view, history::open_history, history::history_view, history::set_plan_price, history::export_history,
             updates::updates_view, updates::set_updates_daily, updates::check_updates, updates::install_update,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,

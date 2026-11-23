@@ -157357,6 +157357,1070 @@
           }
         }
       }
+    },
+    "Утилиты": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأدوات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Werkzeuge"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilities"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilidades"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilitaires"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilitas"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilità"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユーティリティ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "유틸리티"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Narzędzia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilitários"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Утиліти"
+          }
+        }
+      }
+    },
+    "AI Hub Bar держит под рукой лимиты AI, сессии агентов и ваши проекты — в трее, в один клик.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يبقي AI Hub Bar حدود الذكاء الاصطناعي وجلسات الوكلاء ومشاريعك في متناول يدك — في علبة النظام، بنقرة واحدة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar hält KI-Limits, Agenten-Sitzungen und Ihre Projekte griffbereit – im Infobereich, einen Klick entfernt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar keeps AI limits, agent sessions and your projects at hand — in the tray, one click away."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar tiene a mano los límites de IA, las sesiones de agentes y tus proyectos: en la bandeja del sistema, a un clic."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar garde sous la main les limites d’IA, les sessions d’agents et vos projets — dans la zone de notification, en un clic."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar menyimpan batas AI, sesi agen, dan proyek Anda dalam jangkauan — di baki sistem, sekali klik."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar tiene a portata di mano i limiti IA, le sessioni degli agenti e i tuoi progetti — nell’area di notifica, a un clic."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar は AI の制限、エージェントのセッション、プロジェクトを手元に置きます。トレイからワンクリックです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar는 AI 한도, 에이전트 세션, 프로젝트를 가까이에 둡니다. 트레이에서 클릭 한 번이면 됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar trzyma pod ręką limity AI, sesje agentów i Twoje projekty — w zasobniku, jedno kliknięcie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O AI Hub Bar mantém à mão os limites de IA, as sessões de agentes e seus projetos — na bandeja do sistema, a um clique."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar тримає під рукою ліміти AI, сесії агентів і ваші проєкти — у треї, в один клік."
+          }
+        }
+      }
+    },
+    "Панель открывается по клику на значок в трее: блоки модулей текущего профиля сверху вниз и поиск.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُفتح اللوحة بالنقر على الأيقونة في علبة النظام: كتل وحدات ملف التعريف الحالي من الأعلى إلى الأسفل، والبحث."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Panel öffnet sich per Klick auf das Symbol im Infobereich: die Modulblöcke des aktuellen Profils von oben nach unten und die Suche."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The panel opens with a click on the tray icon: the current profile’s module blocks from top to bottom, and a search."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El panel se abre al hacer clic en el icono de la bandeja: los bloques de módulos del perfil actual de arriba abajo y la búsqueda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le panneau s’ouvre d’un clic sur l’icône de la zone de notification : les blocs de modules du profil actuel de haut en bas, et la recherche."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel terbuka dengan mengeklik ikon di baki sistem: blok modul profil saat ini dari atas ke bawah, dan pencarian."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il pannello si apre con un clic sull’icona nell’area di notifica: i blocchi dei moduli del profilo attuale dall’alto in basso e la ricerca."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トレイのアイコンをクリックするとパネルが開きます。現在のプロファイルのモジュールが上から順に並び、検索もあります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "트레이 아이콘을 클릭하면 패널이 열립니다. 현재 프로필의 모듈 블록이 위에서 아래로 놓이고 검색도 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel otwiera się po kliknięciu ikony w zasobniku: bloki modułów bieżącego profilu od góry do dołu i wyszukiwanie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O painel abre com um clique no ícone da bandeja: os blocos de módulos do perfil atual de cima para baixo e a busca."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Панель відкривається кліком по значку в треї: блоки модулів поточного профілю згори донизу і пошук."
+          }
+        }
+      }
+    },
+    "Все сессии Claude Code на этом компьютере: что делают, кто ждёт ответа, фоновые задачи и очередь.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل جلسات Claude Code على هذا الحاسوب: ماذا تفعل، ومن ينتظر الرد، والمهام الخلفية وقائمة الانتظار."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Claude-Code-Sitzungen auf diesem Computer: was sie tun, wer auf eine Antwort wartet, Hintergrundaufgaben und die Warteschlange."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every Claude Code session on this computer: what it is doing, who is waiting for an answer, background tasks and the queue."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todas las sesiones de Claude Code en este ordenador: qué hacen, quién espera respuesta, las tareas en segundo plano y la cola."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les sessions Claude Code sur cet ordinateur : ce qu’elles font, qui attend une réponse, les tâches en arrière-plan et la file d’attente."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semua sesi Claude Code di komputer ini: apa yang dikerjakan, siapa yang menunggu jawaban, tugas latar belakang, dan antrean."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutte le sessioni di Claude Code su questo computer: cosa fanno, chi aspetta una risposta, le attività in background e la coda."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このコンピュータ上のすべての Claude Code セッション。何をしているか、どれが返答待ちか、バックグラウンドタスクとキュー。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 컴퓨터의 모든 Claude Code 세션: 무엇을 하는지, 누가 답을 기다리는지, 백그라운드 작업과 대기열."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wszystkie sesje Claude Code na tym komputerze: co robią, kto czeka na odpowiedź, zadania w tle i kolejka."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todas as sessões do Claude Code neste computador: o que fazem, quem espera resposta, as tarefas em segundo plano e a fila."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Усі сесії Claude Code на цьому комп’ютері: що роблять, хто чекає відповіді, фонові завдання й черга."
+          }
+        }
+      }
+    },
+    "Ресурсы компьютера, «Не спать», быстрые переключатели, история буфера, заметки и свои команды — каждое включается отдельно.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "موارد الحاسوب، ومنع السكون، والمفاتيح السريعة، وسجل الحافظة، والملاحظات، وأوامرك الخاصة — كلٌّ منها يُفعَّل على حدة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Computerressourcen, Wachhalten, Schnellschalter, Zwischenablage-Verlauf, Notizen und eigene Befehle – jedes wird einzeln eingeschaltet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Computer resources, keep awake, quick toggles, clipboard history, notes and your own commands — each is turned on separately."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recursos del ordenador, mantener despierto, interruptores rápidos, historial del portapapeles, notas y tus propios comandos: cada uno se activa por separado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ressources de l’ordinateur, maintien en éveil, bascules rapides, historique du presse-papiers, notes et vos propres commandes — chacun s’active séparément."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sumber daya komputer, tetap terjaga, sakelar cepat, riwayat papan klip, catatan, dan perintah Anda sendiri — masing-masing diaktifkan terpisah."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Risorse del computer, tieni sveglio, interruttori rapidi, cronologia degli appunti, note e i tuoi comandi — ognuno si attiva separatamente."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コンピュータのリソース、スリープ防止、クイック切り替え、クリップボード履歴、メモ、独自のコマンド。それぞれ個別にオンにできます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "컴퓨터 리소스, 잠자기 방지, 빠른 토글, 클립보드 기록, 메모, 나만의 명령 — 각각 따로 켭니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zasoby komputera, czuwanie, szybkie przełączniki, historia schowka, notatki i własne polecenia — każde włącza się osobno."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recursos do computador, manter acordado, alternadores rápidos, histórico da área de transferência, notas e seus próprios comandos — cada um é ativado separadamente."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ресурси комп’ютера, «Не спати», швидкі перемикачі, історія буфера, нотатки та власні команди — кожне вмикається окремо."
+          }
+        }
+      }
+    },
+    "Что приходит уведомлением системы и в Telegram.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما يصل كإشعار من النظام وما يصل إلى Telegram."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was als Systemmitteilung und was in Telegram ankommt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What arrives as a system notification and in Telegram."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qué llega como notificación del sistema y a Telegram."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce qui arrive en notification système et dans Telegram."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apa yang datang sebagai notifikasi sistem dan ke Telegram."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosa arriva come notifica di sistema e su Telegram."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システム通知と Telegram に届くもの。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템 알림과 Telegram으로 오는 것."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Co przychodzi jako powiadomienie systemu i na Telegram."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O que chega como notificação do sistema e no Telegram."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що надходить сповіщенням системи і в Telegram."
+          }
+        }
+      }
+    },
+    "Нажмите значок AI Hub Bar в трее — откроется панель.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انقر على أيقونة AI Hub Bar في علبة النظام — ستُفتح اللوحة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klicken Sie auf das AI-Hub-Bar-Symbol im Infobereich – das Panel öffnet sich."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click the AI Hub Bar icon in the tray — the panel opens."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haz clic en el icono de AI Hub Bar en la bandeja: se abrirá el panel."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cliquez sur l’icône AI Hub Bar dans la zone de notification — le panneau s’ouvre."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klik ikon AI Hub Bar di baki sistem — panel akan terbuka."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fai clic sull’icona di AI Hub Bar nell’area di notifica: si apre il pannello."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トレイの AI Hub Bar アイコンをクリックすると、パネルが開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "트레이의 AI Hub Bar 아이콘을 클릭하면 패널이 열립니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kliknij ikonę AI Hub Bar w zasobniku — otworzy się panel."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clique no ícone do AI Hub Bar na bandeja — o painel abre."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Натисніть значок AI Hub Bar у треї — відкриється панель."
+          }
+        }
+      }
+    },
+    "Ctrl+Alt+P в любой программе: задача, проект (тот, что впереди, или прошлый) и агент — Ctrl+Enter, и она в фоне или в Терминале. Модуль «Быстрый запрос», клавиша — на его странице.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt+P في أي برنامج: المهمة والمشروع (الذي في المقدمة أو السابق) والوكيل — ثم Ctrl+Enter فتعمل في الخلفية أو في الطرفية. وحدة «طلب سريع»، والمفتاح في صفحتها."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strg+Alt+P in jedem Programm: Aufgabe, Projekt (das im Vordergrund oder das letzte) und Agent – Strg+Enter, und sie läuft im Hintergrund oder im Terminal. Modul „Schnellauftrag“, die Taste steht auf seiner Seite."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt+P in any program: the task, the project (the one in front, or the last one) and the agent — Ctrl+Enter, and it runs in the background or in Terminal. The “Quick Prompt” module; its key is on its page."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt+P en cualquier programa: la tarea, el proyecto (el que está delante o el anterior) y el agente; Ctrl+Enter, y se ejecuta en segundo plano o en Terminal. Módulo «Petición rápida»; la tecla está en su página."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt+P dans n’importe quel programme : la tâche, le projet (celui au premier plan ou le précédent) et l’agent — Ctrl+Entrée, et elle part en arrière-plan ou dans Terminal. Module « Requête rapide » ; la touche est sur sa page."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt+P di program apa pun: tugas, proyek (yang di depan, atau yang terakhir), dan agen — Ctrl+Enter, lalu berjalan di latar belakang atau di Terminal. Modul “Permintaan cepat”; tombolnya ada di halamannya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt+P in qualsiasi programma: l’attività, il progetto (quello in primo piano o l’ultimo) e l’agente — Ctrl+Invio, e parte in background o nel Terminale. Modulo «Richiesta rapida»; il tasto è nella sua pagina."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どのプログラムでも Ctrl+Alt+P。タスク、プロジェクト（前面のもの、または前回のもの）、エージェントを選び、Ctrl+Enter でバックグラウンドまたはターミナルで実行します。「クイックプロンプト」モジュール。キーはそのページにあります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어느 프로그램에서나 Ctrl+Alt+P: 작업, 프로젝트(앞에 있는 것 또는 지난번 것), 에이전트를 고르고 Ctrl+Enter를 누르면 백그라운드나 터미널에서 실행됩니다. ‘빠른 요청’ 모듈이며, 키는 해당 페이지에 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt+P w dowolnym programie: zadanie, projekt (ten z przodu albo poprzedni) i agent — Ctrl+Enter, i działa w tle albo w Terminal. Moduł „Szybkie zapytanie”; klawisz jest na jego stronie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt+P em qualquer programa: a tarefa, o projeto (o que está na frente ou o anterior) e o agente — Ctrl+Enter, e ela roda em segundo plano ou no Terminal. Módulo “Pedido rápido”; a tecla fica na página dele."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt+P у будь-якій програмі: завдання, проєкт (той, що попереду, або попередній) і агент — Ctrl+Enter, і воно у фоні або в Терміналі. Модуль «Швидкий запит», клавіша — на його сторінці."
+          }
+        }
+      }
+    },
+    "«Разрешить» и «Отклонить» — в строке сессии и, если включено, в Telegram. Работает ответ, который пришёл первым.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«سماح» و«رفض» — في صف الجلسة، وفي Telegram إن كان مفعّلًا. يُعتمد أول رد يصل."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Erlauben“ und „Ablehnen“ – in der Zeile der Sitzung und, falls eingeschaltet, in Telegram. Es gilt die Antwort, die zuerst ankommt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Allow” and “Deny” — in the session’s row and, if turned on, in Telegram. The answer that arrives first is the one that counts."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Permitir» y «Rechazar»: en la fila de la sesión y, si está activado, en Telegram. Vale la respuesta que llega primero."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Autoriser » et « Refuser » — dans la ligne de la session et, si c’est activé, dans Telegram. La première réponse reçue l’emporte."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Izinkan” dan “Tolak” — di baris sesi dan, jika diaktifkan, di Telegram. Jawaban yang datang lebih dulu yang berlaku."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Consenti» e «Rifiuta» — nella riga della sessione e, se attivato, su Telegram. Vale la risposta che arriva per prima."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「許可」と「拒否」は、セッションの行と、オンにしていれば Telegram にも表示されます。先に届いた返答が有効です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘허용’과 ‘거부’은 세션 행에, 켜 두었다면 Telegram에도 나타납니다. 먼저 도착한 답이 적용됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Zezwól” i „Odrzuć” — w wierszu sesji i, jeśli włączono, w Telegramie. Liczy się odpowiedź, która przyszła pierwsza."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Permitir” e “Recusar” — na linha da sessão e, se ativado, no Telegram. Vale a resposta que chegar primeiro."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Дозволити» і «Відхилити» — у рядку сесії і, якщо ввімкнено, в Telegram. Діє відповідь, яка надійшла першою."
+          }
+        }
+      }
+    },
+    "Если сессия использована больше чем на 90 %, фоновая задача спрашивает: запустить сейчас или после сброса. «Ставить фоновые задачи на паузу» в Настройках → «Сервисы AI» останавливает идущие задачи у порога и продолжает их после сброса.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إذا استُخدم أكثر من 90 % من الجلسة، تسأل المهمة الخلفية: التشغيل الآن أم بعد إعادة الضبط. «إيقاف المهام الخلفية مؤقتًا» في الإعدادات ← «خدمات الذكاء الاصطناعي» يوقف المهام الجارية عند العتبة ويستأنفها بعد إعادة الضبط."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ist die Sitzung zu mehr als 90 % verbraucht, fragt eine Hintergrundaufgabe: jetzt starten oder nach dem Zurücksetzen. „Hintergrundaufgaben pausieren“ in Einstellungen → „KI-Dienste“ hält laufende Aufgaben an der Schwelle an und setzt sie nach dem Zurücksetzen fort."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If more than 90 % of the session is used, a background task asks: start now or after the reset. “Pause background tasks” in Settings → “AI Services” stops running tasks at the threshold and continues them after the reset."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si la sesión está usada en más del 90 %, la tarea en segundo plano pregunta: iniciar ahora o tras el restablecimiento. «Pausar tareas en segundo plano» en Ajustes → «Servicios de IA» detiene las tareas en curso en el umbral y las continúa tras el restablecimiento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si la session est utilisée à plus de 90 %, la tâche en arrière-plan demande : lancer maintenant ou après la réinitialisation. « Mettre en pause les tâches en arrière-plan » dans Réglages → « Services d’IA » arrête les tâches en cours au seuil et les reprend après la réinitialisation."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jika sesi sudah terpakai lebih dari 90 %, tugas latar belakang bertanya: jalankan sekarang atau setelah reset. “Jeda tugas latar belakang” di Pengaturan → “Layanan AI” menghentikan tugas yang berjalan di ambang batas dan melanjutkannya setelah reset."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se la sessione è usata per più del 90 %, l’attività in background chiede: avviare ora o dopo il ripristino. «Metti in pausa le attività in background» in Impostazioni → «Servizi IA» ferma le attività in corso alla soglia e le riprende dopo il ripristino."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションの使用が 90 % を超えていると、バックグラウンドタスクは「今すぐ開始」か「リセット後」かを尋ねます。設定 → 「AI サービス」の「バックグラウンドタスクを一時停止」は、実行中のタスクをしきい値で止め、リセット後に再開します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션을 90 % 넘게 썼으면 백그라운드 작업이 지금 시작할지 재설정 후에 시작할지 묻습니다. 설정 → ‘AI 서비스’의 ‘백그라운드 작업 일시 정지’는 실행 중인 작업을 임계값에서 멈추고 재설정 후 계속합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeśli sesja jest wykorzystana w ponad 90 %, zadanie w tle pyta: uruchomić teraz czy po resecie. „Wstrzymuj zadania w tle” w Ustawienia → „Usługi AI” zatrzymuje trwające zadania przy progu i wznawia je po resecie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se mais de 90 % da sessão já foi usado, a tarefa em segundo plano pergunta: iniciar agora ou depois da redefinição. “Pausar tarefas em segundo plano” em Ajustes → “Serviços de IA” para as tarefas em andamento no limite e as continua depois da redefinição."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Якщо сесію використано більш ніж на 90 %, фонове завдання запитує: запустити зараз чи після скидання. «Ставити фонові завдання на паузу» у Налаштуваннях → «Сервіси AI» зупиняє завдання, що виконуються, біля порога і продовжує їх після скидання."
+          }
+        }
+      }
+    },
+    "Свой бот: токен из @BotFather, без сервера AI Hub Bar между вами. Настройки → «Основные» → «Telegram»: «Привязать чат», затем «Start» в чате. Меню в самом боте: /menu — лимиты и сессии.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بوتك الخاص: رمز من @BotFather، بلا خادم لـ AI Hub Bar بينكما. الإعدادات ← «عام» ← «Telegram»: «ربط الدردشة»، ثم «Start» في الدردشة. القائمة في البوت نفسه: ‎/menu — الحدود والجلسات."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eigener Bot: ein Token von @BotFather, ohne AI-Hub-Bar-Server dazwischen. Einstellungen → „Allgemein“ → „Telegram“: „Chat verknüpfen“, dann „Start“ im Chat. Das Menü im Bot selbst: /menu – Limits und Sitzungen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your own bot: a token from @BotFather, with no AI Hub Bar server in between. Settings → “General” → “Telegram”: “Link chat”, then “Start” in the chat. The menu is in the bot itself: /menu — limits and sessions."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu propio bot: un token de @BotFather, sin servidor de AI Hub Bar por medio. Ajustes → «General» → «Telegram»: «Vincular chat» y luego «Start» en el chat. El menú está en el propio bot: /menu — límites y sesiones."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre propre bot : un jeton de @BotFather, sans serveur AI Hub Bar entre vous. Réglages → « Général » → « Telegram » : « Lier le chat », puis « Start » dans le chat. Le menu est dans le bot lui-même : /menu — limites et sessions."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bot Anda sendiri: token dari @BotFather, tanpa server AI Hub Bar di antaranya. Pengaturan → “Umum” → “Telegram”: “Tautkan chat”, lalu “Start” di chat. Menunya ada di bot itu sendiri: /menu — batas dan sesi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo bot: un token da @BotFather, senza server di AI Hub Bar in mezzo. Impostazioni → «Generali» → «Telegram»: «Collega chat», poi «Start» nella chat. Il menu è nel bot stesso: /menu — limiti e sessioni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自分のボット：@BotFather のトークンを使い、間に AI Hub Bar のサーバーは入りません。設定 → 「一般」 → 「Telegram」で「チャットをリンク」、続いてチャットで「Start」。メニューはボット自体にあります：/menu — 制限とセッション。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나만의 봇: @BotFather의 토큰을 쓰며, 중간에 AI Hub Bar 서버가 없습니다. 설정 → ‘일반’ → ‘Telegram’에서 ‘채팅 연결’, 이어서 채팅에서 ‘Start’. 메뉴는 봇 안에 있습니다: /menu — 한도와 세션."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Własny bot: token od @BotFather, bez serwera AI Hub Bar pośrodku. Ustawienia → „Ogólne” → „Telegram”: „Połącz czat”, potem „Start” na czacie. Menu jest w samym bocie: /menu — limity i sesje."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu próprio bot: um token do @BotFather, sem servidor do AI Hub Bar no meio. Ajustes → “Geral” → “Telegram”: “Vincular chat”, depois “Start” no chat. O menu fica no próprio bot: /menu — limites e sessões."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Свій бот: токен із @BotFather, без сервера AI Hub Bar між вами. Налаштування → «Загальні» → «Telegram»: «Прив’язати чат», потім «Start» у чаті. Меню в самому боті: /menu — ліміти й сесії."
+          }
+        }
+      }
+    },
+    "Запросы разрешений приходят в тот же бот с кнопками ✅ и ❌: включите «Запросы разрешений в этот бот» на странице «Telegram».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصل طلبات الإذن إلى البوت نفسه مع الزرين ✅ و❌: فعّل «طلبات الإذن إلى هذا البوت» في صفحة «Telegram»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berechtigungsanfragen kommen im selben Bot mit den Tasten ✅ und ❌ an: Schalten Sie „Berechtigungsanfragen an diesen Bot“ auf der Seite „Telegram“ ein."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permission requests come to the same bot with ✅ and ❌ buttons: turn on “Permission requests to this bot” on the “Telegram” page."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las solicitudes de permiso llegan al mismo bot con los botones ✅ y ❌: activa «Solicitudes de permiso a este bot» en la página «Telegram»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les demandes d’autorisation arrivent dans le même bot avec les boutons ✅ et ❌ : activez « Demandes d’autorisation dans ce bot » sur la page « Telegram »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permintaan izin datang ke bot yang sama dengan tombol ✅ dan ❌: aktifkan “Permintaan izin ke bot ini” di halaman “Telegram”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le richieste di permesso arrivano nello stesso bot con i pulsanti ✅ e ❌: attiva «Richieste di permesso a questo bot» nella pagina «Telegram»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可リクエストは同じボットに ✅ と ❌ のボタン付きで届きます。「Telegram」ページで「許可リクエストをこのボットへ」をオンにしてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "권한 요청은 같은 봇으로 ✅ 와 ❌ 버튼과 함께 옵니다. ‘Telegram’ 페이지에서 ‘권한 요청을 이 봇으로’를 켜세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prośby o zgodę przychodzą do tego samego bota z przyciskami ✅ i ❌: włącz „Prośby o zgodę do tego bota” na stronie „Telegram”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os pedidos de permissão chegam ao mesmo bot com os botões ✅ e ❌: ative “Pedidos de permissão para este bot” na página “Telegram”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запити дозволів надходять у той самий бот із кнопками ✅ і ❌: увімкніть «Запити дозволів у цей бот» на сторінці «Telegram»."
+          }
+        }
+      }
+    },
+    "AI Hub Bar сам проверяет новые версии: Настройки → «Основные» → «Обновления».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يتحقق AI Hub Bar بنفسه من الإصدارات الجديدة: الإعدادات ← «عام» ← «التحديثات»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar prüft selbst auf neue Versionen: Einstellungen → „Allgemein“ → „Updates“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar checks for new versions by itself: Settings → “General” → “Updates”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar busca nuevas versiones por sí mismo: Ajustes → «General» → «Actualizaciones»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar vérifie lui-même les nouvelles versions : Réglages → « Général » → « Mises à jour »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar memeriksa versi baru sendiri: Pengaturan → “Umum” → “Pembaruan”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar controlla da solo le nuove versioni: Impostazioni → «Generali» → «Aggiornamenti»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar は新しいバージョンを自動で確認します：設定 → 「一般」 → 「アップデート」。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar가 새 버전을 스스로 확인합니다: 설정 → ‘일반’ → ‘업데이트’."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar sam sprawdza nowe wersje: Ustawienia → „Ogólne” → „Aktualizacje”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O AI Hub Bar verifica novas versões sozinho: Ajustes → “Geral” → “Atualizações”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar сам перевіряє нові версії: Налаштування → «Загальні» → «Оновлення»."
+          }
+        }
+      }
+    },
+    "Открыть справку": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح المساعدة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hilfe öffnen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Help"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir la ayuda"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir l’aide"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka Bantuan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri l’aiuto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ヘルプを開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "도움말 열기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz pomoc"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir a ajuda"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити довідку"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

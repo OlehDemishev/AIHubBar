@@ -83,6 +83,17 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .pane-icon.telegram { background: #2aabee; }
 .settings { flex: 1; min-width: 0; overflow-y: auto; scrollbar-width: thin; padding: 18px 24px 24px; display: flex; flex-direction: column; gap: 14px; }
 .settings > * { flex: none; }
+/* «Справка»: the Settings layout with topics in the sidebar. */
+.help-nav-glyph { flex: none; width: 18px; text-align: center; }
+.help-glyph { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--accent); color: #fff; font-size: 20px; }
+.help-head { flex: 1; min-width: 0; }
+.help-head h1 { font-size: 19px; }
+.help-page ol { margin: 6px 0 0; padding-inline-start: 22px; display: flex; flex-direction: column; gap: 4px; }
+.help-fact { padding: 7px 8px; border-radius: 7px; }
+.help-fact + .help-fact { margin-top: 2px; }
+.help-fact p { margin: 2px 0 0; user-select: text; }
+.help-fact.help-found { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.help-page mark { background: color-mix(in srgb, var(--accent) 35%, transparent); color: inherit; border-radius: 3px; }
 .pane-header { display: flex; align-items: center; gap: 12px; min-height: 44px; }
 .pane-header .pane-icon { width: 40px; height: 40px; border-radius: 10px; }
 .pane-header .pane-title { flex: 1; min-width: 0; }

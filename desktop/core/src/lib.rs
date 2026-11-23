@@ -14,6 +14,7 @@ pub mod command;
 pub mod commands;
 pub mod docx;
 pub mod folders;
+pub mod help;
 pub mod hot_keys;
 pub mod hub;
 pub mod hooks;

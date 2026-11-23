@@ -12,6 +12,7 @@
       <select id="profile-switch" data-t-title="Сменить профиль" hidden></select>
       <span class="spacer"></span>
       <button class="icon-button" id="refresh" data-t-title="Обновить" aria-label="Refresh">↻</button>
+      <button class="icon-button" id="help" data-t-title="Открыть справку" aria-label="Help">?</button>
       <button class="icon-button" id="settings" data-t-title="Настройки…" aria-label="Settings">⚙</button>
       <button class="icon-button" id="quit" data-t-title="Выйти из AI Hub Bar" aria-label="Quit">⏻</button>
     </header>
@@ -206,6 +207,7 @@
     await showVersion();
     window.__TAURI__.event.listen("updates-changed", showVersion);
     document.getElementById("settings").onclick = () => invoke("open_settings");
+    document.getElementById("help").onclick = () => invoke("open_help");
     document.getElementById("quit").onclick = () => invoke("quit");
     document.getElementById("refresh").onclick = () => {
       invoke("refresh_limits");
