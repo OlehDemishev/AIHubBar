@@ -19,6 +19,8 @@ struct QuickPromptWindow: View {
     @State private var alsoCodex = false
     /// The project a Claude Code launch went to: the window waits for its answer there.
     @State private var sentPath: String?
+    /// Files dropped on the window: their paths go to the agent with the task.
+    @State private var files: [URL] = []
     @FocusState private var focused: Bool
 
     private var project: Project? { store.projects.first { $0.path == projectPath } }
@@ -45,11 +47,45 @@ struct QuickPromptWindow: View {
                 .help("Настройки быстрого запроса")
                 .accessibilityLabel("Настройки быстрого запроса")
             }
-            TextField("Что сделать?", text: $text, axis: .vertical)
-                .lineLimit(3...8)
-                .textFieldStyle(.roundedBorder)
-                .focused($focused)
-                .accessibilityLabel("Задача")
+            HStack(alignment: .top, spacing: 6) {
+                TextField("Что сделать?", text: $text, axis: .vertical)
+                    .lineLimit(3...8)
+                    .textFieldStyle(.roundedBorder)
+                    .focused($focused)
+                    .accessibilityLabel("Задача")
+                Button {
+                    // macOS' own dictation, into the field: no microphone permission of the app's own.
+                    focused = true
+                    Task { @MainActor in NSApp.sendAction(Selector(("startDictation:")), to: nil, from: nil) }
+                } label: {
+                    Image(systemName: "mic")
+                }
+                .buttonStyle(.borderless)
+                .help("Диктовка macOS: говорите — текст появится в поле. Включается в Системных настройках → «Клавиатура».")
+                .accessibilityLabel("Диктовка")
+            }
+            if files.isEmpty {
+                Text("Файлы и снимки экрана можно перетащить в это окно — агент получит их пути.")
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+            } else {
+                VStack(alignment: .leading, spacing: 2) {
+                    ForEach(files, id: \.self) { file in
+                        HStack(spacing: 4) {
+                            Image(systemName: "paperclip").foregroundStyle(.secondary)
+                            Text(file.lastPathComponent).lineLimit(1).truncationMode(.middle).help(file.path)
+                            Button {
+                                files.removeAll { $0 == file }
+                            } label: {
+                                Image(systemName: "xmark.circle.fill").foregroundStyle(.secondary)
+                            }
+                            .buttonStyle(.borderless)
+                            .accessibilityLabel("Убрать файл")
+                        }
+                        .font(.callout)
+                    }
+                }
+            }
             if store.projects.isEmpty {
                 Label("Нет git-проектов: укажите папку с проектами в профиле — Настройки → «Профили».", systemImage: "folder.badge.questionmark")
                     .font(.callout)
@@ -94,6 +130,12 @@ struct QuickPromptWindow: View {
         }
         .padding(16)
         .frame(width: 540)
+        .dropDestination(for: URL.self) { urls, _ in
+            let joined = QuickPrompt.adding(urls, to: files)
+            guard joined != files else { return false }
+            files = joined
+            return true
+        }
         .background(WindowReader { window in
             // Over every app, on whichever Space is current, also next to a full-screen app.
             window?.level = .floating
@@ -153,6 +195,7 @@ struct QuickPromptWindow: View {
     /// A new request: empty text, Claude Code, the project in front (or the last one).
     private func reset() {
         text = ""
+        files = []
         sentPath = nil
         agent = .claudeCode
         let candidates = store.projects.map { QuickPrompt.Candidate(name: $0.name, path: $0.path, lastActivity: $0.lastActivity) }
@@ -164,7 +207,7 @@ struct QuickPromptWindow: View {
 
     private func send() {
         guard canSend, let project else { return }
-        let task = text
+        let task = QuickPrompt.task(text, files: files)
         quickPrompt.send(task, project: project, agent: agent, mode: mode, alsoCodex: alsoCodex)
         guard agent == .claudeCode || (agent == .codex && mode == .background) else { return }
         sentPath = project.path

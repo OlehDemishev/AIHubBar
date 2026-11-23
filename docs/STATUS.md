@@ -186,6 +186,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: files and dictation in «Быстрый запрос» (branch `feat/quick-prompt-files-dictation`)
+
+Done: the sixth and seventh of the ten ideas of 2026-11-23, both in the quick prompt's window. **Files:** files and screenshots dropped on the window are listed under the task (a name, the path in the tooltip, a button to remove each; up to 8, each once), and their paths go to the agent after the task («Files:» and a path per line) — for Claude Code, Codex and the agents opened in Terminal alike. **Dictation:** a microphone button beside the field puts the cursor in it and starts macOS' own dictation (`startDictation:`), so the app asks for no microphone or speech permission. `QuickPrompt.adding` / `QuickPrompt.task`, `QuickPromptWindow`. Four texts in 12 languages.
+Checked: not built locally (swap 10.4 of 11 GB): the PR's CI runs the tests and the catalog check (`QuickPromptTests.droppedFilesGoWithTheTask`). Both string checks pass.
+Left: **held until 0.12.0 is out.** Nothing of it was seen live: the window takes the keyboard, so it was not opened. Not made: a drop on the menu bar item itself — `MenuBarExtra` gives no access to its status item's button; the window is where a file goes. Untried: whether a background Claude run may read a file outside the project (its rules allow `Read` everywhere but for secrets), and what macOS does on the button with dictation off in System Settings. An image is passed as a path, not pasted into the conversation.
+
 ## 2026-11-23 — 1.0 list: the shared Telegram bot and the Mini App go in as ready (branch `chore/status-shared-bot-ready`)
 
 Done: Oleh's answer «Как готовое» to the question left by the entry of `fix/telegram-help`: in the 1.0 list (entry «the list for 1.0» below, not rewritten) the shared Telegram bot through the Cloudflare Worker and the Mini App move from «Not in 1.0» to the ready part, with no «бета» badge. The line is gone from «Needs Oleh».
