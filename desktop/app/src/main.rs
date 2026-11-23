@@ -241,6 +241,7 @@ fn run_command(app: &AppHandle, name: &str) -> bool {
         "settings" => open_settings_window(app),
         "quit" => app.exit(0),
         "quick-prompt" => quick_prompt::show(app),
+        "search" => search::show(app),
         _ => return false,
     }
     true
@@ -469,6 +470,7 @@ fn main() {
         .manage(quick_commands::QuickCommands::default())
         .manage(toggles::Toggles::default())
         .manage(clipboard::Clipboard::default())
+        .manage(search::SearchKey::default())
         .manage(hub::Hub::default())
         .manage(updates::Updates::default())
         .manage(history::History::default())
@@ -506,7 +508,7 @@ fn main() {
             resources::resources_view, resources::open_task_manager, resources::resource_settings, resources::set_resource_alerts,
             quick_commands::quick_commands_view, quick_commands::run_quick_command, quick_commands::quick_commands_library,
             quick_commands::set_quick_commands, quick_commands::new_quick_command, clipboard::clipboard_view, clipboard::clipboard_copy, clipboard::clipboard_pin, clipboard::clipboard_remove, clipboard::clipboard_clear,
-            clipboard::clipboard_settings, clipboard::set_clipboard_options, appearance_view, set_appearance, whats_new_view, whats_new_seen, search::panel_search, search::saved_prompts_view, search::set_saved_prompts, search::add_saved_prompt, search::prompt_projects,
+            clipboard::clipboard_settings, clipboard::set_clipboard_options, appearance_view, set_appearance, whats_new_view, whats_new_seen, search::search_key_view, search::set_search_hot_key, search::panel_search, search::saved_prompts_view, search::set_saved_prompts, search::add_saved_prompt, search::prompt_projects,
             search::fill_saved_prompt, notes::notes_view, notes::notes_select, notes::notes_create, notes::notes_save, notes::notes_trash, notes::notes_open,
             notes::notes_settings, notes::choose_notes_folder, notes::open_notes_folder, toggles::toggles_view, toggles::perform_toggle,
             toggles::quick_toggle_settings, toggles::set_quick_toggles, hub::hub_view, hub::refresh_hub, hub::hub_settings,

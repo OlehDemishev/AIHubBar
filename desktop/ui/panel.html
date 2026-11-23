@@ -838,6 +838,8 @@ ${command.hotKey}` : command.value;
       }
     }
     searchField.oninput = search;
+    // The hot key and `--app-command search` bring the panel up for typing at once.
+    window.__TAURI__.event.listen("focus-search", () => { searchField.focus(); searchField.select(); });
     searchClear.onclick = () => { clearSearch(); searchField.focus(); };
     searchField.onkeydown = (event) => {
       if (event.key === "ArrowDown" || event.key === "ArrowUp") {

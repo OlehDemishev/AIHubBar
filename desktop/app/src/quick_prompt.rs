@@ -34,7 +34,7 @@ pub fn plugin() -> tauri::plugin::TauriPlugin<tauri::Wry> {
             let ours = *app.state::<QuickPrompt>().registered.lock().unwrap() == Some(*shortcut);
             if ours {
                 show(app);
-            } else {
+            } else if !crate::search::pressed(app, shortcut) {
                 crate::command_hot_keys::pressed(app, shortcut);
             }
         })

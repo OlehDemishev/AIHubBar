@@ -14,6 +14,10 @@
         <select id="language"></select>
       </div>
       <div class="row">
+        <label for="search-key" data-t="Открывать поиск с клавиатуры"></label>
+        <select id="search-key"></select>
+      </div>
+      <div class="row">
         <label for="theme" data-t="Тема"></label>
         <select id="theme"></select>
       </div>
@@ -1086,6 +1090,12 @@
     clipboardLimit.onchange = saveClipboard;
     clipboardRemember.onchange = saveClipboard;
     invoke("clipboard_settings").then(showClipboardSettings);
+
+    // «Открывать поиск с клавиатуры».
+    const searchKey = document.getElementById("search-key");
+    const showSearchKey = (view) => searchKey.replaceChildren(...view.hotKeys.map(([id, title]) => new Option(title, id, false, id === view.hotKey)));
+    searchKey.onchange = async () => showSearchKey(await invoke("set_search_hot_key", { hotKey: searchKey.value }));
+    invoke("search_key_view").then(showSearchKey);
 
     // «Тема» and «Размер текста».
     const themeSelect = document.getElementById("theme");
