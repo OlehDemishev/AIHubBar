@@ -11,6 +11,9 @@ enum NotificationTarget: Equatable, Sendable {
     case run(id: String, pullRequest: String?)
     /// A file to open (the latest report).
     case file(path: String)
+    /// The result file of a command on a folder project that has versions: the file on a click, and «Что изменилось»
+    /// — the project's state before the run that started at `started` against now.
+    case result(path: String, project: String, started: Date)
     /// One of AI Hub Bar's windows (the cleanup output).
     case window(id: String)
     /// A web page (a pull request).
@@ -24,6 +27,8 @@ enum NotificationTarget: Equatable, Sendable {
         case let .session(id): ["target": "session", "id": id]
         case let .run(id, pullRequest): ["target": "run", "id": id, "pr": pullRequest ?? ""]
         case let .file(path): ["target": "file", "path": path]
+        case let .result(path, project, started):
+            ["target": "result", "path": path, "project": project, "started": String(started.timeIntervalSince1970)]
         case let .window(id): ["target": "window", "id": id]
         case let .approval(sessionID, requestID): ["target": "approval", "id": sessionID, "request": requestID]
         case let .link(url): ["target": "link", "url": url.absoluteString]
@@ -37,6 +42,8 @@ enum NotificationTarget: Equatable, Sendable {
         case "session" where !value("id").isEmpty: self = .session(id: value("id"))
         case "run" where !value("id").isEmpty: self = .run(id: value("id"), pullRequest: value("pr").isEmpty ? nil : value("pr"))
         case "file" where !value("path").isEmpty: self = .file(path: value("path"))
+        case "result" where !value("path").isEmpty && !value("project").isEmpty:
+            self = .result(path: value("path"), project: value("project"), started: Date(timeIntervalSince1970: Double(value("started")) ?? 0))
         case "window" where !value("id").isEmpty: self = .window(id: value("id"))
         case "link" where URL(string: value("url"))?.scheme == "https": self = .link(URL(string: value("url"))!)
         case "approval" where !value("id").isEmpty && !value("request").isEmpty:
@@ -51,8 +58,16 @@ enum NotificationTarget: Equatable, Sendable {
         case .session: NotificationAction.sessionCategory
         case .approval: NotificationAction.approvalCategory
         case let .run(_, pullRequest): pullRequest == nil ? NotificationAction.runCategory : NotificationAction.runWithPRCategory
+        case .result: NotificationAction.resultCategory
         case .file, .window, .link, .none: nil
         }
+    }
+}
+
+extension NotificationTarget {
+    /// A folder command's result: with «Что изменилось» while the «Версии» module works.
+    static func commandResult(path: String, project: String, started: Date, versions: Bool) -> NotificationTarget {
+        versions ? .result(path: path, project: project, started: started) : .file(path: path)
     }
 }
 
@@ -68,6 +83,8 @@ enum NotificationAction {
     static let sessionCategory = "session"
     static let runCategory = "run"
     static let runWithPRCategory = "run-pr"
+    static let changes = "changes"
+    static let resultCategory = "result"
 
     enum Resolution: Equatable {
         case showSession(id: String)
@@ -76,6 +93,8 @@ enum NotificationAction {
         case openRunLog(id: String)
         case openFile(path: String)
         case openWindow(id: String)
+        /// «Версии» on the project, at its state before `before`.
+        case openChanges(projectPath: String, before: Date)
         case nothing
     }
 
@@ -90,6 +109,8 @@ enum NotificationAction {
             return .openRunLog(id: id)
         case let .file(path):
             return .openFile(path: path)
+        case let .result(path, project, started):
+            return action == changes ? .openChanges(projectPath: project, before: started) : .openFile(path: path)
         case let .window(id):
             return .openWindow(id: id)
         case let .link(url):
@@ -110,11 +131,13 @@ enum NotificationAction {
         // No `.foreground`: the answer goes to Claude without bringing anything to the front.
         let allow = UNNotificationAction(identifier: allow, title: String(localized: "Разрешить"), options: [])
         let deny = UNNotificationAction(identifier: deny, title: String(localized: "Отклонить"), options: [.destructive])
+        let changes = UNNotificationAction(identifier: changes, title: String(localized: "Что изменилось"), options: [.foreground])
         return [
             UNNotificationCategory(identifier: approvalCategory, actions: [allow, deny, show], intentIdentifiers: []),
             UNNotificationCategory(identifier: sessionCategory, actions: [show], intentIdentifiers: []),
             UNNotificationCategory(identifier: runCategory, actions: [log], intentIdentifiers: []),
             UNNotificationCategory(identifier: runWithPRCategory, actions: [pr, log], intentIdentifiers: []),
+            UNNotificationCategory(identifier: resultCategory, actions: [changes], intentIdentifiers: []),
         ]
     }
 }

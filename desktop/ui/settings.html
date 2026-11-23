@@ -14,6 +14,18 @@
         <select id="language"></select>
       </div>
       <div class="row">
+        <label for="search-key" data-t="Открывать поиск с клавиатуры"></label>
+        <select id="search-key"></select>
+      </div>
+      <div class="row">
+        <label for="theme" data-t="Тема"></label>
+        <select id="theme"></select>
+      </div>
+      <div class="row">
+        <label for="text-size" data-t="Размер текста"></label>
+        <select id="text-size"></select>
+      </div>
+      <div class="row">
         <label for="autostart" data-t="Запускать при входе в систему"></label>
         <input type="checkbox" id="autostart">
       </div>
@@ -186,6 +198,17 @@
       <div id="price-rows"></div>
       <p class="secondary" data-t="AI Hub Bar считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета."></p>
     </section>
+    <section class="card">
+      <h2 data-t="CLAUDE.md и MCP"></h2>
+      <p><button id="open-claude-config" data-t="Открыть инструкции и MCP-серверы…"></button></p>
+      <p class="secondary" data-t="Отдельное окно: все CLAUDE.md и AGENTS.md (общие и проектов) с поиском и правкой, и MCP-серверы Claude Code с выключателем."></p>
+    </section>
+    <section class="card">
+      <h2 data-t="Свои промпты"></h2>
+      <div id="saved-prompts"></div>
+      <p><button id="saved-prompt-add" data-t="Добавить промпт"></button></p>
+      <p class="secondary" data-t="Наберите название в поиске, выберите проект — Claude запустится с этим текстом. Подстановки: {проект}, {ветка}."></p>
+    </section>
     <h1 data-t="Экспорт и импорт"></h1>
     <section class="card">
       <div class="row">
@@ -273,6 +296,23 @@
     </section>
     <section class="card">
       <div class="row">
+        <label for="module-clipboard"><strong data-t="История буфера"></strong></label>
+        <input type="checkbox" class="switch" id="module-clipboard">
+      </div>
+      <p class="secondary" data-t="Последние копирования: поиск, закрепление, снова в буфер одним кликом. Пароли из менеджеров паролей не запоминаются."></p>
+      <div id="clipboard-options" hidden>
+        <div class="row">
+          <label for="clipboard-limit" data-t="Хранить последних"></label>
+          <select id="clipboard-limit"></select>
+        </div>
+        <div class="row">
+          <label for="clipboard-remember" data-t="Помнить после перезапуска"></label>
+          <input type="checkbox" class="switch" id="clipboard-remember">
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="row">
         <label for="module-notes"><strong data-t="Заметки"></strong></label>
         <input type="checkbox" class="switch" id="module-notes">
       </div>
@@ -310,6 +350,10 @@
       <div class="row">
         <label for="time-limit" data-t="Лимит времени"></label>
         <select id="time-limit"></select>
+      </div>
+      <div class="row">
+        <label for="night-hour" data-t="Ночные задачи начинаются в"></label>
+        <select id="night-hour"></select>
       </div>
     </section>
     <h1 data-t="Проекты"></h1>
@@ -434,6 +478,10 @@
       limit.add(new Option(t("%lld мин", launch.timeLimitMinutes), String(launch.timeLimitMinutes)));
     }
     limit.value = String(launch.timeLimitMinutes);
+    // «Ночные задачи начинаются в»: when «На ночь» runs start.
+    const nightHour = document.getElementById("night-hour");
+    invoke("night_hour").then((view) => nightHour.replaceChildren(...view.hours.map(([hour, title]) => new Option(title, hour, false, hour === view.hour))));
+    nightHour.onchange = () => invoke("set_night_hour", { hour: Number(nightHour.value) });
     const saveLaunch = () => invoke("set_launch_settings", { mode: mode.value || null, timeLimitMinutes: Number(limit.value) });
     mode.onchange = saveLaunch;
     limit.onchange = saveLaunch;
@@ -994,6 +1042,85 @@
     };
     quick = await invoke("quick_commands_library");
     showQuickLibrary();
+
+    document.getElementById("open-claude-config").onclick = () => invoke("open_claude_config");
+
+    // «Свои промпты»: a title and a text each; the panel's search offers them by title.
+    let savedPrompts = [];
+    function showSavedPrompts(list) {
+      savedPrompts = list;
+      document.getElementById("saved-prompts").replaceChildren(...list.map((prompt) => {
+        const block = document.createElement("div");
+        block.className = "saved-prompt";
+        const head = document.createElement("div");
+        head.className = "row";
+        const title = document.createElement("input");
+        title.type = "text";
+        title.value = prompt.title;
+        title.placeholder = t("Название");
+        title.setAttribute("aria-label", t("Название"));
+        const remove = document.createElement("button");
+        remove.textContent = "🗑";
+        remove.title = t("Удалить промпт");
+        remove.setAttribute("aria-label", t("Удалить промпт"));
+        const text = document.createElement("textarea");
+        text.rows = 3;
+        text.value = prompt.text;
+        text.placeholder = t("Текст");
+        text.setAttribute("aria-label", t("Текст"));
+        const keep = async () => {
+          prompt.title = title.value;
+          prompt.text = text.value;
+          savedPrompts = await invoke("set_saved_prompts", { prompts: savedPrompts });
+        };
+        title.onchange = keep;
+        text.onchange = keep;
+        remove.onclick = async () => {
+          if (!confirm(`${t("Удалить промпт")}: ${prompt.title}`)) return;
+          showSavedPrompts(await invoke("set_saved_prompts", { prompts: savedPrompts.filter((p) => p.id !== prompt.id) }));
+        };
+        head.append(title, remove);
+        block.append(head, text);
+        return block;
+      }));
+    }
+    document.getElementById("saved-prompt-add").onclick = async () => showSavedPrompts(await invoke("add_saved_prompt"));
+    invoke("saved_prompts_view").then(showSavedPrompts);
+
+    // «История буфера»: on or off, how many copies are kept, and whether they outlive a restart.
+    const clipboardModule = document.getElementById("module-clipboard");
+    const clipboardLimit = document.getElementById("clipboard-limit");
+    const clipboardRemember = document.getElementById("clipboard-remember");
+    function showClipboardSettings(view) {
+      clipboardModule.checked = view.on;
+      document.getElementById("clipboard-options").hidden = !view.on;
+      clipboardLimit.replaceChildren(...view.limits.map((n) => new Option(String(n), String(n), false, n === view.limit)));
+      clipboardRemember.checked = view.remember;
+    }
+    clipboardModule.onchange = async () => {
+      await invoke("set_module", { kind: "clipboard", on: clipboardModule.checked });
+      showClipboardSettings(await invoke("clipboard_settings"));
+    };
+    const saveClipboard = async () => showClipboardSettings(await invoke("set_clipboard_options", { limit: Number(clipboardLimit.value), remember: clipboardRemember.checked }));
+    clipboardLimit.onchange = saveClipboard;
+    clipboardRemember.onchange = saveClipboard;
+    invoke("clipboard_settings").then(showClipboardSettings);
+
+    // «Открывать поиск с клавиатуры».
+    const searchKey = document.getElementById("search-key");
+    const showSearchKey = (view) => searchKey.replaceChildren(...view.hotKeys.map(([id, title]) => new Option(title, id, false, id === view.hotKey)));
+    searchKey.onchange = async () => showSearchKey(await invoke("set_search_hot_key", { hotKey: searchKey.value }));
+    invoke("search_key_view").then(showSearchKey);
+
+    // «Тема» and «Размер текста».
+    const themeSelect = document.getElementById("theme");
+    const textSizeSelect = document.getElementById("text-size");
+    function showAppearance(view) {
+      themeSelect.replaceChildren(...view.themes.map((c) => new Option(c.title, c.id, false, c.id === view.theme)));
+      textSizeSelect.replaceChildren(...view.text_sizes.map((c) => new Option(c.title, c.id, false, c.id === view.text_size)));
+    }
+    themeSelect.onchange = textSizeSelect.onchange = async () => showAppearance(await invoke("set_appearance", { theme: themeSelect.value, textSize: textSizeSelect.value }));
+    invoke("appearance_view").then(showAppearance);
 
     // «Заметки»: on or off, and the folder of the notes.
     const notesModule = document.getElementById("module-notes");

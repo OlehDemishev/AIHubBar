@@ -17,6 +17,12 @@ pub struct Settings {
     pub language: Option<String>,
     /// The person has seen the hint about pinning the tray icon (Windows 11 hides new icons under «^»).
     pub tray_hint_seen: bool,
+    /// The `whats_new::VERSION` whose card was closed.
+    pub whats_new_seen: Option<String>,
+    /// «Ночные задачи начинаются в» (`queue::HOURS`).
+    pub night_start_hour: u32,
+    /// When the night's first run started, in seconds: the batch that gets one summary once it is done.
+    pub night_batch_start: Option<i64>,
     /// A background run is stopped after this many minutes.
     pub background_time_limit_minutes: u32,
     /// Notify when a PR's CI fails or is fixed and when a PR closes (on by default, as on the Mac).
@@ -52,10 +58,15 @@ pub struct Settings {
     pub telegram_requests: bool,
     /// «Заметки»: the folder of the notes (None — `notes::default_folder`) and the note shown last.
     pub notes_folder: Option<String>,
+    /// «История буфера»: how many copies are kept, and whether they outlive a restart (in `clipboard.json`).
+    pub clipboard_limit: u32,
+    pub clipboard_remember: bool,
     pub notes_selected: Option<String>,
     pub resource_disk_below_gb: u64,
     /// «Быстрые команды»: the library (the Mac's `[QuickCommand]`); None — the starting examples, until edited.
     pub quick_commands: Option<Vec<crate::quick_commands::QuickCommand>>,
+    /// «Свои промпты» (the Mac's `savedPrompts`); None — the two examples, until edited.
+    pub saved_prompts: Option<Vec<crate::search::SavedPrompt>>,
     /// «Быстрые переключатели» shown (the Mac's `quickToggles`); None — every one this system has.
     pub quick_toggles: Option<Vec<String>>,
     /// Other AI services' limits (the Mac's `hubDisabled`, `hubGeminiQuota`, `hubGeminiDailyLimit`): each source is on
@@ -69,6 +80,8 @@ pub struct Settings {
     pub tray_style: String,
     /// «Быстрый запрос» (the Mac's `QuickPromptSettings`): the hot key, and the project and mode used last.
     pub quick_prompt_hot_key: String,
+    /// «Открывать поиск с клавиатуры» (`search::SEARCH_KEYS`); «off» until chosen — no global key is taken unasked.
+    pub search_hot_key: String,
     pub quick_prompt_last_project: Option<String>,
     pub quick_prompt_last_mode: Option<String>,
     /// `projects_dir` and `launch_mode` of a file from before profiles, for the first profile.
@@ -81,6 +94,9 @@ impl Default for Settings {
         Settings {
             language: None,
             tray_hint_seen: false,
+            whats_new_seen: None,
+            night_start_hour: crate::queue::DEFAULT_HOUR,
+            night_batch_start: None,
             background_time_limit_minutes: crate::runs::DEFAULT_TIME_LIMIT_MINUTES,
             pull_request_alerts: true,
             profiles: Vec::new(),
@@ -98,9 +114,12 @@ impl Default for Settings {
             telegram_answers: false,
             telegram_requests: false,
             notes_folder: None,
+            clipboard_limit: crate::clipboard::DEFAULT_LIMIT,
+            clipboard_remember: false,
             notes_selected: None,
             resource_disk_below_gb: 20,
             quick_commands: None,
+            saved_prompts: None,
             quick_toggles: None,
             hub_disabled: Vec::new(),
             hub_gemini_quota: false,
@@ -108,6 +127,7 @@ impl Default for Settings {
             main_service: String::new(),
             tray_style: String::new(),
             quick_prompt_hot_key: crate::quick_prompt::DEFAULT_HOT_KEY.id().to_owned(),
+            search_hot_key: "off".into(),
             quick_prompt_last_project: None,
             quick_prompt_last_mode: None,
             before_profiles: (None, None),
@@ -132,6 +152,9 @@ impl Settings {
         let profiles = profiles.into_iter().filter(|p| seen.insert(p.id.clone())).collect();
         Settings {
             language: text("language").or(defaults.language),
+            whats_new_seen: value.get("whats_new_seen").and_then(Value::as_str).map(str::to_owned),
+            night_start_hour: value.get("night_start_hour").and_then(Value::as_u64).map(|hour| hour as u32).filter(|hour| crate::queue::HOURS.contains(hour)).unwrap_or(defaults.night_start_hour),
+            night_batch_start: value.get("night_batch_start").and_then(Value::as_i64),
             tray_hint_seen: value.get("tray_hint_seen").and_then(Value::as_bool).unwrap_or(defaults.tray_hint_seen),
             background_time_limit_minutes: value
                 .get("background_time_limit_minutes")
@@ -160,16 +183,20 @@ impl Settings {
             renew_claude_login: value.get("renew_claude_login").and_then(Value::as_bool).unwrap_or(defaults.renew_claude_login),
             telegram_answers: value.get("telegram_answers").and_then(Value::as_bool).unwrap_or(false),
             telegram_requests: value.get("telegram_requests").and_then(Value::as_bool).unwrap_or(false),
+            clipboard_limit: value.get("clipboard_limit").and_then(Value::as_u64).map(|n| n as u32).filter(|n| crate::clipboard::LIMITS.contains(n)).unwrap_or(crate::clipboard::DEFAULT_LIMIT),
+            clipboard_remember: value.get("clipboard_remember").and_then(Value::as_bool).unwrap_or(false),
             notes_folder: value.get("notes_folder").and_then(Value::as_str).map(str::to_owned).filter(|f| !f.trim().is_empty()),
             notes_selected: value.get("notes_selected").and_then(Value::as_str).map(str::to_owned),
             telegram_chat: value.get("telegram_chat").and_then(Value::as_str).map(str::to_owned).filter(|c| !c.is_empty()),
             telegram_off: value.get("telegram_off").and_then(Value::as_array).map(|list| list.iter().filter_map(Value::as_str).filter(|e| crate::telegram::EVENTS.contains(e)).map(str::to_owned).collect()).unwrap_or_default(),
             quick_commands: crate::quick_commands::library(value.get("quick_commands")),
+            saved_prompts: crate::search::saved_prompts(value.get("saved_prompts")),
             hub_disabled: value.get("hub_disabled").and_then(Value::as_array).map(|l| l.iter().filter_map(Value::as_str).map(str::to_owned).collect()).unwrap_or_default(),
             hub_gemini_quota: value.get("hub_gemini_quota").and_then(Value::as_bool).unwrap_or(false),
             main_service: value.get("main_service").and_then(Value::as_str).unwrap_or_default().to_owned(),
             tray_style: value.get("tray_style").and_then(Value::as_str).unwrap_or_default().to_owned(),
             quick_prompt_hot_key: text("quick_prompt_hot_key").filter(|k| crate::quick_prompt::HotKey::parse(k).is_some()).unwrap_or(defaults.quick_prompt_hot_key),
+            search_hot_key: text("search_hot_key").filter(|k| crate::search::SEARCH_KEYS.iter().any(|(id, _, _)| id == k)).unwrap_or_else(|| "off".into()),
             quick_prompt_last_project: text("quick_prompt_last_project"),
             quick_prompt_last_mode: text("quick_prompt_last_mode").filter(|m| LAUNCH_MODES.contains(&m.as_str())),
             hub_gemini_daily_limit: value.get("hub_gemini_daily_limit").and_then(Value::as_u64).filter(|n| *n > 0).unwrap_or(1000),
@@ -323,8 +350,11 @@ impl Settings {
 
 // MARK: - Modules: the Mac's `installed` and `off` lists, so `.claudepult` files carry them both ways
 
+pub const THEMES: [&str; 3] = ["system", "light", "dark"];
+pub const TEXT_SIZES: [(&str, f64); 4] = [("small", 0.9), ("normal", 1.0), ("large", 1.15), ("extraLarge", 1.3)];
+
 /// The stage 6 modules this version has, as the Mac's `ModuleKind` names them.
-pub const MODULES: [&str; 6] = ["resources", "keepAwake", "quickCommands", "toggles", "quickPrompt", "notes"];
+pub const MODULES: [&str; 7] = ["resources", "keepAwake", "quickCommands", "toggles", "quickPrompt", "notes", "clipboard"];
 
 impl Settings {
     fn kinds(&self, key: &str) -> Vec<String> {
@@ -411,6 +441,31 @@ impl Settings {
         values.sort_unstable();
         values.dedup();
         if values.is_empty() { DEFAULT_LIMIT_THRESHOLDS.to_vec() } else { values }
+    }
+
+    /// «Тема»: «system», «light» or «dark» (the Mac's `PanelTheme`, kept where its profiles keep it).
+    pub fn theme(&self) -> &'static str {
+        let saved = self.mac_settings.get("appearance").and_then(|a| a.get("theme")).and_then(Value::as_str);
+        THEMES.into_iter().find(|theme| Some(*theme) == saved).unwrap_or(THEMES[0])
+    }
+
+    /// «Размер текста»: the Mac's `PanelTextSize` and its scale.
+    pub fn text_size(&self) -> (&'static str, f64) {
+        let saved = self.mac_settings.get("appearance").and_then(|a| a.get("textSize")).and_then(Value::as_str);
+        TEXT_SIZES.into_iter().find(|(size, _)| Some(*size) == saved).unwrap_or(TEXT_SIZES[1])
+    }
+
+    /// Values that are not a theme or a size change nothing.
+    pub fn set_appearance(&mut self, theme: &str, text_size: &str) {
+        let appearance = self.mac_settings.entry("appearance").or_insert_with(|| Value::Object(Map::new()));
+        if let Some(appearance) = appearance.as_object_mut() {
+            if THEMES.contains(&theme) {
+                appearance.insert("theme".into(), Value::String(theme.to_owned()));
+            }
+            if TEXT_SIZES.iter().any(|(size, _)| *size == text_size) {
+                appearance.insert("textSize".into(), Value::String(text_size.to_owned()));
+            }
+        }
     }
 
     /// Nothing valid in `values` keeps what was there.
@@ -542,6 +597,17 @@ mod tests {
         assert_eq!((resources.resource_alerts, resources.resource_disk_below_gb), (false, 20));
         assert_eq!(parse_thresholds("95, 50;80 % 80, 0, 101, x"), [50, 80, 95]);
         assert!(parse_thresholds("ноль").is_empty());
+        let mut look = Settings::default();
+        assert_eq!((look.theme(), look.text_size()), ("system", ("normal", 1.0)));
+        look.set_appearance("dark", "extraLarge");
+        assert_eq!((look.theme(), look.text_size()), ("dark", ("extraLarge", 1.3)));
+        look.set_appearance("pink", "huge");
+        assert_eq!((look.theme(), look.text_size().0), ("dark", "extraLarge"), "not a theme, not a size");
+        let from_mac = Settings::from_json(r#"{"mac_settings": {"appearance": {"theme": "light", "textSize": "small", "width": "wide"}}}"#);
+        assert_eq!((from_mac.theme(), from_mac.text_size()), ("light", ("small", 0.9)));
+        let mut kept = from_mac.clone();
+        kept.set_appearance("system", "large");
+        assert_eq!(kept.mac_settings["appearance"]["width"], "wide", "the Mac's other appearance settings stay");
         let mut thresholds = Settings::default();
         assert_eq!(thresholds.limit_thresholds(), DEFAULT_LIMIT_THRESHOLDS);
         thresholds.set_limit_thresholds(&[90, 70, 70, 300]);

@@ -8,15 +8,19 @@
 
 mod assistant;
 mod calendar;
+mod claude_config;
+mod clipboard;
 mod commands;
 mod history;
 mod hub;
 mod keep_awake;
 mod notes;
+mod search;
 mod limits;
 mod profiles;
 mod resources;
 mod projects;
+mod queue;
 mod quick_prompt;
 mod quick_commands;
 mod command_hot_keys;
@@ -239,6 +243,7 @@ fn run_command(app: &AppHandle, name: &str) -> bool {
         "settings" => open_settings_window(app),
         "quit" => app.exit(0),
         "quick-prompt" => quick_prompt::show(app),
+        "search" => search::show(app),
         _ => return false,
     }
     true
@@ -256,6 +261,8 @@ struct UiTexts {
     chosen: Option<String>,
     languages: Vec<LanguageItem>,
     show_tray_hint: bool,
+    /// «Размер текста»: every page is scaled by this.
+    text_scale: f64,
 }
 
 #[derive(Serialize)]
@@ -273,11 +280,78 @@ fn ui_texts(app: AppHandle) -> UiTexts {
         rtl: i18n::is_rtl(lang),
         strings: serde_json::from_str(strings_json(lang)).unwrap_or_default(),
         version: env!("CARGO_PKG_VERSION"),
-        chosen: settings.language,
+        chosen: settings.language.clone(),
         languages: i18n::LANGUAGES.iter().map(|code| LanguageItem { code, name: i18n::native_name(code) }).collect(),
         // Windows 11 hides new tray icons under «^».
         show_tray_hint: cfg!(target_os = "windows") && !settings.tray_hint_seen,
+        text_scale: settings.text_size().1,
     }
+}
+
+/// «Что нового»: the lines of the card, or none when it is not to be shown.
+#[tauri::command]
+fn whats_new_view(app: AppHandle) -> Vec<String> {
+    let settings = app.state::<AppState>().settings.lock().unwrap().clone();
+    if claudepult_core::whats_new::should_show(settings.whats_new_seen.as_deref(), !settings.profiles.is_empty()) {
+        claudepult_core::whats_new::items(&strings(&app))
+    } else {
+        Vec::new()
+    }
+}
+
+/// «Понятно» or «Открыть настройки»: the card is not shown again until a version with news.
+#[tauri::command]
+fn whats_new_seen(app: AppHandle) {
+    save(&app, |settings| settings.whats_new_seen = Some(claudepult_core::whats_new::VERSION.to_owned()));
+}
+
+#[derive(Serialize)]
+struct Choice {
+    id: &'static str,
+    title: String,
+}
+
+#[derive(Serialize)]
+struct AppearanceView {
+    theme: &'static str,
+    themes: Vec<Choice>,
+    text_size: &'static str,
+    text_sizes: Vec<Choice>,
+}
+
+/// The theme of every window: the system's, or the chosen one.
+fn apply_theme(app: &AppHandle) {
+    let theme = match app.state::<AppState>().settings.lock().unwrap().theme() {
+        "light" => Some(tauri::Theme::Light),
+        "dark" => Some(tauri::Theme::Dark),
+        _ => None,
+    };
+    app.set_theme(theme);
+}
+
+#[tauri::command]
+fn appearance_view(app: AppHandle) -> AppearanceView {
+    let texts = strings(&app);
+    let settings = app.state::<AppState>().settings.lock().unwrap().clone();
+    let choice = |id: &'static str, title: &str| Choice { id, title: title.to_owned() };
+    AppearanceView {
+        theme: settings.theme(),
+        themes: vec![choice("system", texts.t("Как в системе")), choice("light", texts.t("Светлая")), choice("dark", texts.t("Тёмная"))],
+        text_size: settings.text_size().0,
+        text_sizes: vec![choice("small", texts.t("Мелкий")), choice("normal", texts.t("Обычный")), choice("large", texts.t("Крупный")), choice("extraLarge", texts.t("Очень крупный"))],
+    }
+}
+
+/// «Тема» and «Размер текста»: every window follows at once.
+#[tauri::command]
+fn set_appearance(app: AppHandle, theme: String, text_size: String) -> AppearanceView {
+    save(&app, |settings| settings.set_appearance(&theme, &text_size));
+    apply_theme(&app);
+    let scale = app.state::<AppState>().settings.lock().unwrap().text_size().1;
+    for window in app.webview_windows().values() {
+        let _ = window.eval(format!("document.documentElement.style.zoom = {scale}"));
+    }
+    appearance_view(app)
 }
 
 #[tauri::command]
@@ -397,6 +471,10 @@ fn main() {
         .manage(resources::Resources::default())
         .manage(quick_commands::QuickCommands::default())
         .manage(toggles::Toggles::default())
+        .manage(clipboard::Clipboard::default())
+        .manage(search::SearchKey::default())
+        .manage(claude_config::ClaudeConfig::default())
+        .manage(queue::Queue::default())
         .manage(hub::Hub::default())
         .manage(updates::Updates::default())
         .manage(history::History::default())
@@ -423,6 +501,9 @@ fn main() {
             telegram::telegram_view, telegram::telegram_save_token, telegram::telegram_remove_token, telegram::telegram_bind,
             telegram::telegram_cancel_binding, telegram::telegram_set_chat, telegram::telegram_test, telegram::set_telegram_event,
             telegram::set_telegram_answers, telegram::set_telegram_requests,
+            claude_config::open_claude_config, claude_config::claude_config_view, claude_config::claude_config_edit, claude_config::claude_config_save,
+            claude_config::claude_config_open, claude_config::set_mcp_server, claude_config::set_agent_skill, claude_config::set_claude_plugin,
+            queue::queue_launch, queue::queued_view, queue::cancel_queued, queue::night_hour, queue::set_night_hour,
             history::open_history, history::history_view, history::set_plan_price, history::export_history,
             updates::updates_view, updates::set_updates_daily, updates::check_updates, updates::install_update,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
@@ -433,7 +514,9 @@ fn main() {
             keep_awake::set_module, keep_awake::set_keep_awake_rules, keep_awake::choose_keep_awake_apps,
             resources::resources_view, resources::open_task_manager, resources::resource_settings, resources::set_resource_alerts,
             quick_commands::quick_commands_view, quick_commands::run_quick_command, quick_commands::quick_commands_library,
-            quick_commands::set_quick_commands, quick_commands::new_quick_command, notes::notes_view, notes::notes_select, notes::notes_create, notes::notes_save, notes::notes_trash, notes::notes_open,
+            quick_commands::set_quick_commands, quick_commands::new_quick_command, clipboard::clipboard_view, clipboard::clipboard_copy, clipboard::clipboard_pin, clipboard::clipboard_remove, clipboard::clipboard_clear,
+            clipboard::clipboard_settings, clipboard::set_clipboard_options, appearance_view, set_appearance, whats_new_view, whats_new_seen, search::search_key_view, search::set_search_hot_key, search::panel_search, search::saved_prompts_view, search::set_saved_prompts, search::add_saved_prompt, search::prompt_projects,
+            search::fill_saved_prompt, notes::notes_view, notes::notes_select, notes::notes_create, notes::notes_save, notes::notes_trash, notes::notes_open,
             notes::notes_settings, notes::choose_notes_folder, notes::open_notes_folder, toggles::toggles_view, toggles::perform_toggle,
             toggles::quick_toggle_settings, toggles::set_quick_toggles, hub::hub_view, hub::refresh_hub, hub::hub_settings,
             hub::set_hub_enabled, hub::save_hub_key, hub::delete_hub_key, hub::set_gemini_options, hub::open_hub_key_page,
@@ -453,9 +536,12 @@ fn main() {
             handle.state::<Sessions>().start(handle.clone());
             handle.state::<Projects>().start(handle.clone());
             handle.state::<Runs>().start(handle.clone());
+            handle.state::<queue::Queue>().start(handle.clone());
             services::Agents::start(&handle);
             handle.state::<calendar::Calendar>().start(handle.clone());
+            apply_theme(&handle);
             handle.state::<keep_awake::KeepAwake>().start(handle.clone());
+            handle.state::<clipboard::Clipboard>().start(handle.clone());
             handle.state::<resources::Resources>().start(handle.clone());
             handle.state::<hub::Hub>().start(handle.clone());
             command_hot_keys::sync(&handle);
@@ -464,6 +550,10 @@ fn main() {
             // Started by a double click on a `.claudepult` file.
             if let Some(file) = profiles::import_argument(std::env::args().skip(1)) {
                 profiles::open_import_file(&handle, &file);
+            }
+            if first_start {
+                // A new person has nothing to compare with.
+                save(&handle, |settings| settings.whats_new_seen = Some(claudepult_core::whats_new::VERSION.to_owned()));
             }
             if first_start && handle.state::<AppState>().settings.lock().unwrap().profiles.is_empty() {
                 eprintln!("first start: the assistant opens");

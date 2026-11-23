@@ -148,6 +148,7 @@ pub fn set_module(app: AppHandle, kind: String, on: bool) -> Result<ModulesView,
     let _ = app.emit("quick-commands-changed", ());
     let _ = app.emit("toggles-changed", ());
     let _ = app.emit("notes-changed", ());
+    let _ = app.emit("clipboard-changed", ());
     crate::command_hot_keys::sync(&app);
     app.state::<crate::limits::Limits>().update_tray(&app);
     Ok(modules(&app))
