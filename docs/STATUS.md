@@ -186,6 +186,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: a notification when swap has grown large (branch `feat/swap-alert`)
+
+Done: the fourth of the ten ideas of 2026-11-23. «Ресурсы Mac» already told about a critical memory shortage and low disk space; it did not see the state that hung this Mac mini twice — memory pressure looks normal while swap has grown to gigabytes and eats the disk. `SystemSnapshot.swapUsed` (`vm.swapusage`, no permission) and a new alert: swap at half of the Mac's memory or more (not less than 4 GB) gives one notification «Подкачка сильно выросла» until it falls a gigabyte under the line. It follows the module's switch «Уведомлять о нагрузке, памяти, месте и заряде»; the footnote under it names it. Two new texts and the changed footnote in 12 languages.
+Checked: not built locally (swap 10.4 of 11 GB — the very case): the PR's CI runs the tests and the catalog check (`ResourcesTests.swapOverHalfOfTheMemory`). `scripts/strings-check.py` passes.
+Left: **held until 0.12.0 is out.** Not seen live. The panel's «Ресурсы Mac» block does not show swap, only the notification does. No button that frees space: clearing build folders stays with `_daily-report`'s command, which only Oleh's setup has. The line is fixed at half of the memory, with no setting.
+
 ## 2026-11-23 — 1.0 list: the shared Telegram bot and the Mini App go in as ready (branch `chore/status-shared-bot-ready`)
 
 Done: Oleh's answer «Как готовое» to the question left by the entry of `fix/telegram-help`: in the 1.0 list (entry «the list for 1.0» below, not rewritten) the shared Telegram bot through the Cloudflare Worker and the Mini App move from «Not in 1.0» to the ready part, with no «бета» badge. The line is gone from «Needs Oleh».
