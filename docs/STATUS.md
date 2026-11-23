@@ -186,6 +186,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: local servers seen live, the buttons' hints fixed (branch `feat/local-servers`)
+
+Done: after Oleh restarted the Mac (swap 0) the six branches of the batch were merged into a local-only branch and looked at in an isolated copy (its own bundle id and home, the «Panel debug» window moved off screen, AX presses only). Seen: «Локальные серверы» in the open row of a test project with the agent's own `python3 -m http.server` — «:8765 Python», the two buttons; the first press on stop showed «Остановить?» and lapsed in 5 seconds with the server alive; the second try with the confirmation stopped it, the section went away and the log has the line. **Found and fixed:** the row's hint (the folder) replaced the hints of both buttons — it is now on the program's name; seen again after a rebuild.
+Checked: `scripts/check.sh` on the six branches merged together (the first local build of the batch): all passed. The fix was rebuilt and read by AX in the copy; the PR's CI runs the tests again.
+Left: **held until 0.12.0 is out.** «Открыть в браузере» was not pressed (it would bring a browser to the front). A server in a worktree and a program that ignores SIGTERM are untried.
+
 ## 2026-11-23 — Mac: local servers in an open project row (branch `feat/local-servers`)
 
 Done: the eighth of the ten ideas of 2026-11-23. An expanded project row gets «Локальные серверы»: every process that listens on a TCP port and runs in the project's folder or below it (its worktrees too) — the port, the program's name, a button that opens `http://localhost:<port>` and a stop button. Stop asks once more in the row («Остановить?», 4 seconds), then sends SIGTERM — and only if the same process still listens on that port from that folder. Read by `lsof` every 10 seconds, only while the row is open; the section is not shown when nothing listens. `AIHubBar/Services/LocalServers.swift`, `ProjectRowView`. Three new texts in 12 languages.

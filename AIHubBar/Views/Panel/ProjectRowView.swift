@@ -185,6 +185,8 @@ private struct LocalServersView: View {
             Image(systemName: "network").foregroundStyle(.secondary)
             Text(verbatim: ":\(server.port)").monospacedDigit()
             Text(verbatim: server.command).foregroundStyle(.secondary).lineLimit(1).truncationMode(.tail)
+                // On the name, not on the row: a row's hint would replace the buttons' own.
+                .help(server.folder)
             Spacer(minLength: 4)
             if confirming == server.id {
                 Button("Остановить?") { stop(server) }
@@ -212,7 +214,6 @@ private struct LocalServersView: View {
             }
         }
         .scaledFont(.caption)
-        .help(server.folder)
     }
 
     private func ask(_ server: LocalServer) {
