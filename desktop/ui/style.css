@@ -87,6 +87,7 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .claude-account .row .path { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .claude-account p { margin: 0 0 6px; }
 /* «Справка»: the Settings layout with topics in the sidebar. */
+.help-feedback { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin: 0; padding: 8px 8px 0; border-top: 1px solid var(--line); font-size: 12px; }
 .help-nav-glyph { flex: none; width: 18px; text-align: center; }
 .help-glyph { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--accent); color: #fff; font-size: 20px; }
 .help-head { flex: 1; min-width: 0; }

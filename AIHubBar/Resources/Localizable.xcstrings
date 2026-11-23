@@ -158497,6 +158497,82 @@
           }
         }
       }
+    },
+    "Откроется форма на GitHub, версия и система в ней уже заполнены. Сама программа ничего не отправляет: перед отправкой видно всё, что уходит. Нужен аккаунт GitHub.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُفتح نموذج على GitHub وفيه الإصدار والنظام معبّآن مسبقًا. التطبيق نفسه لا يرسل شيئًا: ترى كل شيء قبل الإرسال. يلزم حساب GitHub."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf GitHub öffnet sich ein Formular, Version und System sind schon eingetragen. Die App selbst sendet nichts: Sie sehen alles, bevor es abgeschickt wird. Ein GitHub-Konto ist nötig."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A form opens on GitHub with the version and the system already filled in. The app itself sends nothing: you see everything before it goes. A GitHub account is needed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se abre un formulario en GitHub con la versión y el sistema ya rellenados. La app no envía nada por sí sola: ves todo antes de enviarlo. Se necesita una cuenta de GitHub."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un formulaire s’ouvre sur GitHub avec la version et le système déjà remplis. L’app n’envoie rien d’elle-même : vous voyez tout avant l’envoi. Un compte GitHub est nécessaire."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Formulir terbuka di GitHub dengan versi dan sistem yang sudah terisi. Aplikasi sendiri tidak mengirim apa pun: Anda melihat semuanya sebelum dikirim. Diperlukan akun GitHub."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si apre un modulo su GitHub con versione e sistema già compilati. L’app da sola non invia nulla: vedi tutto prima dell’invio. Serve un account GitHub."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョンとシステムが入力済みのフォームが GitHub で開きます。アプリ自体は何も送信しません。送信前にすべての内容を確認できます。GitHub アカウントが必要です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전과 시스템이 미리 채워진 양식이 GitHub에서 열립니다. 앱 자체는 아무것도 보내지 않으며, 보내기 전에 모든 내용을 확인할 수 있습니다. GitHub 계정이 필요합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na GitHubie otworzy się formularz z już wpisaną wersją i systemem. Sama aplikacja nic nie wysyła: przed wysłaniem widać wszystko, co zostanie wysłane. Potrzebne jest konto GitHub."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um formulário abre no GitHub com a versão e o sistema já preenchidos. O app não envia nada sozinho: você vê tudo antes do envio. É preciso uma conta do GitHub."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкриється форма на GitHub, версія і система у ній уже заповнені. Сама програма нічого не надсилає: перед надсиланням видно все, що буде надіслано. Потрібен акаунт GitHub."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

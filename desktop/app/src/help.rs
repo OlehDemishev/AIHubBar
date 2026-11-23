@@ -39,6 +39,15 @@ pub fn show(app: &AppHandle) {
     });
 }
 
+/// «Предложить идею…» (`idea`) and «Сообщить о проблеме…» (`bug`): the repository's form in the browser.
+#[tauri::command]
+pub fn open_feedback(kind: String) -> Result<(), String> {
+    let template = claudepult_core::feedback::Template::parse(&kind).ok_or("no such form")?;
+    let url = claudepult_core::feedback::url(template, env!("CARGO_PKG_VERSION"));
+    eprintln!("feedback: the {kind} form opens");
+    crate::projects::open_with_system(url.as_ref())
+}
+
 #[tauri::command]
 pub fn open_help(app: AppHandle) {
     show(&app);
