@@ -83,6 +83,13 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .pane-icon.telegram { background: #2aabee; }
 .settings { flex: 1; min-width: 0; overflow-y: auto; scrollbar-width: thin; padding: 18px 24px 24px; display: flex; flex-direction: column; gap: 14px; }
 .settings > * { flex: none; }
+/* «Сервисы AI»: a capsule per service, as on the Mac. */
+.service-tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.service-tab { display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px; border-radius: 999px; }
+.service-tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.service-tab .dot { width: 7px; height: 7px; border-radius: 50%; background: color-mix(in srgb, currentColor 30%, transparent); }
+.service-tab .dot.works { background: #30d158; }
+.service-off { display: none !important; }
 .claude-account .row input { flex: none; width: 150px; }
 .claude-account .row .path { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .claude-account p { margin: 0 0 6px; }

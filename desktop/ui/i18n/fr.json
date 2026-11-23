@@ -207,6 +207,7 @@
  "Добавлено профилей: %lld.": "Profils ajoutés : %lld.",
  "Добавляются командой claude mcp add или файлом .mcp.json в проекте.": "Ils s’ajoutent avec claude mcp add ou un fichier .mcp.json dans le projet.",
  "Доступна версия %@": "La version %@ est disponible",
+ "Другие": "Autres",
  "Другие AI": "Autres IA",
  "Другие AI подключаются в «Сервисы AI»: вход в их CLI или ключ API.": "Les autres IA se connectent dans « Services d’IA » : connexion à leur CLI ou clé d’API.",
  "Другие агенты — только в Терминале: задача в буфере обмена, вставьте Ctrl+V": "Les autres agents seulement dans Terminal : la tâche est dans le presse-papiers, collez-la avec Ctrl+V",

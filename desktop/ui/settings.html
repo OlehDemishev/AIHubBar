@@ -322,6 +322,8 @@
       </div>
 
       <div class="page" id="page-services" role="tabpanel" hidden>
+        <!-- A page per service, as on the Mac: the capsules choose whose blocks and rows are seen (`data-service`). -->
+        <div class="service-tabs" id="service-tabs" role="tablist"></div>
         <section class="card services">
           <div class="card-title">
             <h2 data-t="Агенты"></h2>
@@ -329,8 +331,8 @@
           </div>
           <div id="agent-rows"></div>
         </section>
-        <h2 class="group">Hooks</h2>
-        <section class="card">
+        <h2 class="group" data-service="claude codex copilot">Hooks</h2>
+        <section class="card" data-service="claude">
           <div class="row">
             <span data-t="Сессии Claude Code"></span>
             <strong id="hooks-status"></strong>
@@ -345,7 +347,7 @@
           <p class="secondary" style="margin-top: 8px" data-t="Hooks добавляются в settings.json Claude Code (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом компьютере, чтобы AI Hub Bar показывал их в панели."></p>
           <p class="error" id="hooks-error" hidden></p>
         </section>
-        <section class="card agent-hooks" data-agent="codex">
+        <section class="card agent-hooks" data-agent="codex" data-service="codex">
           <div class="row">
             <span data-t="Состояние сессий Codex"></span>
             <strong class="status"></strong>
@@ -357,7 +359,7 @@
           <p class="secondary note" style="margin-top: 8px" hidden></p>
           <p class="error" hidden></p>
         </section>
-        <section class="card agent-hooks" data-agent="copilot">
+        <section class="card agent-hooks" data-agent="copilot" data-service="copilot">
           <div class="row">
             <span data-t="Состояние сессий Copilot"></span>
             <strong class="status"></strong>
@@ -368,7 +370,7 @@
           </div>
           <p class="error" hidden></p>
         </section>
-        <section class="card" id="claude-accounts">
+        <section class="card" id="claude-accounts" data-service="claude">
           <h2 data-t="Другие аккаунты Claude"></h2>
           <div id="claude-account-rows"></div>
           <p style="margin-top: 8px"><button id="claude-account-add" data-t="Добавить аккаунт…"></button> <button id="claude-account-refresh" data-t="Обновить"></button></p>
@@ -377,6 +379,7 @@
         </section>
         <section class="card services">
           <h2 data-t="Другие AI"></h2>
+          <div data-service="claude">
           <div class="row">
             <label for="main-service" data-t="Главный сервис"></label>
             <select id="main-service"></select>
@@ -396,10 +399,11 @@
             <input type="checkbox" id="renew-login">
           </div>
           <p class="secondary" data-t="Когда вход истёк (claude давно не запускался, а работа идёт в приложении Claude), AI Hub Bar отправляет через claude запрос из одного слова — самая маленькая модель, без инструментов, не чаще раза в час. Вход продлевается примерно на 8 часов."></p>
+          </div>
           <div id="hub-sources"></div>
         </section>
-        <h2 class="group" data-t="Фоновые задачи"></h2>
-        <section class="card">
+        <h2 class="group" data-t="Фоновые задачи" data-service="claude"></h2>
+        <section class="card" data-service="claude">
           <div class="row">
             <label for="time-limit" data-t="Лимит времени"></label>
             <select id="time-limit"></select>
@@ -414,7 +418,7 @@
           <p class="secondary" id="no-key-store" data-t="На этой системе ключи API пока негде хранить: работают только серверы без ключа (Ollama, LM Studio)." hidden></p>
           <div id="provider-rows"></div>
         </section>
-        <section class="card services">
+        <section class="card services" data-service="other">
           <h2 data-t="Расход по API"></h2>
           <div class="row"><span data-t="Сегодня"></span><span id="spend-today"></span></div>
           <div class="row"><span data-t="В этом месяце"></span><span id="spend-month"></span></div>
@@ -425,12 +429,12 @@
           <div id="price-rows"></div>
           <p class="secondary" data-t="AI Hub Bar считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета."></p>
         </section>
-        <section class="card">
+        <section class="card" data-service="claude">
           <h2 data-t="CLAUDE.md и MCP"></h2>
           <p><button id="open-claude-config" data-t="Открыть инструкции и MCP-серверы…"></button></p>
           <p class="secondary" data-t="Отдельное окно: все CLAUDE.md и AGENTS.md (общие и проектов) с поиском и правкой, и MCP-серверы Claude Code с выключателем."></p>
         </section>
-        <section class="card">
+        <section class="card" data-service="claude">
           <h2 data-t="Свои промпты"></h2>
           <div id="saved-prompts"></div>
           <p><button id="saved-prompt-add" data-t="Добавить промпт"></button></p>
@@ -540,6 +544,11 @@
       telegram: '<path d="M14 2.5L1.8 7.3l3.6 1.3 1.3 4 2-2.4 3.1 2.3z"/>',
     };
     const icon = (name) => `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${icons[name] ?? icons.module}</svg>`;
+    // The capsules of «Сервисы AI» (drawn further down): known before the first page opens, since a link can name one.
+    const serviceTabs = [["claude", "Claude Code"], ["codex", "Codex"], ["gemini", "Gemini"], ["copilot", "Copilot"], ["cursor", "Cursor"], ["other", t("Другие")]];
+    const servicesPage = document.getElementById("page-services");
+    let service = (() => { try { return localStorage.getItem("settingsService"); } catch { return null; } })();
+    if (!serviceTabs.some(([id]) => id === service)) service = "claude";
     const pages = new Map([
       ["general", { title: t("Основные"), subtitle: t("Запуск, уведомления, Telegram и обновления") }],
       ["show", { title: t("Что показывать"), subtitle: t("Модули панели и их настройки") }],
@@ -591,6 +600,8 @@
       document.getElementById("settings-nothing").hidden = children.length > 0;
     }
     function go(id, focus) {
+      // «service.codex», the Mac's link to a service's page: «Сервисы AI» on that capsule.
+      if (id?.startsWith?.("service.")) { chooseService(id.slice(8)); id = "services"; }
       id = known(id) ?? "general";
       // «Telegram» where the app can't offer it has no page either.
       if (id === "telegram" && document.getElementById("telegram").hidden) id = "general";
@@ -671,6 +682,7 @@
 
     function showHooks(state) {
       document.getElementById("hooks-status").textContent = state.title;
+      document.getElementById("hooks-status").closest("section").toggleAttribute("data-works", state.status !== "notInstalled");
       document.getElementById("hooks-path").textContent = state.settingsPath;
       const install = document.getElementById("hooks-install");
       install.textContent = state.status === "outdated" ? t("Обновить hooks") : t("Установить hooks");
@@ -693,6 +705,7 @@
       const show = (state) => {
         card.querySelector(".status").textContent = state.title;
         card.querySelector(".path").textContent = state.settingsPath;
+        card.toggleAttribute("data-works", state.status !== "notInstalled");
         const install = card.querySelector(".install");
         install.textContent = state.status === "outdated" ? t("Обновить hooks") : t("Установить hooks");
         install.hidden = state.status === "installed";
@@ -932,6 +945,43 @@
     const budget = document.getElementById("api-budget");
     const number = (input) => (input.value.trim() === "" ? null : Number(input.value));
     budget.onchange = async () => showSpendLines(await invoke("set_api_budget", { budget: number(budget) }));
+    // «Сервисы AI» by service, as on the Mac: a capsule per service with a dot (green — something of it works here),
+    // and only that service's blocks and rows below. Rows of the lists are marked as they are built.
+    function markService(element, id, works) {
+      element.dataset.service = serviceTabs.some(([known]) => known === id) ? id : "other";
+      if (works) element.dataset.works = "1";
+    }
+    const ofService = (element, id) => element.dataset.service.split(" ").includes(id);
+    function showService() {
+      for (const element of servicesPage.querySelectorAll("[data-service]")) element.classList.toggle("service-off", !ofService(element, service));
+      // A block whose rows all belong to other services goes with them.
+      for (const card of servicesPage.querySelectorAll("section.card:not([data-service])")) {
+        const marked = [...card.querySelectorAll("[data-service]")];
+        card.classList.toggle("service-off", marked.length > 0 && marked.every((element) => element.classList.contains("service-off")));
+      }
+      document.getElementById("service-tabs").replaceChildren(...serviceTabs.map(([id, title]) => {
+        const tab = document.createElement("button");
+        tab.className = "service-tab";
+        tab.setAttribute("role", "tab");
+        tab.setAttribute("aria-selected", String(id === service));
+        const works = [...servicesPage.querySelectorAll("[data-works]")].some((element) => ofService(element, id));
+        tab.append(Object.assign(document.createElement("span"), { className: works ? "dot works" : "dot" }), title);
+        tab.onclick = () => chooseService(id);
+        return tab;
+      }));
+    }
+    // The lists are filled later and again after every change; so are the marks of installed hooks.
+    const serviceObserver = new MutationObserver(showService);
+    for (const list of ["agent-rows", "hub-sources", "provider-rows"]) serviceObserver.observe(document.getElementById(list), { childList: true });
+    serviceObserver.observe(servicesPage, { subtree: true, attributes: true, attributeFilter: ["data-works"] });
+    showService();
+    function chooseService(id) {
+      if (!serviceTabs.some(([known]) => known === id)) return;
+      service = id;
+      try { localStorage.setItem("settingsService", id); } catch { /* the tab is just not remembered */ }
+      showService();
+    }
+
     function showSpendLines(view) {
       document.getElementById("spend-today").textContent = view.today;
       document.getElementById("spend-month").textContent = view.month;
@@ -967,6 +1017,7 @@
       providerRows.replaceChildren(...view.providers.map((provider) => {
         const box = document.createElement("div");
         box.className = "provider";
+        markService(box, { anthropic: "claude", openai: "codex", google: "gemini" }[provider.id] ?? "other", provider.ok);
         const head = document.createElement("div");
         head.className = "row";
         const title = document.createElement("span");
@@ -1065,6 +1116,7 @@
       document.getElementById("agent-rows").replaceChildren(...rows.map((agent) => {
         const box = document.createElement("div");
         box.className = "provider";
+        markService(box, { antigravity: "gemini" }[agent.id] ?? agent.id, agent.installed);
         const head = document.createElement("div");
         head.className = "row";
         const title = document.createElement("span");
@@ -1485,6 +1537,7 @@
       document.getElementById("hub-sources").replaceChildren(...view.sources.map((source) => {
         const box = document.createElement("div");
         box.className = "hub-source";
+        markService(box, { openRouter: "other", openAICosts: "codex", anthropicCosts: "claude" }[source.id] ?? source.id, source.found && source.enabled);
         const head = document.createElement("div");
         head.className = "row";
         const label = document.createElement("label");
