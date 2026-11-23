@@ -89,7 +89,7 @@ enum LocalServers {
     /// that has passed to another program is left alone.
     @discardableResult
     static func stop(_ server: LocalServer) async -> Bool {
-        guard await scan().contains(server) else { return false }
+        guard server.pid > 0, await scan().contains(server) else { return false }
         let done = kill(server.pid, SIGTERM) == 0
         AppLog.info("Local server \(server.command) :\(server.port) (pid \(server.pid)) asked to quit: \(done)")
         return done
