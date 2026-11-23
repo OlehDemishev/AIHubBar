@@ -15,6 +15,21 @@
       <button class="icon-button" id="settings" data-t-title="Настройки…" aria-label="Settings">⚙</button>
       <button class="icon-button" id="quit" data-t-title="Выйти из AI Hub Bar" aria-label="Quit">⏻</button>
     </header>
+    <div class="search" id="search">
+      <span class="glass" aria-hidden="true">🔍</span>
+      <input type="text" id="search-field" autocomplete="off" spellcheck="false" data-t-placeholder="Найти проект, сессию, команду…">
+      <button class="icon-button" id="search-clear" data-t-title="Очистить поиск (Esc)" hidden>✕</button>
+    </div>
+    <section class="card search-results" id="search-results" hidden></section>
+    <section class="card whats-new" id="whats-new" hidden>
+      <h2><span aria-hidden="true">✨</span> <span data-t="Что нового"></span></h2>
+      <ul id="whats-new-items"></ul>
+      <p class="buttons">
+        <span class="spacer"></span>
+        <button class="small" id="whats-new-settings" data-t="Открыть настройки"></button>
+        <button class="small prominent" id="whats-new-done" data-t="Понятно"></button>
+      </p>
+    </section>
     <section class="card hint" id="tray-hint" hidden>
       <p data-t="Windows прячет новые значки под «^». Чтобы AI Hub Bar был всегда виден: Параметры → Персонализация → Панель задач → Другие значки на панели задач."></p>
       <p style="margin-top: 8px"><button id="tray-hint-done" data-t="Готово"></button></p>
@@ -104,6 +119,42 @@
         <button class="small prominent" id="quick-run" data-t="Запустить"></button>
       </div>
       <div class="quick-results" id="quick-results"></div>
+    </section>
+    <section class="card clips" id="clips" hidden>
+      <div class="notes-head">
+        <h2 data-t="История буфера"></h2>
+        <span class="secondary" id="clip-count"></span>
+        <span class="spacer"></span>
+        <button class="small" id="clip-clear" data-t="Очистить" data-t-title="Удалить всё, кроме закреплённого" hidden></button>
+      </div>
+      <div class="quick-confirm" id="clip-confirm" hidden>
+        <span data-t="Удалить всё, кроме закреплённого"></span>
+        <span class="spacer"></span>
+        <button class="small" id="clip-cancel" data-t="Отмена"></button>
+        <button class="small danger" id="clip-yes" data-t="Очистить"></button>
+      </div>
+      <p class="secondary" id="clip-empty" data-t="Пока пусто: скопируйте что-нибудь. Пароли из менеджеров паролей не запоминаются." hidden></p>
+      <input type="text" id="clip-query" autocomplete="off" spellcheck="false" data-t-placeholder="Поиск" hidden>
+      <div id="clip-rows"></div>
+      <p class="secondary" id="clip-none" data-t="Ничего не найдено" hidden></p>
+    </section>
+    <section class="card notes" id="notes" hidden>
+      <div class="notes-head">
+        <h2 data-t="Заметки"></h2>
+        <span class="spacer"></span>
+        <button class="small" id="note-new" data-t-title="Новая заметка">+</button>
+        <button class="small" id="note-open" data-t-title="Открыть в редакторе">↗</button>
+        <button class="small" id="note-trash" data-t-title="В корзину">🗑</button>
+      </div>
+      <select id="note-names" hidden></select>
+      <textarea id="note-text" spellcheck="false"></textarea>
+      <p class="note-error" id="note-error" hidden></p>
+      <div class="quick-confirm" id="note-confirm" hidden>
+        <span id="note-confirm-text"></span>
+        <span class="spacer"></span>
+        <button class="small" id="note-cancel" data-t="Отмена"></button>
+        <button class="small danger" id="note-yes" data-t="В корзину"></button>
+      </div>
     </section>
     <section class="card toggles" id="toggles" hidden>
       <h2 data-t="Быстрые переключатели"></h2>
@@ -459,11 +510,20 @@
     async function showSessions() {
       const view = await invoke("sessions_view");
       const rows = document.getElementById("session-rows");
+      (window.searchData ??= {}).sessions = view.rows.map((row) => ({ id: row.id, name: row.project, detail: row.detail ?? "" }));
       rows.replaceChildren(...view.rows.flatMap((row) => {
         const item = document.createElement("div");
         item.className = `session ${row.state}`;
-        item.innerHTML = `<span class="dot" aria-hidden="true"></span><span class="project"></span><span class="secondary worktree" hidden></span><span class="secondary detail"></span><span class="secondary progress"></span>`;
+        item.dataset.search = row.id;
+        item.innerHTML = `<span class="dot" aria-hidden="true"></span><span class="project"></span><span class="secondary worktree" hidden></span><span class="secondary detail"></span><span class="context" hidden></span><span class="secondary progress"></span>`;
         item.querySelector(".project").textContent = row.project;
+        if (row.context) {
+          const context = item.querySelector(".context");
+          context.textContent = row.context;
+          context.classList.toggle("full", row.contextFull);
+          context.title = t("Насколько заполнен контекст сессии (по журналу Claude Code). Ближе к 100 %, Claude сжимает историю и часть деталей теряется.");
+          context.hidden = false;
+        }
         if (row.worktree) {
           const worktree = item.querySelector(".worktree");
           worktree.textContent = "⎇ " + row.worktree;
@@ -494,8 +554,19 @@
         };
         return item;
       }));
+      // Runs put off for the night or until the limit resets, each with «Отменить».
+      const queued = await invoke("queued_view");
+      rows.append(...queued.map((waiting) => {
+        const item = element("div", "queued");
+        const clock = element("span", "", "🕓");
+        clock.setAttribute("aria-hidden", "true");
+        const text = element("span", "text", waiting.text);
+        text.title = waiting.text;
+        item.append(clock, text, action(t("Отменить"), () => invoke("cancel_queued", { id: waiting.id })));
+        return item;
+      }));
       document.getElementById("no-hooks").hidden = view.hooks === "installed";
-      document.getElementById("no-sessions").hidden = view.rows.length > 0 || view.hooks !== "installed";
+      document.getElementById("no-sessions").hidden = view.rows.length > 0 || queued.length > 0 || view.hooks !== "installed";
     }
     document.getElementById("hooks-settings").onclick = () => invoke("open_settings");
     await showSessions();
@@ -583,11 +654,13 @@
     async function showQuickCommands() {
       const view = await invoke("quick_commands_view");
       document.getElementById("quick-commands").hidden = !view.shown;
+      (window.searchData ??= {}).quick = view.shown ? view.buttons.map((command) => ({ id: command.id, name: command.title, detail: command.value ?? "" })) : [];
       if (!view.shown) return;
       document.getElementById("quick-empty").hidden = view.buttons.length > 0;
       document.getElementById("quick-buttons").replaceChildren(...view.buttons.map((command) => {
         const button = document.createElement("button");
         button.className = "quick";
+        button.dataset.search = command.id;
         button.title = command.hotKey ? `${command.value}
 ${command.hotKey}` : command.value;
         button.disabled = command.running;
@@ -669,6 +742,264 @@ ${command.hotKey}` : command.value;
     };
     showToggles();
     window.__TAURI__.event.listen("toggles-changed", showToggles);
+
+    // The search under the header: sessions, projects and quick commands by name; ↑ ↓ choose, Enter does the
+    // chosen one, Esc clears the text and, with nothing typed, puts the panel away.
+    const searchField = document.getElementById("search-field");
+    const searchResults = document.getElementById("search-results");
+    const searchClear = document.getElementById("search-clear");
+    searchField.setAttribute("aria-label", t("Найти проект, сессию, команду…"));
+    let found = [], foundAt = 0, searchTurn = 0;
+    // A saved prompt was chosen: the list is now the projects to start it in.
+    let promptStep = null;
+    const searchPlaceholder = searchField.placeholder;
+    function showFound() {
+      searchResults.hidden = !searchField.value.trim() && !promptStep;
+      searchClear.hidden = !searchField.value;
+      if (searchResults.hidden) return searchResults.replaceChildren();
+      if (!found.length) {
+        const empty = document.createElement("p");
+        empty.className = "secondary";
+        empty.textContent = promptStep ? t("Нет такого проекта") : t("Ничего не найдено");
+        return searchResults.replaceChildren(empty);
+      }
+      searchResults.replaceChildren(...found.map((row, index) => {
+        const button = document.createElement("button");
+        button.className = index === foundAt ? "found chosen" : "found";
+        button.title = row.hint;
+        button.innerHTML = `<span class="glyph" aria-hidden="true"></span><span class="name"></span><span class="secondary detail"></span><span class="secondary enter" aria-hidden="true"></span>`;
+        button.querySelector(".glyph").textContent = { session: "💬", project: "📁", quickCommand: "⚡", prompt: "📝" }[row.kind];
+        button.querySelector(".name").textContent = row.title;
+        button.querySelector(".detail").textContent = row.detail;
+        button.querySelector(".enter").textContent = index === foundAt ? "↵" : "";
+        button.onclick = () => doFound(row);
+        return button;
+      }));
+    }
+    async function search() {
+      const turn = ++searchTurn;
+      const data = window.searchData ?? {};
+      const rows = promptStep
+        ? (await invoke("prompt_projects", { query: searchField.value, projects: data.projects ?? [] })).map((p) => ({ kind: "project", id: p.id, title: p.name, detail: p.detail, hint: p.hint }))
+        : searchField.value.trim()
+        ? await invoke("panel_search", { query: searchField.value, sessions: data.sessions ?? [], projects: data.projects ?? [], quickCommands: data.quick ?? [], withPrompts: !data.folders })
+        : [];
+      if (turn !== searchTurn) return;
+      found = rows;
+      foundAt = 0;
+      showFound();
+    }
+    function clearSearch() {
+      promptStep = null;
+      searchField.placeholder = searchPlaceholder;
+      searchField.value = "";
+      search();
+    }
+    // The row the search found: brought into view and marked for a moment.
+    function pointAt(id, block = "center") {
+      const row = [...document.querySelectorAll("[data-search]")].find((item) => item.dataset.search === id);
+      if (!row) return null;
+      row.scrollIntoView({ block, behavior: "smooth" });
+      row.classList.add("pointed");
+      setTimeout(() => row.classList.remove("pointed"), 1600);
+      return row;
+    }
+    // The prompt with the project's name and branch, started as «Своя задача…» of that project: its row shows
+    // what the start said, or asks how to start.
+    async function startPrompt(prompt, project) {
+      let next;
+      try {
+        const task = await invoke("fill_saved_prompt", { id: prompt, project: project.title, branch: project.detail || null });
+        expanded.add(project.id);
+        launches.set(project.id, { working: true });
+        await showProjects();
+        pointAt(project.id, "start");
+        const reply = await invoke("launch_claude", { path: project.id, command: "custom", task, allowBusy: false, mode: null, remember: false, agent: null, skipLimit: false });
+        next = reply.choose
+          ? { choose: { question: reply.choose, command: "custom", task, allowBusy: false } }
+          : { message: reply.message, confirm: reply.confirm ? { command: "custom", task, mode: null, agent: null } : null, limit: reply.limit ? { command: "custom", task, allowBusy: false } : null };
+      } catch (error) {
+        next = { message: String(error), error: true };
+      }
+      launches.set(project.id, next);
+      showProjects();
+    }
+    async function doFound(row) {
+      if (promptStep) {
+        const prompt = promptStep;
+        clearSearch();
+        return startPrompt(prompt, row);
+      }
+      if (row.kind === "prompt") {
+        promptStep = row.id;
+        searchField.placeholder = row.placeholder;
+        searchField.value = "";
+        searchField.focus();
+        return search();
+      }
+      clearSearch();
+      if (row.kind === "project") {
+        expanded.add(row.id);
+        await showProjects();
+        pointAt(row.id, "start");
+      } else if (row.kind === "quickCommand") {
+        pointAt(row.id)?.click();
+      } else {
+        pointAt(row.id);
+      }
+    }
+    searchField.oninput = search;
+    // The hot key and `--app-command search` bring the panel up for typing at once.
+    window.__TAURI__.event.listen("focus-search", () => { searchField.focus(); searchField.select(); });
+    searchClear.onclick = () => { clearSearch(); searchField.focus(); };
+    searchField.onkeydown = (event) => {
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        event.preventDefault();
+        foundAt = Math.min(Math.max(foundAt + (event.key === "ArrowDown" ? 1 : -1), 0), Math.max(found.length - 1, 0));
+        showFound();
+      } else if (event.key === "Enter") {
+        if (found[foundAt]) doFound(found[foundAt]);
+      } else if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        if (searchField.value || promptStep) clearSearch(); else invoke("hide_panel");
+      }
+    };
+
+    // «История буфера»: a click puts an entry back on the clipboard; pin, remove, clear.
+    const clipQuery = document.getElementById("clip-query");
+    clipQuery.setAttribute("aria-label", t("Поиск"));
+    let clipCopied = null;
+    function showClips(view) {
+      document.getElementById("clips").hidden = !view.shown;
+      if (!view.shown) return;
+      document.getElementById("clip-count").textContent = view.count ? String(view.count) : "";
+      document.getElementById("clip-clear").hidden = !view.count;
+      if (!view.count) document.getElementById("clip-confirm").hidden = true;
+      document.getElementById("clip-empty").hidden = view.count > 0;
+      clipQuery.hidden = !view.count;
+      document.getElementById("clip-none").hidden = !view.count || view.rows.length > 0;
+      document.getElementById("clip-rows").replaceChildren(...view.rows.map((row) => {
+        const item = document.createElement("div");
+        item.className = row.pinned ? "clip pinned" : "clip";
+        item.innerHTML = `<span class="glyph" aria-hidden="true"></span><button class="text"></button><span class="secondary ago"></span><button class="icon-button pin"></button><button class="icon-button remove">✕</button>`;
+        item.querySelector(".glyph").textContent = row.pinned ? "📌" : "📋";
+        item.querySelector(".glyph").title = row.pinned ? t("Закреплено") : t("Скопированный текст");
+        const text = item.querySelector(".text");
+        text.textContent = row.text;
+        text.title = row.hint;
+        const ago = item.querySelector(".ago");
+        ago.textContent = clipCopied === row.id ? t("скопировано") : row.ago;
+        ago.classList.toggle("done", clipCopied === row.id);
+        text.onclick = async () => {
+          clipCopied = row.id;
+          showClips(await invoke("clipboard_copy", { id: row.id, query: clipQuery.value }));
+          setTimeout(() => { if (clipCopied === row.id) { clipCopied = null; refreshClips(); } }, 2000);
+        };
+        const pin = item.querySelector(".pin");
+        pin.textContent = row.pinned ? "⊘" : "📌";
+        pin.title = row.pinned ? t("Открепить") : t("Закрепить");
+        pin.setAttribute("aria-label", pin.title);
+        pin.onclick = async () => showClips(await invoke("clipboard_pin", { id: row.id, query: clipQuery.value }));
+        const remove = item.querySelector(".remove");
+        remove.title = t("Удалить");
+        remove.setAttribute("aria-label", t("Удалить"));
+        remove.onclick = async () => showClips(await invoke("clipboard_remove", { id: row.id, query: clipQuery.value }));
+        return item;
+      }));
+    }
+    const refreshClips = async () => showClips(await invoke("clipboard_view", { query: clipQuery.value }));
+    clipQuery.oninput = refreshClips;
+    clipQuery.onkeydown = (event) => { if (event.key === "Escape" && clipQuery.value) { event.stopPropagation(); clipQuery.value = ""; refreshClips(); } };
+    document.getElementById("clip-clear").onclick = () => { document.getElementById("clip-confirm").hidden = false; };
+    document.getElementById("clip-cancel").onclick = () => { document.getElementById("clip-confirm").hidden = true; };
+    document.getElementById("clip-yes").onclick = async () => {
+      document.getElementById("clip-confirm").hidden = true;
+      clipQuery.value = "";
+      showClips(await invoke("clipboard_clear"));
+    };
+    refreshClips();
+    window.addEventListener("focus", refreshClips);
+    window.__TAURI__.event.listen("clipboard-changed", refreshClips);
+    window.__TAURI__.event.listen("profiles-changed", refreshClips);
+
+    // «Что нового»: once per version with news, until «Понятно».
+    invoke("whats_new_view").then((items) => {
+      document.getElementById("whats-new").hidden = items.length === 0;
+      document.getElementById("whats-new-items").replaceChildren(...items.map((line) => {
+        const item = document.createElement("li");
+        item.textContent = line;
+        return item;
+      }));
+    });
+    const closeWhatsNew = async () => {
+      document.getElementById("whats-new").hidden = true;
+      await invoke("whats_new_seen");
+    };
+    document.getElementById("whats-new-done").onclick = closeWhatsNew;
+    document.getElementById("whats-new-settings").onclick = async () => { await closeWhatsNew(); invoke("open_settings"); };
+
+    // «Заметки»: a note per .md file. What is typed is written a second after the last key, and when the note,
+    // the panel or the window is left; a note changed in another editor is read again when the panel comes back.
+    const noteText = document.getElementById("note-text");
+    const noteNames = document.getElementById("note-names");
+    const noteError = document.getElementById("note-error");
+    document.getElementById("note-names").setAttribute("aria-label", t("Заметки"));
+    let noteShown = null, noteDirty = false, noteTimer = null;
+    function showNotes(view) {
+      document.getElementById("notes").hidden = !view.shown;
+      noteShown = view.selected;
+      noteDirty = false;
+      noteNames.hidden = view.names.length < 2;
+      noteNames.replaceChildren(...view.names.map((name) => new Option(name, name, false, name === view.selected)));
+      noteText.value = view.text;
+      noteText.disabled = !view.selected;
+      document.getElementById("note-confirm").hidden = true;
+      document.getElementById("note-confirm-text").textContent = view.question || "";
+      for (const id of ["note-open", "note-trash"]) document.getElementById(id).disabled = !view.selected;
+    }
+    async function saveNote() {
+      clearTimeout(noteTimer);
+      if (!noteDirty || !noteShown) return;
+      const text = noteText.value;
+      try {
+        await invoke("notes_save", { name: noteShown, text });
+        if (noteText.value === text) noteDirty = false;
+        noteError.hidden = true;
+      } catch (error) {
+        noteError.textContent = String(error);
+        noteError.hidden = false;
+      }
+    }
+    noteText.oninput = () => {
+      noteDirty = true;
+      clearTimeout(noteTimer);
+      noteTimer = setTimeout(saveNote, 1000);
+    };
+    noteText.onblur = saveNote;
+    window.addEventListener("blur", saveNote);
+    const refreshNotes = async () => { if (!noteDirty) showNotes(await invoke("notes_view")); };
+    noteNames.onchange = async () => { await saveNote(); showNotes(await invoke("notes_select", { name: noteNames.value })); };
+    const noteAction = async (command, args) => {
+      await saveNote();
+      try {
+        const view = await invoke(command, args);
+        if (view) showNotes(view);
+        noteError.hidden = true;
+      } catch (error) {
+        noteError.textContent = String(error);
+        noteError.hidden = false;
+      }
+    };
+    document.getElementById("note-new").onclick = () => noteAction("notes_create");
+    document.getElementById("note-open").onclick = () => noteAction("notes_open", { name: noteShown });
+    document.getElementById("note-trash").onclick = () => { document.getElementById("note-confirm").hidden = false; };
+    document.getElementById("note-cancel").onclick = () => { document.getElementById("note-confirm").hidden = true; };
+    document.getElementById("note-yes").onclick = () => { noteDirty = false; noteAction("notes_trash", { name: noteShown }); };
+    refreshNotes();
+    window.addEventListener("focus", refreshNotes);
+    window.__TAURI__.event.listen("notes-changed", refreshNotes);
+    window.__TAURI__.event.listen("profiles-changed", refreshNotes);
     window.__TAURI__.event.listen("profiles-changed", showToggles);
     // Dark mode or the icons may be switched elsewhere: read again when the panel comes forward.
     window.addEventListener("focus", showToggles);
@@ -743,15 +1074,28 @@ ${command.hotKey}` : command.value;
       const box = element("div", "claude");
       const state = launches.get(row.path) ?? {};
       const buttons = element("div", "actions");
-      const start = async (command, task, allowBusy = false, mode = null, remember = false, agent = null) => {
+      const start = async (command, task, allowBusy = false, mode = null, remember = false, agent = null, skipLimit = false) => {
         launches.set(row.path, { working: true });
         showProjects();
         let next;
         try {
-          const reply = await invoke("launch_claude", { path: row.path, command, task: task ?? null, allowBusy, mode, remember, agent });
+          const reply = await invoke("launch_claude", { path: row.path, command, task: task ?? null, allowBusy, mode, remember, agent, skipLimit });
           next = reply.choose
             ? { choose: { question: reply.choose, command, task, allowBusy } }
-            : { message: reply.message, confirm: reply.confirm ? { command, task, mode, agent } : null };
+            : { message: reply.message, confirm: reply.confirm ? { command, task, mode, agent, skipLimit } : null, limit: reply.limit ? { command, task, allowBusy } : null };
+        } catch (error) {
+          next = { message: String(error), error: true };
+        }
+        launches.set(row.path, next);
+        showProjects();
+      };
+      // «На ночь» and «После сброса»: the run waits in the queue, the row in «Сессии» can cancel it.
+      const later = async (command, task, when, agent = null) => {
+        launches.set(row.path, { working: true });
+        showProjects();
+        let next;
+        try {
+          next = { message: await invoke("queue_launch", { path: row.path, command, task: task ?? null, when, agent }) };
         } catch (error) {
           next = { message: String(error), error: true };
         }
@@ -767,8 +1111,14 @@ ${command.hotKey}` : command.value;
       });
       const finish = action(t("Завершить"), () => start("finish"));
       finish.title = t("Завершить сессию: проверки, коммит, push, PR и STATUS по разделу «Конец сессии»");
-      for (const button of [nextStep, custom, finish]) button.disabled = !!state.working;
-      buttons.append(element("span", "bullets-title", "Claude"), nextStep, custom, finish);
+      const postpone = element("select", "service-choice");
+      postpone.title = t("Следующий шаг — в фоне позже: ночью (утром сводка) или когда сбросится лимит сессии. Свою задачу — в «Своя задача…»");
+      postpone.add(new Option(t("Позже"), ""));
+      postpone.add(new Option(t("На ночь"), "night"));
+      postpone.add(new Option(t("После сброса лимита"), "reset"));
+      postpone.onchange = () => { const when = postpone.value; postpone.value = ""; if (when) later("next", null, when); };
+      for (const button of [nextStep, custom, finish, postpone]) button.disabled = !!state.working;
+      buttons.append(element("span", "bullets-title", "Claude"), nextStep, custom, finish, postpone);
       // «Открыть в…»: another installed agent in a terminal, in the project folder.
       if (otherAgents.length) {
         const open = element("select", "service-choice");
@@ -789,7 +1139,7 @@ ${command.hotKey}` : command.value;
         field.rows = 3;
         field.placeholder = t("Что сделать в %@?", row.name);
         field.value = state.draft ?? "";
-        field.oninput = () => { state.draft = field.value; launches.set(row.path, state); go.disabled = !field.value.trim(); };
+        field.oninput = () => { state.draft = field.value; launches.set(row.path, state); for (const button of [go, night, afterReset]) button.disabled = !field.value.trim(); };
         const cancel = action(t("Отмена"), () => { launches.set(row.path, {}); showProjects(); });
         // Who does it: Claude Code (where the profile says), or Codex in the background when it is installed.
         const codex = otherAgents.some((agent) => agent.id === "codex");
@@ -804,14 +1154,18 @@ ${command.hotKey}` : command.value;
         const send = () => start("custom", field.value, false, null, false, agent.value || null);
         const go = action(t("Запустить"), send);
         go.classList.add("prominent");
-        go.disabled = !field.value.trim();
+        const night = action(t("На ночь"), () => later("custom", field.value, "night", agent.value || null));
+        night.title = t("Запустить в фоне ночью; утром придёт сводка");
+        const afterReset = action(t("После сброса"), () => later("custom", field.value, "reset", agent.value || null));
+        afterReset.title = t("Запустить в фоне, когда сбросится лимит сессии");
+        for (const button of [go, night, afterReset]) button.disabled = !field.value.trim();
         field.onkeydown = (event) => {
           if (event.key === "Enter" && (event.ctrlKey || event.metaKey) && field.value.trim()) send();
           if (event.key === "Escape") { event.stopPropagation(); cancel.onclick(); }
         };
         const line = element("div", "actions end");
         if (codex) line.append(agent);
-        line.append(cancel, go);
+        line.append(cancel, night, afterReset, go);
         editor.append(field, line, note);
         box.append(editor);
         setTimeout(() => field.focus(), 0);
@@ -839,7 +1193,19 @@ ${command.hotKey}` : command.value;
         const message = element("div", `launch-message${state.error ? " error" : ""}`);
         message.append(element("span", "", state.message));
         const line = element("div", "actions");
-        if (state.confirm) line.append(action(t("Запустить всё равно"), () => start(state.confirm.command, state.confirm.task, true, state.confirm.mode, false, state.confirm.agent)));
+        if (state.confirm) line.append(action(t("Запустить всё равно"), () => start(state.confirm.command, state.confirm.task, true, state.confirm.mode, false, state.confirm.agent, state.confirm.skipLimit)));
+        if (state.limit) {
+          const waiting = state.limit;
+          line.append(
+            action(t("Запустить после сброса"), () => later(waiting.command, waiting.task, "reset")),
+            action(t("Запустить сейчас"), () => start(waiting.command, waiting.task, waiting.allowBusy, "background", false, null, true)),
+          );
+          if (otherAgents.some((agent) => agent.id === "codex")) {
+            const codex = action(t("В %@", "Codex"), () => start(waiting.command, waiting.task, waiting.allowBusy, "background", false, "codex"));
+            codex.title = t("Claude близок к лимиту: ту же задачу выполнит Codex в фоне");
+            line.append(codex);
+          }
+        }
         line.append(action(t("Скрыть"), () => { launches.delete(row.path); showProjects(); }));
         message.append(line);
         box.append(message);
@@ -1073,6 +1439,7 @@ ${command.hotKey}` : command.value;
     function folderRows(view) {
       return view.rows.map((row) => {
         const item = element("div", "project folder");
+        item.dataset.search = row.path;
         const open = expanded.has(row.path);
         const summary = element("button", "project-summary");
         summary.setAttribute("aria-expanded", String(open));
@@ -1155,6 +1522,10 @@ ${command.hotKey}` : command.value;
     async function showProjects() {
       const view = await invoke("projects_view");
       otherAgents = view.agents ?? [];
+      (window.searchData ??= {}).folders = !!view.folders;
+      (window.searchData ??= {}).projects = view.folders
+        ? view.folders.rows.map((row) => ({ id: row.path, name: row.name, detail: "" }))
+        : view.rows.map((row) => ({ id: row.path, name: row.name, detail: row.branch ?? "" }));
       const rows = document.getElementById("project-rows");
       newProject.hidden = !view.folders?.canCreate;
       if (view.folders) {
@@ -1166,6 +1537,7 @@ ${command.hotKey}` : command.value;
       }
       rows.replaceChildren(...view.rows.map((row) => {
         const item = element("div", "project");
+        item.dataset.search = row.path;
         const open = expanded.has(row.path);
         const summary = element("button", "project-summary");
         summary.setAttribute("aria-expanded", String(open));

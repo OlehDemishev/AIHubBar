@@ -14,6 +14,8 @@ final class RunStore {
     var selectedLogRunID: String?
     /// The pair shown in the «Сравнение» window (`PairCompareWindow`).
     var selectedPair: String?
+    /// «Версии» is on: a folder command's notification gets «Что изменилось».
+    @ObservationIgnored var tracksVersions: @MainActor () -> Bool = { false }
 
     private let settings: AppSettings
     private var processes: [String: Process] = [:]
@@ -60,13 +62,13 @@ final class RunStore {
     func launch(
         title: String, prompt: String, project: String, projectPath: String, folder: String, worktreeBranch: String?,
         profile: PermissionProfile, resultFile: String?, claudePath: String, taskTitle: String? = nil,
-        codexPath: String? = nil, reviewOf: String? = nil, pair: String? = nil
+        codexPath: String? = nil, reviewOf: String? = nil, pair: String? = nil, quiet: Bool = false
     ) throws -> BackgroundRun {
         let id = UUID().uuidString.lowercased()
         var run = BackgroundRun(
             id: id, project: project, projectPath: projectPath, folder: folder, worktreeBranch: worktreeBranch,
             commandTitle: title, task: taskTitle ?? Session.taskTitle(prompt), startedAt: .now,
-            timeLimitMinutes: settings.backgroundTimeLimitMinutes, pid: nil, state: .running, notified: false,
+            timeLimitMinutes: settings.backgroundTimeLimitMinutes, pid: nil, state: .running, notified: quiet,
             resultFile: resultFile, agent: codexPath == nil ? nil : CodexExec.agent, prompt: prompt, reviewOf: reviewOf, pair: pair
         )
 
@@ -270,7 +272,7 @@ final class RunStore {
         guard Date.now.timeIntervalSince(lastWrite) < 3600 else { return }
         Notifier.post(
             id: "run-\(run.id)", title: RunMessage.notificationTitle(run), body: RunMessage.notificationBody(run),
-            target: run.resultFile.flatMap { FileManager.default.fileExists(atPath: $0) ? .file(path: $0) : nil }
+            target: run.resultFile.flatMap { FileManager.default.fileExists(atPath: $0) ? NotificationTarget.commandResult(path: $0, project: run.projectPath, started: run.startedAt, versions: tracksVersions()) : nil }
                 ?? .run(id: run.id, pullRequest: run.pullRequestURL)
         )
         Telegram.notify(.backgroundResults, html: RunMessage.telegramHTML(run), settings: settings)

@@ -15,6 +15,10 @@
     <span class="spacer"></span>
     <button id="export" data-t="Экспорт CSV…"></button>
   </header>
+  <fieldset class="today" id="today" hidden>
+    <legend data-t="Сегодня"></legend>
+    <div id="today-lines"></div>
+  </fieldset>
   <p class="secondary" id="empty" hidden></p>
   <div id="content" hidden>
     <div class="figures">
@@ -48,6 +52,14 @@
 
     function show(view) {
       for (const button of id("periods").children) button.classList.toggle("chosen", Number(button.dataset.period) === period);
+      // «Сегодня»: the same lines the Mac's day summary has.
+      id("today").hidden = view.today.length === 0;
+      id("today-lines").replaceChildren(...view.today.map((line) => {
+        const row = document.createElement("div");
+        row.className = line.heading ? "heading secondary" : "line";
+        row.textContent = row.title = line.text;
+        return row;
+      }));
       const any = view.days.some((day) => day.tokens > 0);
       id("content").hidden = !any;
       id("empty").hidden = any;

@@ -126,6 +126,19 @@ enum QuickToggle: String, Codable, CaseIterable, Sendable {
         }
     }
 
+    /// The tile's hover hint: the title, its state, and what «off» takes away. The desktop's note is a warning and
+    /// is said beforehand too; Telegram's states a fact («выключены»), so it would contradict «включено» above it.
+    func hint(isOn: Bool?) -> String {
+        var hint = title
+        if let isOn {
+            hint += isOn ? String(localized: " — включено") : String(localized: " — выключено")
+        }
+        if let note = offNote, isOn == false || self == .desktopIcons {
+            hint += "\n" + note
+        }
+        return hint
+    }
+
     /// Can't be undone: asked first.
     var needsConfirmation: Bool { self == .emptyTrash }
 }
