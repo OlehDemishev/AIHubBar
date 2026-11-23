@@ -454,3 +454,8 @@ body.quick-prompt-window { margin: 0; padding: 14px 16px; display: flex; flex-di
 .found .detail { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .found .enter { flex: none; }
 .pointed { outline: 2px solid Highlight; outline-offset: 2px; border-radius: 6px; }
+
+/* «Свои промпты» in Settings */
+.saved-prompt { margin: 8px 0 12px; }
+.saved-prompt .row input { flex: 1; min-width: 0; }
+.saved-prompt textarea { display: block; width: 100%; margin-top: 6px; box-sizing: border-box; resize: vertical; font: inherit; }

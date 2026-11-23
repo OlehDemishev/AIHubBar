@@ -5,7 +5,8 @@
 **Updated:** 2026-11-23
 
 **Now:**
-- 2026-11-23: Mac — SPEC-content stage 5 is ready in branch `feat/calendar-ics-word-goals`: the calendar as an `.ics` file and «Цель по словам» of a folder profile; **held until 0.12.0 is out**; the panel line and the file seen live, the windows not
+- 2026-11-23: Mac — SPEC-content stage 5 is ready in PR 534 (`feat/calendar-ics-word-goals`): the calendar as an `.ics` file and «Цель по словам» of a folder profile; **held until 0.12.0 is out**; the panel line and the file seen live, the windows not
+- 2026-11-23: Windows — «Свои промпты»: kept in Settings, found by the panel's search, started in a chosen project (branch `feat/desktop-saved-prompts`; the two search steps seen live, the start and the Settings card not)
 - 2026-11-23: Windows — the search field in the panel: sessions, projects, quick commands (branch `feat/desktop-panel-search`; seen live). Saved prompts and the hot-key search window are next
 - 2026-11-23: Windows — the «Заметки» module (branch `feat/desktop-notes`; typing, a new note and the Recycle Bin seen live; its Settings card not seen)
 - 2026-11-21: Windows — limit hits are counted, «Упирался в лимит: N» in «Сегодня» (branch `feat/desktop-limit-hits`; the line seen live from a made-up record)
@@ -131,7 +132,7 @@
 - towards 1.0: what is in, what is «бета» and what is out is agreed (journal 2026-11-21); the «бета» badge beside a feature is ready in PR 529 (`feat/beta-badge`), **held until 0.12.0 is out** (after it: the badge for «Версии» and batch tasks); left — release notes, translations read by people, feedback from strangers, the island at the real notch
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
-- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`, PR 520, PR 529 and the stage 5 PR (`feat/calendar-ics-word-goals`); all four contain `main` as of 2026-11-21 and are green
+- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`, PR 520, PR 529 and PR 534; all four contain `main` as of 2026-11-21 and are green
 - batch tasks and «Версии», left to see live (the rest was seen 2026-11-21 in an isolated copy): a batch with a typed text, a model by API, the wait near the limit, the summary and «Что изменилось» as a banner and in Telegram
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
@@ -180,6 +181,11 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Windows: «Свои промпты» (branch `feat/desktop-saved-prompts`)
+
+Done: on Oleh's «Продолжай, пока не упрешься в текущую версию на маке». The Mac's `SavedPrompt`: a title and a text kept in `settings.json` (`saved_prompts`; the Mac's two examples until the list is edited), Settings → «Сервисы AI» → «Свои промпты» with «Добавить промпт» and removal after a question. The panel's search finds a prompt by its title or text («свой промпт»); choosing it turns the field into «Проект для «…»…» with the projects below, and the chosen project starts Claude with the text as its «Своя задача…» does — {проект} and {ветка} (or {project}, {branch}) filled in, the project's row showing what the start said. Not offered in a profile with folder projects, as on the Mac. Esc in the search no longer closes the panel while there is text or a prompt's step to leave. `core/src/search.rs`, `app/src/search.rs`, `ui/panel.html`, `ui/settings.html`. One new text in the catalog — the Mac's footer without ⌃⌥C and the Finder file, in 12 languages.
+Checked: `python scripts/strings.py --check` (704 texts), `cargo test --workspace` on Windows (placeholders in both languages, the examples, the kept list with ids made unique, a prompt among the results, the projects of step two). Live on the laptop, a build from the branch: «ревью» found «Ревью ветки — свой промпт»; Enter gave the field «Проект для «Ревью ветки»…» and the row «AIHubBar — feat/desktop-saved-prompts»; Esc brought the plain search back with the panel still open (before the fix it closed the panel).
+Left: {файл} stays empty — nothing asks Explorer for its selected file. Not seen: the start itself (it would have opened a real Claude session in this repository), the card in Settings — the agent's scrolling did not reach it — and editing a prompt there. The search window on a hot key is not ported. Seen in Russian only.
 ## 2026-11-23 — Mac: the calendar as an `.ics` file and «Цель по словам» (branch `feat/calendar-ics-word-goals`)
 
 Done: SPEC-content stage 5, on Oleh's «Этап 5 «Текстов»».

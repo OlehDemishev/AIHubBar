@@ -56,6 +56,8 @@ pub struct Settings {
     pub resource_disk_below_gb: u64,
     /// «Быстрые команды»: the library (the Mac's `[QuickCommand]`); None — the starting examples, until edited.
     pub quick_commands: Option<Vec<crate::quick_commands::QuickCommand>>,
+    /// «Свои промпты» (the Mac's `savedPrompts`); None — the two examples, until edited.
+    pub saved_prompts: Option<Vec<crate::search::SavedPrompt>>,
     /// «Быстрые переключатели» shown (the Mac's `quickToggles`); None — every one this system has.
     pub quick_toggles: Option<Vec<String>>,
     /// Other AI services' limits (the Mac's `hubDisabled`, `hubGeminiQuota`, `hubGeminiDailyLimit`): each source is on
@@ -101,6 +103,7 @@ impl Default for Settings {
             notes_selected: None,
             resource_disk_below_gb: 20,
             quick_commands: None,
+            saved_prompts: None,
             quick_toggles: None,
             hub_disabled: Vec::new(),
             hub_gemini_quota: false,
@@ -165,6 +168,7 @@ impl Settings {
             telegram_chat: value.get("telegram_chat").and_then(Value::as_str).map(str::to_owned).filter(|c| !c.is_empty()),
             telegram_off: value.get("telegram_off").and_then(Value::as_array).map(|list| list.iter().filter_map(Value::as_str).filter(|e| crate::telegram::EVENTS.contains(e)).map(str::to_owned).collect()).unwrap_or_default(),
             quick_commands: crate::quick_commands::library(value.get("quick_commands")),
+            saved_prompts: crate::search::saved_prompts(value.get("saved_prompts")),
             hub_disabled: value.get("hub_disabled").and_then(Value::as_array).map(|l| l.iter().filter_map(Value::as_str).map(str::to_owned).collect()).unwrap_or_default(),
             hub_gemini_quota: value.get("hub_gemini_quota").and_then(Value::as_bool).unwrap_or(false),
             main_service: value.get("main_service").and_then(Value::as_str).unwrap_or_default().to_owned(),

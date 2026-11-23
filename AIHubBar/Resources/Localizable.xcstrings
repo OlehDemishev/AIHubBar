@@ -57722,6 +57722,82 @@
         }
       }
     },
+    "Наберите название в поиске, выберите проект — Claude запустится с этим текстом. Подстановки: {проект}, {ветка}.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اكتب الاسم في البحث واختر مشروعًا: يبدأ Claude بهذا النص. المتغيرات: {project} و{branch}."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Namen in der Suche eingeben und ein Projekt wählen: Claude startet mit diesem Text. Platzhalter: {project}, {branch}."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type the title in the search and pick a project: Claude starts with this text. Placeholders: {project}, {branch}."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escribe el nombre en la búsqueda y elige un proyecto: Claude se inicia con este texto. Variables: {project}, {branch}."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tapez le nom dans la recherche et choisissez un projet : Claude démarre avec ce texte. Variables : {project}, {branch}."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ketik nama di pencarian lalu pilih proyek: Claude dimulai dengan teks ini. Variabel: {project}, {branch}."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Digita il nome nella ricerca e scegli un progetto: Claude parte con questo testo. Segnaposto: {project}, {branch}."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "検索で名前を入力してプロジェクトを選ぶと、このテキストで Claude が起動します。置き換え: {project}、{branch}。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "검색에 이름을 입력하고 프로젝트를 고르면 이 텍스트로 Claude가 시작됩니다. 치환: {project}, {branch}."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wpisz nazwę w wyszukiwaniu i wybierz projekt: Claude uruchomi się z tym tekstem. Zmienne: {project}, {branch}."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Digite o nome na busca e escolha um projeto: o Claude inicia com este texto. Variáveis: {project}, {branch}."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Наберіть назву в пошуку, виберіть проєкт — Claude запуститься з цим текстом. Підстановки: {project}, {branch}."
+          }
+        }
+      }
+    },
     "Набор": {
       "localizations": {
         "ar": {
