@@ -45162,6 +45162,82 @@
         }
       }
     },
+    "Каждая заметка — файл .md в этой папке; удалённые уходят в корзину.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل ملاحظة ملف .md في هذا المجلد؛ والمحذوفة تذهب إلى سلة المهملات."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jede Notiz ist eine .md-Datei in diesem Ordner; gelöschte kommen in den Papierkorb."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Each note is a .md file in this folder; deleted ones go to the Trash."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada nota es un archivo .md en esta carpeta; las borradas van a la papelera."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chaque note est un fichier .md dans ce dossier ; les notes supprimées vont à la corbeille."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Setiap catatan adalah file .md di folder ini; yang dihapus masuk Tong Sampah."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ogni nota è un file .md in questa cartella; quelle eliminate vanno nel cestino."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メモはこのフォルダーの .md ファイルです。削除したものはゴミ箱へ。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "각 메모는 이 폴더의 .md 파일입니다. 삭제한 메모는 휴지통으로 갑니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Każda notatka to plik .md w tym folderze; usunięte trafiają do kosza."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada nota é um arquivo .md nesta pasta; as apagadas vão para o lixo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кожна нотатка — файл .md у цій папці; видалені йдуть у кошик."
+          }
+        }
+      }
+    },
     "Каждая заметка — файл .md в этой папке; удалённые уходят в корзину. Папку можно положить в iCloud Drive, чтобы заметки были и на других Mac.": {
       "localizations": {
         "ar": {

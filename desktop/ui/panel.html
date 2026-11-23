@@ -105,6 +105,24 @@
       </div>
       <div class="quick-results" id="quick-results"></div>
     </section>
+    <section class="card notes" id="notes" hidden>
+      <div class="notes-head">
+        <h2 data-t="Заметки"></h2>
+        <span class="spacer"></span>
+        <button class="small" id="note-new" data-t-title="Новая заметка">+</button>
+        <button class="small" id="note-open" data-t-title="Открыть в редакторе">↗</button>
+        <button class="small" id="note-trash" data-t-title="В корзину">🗑</button>
+      </div>
+      <select id="note-names" hidden></select>
+      <textarea id="note-text" spellcheck="false"></textarea>
+      <p class="note-error" id="note-error" hidden></p>
+      <div class="quick-confirm" id="note-confirm" hidden>
+        <span id="note-confirm-text"></span>
+        <span class="spacer"></span>
+        <button class="small" id="note-cancel" data-t="Отмена"></button>
+        <button class="small danger" id="note-yes" data-t="В корзину"></button>
+      </div>
+    </section>
     <section class="card toggles" id="toggles" hidden>
       <h2 data-t="Быстрые переключатели"></h2>
       <div class="tiles" id="toggle-tiles"></div>
@@ -676,6 +694,68 @@ ${command.hotKey}` : command.value;
     };
     showToggles();
     window.__TAURI__.event.listen("toggles-changed", showToggles);
+
+    // «Заметки»: a note per .md file. What is typed is written a second after the last key, and when the note,
+    // the panel or the window is left; a note changed in another editor is read again when the panel comes back.
+    const noteText = document.getElementById("note-text");
+    const noteNames = document.getElementById("note-names");
+    const noteError = document.getElementById("note-error");
+    document.getElementById("note-names").setAttribute("aria-label", t("Заметки"));
+    let noteShown = null, noteDirty = false, noteTimer = null;
+    function showNotes(view) {
+      document.getElementById("notes").hidden = !view.shown;
+      noteShown = view.selected;
+      noteDirty = false;
+      noteNames.hidden = view.names.length < 2;
+      noteNames.replaceChildren(...view.names.map((name) => new Option(name, name, false, name === view.selected)));
+      noteText.value = view.text;
+      noteText.disabled = !view.selected;
+      document.getElementById("note-confirm").hidden = true;
+      document.getElementById("note-confirm-text").textContent = view.question || "";
+      for (const id of ["note-open", "note-trash"]) document.getElementById(id).disabled = !view.selected;
+    }
+    async function saveNote() {
+      clearTimeout(noteTimer);
+      if (!noteDirty || !noteShown) return;
+      const text = noteText.value;
+      try {
+        await invoke("notes_save", { name: noteShown, text });
+        if (noteText.value === text) noteDirty = false;
+        noteError.hidden = true;
+      } catch (error) {
+        noteError.textContent = String(error);
+        noteError.hidden = false;
+      }
+    }
+    noteText.oninput = () => {
+      noteDirty = true;
+      clearTimeout(noteTimer);
+      noteTimer = setTimeout(saveNote, 1000);
+    };
+    noteText.onblur = saveNote;
+    window.addEventListener("blur", saveNote);
+    const refreshNotes = async () => { if (!noteDirty) showNotes(await invoke("notes_view")); };
+    noteNames.onchange = async () => { await saveNote(); showNotes(await invoke("notes_select", { name: noteNames.value })); };
+    const noteAction = async (command, args) => {
+      await saveNote();
+      try {
+        const view = await invoke(command, args);
+        if (view) showNotes(view);
+        noteError.hidden = true;
+      } catch (error) {
+        noteError.textContent = String(error);
+        noteError.hidden = false;
+      }
+    };
+    document.getElementById("note-new").onclick = () => noteAction("notes_create");
+    document.getElementById("note-open").onclick = () => noteAction("notes_open", { name: noteShown });
+    document.getElementById("note-trash").onclick = () => { document.getElementById("note-confirm").hidden = false; };
+    document.getElementById("note-cancel").onclick = () => { document.getElementById("note-confirm").hidden = true; };
+    document.getElementById("note-yes").onclick = () => { noteDirty = false; noteAction("notes_trash", { name: noteShown }); };
+    refreshNotes();
+    window.addEventListener("focus", refreshNotes);
+    window.__TAURI__.event.listen("notes-changed", refreshNotes);
+    window.__TAURI__.event.listen("profiles-changed", refreshNotes);
     window.__TAURI__.event.listen("profiles-changed", showToggles);
     // Dark mode or the icons may be switched elsewhere: read again when the panel comes forward.
     window.addEventListener("focus", showToggles);
