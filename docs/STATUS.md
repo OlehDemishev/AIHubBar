@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — «Агент мог застрять»: a notification when a working session has done nothing for 20 minutes or runs the same command again and again, and «тихо N мин» on its row after 10 (branch `feat/desktop-stuck-watch`; the row and the quiet notification's trigger seen live on a scratch session)
 - 2026-11-23: Windows 0.1.10 published as an unsigned pre-release (tag `desktop-v0.1.10`) on Oleh's «Да, выпускай»: the help window, other Claude accounts, «Сервисы AI» by service, feedback buttons, one task for Claude and Codex; installed on the laptop by the agent (0.1.8 → 0.1.9 → 0.1.10); «latest» stays the Mac's v0.12.0
 - 2026-11-23: Windows — «Сервисы AI» by service: capsules Claude Code, Codex, Gemini, Copilot, Cursor, «Другие» with a dot, each showing only its own agents, hooks, limits and keys (branch `feat/desktop-service-pages`; every capsule seen live)
 - 2026-11-23: Windows — «Предложить идею…» and «Сообщить о проблеме…» in Settings → «Основные» and under the help's topics: the repository's forms on GitHub, the bug form with the version and the system filled in (branch `feat/desktop-feedback`; the buttons seen, not pressed)
@@ -206,6 +207,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: «Агент мог застрять» (branch `feat/desktop-stuck-watch`)
+
+Done: the third Mac feature of «Надо догонять». The Mac's `StuckWatch`. A session that works but has done nothing for 20 minutes — no tool call, no new request, no hook event — gets one notification «Claude мог застрять — Проект» / «Сессия идёт, но уже N мин ничего не делает. Посмотрите, не зависла ли она.», once per quiet spell; one that runs the same shell command (Bash or, on Windows, PowerShell) five times among its last twelve tool calls gets «Раз за разом запускает одно и то же (уже 5): <команда>», once per command. A new request starts the count again; a session the app first finds already long quiet (after a restart) is old news. After ten quiet minutes the session's row says «тихо N мин» in orange, with the Mac's hint; a paused or finished background run never does. The times come from the session file's `last_tool_at` and `prompt_at`, which the hook already wrote. The watch looks every three seconds, with the sessions. `core/src/stuck.rs`, `core/src/sessions.rs`, `app/src/sessions.rs`, `ui/panel.html`; all texts are the Mac's.
+Checked: `python scripts/strings.py --check`, `cargo test --workspace` on Windows (two new: a quiet session told once and not after a restart, the same command again and again and a new request). Live on the laptop, the build from the branch, with a session file written for the look (running, quiet for 19 min 40 s, no process): its row said «работает … тихо 19 мин»; about half a minute later the log said «session demo-stuck-session may be stuck» — the notification was shown then (the toast itself the agent can't see). The scratch file was removed and the installed app started again.
+Left: the toast not seen; the repeated command not seen live (it needs a real agent in a loop). The Mac's «Как часто уведомлять» per module is not here: every stuck session notifies. Seen in Russian. Nothing run on Linux beyond CI.
 
 ## 2026-11-23 — Windows 0.1.10 released (branch `chore/desktop-0.1.10-note`)
 
