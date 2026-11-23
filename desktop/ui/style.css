@@ -126,6 +126,13 @@ body.pair-window { margin: 0; padding: 14px 16px; display: flex; flex-direction:
 .pair-ask { max-width: 440px; }
 .pair-ask p { margin: 0; user-select: text; }
 .pair-ask-buttons { display: flex; justify-content: flex-end; gap: 8px; }
+/* «Цель по словам» above a folder profile's projects. */
+.word-goal { display: flex; align-items: center; gap: 6px; font-size: 12px; padding: 2px 0 6px; }
+.word-goal .mark { color: var(--secondary); }
+.word-goal.reached .mark { color: #30d158; }
+.word-goal-bar { flex: 0 0 90px; height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; margin-inline-start: auto; }
+.word-goal-bar span { display: block; height: 100%; background: var(--accent); }
+.word-goal.reached .word-goal-bar span { background: #30d158; }
 /* «Справка»: the Settings layout with topics in the sidebar. */
 .help-feedback { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin: 0; padding: 8px 8px 0; border-top: 1px solid var(--line); font-size: 12px; }
 .help-nav-glyph { flex: none; width: 18px; text-align: center; }
