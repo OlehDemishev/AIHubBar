@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows 0.1.9 published as an unsigned pre-release (tag `desktop-v0.1.9`) on Oleh's «выпускай следующую версию»: Settings with a sidebar as on the Mac, «На ночь» and «После сброса», the pause near a limit, handover to Codex and review by the other service, the «Claude Code: инструкции и MCP» window; the update manifest serves it; the laptop was not updated by the agent; «latest» stays the Mac's v0.12.0
 - 2026-11-23: Windows — «Ширина» and «Плотность строк» of the panel in Settings → «Основные» (branch `feat/desktop-panel-shape`; a wide, spacious panel seen live). The warning above 90 % of the session, not seen before, was seen with it
 - 2026-11-23: Windows — copied files in «История буфера», and «Не запоминать из приложений» as the person's own list (branch `feat/desktop-clipboard-files`; files copied and put back seen live, the list in Settings not)
 - 2026-11-23: Windows — «Изменения: файлов: N +… −…» under a session or background run, with the list of files (branch `feat/desktop-session-changes`; seen live)
@@ -154,6 +155,7 @@
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
 **Needs Oleh:**
+- Windows laptop: update to 0.1.9 (Settings → «Основные» → «Обновления» → «Проверить сейчас», or wait a day) and look at the new Settings: the sidebar, «Что показывать» and a module's page with the back button, «Профили» and «Клавиши» (no control was changed there before the release); say what still looks unlike the Mac
 - Windows laptop, Telegram (0.1.7 is installed; nothing of it was tried with a real bot): 1) in @BotFather make a new bot — the Mac mini reads your present one; 2) Settings → «Telegram»: paste the token, «Привязать чат», «Start» in Telegram, «Проверить»; 3) start a small background task and see its result come to the chat; 4) «Этот компьютер отвечает боту» on, `/menu` in the chat — 🏠, then 🤖 and ⏳; 5) «Запросы разрешений в этот бот» on, start `claude --permission-mode default` in a project, ask it to create a file and answer ✅ from the phone. Say what did not work
 - update to 0.12.0 (Settings → «Основные» → «Обновления»): does the update window show the list of changes; does the «Что нового» card show once with six lines; is the bell in the panel's header left of the gear, and does a press turn it orange; the «Telegram» tile in «Быстрые переключатели» if they are on
 - Windows laptop, Telegram (in the next Windows version, or a build from `main`): Settings → «Telegram» — paste a bot's token from @BotFather (a new bot is the safest: the Mac mini reads your present one, and then «Start» reaches the Mac instead — the page says so and asks for the chat's id), «Привязать чат», «Start» in Telegram, «Проверить»; then start a small background task and see its result come to the chat
@@ -196,6 +198,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows 0.1.9 released (branch `chore/desktop-0.1.9-note`)
+
+Done: on Oleh's «выпускай следующую версию». The version set to 0.1.9 with the «Что нового» card's five lines for it and their 12 translations (PR 572; the five lines of 0.1.8 left the catalog), the tag `desktop-v0.1.9` on that PR's merge commit, the release published as a pre-release and not «latest» (the Mac's v0.12.0 stays latest): https://github.com/OlehDemishev/AIHubBar/releases/tag/desktop-v0.1.9. In it since 0.1.8: Settings with a sidebar as on the Mac, «На ночь» and «После сброса» with the question above 90 %, the pause of background tasks near a limit, «Передать Codex» and the review by the other service, the «Claude Code: инструкции и MCP» window. The update manifest serves 0.1.9.
+Checked: `python scripts/strings.py --check` (805 texts), `python scripts/strings-check.py`, `cargo test --workspace` on Windows; CI green on PR 572 after two tries — the first failed on the Mac's «Strings against the code» (the old card's lines were left unused in the catalog; removed), the second had the Mac job cancelled, why is not known, and a rerun passed; `desktop-release.yml` green (it installs and uninstalls the installer) and the manifest workflow green; `latest.json` at `desktop-updates` read back and says 0.1.9.
+Left: the laptop was not updated by the agent and the new build was not opened as installed — the «Что нового» card of 0.1.9 and the update itself are unseen (Needs Oleh). Unsigned, SmartScreen warns. What was not tried by hand is listed in the release notes' «Known».
 
 ## 2026-11-23 — Mac: a batch and a restore from «Версии» run live on today's `main` (branch `chore/status-batch-versions-seen`)
 
