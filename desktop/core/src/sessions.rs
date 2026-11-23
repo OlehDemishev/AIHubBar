@@ -71,6 +71,9 @@ pub struct Session {
     pub transcript_path: Option<String>,
     /// When the hook first heard of the session.
     pub started_at: Option<DateTime<Utc>>,
+    /// The last tool call and the last request (the hook's `last_tool_at`, `prompt_at`).
+    pub last_tool_at: Option<DateTime<Utc>>,
+    pub prompt_at: Option<DateTime<Utc>>,
 }
 
 fn text(value: &Value, key: &str) -> Option<String> {
@@ -104,6 +107,8 @@ impl Session {
             task: text(&value, "first_prompt").or_else(|| text(&value, "last_prompt")),
             transcript_path: text(&value, "transcript_path"),
             started_at: text(&value, "started_at").and_then(|at| DateTime::parse_from_rfc3339(&at).ok()).map(|at| at.with_timezone(&Utc)),
+            last_tool_at: text(&value, "last_tool_at").and_then(|at| DateTime::parse_from_rfc3339(&at).ok()).map(|at| at.with_timezone(&Utc)),
+            prompt_at: text(&value, "prompt_at").and_then(|at| DateTime::parse_from_rfc3339(&at).ok()).map(|at| at.with_timezone(&Utc)),
         })
     }
 
