@@ -186,6 +186,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: three more Shortcuts actions (branch `feat/more-shortcuts`)
+
+Done: the fifth of the ten ideas of 2026-11-23. Shortcuts already had «Лимиты Claude», «Быстрая команда AI Hub Bar» and «Поиск AI Hub Bar». New in `AIHubBar/App/Intents.swift`: «Не спать» (for an hour, until turned off, off; answers with the module's own status line, or that the module is off), «Кто ждёт ответа» (the waiting sessions as text, also an App Shortcut with a phrase) and «Задача Claude в фоне» (a task and a project's name; goes through the projects' own launch, so the 90 % limit question, a busy folder and errors come back as the action's answer instead of a silent start). A project is found like a quick command: the whole name in any case, or a part that means one project (`IntentMatch`). 14 texts in 12 languages.
+Checked: not built locally (swap 10.4 of 11 GB): the PR's CI runs the tests and the catalog check (`IntentsTests`, the older `AuditTests` case for quick commands). `scripts/strings-check.py` passes.
+Left: **held until 0.12.0 is out.** No action was run from the Shortcuts app or by Siri. «Задача Claude в фоне» answers a limit question with its text but cannot say «Run anyway» — that stays in the project's row. Focus filters are not made.
+
 ## 2026-11-23 — 1.0 list: the shared Telegram bot and the Mini App go in as ready (branch `chore/status-shared-bot-ready`)
 
 Done: Oleh's answer «Как готовое» to the question left by the entry of `fix/telegram-help`: in the 1.0 list (entry «the list for 1.0» below, not rewritten) the shared Telegram bot through the Cloudflare Worker and the Mini App move from «Not in 1.0» to the ready part, with no «бета» badge. The line is gone from «Needs Oleh».
