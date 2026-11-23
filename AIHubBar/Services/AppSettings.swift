@@ -75,6 +75,10 @@ final class AppSettings {
     /// `Profile.resultPatterns` of the current mode; set with the source, not stored.
     var activeResultPatterns: [String] = []
 
+    /// The current profile and its «Цель по словам» (0 = none), for the day's word count; set with the source, not stored.
+    var activeProfileID = ""
+    var activeWordGoal = 0
+
     /// Whose rules the developer prompts follow; set with the mode, not stored.
     var promptStyle: PromptStyle = .workspace
 

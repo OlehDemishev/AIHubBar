@@ -21,6 +21,7 @@ import UserNotifications
 /// - `AIHubBar --git-scan <folder>` (the built-in git scanner: health, branch, changes, PRs, attention)
 /// - `AIHubBar --calendar [folder] [template]` (calendar dates of the enabled modes, or of a folder read as «папки» +
 ///   контент-план, with a template's stages)
+/// - `AIHubBar --calendar-ics <file.ics>` (the same dates of the enabled modes as an iCalendar file)
 /// - `AIHubBar --folder-projects <folder> [template]` (folder projects as the panel would list them in that template)
 /// - `AIHubBar --api-complete <provider> <prompt> [base-url]` (one request to a model by API, prints reply and tokens)
 /// - `AIHubBar --services [check]` (installed agents, stored API keys; `check` lists each provider's models)
@@ -245,6 +246,19 @@ enum CommandLineTool {
                           + "  — \(CalendarText.relative(entry.date, hasTime: entry.hasTime))" + (entry.isOverdue() ? "  OVERDUE" : ""))
                 }
                 if entries.isEmpty { print("no calendar dates") }
+                return 0
+            },
+            CLICommand(["--calendar-ics"], needs: 1, usage: "--calendar-ics <file.ics>  the enabled profiles' calendar dates as an iCalendar file") { arguments, index in
+                let modes = ProfileStore(settings: AppSettings(), readOnly: true)
+                let infos = modes.enabledModes.map { CalendarScanner.ProfileInfo(id: $0.id, name: $0.name, icon: $0.icon, source: $0.source, calendar: $0.calendar, doneStage: $0.doneStage) }
+                let entries = CalendarScanner.entries(for: infos)
+                do {
+                    try CalendarICS.text(entries).write(toFile: PathText.expand(arguments[index + 1]), atomically: true, encoding: .utf8)
+                } catch {
+                    printError("Could not write \(arguments[index + 1]): \(error.localizedDescription)")
+                    return 1
+                }
+                print("\(entries.count) dates written to \(arguments[index + 1])")
                 return 0
             },
             CLICommand(["--folder-projects"], needs: 1, usage: "--folder-projects <folder> [template]  folder projects as the panel lists them") { arguments, index in

@@ -26,6 +26,27 @@ struct FolderProjectsView: View {
                     .padding(.horizontal, 8)
                     .padding(.top, 4)
             }
+            if let goal = mode?.wordGoal, goal > 0, let words = store.wordsToday {
+                HStack(spacing: 6) {
+                    Image(systemName: words >= goal ? "checkmark.circle.fill" : "pencil.line")
+                        .foregroundStyle(words >= goal ? Color.green : Color.secondary)
+                    Text("Слов сегодня: \(words) из \(goal)")
+                        .scaledFont(.caption)
+                        .foregroundStyle(.secondary)
+                    if store.wordStreak >= 2 {
+                        Text("Дней подряд: \(store.wordStreak)")
+                            .scaledFont(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    ProgressView(value: Double(min(words, goal)), total: Double(goal))
+                        .tint(words >= goal ? .green : .accentColor)
+                        .frame(maxWidth: 90)
+                        .accessibilityHidden(true)
+                    Spacer(minLength: 0)
+                }
+                .padding(.horizontal, 8)
+                .padding(.top, 4)
+            }
             if store.projects.isEmpty, store.lastUpdated != nil {
                 let root = PathText.tilde(store.rootFolder ?? "")
                 Text(store.rootFolder == nil ? String(localized: "Папка пуста.") : String(localized: "Проектов пока нет: каждая папка внутри «\(root)» — проект."))

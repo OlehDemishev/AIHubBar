@@ -20973,6 +20973,82 @@
         }
       }
     },
+    "В настройках профиля с папками задайте цель в словах на день: панель покажет, сколько слов добавилось сегодня в главных файлах проектов. Удалённый текст в минус не считается.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في إعدادات ملف تعريف المجلدات حدّد هدفًا بالكلمات في اليوم: تعرض اللوحة عدد الكلمات المضافة اليوم إلى الملفات الرئيسية للمشاريع. النص المحذوف لا يُحسب بالسالب."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Legen Sie in den Einstellungen eines Ordnerprofils ein Ziel in Wörtern pro Tag fest: Das Panel zeigt, wie viele Wörter heute in den Hauptdateien der Projekte hinzugekommen sind. Gelöschter Text zählt nicht ins Minus."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the settings of a folder profile set a goal in words a day: the panel shows how many words were added today to the projects' main files. Deleted text does not count below zero."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En los ajustes de un perfil de carpetas fije un objetivo en palabras al día: el panel muestra cuántas palabras se han añadido hoy a los archivos principales de los proyectos. El texto eliminado no cuenta en negativo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans les réglages d’un profil à dossiers, fixez un objectif en mots par jour : le panneau indique combien de mots ont été ajoutés aujourd’hui aux fichiers principaux des projets. Le texte supprimé ne compte pas en négatif."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di pengaturan profil folder, tetapkan target kata per hari: panel menampilkan berapa kata yang ditambahkan hari ini ke berkas utama proyek. Teks yang dihapus tidak dihitung minus."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nelle impostazioni di un profilo a cartelle fissate un obiettivo in parole al giorno: il pannello mostra quante parole sono state aggiunte oggi ai file principali dei progetti. Il testo eliminato non conta in negativo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダのプロファイルの設定で 1 日の語数の目標を決めると、プロジェクトのメインファイルに今日加わった語数がパネルに表示されます。削除したテキストはマイナスになりません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 프로필 설정에서 하루 단어 목표를 정하면, 오늘 프로젝트의 주 파일에 추가된 단어 수가 패널에 표시됩니다. 지운 텍스트는 마이너스로 계산되지 않습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W ustawieniach profilu z folderami ustaw cel w słowach na dzień: panel pokaże, ile słów przybyło dziś w głównych plikach projektów. Usunięty tekst nie liczy się na minus."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nos ajustes de um perfil de pastas, defina uma meta em palavras por dia: o painel mostra quantas palavras foram adicionadas hoje aos arquivos principais dos projetos. Texto apagado não conta como negativo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У налаштуваннях профілю з папками задайте ціль у словах на день: панель покаже, скільки слів додалося сьогодні в головних файлах проєктів. Видалений текст у мінус не рахується."
+          }
+        }
+      }
+    },
     "В окне «Claude Code» на вкладке «Skills и плагины»: skills Claude Code и Codex и плагины Claude Code — у каждого выключатель; hooks обоих — для просмотра.": {
       "localizations": {
         "ar": {
@@ -35584,6 +35660,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Для скриптів"
+          }
+        }
+      }
+    },
+    "Дней подряд: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Days in a row: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Днів поспіль: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tage in Folge: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jours d’affilée : %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Días seguidos: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giorni di fila: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dias seguidos: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dni z rzędu: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連続日数: %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "연속 일수: %lld"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أيام متتالية: %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hari berturut-turut: %lld"
           }
         }
       }
@@ -50719,6 +50871,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Кнопка «Меню» показує список команд бота"
+          }
+        }
+      }
+    },
+    "Кнопка в окне «Календарь» сохраняет даты файлом .ics: откройте его в «Календаре» macOS или загрузите в Google Calendar. Повторный экспорт обновляет те же события, а не создаёт вторые.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الزر في نافذة «التقويم» يحفظ التواريخ في ملف ‎.ics: افتحه في تقويم macOS أو ارفعه إلى تقويم Google. التصدير مرة أخرى يحدّث الأحداث نفسها ولا ينشئ نسخًا ثانية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Taste im Fenster „Kalender“ sichert die Termine als .ics-Datei: Öffnen Sie sie im macOS-Kalender oder laden Sie sie in Google Kalender. Ein erneuter Export aktualisiert dieselben Termine, statt sie zu verdoppeln."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The button in the Calendar window saves the dates as an .ics file: open it in macOS Calendar or upload it to Google Calendar. Exporting again updates the same events instead of creating second ones."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El botón de la ventana «Calendario» guarda las fechas en un archivo .ics: ábralo en Calendario de macOS o súbalo a Google Calendar. Al exportar de nuevo se actualizan los mismos eventos en lugar de duplicarse."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le bouton de la fenêtre « Calendrier » enregistre les dates dans un fichier .ics : ouvrez-le dans Calendrier de macOS ou importez-le dans Google Agenda. Un nouvel export met à jour les mêmes événements au lieu d’en créer d’autres."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tombol di jendela “Kalender” menyimpan tanggal sebagai berkas .ics: buka di Kalender macOS atau unggah ke Google Calendar. Mengekspor lagi memperbarui acara yang sama, bukan membuat yang kedua."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il pulsante nella finestra «Calendario» salva le date in un file .ics: apritelo in Calendario di macOS o caricatelo su Google Calendar. Una nuova esportazione aggiorna gli stessi eventi invece di crearne altri."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「カレンダー」ウインドウのボタンで日付を .ics ファイルに保存します。macOS のカレンダーで開くか、Google カレンダーに読み込んでください。もう一度書き出すと、同じ予定が更新され、重複しません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘캘린더’ 윈도우의 버튼은 날짜를 .ics 파일로 저장합니다. macOS 캘린더에서 열거나 Google 캘린더에 올리세요. 다시 내보내면 같은 일정이 갱신되고 중복되지 않습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przycisk w oknie „Kalendarz” zapisuje daty w pliku .ics: otwórz go w Kalendarzu macOS lub wgraj do Kalendarza Google. Ponowny eksport aktualizuje te same wydarzenia, zamiast tworzyć kolejne."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O botão na janela “Calendário” salva as datas em um arquivo .ics: abra-o no Calendário do macOS ou envie-o para o Google Agenda. Exportar de novo atualiza os mesmos eventos em vez de criar outros."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кнопка у вікні «Календар» зберігає дати файлом .ics: відкрийте його в «Календарі» macOS або завантажте в Google Calendar. Повторний експорт оновлює ті самі події, а не створює другі."
           }
         }
       }
@@ -111563,6 +111791,88 @@
         }
       }
     },
+    "Слов сегодня: %lld из %lld": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كلمات اليوم: %1$lld من %2$lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wörter heute: %1$lld von %2$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Words today: %1$lld of %2$lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palabras hoy: %1$lld de %2$lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mots aujourd’hui : %1$lld sur %2$lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kata hari ini: %1$lld dari %2$lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parole oggi: %1$lld su %2$lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日の語数: %1$lld / %2$lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘 단어 수: %1$lld / %2$lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słów dzisiaj: %1$lld z %2$lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palavras hoje: %1$lld de %2$lld"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Слов сегодня: %1$lld из %2$lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Слів сьогодні: %1$lld із %2$lld"
+          }
+        }
+      }
+    },
     "Слова": {
       "localizations": {
         "ar": {
@@ -129151,6 +129461,310 @@
         }
       }
     },
+    "Цель дня выполнена": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today's goal is reached"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ціль дня виконано"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tagesziel erreicht"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objectif du jour atteint"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo del día cumplido"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obiettivo del giorno raggiunto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta do dia cumprida"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cel dnia osiągnięty"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日の目標を達成しました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘의 목표를 달성했습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تحقّق هدف اليوم"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target hari ini tercapai"
+          }
+        }
+      }
+    },
+    "Цель по словам": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هدف الكلمات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wortziel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Word goal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo de palabras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objectif de mots"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target kata"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obiettivo di parole"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "語数の目標"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단어 목표"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cel słów"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta de palavras"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ціль за словами"
+          }
+        }
+      }
+    },
+    "Цель по словам: нет": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هدف الكلمات: لا يوجد"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wortziel: keines"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Word goal: none"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo de palabras: ninguno"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objectif de mots : aucun"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target kata: tidak ada"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obiettivo di parole: nessuno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "語数の目標: なし"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단어 목표: 없음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cel słów: brak"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta de palavras: nenhuma"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ціль за словами: немає"
+          }
+        }
+      }
+    },
+    "Цель: %lld слов/день": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الهدف: %lld كلمة/يوم"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziel: %lld Wörter/Tag"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goal: %lld words/day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo: %lld palabras/día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objectif : %lld mots/jour"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target: %lld kata/hari"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obiettivo: %lld parole/giorno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標: 1日 %lld 語"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "목표: 하루 %lld단어"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cel: %lld słów/dzień"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta: %lld palavras/dia"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ціль: %lld слів/день"
+          }
+        }
+      }
+    },
     "Цена токенов Anthropic: без неё стоимость не считается": {
       "localizations": {
         "ar": {
@@ -132346,6 +132960,234 @@
           "stringUnit": {
             "state": "translated",
             "value": "Експорт CSV…"
+          }
+        }
+      }
+    },
+    "Экспорт в .ics": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصدير إلى ‎.ics"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export als .ics"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export to .ics"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar a .ics"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export en .ics"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekspor ke .ics"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esporta in .ics"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ".ics に書き出す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ".ics로 내보내기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksport do .ics"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar para .ics"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Експорт у .ics"
+          }
+        }
+      }
+    },
+    "Экспорт в .ics…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصدير إلى ‎.ics…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export als .ics …"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export to .ics…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar a .ics…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export en .ics…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekspor ke .ics…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esporta in .ics…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ".ics に書き出す…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ".ics로 내보내기…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksport do .ics…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar para .ics…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Експорт у .ics…"
+          }
+        }
+      }
+    },
+    "Экспорт в .ics… — файл с датами для «Календаря» macOS, Google Calendar и других": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصدير إلى ‎.ics… — ملف بالتواريخ لتقويم macOS وتقويم Google وغيرهما"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export als .ics … – eine Datei mit den Terminen für den macOS-Kalender, Google Kalender und andere"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export to .ics… — a file with the dates for macOS Calendar, Google Calendar and others"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar a .ics… — un archivo con las fechas para Calendario de macOS, Google Calendar y otros"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export en .ics… — un fichier avec les dates pour Calendrier de macOS, Google Agenda et d’autres"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekspor ke .ics… — berkas berisi tanggal untuk Kalender macOS, Google Calendar, dan lainnya"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esporta in .ics… — un file con le date per Calendario di macOS, Google Calendar e altri"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ".ics に書き出す… — macOS のカレンダーや Google カレンダーなどに読み込める日付のファイル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ".ics로 내보내기… — macOS 캘린더, Google 캘린더 등에서 쓸 수 있는 날짜 파일"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksport do .ics… — plik z datami dla Kalendarza macOS, Kalendarza Google i innych"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar para .ics… — um arquivo com as datas para o Calendário do macOS, o Google Agenda e outros"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Експорт у .ics… — файл із датами для «Календаря» macOS, Google Calendar та інших"
           }
         }
       }
