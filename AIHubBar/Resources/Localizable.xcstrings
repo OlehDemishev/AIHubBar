@@ -158573,6 +158573,82 @@
           }
         }
       }
+    },
+    "Экспорт в .ics… — файл с датами для Outlook, Google Calendar и других": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصدير إلى ‎.ics… — ملف بالتواريخ لـ Outlook وتقويم Google وغيرهما"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export als .ics … – eine Datei mit den Terminen für Outlook, Google Kalender und andere"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export to .ics… — a file with the dates for Outlook, Google Calendar and others"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar a .ics… — un archivo con las fechas para Outlook, Google Calendar y otros"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export en .ics… — un fichier avec les dates pour Outlook, Google Agenda et d’autres"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekspor ke .ics… — berkas berisi tanggal untuk Outlook, Google Calendar, dan lainnya"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esporta in .ics… — un file con le date per Outlook, Google Calendar e altri"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ".ics に書き出す… — Outlook や Google カレンダーなどに読み込める日付のファイル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ".ics로 내보내기… — Outlook, Google 캘린더 등에서 쓸 수 있는 날짜 파일"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksport do .ics… — plik z datami dla Outlooka, Kalendarza Google i innych"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar para .ics… — um arquivo com as datas para o Outlook, o Google Agenda e outros"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Експорт у .ics… — файл із датами для Outlook, Google Calendar та інших"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
