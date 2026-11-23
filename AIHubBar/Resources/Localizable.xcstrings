@@ -1481,6 +1481,82 @@
         }
       }
     },
+    "%@ мог застрять — %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ may be stuck — %2$@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ міг застрягти — %2$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ hängt vielleicht fest — %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ est peut-être bloqué — %2$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ puede haberse atascado — %2$@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ potrebbe essersi bloccato — %2$@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ pode ter travado — %2$@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ mógł utknąć — %2$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ が止まっているかもしれません — %2$@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@이(가) 멈춘 것 같습니다 — %2$@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ربما توقّف %1$@ — %2$@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ mungkin macet — %2$@"
+          }
+        }
+      }
+    },
     "%@ не ответил за %lld с": {
       "localizations": {
         "ar": {
@@ -15636,6 +15712,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Агент і ліміти"
+          }
+        }
+      }
+    },
+    "Агент мог застрять: молчит или ходит по кругу": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An agent may be stuck: silent or going in circles"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Агент міг застрягти: мовчить або ходить по колу"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agent hängt vielleicht fest: still oder im Kreis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agent peut-être bloqué : silencieux ou en boucle"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El agente puede haberse atascado: en silencio o en bucle"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’agente potrebbe essersi bloccato: fermo o in loop"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O agente pode ter travado: parado ou em círculos"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agent mógł utknąć: milczy lub kręci się w kółko"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エージェントが止まっているかも：無反応または堂々巡り"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "에이전트가 멈춘 것 같음: 무응답 또는 반복"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ربما توقّف الوكيل: صامت أو يدور في حلقة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agen mungkin macet: diam atau berputar-putar"
           }
         }
       }
@@ -96706,6 +96858,82 @@
         }
       }
     },
+    "Раз за разом запускает одно и то же (уже %lld): %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keeps running the same command (%1$lld times so far): %2$@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Раз у раз запускає одне й те саме (вже %1$lld): %2$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Führt immer wieder dasselbe aus (schon %1$lld-mal): %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relance sans cesse la même commande (déjà %1$lld fois) : %2$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ejecuta lo mismo una y otra vez (ya %1$lld veces): %2$@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continua a eseguire lo stesso comando (già %1$lld volte): %2$@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roda a mesma coisa repetidamente (já %1$lld vezes): %2$@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wciąż uruchamia to samo (już %1$lld razy): %2$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "同じコマンドを繰り返し実行しています（すでに %1$lld 回）：%2$@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "같은 명령을 계속 실행합니다(벌써 %1$lld회): %2$@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يكرّر تشغيل الأمر نفسه (%1$lld مرات حتى الآن): %2$@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terus menjalankan perintah yang sama (sudah %1$lld kali): %2$@"
+          }
+        }
+      }
+    },
     "Развернуть": {
       "localizations": {
         "ar": {
@@ -105148,6 +105376,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сесія й тиждень підписки Claude, прогноз, витрата за проєктами й на API."
+          }
+        }
+      }
+    },
+    "Сессия идёт, но уже %lld мин ничего не делает. Посмотрите, не зависла ли она.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The session is running but has done nothing for %lld min. Check whether it has hung."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесія триває, але вже %lld хв нічого не робить. Перевірте, чи не зависла вона."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Sitzung läuft, tut aber seit %lld Min. nichts. Prüfen Sie, ob sie hängt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La session tourne, mais ne fait rien depuis %lld min. Vérifiez qu’elle n’est pas bloquée."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La sesión sigue en marcha, pero lleva %lld min sin hacer nada. Comprueba si se ha colgado."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La sessione è in corso, ma non fa nulla da %lld min. Controlla che non si sia bloccata."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A sessão está rodando, mas não faz nada há %lld min. Veja se ela travou."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesja trwa, ale od %lld min nic nie robi. Sprawdź, czy się nie zawiesiła."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションは実行中ですが、%lld 分間何もしていません。止まっていないか確認してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션이 실행 중이지만 %lld분째 아무것도 하지 않습니다. 멈췄는지 확인하세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجلسة تعمل لكنها لم تفعل شيئًا منذ %lld دقيقة. تحقّق من أنها لم تتوقف."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi berjalan, tetapi sudah %lld mnt tidak melakukan apa-apa. Periksa apakah sesi macet."
           }
         }
       }
@@ -147122,310 +147426,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "❌ CI впав: %@ #%lld"
-          }
-        }
-      }
-    },
-    "%@ мог застрять — %@": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ may be stuck — %2$@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ міг застрягти — %2$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ hängt vielleicht fest — %2$@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ est peut-être bloqué — %2$@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ puede haberse atascado — %2$@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ potrebbe essersi bloccato — %2$@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ pode ter travado — %2$@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ mógł utknąć — %2$@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ が止まっているかもしれません — %2$@"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@이(가) 멈춘 것 같습니다 — %2$@"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ربما توقّف %1$@ — %2$@"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ mungkin macet — %2$@"
-          }
-        }
-      }
-    },
-    "Сессия идёт, но уже %lld мин ничего не делает. Посмотрите, не зависла ли она.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The session is running but has done nothing for %lld min. Check whether it has hung."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сесія триває, але вже %lld хв нічого не робить. Перевірте, чи не зависла вона."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Sitzung läuft, tut aber seit %lld Min. nichts. Prüfen Sie, ob sie hängt."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La session tourne, mais ne fait rien depuis %lld min. Vérifiez qu’elle n’est pas bloquée."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La sesión sigue en marcha, pero lleva %lld min sin hacer nada. Comprueba si se ha colgado."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La sessione è in corso, ma non fa nulla da %lld min. Controlla che non si sia bloccata."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A sessão está rodando, mas não faz nada há %lld min. Veja se ela travou."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sesja trwa, ale od %lld min nic nie robi. Sprawdź, czy się nie zawiesiła."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "セッションは実行中ですが、%lld 分間何もしていません。止まっていないか確認してください。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "세션이 실행 중이지만 %lld분째 아무것도 하지 않습니다. 멈췄는지 확인하세요."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الجلسة تعمل لكنها لم تفعل شيئًا منذ %lld دقيقة. تحقّق من أنها لم تتوقف."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sesi berjalan, tetapi sudah %lld mnt tidak melakukan apa-apa. Periksa apakah sesi macet."
-          }
-        }
-      }
-    },
-    "Раз за разом запускает одно и то же (уже %lld): %@": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Keeps running the same command (%1$lld times so far): %2$@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Раз у раз запускає одне й те саме (вже %1$lld): %2$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Führt immer wieder dasselbe aus (schon %1$lld-mal): %2$@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Relance sans cesse la même commande (déjà %1$lld fois) : %2$@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ejecuta lo mismo una y otra vez (ya %1$lld veces): %2$@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Continua a eseguire lo stesso comando (già %1$lld volte): %2$@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Roda a mesma coisa repetidamente (já %1$lld vezes): %2$@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wciąż uruchamia to samo (już %1$lld razy): %2$@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "同じコマンドを繰り返し実行しています（すでに %1$lld 回）：%2$@"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "같은 명령을 계속 실행합니다(벌써 %1$lld회): %2$@"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يكرّر تشغيل الأمر نفسه (%1$lld مرات حتى الآن): %2$@"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Terus menjalankan perintah yang sama (sudah %1$lld kali): %2$@"
-          }
-        }
-      }
-    },
-    "Агент мог застрять: молчит или ходит по кругу": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "An agent may be stuck: silent or going in circles"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Агент міг застрягти: мовчить або ходить по колу"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agent hängt vielleicht fest: still oder im Kreis"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agent peut-être bloqué : silencieux ou en boucle"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El agente puede haberse atascado: en silencio o en bucle"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L’agente potrebbe essersi bloccato: fermo o in loop"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O agente pode ter travado: parado ou em círculos"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agent mógł utknąć: milczy lub kręci się w kółko"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "エージェントが止まっているかも：無反応または堂々巡り"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "에이전트가 멈춘 것 같음: 무응답 또는 반복"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ربما توقّف الوكيل: صامت أو يدور في حلقة"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agen mungkin macet: diam atau berputar-putar"
           }
         }
       }
