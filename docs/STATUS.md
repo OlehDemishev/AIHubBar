@@ -187,6 +187,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: the stuck-agent notification seen live (branch `feat/stuck-agent`)
+
+Done: after Oleh restarted the Mac (swap 0) the batch's six branches were merged into a local-only branch and run as an isolated copy (own bundle id and home). Two made-up session files in the copy's own folder: one running and silent — its row said «тихо 19 мин» and at 20 minutes the log got «Notification: Claude мог застрять — Ambo»; one that alternated an edit and `npm test` every 3 seconds — the same notification on the fifth `npm test`, once. No code change.
+Checked: `scripts/check.sh` on the six branches merged together: all passed (the first local build of the batch). The copy's log.
+Left: **held until 0.12.0 is out.** The banner itself was not seen: notifications are not allowed for the copy, so the proof is the log line, and the body's text is not in the log. Seen once: the copy restarted about a minute after the quiet notification and sent it again — a session first seen up to 2 minutes past the 20-minute line counts as news (`replayWithin`), so an app restart in exactly that window repeats it; left as it is. A real Claude Code session was not driven into either state.
+
 ## 2026-11-23 — Mac: a notification when an agent may be stuck (branch `feat/stuck-agent`)
 
 Done: on Oleh's «с 1 по 10 все сразу сделай» (the ten ideas of 2026-11-23). Checked against the code first: PR and CI in a project row with CI notifications, «Итог дня», spend by project, and memory and disk alerts were already there, so those ideas shrink to what is missing. This one was half there — a row says «тихо N мин» after 10 minutes — and had no notification. New `StuckWatch` (`AIHubBar/Models/StuckWatch.swift`): a running session with no sign of life for 20 minutes, or the same Bash command 5 times among its last 12 tool calls, gives one notification «… мог застрять — проект» with a click to the session; once per quiet stretch and once per command, the count starts again with a new request, an old quiet session is not announced at the app's start. A new notification kind «Агент мог застрять: молчит или ходит по кругу» on the «Сессии агентов» page (frequency, «не присылать»); in the island it comes as a waiting event. Four texts in 12 languages.
