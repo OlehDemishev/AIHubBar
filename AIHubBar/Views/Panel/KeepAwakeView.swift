@@ -3,6 +3,7 @@ import SwiftUI
 /// «Не спать» in the panel (SPEC-profiles §4.2): what holds the Mac awake now, a switch and quick timers.
 struct KeepAwakeView: View {
     @Environment(KeepAwakeController.self) private var keepAwake
+    @Environment(AppSettings.self) private var settings
     @Environment(ProfileStore.self) private var modes
     @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
 
@@ -18,6 +19,18 @@ struct KeepAwakeView: View {
                     .scaledFont(.caption)
                     .help(KeepAwakeText.status(keepAwake.reason))
                 Spacer()
+                // In the header, so it is in sight with the block collapsed too: without it only the system is held
+                // awake and the screen still goes off.
+                Toggle(isOn: Binding(
+                    get: { settings.keepAwakeRules.keepDisplayOn },
+                    set: { keepAwake.setKeepDisplayOn($0) }
+                )) {
+                    Image(systemName: settings.keepAwakeRules.keepDisplayOn ? "sun.max.fill" : "sun.max")
+                }
+                .toggleStyle(.button)
+                .controlSize(.mini)
+                .accessibilityLabel("Не гасить и экран")
+                .help("Не гасить и экран")
                 Toggle("", isOn: Binding(
                     get: { manual },
                     set: { $0 ? keepAwake.holdManually(for: nil) : keepAwake.stopManual() }

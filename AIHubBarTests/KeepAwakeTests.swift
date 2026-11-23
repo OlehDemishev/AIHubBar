@@ -74,6 +74,24 @@ struct KeepAwakeControllerTests {
         controller.holdManually(for: nil)
         #expect(controller.reason == nil && controller.manualUntil == nil, "not installed: nothing is held")
     }
+
+    @Test func theDisplayIsHeldOnlyWithItsSwitch() {
+        let name = "claudepult-keepawake-\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: name)!
+        defer { defaults.removePersistentDomain(forName: name) }
+        let settings = AppSettings(defaults: defaults)
+        let controller = KeepAwakeController(settings: settings, defaults: defaults)
+        controller.isActive = { true }
+        controller.holdManually(for: nil)
+        #expect(controller.reason == .manual(until: nil) && !controller.holdsDisplay, "the system alone by default")
+        controller.setKeepDisplayOn(true)
+        #expect(settings.keepAwakeRules.keepDisplayOn && controller.holdsDisplay, "taken at once, not at the next look")
+        controller.setKeepDisplayOn(false)
+        #expect(!controller.holdsDisplay)
+        controller.setKeepDisplayOn(true)
+        controller.stopManual()
+        #expect(controller.reason == nil && !controller.holdsDisplay, "nothing holds: the display goes off as usual")
+    }
 }
 
 struct LidSleepTests {
