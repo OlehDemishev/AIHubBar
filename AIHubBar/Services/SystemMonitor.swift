@@ -30,6 +30,8 @@ struct SystemSnapshot: Equatable, Sendable {
     var battery: Battery?
     /// Graphics load, when macOS reports it.
     var gpu: Double?
+    /// Bytes of swap in use. Swap files live on the startup disk, so a large one also eats free space.
+    var swapUsed: UInt64 = 0
 
     var memoryPercent: Double { memoryTotal == 0 ? 0 : Double(memoryUsed) / Double(memoryTotal) * 100 }
 }
@@ -47,7 +49,7 @@ struct SystemSampler: Sendable {
         return SystemSnapshot(
             cpu: cpuUsage(), memoryUsed: memory.used, memoryTotal: memory.total, pressure: Self.pressure(),
             diskFree: disk.free, diskTotal: disk.total, networkIn: netIn, networkOut: netOut,
-            battery: Self.battery(), gpu: Self.gpu()
+            battery: Self.battery(), gpu: Self.gpu(), swapUsed: Self.swap()
         )
     }
 
@@ -94,6 +96,14 @@ struct SystemSampler: Sendable {
         var size = MemoryLayout<Int32>.size
         sysctlbyname("kern.memorystatus_vm_pressure_level", &level, &size, nil, 0)
         return SystemSnapshot.Pressure(rawValue: Int(level)) ?? .normal
+    }
+
+    /// Swap in use, as `sysctl vm.swapusage` reports it.
+    static func swap() -> UInt64 {
+        var usage = xsw_usage()
+        var size = MemoryLayout<xsw_usage>.size
+        guard sysctlbyname("vm.swapusage", &usage, &size, nil, 0) == 0 else { return 0 }
+        return usage.xsu_used
     }
 
     // MARK: Disk
@@ -178,12 +188,15 @@ struct SystemSampler: Sendable {
 /// When to notify about resources (SPEC-profiles §4.1): each alert once per event, again only after it cleared.
 struct ResourceAlerts: Sendable {
     enum Alert: Equatable, Sendable {
-        case cpu, memory, disk(Int64), battery(Int)
+        case cpu, memory, swap(UInt64), disk(Int64), battery(Int)
     }
 
     static let cpuHigh = 90.0, cpuClear = 70.0
     static let cpuSustained: TimeInterval = 5 * 60
     static let batteryLow = 15, batteryClear = 20
+
+    /// Swap worth a word: half of the Mac's memory, and not less than 4 GB.
+    static func swapLimit(memoryTotal: UInt64) -> UInt64 { max(memoryTotal / 2, 4 << 30) }
 
     private var cpuHighSince: Date?
     private var fired: Set<String> = []
@@ -206,6 +219,8 @@ struct ResourceAlerts: Sendable {
         once("cpu", when: cpuHighSince.map { now.timeIntervalSince($0) >= Self.cpuSustained } ?? false,
              clearedWhen: cpuHighSince == nil, .cpu)
         once("memory", when: snapshot.pressure == .critical, clearedWhen: snapshot.pressure == .normal, .memory)
+        let swapLimit = Self.swapLimit(memoryTotal: snapshot.memoryTotal)
+        once("swap", when: snapshot.swapUsed >= swapLimit, clearedWhen: snapshot.swapUsed + (1 << 30) < swapLimit, .swap(snapshot.swapUsed))
         let limit = Int64(diskBelowGB) * 1_000_000_000
         once("disk", when: snapshot.diskFree > 0 && snapshot.diskFree < limit, clearedWhen: snapshot.diskFree >= limit + 2_000_000_000,
              .disk(snapshot.diskFree))
@@ -286,6 +301,9 @@ final class SystemMonitor {
         case .memory:
             Notifier.post(id: "resources-memory", title: String(localized: "Памяти не хватает"),
                           body: String(localized: "macOS сообщает о критической нехватке памяти. Закройте лишние приложения."))
+        case let .swap(used):
+            Notifier.post(id: "resources-swap", title: String(localized: "Подкачка сильно выросла"),
+                          body: String(localized: "Занято \(ResourceText.memory(used)): памяти давно не хватает, и подкачка занимает место на диске. Закройте тяжёлые приложения или перезагрузите Mac."))
         case let .disk(free):
             Notifier.post(id: "resources-disk", title: String(localized: "Мало места на диске"),
                           body: String(localized: "Свободно \(ResourceText.bytes(free))."))

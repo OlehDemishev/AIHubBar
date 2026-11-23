@@ -192,6 +192,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: a notification when swap has grown large (branch `feat/swap-alert`)
+
+Done: the fourth of the ten ideas of 2026-11-23. «Ресурсы Mac» already told about a critical memory shortage and low disk space; it did not see the state that hung this Mac mini twice — memory pressure looks normal while swap has grown to gigabytes and eats the disk. `SystemSnapshot.swapUsed` (`vm.swapusage`, no permission) and a new alert: swap at half of the Mac's memory or more (not less than 4 GB) gives one notification «Подкачка сильно выросла» until it falls a gigabyte under the line. It follows the module's switch «Уведомлять о нагрузке, памяти, месте и заряде»; the footnote under it names it. Two new texts and the changed footnote in 12 languages.
+Checked: not built locally (swap 10.4 of 11 GB — the very case): the PR's CI runs the tests and the catalog check (`ResourcesTests.swapOverHalfOfTheMemory`). `scripts/strings-check.py` passes.
+Left: **held until 0.12.0 is out.** Not seen live. The panel's «Ресурсы Mac» block does not show swap, only the notification does. No button that frees space: clearing build folders stays with `_daily-report`'s command, which only Oleh's setup has. The line is fixed at half of the memory, with no setting.
+
 ## 2026-11-23 — Mac: «Ждёт вас» in the day's summary (branch `feat/day-summary-waiting`)
 
 Done: the second of the ten ideas of 2026-11-23. «Итог дня» was already there (the «История расхода» window and a daily Telegram message: limits, spend by project, background runs); what it lacked was what is left for the person. New section «Ждёт вас» right under the limits: sessions that wait for an answer now («Проект: чего ждёт») and open pull requests with failed checks («❌ CI · Проект #7: название»), five of each and «и ещё N». A day with nothing done but with something waiting is now sent too. `DaySummary.waitingLines` / `failedPRLines`; `WeeklySummarySender` takes the session and project stores. One new text in 12 languages.
