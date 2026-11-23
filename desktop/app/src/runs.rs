@@ -260,6 +260,7 @@ fn start_beside(app: &AppHandle, run: &Run, program: &std::path::Path, command_t
         result_file: None,
         codex,
         review_of: review.then_some(run.id.as_str()),
+        pair: None,
     };
     let (started, child) = runs::start(&paths::runs_dir(), program, &new).map_err(|error| error.to_string())?;
     eprintln!("run {} started beside {}: «{command_title}»{}", started.id, run.id, if codex { " (Codex)" } else { "" });
