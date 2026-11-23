@@ -14734,6 +14734,82 @@
         }
       }
     },
+    "«Выбрать» под списком проектов: отметьте проекты, команду профиля и когда запустить — «Сейчас», «На ночь» или «После сброса лимита». Проекты идут по очереди в фоне (Claude Code или модель по API), у лимита пакет ждёт сброса, в конце приходит одна сводка.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Choose” under the list of projects: tick the projects, pick one of the profile’s commands and when to run it — “Now”, “Overnight” or “After the limit resets”. The projects go one after another in the background (Claude Code or a model by API), near a limit the batch waits for the reset, and one summary comes at the end."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Вибрати» під списком проєктів: позначте проєкти, команду профілю й коли запустити — «Зараз», «На ніч» або «Після скидання ліміту». Проєкти йдуть по черзі у фоні (Claude Code або модель через API), біля ліміту пакет чекає скидання, наприкінці надходить одне зведення."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Wählen“ unter der Projektliste: Projekte ankreuzen, einen Befehl des Profils wählen und wann er läuft – „Jetzt“, „Heute Nacht“ oder „Nach dem Zurücksetzen des Limits“. Die Projekte laufen nacheinander im Hintergrund (Claude Code oder ein Modell per API), am Limit wartet der Stapel auf das Zurücksetzen, am Ende kommt eine Zusammenfassung."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Choisir » sous la liste des projets : cochez les projets, choisissez une commande du profil et le moment — « Maintenant », « Cette nuit » ou « Après réinitialisation de la limite ». Les projets passent l’un après l’autre en arrière-plan (Claude Code ou un modèle par API), près d’une limite le lot attend la réinitialisation, et un seul résumé arrive à la fin."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Elegir» bajo la lista de proyectos: marca los proyectos, elige un comando del perfil y cuándo ejecutarlo: «Ahora», «Esta noche» o «Tras el reinicio del límite». Los proyectos van uno tras otro en segundo plano (Claude Code o un modelo por API), cerca de un límite el lote espera el reinicio y al final llega un solo resumen."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Scegli» sotto l’elenco dei progetti: spunta i progetti, scegli un comando del profilo e quando eseguirlo: «Ora», «Stanotte» o «Dopo l’azzeramento del limite». I progetti vanno uno dopo l’altro in background (Claude Code o un modello via API), vicino a un limite il gruppo attende l’azzeramento e alla fine arriva un solo riepilogo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Escolher” abaixo da lista de projetos: marque os projetos, escolha um comando do perfil e quando executar — “Agora”, “À noite” ou “Após o limite reiniciar”. Os projetos vão um após o outro em segundo plano (Claude Code ou um modelo por API), perto de um limite o lote espera o reinício e no fim chega um único resumo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Wybierz” pod listą projektów: zaznacz projekty, polecenie profilu i kiedy je uruchomić — „Teraz”, „Na noc” albo „Po resecie limitu”. Projekty idą po kolei w tle (Claude Code lub model przez API), przy limicie pakiet czeka na reset, a na końcu przychodzi jedno podsumowanie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクト一覧の下の「選択」で、プロジェクトにチェックを入れ、プロファイルのコマンドと実行のタイミング（「現在」「今夜」「上限のリセット後」）を選びます。プロジェクトはバックグラウンドで1つずつ順番に処理され（Claude CodeまたはAPI経由のモデル）、上限が近いとバッチはリセットを待ち、最後にまとめが1件届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트 목록 아래의 “선택”에서 프로젝트를 체크하고, 프로필의 명령과 실행 시점(“현재”, “오늘 밤”, “한도 초기화 후”)을 고릅니다. 프로젝트는 백그라운드에서 하나씩 차례로 처리되며(Claude Code 또는 API 모델), 한도에 가까워지면 묶음은 초기화를 기다리고, 끝나면 요약이 하나 옵니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«اختيار» تحت قائمة المشاريع: حدّد المشاريع، واختر أحد أوامر ملف التعريف ووقت التشغيل — «الآن» أو «الليلة» أو «بعد إعادة ضبط الحد». تُنفَّذ المشاريع واحدًا تلو الآخر في الخلفية (Claude Code أو نموذج عبر API)، وقرب الحد تنتظر الدفعة إعادة الضبط، وفي النهاية يصل ملخص واحد."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Pilih” di bawah daftar proyek: centang proyek, pilih salah satu perintah profil dan kapan menjalankannya — “Sekarang”, “Malam ini”, atau “Setelah batas direset”. Proyek dikerjakan satu per satu di latar belakang (Claude Code atau model lewat API), di dekat batas kumpulan itu menunggu reset, dan di akhir datang satu ringkasan."
+          }
+        }
+      }
+    },
     "«Готово» добавит профиль и сделает его текущим. Дальше всё правится в Настройках → «Профили».": {
       "localizations": {
         "ar": {
@@ -26768,6 +26844,82 @@
         }
       }
     },
+    "Все": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Усі"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutti"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wszystkie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべて"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모두"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الكل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semua"
+          }
+        }
+      }
+    },
     "Все команды Mac": {
       "localizations": {
         "ar": {
@@ -28208,6 +28360,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Виберіть файл ліворуч"
+          }
+        }
+      }
+    },
+    "Выбрано проектов: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projects chosen: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вибрано проєктів: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gewählte Projekte: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projets choisis : %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyectos elegidos: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progetti scelti: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projetos escolhidos: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybrane projekty: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択したプロジェクト: %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택한 프로젝트: %lld개"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المشاريع المختارة: %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyek dipilih: %lld"
           }
         }
       }
@@ -30565,6 +30793,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Виконати одну команду 2–3 сервісами й покласти результати поруч"
+          }
+        }
+      }
+    },
+    "Выполнить одну команду в нескольких проектах — по очереди, сейчас или ночью": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run one command in several projects — one after another, now or at night"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Виконати одну команду в кількох проєктах — по черзі, зараз або вночі"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einen Befehl in mehreren Projekten ausführen – nacheinander, jetzt oder nachts"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exécuter une commande dans plusieurs projets — l’un après l’autre, maintenant ou la nuit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ejecutar un comando en varios proyectos: uno tras otro, ahora o por la noche"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esegui un comando in più progetti: uno dopo l’altro, ora o di notte"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Executar um comando em vários projetos — um após o outro, agora ou à noite"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wykonaj jedno polecenie w kilku projektach — po kolei, teraz lub w nocy"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1つのコマンドを複数のプロジェクトで順番に実行します（今すぐ、または夜間）"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "하나의 명령을 여러 프로젝트에서 차례로 실행합니다(지금 또는 밤에)"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تنفيذ أمر واحد في عدة مشاريع — واحدًا تلو الآخر، الآن أو ليلًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jalankan satu perintah di beberapa proyek — satu per satu, sekarang atau malam hari"
           }
         }
       }
@@ -63436,6 +63740,158 @@
         }
       }
     },
+    "Начнётся в час ночного запуска из настроек; утром одна сводка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starts at the night start hour from Settings; one summary in the morning"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Почнеться в годину нічного запуску з налаштувань; уранці одне зведення"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beginnt zur Nachtstartstunde aus den Einstellungen; morgens eine Zusammenfassung"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commence à l’heure de lancement de nuit des réglages ; un résumé le matin"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empieza a la hora de inicio nocturno de los ajustes; un resumen por la mañana"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inizia all’ora di avvio notturno delle impostazioni; un riepilogo al mattino"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Começa na hora de início noturno dos ajustes; um resumo pela manhã"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zacznie się o godzinie nocnego startu z ustawień; rano jedno podsumowanie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定の夜間開始時刻に始まり、朝にまとめが1件届きます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정의 야간 시작 시각에 시작하며, 아침에 요약이 하나 옵니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تبدأ في ساعة التشغيل الليلي من الإعدادات؛ وملخص واحد في الصباح"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mulai pada jam mulai malam dari pengaturan; satu ringkasan di pagi hari"
+          }
+        }
+      }
+    },
+    "Начнётся через две минуты после сброса лимита сессии": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starts two minutes after the session limit resets"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Почнеться через дві хвилини після скидання ліміту сесії"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beginnt zwei Minuten nach dem Zurücksetzen des Sitzungslimits"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commence deux minutes après la réinitialisation de la limite de session"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empieza dos minutos después del reinicio del límite de sesión"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inizia due minuti dopo l’azzeramento del limite di sessione"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Começa dois minutos depois de o limite da sessão reiniciar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zacznie się dwie minuty po resecie limitu sesji"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッション上限のリセットから2分後に始まります"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션 한도가 초기화되고 2분 뒤에 시작합니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تبدأ بعد دقيقتين من إعادة ضبط حد الجلسة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mulai dua menit setelah batas sesi direset"
+          }
+        }
+      }
+    },
     "Не выбрана модель — Настройки → «Сервисы AI» → «Проверить»": {
       "localizations": {
         "ar": {
@@ -67943,6 +68399,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Нейромережі в медицині"
+          }
+        }
+      }
+    },
+    "Несколько проектов сразу": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Several projects at once"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кілька проєктів одразу"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mehrere Projekte auf einmal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plusieurs projets à la fois"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varios proyectos a la vez"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Più progetti insieme"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vários projetos de uma vez"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kilka projektów naraz"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "複数のプロジェクトをまとめて"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "여러 프로젝트 한꺼번에"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عدة مشاريع دفعة واحدة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beberapa proyek sekaligus"
           }
         }
       }
@@ -80504,6 +81036,158 @@
         }
       }
     },
+    "Отменить пакет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel Batch"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скасувати пакет"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stapel abbrechen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler le lot"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar lote"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulla gruppo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar lote"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anuluj pakiet"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バッチをキャンセル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "묶음 취소"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إلغاء الدفعة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batalkan kumpulan"
+          }
+        }
+      }
+    },
+    "Отменить пакет?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel the batch?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скасувати пакет?"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stapel abbrechen?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler le lot ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Cancelar el lote?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annullare il gruppo?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar o lote?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anulować pakiet?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バッチをキャンセルしますか？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "묶음을 취소할까요?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إلغاء الدفعة؟"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batalkan kumpulan?"
+          }
+        }
+      }
+    },
     "Отправить сейчас": {
       "localizations": {
         "ar": {
@@ -83161,6 +83845,164 @@
           "stringUnit": {
             "state": "translated",
             "value": "Помилка: %@"
+          }
+        }
+      }
+    },
+    "Пакет «%@»: ✅ %lld, ❌ %lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Пакет «%1$@»: ✅ %2$lld, ❌ %3$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batch “%@”: ✅ %lld, ❌ %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пакет «%@»: ✅ %lld, ❌ %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stapel „%@“: ✅ %lld, ❌ %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lot « %@ » : ✅ %lld, ❌ %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lote «%@»: ✅ %lld, ❌ %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gruppo «%@»: ✅ %lld, ❌ %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lote “%@”: ✅ %lld, ❌ %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pakiet „%@”: ✅ %lld, ❌ %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バッチ「%@」: ✅ %lld、❌ %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "묶음 “%@”: ✅ %lld, ❌ %lld"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الدفعة «%@»: ✅ %lld، ❌ %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kumpulan “%@”: ✅ %lld, ❌ %lld"
+          }
+        }
+      }
+    },
+    "Пакет работает только в фоне: нужен Claude Code с запуском в фоне или модель по API.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A batch runs only in the background: it needs Claude Code launched in the background or a model by API."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пакет працює лише у фоні: потрібен Claude Code із запуском у фоні або модель через API."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Stapel läuft nur im Hintergrund: Er braucht Claude Code mit Start im Hintergrund oder ein Modell per API."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un lot ne fonctionne qu’en arrière-plan : il faut Claude Code lancé en arrière-plan ou un modèle par API."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un lote solo funciona en segundo plano: necesita Claude Code con inicio en segundo plano o un modelo por API."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un gruppo funziona solo in background: serve Claude Code con avvio in background o un modello via API."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um lote só funciona em segundo plano: precisa do Claude Code iniciado em segundo plano ou de um modelo por API."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pakiet działa tylko w tle: potrzebny jest Claude Code uruchamiany w tle albo model przez API."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バッチはバックグラウンドでのみ動きます。バックグラウンド起動のClaude Code、またはAPI経由のモデルが必要です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "묶음은 백그라운드에서만 작동합니다. 백그라운드로 실행하는 Claude Code 또는 API 모델이 필요합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الدفعة تعمل في الخلفية فقط: تحتاج إلى Claude Code بتشغيل في الخلفية أو إلى نموذج عبر API."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kumpulan hanya berjalan di latar belakang: perlu Claude Code yang dijalankan di latar belakang atau model lewat API."
           }
         }
       }
@@ -87499,6 +88341,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "За записами Copilot CLI: токени запитів за тиждень (введення й виведення)."
+          }
+        }
+      }
+    },
+    "По одному проекту за раз, начиная сейчас": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One project at a time, starting now"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "По одному проєкту за раз, починаючи зараз"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Projekt nach dem anderen, ab jetzt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un projet à la fois, à partir de maintenant"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un proyecto cada vez, empezando ahora"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un progetto alla volta, a partire da adesso"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um projeto por vez, começando agora"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po jednym projekcie naraz, zaczynając teraz"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今から1プロジェクトずつ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금부터 프로젝트를 하나씩"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مشروع واحد في كل مرة، بدءًا من الآن"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satu proyek setiap kali, mulai sekarang"
           }
         }
       }
@@ -97016,6 +97934,82 @@
         }
       }
     },
+    "Проекты идут по очереди, не параллельно. У лимита пакет ждёт сброса; в конце придёт одна сводка.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The projects go one after another, not in parallel. Near a limit the batch waits for the reset; one summary comes at the end."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Проєкти йдуть по черзі, не паралельно. Біля ліміту пакет чекає скидання; наприкінці надійде одне зведення."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Projekte laufen nacheinander, nicht parallel. Am Limit wartet der Stapel auf das Zurücksetzen; am Ende kommt eine Zusammenfassung."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les projets passent l’un après l’autre, pas en parallèle. Près d’une limite, le lot attend la réinitialisation ; un seul résumé arrive à la fin."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los proyectos van uno tras otro, no en paralelo. Cerca de un límite el lote espera el reinicio; al final llega un solo resumen."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I progetti vanno uno dopo l’altro, non in parallelo. Vicino a un limite il gruppo attende l’azzeramento; alla fine arriva un solo riepilogo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os projetos vão um após o outro, não em paralelo. Perto de um limite o lote espera o reinício; no fim chega um único resumo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekty idą po kolei, nie równolegle. Przy limicie pakiet czeka na reset; na końcu przyjdzie jedno podsumowanie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクトは並行ではなく順番に処理されます。上限が近いとバッチはリセットを待ち、最後にまとめが1件届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트는 동시에가 아니라 차례로 처리됩니다. 한도에 가까워지면 묶음은 초기화를 기다리고, 끝나면 요약이 하나 옵니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُنفَّذ المشاريع واحدًا تلو الآخر لا بالتوازي. قرب الحد تنتظر الدفعة إعادة الضبط؛ وفي النهاية يصل ملخص واحد."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyek dikerjakan satu per satu, tidak paralel. Di dekat batas kumpulan menunggu reset; di akhir datang satu ringkasan."
+          }
+        }
+      }
+    },
     "Проекты профиля: git-репозитории или папки с работой — состояние, PR, этапы и команды для AI.": {
       "localizations": {
         "ar": {
@@ -97240,6 +98234,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Проєкти — це"
+          }
+        }
+      }
+    },
+    "Проекты, до которых очередь не дошла, не будут обработаны. Тот, что выполняется сейчас, закончит работу.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The projects whose turn hasn’t come won’t be processed. The one running now will finish."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Проєкти, до яких черга не дійшла, не буде оброблено. Той, що виконується зараз, завершить роботу."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekte, die noch nicht an der Reihe waren, werden nicht bearbeitet. Das gerade laufende wird fertig."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les projets dont le tour n’est pas venu ne seront pas traités. Celui qui est en cours ira jusqu’au bout."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los proyectos a los que aún no les ha llegado el turno no se procesarán. El que está en curso terminará."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I progetti il cui turno non è ancora arrivato non verranno elaborati. Quello in corso terminerà."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os projetos cuja vez ainda não chegou não serão processados. O que está em execução agora vai terminar."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekty, do których kolejka nie doszła, nie zostaną przetworzone. Ten, który jest teraz wykonywany, dokończy pracę."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "順番がまだ来ていないプロジェクトは処理されません。現在実行中のものは最後まで実行されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "차례가 오지 않은 프로젝트는 처리되지 않습니다. 지금 실행 중인 것은 끝까지 진행됩니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المشاريع التي لم يحن دورها لن تُعالَج. والمشروع الجاري تنفيذه الآن سيُكمل عمله."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyek yang belum mendapat giliran tidak akan diproses. Yang sedang berjalan akan selesai."
           }
         }
       }
@@ -111253,6 +112323,82 @@
         }
       }
     },
+    "Снять все": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deselect All"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зняти всі"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle abwählen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout désélectionner"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deseleccionar todo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deseleziona tutto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desmarcar tudo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odznacz wszystkie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべて解除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모두 해제"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إلغاء تحديد الكل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batalkan semua pilihan"
+          }
+        }
+      }
+    },
     "Снять ручной запрет сна: дальше решают правила": {
       "localizations": {
         "ar": {
@@ -113606,6 +114752,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Довідка"
+          }
+        }
+      }
+    },
+    "Спрашивается один раз на весь пакет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asked once for the whole batch"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запитується один раз на весь пакет"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird einmal für den ganzen Stapel abgefragt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demandé une seule fois pour tout le lot"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se pregunta una vez para todo el lote"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiesto una sola volta per tutto il gruppo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perguntado uma vez para o lote inteiro"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pytanie pada raz na cały pakiet"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バッチ全体で1回だけ入力します"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "묶음 전체에 한 번만 묻습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُسأل مرة واحدة للدفعة كلها"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ditanyakan sekali untuk seluruh kumpulan"
           }
         }
       }
@@ -120373,6 +121595,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tombol menu bot bersama membuka aplikasi langsung di Telegram: batas, sesi dengan “Izinkan” dan “Tolak”, tugas, laporan, dan pengaturan notifikasi."
+          }
+        }
+      }
+    },
+    "У профиля нет команд: добавьте их в Настройки → «Профили».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The profile has no commands: add them in Settings → “Profiles”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У профілю немає команд: додайте їх у Налаштування → «Профілі»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Profil hat keine Befehle: Fügen Sie sie unter Einstellungen → „Profile“ hinzu."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le profil n’a pas de commandes : ajoutez-les dans Réglages → « Profils »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El perfil no tiene comandos: añádelos en Ajustes → «Perfiles»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il profilo non ha comandi: aggiungili in Impostazioni → «Profili»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O perfil não tem comandos: adicione-os em Ajustes → “Perfis”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil nie ma poleceń: dodaj je w Ustawienia → „Profile”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このプロファイルにはコマンドがありません。設定 →「プロファイル」で追加してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필에 명령이 없습니다. 설정 → “프로필”에서 추가하세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد أوامر في ملف التعريف: أضفها من الإعدادات ← «ملفات التعريف»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil tidak punya perintah: tambahkan di Pengaturan → “Profil”."
           }
         }
       }
@@ -135322,6 +136620,170 @@
         }
       }
     },
+    "готово: %lld из %lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "готово: %1$lld из %2$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "done: %lld of %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "готово: %lld із %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fertig: %lld von %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "terminé : %lld sur %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "listo: %lld de %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fatto: %lld di %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pronto: %lld de %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gotowe: %lld z %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了: %lld / %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완료: %lld / %lld"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم: %lld من %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "selesai: %lld dari %lld"
+          }
+        }
+      }
+    },
+    "готово: %lld из %lld, не получилось: %lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "готово: %1$lld из %2$lld, не получилось: %3$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "done: %lld of %lld, failed: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "готово: %lld із %lld, не вдалося: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fertig: %lld von %lld, fehlgeschlagen: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "terminé : %lld sur %lld, échecs : %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "listo: %lld de %lld, con error: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fatto: %lld di %lld, non riusciti: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pronto: %lld de %lld, com falha: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gotowe: %lld z %lld, nie udało się: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了: %lld / %lld、失敗: %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완료: %lld / %lld, 실패: %lld"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم: %lld من %lld، فشل: %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "selesai: %lld dari %lld, gagal: %lld"
+          }
+        }
+      }
+    },
     "давление повышено": {
       "localizations": {
         "ar": {
@@ -140719,6 +142181,88 @@
         }
       }
     },
+    "начнётся в %@, проектов: %lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "начнётся в %1$@, проектов: %2$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "starts at %@, projects: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "почнеться о %@, проєктів: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "beginnt um %@, Projekte: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "commence à %@, projets : %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "empieza a las %@, proyectos: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "inizia alle %@, progetti: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "começa às %@, projetos: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "zacznie się o %@, projektów: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@に開始、プロジェクト: %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@에 시작, 프로젝트: %lld개"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تبدأ في %@، المشاريع: %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mulai pukul %@, proyek: %lld"
+          }
+        }
+      }
+    },
     "не найден": {
       "localizations": {
         "ar": {
@@ -144532,6 +146076,82 @@
         }
       }
     },
+    "папки больше нет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the folder is gone"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "папки більше немає"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "der Ordner ist nicht mehr da"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "le dossier n’existe plus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la carpeta ya no existe"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la cartella non c’è più"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "a pasta não existe mais"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "folderu już nie ma"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダがなくなりました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더가 더 이상 없습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المجلد لم يعد موجودًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "folder sudah tidak ada"
+          }
+        }
+      }
+    },
     "перед «%@»": {
       "localizations": {
         "en": {
@@ -145136,6 +146756,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "преміум-запити"
+          }
+        }
+      }
+    },
+    "прервано: приложение было закрыто": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "interrupted: the app was closed"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "перервано: застосунок було закрито"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "unterbrochen: Die App wurde beendet"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "interrompu : l’app a été fermée"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "interrumpido: la app se cerró"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "interrotto: l’app è stata chiusa"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "interrompido: o app foi fechado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "przerwano: aplikacja została zamknięta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "中断: アプリが終了しました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "중단됨: 앱이 종료되었습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قوطع: أُغلق التطبيق"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "terhenti: aplikasi ditutup"
           }
         }
       }
@@ -145820,6 +147516,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "профілю «%@»"
+          }
+        }
+      }
+    },
+    "профиля или сервиса больше нет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the profile or the service is gone"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "профілю або сервісу більше немає"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "das Profil oder der Dienst ist nicht mehr da"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "le profil ou le service n’existe plus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "el perfil o el servicio ya no existe"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "il profilo o il servizio non c’è più"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "o perfil ou o serviço não existe mais"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "profilu lub usługi już nie ma"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルまたはサービスがなくなりました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필 또는 서비스가 더 이상 없습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملف التعريف أو الخدمة لم يعد موجودًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "profil atau layanannya sudah tidak ada"
           }
         }
       }
