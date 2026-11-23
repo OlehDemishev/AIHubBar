@@ -8,6 +8,7 @@
 
 mod assistant;
 mod calendar;
+mod clipboard;
 mod commands;
 mod history;
 mod hub;
@@ -398,6 +399,7 @@ fn main() {
         .manage(resources::Resources::default())
         .manage(quick_commands::QuickCommands::default())
         .manage(toggles::Toggles::default())
+        .manage(clipboard::Clipboard::default())
         .manage(hub::Hub::default())
         .manage(updates::Updates::default())
         .manage(history::History::default())
@@ -434,7 +436,8 @@ fn main() {
             keep_awake::set_module, keep_awake::set_keep_awake_rules, keep_awake::choose_keep_awake_apps,
             resources::resources_view, resources::open_task_manager, resources::resource_settings, resources::set_resource_alerts,
             quick_commands::quick_commands_view, quick_commands::run_quick_command, quick_commands::quick_commands_library,
-            quick_commands::set_quick_commands, quick_commands::new_quick_command, search::panel_search, search::saved_prompts_view, search::set_saved_prompts, search::add_saved_prompt, search::prompt_projects,
+            quick_commands::set_quick_commands, quick_commands::new_quick_command, clipboard::clipboard_view, clipboard::clipboard_copy, clipboard::clipboard_pin, clipboard::clipboard_remove, clipboard::clipboard_clear,
+            clipboard::clipboard_settings, clipboard::set_clipboard_options, search::panel_search, search::saved_prompts_view, search::set_saved_prompts, search::add_saved_prompt, search::prompt_projects,
             search::fill_saved_prompt, notes::notes_view, notes::notes_select, notes::notes_create, notes::notes_save, notes::notes_trash, notes::notes_open,
             notes::notes_settings, notes::choose_notes_folder, notes::open_notes_folder, toggles::toggles_view, toggles::perform_toggle,
             toggles::quick_toggle_settings, toggles::set_quick_toggles, hub::hub_view, hub::refresh_hub, hub::hub_settings,
@@ -458,6 +461,7 @@ fn main() {
             services::Agents::start(&handle);
             handle.state::<calendar::Calendar>().start(handle.clone());
             handle.state::<keep_awake::KeepAwake>().start(handle.clone());
+            handle.state::<clipboard::Clipboard>().start(handle.clone());
             handle.state::<resources::Resources>().start(handle.clone());
             handle.state::<hub::Hub>().start(handle.clone());
             command_hot_keys::sync(&handle);
