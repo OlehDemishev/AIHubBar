@@ -4,6 +4,20 @@ import Testing
 
 /// «Быстрый запрос» (docs/specs/SPEC-quick-prompt.md): which project, agent and mode the window starts with, and its keys.
 struct QuickPromptTests {
+    @Test func droppedFilesGoWithTheTask() {
+        let shot = URL(fileURLWithPath: "/Users/o/Desktop/shot 1.png")
+        let log = URL(fileURLWithPath: "/tmp/build.log")
+        var files = QuickPrompt.adding([shot, URL(string: "https://example.com/a.png")!, log], to: [])
+        #expect(files == [shot.standardizedFileURL, log.standardizedFileURL], "files only")
+        files = QuickPrompt.adding([shot], to: files)
+        #expect(files.count == 2, "each file once")
+        let many = (0..<20).map { URL(fileURLWithPath: "/tmp/\($0).txt") }
+        #expect(QuickPrompt.adding(many, to: files).count == QuickPrompt.maxFiles)
+
+        #expect(QuickPrompt.task("Fix it", files: []) == "Fix it")
+        #expect(QuickPrompt.task(" Fix it\n", files: [shot, log]) == "Fix it\n\nFiles:\n/Users/o/Desktop/shot 1.png\n/tmp/build.log")
+    }
+
     private let projects = [
         QuickPrompt.Candidate(name: "Cantero", path: "/Users/o/Projects/Cantero", lastActivity: Date(timeIntervalSince1970: 100)),
         QuickPrompt.Candidate(name: "Cantero-l5", path: "/Users/o/Projects/Cantero-l5", lastActivity: nil),

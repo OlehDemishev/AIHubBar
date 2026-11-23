@@ -35588,6 +35588,158 @@
         }
       }
     },
+    "Диктовка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictation"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Диктування"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diktat"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictée"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dettatura"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ditado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dyktowanie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "音声入力"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "받아쓰기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإملاء"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dikte"
+          }
+        }
+      }
+    },
+    "Диктовка macOS: говорите — текст появится в поле. Включается в Системных настройках → «Клавиатура».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS Dictation: speak, and the text appears in the field. It is turned on in System Settings → “Keyboard”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Диктування macOS: говоріть — текст з’явиться в полі. Вмикається в Системних параметрах → «Клавіатура»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS-Diktat: Sprechen Sie – der Text erscheint im Feld. Eingeschaltet wird es in den Systemeinstellungen → „Tastatur“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictée macOS : parlez, le texte apparaît dans le champ. Elle s’active dans Réglages Système → « Clavier »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictado de macOS: habla y el texto aparece en el campo. Se activa en Ajustes del Sistema → «Teclado»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dettatura di macOS: parla e il testo appare nel campo. Si attiva in Impostazioni di Sistema → “Tastiera”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ditado do macOS: fale e o texto aparece no campo. É ativado em Ajustes do Sistema → “Teclado”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dyktowanie macOS: mów, a tekst pojawi się w polu. Włącza się je w Ustawieniach systemowych → „Klawiatura”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS の音声入力：話すとテキストがフィールドに入ります。「システム設定」→「キーボード」でオンにします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 받아쓰기: 말하면 텍스트가 필드에 나타납니다. 시스템 설정 → ‘키보드’에서 켭니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إملاء macOS: تكلّم فيظهر النص في الحقل. يُفعَّل من إعدادات النظام ← «لوحة المفاتيح»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dikte macOS: bicaralah, teks akan muncul di kolom. Diaktifkan di Pengaturan Sistem → “Papan Ketik”."
+          }
+        }
+      }
+    },
     "Диск": {
       "localizations": {
         "ar": {
@@ -124721,6 +124873,82 @@
         }
       }
     },
+    "Убрать файл": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove the file"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати файл"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datei entfernen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer le fichier"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar el archivo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi il file"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover o arquivo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń plik"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルを外す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일 빼기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة الملف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus file"
+          }
+        }
+      }
+    },
     "Убрать этап": {
       "localizations": {
         "ar": {
@@ -129444,6 +129672,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Файли + пошук в інтернеті"
+          }
+        }
+      }
+    },
+    "Файлы и снимки экрана можно перетащить в это окно — агент получит их пути.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drag files and screenshots into this window — the agent gets their paths."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файли та знімки екрана можна перетягнути в це вікно — агент отримає їхні шляхи."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dateien und Bildschirmfotos lassen sich in dieses Fenster ziehen – der Agent erhält ihre Pfade."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glissez des fichiers et des captures d’écran dans cette fenêtre : l’agent reçoit leurs chemins."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrastra archivos y capturas de pantalla a esta ventana: el agente recibe sus rutas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trascina file e istantanee in questa finestra: l’agente riceve i loro percorsi."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arraste arquivos e capturas de tela para esta janela — o agente recebe os caminhos."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pliki i zrzuty ekranu można przeciągnąć do tego okna — agent dostanie ich ścieżki."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルやスクリーンショットをこのウインドウにドラッグできます。エージェントにはそのパスが渡されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일과 스크린샷을 이 윈도우로 드래그하면 에이전트가 해당 경로를 받습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن سحب الملفات ولقطات الشاشة إلى هذه النافذة — يحصل الوكيل على مساراتها."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seret file dan tangkapan layar ke jendela ini — agen menerima path-nya."
           }
         }
       }
