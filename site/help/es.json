@@ -409,6 +409,10 @@
               "name" : "Comparar"
             },
             {
+              "detail" : "El módulo «Versiones» guarda los textos y la ficha de un proyecto de carpeta antes de cada ejecución de la IA y mientras escribes, en la carpeta de la app, no en el proyecto. Cada cuánto y cuánto tiempo: Ajustes → «Módulos» → «Versiones».",
+              "name" : "Versiones"
+            },
+            {
               "detail" : "Las etapas del perfil, separadas por comas; la etapa se cambia con un botón en el proyecto expandido. Palabras, duración, tiempo de lectura y páginas se cuentan sobre el archivo principal (.md, .txt, .rtf, .docx).",
               "name" : "Etapas y métricas"
             }

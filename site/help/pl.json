@@ -409,6 +409,10 @@
               "name" : "Porównaj"
             },
             {
+              "detail" : "Moduł „Wersje” zapisuje teksty i kartę projektu-folderu przed każdym uruchomieniem AI i gdy piszesz — w folderze aplikacji, nie w projekcie. Jak często i jak długo przechowywać: Ustawienia → „Moduły” → „Wersje”.",
+              "name" : "Wersje"
+            },
+            {
               "detail" : "Etapy profilu, oddzielone przecinkami; etap zmienia się przyciskiem w rozwiniętym projekcie. Słowa, czas trwania, czas czytania i strony są liczone w pliku głównym (.md, .txt, .rtf, .docx).",
               "name" : "Etapy i wskaźniki"
             }
