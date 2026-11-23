@@ -26,6 +26,8 @@ const CHECK_EVERY: Duration = Duration::from_secs(30);
 #[derive(Clone, Default)]
 pub struct Queue {
     items: Arc<Mutex<Vec<Queued>>>,
+    /// Runs the person resumed by hand: the guard leaves them alone until they finish.
+    exempt: Arc<Mutex<HashSet<String>>>,
 }
 
 fn file() -> PathBuf {
@@ -65,9 +67,16 @@ impl Queue {
         let now = Utc::now();
         summarize_night(app, now);
         let snapshot = app.state::<Limits>().snapshot();
+        let threshold = app.state::<AppState>().settings.lock().unwrap().run_guard_percent;
+        let mut hold = queue::hold(snapshot.as_ref(), threshold, now);
+        // For a look at the pause without a used-up limit, in a build made for development only.
+        if cfg!(debug_assertions) && std::env::var_os("CLAUDEPULT_TEST_HOLD").is_some() {
+            hold = Some(queue::Hold { key: "five_hour".into(), utilization: 99.0, resets_at: Some(now + chrono::Duration::hours(1)) });
+        }
+        self.guard_runs(app, hold);
         let (due, moved) = {
             let mut items = self.items.lock().unwrap();
-            let moved = queue::postpone_held(&mut items, snapshot.as_ref(), queue::GUARD_PERCENT, now);
+            let moved = queue::postpone_held(&mut items, snapshot.as_ref(), threshold, now);
             let due = queue::due_now(&items, &HashSet::new(), now);
             let started: HashSet<&str> = due.iter().map(|item| item.id.as_str()).collect();
             items.retain(|item| !started.contains(item.id.as_str()));
@@ -101,6 +110,65 @@ impl Queue {
         if moved || !due.is_empty() {
             let _ = app.emit("sessions-changed", ());
         }
+    }
+}
+
+impl Queue {
+    /// Pauses Claude's running background runs near the limit and resumes them after the reset; one notification
+    /// each way. Codex's runs are left alone: its limits are not Claude's.
+    fn guard_runs(&self, app: &AppHandle, hold: Option<queue::Hold>) {
+        let runs = app.state::<Runs>();
+        let texts = strings(app);
+        let mine: Vec<_> = runs.list().into_iter().filter(|run| run.is_running() && !run.is_codex()).collect();
+        let lines = |list: &[&claudepult_core::runs::Run]| list.iter().map(|run| format!("{}: {}", run.project, run.command_title)).collect::<Vec<_>>().join("\n");
+        let (icon, headline, body) = if let Some(hold) = hold {
+            let exempt = self.exempt.lock().unwrap().clone();
+            let paused: Vec<_> = mine.iter().filter(|run| !run.is_paused() && !exempt.contains(&run.id) && runs.pause(&run.id)).collect();
+            if paused.is_empty() {
+                return;
+            }
+            let window = claudepult_core::texts::window_title(&texts, &claudepult_core::usage::UsageWindow { key: hold.key.clone(), utilization: hold.utilization, resets_at: hold.resets_at, model: None });
+            let until = hold.resets_at.map(|at| texts.format(" Продолжу после сброса в %@.", &[&clock(at)])).unwrap_or_default();
+            ("⏸", texts.format("Фоновые задачи на паузе: %@ %@", &[&window, &claudepult_core::texts::percent(hold.utilization)]), lines(&paused) + &until)
+        } else {
+            let resumed: Vec<_> = mine.iter().filter(|run| run.is_paused() && runs.resume(&run.id)).collect();
+            if resumed.is_empty() {
+                return;
+            }
+            ("▶️", texts.t("Лимит сбросился: фоновые задачи продолжают работу").to_owned(), lines(&resumed))
+        };
+        let _ = app.notification().builder().title(&headline).body(&body).show();
+        crate::telegram::notify(app, "bg", format!("{icon} <b>{}</b>\n{}", claudepult_core::telegram::escape(&headline), claudepult_core::telegram::escape(&body)));
+        let _ = app.emit("sessions-changed", ());
+    }
+}
+
+/// «Продолжить сейчас» on a paused run: it goes on, and the guard leaves it alone until it finishes.
+#[tauri::command]
+pub fn resume_run_now(app: AppHandle, id: String) {
+    app.state::<Queue>().exempt.lock().unwrap().insert(id.clone());
+    app.state::<Runs>().resume(&id);
+    let _ = app.emit("sessions-changed", ());
+}
+
+#[derive(Serialize)]
+pub struct RunGuardView {
+    percent: u32,
+    choices: Vec<(u32, String)>,
+}
+
+/// «Ставить фоновые задачи на паузу».
+#[tauri::command]
+pub fn run_guard(app: AppHandle) -> RunGuardView {
+    let texts = strings(&app);
+    let percent = app.state::<AppState>().settings.lock().unwrap().run_guard_percent;
+    RunGuardView { percent, choices: queue::GUARD_CHOICES.into_iter().map(|value| (value, if value == 0 { texts.t("никогда").to_owned() } else { texts.format("с %lld %%", &[&value.to_string()]) })).collect() }
+}
+
+#[tauri::command]
+pub fn set_run_guard(app: AppHandle, percent: u32) {
+    if queue::GUARD_CHOICES.contains(&percent) {
+        save(&app, |settings| settings.run_guard_percent = percent);
     }
 }
 

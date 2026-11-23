@@ -19,8 +19,9 @@ pub const DEFAULT_HOUR: u32 = 1;
 pub const END_HOUR: u32 = 6;
 /// Above this session usage a background run asks first.
 pub const LAUNCH_WARNING: f64 = 90.0;
-/// At this usage of the session or the week queued runs wait for the reset (the Mac's default of «Ставить фоновые
-/// задачи на паузу»).
+/// «Ставить фоновые задачи на паузу»: at this usage of the session or the week running background tasks freeze and
+/// queued ones wait for the reset; 0 — never.
+pub const GUARD_CHOICES: [u32; 5] = [0, 80, 90, 95, 98];
 pub const GUARD_PERCENT: u32 = 95;
 
 /// When a run queued now starts, in the computer's own time: at the next `hour` o'clock, or at once if the night has
