@@ -84,6 +84,10 @@ fn git(program: &Path, folder: &Path, args: &[&str], seconds: u64) -> Option<Str
 }
 
 /// The commit the changes are counted from: the last one before the session started, `HEAD` without a start.
+pub fn base_commit(program: &Path, folder: &Path, since: Option<DateTime<Utc>>) -> String {
+    base(program, folder, since)
+}
+
 fn base(program: &Path, folder: &Path, since: Option<DateTime<Utc>>) -> String {
     let Some(start) = since else { return "HEAD".into() };
     let before = format!("--before={}", start.to_rfc3339_opts(SecondsFormat::Secs, true));

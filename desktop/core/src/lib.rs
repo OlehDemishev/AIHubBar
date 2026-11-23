@@ -26,6 +26,7 @@ pub mod keep_awake;
 pub mod keys;
 pub mod launch;
 pub mod notes;
+pub mod pair_compare;
 pub mod paths;
 pub mod process;
 pub mod profiles;

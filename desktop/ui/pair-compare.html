@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>AI Hub Bar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="pair-window">
+  <!-- The Mac's «Сравнение»: the two runs of a pair side by side. A file or «Различия между вариантами» opens the
+       diff over the window; the actions ask first, with the Mac's words. -->
+  <h1 id="pair-title"></h1>
+  <p class="secondary" id="pair-empty" data-t="Нет пары задач для сравнения" hidden></p>
+  <div class="pair-sides" id="pair-sides"></div>
+  <p class="warning" id="pair-error" hidden></p>
+  <footer class="pair-footer">
+    <span class="secondary" id="pair-common"></span>
+    <span class="spacer"></span>
+    <button id="pair-between" data-t="Различия между вариантами" data-t-title="Чем вариант второго сервиса отличается от варианта первого: то, что закоммичено в обеих ветках" hidden></button>
+  </footer>
+  <div class="pair-sheet" id="pair-sheet" hidden>
+    <div class="pair-sheet-box" role="dialog" aria-modal="true">
+      <header>
+        <strong id="sheet-title"></strong>
+        <span class="spacer"></span>
+        <button id="sheet-close" data-t="Закрыть"></button>
+      </header>
+      <div class="pair-diff" id="sheet-lines"></div>
+      <p class="secondary" id="sheet-cut" hidden></p>
+    </div>
+  </div>
+  <div class="pair-sheet" id="pair-ask" hidden>
+    <div class="pair-sheet-box pair-ask" role="alertdialog" aria-modal="true">
+      <strong id="ask-title"></strong>
+      <p id="ask-text"></p>
+      <p class="pair-ask-buttons">
+        <button id="ask-cancel" data-t="Отмена"></button>
+        <button class="prominent" id="ask-yes"></button>
+      </p>
+    </div>
+  </div>
+  <script type="module">
+    import { loadTexts, invoke, t } from "./app.js";
+    await loadTexts();
+
+    const id = (name) => document.getElementById(name);
+    const element = (tag, className, text) => Object.assign(document.createElement(tag), { className: className ?? "", textContent: text ?? "" });
+    let view = null;
+
+    function showError(text) {
+      id("pair-error").hidden = !text;
+      id("pair-error").textContent = text ? "⚠ " + text : "";
+    }
+
+    function showSheet(title, lines, cut) {
+      id("sheet-title").textContent = title;
+      id("sheet-lines").replaceChildren(...(lines.length ? lines : [{ kind: "context", text: t("Изменений в файлах нет") }]).map((line) => element("div", "diff-" + line.kind, line.text || " ")));
+      id("sheet-cut").hidden = !cut;
+      id("sheet-cut").textContent = t("Показано начало: строк %lld. Целиком — командой сравнения в терминале.", lines.length);
+      id("pair-sheet").hidden = false;
+      id("sheet-close").focus();
+    }
+    id("sheet-close").onclick = () => { id("pair-sheet").hidden = true; };
+
+    // A confirmation as the Mac's: a title, what will happen, «Отмена» and the action.
+    let asked = null;
+    function ask(title, text, yes, action) {
+      asked = action;
+      id("ask-title").textContent = title;
+      id("ask-text").textContent = text;
+      id("ask-yes").textContent = yes;
+      id("pair-ask").hidden = false;
+      id("ask-cancel").focus();
+    }
+    id("ask-cancel").onclick = () => { asked = null; id("pair-ask").hidden = true; };
+    id("ask-yes").onclick = async () => {
+      const action = asked;
+      asked = null;
+      id("pair-ask").hidden = true;
+      if (action) await action();
+    };
+    window.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (!id("pair-ask").hidden) id("ask-cancel").click();
+      else if (!id("pair-sheet").hidden) id("sheet-close").click();
+    });
+
+    async function act(side, action) {
+      try {
+        view = await invoke("pair_action", { id: side.id, action });
+        showError(null);
+        show();
+      } catch (problem) {
+        showError(String(problem));
+      }
+    }
+
+    function sideBox(side) {
+      const box = element("section", "card pair-side");
+      box.append(element("h2", "", side.agent));
+      const head = element("div", "pair-side-head");
+      head.append(element("span", "pair-state " + side.tone, side.state));
+      if (side.branch) head.append(element("span", "mono", side.branch));
+      head.append(element("span", "spacer"));
+      if (side.summary) head.append(element("span", "", side.summary));
+      box.append(head);
+      const body = element("div", "pair-side-body");
+      body.append(element("p", "pair-outcome", side.outcome));
+      if (side.files && side.files.length === 0) body.append(element("p", "secondary", t("Изменений в файлах нет")));
+      for (const file of side.files ?? []) {
+        const row = element("button", "pair-file");
+        row.title = t("Показать изменения в файле");
+        row.append(element("span", "pair-file-mark", file.common ? "⇄" : "·"), element("span", "pair-file-path", file.path));
+        if (file.common) row.querySelector(".pair-file-mark").title = t("Этот файл изменили оба");
+        if (file.added) row.append(element("span", "added", file.added));
+        if (file.removed) row.append(element("span", "removed", file.removed));
+        if (file.note) row.append(element("span", "secondary", file.note));
+        row.onclick = async () => {
+          try {
+            const diff = await invoke("pair_file_diff", { id: side.id, path: file.path });
+            showSheet(diff.title, diff.lines, diff.cut);
+          } catch (problem) { showError(String(problem)); }
+        };
+        body.append(row);
+      }
+      box.append(body);
+      const tools = element("div", "pair-side-tools");
+      const log = element("button", "small", t("Журнал"));
+      log.onclick = async () => {
+        try {
+          const entries = await invoke("run_log", { id: side.id });
+          showSheet(`${side.agent}: ${t("Журнал")}`, entries.map((entry) => ({ kind: entry.kind === "error" ? "removed" : entry.kind === "result" ? "added" : "context", text: entry.text })), false);
+        } catch (problem) { showError(String(problem)); }
+      };
+      const folder = element("button", "small", t("Открыть папку"));
+      folder.disabled = side.folderGone;
+      folder.onclick = () => invoke("pair_open_folder", { id: side.id }).catch((problem) => showError(String(problem)));
+      tools.append(log, folder);
+      box.append(tools);
+      const actions = element("div", "pair-side-actions");
+      if (side.merge) {
+        const [title, warning] = side.merge;
+        const merge = element("button", "small", title);
+        merge.onclick = () => ask(t("Влить этот вариант?"), warning, t("Влить"), () => act(side, "merge"));
+        actions.append(merge);
+      }
+      if (side.tidy) {
+        const tidy = element("button", "small", t("Убрать папку и ветку"));
+        tidy.onclick = () => ask(t("Убрать папку и ветку?"), side.tidy, t("Убрать"), () => act(side, "tidy"));
+        actions.append(tidy);
+      }
+      if (side.keep) {
+        const keep = element("button", "small", t("Оставить этот вариант"));
+        keep.onclick = () => ask(t("Оставить этот вариант?"), side.keep, t("Удалить другой вариант"), () => act(side, "keep"));
+        actions.append(keep);
+      }
+      if (actions.childElementCount) box.append(actions);
+      return box;
+    }
+
+    function show() {
+      id("pair-empty").hidden = view.sides.length > 0;
+      id("pair-title").textContent = view.title;
+      id("pair-sides").replaceChildren(...view.sides.map(sideBox));
+      id("pair-common").textContent = view.common ? "⇄ " + view.common : "";
+      id("pair-between").hidden = !view.between;
+    }
+    id("pair-between").onclick = async () => {
+      try {
+        const diff = await invoke("pair_between_diff");
+        showSheet(diff.title, diff.lines, diff.cut);
+      } catch (problem) { showError(String(problem)); }
+    };
+
+    // While a side still works, read again every ten seconds, as the Mac does.
+    async function refresh() {
+      view = await invoke("pair_view");
+      show();
+    }
+    await refresh();
+    setInterval(() => { if (view && !view.finished && !document.hidden) refresh(); }, 10000);
+    window.__TAURI__.event.listen("pair-changed", () => { showError(null); refresh(); });
+    window.addEventListener("focus", refresh);
+  </script>
+</body>
+</html>

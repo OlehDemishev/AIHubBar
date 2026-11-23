@@ -511,6 +511,7 @@
       });
       if (run.handover) line.append(beside(t("Передать %@", "Codex"), "hand_over_run"));
       if (run.review) line.append(beside(t("Проверить в %@", run.review), "review_run"));
+      if (run.compare) line.append(button(t("Сравнить с %@", run.compare), () => invoke("open_pair_compare", { id: run.id })));
       if (run.running) {
         const asking = confirmStop.has(run.id);
         line.append(button(asking ? t("Остановить?") : t("Остановить"), () => {
