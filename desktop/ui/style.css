@@ -469,3 +469,9 @@ body.quick-prompt-window { margin: 0; padding: 14px 16px; display: flex; flex-di
 .clip .ago { flex: none; }
 .clip .ago.done { color: #1a7f37; }
 .clip .icon-button { flex: none; font-size: 11px; padding: 2px 4px; }
+
+/* «Что нового» */
+.whats-new ul { margin: 6px 0 8px; padding-inline-start: 18px; font-size: 12px; }
+.whats-new li { margin: 3px 0; }
+.whats-new .buttons { display: flex; gap: 8px; margin: 0; }
+.whats-new .buttons .spacer { flex: 1; }

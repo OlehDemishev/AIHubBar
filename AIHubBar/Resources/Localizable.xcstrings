@@ -20353,6 +20353,82 @@
         }
       }
     },
+    "В окне «История расхода» видно, сколько раз за день вы упёрлись в лимит.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نافذة «سجل الاستهلاك» تعرض عدد المرات التي بلغت فيها الحد خلال اليوم."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Fenster „Verbrauchsverlauf“ zeigt, wie oft Sie am Tag das Limit erreicht haben."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “Usage History” window shows how many times you hit the limit during the day."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La ventana «Historial de consumo» muestra cuántas veces has alcanzado el límite en el día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fenêtre « Historique de consommation » indique combien de fois vous avez atteint la limite dans la journée."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jendela “Riwayat pemakaian” menunjukkan berapa kali Anda mencapai batas dalam sehari."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La finestra «Cronologia dei consumi» mostra quante volte hai raggiunto il limite durante la giornata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「使用履歴」ウインドウに、その日に上限に達した回数が表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘사용 기록’ 창에서 하루 동안 한도에 도달한 횟수를 볼 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Okno „Historia zużycia” pokazuje, ile razy w ciągu dnia osiągnięto limit."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A janela “Histórico de consumo” mostra quantas vezes você atingiu o limite no dia."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У вікні «Історія витрат» видно, скільки разів за день ви вперлися в ліміт."
+          }
+        }
+      }
+    },
     "В окне сравнения клик по файлу показывает изменения построчно. «Оставить этот вариант» удаляет другой, «Влить в …» вливает ветку варианта в ветку проекта (без push), а «Убрать папку и ветку» потом убирает за ним. Каждое действие спрашивает подтверждение.": {
       "localizations": {
         "ar": {
@@ -39077,6 +39153,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Нотатки"
+          }
+        }
+      }
+    },
+    "Заметки в Markdown и история буфера обмена — два новых модуля: Настройки → «Модули».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الملاحظات بتنسيق Markdown وسجل الحافظة وحدتان جديدتان: الإعدادات ← «الوحدات»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notizen in Markdown und der Verlauf der Zwischenablage sind zwei neue Module: Einstellungen → „Module“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown notes and clipboard history are two new modules: Settings → “Modules”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las notas en Markdown y el historial del portapapeles son dos módulos nuevos: Ajustes → «Módulos»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les notes en Markdown et l’historique du presse-papiers sont deux nouveaux modules : Réglages → « Modules »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Catatan Markdown dan riwayat papan klip adalah dua modul baru: Pengaturan → “Modul”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le note in Markdown e la cronologia degli appunti sono due nuovi moduli: Impostazioni → «Moduli»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown のメモとクリップボード履歴の 2 つのモジュールが加わりました: 設定 →「モジュール」。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown 메모와 클립보드 기록, 두 가지 모듈이 새로 생겼습니다: 설정 → ‘모듈’."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notatki w Markdown i historia schowka to dwa nowe moduły: Ustawienia → „Moduły”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notas em Markdown e histórico da área de transferência são dois módulos novos: Ajustes → “Módulos”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нотатки в Markdown та історія буфера обміну — два нові модулі: Налаштування → «Модулі»."
           }
         }
       }
@@ -88251,6 +88403,82 @@
         }
       }
     },
+    "Поле поиска вверху панели находит проекты, сессии, быстрые команды и свои промпты.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حقل البحث أعلى اللوحة يجد المشاريع والجلسات والأوامر السريعة وطلباتك المحفوظة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Suchfeld oben im Panel findet Projekte, Sitzungen, Schnellbefehle und eigene Prompts."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The search field at the top of the panel finds projects, sessions, quick commands and your saved prompts."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El campo de búsqueda en la parte superior del panel encuentra proyectos, sesiones, comandos rápidos y tus prompts."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le champ de recherche en haut du panneau trouve les projets, les sessions, les commandes rapides et vos prompts."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kolom pencarian di bagian atas panel menemukan proyek, sesi, perintah cepat, dan prompt Anda."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il campo di ricerca in cima al pannello trova progetti, sessioni, comandi rapidi e i tuoi prompt."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネル上部の検索欄で、プロジェクト、セッション、クイックコマンド、保存したプロンプトを探せます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 위쪽 검색 필드에서 프로젝트, 세션, 빠른 명령, 저장한 프롬프트를 찾을 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pole wyszukiwania u góry panelu znajduje projekty, sesje, szybkie polecenia i własne prompty."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O campo de busca no topo do painel encontra projetos, sessões, comandos rápidos e seus prompts."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поле пошуку вгорі панелі знаходить проєкти, сесії, швидкі команди та свої промпти."
+          }
+        }
+      }
+    },
     "Поле сверху панели ищет проекты, сессии, команды и свои промпты. Открыть с клавиатуры — сочетание в «Клавишах».": {
       "localizations": {
         "ar": {
@@ -101578,6 +101806,82 @@
         }
       }
     },
+    "Свои промпты: Настройки → «Сервисы AI». Выберите промпт в поиске, затем проект — Claude запустится с этим текстом.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "طلباتك المحفوظة: الإعدادات ← «خدمات الذكاء الاصطناعي». اختر طلبًا في البحث ثم مشروعًا، وسيبدأ Claude بهذا النص."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eigene Prompts: Einstellungen → „KI-Dienste“. Prompt in der Suche wählen, dann ein Projekt – Claude startet mit diesem Text."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved prompts: Settings → “AI Services”. Pick a prompt in the search, then a project: Claude starts with this text."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus prompts: Ajustes → «Servicios de IA». Elige un prompt en la búsqueda y luego un proyecto: Claude se inicia con ese texto."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos prompts : Réglages → « Services d’IA ». Choisissez un prompt dans la recherche, puis un projet : Claude démarre avec ce texte."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prompt Anda: Pengaturan → “Layanan AI”. Pilih prompt di pencarian, lalu proyek: Claude dimulai dengan teks ini."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I tuoi prompt: Impostazioni → «Servizi IA». Scegli un prompt nella ricerca, poi un progetto: Claude parte con questo testo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存したプロンプト: 設定 →「AI サービス」。検索でプロンプトを選び、次にプロジェクトを選ぶと、そのテキストで Claude が起動します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "저장한 프롬프트: 설정 → ‘AI 서비스’. 검색에서 프롬프트를 고르고 프로젝트를 고르면 이 텍스트로 Claude가 시작됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Własne prompty: Ustawienia → „Usługi AI”. Wybierz prompt w wyszukiwaniu, potem projekt — Claude uruchomi się z tym tekstem."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seus prompts: Ajustes → “Serviços de IA”. Escolha um prompt na busca e depois um projeto: o Claude inicia com este texto."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Свої промпти: Налаштування → «Сервіси AI». Виберіть промпт у пошуку, потім проєкт — Claude запуститься з цим текстом."
+          }
+        }
+      }
+    },
     "Своих настроек нет.": {
       "localizations": {
         "ar": {
@@ -113367,6 +113671,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Тема"
+          }
+        }
+      }
+    },
+    "Тема и размер текста: Настройки → «Основные».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السمة وحجم النص: الإعدادات ← «عام»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Design und Textgröße: Einstellungen → „Allgemein“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Theme and text size: Settings → “General”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema y tamaño del texto: Ajustes → «General»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thème et taille du texte : Réglages → « Général »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema dan ukuran teks: Pengaturan → “Umum”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema e dimensione del testo: Impostazioni → «Generali»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テーマと文字サイズ: 設定 →「一般」。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "테마와 글자 크기: 설정 → ‘일반’."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motyw i rozmiar tekstu: Ustawienia → „Ogólne”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema e tamanho do texto: Ajustes → “Geral”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тема й розмір тексту: Налаштування → «Загальні»."
           }
         }
       }
