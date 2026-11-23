@@ -6,6 +6,22 @@ import Foundation
 enum IntentBridge {
     static weak var settings: AppSettings?
     static weak var quickTools: QuickToolsController?
+    static weak var sessions: SessionStore?
+    /// «Не спать» from Shortcuts: the new state in words, nil while the module is off.
+    static var keepAwake: (@MainActor (KeepAwakeChoice) -> String?)?
+    static var projects: (@MainActor () -> [Project])?
+    /// Sends a task to Claude Code in the background; the answer is what the project's row would say about it.
+    static var startTask: (@MainActor (String, Project) async -> String)?
+}
+
+/// One thing by its name, any case. Part of a name is enough only when it means one thing: «clean» must not pick the
+/// first of two.
+enum IntentMatch {
+    static func pick<Item>(_ name: String, in items: [Item], title: (Item) -> String) -> Item? {
+        if let exact = items.first(where: { title($0).localizedCaseInsensitiveCompare(name) == .orderedSame }) { return exact }
+        let partial = items.filter { title($0).localizedCaseInsensitiveContains(name) }
+        return partial.count == 1 ? partial.first : nil
+    }
 }
 
 /// «Сессия 24 %, сброс через 1 ч 10 мин; неделя 84 %, сброс Пн 10:00» from `usage.json`, the file the limits block
@@ -63,9 +79,7 @@ extension RunQuickCommandIntent {
     /// The command with this title, any case. Part of a name is enough only when it means one command: «clean»
     /// must not pick the first of two.
     static func command(named name: String, in commands: [QuickCommand]) -> QuickCommand? {
-        if let exact = commands.first(where: { $0.title.localizedCaseInsensitiveCompare(name) == .orderedSame }) { return exact }
-        let partial = commands.filter { $0.title.localizedCaseInsensitiveContains(name) }
-        return partial.count == 1 ? partial.first : nil
+        IntentMatch.pick(name, in: commands, title: \.title)
     }
 }
 
@@ -81,11 +95,76 @@ struct OpenSearchIntent: AppIntent {
     }
 }
 
+enum KeepAwakeChoice: String, AppEnum {
+    case hour, untilOff, off
+
+    static let typeDisplayRepresentation: TypeDisplayRepresentation = "Не спать"
+    static let caseDisplayRepresentations: [KeepAwakeChoice: DisplayRepresentation] = [
+        .hour: "На час", .untilOff: "До выключения", .off: "Выключить",
+    ]
+}
+
+struct KeepAwakeIntent: AppIntent {
+    static let title: LocalizedStringResource = "Не спать"
+    static let description = IntentDescription("Держит Mac включённым час или до выключения, либо отпускает его.")
+
+    @Parameter(title: "Режим")
+    var mode: KeepAwakeChoice
+
+    @MainActor
+    func perform() async throws -> some IntentResult & ProvidesDialog {
+        let text = IntentBridge.keepAwake?(mode) ?? String(localized: "Модуль «Не спать» выключен")
+        return .result(dialog: IntentDialog(stringLiteral: text))
+    }
+}
+
+struct WaitingSessionsIntent: AppIntent {
+    static let title: LocalizedStringResource = "Кто ждёт ответа"
+    static let description = IntentDescription("Сессии агентов, которые ждут вашего ответа или разрешения.")
+
+    @MainActor
+    func perform() async throws -> some IntentResult & ReturnsValue<String> & ProvidesDialog {
+        let waiting = (IntentBridge.sessions?.items ?? []).filter { $0.state == .waiting }.map(\.session)
+        let text = Self.text(waiting)
+        return .result(value: text, dialog: IntentDialog(stringLiteral: text))
+    }
+
+    /// «Ambo: какой порт?; Site: Нужно разрешение: Bash».
+    static func text(_ waiting: [Session]) -> String {
+        guard !waiting.isEmpty else { return String(localized: "Никто не ждёт ответа") }
+        return waiting.map { [$0.displayProject, $0.message ?? $0.task].compactMap { $0 }.joined(separator: ": ") }.joined(separator: "; ")
+    }
+}
+
+struct StartTaskIntent: AppIntent {
+    static let title: LocalizedStringResource = "Задача Claude в фоне"
+    static let description = IntentDescription("Отправляет задачу Claude Code в фон в проекте с этим названием.")
+
+    @Parameter(title: "Задача")
+    var task: String
+
+    @Parameter(title: "Проект")
+    var project: String
+
+    @MainActor
+    func perform() async throws -> some IntentResult & ProvidesDialog {
+        let text = task.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !text.isEmpty else { return .result(dialog: IntentDialog(stringLiteral: String(localized: "Задача пустая"))) }
+        guard let start = IntentBridge.startTask,
+              let found = IntentMatch.pick(project, in: IntentBridge.projects?() ?? [], title: \.name) else {
+            return .result(dialog: IntentDialog(stringLiteral: String(localized: "Нет проекта «\(project)»")))
+        }
+        return .result(dialog: IntentDialog(stringLiteral: await start(text, found)))
+    }
+}
+
 struct AIHubBarShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         AppShortcut(intent: ShowLimitsIntent(), phrases: ["Лимиты в \(.applicationName)", "Limits in \(.applicationName)"],
                     shortTitle: "Лимиты Claude", systemImageName: "gauge.with.dots.needle.33percent")
         AppShortcut(intent: OpenSearchIntent(), phrases: ["Поиск в \(.applicationName)", "Search \(.applicationName)"],
                     shortTitle: "Поиск", systemImageName: "magnifyingglass")
+        AppShortcut(intent: WaitingSessionsIntent(), phrases: ["Кто ждёт в \(.applicationName)", "Who is waiting in \(.applicationName)"],
+                    shortTitle: "Кто ждёт ответа", systemImageName: "hand.raised")
     }
 }
