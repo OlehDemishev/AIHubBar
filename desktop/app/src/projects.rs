@@ -726,6 +726,7 @@ pub(crate) fn launch_now(
             result_file: None,
             codex,
             review_of: None,
+            pair: None,
         };
         let (run, child) = claudepult_core::runs::start(&paths::runs_dir(), &program, &new).map_err(|e| e.to_string())?;
         eprintln!("run {} started: «{title}» in {}{}", run.id, folder.display(), if codex { " (Codex)" } else { "" });
@@ -741,6 +742,59 @@ pub(crate) fn launch_now(
         projects.ask(false);
     }
     Ok(LaunchReply { message, ..LaunchReply::default() })
+}
+
+/// «И в Codex — сравнить» (the Mac's `launchBoth`): the same task goes to Claude and to Codex in the background,
+/// each in its own new worktree, so their changes do not meet. One notification comes when both have finished.
+#[tauri::command]
+pub async fn launch_both(app: AppHandle, path: String, task: String) -> Result<LaunchReply, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        let texts = strings(&app);
+        let project = Path::new(&path);
+        let task = task.trim().to_owned();
+        if task.is_empty() {
+            return Err("unknown command".to_owned());
+        }
+        let (base, _) = app.state::<Projects>().launch_target(project).ok_or("unknown project")?;
+        let kind = claudepult_core::agents::kind("codex").expect("listed");
+        let codex = claudepult_core::agents::detect(kind).ok_or_else(|| texts.format("%@ не установлен", &[kind.title]))?;
+        let claude = launch::find_claude().ok_or_else(|| texts.t("Claude Code не установлен").to_owned())?;
+        let tools = Tools::find().ok_or("git not found")?;
+        let settings = app.state::<crate::AppState>().settings.lock().unwrap().clone();
+        let command = ClaudeCommand::CustomTask(task.clone());
+        let prompt = launch::one_line(&command.prompt(&Style::for_projects(&projects_root(&app)), language(&app)));
+        let title = texts.t("Своя задача").to_owned();
+        let name = project.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
+        let pair = claudepult_core::runs::new_id();
+        let mut branches = Vec::new();
+        for (program, by_codex) in [(&claude, false), (&codex, true)] {
+            let plan = launch::create_worktree(&tools, project, &claudepult_core::runs::pair_name_source(&task, by_codex), &base)?;
+            let new = NewRun {
+                project: &name,
+                project_path: project,
+                folder: &plan.path,
+                worktree_branch: Some(plan.branch.as_str()),
+                command_title: &title,
+                task: &task,
+                prompt: &prompt,
+                time_limit_minutes: settings.background_time_limit_minutes,
+                permissions: "code",
+                result_file: None,
+                codex: by_codex,
+                review_of: None,
+                pair: Some(&pair),
+            };
+            let (run, child) = claudepult_core::runs::start(&paths::runs_dir(), program, &new).map_err(|e| e.to_string())?;
+            eprintln!("run {} started: pair {pair} in {}{}", run.id, plan.path.display(), if by_codex { " (Codex)" } else { "" });
+            app.state::<Runs>().add(&app, run, child);
+            branches.push(plan.branch);
+        }
+        app.state::<Projects>().ask(false);
+        let message = texts.format("«%@» запущен в фоне у Claude и Codex, каждый в своём worktree: %@. Итог придёт, когда закончат оба.", &[&title, &branches.join(", ")]);
+        Ok(LaunchReply { message, ..LaunchReply::default() })
+    })
+    .await
+    .map_err(|e| e.to_string())?
 }
 
 // MARK: - Worktrees

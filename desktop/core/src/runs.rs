@@ -152,6 +152,11 @@ impl Run {
         self.prompt.as_deref().is_some_and(|prompt| !prompt.is_empty())
     }
 
+    /// The pair this run belongs to («одна задача двум сервисам»).
+    pub fn pair(&self) -> Option<&str> {
+        self.other.get("pair").and_then(Value::as_str)
+    }
+
     /// «Передать Codex» (the Mac's `Handover`): a Claude run that has not finished well and whose task was kept.
     pub fn can_hand_over(&self) -> bool {
         !self.is_codex() && self.other.get("agent").is_none() && self.has_prompt() && (self.is_paused() || matches!(self.state, RunState::Failed | RunState::Stopped))
@@ -392,6 +397,22 @@ pub fn review_prompt(task: &str, author: &str) -> String {
     )
 }
 
+/// «Одна задача двум сервисам» (the Mac's `TwoServices`): the worktree names differ by the service, which goes
+/// first — at the end a long task's name cut it off, and both branches looked alike.
+pub fn pair_name_source(source: &str, codex: bool) -> String {
+    format!("{} {source}", if codex { "codex" } else { "claude" })
+}
+
+/// The pair's runs once both have finished, Claude first; None while one still works or one is missing.
+pub fn finished_pair<'a>(pair: &str, runs: &'a [Run]) -> Option<Vec<&'a Run>> {
+    let mut both: Vec<&Run> = runs.iter().filter(|run| run.pair() == Some(pair) && run.review_of().is_none()).collect();
+    if both.len() != 2 || both.iter().any(|run| run.is_running()) {
+        return None;
+    }
+    both.sort_by_key(|run| run.is_codex());
+    Some(both)
+}
+
 // MARK: - Start and stop
 
 pub struct NewRun<'a> {
@@ -412,6 +433,8 @@ pub struct NewRun<'a> {
     /// A review: the run it reads (the Mac's `reviewOf`). Codex then gets its `read-only` sandbox; Claude's
     /// `permissions` are `REVIEW`.
     pub review_of: Option<&'a str>,
+    /// «Одна задача двум сервисам»: the id both runs of the pair carry (the Mac's `pair`).
+    pub pair: Option<&'a str>,
 }
 
 /// Starts `claude -p` (or `codex exec`) in the folder with no window, its output into the log; the run is saved before
@@ -448,6 +471,9 @@ pub fn start(dir: &Path, program: &Path, new: &NewRun) -> io::Result<(Run, Child
     }
     if let Some(reviewed) = new.review_of {
         run.other.insert("reviewOf".into(), json!(reviewed));
+    }
+    if let Some(pair) = new.pair {
+        run.other.insert("pair".into(), json!(pair));
     }
     let log = File::create(run.log_path(dir))?;
     let mut process = command::command(program);
@@ -937,6 +963,28 @@ not json at all
     }
 
     #[test]
+    fn a_pair_is_told_when_both_are_done() {
+        let run = |id: &str, state: &str, extra: &str| -> Run {
+            serde_json::from_str(&format!(
+                r#"{{"id":"{id}","project":"Shop","projectPath":"/P/Shop","folder":"/P/Shop","commandTitle":"Своя задача","task":"Экспорт",
+                    "startedAt":"2026-11-18T10:00:00Z","timeLimitMinutes":90,"state":"{state}","notified":false{extra}}}"#
+            ))
+            .unwrap()
+        };
+        let claude = run("c", "succeeded", r#","pair":"p1""#);
+        let codex = run("x", "failed", r#","pair":"p1","agent":"codex""#);
+        let working = run("w", "running", r#","pair":"p2""#);
+        let other = run("o", "succeeded", r#","pair":"p2","agent":"codex""#);
+        let review = run("r", "succeeded", r#","pair":"p1","reviewOf":"c","agent":"codex""#);
+        let all = [codex.clone(), working, other, review, claude.clone(), run("alone", "succeeded", "")];
+        assert_eq!(finished_pair("p1", &all).map(|both| both.iter().map(|r| r.id.as_str()).collect::<Vec<_>>()), Some(vec!["c", "x"]), "Claude first; the review is not a side");
+        assert!(finished_pair("p2", &all).is_none(), "one still works");
+        assert!(finished_pair("p1", &[claude.clone()]).is_none() && finished_pair("none", &all).is_none());
+        assert_eq!((claude.pair(), all[5].pair()), (Some("p1"), None));
+        assert_eq!((pair_name_source("export orders", false), pair_name_source("export orders", true)), ("claude export orders".into(), "codex export orders".into()));
+    }
+
+    #[test]
     fn rules_per_system() {
         let (allow, deny) = rules(false);
         assert!(allow.contains(&"Bash(git push origin *)".to_owned()) && allow.contains(&"Bash(npm)".to_owned()));
@@ -1043,6 +1091,7 @@ not json at all
             task: "Do it", prompt: "Задача: «it's done» & more", time_limit_minutes: 5, permissions: "code", result_file: None,
             codex: false,
             review_of: None,
+            pair: None,
         };
         let (mut run, mut child) = start(&runs, &fake, &new).unwrap();
         assert!(child.wait().unwrap().success());

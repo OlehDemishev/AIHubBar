@@ -66,6 +66,7 @@ impl Queue {
     fn tick(&self, app: &AppHandle) {
         let now = Utc::now();
         summarize_night(app, now);
+        announce_pairs(app, now);
         let snapshot = app.state::<Limits>().snapshot();
         let threshold = app.state::<AppState>().settings.lock().unwrap().run_guard_percent;
         let mut hold = queue::hold(snapshot.as_ref(), threshold, now);
@@ -179,6 +180,44 @@ fn title(texts: &claudepult_core::i18n::Strings, command: &queue::Command) -> St
         queue::Command::FinishSession {} => texts.t("Завершить сессию"),
     }
     .to_owned()
+}
+
+/// «Одна задача двум сервисам»: one notification when both runs of a pair have finished, with what each one did.
+fn announce_pairs(app: &AppHandle, now: DateTime<Utc>) {
+    let runs = app.state::<Runs>().list();
+    let told = app.state::<AppState>().settings.lock().unwrap().pairs_announced.clone();
+    let mut pairs: Vec<&str> = runs.iter().filter_map(|run| run.pair()).filter(|pair| !told.iter().any(|known| known == pair)).collect();
+    pairs.sort_unstable();
+    pairs.dedup();
+    for pair in pairs {
+        let Some(both) = claudepult_core::runs::finished_pair(pair, &runs) else { continue };
+        save(app, |settings| {
+            settings.pairs_announced.push(pair.to_owned());
+            let extra = settings.pairs_announced.len().saturating_sub(100);
+            settings.pairs_announced.drain(..extra);
+        });
+        // Finished long ago (the app was closed): not news any more.
+        if !both.iter().any(|run| run.finished_at.is_some_and(|at| (now - at).num_minutes() < 60)) {
+            continue;
+        }
+        let texts = strings(app);
+        let headline = texts.format("Claude и Codex закончили — %@", &[&both[0].project]);
+        let git = claudepult_core::projects::Tools::find();
+        let body = both
+            .iter()
+            .map(|run| {
+                let outcome = crate::runs::outcome_text(&texts, run);
+                let folder = Path::new(&run.folder).file_name().map(|name| name.to_string_lossy().into_owned()).unwrap_or_default();
+                // With what each one changed, so the two can be told apart.
+                let changed = git.as_ref().and_then(|tools| claudepult_core::session_changes::read(&tools.git, Path::new(&run.folder), Some(run.started_at))).filter(|changes| !changes.files.is_empty()).map(|changes| format!(" · {}", changes.summary(&texts))).unwrap_or_default();
+                format!("{} ({}): {}{changed}", run.agent_title(), run.worktree_branch.as_deref().unwrap_or(&folder), outcome.lines().next().unwrap_or_default())
+            })
+            .collect::<Vec<_>>()
+            .join("\n");
+        let _ = app.notification().builder().title(&headline).body(&body).show();
+        crate::telegram::notify(app, "bg", format!("⚖️ <b>{}</b>\n{}", claudepult_core::telegram::escape(&headline), claudepult_core::telegram::escape(&body)));
+        eprintln!("pair {pair} announced: {}", body.replace('\n', " | "));
+    }
 }
 
 /// When the night's runs are all finished: one notification (and Telegram, like other background results).

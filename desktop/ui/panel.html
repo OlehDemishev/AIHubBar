@@ -1188,16 +1188,27 @@ ${command.hotKey}` : command.value;
         agent.setAttribute("aria-label", t("Агент"));
         agent.add(new Option("Claude Code", ""));
         if (codex) agent.add(new Option(t("Codex в фоне"), "codex"));
-        agent.value = codex && state.agent === "codex" ? "codex" : "";
+        // The same task to both at once, each in its own worktree; one notification when both are done.
+        if (codex) agent.add(new Option(t("И в Codex — сравнить"), "both"));
+        agent.value = codex && ["codex", "both"].includes(state.agent) ? state.agent : "";
         const note = element("p", "secondary agent-note", t("Codex работает в фоне в своей песочнице: пишет в папке проекта, итог — уведомлением. Закрыта ли при этом сеть, на Windows зависит от того, как настроена песочница Codex."));
         note.hidden = agent.value !== "codex";
         agent.onchange = () => { state.agent = agent.value; launches.set(row.path, state); note.hidden = agent.value !== "codex"; };
-        const send = () => start("custom", field.value, false, null, false, agent.value || null);
+        const both = async () => {
+          const task = field.value;
+          launches.set(row.path, { working: true });
+          showProjects();
+          let next;
+          try { next = { message: (await invoke("launch_both", { path: row.path, task })).message }; } catch (error) { next = { message: String(error), error: true }; }
+          launches.set(row.path, next);
+          showProjects();
+        };
+        const send = () => (agent.value === "both" ? both() : start("custom", field.value, false, null, false, agent.value || null));
         const go = action(t("Запустить"), send);
         go.classList.add("prominent");
-        const night = action(t("На ночь"), () => later("custom", field.value, "night", agent.value || null));
+        const night = action(t("На ночь"), () => later("custom", field.value, "night", agent.value === "codex" ? "codex" : null));
         night.title = t("Запустить в фоне ночью; утром придёт сводка");
-        const afterReset = action(t("После сброса"), () => later("custom", field.value, "reset", agent.value || null));
+        const afterReset = action(t("После сброса"), () => later("custom", field.value, "reset", agent.value === "codex" ? "codex" : null));
         afterReset.title = t("Запустить в фоне, когда сбросится лимит сессии");
         for (const button of [go, night, afterReset]) button.disabled = !field.value.trim();
         field.onkeydown = (event) => {
