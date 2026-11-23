@@ -34,6 +34,8 @@ pub struct Sessions {
     notified: Arc<Mutex<HashSet<String>>>,
     /// Sessions already told that their context is nearly full.
     context_notified: Arc<Mutex<HashSet<String>>>,
+    /// Sessions that went quiet or keep repeating a command (`stuck`).
+    stuck: Arc<Mutex<claudepult_core::stuck::StuckWatch>>,
 }
 
 /// The sessions to show; a process that is gone ends its session.
@@ -75,6 +77,8 @@ impl Sessions {
                 .iter()
                 .map(|(s, state)| (s.id.clone(), *state, s.updated_at.timestamp(), open.get(&s.id).map(|r| r.id.clone())))
                 .collect();
+            // Quiet is a matter of time, not of a changed file: looked at on every pass.
+            this.announce_stuck(&app, &shown);
             let changed = *this.seen.lock().unwrap() != seen;
             if changed {
                 *this.seen.lock().unwrap() = seen;
@@ -88,6 +92,21 @@ impl Sessions {
             }
             std::thread::sleep(std::time::Duration::from_secs(3));
         });
+    }
+
+    /// «Агент мог застрять»: a working session quiet for twenty minutes, or one running the same command again and
+    /// again — a notification each time, as on the Mac.
+    fn announce_stuck(&self, app: &AppHandle, shown: &[(Session, State)]) {
+        let alerts = self.stuck.lock().unwrap().evaluate(shown, Utc::now());
+        if alerts.is_empty() {
+            return;
+        }
+        let texts = strings(app);
+        for alert in alerts {
+            let Some((session, _)) = shown.iter().find(|(s, _)| s.id == alert.session_id) else { continue };
+            eprintln!("session {} may be stuck", session.id);
+            let _ = app.notification().builder().title(claudepult_core::stuck::title(&texts, session)).body(claudepult_core::stuck::body(&texts, &alert.reason)).show();
+        }
     }
 
     /// Once per session: the context is nearly full, Claude will soon compact the conversation.
@@ -162,6 +181,8 @@ pub struct SessionRow {
     /// «контекст 82 %» once the context is 70 % full, and whether it is nearly full (90 %).
     context: Option<String>,
     context_full: bool,
+    /// «тихо 14 мин»: working, but no tool call for ten minutes.
+    quiet: Option<String>,
     /// A permission request to answer from the panel.
     request: Option<RequestRow>,
     /// A background run (`runs.rs`): it can be stopped while it runs, its log read.
@@ -251,6 +272,7 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
             SessionRow {
             context: context.map(|part| texts.format("контекст %lld %%", &[&((part * 100.0).round() as i64).to_string()])),
             context_full: context.is_some_and(|part| part >= token_usage::CONTEXT_NOTIFY_AT),
+            quiet: claudepult_core::stuck::row_quiet_minutes(&session, state, Utc::now()).map(|minutes| texts.format("тихо %lld мин", &[&minutes.to_string()])),
             request: open.remove(&session.id).map(|r| RequestRow { title: r.asks_title(&texts), text: r.text(), id: r.id }),
             id: session.id.clone(),
             project: session.display_project(),
@@ -278,6 +300,9 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
         // Codex's hook names its session by Codex's thread, not by the run.
         let thread = run.is_codex().then(|| codex_thread(run)).flatten();
         if let Some(existing) = rows.iter_mut().find(|r| r.id == run.id || thread.as_deref() == Some(r.id.as_str())) {
+            if run.is_paused() || !run.is_running() {
+                existing.quiet = None;
+            }
             if run.is_paused() {
                 existing.detail = Some(texts.t("на паузе до сброса лимита").to_owned());
             }
@@ -303,6 +328,7 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
                 progress: None,
                 context: None,
                 context_full: false,
+                quiet: None,
                 request: None,
                 run: Some(row),
                 changes: changes.get(&app, &run.folder, Some(run.started_at)).map(|found| crate::changes::row(&texts, &run.folder, &found)),

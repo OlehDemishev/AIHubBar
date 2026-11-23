@@ -558,7 +558,7 @@
         const item = document.createElement("div");
         item.className = `session ${row.state}`;
         item.dataset.search = row.id;
-        item.innerHTML = `<span class="dot" aria-hidden="true"></span><span class="project"></span><span class="secondary worktree" hidden></span><span class="secondary detail"></span><span class="context" hidden></span><span class="secondary progress"></span>`;
+        item.innerHTML = `<span class="dot" aria-hidden="true"></span><span class="project"></span><span class="secondary worktree" hidden></span><span class="secondary detail"></span><span class="context" hidden></span><span class="quiet" hidden></span><span class="secondary progress"></span>`;
         item.querySelector(".project").textContent = row.project;
         if (row.context) {
           const context = item.querySelector(".context");
@@ -566,6 +566,12 @@
           context.classList.toggle("full", row.contextFull);
           context.title = t("Насколько заполнен контекст сессии (по журналу Claude Code). Ближе к 100 %, Claude сжимает историю и часть деталей теряется.");
           context.hidden = false;
+        }
+        if (row.quiet) {
+          const quiet = item.querySelector(".quiet");
+          quiet.textContent = row.quiet;
+          quiet.title = t("Придёт уведомление, если агент 20 минут ничего не делает или раз за разом запускает одну и ту же команду.");
+          quiet.hidden = false;
         }
         if (row.worktree) {
           const worktree = item.querySelector(".worktree");
