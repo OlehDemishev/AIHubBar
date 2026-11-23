@@ -16,6 +16,9 @@ struct ModuleDefinition: Sendable {
     var isBuiltIn = false
     /// Still in beta testing: offered and working only with Settings → General → «Бета-версии» on (docs/RELEASE.md).
     var isBeta = false
+    /// Carries the «бета» badge and nothing more: it works for everyone, but was checked less than the rest. Unlike
+    /// `isBeta` it hides and switches off nothing.
+    var hasBetaMark = false
     /// Shown as a block of the panel; «Остров у чёлки» and «Раскладка» live elsewhere (SPEC-notch §6, SPEC-layout §4).
     var isPanelBlock = true
     /// «Где показывать» on its page (SPEC-settings §1).
@@ -116,6 +119,7 @@ extension ModuleKind {
     var group: ModuleGroup { definition.group }
     var isBuiltIn: Bool { definition.isBuiltIn }
     var isBeta: Bool { definition.isBeta }
+    var hasBetaMark: Bool { definition.hasBetaMark }
     var isPanelBlock: Bool { definition.isPanelBlock }
     var keywords: [String] { definition.keywords }
 }

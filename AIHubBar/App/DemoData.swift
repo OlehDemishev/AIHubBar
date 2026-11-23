@@ -9,7 +9,7 @@ struct DemoData {
     /// The release this data was last brought up to date for; the same value as `WhatsNew.version`, and a test keeps
     /// the two equal. A release with news changes `WhatsNew.version`, the test fails, and whoever makes the release
     /// adds what the new version should show here (docs/RELEASE.md → «Demo») before raising this.
-    static let version = "0.12"
+    static let version = "0.13"
 
     var snapshot: UsageSnapshot?
     var history: [UsagePoint] = []
@@ -26,6 +26,16 @@ struct DemoData {
 
     static var projectsDirectory: String { NSHomeDirectory() + "/Projects" }
     static let projects = ["atlas-api", "atlas-web", "notes-app", "landing"]
+
+    /// «Локальные серверы» of the demo's projects (0.13): made-up processes, so the row shows without anything running.
+    static func servers(in projectPath: String) -> [LocalServer] {
+        switch (projectPath as NSString).lastPathComponent {
+        case "atlas-web": [LocalServer(pid: 0, command: "node", port: 5173, folder: projectPath)]
+        case "atlas-api": [LocalServer(pid: 0, command: "python3", port: 8000, folder: projectPath),
+                           LocalServer(pid: 0, command: "postgres", port: 5432, folder: projectPath)]
+        default: []
+        }
+    }
 
     static func make(scene: DemoMode.Scene, now: Date, calendar: Calendar = .current) -> DemoData {
         var data = DemoData()

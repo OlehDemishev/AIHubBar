@@ -36,6 +36,9 @@ final class DemoTests: XCTestCase {
         XCTAssertEqual(data.runs.map(\.state), [.running, .succeeded, .succeeded, .succeeded])
         XCTAssertEqual(PairCompare.sides("demo-pair-1", runs: data.runs)?.map(\.agentTitle), [AgentKind.claudeCode.title, AgentKind.codex.title])
         XCTAssertEqual(data.report?.projects.map(\.name), DemoData.projects)
+        XCTAssertEqual(DemoData.servers(in: DemoData.projectsDirectory + "/atlas-web").map(\.port), [5173])
+        XCTAssertEqual(DemoData.servers(in: DemoData.projectsDirectory + "/atlas-api").map(\.command), ["python3", "postgres"])
+        XCTAssertTrue(DemoData.servers(in: DemoData.projectsDirectory + "/landing").isEmpty)
         XCTAssertEqual(data.report?.projects.map(\.health), [.yellow, .green, .red, .green])
         XCTAssertEqual(ClaudeIdentity.parse(try XCTUnwrap(data.claudeIdentity)), ClaudeIdentity(name: "Alex", plan: "Max 5x"))
     }

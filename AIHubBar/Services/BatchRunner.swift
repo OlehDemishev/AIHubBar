@@ -84,8 +84,10 @@ final class BatchRunner {
         let before = batches
         for index in batches.indices { settle(&batches[index]) }
         let busy = batches.contains { $0.runningIndex != nil }
-        if !busy, let index = batches.firstIndex(where: { !$0.isFinished && $0.startAt <= now }) {
-            if !(batches[index].waitsForLimit && isHeld()) { startNext(&batches[index]) }
+        // A batch that waits for a limit does not hold the ones behind it: a batch for a model by API goes on.
+        let held = batches.contains { !$0.isFinished && $0.waitsForLimit } && isHeld()
+        if !busy, let index = batches.firstIndex(where: { !$0.isFinished && $0.startAt <= now && !($0.waitsForLimit && held) }) {
+            startNext(&batches[index])
         }
         for index in batches.indices where batches[index].isFinished && !batches[index].announced {
             batches[index].announced = true

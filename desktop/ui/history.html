@@ -112,7 +112,7 @@
 
     for (const button of id("periods").children) button.onclick = () => { period = Number(button.dataset.period); load(); };
     id("plan").onchange = async () => show(await invoke("set_plan_price", { price: Number(id("plan").value) || 0, period }));
-    id("set-price").onclick = () => invoke("open_settings");
+    id("set-price").onclick = () => invoke("open_settings", { page: "services" });
     id("export").onclick = async () => {
       const problem = await invoke("export_history", { period });
       id("error").hidden = !problem;
