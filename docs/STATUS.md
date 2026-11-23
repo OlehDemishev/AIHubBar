@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Mac — a sun button beside the «Не спать» switch in the panel turns «Не гасить и экран» on and off (`feat/keep-awake-display-in-panel`, PR 560, merged 2026-11-23); seen live on the Debug copy, goes out with the next release
 - 2026-11-23: Windows — the limit guard: Claude's running background tasks freeze near a limit and go on after the reset, «Ставить фоновые задачи на паузу» in Settings, «Продолжить сейчас» on a paused run (branch `feat/desktop-run-guard`; a pause and a resume seen live with a development switch)
 - 2026-11-23: Windows — «Передать Codex» on a Claude run that is paused or ended badly, and «Проверить в Codex / Claude Code» on a finished run (branch `feat/desktop-handover-review`; a review by Codex seen live, a handover not)
 - 2026-11-23: Windows — background runs for later: «На ночь» with a morning summary, «После сброса», the warning near the session's limit (branch `feat/desktop-night-queue`; a night run and its summary seen live). The pause of running tasks near a limit is not built yet
