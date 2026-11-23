@@ -550,7 +550,7 @@ fn main() {
             services::save_api_key, services::delete_api_key, services::set_api_model, services::set_compatible_server, services::open_key_page,
             services::agents_view, services::copy_install_command, projects::open_agent, calendar::upcoming_view,
             calendar::open_upcoming, calendar::reminder_hours, calendar::set_reminder_hours, calendar::set_profile_calendar,
-            calendar::open_calendar, calendar::calendar_view, calendar::reread_calendar, calendar::move_calendar_entry,
+            calendar::open_calendar, calendar::calendar_view, calendar::export_calendar, calendar::reread_calendar, calendar::move_calendar_entry,
             calendar::add_calendar_date, assistant::open_assistant, assistant::assistant_start, assistant::assistant_look,
             assistant::assistant_choose_folder, assistant::assistant_apply_folder, assistant::assistant_finish,
             runs::stop_run, runs::run_log, projects::worktree_removal, launch_settings, set_launch_settings,
