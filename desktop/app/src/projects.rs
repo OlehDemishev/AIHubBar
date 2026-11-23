@@ -44,6 +44,8 @@ struct State {
     updated: Option<Instant>,
     refreshing: bool,
     problem: Option<Problem>,
+    /// «Слов сегодня» of the folder profile and the days in a row with its goal reached.
+    words_today: Option<(usize, usize)>,
 }
 
 #[derive(Clone, Default)]
@@ -101,7 +103,8 @@ impl Projects {
             };
             eprintln!("folder projects: {} in {:.1} s", found.0.len(), started.elapsed().as_secs_f64());
             app.state::<crate::calendar::Calendar>().ask();
-            *self.state.lock().unwrap() = State { folders: found.0, root, updated: Some(Instant::now()), problem: found.1, ..State::default() };
+            let words_today = count_words(app, &profile, &found.0);
+            *self.state.lock().unwrap() = State { folders: found.0, root, updated: Some(Instant::now()), problem: found.1, words_today, ..State::default() };
             let _ = app.emit("projects-changed", ());
             app.state::<crate::limits::Limits>().update_tray(app);
             return;
@@ -280,6 +283,32 @@ pub struct ProjectsView {
     refreshing: bool,
 }
 
+/// The day's words in the profile's main files (the Mac's `countWords`): the record is kept even while the goal is off,
+/// so switching it on mid-day shows the day. Once a day, at the look that first sees the goal reached, a notification.
+fn count_words(app: &AppHandle, profile: &claudepult_core::profiles::Profile, projects: &[FolderProject]) -> Option<(usize, usize)> {
+    use claudepult_core::word_goal;
+    let counts: std::collections::BTreeMap<String, usize> = projects.iter().filter_map(|p| p.words.map(|words| (word_goal::key(&p.path, p.main_file.as_deref()), words))).collect();
+    let file = paths::data_dir().join("word-goals.json");
+    let mut records = word_goal::load(&file);
+    let today = chrono::Local::now().date_naive();
+    let mut record = word_goal::advanced(records.get(&profile.id), &counts, today);
+    let words = record.written(&counts);
+    let goal = profile.word_goal();
+    if goal > 0 && words >= goal && record.announced_day.as_deref() != Some(record.day.as_str()) {
+        record.announced_day = Some(record.day.clone());
+        let texts = strings(app);
+        let _ = app.notification().builder().title(texts.t("Цель дня выполнена")).body(texts.format("Слов сегодня: %lld из %lld", &[&words.to_string(), &goal.to_string()])).show();
+        eprintln!("word goal reached: {words} of {goal}");
+    }
+    if records.get(&profile.id) != Some(&record) {
+        records.insert(profile.id.clone(), record.clone());
+        if let Err(error) = word_goal::save(&file, &records) {
+            eprintln!("word goals not saved: {error}");
+        }
+    }
+    Some((words, record.streak(goal, words, today)))
+}
+
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FolderView {
@@ -292,6 +321,17 @@ pub struct FolderView {
     services: Vec<crate::commands::ServiceChoice>,
     /// The profile's service, preselected.
     default_service: String,
+    /// «Слов сегодня: 420 из 500», «Дней подряд: 3», how far, and whether the goal is reached; None without a goal.
+    word_goal: Option<WordGoalLine>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct WordGoalLine {
+    text: String,
+    streak: Option<String>,
+    fraction: f64,
+    reached: bool,
 }
 
 #[derive(Serialize)]
@@ -355,7 +395,14 @@ fn folder_view(app: &AppHandle, state: &State, texts: &Strings) -> Option<Folder
         })
         .collect();
     let default_service = crate::commands::default_service(profile);
-    Some(FolderView { rows, stages, can_create: matches!(profile.source(), claudepult_core::profiles::Source::Folders(_)), services: crate::commands::choices(app), default_service })
+    let goal = profile.word_goal();
+    let word_goal = state.words_today.filter(|_| goal > 0).map(|(words, streak)| WordGoalLine {
+        text: texts.format("Слов сегодня: %lld из %lld", &[&words.to_string(), &goal.to_string()]),
+        streak: (streak >= 2).then(|| texts.format("Дней подряд: %lld", &[&streak.to_string()])),
+        fraction: (words as f64 / goal as f64).min(1.0),
+        reached: words >= goal,
+    });
+    Some(FolderView { rows, stages, can_create: matches!(profile.source(), claudepult_core::profiles::Source::Folders(_)), services: crate::commands::choices(app), default_service, word_goal })
 }
 
 fn health_key(health: Health) -> &'static str {
