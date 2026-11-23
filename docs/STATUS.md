@@ -189,6 +189,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: «Не гасить и экран» beside the «Не спать» switch (branch `feat/keep-awake-display-in-panel`)
+
+Done: Oleh asked why «Не спать» does not work like Vorssaint's Keep Awake with «экран может гаснуть» off. The mechanism is the same (both take `PreventUserIdleSystemSleep` and, for the display, `PreventUserIdleDisplaySleep`); the difference was that «Не гасить и экран» sat only in Settings → «Не спать», off by default, so on his Mac only the system was held. Now a sun button in the block's header, left of the switch (`KeepAwakeView.swift`), turns the same setting on and off; it is in the header, so it is in sight with the block collapsed. `KeepAwakeController.setKeepDisplayOn` takes or releases the display assertion at once instead of at the next 15-second look. No new texts: the button's label and tooltip reuse «Не гасить и экран». `docs/GUIDE.md` says where the button is.
+Checked: `scripts/check.sh` green locally (strings, relay tests, Mac tests with the new `theDisplayIsHeldOnlyWithItsSwitch`, the catalog against the code). Live on the Debug copy in the «Panel debug» window, pressed through Accessibility: on — `pmset -g assertions` lists `PreventUserIdleDisplaySleep` «ClaudePult keep awake» for that copy within a second, off — it is gone; the button is filled blue while on. The Debug copy was closed and unregistered, its saved rules removed.
+Left: not seen in the real menu bar panel (it takes the keyboard while Oleh works) or in light theme; the installed 0.12.0 does not have the button until the next release. Oleh set `pmset displaysleep 0` by hand before this — it is his to put back in System Settings → «Экран блокировки».
+
 ## 2026-11-23 — Windows: a quick command's combination pressed on the real keyboard (no code, branch `chore/command-shortcut-pressed`)
 
 Done: no code changed. Oleh pressed a quick command's recorded combination on the laptop's keyboard and said it is checked («готово, проверил»); the row is taken out of Needs Oleh. This was the step left unseen since the shortcuts were built on 2026-11-19: the agent had only delivered the press itself.
