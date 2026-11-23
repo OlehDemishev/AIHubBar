@@ -279,6 +279,23 @@
     </section>
     <section class="card">
       <div class="row">
+        <label for="module-clipboard"><strong data-t="История буфера"></strong></label>
+        <input type="checkbox" class="switch" id="module-clipboard">
+      </div>
+      <p class="secondary" data-t="Последние копирования: поиск, закрепление, снова в буфер одним кликом. Пароли из менеджеров паролей не запоминаются."></p>
+      <div id="clipboard-options" hidden>
+        <div class="row">
+          <label for="clipboard-limit" data-t="Хранить последних"></label>
+          <select id="clipboard-limit"></select>
+        </div>
+        <div class="row">
+          <label for="clipboard-remember" data-t="Помнить после перезапуска"></label>
+          <input type="checkbox" class="switch" id="clipboard-remember">
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="row">
         <label for="module-notes"><strong data-t="Заметки"></strong></label>
         <input type="checkbox" class="switch" id="module-notes">
       </div>
@@ -1042,6 +1059,25 @@
     }
     document.getElementById("saved-prompt-add").onclick = async () => showSavedPrompts(await invoke("add_saved_prompt"));
     invoke("saved_prompts_view").then(showSavedPrompts);
+
+    // «История буфера»: on or off, how many copies are kept, and whether they outlive a restart.
+    const clipboardModule = document.getElementById("module-clipboard");
+    const clipboardLimit = document.getElementById("clipboard-limit");
+    const clipboardRemember = document.getElementById("clipboard-remember");
+    function showClipboardSettings(view) {
+      clipboardModule.checked = view.on;
+      document.getElementById("clipboard-options").hidden = !view.on;
+      clipboardLimit.replaceChildren(...view.limits.map((n) => new Option(String(n), String(n), false, n === view.limit)));
+      clipboardRemember.checked = view.remember;
+    }
+    clipboardModule.onchange = async () => {
+      await invoke("set_module", { kind: "clipboard", on: clipboardModule.checked });
+      showClipboardSettings(await invoke("clipboard_settings"));
+    };
+    const saveClipboard = async () => showClipboardSettings(await invoke("set_clipboard_options", { limit: Number(clipboardLimit.value), remember: clipboardRemember.checked }));
+    clipboardLimit.onchange = saveClipboard;
+    clipboardRemember.onchange = saveClipboard;
+    invoke("clipboard_settings").then(showClipboardSettings);
 
     // «Заметки»: on or off, and the folder of the notes.
     const notesModule = document.getElementById("module-notes");

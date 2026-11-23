@@ -459,3 +459,13 @@ body.quick-prompt-window { margin: 0; padding: 14px 16px; display: flex; flex-di
 .saved-prompt { margin: 8px 0 12px; }
 .saved-prompt .row input { flex: 1; min-width: 0; }
 .saved-prompt textarea { display: block; width: 100%; margin-top: 6px; box-sizing: border-box; resize: vertical; font: inherit; }
+
+/* «История буфера» */
+.clips input[type="text"] { width: 100%; margin: 6px 0 2px; box-sizing: border-box; }
+.clips p { margin: 6px 0 0; font-size: 12px; }
+.clip { display: flex; align-items: center; gap: 6px; font-size: 12px; padding: 1px 0; }
+.clip .glyph { flex: none; width: 16px; text-align: center; font-size: 11px; }
+.clip .text { flex: 1; min-width: 0; padding: 3px 0; border: none; background: none; color: inherit; font: inherit; text-align: start; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+.clip .ago { flex: none; }
+.clip .ago.done { color: #1a7f37; }
+.clip .icon-button { flex: none; font-size: 11px; padding: 2px 4px; }

@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — the «История буфера» module: copied texts, search, pin, back to the clipboard in a click (branch `feat/desktop-clipboard`; seen live; its Settings card not seen)
 - 2026-11-23: Windows — «Свои промпты»: kept in Settings, found by the panel's search, started in a chosen project (branch `feat/desktop-saved-prompts`; the two search steps seen live, the start and the Settings card not)
 - 2026-11-23: Windows — the search field in the panel: sessions, projects, quick commands (branch `feat/desktop-panel-search`; seen live). Saved prompts and the hot-key search window are next
 - 2026-11-23: Windows — the «Заметки» module (branch `feat/desktop-notes`; typing, a new note and the Recycle Bin seen live; its Settings card not seen)
@@ -179,6 +180,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: the «История буфера» module (branch `feat/desktop-clipboard`)
+
+Done: on Oleh's «Продолжай, пока не упрешься в текущую версию на маке». The Mac's `ClipboardHistory`, `ClipboardPolicy` and `ClipboardView` for copied texts. While the module is on the clipboard is looked at every 0.7 s (its sequence number on Windows; off — nothing is read). A new copy goes on top, the same text moves up with its pin, the rest beyond «Хранить последних» (20 / 50 / 100 / 200) fall off; in memory, and in `clipboard.json` only with «Помнить после перезапуска». Not recorded: a copy a program marks as hidden from clipboard history (`ExcludeClipboardContentFromMonitorProcessing`, `CanIncludeInClipboardHistory`), anything copied while a password manager's window is in front (nine programs by file name), what was on the clipboard before the module started, texts over 1 MB. The panel: the count, «Поиск», eight rows with the pinned first, a click copies back («скопировано»), pin, remove, «Очистить» after a question. Settings → «Модули» → «История буфера». `core/src/clipboard.rs`, `app/src/clipboard.rs`; the module's kind is the Mac's `clipboard`. All texts are the Mac's.
+Checked: `python scripts/strings.py --check` (716 texts), `cargo test --workspace` on Windows (what is recorded, the list with a pin and a limit, the panel's order, one line of a long text, the Mac's file form). Live on the laptop, a build from the branch with the module on in `settings.json`: three copies made with `Set-Clipboard` («test copy one», a two-line text, the first again) gave two rows with the repeated one on top and «вторая строка ⏎ с переносом» under it; a click on that row moved it up with «скопировано» and `Get-Clipboard` returned its two lines; the pin button marked it. The settings were put back after.
+Left: copied files are not recorded (texts only); the list of excluded programs can't be edited; the Mac's footer about Keychain is not shown. Not seen: the card in Settings, «Помнить после перезапуска» and its file, «Очистить», remove, the search, a password manager's copy being skipped. Linux has no sequence number and compares the text itself — not tried. The laptop's clipboard holds the test text. Seen in Russian only.
 
 ## 2026-11-23 — Windows: «Свои промпты» (branch `feat/desktop-saved-prompts`)
 
