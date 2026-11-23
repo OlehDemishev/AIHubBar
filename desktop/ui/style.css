@@ -556,3 +556,17 @@ body.config-window { display: flex; flex-direction: column; height: 100vh; margi
 /* A run waiting for the night or for the limit's reset */
 .queued { display: flex; align-items: center; gap: 6px; padding: 3px 2px; font-size: 12px; }
 .queued .text { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+
+/* «Изменения сессии» */
+button.changes-toggle { display: block; margin: 0 0 4px 16px; }
+.changes { margin: 0 0 6px 16px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; font-size: 12px; }
+.changes-head, .changes-foot { display: flex; align-items: center; gap: 8px; }
+.changes-head { justify-content: space-between; margin-bottom: 4px; }
+.changes-files { max-height: 260px; overflow-y: auto; }
+.changes-foot { margin-top: 6px; }
+.changes .path { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; direction: rtl; text-align: left; }
+button.changed-file { display: flex; align-items: center; gap: 6px; width: 100%; border: none; background: none; padding: 2px 4px; border-radius: 4px; font-size: 12px; font-variant-numeric: tabular-nums; }
+button.changed-file:hover { background: var(--line); border: none; }
+.changes .added { color: #248a3d; }
+.changes .removed { color: #d70015; }
+@media (prefers-color-scheme: dark) { .changes .added { color: #30d158; } .changes .removed { color: #ff6961; } }

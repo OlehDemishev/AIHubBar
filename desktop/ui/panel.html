@@ -460,6 +460,36 @@
     // A background run under its row: «Остановить» (a second click within a few seconds stops it), «Журнал», its PR.
     const openLogs = new Set();
     const confirmStop = new Set();
+    // «Изменения: файлов: 3 +120 −8» under a session or run: a click lists the files, a click on a file opens it.
+    const openChanges = new Set();
+    function changesOf(id, changes) {
+      const toggle = element("button", "link changes-toggle", t("Изменения: %@", changes.summary));
+      toggle.onclick = () => { if (openChanges.has(id)) openChanges.delete(id); else openChanges.add(id); showSessions(); };
+      if (!openChanges.has(id)) return [toggle];
+      const list = element("div", "changes");
+      const head = element("div", "changes-head");
+      head.append(element("strong", "", t("Изменения сессии")), element("span", "secondary", changes.summary));
+      list.append(head);
+      const files = element("div", "changes-files");
+      list.append(files);
+      for (const file of changes.files) {
+        const line = element("button", "changed-file");
+        line.title = t("Открыть %@", file.path);
+        // The mark keeps a leading dot in its place: the span is cut from the left.
+        line.append(element("span", "path", "‎" + file.path));
+        if (file.note) line.append(element("span", file.isNew ? "added" : "secondary", file.note));
+        if (file.added) line.append(element("span", "added", file.added), element("span", "removed", file.removed));
+        line.onclick = () => invoke("open_changed", { folder: changes.folder, path: file.path }).catch(() => {});
+        files.append(line);
+      }
+      if (changes.more > 0) list.append(element("div", "secondary", `+ ${changes.more}`));
+      const foot = element("div", "changes-foot");
+      const folder = element("span", "secondary path", changes.folder);
+      folder.title = changes.folder;
+      foot.append(action(t("Показать папку"), () => invoke("open_changed", { folder: changes.folder, path: "" }).catch(() => {})), folder);
+      list.append(foot);
+      return [toggle, list];
+    }
     const runErrors = new Map();
     function runControls(run) {
       const line = document.createElement("div");
@@ -544,6 +574,7 @@
         item.querySelector(".progress").textContent = row.progress ?? "";
         item.title = `${row.project}${row.worktree ? " ⎇ " + row.worktree : ""} · ${row.stateTitle}${row.detail ? " · " + row.detail : ""}`;
         const extra = row.run ? runControls(row.run) : [];
+        if (row.changes) extra.push(...changesOf(row.id, row.changes));
         return [item, ...extra, ...(row.request ? [request(row.request)] : [])];
       }));
       // «Недавно завершённые»: a click continues the session in a terminal (`claude --resume`).
