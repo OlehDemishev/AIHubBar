@@ -162,7 +162,7 @@ struct ScreenLockTests {
 /// What carries «бета» in 1.0 (agreed with Oleh 2026-11-21): the mark only labels, it hides nothing.
 struct BetaMarkTests {
     @Test func servicesOtherThanClaudeAreBeta() {
-        #expect(ServiceTab.allCases.filter(\.isBeta) == [.codex, .gemini, .copilot])
+        #expect(ServiceTab.allCases.filter(\.isBeta) == [.codex, .gemini, .copilot, .cursor])
     }
 
     @Test func translationsNobodyReadAreBeta() {

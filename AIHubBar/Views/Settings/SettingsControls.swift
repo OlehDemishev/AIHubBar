@@ -131,6 +131,9 @@ struct Footnote: View {
 /// «бета» next to a module still in beta testing, and next to a feature that is in the release but checked less than
 /// the rest (a service other than Claude, «Сравнить», a translation nobody has read): the feature stays in sight.
 struct BetaBadge: View {
+    /// For a menu item, which can't hold the badge: « — бета» after its title.
+    static var suffix: Text { Text(verbatim: " — " + String(localized: "бета")) }
+
     var body: some View {
         // Upper case in the string, not by `textCase`: that one reached the hover hint too (seen live 2026-11-23).
         Text(verbatim: String(localized: "бета").uppercased())

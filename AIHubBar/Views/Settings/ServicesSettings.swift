@@ -7,7 +7,7 @@ enum ServiceTab: String, CaseIterable, Sendable {
 
     /// In 1.0 with the «бета» mark (agreed 2026-11-21): what leans on another program's hooks or undocumented files
     /// and was not seen on real runs. The mark hides nothing.
-    var isBeta: Bool { [.codex, .gemini, .copilot].contains(self) }
+    var isBeta: Bool { self != .claude && self != .other }
 
     var title: String {
         switch self {
