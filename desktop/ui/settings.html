@@ -313,6 +313,10 @@
             <label for="panel-density" data-t="Плотность строк"></label>
             <select id="panel-density"></select>
           </div>
+          <div class="row">
+            <label for="limits-style" data-t="Вид лимитов"></label>
+            <select id="limits-style"></select>
+          </div>
         </section>
         <section class="card services">
           <h2 data-t="Значок в трее"></h2>
@@ -1500,11 +1504,13 @@
       textSizeSelect.replaceChildren(...view.text_sizes.map((c) => new Option(c.title, c.id, false, c.id === view.text_size)));
       document.getElementById("panel-width").replaceChildren(...view.widths.map((c) => new Option(c.title, c.id, false, c.id === view.width)));
       document.getElementById("panel-density").replaceChildren(...view.densities.map((c) => new Option(c.title, c.id, false, c.id === view.density)));
+      document.getElementById("limits-style").replaceChildren(...view.limits_styles.map((c) => new Option(c.title, c.id, false, c.id === view.limits_style)));
     }
     const widthSelect = document.getElementById("panel-width");
     const densitySelect = document.getElementById("panel-density");
-    themeSelect.onchange = textSizeSelect.onchange = widthSelect.onchange = densitySelect.onchange = async () =>
-      showAppearance(await invoke("set_appearance", { theme: themeSelect.value, textSize: textSizeSelect.value, width: widthSelect.value, density: densitySelect.value }));
+    const limitsStyleSelect = document.getElementById("limits-style");
+    themeSelect.onchange = textSizeSelect.onchange = widthSelect.onchange = densitySelect.onchange = limitsStyleSelect.onchange = async () =>
+      showAppearance(await invoke("set_appearance", { theme: themeSelect.value, textSize: textSizeSelect.value, width: widthSelect.value, density: densitySelect.value, limitsStyle: limitsStyleSelect.value }));
     invoke("appearance_view").then(showAppearance);
 
     // «Заметки»: on or off, and the folder of the notes.

@@ -383,6 +383,7 @@ impl Limits {
             ),
             error: state.error.as_ref().map(|e| texts::error_text(texts, e)),
             outage: state.outage.as_ref().filter(|_| state.error.is_some()).map(|outage| texts.format("Сбой у Anthropic: %@", &[outage])),
+            style: "bars",
         }
     }
 }
@@ -415,6 +416,8 @@ pub struct LimitsView {
     error: Option<String>,
     /// «Сбой у Anthropic: …» when the limits fail and Anthropic's status page reports trouble.
     outage: Option<String>,
+    /// «Вид лимитов»: `bars` or `rings`.
+    style: &'static str,
 }
 
 #[derive(Serialize)]
@@ -509,7 +512,9 @@ pub fn set_limit_thresholds(app: AppHandle, text: String) -> String {
 
 #[tauri::command]
 pub fn limits_view(app: AppHandle) -> LimitsView {
-    app.state::<Limits>().view(&strings(&app))
+    let mut view = app.state::<Limits>().view(&strings(&app));
+    view.style = app.state::<crate::AppState>().settings.lock().unwrap().limits_style();
+    view
 }
 
 #[tauri::command]
