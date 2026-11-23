@@ -15,6 +15,12 @@
       <button class="icon-button" id="settings" data-t-title="Настройки…" aria-label="Settings">⚙</button>
       <button class="icon-button" id="quit" data-t-title="Выйти из AI Hub Bar" aria-label="Quit">⏻</button>
     </header>
+    <div class="search" id="search">
+      <span class="glass" aria-hidden="true">🔍</span>
+      <input type="text" id="search-field" autocomplete="off" spellcheck="false" data-t-placeholder="Найти проект, сессию, команду…">
+      <button class="icon-button" id="search-clear" data-t-title="Очистить поиск (Esc)" hidden>✕</button>
+    </div>
+    <section class="card search-results" id="search-results" hidden></section>
     <section class="card hint" id="tray-hint" hidden>
       <p data-t="Windows прячет новые значки под «^». Чтобы AI Hub Bar был всегда виден: Параметры → Персонализация → Панель задач → Другие значки на панели задач."></p>
       <p style="margin-top: 8px"><button id="tray-hint-done" data-t="Готово"></button></p>
@@ -477,9 +483,11 @@
     async function showSessions() {
       const view = await invoke("sessions_view");
       const rows = document.getElementById("session-rows");
+      (window.searchData ??= {}).sessions = view.rows.map((row) => ({ id: row.id, name: row.project, detail: row.detail ?? "" }));
       rows.replaceChildren(...view.rows.flatMap((row) => {
         const item = document.createElement("div");
         item.className = `session ${row.state}`;
+        item.dataset.search = row.id;
         item.innerHTML = `<span class="dot" aria-hidden="true"></span><span class="project"></span><span class="secondary worktree" hidden></span><span class="secondary detail"></span><span class="context" hidden></span><span class="secondary progress"></span>`;
         item.querySelector(".project").textContent = row.project;
         if (row.context) {
@@ -608,11 +616,13 @@
     async function showQuickCommands() {
       const view = await invoke("quick_commands_view");
       document.getElementById("quick-commands").hidden = !view.shown;
+      (window.searchData ??= {}).quick = view.shown ? view.buttons.map((command) => ({ id: command.id, name: command.title, detail: command.value ?? "" })) : [];
       if (!view.shown) return;
       document.getElementById("quick-empty").hidden = view.buttons.length > 0;
       document.getElementById("quick-buttons").replaceChildren(...view.buttons.map((command) => {
         const button = document.createElement("button");
         button.className = "quick";
+        button.dataset.search = command.id;
         button.title = command.hotKey ? `${command.value}
 ${command.hotKey}` : command.value;
         button.disabled = command.running;
@@ -694,6 +704,87 @@ ${command.hotKey}` : command.value;
     };
     showToggles();
     window.__TAURI__.event.listen("toggles-changed", showToggles);
+
+    // The search under the header: sessions, projects and quick commands by name; ↑ ↓ choose, Enter does the
+    // chosen one, Esc clears the text and, with nothing typed, puts the panel away.
+    const searchField = document.getElementById("search-field");
+    const searchResults = document.getElementById("search-results");
+    const searchClear = document.getElementById("search-clear");
+    searchField.setAttribute("aria-label", t("Найти проект, сессию, команду…"));
+    let found = [], foundAt = 0, searchTurn = 0;
+    function showFound() {
+      searchResults.hidden = !searchField.value.trim();
+      searchClear.hidden = !searchField.value;
+      if (searchResults.hidden) return searchResults.replaceChildren();
+      if (!found.length) {
+        const empty = document.createElement("p");
+        empty.className = "secondary";
+        empty.textContent = t("Ничего не найдено");
+        return searchResults.replaceChildren(empty);
+      }
+      searchResults.replaceChildren(...found.map((row, index) => {
+        const button = document.createElement("button");
+        button.className = index === foundAt ? "found chosen" : "found";
+        button.title = row.hint;
+        button.innerHTML = `<span class="glyph" aria-hidden="true"></span><span class="name"></span><span class="secondary detail"></span><span class="secondary enter" aria-hidden="true"></span>`;
+        button.querySelector(".glyph").textContent = { session: "💬", project: "📁", quickCommand: "⚡" }[row.kind];
+        button.querySelector(".name").textContent = row.title;
+        button.querySelector(".detail").textContent = row.detail;
+        button.querySelector(".enter").textContent = index === foundAt ? "↵" : "";
+        button.onclick = () => doFound(row);
+        return button;
+      }));
+    }
+    async function search() {
+      const turn = ++searchTurn;
+      const data = window.searchData ?? {};
+      const rows = searchField.value.trim()
+        ? await invoke("panel_search", { query: searchField.value, sessions: data.sessions ?? [], projects: data.projects ?? [], quickCommands: data.quick ?? [] })
+        : [];
+      if (turn !== searchTurn) return;
+      found = rows;
+      foundAt = 0;
+      showFound();
+    }
+    function clearSearch() {
+      searchField.value = "";
+      search();
+    }
+    // The row the search found: brought into view and marked for a moment.
+    function pointAt(id, block = "center") {
+      const row = [...document.querySelectorAll("[data-search]")].find((item) => item.dataset.search === id);
+      if (!row) return null;
+      row.scrollIntoView({ block, behavior: "smooth" });
+      row.classList.add("pointed");
+      setTimeout(() => row.classList.remove("pointed"), 1600);
+      return row;
+    }
+    async function doFound(row) {
+      clearSearch();
+      if (row.kind === "project") {
+        expanded.add(row.id);
+        await showProjects();
+        pointAt(row.id, "start");
+      } else if (row.kind === "quickCommand") {
+        pointAt(row.id)?.click();
+      } else {
+        pointAt(row.id);
+      }
+    }
+    searchField.oninput = search;
+    searchClear.onclick = () => { clearSearch(); searchField.focus(); };
+    searchField.onkeydown = (event) => {
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        event.preventDefault();
+        foundAt = Math.min(Math.max(foundAt + (event.key === "ArrowDown" ? 1 : -1), 0), Math.max(found.length - 1, 0));
+        showFound();
+      } else if (event.key === "Enter") {
+        if (found[foundAt]) doFound(found[foundAt]);
+      } else if (event.key === "Escape") {
+        event.preventDefault();
+        if (searchField.value) clearSearch(); else invoke("hide_panel");
+      }
+    };
 
     // «Заметки»: a note per .md file. What is typed is written a second after the last key, and when the note,
     // the panel or the window is left; a note changed in another editor is read again when the panel comes back.
@@ -1160,6 +1251,7 @@ ${command.hotKey}` : command.value;
     function folderRows(view) {
       return view.rows.map((row) => {
         const item = element("div", "project folder");
+        item.dataset.search = row.path;
         const open = expanded.has(row.path);
         const summary = element("button", "project-summary");
         summary.setAttribute("aria-expanded", String(open));
@@ -1242,6 +1334,9 @@ ${command.hotKey}` : command.value;
     async function showProjects() {
       const view = await invoke("projects_view");
       otherAgents = view.agents ?? [];
+      (window.searchData ??= {}).projects = view.folders
+        ? view.folders.rows.map((row) => ({ id: row.path, name: row.name, detail: "" }))
+        : view.rows.map((row) => ({ id: row.path, name: row.name, detail: row.branch ?? "" }));
       const rows = document.getElementById("project-rows");
       newProject.hidden = !view.folders?.canCreate;
       if (view.folders) {
@@ -1253,6 +1348,7 @@ ${command.hotKey}` : command.value;
       }
       rows.replaceChildren(...view.rows.map((row) => {
         const item = element("div", "project");
+        item.dataset.search = row.path;
         const open = expanded.has(row.path);
         const summary = element("button", "project-summary");
         summary.setAttribute("aria-expanded", String(open));

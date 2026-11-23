@@ -29,6 +29,7 @@ pub mod quick_prompt;
 pub mod resources;
 pub mod projects;
 pub mod runs;
+pub mod search;
 pub mod sessions;
 pub mod telegram;
 pub mod settings;
