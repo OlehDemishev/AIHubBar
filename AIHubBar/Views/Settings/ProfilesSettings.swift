@@ -215,6 +215,8 @@ private struct ProfileEditor: View {
                         Text("Дедлайны и публикации").tag(CalendarMode.dates)
                         Text("+ контент-план").tag(CalendarMode.contentPlan)
                     }
+                    Stepper(mode.wordGoal > 0 ? String(localized: "Цель: \(mode.wordGoal) слов/день") : String(localized: "Цель по словам: нет"),
+                            value: $mode.wordGoal, in: 0...20000, step: 100)
                     if mode.metrics.contains(FolderMetric.duration.rawValue) {
                         Stepper("Темп речи: \(mode.wordsPerMinute) слов/мин", value: $mode.wordsPerMinute, in: 80...250, step: 10)
                     }

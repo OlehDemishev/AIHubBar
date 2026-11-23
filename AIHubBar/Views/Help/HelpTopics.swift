@@ -225,6 +225,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
                 HelpFact(String(localized: "Команды"), String(localized: "В развёрнутом проекте: команды профиля и «Своя задача». Результат — всегда новый файл в папке проекта. Модель по API получает текст главного файла; Claude работает в фоне с правами профиля («только файлы» — без терминала и интернета); другие агенты открываются в Терминале, задача — в буфере обмена."), symbol: "bolt"),
                 HelpFact(String(localized: "Сравнить"), String(localized: "Включите «Сравнить», выберите 2–3 сервиса и команду: результаты лягут рядом («хуки (Claude).md», «хуки (OpenAI).md») и откроются в окне «Сравнение»."), symbol: "square.split.2x1"),
                 HelpFact(String(localized: "Этапы и метрики"), String(localized: "Этапы профиля — через запятую; этап меняется кнопкой в развёрнутом проекте. Слова, хронометраж, время чтения и страницы считаются по главному файлу (.md, .txt, .rtf, .docx)."), symbol: "chart.bar"),
+                HelpFact(String(localized: "Цель по словам"), String(localized: "В настройках профиля с папками задайте цель в словах на день: панель покажет, сколько слов добавилось сегодня в главных файлах проектов. Удалённый текст в минус не считается."), symbol: "pencil.line"),
              ])]
         case .calendar:
             [HelpSection(facts: [
@@ -232,6 +233,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
                 HelpFact(String(localized: "Ближайшее"), String(localized: "Блок в панели: 7 дней вперёд, просроченное красным; клик открывает проект или файл."), symbol: "calendar.day.timeline.left"),
                 HelpFact(String(localized: "Окно «Календарь»"), String(localized: "Месяц или неделя. Перетащите запись на другой день — дата перепишется в файле. Двойной клик по дню — новая запись."), symbol: "calendar.badge.plus"),
                 HelpFact(String(localized: "Напоминания"), String(localized: "На странице модуля «Ближайшее»: за сколько напоминать и дублировать ли в Telegram."), symbol: "alarm"),
+                HelpFact(String(localized: "Экспорт в .ics"), String(localized: "Кнопка в окне «Календарь» сохраняет даты файлом .ics: откройте его в «Календаре» macOS или загрузите в Google Calendar. Повторный экспорт обновляет те же события, а не создаёт вторые."), symbol: "square.and.arrow.up"),
             ])]
         case .reports:
             [HelpSection(facts: [

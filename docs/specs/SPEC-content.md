@@ -107,7 +107,11 @@ No new module: it is a way to run the existing commands.
    retention, «Модули → Версии». Tests on the store (dedup, retention, skipped files).
 3. **«Версии» in the card.** List, compare, restore, «Что изменилось» after a run; accessibility walk.
 4. **Batch tasks.** Selection in «Проекты», sequential queue, summary.
-5. Later, on Oleh's word: `.ics` export of the calendar (SPEC-modes §6), writing goals (words per day).
+5. **`.ics` export and writing goals** (on Oleh's word, 2026-11-23). «Экспорт в .ics…» in the «Календарь» window and
+   `--calendar-ics <file>`: a file the person saves, no access to their calendars; the UID comes from where the date
+   lives, so a newer file moves the events. «Цель по словам» of a folder profile (`Profile.wordGoal`, words a day,
+   0 = none): the projects block says «Слов сегодня: N из M» — words added today to the main files, counted from
+   yesterday's last look (`WordGoal`, `word-goals.json`: numbers only).
 
 Rules for every stage: hover hint on each icon-only control, all strings in 13 languages, nothing sent anywhere but
 the AI service chosen for the command.

@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Mac — SPEC-content stage 5 is ready in branch `feat/calendar-ics-word-goals`: the calendar as an `.ics` file and «Цель по словам» of a folder profile; **held until 0.12.0 is out**; the panel line and the file seen live, the windows not
 - 2026-11-23: Windows — the search field in the panel: sessions, projects, quick commands (branch `feat/desktop-panel-search`; seen live). Saved prompts and the hot-key search window are next
 - 2026-11-23: Windows — the «Заметки» module (branch `feat/desktop-notes`; typing, a new note and the Recycle Bin seen live; its Settings card not seen)
 - 2026-11-21: Windows — limit hits are counted, «Упирался в лимит: N» in «Сегодня» (branch `feat/desktop-limit-hits`; the line seen live from a made-up record)
@@ -130,7 +131,7 @@
 - towards 1.0: what is in, what is «бета» and what is out is agreed (journal 2026-11-21); the «бета» badge beside a feature is ready in PR 529 (`feat/beta-badge`), **held until 0.12.0 is out** (after it: the badge for «Версии» and batch tasks); left — release notes, translations read by people, feedback from strangers, the island at the real notch
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
-- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`, PR 520 and PR 529; all four contain `main` as of 2026-11-21 and are green
+- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`, PR 520, PR 529 and the stage 5 PR (`feat/calendar-ics-word-goals`); all four contain `main` as of 2026-11-21 and are green
 - batch tasks and «Версии», left to see live (the rest was seen 2026-11-21 in an isolated copy): a batch with a typed text, a model by API, the wait near the limit, the summary and «Что изменилось» as a banner and in Telegram
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
@@ -178,6 +179,15 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Mac: the calendar as an `.ics` file and «Цель по словам» (branch `feat/calendar-ics-word-goals`)
+
+Done: SPEC-content stage 5, on Oleh's «Этап 5 «Текстов»».
+- **`.ics` export.** A button «Экспорт в .ics…» in the «Календарь» window's toolbar saves the dates it shows under its filter (every month) through a save dialog; `AIHubBar --calendar-ics <file>` writes the enabled profiles' dates. `CalendarICS`: a date without a time is an all-day event, a timed one lasts 30 minutes, text escaped and lines folded at 75 bytes by RFC 5545, the UID is a hash of where the date lives (the card's key or the plan's row), so importing a newer file moves the events. No access to the person's calendars is asked.
+- **«Цель по словам».** `Profile.wordGoal` (words a day, 0 = none; old profile files read as none), a stepper in Settings → «Профили» → a folder profile → «Карточка, этапы и метрики». The projects block says «Слов сегодня: N из M» with a bar and a green check when reached. `WordGoal` counts words added today to the projects' main files: the day starts from yesterday's last look, a file first seen today starts from what it has, cut text never counts below zero, after a break longer than a day the count starts from now. Kept per profile in `word-goals.json` — numbers only.
+- Nine new strings in 13 languages, two help facts («Экспорт в .ics», «Цель по словам»).
+Checked: `scripts/check.sh`; tests `CalendarICSTests`, `WordGoalTests`. Live in an isolated copy (a «Тексты» profile with two projects, a plan row and a goal of 300): `--calendar-ics` wrote four events — two all-day, two timed in UTC, a long title folded, «Блог; сайт, рассылка» escaped; the panel said «Слов сегодня: 0 из 300», after 180 words added to one file and 20 cut from another — 180, after more — «330 из 300» with the green check.
+Left: **held until 0.12.0 is out**. Not seen live: the export button and its save dialog, the stepper in Settings (their windows take the keyboard); the file was not imported into Calendar or Google Calendar; midnight and the day after were tested by code only. The count follows the panel's scan (on opening the panel and every five minutes). No notification when the goal is reached and no history of days — not asked.
 
 ## 2026-11-23 — Windows: the search in the panel (branch `feat/desktop-panel-search`)
 

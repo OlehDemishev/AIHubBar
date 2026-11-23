@@ -75,6 +75,9 @@ final class AppSettings {
     /// `Profile.resultPatterns` of the current mode; set with the source, not stored.
     var activeResultPatterns: [String] = []
 
+    /// The current profile, for its day's word count; set with the source, not stored.
+    var activeProfileID = ""
+
     /// Whose rules the developer prompts follow; set with the mode, not stored.
     var promptStyle: PromptStyle = .workspace
 

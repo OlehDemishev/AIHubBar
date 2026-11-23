@@ -1,5 +1,6 @@
 import AppKit
 import SwiftUI
+import UniformTypeIdentifiers
 
 /// The «Календарь» window (SPEC-modes §6): month or week, all enabled modes or the current one, colour per mode.
 /// Dragging an entry to another day writes the new date into its file; a double click on a day adds a date.
@@ -12,6 +13,7 @@ struct CalendarWindow: View {
     @AppStorage(StorageKey.calendarCurrentModeOnly) private var currentOnly = false
     @State private var anchor = Date.now
     @State private var newEntryDay: Date?
+    @State private var exportError: String?
 
     private var calendar: Calendar { Calendar.current }
 
@@ -31,7 +33,7 @@ struct CalendarWindow: View {
                 weekdayHeader
                 grid
             }
-            if let error = store.lastError {
+            if let error = exportError ?? store.lastError {
                 Text(error).font(.caption).foregroundStyle(.orange).padding(6)
             }
         }
@@ -68,9 +70,26 @@ struct CalendarWindow: View {
             .fixedSize()
             Button { Task { await store.refresh() } } label: { Label("Перечитать файлы", systemImage: "arrow.clockwise").labelStyle(.iconOnly) }
                 .help("Перечитать файлы")
+            Button(action: exportICS) { Label("Экспорт в .ics…", systemImage: "square.and.arrow.up").labelStyle(.iconOnly) }
+                .help("Экспорт в .ics… — файл с датами для «Календаря» macOS, Google Calendar и других")
+                .disabled(entries.isEmpty)
         }
         .buttonStyle(.borderless)
         .padding(10)
+    }
+
+    /// The dates the window shows under its filter, for every month: a file the person saves where they choose.
+    private func exportICS() {
+        let panel = NSSavePanel()
+        panel.nameFieldStringValue = "AI Hub Bar.ics"
+        panel.allowedContentTypes = [.calendarEvent]
+        guard panel.runModal() == .OK, let url = panel.url else { return }
+        do {
+            try CalendarICS.text(entries).write(to: url, atomically: true, encoding: .utf8)
+            AppLog.info("Calendar exported: \(entries.count) dates to \(url.lastPathComponent)")
+        } catch {
+            exportError = String(localized: "Не удалось записать \(url.lastPathComponent): \(error.localizedDescription)")
+        }
     }
 
     private var title: String {

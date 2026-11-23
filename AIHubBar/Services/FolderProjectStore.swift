@@ -10,6 +10,8 @@ final class FolderProjectStore {
     private(set) var lastUpdated: Date?
     private(set) var isRefreshing = false
     private(set) var lastError: String?
+    /// Words added today to the main files of the profile's projects; the view shows it when the profile has a goal.
+    private(set) var wordsToday: Int?
 
     private let settings: AppSettings
     private var loop: Task<Void, Never>?
@@ -49,6 +51,7 @@ final class FolderProjectStore {
         guard source.isFolders else {
             projects = []
             scannedSource = source
+            wordsToday = nil
             return
         }
         isRefreshing = true
@@ -59,9 +62,24 @@ final class FolderProjectStore {
         projects = scanned
         scannedSource = source
         lastUpdated = .now
+        countWords(of: scanned)
         let folder = source.folder ?? ""
         lastError = folderMissing(source) ? String(localized: "Папки нет: \(folder)") : nil
         AppLog.info("Folder projects: \(scanned.count) in \((ContinuousClock.now - started).formatted(.units(allowed: [.seconds], fractionalPart: .show(length: 1))))")
+    }
+
+    /// Keeps the day's record for the profile even while the goal is off, so switching it on mid-day shows the day.
+    private func countWords(of projects: [FolderProject]) {
+        let profile = settings.activeProfileID
+        guard !profile.isEmpty else { wordsToday = nil; return }
+        let counts = Dictionary(projects.compactMap { project in project.words.map { (project.path, $0) } }, uniquingKeysWith: { first, _ in first })
+        var records = WordGoal.load()
+        let record = WordGoal.advanced(records[profile], counts: counts, now: .now)
+        if records[profile] != record {
+            records[profile] = record
+            WordGoal.save(records)
+        }
+        wordsToday = record.written(counts)
     }
 
     private func folderMissing(_ source: ProjectSource) -> Bool {
