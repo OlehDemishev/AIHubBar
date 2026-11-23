@@ -296,6 +296,43 @@ pub fn renew_sign_in(claude: &Path) -> bool {
     crate::command::run(command, std::time::Duration::from_secs(60)).is_some_and(|output| output.ok())
 }
 
+// MARK: - Limit hits (the Mac's `LimitHits`)
+
+/// When a Claude limit reached 100 %: the window («five_hour», «seven_day») and the moment.
+pub type LimitHit = (String, DateTime<Utc>);
+
+/// How long a hit is kept.
+pub const HITS_DAYS: i64 = 30;
+
+/// The hits with a new one when the window has just reached 100 %. A window is hit once while it lasts — five hours
+/// or seven days — so a restart with the limit still at 100 % is not a second hit. Older than 30 days are dropped.
+pub fn noting_hit(hits: &[LimitHit], window: &str, before: Option<f64>, fresh: Option<f64>, now: DateTime<Utc>) -> Vec<LimitHit> {
+    let mut kept: Vec<LimitHit> = hits.iter().filter(|(_, date)| now - *date < Duration::days(HITS_DAYS)).cloned().collect();
+    let length = if window == "seven_day" { Duration::days(7) } else { Duration::hours(5) };
+    let counted = kept.iter().any(|(name, date)| name == window && now - *date < length);
+    if fresh.is_some_and(|value| value >= 100.0) && before.unwrap_or(0.0) < 100.0 && !counted {
+        kept.push((window.to_owned(), now));
+    }
+    kept
+}
+
+/// `limit-hits.json`: «five_hour|1763700000», the Mac's form of a hit.
+pub fn hits_json(hits: &[LimitHit]) -> String {
+    Value::Array(hits.iter().map(|(window, date)| Value::String(format!("{window}|{}", date.timestamp()))).collect()).to_string()
+}
+
+/// A file that can't be read is no hits.
+pub fn parse_hits(text: &str) -> Vec<LimitHit> {
+    serde_json::from_str::<Vec<String>>(text)
+        .unwrap_or_default()
+        .iter()
+        .filter_map(|item| {
+            let (window, seconds) = item.split_once('|')?;
+            Some((window.to_owned(), DateTime::from_timestamp(seconds.parse::<f64>().ok()? as i64, 0)?))
+        })
+        .collect()
+}
+
 /// How long a reading helps the forecast.
 pub const HISTORY_HOURS: i64 = 2;
 
@@ -428,6 +465,26 @@ pub fn usage_file_json(snapshot: &UsageSnapshot) -> Value {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn limit_hits() {
+        let now = DateTime::parse_from_rfc3339("2026-11-21T12:00:00Z").unwrap().with_timezone(&Utc);
+        let hits = noting_hit(&[], "five_hour", Some(97.0), Some(100.0), now);
+        assert_eq!(hits, [("five_hour".to_owned(), now)]);
+        assert_eq!(noting_hit(&hits, "five_hour", Some(100.0), Some(100.0), now + Duration::minutes(5)).len(), 1, "still at the limit");
+        assert_eq!(noting_hit(&hits, "five_hour", None, Some(100.0), now + Duration::minutes(5)).len(), 1, "a restart at the limit is not a second hit");
+        assert_eq!(noting_hit(&hits, "five_hour", Some(40.0), Some(100.0), now + Duration::hours(6)).len(), 2, "the next session");
+        assert_eq!(noting_hit(&hits, "seven_day", None, Some(100.0), now + Duration::minutes(5)).len(), 2, "the week is its own window");
+        assert_eq!(noting_hit(&hits, "five_hour", Some(40.0), Some(99.9), now).len(), 1);
+        assert_eq!(noting_hit(&hits, "five_hour", Some(40.0), None, now).len(), 1);
+        assert!(noting_hit(&hits, "five_hour", None, None, now + Duration::days(31)).is_empty(), "kept 30 days");
+
+        let text = hits_json(&hits);
+        assert_eq!(text, r#"["five_hour|1795262400"]"#);
+        assert_eq!(parse_hits(&text), hits);
+        assert_eq!(parse_hits(r#"["seven_day|1795262400.25","bad","x|y"]"#), [("seven_day".to_owned(), now)], "the Mac writes fractions");
+        assert!(parse_hits("not json").is_empty());
+    }
 
     fn at(text: &str) -> DateTime<Utc> {
         DateTime::parse_from_rfc3339(text).unwrap().with_timezone(&Utc)

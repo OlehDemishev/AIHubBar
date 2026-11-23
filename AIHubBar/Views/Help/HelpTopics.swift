@@ -268,9 +268,10 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
         case .alerts:
             [HelpSection(facts: [
                 HelpFact(String(localized: "Как часто"), String(localized: "У каждого модуля на странице — «Как часто уведомлять»: каждый раз, не чаще раза в 15 мин, в час, в день или не присылать."), symbol: "clock"),
-                HelpFact("Telegram", String(localized: "Бот — модуль «Telegram»: токен, чат и меню в самом боте (/menu — лимиты, сессии, отчёты, очистка). Что дублировать — чипом «Telegram» на странице модуля."), symbol: "paperplane"),
+                HelpFact("Telegram", String(localized: "Модуль «Telegram». «Общий бот» подключается одной кнопкой: «Подключить Telegram», затем «Start» в чате — создавать ничего не нужно. «Свой бот» — токен из @BotFather, без сервера AI Hub Bar между вами. Меню в самом боте: /menu — лимиты, сессии, отчёты, очистка. Что дублировать — чипом «Telegram» на странице модуля."), symbol: "paperplane"),
+                HelpFact(String(localized: "Приложение в боте"), String(localized: "У общего бота кнопка меню открывает приложение прямо в Telegram: лимиты, сессии с «Разрешить» и «Отклонить», задачи, отчёты и настройки уведомлений."), symbol: "apps.iphone"),
                 HelpFact(String(localized: "Выключить Telegram на время"), String(localized: "Плитка «Telegram» в «Быстрых переключателях» выключает уведомления в Telegram одним кликом и держит их выключенными, пока не нажмёте снова. Запросы разрешений и ответы бота приходят."), symbol: "bell.slash"),
-                HelpFact(String(localized: "Ответы из Telegram"), String(localized: "Запросы разрешений Claude можно принимать и отклонять кнопками в Telegram — отдельный бот, страница «Сессии агентов»."), symbol: "hand.tap"),
+                HelpFact(String(localized: "Ответы из Telegram"), String(localized: "Запросы разрешений приходят в тот же бот с кнопками ✅ и ❌: включите «Запросы разрешений в этот бот» на странице модуля «Telegram». Через общий бот отвечать можно после «Ответы на запросы через общий бот» там же."), symbol: "hand.tap"),
                 HelpFact(String(localized: "Клик по уведомлению"), String(localized: "Ведёт к сессии, PR, журналу или отчёту."), symbol: "cursorarrow.click"),
             ])]
         case .commandLine:
