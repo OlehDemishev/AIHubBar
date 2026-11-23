@@ -712,14 +712,17 @@ ${command.hotKey}` : command.value;
     const searchClear = document.getElementById("search-clear");
     searchField.setAttribute("aria-label", t("Найти проект, сессию, команду…"));
     let found = [], foundAt = 0, searchTurn = 0;
+    // A saved prompt was chosen: the list is now the projects to start it in.
+    let promptStep = null;
+    const searchPlaceholder = searchField.placeholder;
     function showFound() {
-      searchResults.hidden = !searchField.value.trim();
+      searchResults.hidden = !searchField.value.trim() && !promptStep;
       searchClear.hidden = !searchField.value;
       if (searchResults.hidden) return searchResults.replaceChildren();
       if (!found.length) {
         const empty = document.createElement("p");
         empty.className = "secondary";
-        empty.textContent = t("Ничего не найдено");
+        empty.textContent = promptStep ? t("Нет такого проекта") : t("Ничего не найдено");
         return searchResults.replaceChildren(empty);
       }
       searchResults.replaceChildren(...found.map((row, index) => {
@@ -727,7 +730,7 @@ ${command.hotKey}` : command.value;
         button.className = index === foundAt ? "found chosen" : "found";
         button.title = row.hint;
         button.innerHTML = `<span class="glyph" aria-hidden="true"></span><span class="name"></span><span class="secondary detail"></span><span class="secondary enter" aria-hidden="true"></span>`;
-        button.querySelector(".glyph").textContent = { session: "💬", project: "📁", quickCommand: "⚡" }[row.kind];
+        button.querySelector(".glyph").textContent = { session: "💬", project: "📁", quickCommand: "⚡", prompt: "📝" }[row.kind];
         button.querySelector(".name").textContent = row.title;
         button.querySelector(".detail").textContent = row.detail;
         button.querySelector(".enter").textContent = index === foundAt ? "↵" : "";
@@ -738,8 +741,10 @@ ${command.hotKey}` : command.value;
     async function search() {
       const turn = ++searchTurn;
       const data = window.searchData ?? {};
-      const rows = searchField.value.trim()
-        ? await invoke("panel_search", { query: searchField.value, sessions: data.sessions ?? [], projects: data.projects ?? [], quickCommands: data.quick ?? [] })
+      const rows = promptStep
+        ? (await invoke("prompt_projects", { query: searchField.value, projects: data.projects ?? [] })).map((p) => ({ kind: "project", id: p.id, title: p.name, detail: p.detail, hint: p.hint }))
+        : searchField.value.trim()
+        ? await invoke("panel_search", { query: searchField.value, sessions: data.sessions ?? [], projects: data.projects ?? [], quickCommands: data.quick ?? [], withPrompts: !data.folders })
         : [];
       if (turn !== searchTurn) return;
       found = rows;
@@ -747,6 +752,8 @@ ${command.hotKey}` : command.value;
       showFound();
     }
     function clearSearch() {
+      promptStep = null;
+      searchField.placeholder = searchPlaceholder;
       searchField.value = "";
       search();
     }
@@ -759,7 +766,39 @@ ${command.hotKey}` : command.value;
       setTimeout(() => row.classList.remove("pointed"), 1600);
       return row;
     }
+    // The prompt with the project's name and branch, started as «Своя задача…» of that project: its row shows
+    // what the start said, or asks how to start.
+    async function startPrompt(prompt, project) {
+      let next;
+      try {
+        const task = await invoke("fill_saved_prompt", { id: prompt, project: project.title, branch: project.detail || null });
+        expanded.add(project.id);
+        launches.set(project.id, { working: true });
+        await showProjects();
+        pointAt(project.id, "start");
+        const reply = await invoke("launch_claude", { path: project.id, command: "custom", task, allowBusy: false, mode: null, remember: false, agent: null });
+        next = reply.choose
+          ? { choose: { question: reply.choose, command: "custom", task, allowBusy: false } }
+          : { message: reply.message, confirm: reply.confirm ? { command: "custom", task, mode: null, agent: null } : null };
+      } catch (error) {
+        next = { message: String(error), error: true };
+      }
+      launches.set(project.id, next);
+      showProjects();
+    }
     async function doFound(row) {
+      if (promptStep) {
+        const prompt = promptStep;
+        clearSearch();
+        return startPrompt(prompt, row);
+      }
+      if (row.kind === "prompt") {
+        promptStep = row.id;
+        searchField.placeholder = row.placeholder;
+        searchField.value = "";
+        searchField.focus();
+        return search();
+      }
       clearSearch();
       if (row.kind === "project") {
         expanded.add(row.id);
@@ -782,7 +821,8 @@ ${command.hotKey}` : command.value;
         if (found[foundAt]) doFound(found[foundAt]);
       } else if (event.key === "Escape") {
         event.preventDefault();
-        if (searchField.value) clearSearch(); else invoke("hide_panel");
+        event.stopPropagation();
+        if (searchField.value || promptStep) clearSearch(); else invoke("hide_panel");
       }
     };
 
@@ -1334,6 +1374,7 @@ ${command.hotKey}` : command.value;
     async function showProjects() {
       const view = await invoke("projects_view");
       otherAgents = view.agents ?? [];
+      (window.searchData ??= {}).folders = !!view.folders;
       (window.searchData ??= {}).projects = view.folders
         ? view.folders.rows.map((row) => ({ id: row.path, name: row.name, detail: "" }))
         : view.rows.map((row) => ({ id: row.path, name: row.name, detail: row.branch ?? "" }));

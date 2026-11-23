@@ -186,6 +186,12 @@
       <div id="price-rows"></div>
       <p class="secondary" data-t="AI Hub Bar считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета."></p>
     </section>
+    <section class="card">
+      <h2 data-t="Свои промпты"></h2>
+      <div id="saved-prompts"></div>
+      <p><button id="saved-prompt-add" data-t="Добавить промпт"></button></p>
+      <p class="secondary" data-t="Наберите название в поиске, выберите проект — Claude запустится с этим текстом. Подстановки: {проект}, {ветка}."></p>
+    </section>
     <h1 data-t="Экспорт и импорт"></h1>
     <section class="card">
       <div class="row">
@@ -994,6 +1000,48 @@
     };
     quick = await invoke("quick_commands_library");
     showQuickLibrary();
+
+    // «Свои промпты»: a title and a text each; the panel's search offers them by title.
+    let savedPrompts = [];
+    function showSavedPrompts(list) {
+      savedPrompts = list;
+      document.getElementById("saved-prompts").replaceChildren(...list.map((prompt) => {
+        const block = document.createElement("div");
+        block.className = "saved-prompt";
+        const head = document.createElement("div");
+        head.className = "row";
+        const title = document.createElement("input");
+        title.type = "text";
+        title.value = prompt.title;
+        title.placeholder = t("Название");
+        title.setAttribute("aria-label", t("Название"));
+        const remove = document.createElement("button");
+        remove.textContent = "🗑";
+        remove.title = t("Удалить промпт");
+        remove.setAttribute("aria-label", t("Удалить промпт"));
+        const text = document.createElement("textarea");
+        text.rows = 3;
+        text.value = prompt.text;
+        text.placeholder = t("Текст");
+        text.setAttribute("aria-label", t("Текст"));
+        const keep = async () => {
+          prompt.title = title.value;
+          prompt.text = text.value;
+          savedPrompts = await invoke("set_saved_prompts", { prompts: savedPrompts });
+        };
+        title.onchange = keep;
+        text.onchange = keep;
+        remove.onclick = async () => {
+          if (!confirm(`${t("Удалить промпт")}: ${prompt.title}`)) return;
+          showSavedPrompts(await invoke("set_saved_prompts", { prompts: savedPrompts.filter((p) => p.id !== prompt.id) }));
+        };
+        head.append(title, remove);
+        block.append(head, text);
+        return block;
+      }));
+    }
+    document.getElementById("saved-prompt-add").onclick = async () => showSavedPrompts(await invoke("add_saved_prompt"));
+    invoke("saved_prompts_view").then(showSavedPrompts);
 
     // «Заметки»: on or off, and the folder of the notes.
     const notesModule = document.getElementById("module-notes");
