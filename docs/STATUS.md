@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — «Экспорт в .ics…» in the «Календарь» window: the dates under its filter as an iCalendar file for Outlook, Google Calendar and others; a newer export moves the events instead of doubling them (branch `feat/desktop-calendar-ics`; a file written live, with no dates in it)
 - 2026-11-23: Windows — the pair's «Сравнение» window: «Сравнить с …» under a run of a pair, both sides with their files, a file's changes line by line, «Различия между вариантами», «Оставить этот вариант», «Влить в …», «Убрать папку и ветку» (branch `feat/desktop-pair-compare`; seen live on a scratch pair)
 - 2026-11-23: Windows 0.1.10 published as an unsigned pre-release (tag `desktop-v0.1.10`) on Oleh's «Да, выпускай»: the help window, other Claude accounts, «Сервисы AI» by service, feedback buttons, one task for Claude and Codex; installed on the laptop by the agent (0.1.8 → 0.1.9 → 0.1.10); «latest» stays the Mac's v0.12.0
 - 2026-11-23: Windows — «Сервисы AI» by service: capsules Claude Code, Codex, Gemini, Copilot, Cursor, «Другие» with a dot, each showing only its own agents, hooks, limits and keys (branch `feat/desktop-service-pages`; every capsule seen live)
@@ -207,6 +208,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: the calendar's .ics export (branch `feat/desktop-calendar-ics`)
+
+Done: the fourth Mac feature of «Надо догонять». The Mac's `CalendarICS`. A button «⇪» in the «Календарь» window's toolbar, «Экспорт в .ics… — файл с датами для Outlook, Google Calendar и других» (a Windows twin of the Mac's hint, which names the macOS Calendar; 12 translations), saves the dates the window shows under its filter — every month — where the person chooses («AI Hub Bar.ics»). A date without a time is an all-day event, a timed one lasts half an hour; the title is «Дедлайн: …», the description the detail and the profile; a project at its last stage is confirmed. The event id comes from where the date lives (a card's field, or a plan row's file, kind and title — not its line), as SHA-256 like the Mac's, so importing a newer file moves the events; two rows of one name get numbers. Lines are escaped and folded at 75 bytes between characters (RFC 5545). AI Hub Bar asks for no access to any calendar. `core/src/calendar_ics.rs` (`sha2`, already built for Tauri), `app/src/calendar.rs`, `ui/calendar.html`.
+Checked: `python scripts/strings.py --check`, `python scripts/strings-check.py`, `cargo test --workspace` on Windows (two new: the file a calendar reads — all-day and timed events, escaping, ids that survive a moved row, numbered twins, line length; folding between characters). Live on the laptop, the build from the branch: the export was called and the system's save dialog came up; the file was written («calendar exported: 0 dates») and read — a valid empty calendar, because the laptop's profile has no dates. It landed in OneDrive's Documents (the dialog's own folder; the agent's typing did not reach the name field) and was deleted. The installed app was started again.
+Left: not seen live — a file with dates in it opened in Outlook or Google Calendar, and the button pressed in the window itself (the calendar window runs in a WebView2 of its own that the agent's tool could not reach). The Mac's cue in the help names the macOS Calendar; the Windows help does not mention the export yet. Seen in Russian.
 
 ## 2026-11-23 — Windows: the pair's comparison window (branch `feat/desktop-pair-compare`)
 
