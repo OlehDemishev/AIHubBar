@@ -39537,6 +39537,82 @@
         }
       }
     },
+    "Занято %@: памяти давно не хватает, и подкачка занимает место на диске. Закройте тяжёлые приложения или перезагрузите Mac.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ in use: memory has been short for a while, and swap takes disk space. Close heavy apps or restart the Mac."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зайнято %@: пам’яті давно бракує, і підкачка займає місце на диску. Закрийте важкі програми або перезавантажте Mac."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ belegt: Der Speicher ist schon länger knapp, und die Auslagerung belegt Platz auf dem Laufwerk. Schließen Sie schwere Apps oder starten Sie den Mac neu."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ utilisés : la mémoire manque depuis un moment et le fichier d’échange occupe le disque. Fermez les apps lourdes ou redémarrez le Mac."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ en uso: falta memoria desde hace rato y el intercambio ocupa espacio en disco. Cierra las apps pesadas o reinicia el Mac."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ in uso: la memoria scarseggia da tempo e lo swap occupa spazio su disco. Chiudi le app pesanti o riavvia il Mac."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ em uso: falta memória há algum tempo e o swap ocupa espaço em disco. Feche os apps pesados ou reinicie o Mac."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zajęte %@: pamięci brakuje od dłuższego czasu, a plik wymiany zajmuje miejsce na dysku. Zamknij ciężkie aplikacje lub uruchom Maca ponownie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ を使用中：メモリ不足が続いており、スワップがディスクを圧迫しています。重いアプリを閉じるか、Mac を再起動してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 사용 중: 메모리 부족이 오래 이어져 스왑이 디스크 공간을 차지합니다. 무거운 앱을 닫거나 Mac을 재시동하세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المستخدَم %@: الذاكرة ناقصة منذ فترة، وملف المبادلة يأخذ مساحة من القرص. أغلق التطبيقات الثقيلة أو أعد تشغيل Mac."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terpakai %@: memori sudah lama kurang, dan swap memakan ruang disk. Tutup aplikasi berat atau mulai ulang Mac."
+          }
+        }
+      }
+    },
     "Записать": {
       "localizations": {
         "ar": {
@@ -85591,6 +85667,82 @@
         }
       }
     },
+    "Подкачка сильно выросла": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swap has grown large"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Підкачка сильно зросла"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auslagerung stark gewachsen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le fichier d’échange a beaucoup grossi"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El intercambio ha crecido mucho"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo swap è cresciuto molto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O swap cresceu muito"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plik wymiany mocno urósł"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スワップが大きくなっています"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스왑이 크게 늘었습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملف المبادلة كبر كثيرًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swap membesar"
+          }
+        }
+      }
+    },
     "Подключить Telegram": {
       "localizations": {
         "ar": {
@@ -95334,6 +95486,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Процесор (модуль «Ресурси Mac»)"
+          }
+        }
+      }
+    },
+    "Процессор выше 90 % дольше 5 минут, критическая нехватка памяти, мало места, заряд ниже 15 % без зарядки — по одному уведомлению, пока не наладится.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المعالج فوق 90 % — لأكثر من 5 دقائق، نقص حاد في الذاكرة، مساحة قليلة، البطارية تحت 15 % — دون شحن: إشعار واحد لكل حالة حتى تعود طبيعية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prozessor über 90 % — länger als 5 Minuten, kritischer Speichermangel, wenig Platz, Akku unter 15 % — ohne Ladegerät: je eine Mitteilung, bis es sich normalisiert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processor above 90 % — longer than 5 minutes, a critical memory shortage, low disk space, battery below 15 % — not charging: one notification each until it’s back to normal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Procesador por encima del 90 % — más de 5 minutos, falta crítica de memoria, poco espacio, batería por debajo del 15 % — sin cargar: una notificación por caso hasta que se normalice."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processeur au-dessus de 90 % — plus de 5 minutes, manque critique de mémoire, peu d’espace, batterie sous 15 % — sans charge : une notification par cas jusqu’au retour à la normale."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prosesor di atas 90 % — lebih dari 5 menit, kekurangan memori kritis, ruang sedikit, baterai di bawah 15 % — tanpa pengisian: satu pemberitahuan per kasus sampai normal."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processore oltre il 90 % — per più di 5 minuti, carenza critica di memoria, poco spazio, batteria sotto il 15 % — senza carica: una notifica per caso finché non si normalizza."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロセッサ 90 % 超えが 5 分以上、メモリの深刻な不足、空き容量の不足、充電なしでバッテリー 15 % 未満 — それぞれ正常に戻るまで 1 回だけ通知します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로세서 90 % 초과 5분 이상, 심각한 메모리 부족, 디스크 공간 부족, 충전 없이 배터리 15 % 미만 — 정상으로 돌아올 때까지 한 번씩 알립니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Procesor powyżej 90 % — dłużej niż 5 minut, krytyczny brak pamięci, mało miejsca, bateria poniżej 15 % — bez ładowania: po jednym powiadomieniu, aż wróci do normy."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processador acima de 90 % — mais de 5 minutos, falta crítica de memória, pouco espaço, bateria abaixo de 15 % — sem carregar: uma notificação por caso até normalizar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Процесор понад 90 % — довше 5 хвилин, критична нестача пам’яті, мало місця, заряд нижче 15 % — без зарядки: по одному сповіщенню, доки не налагодиться."
+          }
+        }
+      }
+    },
+    "Процессор выше 90 % дольше 5 минут, критическая нехватка памяти, подкачка больше половины памяти, мало места, заряд ниже 15 % без зарядки — по одному уведомлению, пока не наладится.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المعالج فوق 90 % — لأكثر من 5 دقائق، نقص حاد في الذاكرة، ملف المبادلة أكبر من نصف الذاكرة، مساحة قليلة، البطارية تحت 15 % — دون شحن: إشعار واحد لكل حالة حتى تعود طبيعية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prozessor über 90 % — länger als 5 Minuten, kritischer Speichermangel, Auslagerung über der Hälfte des Speichers, wenig Platz, Akku unter 15 % — ohne Ladegerät: je eine Mitteilung, bis es sich normalisiert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processor above 90 % — longer than 5 minutes, a critical memory shortage, swap over half of the memory, low disk space, battery below 15 % — not charging: one notification each until it’s back to normal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Procesador por encima del 90 % — más de 5 minutos, falta crítica de memoria, intercambio por encima de la mitad de la memoria, poco espacio, batería por debajo del 15 % — sin cargar: una notificación por caso hasta que se normalice."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processeur au-dessus de 90 % — plus de 5 minutes, manque critique de mémoire, fichier d’échange au-delà de la moitié de la mémoire, peu d’espace, batterie sous 15 % — sans charge : une notification par cas jusqu’au retour à la normale."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prosesor di atas 90 % — lebih dari 5 menit, kekurangan memori kritis, swap lebih dari setengah memori, ruang sedikit, baterai di bawah 15 % — tanpa pengisian: satu pemberitahuan per kasus sampai normal."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processore oltre il 90 % — per più di 5 minuti, carenza critica di memoria, swap oltre la metà della memoria, poco spazio, batteria sotto il 15 % — senza carica: una notifica per caso finché non si normalizza."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロセッサ 90 % 超えが 5 分以上、メモリの深刻な不足、スワップがメモリの半分超、空き容量の不足、充電なしでバッテリー 15 % 未満 — それぞれ正常に戻るまで 1 回だけ通知します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로세서 90 % 초과 5분 이상, 심각한 메모리 부족, 스왑이 메모리의 절반 초과, 디스크 공간 부족, 충전 없이 배터리 15 % 미만 — 정상으로 돌아올 때까지 한 번씩 알립니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Procesor powyżej 90 % — dłużej niż 5 minut, krytyczny brak pamięci, plik wymiany ponad połowę pamięci, mało miejsca, bateria poniżej 15 % — bez ładowania: po jednym powiadomieniu, aż wróci do normy."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processador acima de 90 % — mais de 5 minutos, falta crítica de memória, swap acima de metade da memória, pouco espaço, bateria abaixo de 15 % — sem carregar: uma notificação por caso até normalizar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Процесор понад 90 % — довше 5 хвилин, критична нестача пам’яті, підкачка більша за половину пам’яті, мало місця, заряд нижче 15 % — без зарядки: по одному сповіщенню, доки не налагодиться."
           }
         }
       }
@@ -147046,310 +147350,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "❌ CI впав: %@ #%lld"
-          }
-        }
-      }
-    },
-    "Процессор выше 90 % дольше 5 минут, критическая нехватка памяти, подкачка больше половины памяти, мало места, заряд ниже 15 % без зарядки — по одному уведомлению, пока не наладится.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "المعالج فوق 90 % — لأكثر من 5 دقائق، نقص حاد في الذاكرة، ملف المبادلة أكبر من نصف الذاكرة، مساحة قليلة، البطارية تحت 15 % — دون شحن: إشعار واحد لكل حالة حتى تعود طبيعية."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prozessor über 90 % — länger als 5 Minuten, kritischer Speichermangel, Auslagerung über der Hälfte des Speichers, wenig Platz, Akku unter 15 % — ohne Ladegerät: je eine Mitteilung, bis es sich normalisiert."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Processor above 90 % — longer than 5 minutes, a critical memory shortage, swap over half of the memory, low disk space, battery below 15 % — not charging: one notification each until it’s back to normal."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Procesador por encima del 90 % — más de 5 minutos, falta crítica de memoria, intercambio por encima de la mitad de la memoria, poco espacio, batería por debajo del 15 % — sin cargar: una notificación por caso hasta que se normalice."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Processeur au-dessus de 90 % — plus de 5 minutes, manque critique de mémoire, fichier d’échange au-delà de la moitié de la mémoire, peu d’espace, batterie sous 15 % — sans charge : une notification par cas jusqu’au retour à la normale."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prosesor di atas 90 % — lebih dari 5 menit, kekurangan memori kritis, swap lebih dari setengah memori, ruang sedikit, baterai di bawah 15 % — tanpa pengisian: satu pemberitahuan per kasus sampai normal."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Processore oltre il 90 % — per più di 5 minuti, carenza critica di memoria, swap oltre la metà della memoria, poco spazio, batteria sotto il 15 % — senza carica: una notifica per caso finché non si normalizza."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "プロセッサ 90 % 超えが 5 分以上、メモリの深刻な不足、スワップがメモリの半分超、空き容量の不足、充電なしでバッテリー 15 % 未満 — それぞれ正常に戻るまで 1 回だけ通知します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "프로세서 90 % 초과 5분 이상, 심각한 메모리 부족, 스왑이 메모리의 절반 초과, 디스크 공간 부족, 충전 없이 배터리 15 % 미만 — 정상으로 돌아올 때까지 한 번씩 알립니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Procesor powyżej 90 % — dłużej niż 5 minut, krytyczny brak pamięci, plik wymiany ponad połowę pamięci, mało miejsca, bateria poniżej 15 % — bez ładowania: po jednym powiadomieniu, aż wróci do normy."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Processador acima de 90 % — mais de 5 minutos, falta crítica de memória, swap acima de metade da memória, pouco espaço, bateria abaixo de 15 % — sem carregar: uma notificação por caso até normalizar."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Процесор понад 90 % — довше 5 хвилин, критична нестача пам’яті, підкачка більша за половину пам’яті, мало місця, заряд нижче 15 % — без зарядки: по одному сповіщенню, доки не налагодиться."
-          }
-        }
-      }
-    },
-    "Подкачка сильно выросла": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Swap has grown large"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Підкачка сильно зросла"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auslagerung stark gewachsen"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le fichier d’échange a beaucoup grossi"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El intercambio ha crecido mucho"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lo swap è cresciuto molto"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O swap cresceu muito"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plik wymiany mocno urósł"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "スワップが大きくなっています"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "스왑이 크게 늘었습니다"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ملف المبادلة كبر كثيرًا"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Swap membesar"
-          }
-        }
-      }
-    },
-    "Занято %@: памяти давно не хватает, и подкачка занимает место на диске. Закройте тяжёлые приложения или перезагрузите Mac.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ in use: memory has been short for a while, and swap takes disk space. Close heavy apps or restart the Mac."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Зайнято %@: пам’яті давно бракує, і підкачка займає місце на диску. Закрийте важкі програми або перезавантажте Mac."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ belegt: Der Speicher ist schon länger knapp, und die Auslagerung belegt Platz auf dem Laufwerk. Schließen Sie schwere Apps oder starten Sie den Mac neu."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ utilisés : la mémoire manque depuis un moment et le fichier d’échange occupe le disque. Fermez les apps lourdes ou redémarrez le Mac."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ en uso: falta memoria desde hace rato y el intercambio ocupa espacio en disco. Cierra las apps pesadas o reinicia el Mac."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ in uso: la memoria scarseggia da tempo e lo swap occupa spazio su disco. Chiudi le app pesanti o riavvia il Mac."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ em uso: falta memória há algum tempo e o swap ocupa espaço em disco. Feche os apps pesados ou reinicie o Mac."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zajęte %@: pamięci brakuje od dłuższego czasu, a plik wymiany zajmuje miejsce na dysku. Zamknij ciężkie aplikacje lub uruchom Maca ponownie."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ を使用中：メモリ不足が続いており、スワップがディスクを圧迫しています。重いアプリを閉じるか、Mac を再起動してください。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ 사용 중: 메모리 부족이 오래 이어져 스왑이 디스크 공간을 차지합니다. 무거운 앱을 닫거나 Mac을 재시동하세요."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "المستخدَم %@: الذاكرة ناقصة منذ فترة، وملف المبادلة يأخذ مساحة من القرص. أغلق التطبيقات الثقيلة أو أعد تشغيل Mac."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Terpakai %@: memori sudah lama kurang, dan swap memakan ruang disk. Tutup aplikasi berat atau mulai ulang Mac."
-          }
-        }
-      }
-    },
-    "Процессор выше 90 % дольше 5 минут, критическая нехватка памяти, мало места, заряд ниже 15 % без зарядки — по одному уведомлению, пока не наладится.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "المعالج فوق 90 % — لأكثر من 5 دقائق، نقص حاد في الذاكرة، مساحة قليلة، البطارية تحت 15 % — دون شحن: إشعار واحد لكل حالة حتى تعود طبيعية."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prozessor über 90 % — länger als 5 Minuten, kritischer Speichermangel, wenig Platz, Akku unter 15 % — ohne Ladegerät: je eine Mitteilung, bis es sich normalisiert."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Processor above 90 % — longer than 5 minutes, a critical memory shortage, low disk space, battery below 15 % — not charging: one notification each until it’s back to normal."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Procesador por encima del 90 % — más de 5 minutos, falta crítica de memoria, poco espacio, batería por debajo del 15 % — sin cargar: una notificación por caso hasta que se normalice."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Processeur au-dessus de 90 % — plus de 5 minutes, manque critique de mémoire, peu d’espace, batterie sous 15 % — sans charge : une notification par cas jusqu’au retour à la normale."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prosesor di atas 90 % — lebih dari 5 menit, kekurangan memori kritis, ruang sedikit, baterai di bawah 15 % — tanpa pengisian: satu pemberitahuan per kasus sampai normal."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Processore oltre il 90 % — per più di 5 minuti, carenza critica di memoria, poco spazio, batteria sotto il 15 % — senza carica: una notifica per caso finché non si normalizza."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "プロセッサ 90 % 超えが 5 分以上、メモリの深刻な不足、空き容量の不足、充電なしでバッテリー 15 % 未満 — それぞれ正常に戻るまで 1 回だけ通知します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "프로세서 90 % 초과 5분 이상, 심각한 메모리 부족, 디스크 공간 부족, 충전 없이 배터리 15 % 미만 — 정상으로 돌아올 때까지 한 번씩 알립니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Procesor powyżej 90 % — dłużej niż 5 minut, krytyczny brak pamięci, mało miejsca, bateria poniżej 15 % — bez ładowania: po jednym powiadomieniu, aż wróci do normy."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Processador acima de 90 % — mais de 5 minutos, falta crítica de memória, pouco espaço, bateria abaixo de 15 % — sem carregar: uma notificação por caso até normalizar."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Процесор понад 90 % — довше 5 хвилин, критична нестача пам’яті, мало місця, заряд нижче 15 % — без зарядки: по одному сповіщенню, доки не налагодиться."
           }
         }
       }
