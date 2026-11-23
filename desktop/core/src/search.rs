@@ -89,6 +89,22 @@ pub struct Found {
 
 pub const LIMIT: usize = 12;
 
+/// «Открывать поиск с клавиатуры» (the Mac's `PanelHotKey`): the Mac's raw value, the key as the global shortcut
+/// plugin reads it, and the same key as a command's shortcut would name it. Ctrl for ⌃, Alt for ⌥; the Mac's ⌥⌘K
+/// is Ctrl+Alt+K here — Alt with the Windows key belongs to the system.
+pub const SEARCH_KEYS: [(&str, Option<&str>, Option<(u32, u32)>); 4] = [
+    ("off", None, None),
+    ("controlOptionC", Some("Ctrl+Alt+C"), Some((8, crate::hot_keys::CONTROL | crate::hot_keys::OPTION))),
+    ("controlOptionSpace", Some("Ctrl+Alt+Space"), Some((49, crate::hot_keys::CONTROL | crate::hot_keys::OPTION))),
+    ("optionCommandK", Some("Ctrl+Alt+K"), Some((40, crate::hot_keys::CONTROL | crate::hot_keys::OPTION))),
+];
+
+/// The key of a saved choice; None for «off» and for what is not a choice.
+pub fn search_key(id: &str) -> Option<(&'static str, crate::hot_keys::KeyCombo)> {
+    let (_, accelerator, combo) = SEARCH_KEYS.into_iter().find(|(key, _, _)| *key == id)?;
+    Some((accelerator?, combo.map(|(code, modifiers)| crate::hot_keys::KeyCombo::new(code, modifiers))?))
+}
+
 /// Step two of a saved prompt: the projects to start it in, all of them until something is typed; by name only.
 pub fn prompt_projects(query: &str, projects: &[Item]) -> Vec<Item> {
     let query = query.trim().to_lowercase();
@@ -144,6 +160,18 @@ mod tests {
 
     fn item(id: &str, name: &str, detail: &str) -> Item {
         Item { id: id.into(), name: name.into(), detail: detail.into() }
+    }
+
+    #[test]
+    fn the_keys_of_the_search() {
+        assert_eq!(search_key("off"), None);
+        assert_eq!(search_key("nonsense"), None);
+        assert_eq!(search_key("controlOptionC").map(|(key, _)| key), Some("Ctrl+Alt+C"));
+        let combos: Vec<_> = SEARCH_KEYS.iter().filter_map(|(id, _, _)| search_key(id)).map(|(_, combo)| combo).collect();
+        assert_eq!(combos.len(), 3);
+        for quick in crate::quick_prompt::HOT_KEYS {
+            assert!(quick.combo().is_none_or(|combo| !combos.contains(&combo)), "{} is a key of «Быстрый запрос»", quick.id());
+        }
     }
 
     #[test]

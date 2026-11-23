@@ -123,7 +123,7 @@ struct AssistantDraft: Equatable, Sendable {
     /// modules in beta testing.
     /// «Остров у чёлки» only on a Mac with a notch.
     @MainActor static var offeredModules: [ModuleKind] {
-        [.limits, .sessions, .projects, .upcoming, .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes]
+        [.limits, .sessions, .projects, .upcoming, .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .versions]
             + (NotchGeometry.macHasNotch ? [.notch] : [])
             + [ModuleKind.layout, .quickPrompt, .telegram].filter { !$0.isBeta }
     }
@@ -134,7 +134,7 @@ struct AssistantDraft: Equatable, Sendable {
         case .projects: hasProjects
         case .upcoming: mode.calendar != .off && mode.source.isFolders
         case .reports: mode.commonCommands == .dailyReport
-        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout, .quickPrompt, .telegram: extraModules.contains(kind)
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout, .quickPrompt, .telegram, .versions: extraModules.contains(kind)
         }
     }
 
@@ -165,7 +165,7 @@ struct AssistantDraft: Equatable, Sendable {
             }
         case .reports:
             mode.commonCommands = on ? .dailyReport : .none
-        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout, .quickPrompt, .telegram:
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout, .quickPrompt, .telegram, .versions:
             extraModules.removeAll { $0 == kind }
             if on { extraModules.append(kind) }
         }
@@ -201,6 +201,8 @@ struct AssistantDraft: Equatable, Sendable {
         if template?.id == "developer", !extraModules.contains(.keepAwake) { extraModules.append(.keepAwake) }
         // …and on a MacBook with a notch the island shows what Claude is doing (SPEC-notch §6).
         if template?.id == "developer", hasNotch, !extraModules.contains(.notch) { extraModules.append(.notch) }
+        // A writer's drafts are kept from the first day (SPEC-content §6): the templates with folder projects.
+        if template?.mode.source.isFolders == true, !extraModules.contains(.versions) { extraModules.append(.versions) }
         hiddenModules = Set(templateModules.filter { !$0.shown && [.limits, .sessions].contains($0.kind) }.map(\.kind))
         mode.modules = nil
         if let folder, analysis != nil { setFolder(folder, analysis: analysis) }

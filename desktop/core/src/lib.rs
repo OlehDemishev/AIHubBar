@@ -8,6 +8,8 @@ pub mod ai;
 pub mod assistant;
 pub mod approvals;
 pub mod calendar;
+pub mod claude_config;
+pub mod clipboard;
 pub mod command;
 pub mod commands;
 pub mod docx;
@@ -24,6 +26,7 @@ pub mod notes;
 pub mod paths;
 pub mod process;
 pub mod profiles;
+pub mod queue;
 pub mod quick_commands;
 pub mod quick_prompt;
 pub mod resources;
@@ -38,6 +41,7 @@ pub mod token_usage;
 pub mod toggles;
 pub mod tray_icon;
 pub mod usage;
+pub mod whats_new;
 
 /// The name people see. The programs are `AIHubBar` and `claudepult`; data folders keep the old name `ClaudePult`, as on the Mac.
 pub const APP_NAME: &str = "AI Hub Bar";
