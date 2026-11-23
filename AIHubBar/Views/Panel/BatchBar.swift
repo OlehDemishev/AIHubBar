@@ -35,13 +35,16 @@ struct BatchBar: View {
             if isSelecting {
                 selecting
             } else if projects.count > 1 {
-                Button {
-                    isSelecting = true
-                } label: {
-                    Label("Выбрать", systemImage: "checklist").scaledFont(.caption)
+                HStack(spacing: 6) {
+                    Button {
+                        isSelecting = true
+                    } label: {
+                        Label("Выбрать", systemImage: "checklist").scaledFont(.caption)
+                    }
+                    .buttonStyle(.borderless)
+                    .help("Выполнить одну команду в нескольких проектах — по очереди, сейчас или ночью")
+                    BetaBadge()
                 }
-                .buttonStyle(.borderless)
-                .help("Выполнить одну команду в нескольких проектах — по очереди, сейчас или ночью")
             }
             ForEach(batches.batches) { batch in
                 BatchRow(batch: batch)
