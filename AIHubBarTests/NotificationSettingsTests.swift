@@ -13,6 +13,7 @@ struct NotificationSettingsTests {
         #expect(NotificationKind(id: "spendWarned-2026-10-80") == .limits)
         #expect(NotificationKind(id: "resources-memory") == .resources)
         #expect(NotificationKind(id: "pr-x") == .pullRequests)
+        #expect(NotificationKind(id: "stuck-abc") == .stuck)
         #expect(NotificationKind(id: "quick-1") == .commands)
         #expect(NotificationKind(id: "test") == nil)
     }

@@ -176,6 +176,11 @@
         <input type="text" id="limit-thresholds" placeholder="50, 80, 95" inputmode="numeric" autocomplete="off" style="width: 9em">
       </div>
       <div class="row">
+        <label for="run-guard" data-t="Ставить фоновые задачи на паузу"></label>
+        <select id="run-guard"></select>
+      </div>
+      <p class="secondary" data-t="Когда сессия или неделя дошла до порога, фоновые задачи замирают там, где были, а запланированные ждут. После сброса лимита работа продолжается сама. Так задача не обрывается на полпути из-за лимита."></p>
+      <div class="row">
         <label for="renew-login" data-t="Продлевать вход Claude Code сам"></label>
         <input type="checkbox" id="renew-login">
       </div>
@@ -197,6 +202,11 @@
       </div>
       <div id="price-rows"></div>
       <p class="secondary" data-t="AI Hub Bar считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета."></p>
+    </section>
+    <section class="card">
+      <h2 data-t="CLAUDE.md и MCP"></h2>
+      <p><button id="open-claude-config" data-t="Открыть инструкции и MCP-серверы…"></button></p>
+      <p class="secondary" data-t="Отдельное окно: все CLAUDE.md и AGENTS.md (общие и проектов) с поиском и правкой, и MCP-серверы Claude Code с выключателем."></p>
     </section>
     <section class="card">
       <h2 data-t="Свои промпты"></h2>
@@ -346,6 +356,10 @@
         <label for="time-limit" data-t="Лимит времени"></label>
         <select id="time-limit"></select>
       </div>
+      <div class="row">
+        <label for="night-hour" data-t="Ночные задачи начинаются в"></label>
+        <select id="night-hour"></select>
+      </div>
     </section>
     <h1 data-t="Проекты"></h1>
     <section class="card">
@@ -469,6 +483,10 @@
       limit.add(new Option(t("%lld мин", launch.timeLimitMinutes), String(launch.timeLimitMinutes)));
     }
     limit.value = String(launch.timeLimitMinutes);
+    // «Ночные задачи начинаются в»: when «На ночь» runs start.
+    const nightHour = document.getElementById("night-hour");
+    invoke("night_hour").then((view) => nightHour.replaceChildren(...view.hours.map(([hour, title]) => new Option(title, hour, false, hour === view.hour))));
+    nightHour.onchange = () => invoke("set_night_hour", { hour: Number(nightHour.value) });
     const saveLaunch = () => invoke("set_launch_settings", { mode: mode.value || null, timeLimitMinutes: Number(limit.value) });
     mode.onchange = saveLaunch;
     limit.onchange = saveLaunch;
@@ -1030,6 +1048,8 @@
     quick = await invoke("quick_commands_library");
     showQuickLibrary();
 
+    document.getElementById("open-claude-config").onclick = () => invoke("open_claude_config");
+
     // «Свои промпты»: a title and a text each; the panel's search offers them by title.
     let savedPrompts = [];
     function showSavedPrompts(list) {
@@ -1215,6 +1235,14 @@
       const apply = async () => { field.value = await invoke("set_limit_thresholds", { text: field.value }); };
       field.onchange = apply;
       field.onkeydown = (event) => { if (event.key === "Enter") field.blur(); };
+    }
+
+    {
+      // «Ставить фоновые задачи на паузу»: the usage at which the limit guard holds background work.
+      const guard = document.getElementById("run-guard");
+      const view = await invoke("run_guard");
+      guard.replaceChildren(...view.choices.map(([percent, title]) => new Option(title, percent, false, percent === view.percent)));
+      guard.onchange = () => invoke("set_run_guard", { percent: Number(guard.value) });
     }
 
     {

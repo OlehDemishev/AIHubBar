@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>AI Hub Bar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="config-window">
+  <header class="config-tabs segmented" id="tabs" role="tablist">
+    <button data-tab="instructions" role="tab" data-t="Инструкции"></button>
+    <button data-tab="mcp" role="tab" data-t="MCP-серверы"></button>
+    <button data-tab="extras" role="tab" data-t="Skills и плагины"></button>
+  </header>
+
+  <section class="config-tab" id="tab-instructions">
+    <div class="config-split">
+      <div class="config-side">
+        <input type="search" id="query" data-t-placeholder="Искать во всех файлах">
+        <div class="config-files" id="files"></div>
+        <p class="secondary" id="files-empty" hidden></p>
+      </div>
+      <div class="config-editor">
+        <div class="bar" id="file-bar" hidden>
+          <span class="secondary path" id="file-path"></span>
+          <button class="small" id="file-reveal" data-t="Папка"></button>
+          <button class="small" id="file-open" data-t="Открыть в редакторе"></button>
+          <button class="small prominent" id="file-save" data-t="Сохранить" disabled></button>
+        </div>
+        <div class="hits" id="hits" hidden></div>
+        <textarea id="editor" spellcheck="false" hidden></textarea>
+        <p class="secondary nothing" id="no-file" data-t="Выберите файл слева"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="config-tab" id="tab-mcp" hidden>
+    <div class="config-list" id="servers"></div>
+    <div class="config-empty" id="servers-empty" hidden>
+      <strong data-t="MCP-серверов нет"></strong>
+      <span class="secondary" data-t="Добавляются командой claude mcp add или файлом .mcp.json в проекте."></span>
+    </div>
+    <div class="config-foot">
+      <button class="small refresh" data-t="Обновить"></button>
+      <span class="secondary" data-t="Выключенный сервер AI Hub Bar помнит целиком и возвращает как был. Новые настройки подхватит следующая сессия Claude."></span>
+    </div>
+  </section>
+
+  <section class="config-tab" id="tab-extras" hidden>
+    <div class="config-list" id="extras"></div>
+    <div class="config-empty" id="extras-empty" hidden>
+      <strong data-t="Ничего не установлено"></strong>
+      <span class="secondary" data-t="Skills лежат в ~/.claude/skills и ~/.codex/skills, плагины ставятся командой /plugin в Claude Code."></span>
+    </div>
+    <div class="config-foot">
+      <button class="small refresh" data-t="Обновить"></button>
+      <span class="secondary" data-t="Выключенный skill переносится в папку рядом (skills.disabled) и возвращается как был. Hooks здесь только для просмотра. Изменения подхватит следующая сессия."></span>
+    </div>
+  </section>
+
+  <p class="error" id="error" hidden></p>
+
+  <script type="module">
+    import { loadTexts, invoke, t } from "./app.js";
+    await loadTexts();
+
+    const id = (name) => document.getElementById(name);
+    const make = (tag, className, text) => {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text !== undefined) element.textContent = text;
+      return element;
+    };
+    const remembered = (key) => { try { return localStorage.getItem(key); } catch { return null; } };
+    const remember = (key, value) => { try { localStorage.setItem(key, value); } catch { /* a convenience only */ } };
+
+    let view = { files: [], servers: [], skills: [], plugins: [], hooks: [] };
+    let selected = null;
+    const busy = new Set();
+
+    // «Не получилось»: the reason stays under the window's content until the next change.
+    function fail(reason) {
+      id("error").hidden = !reason;
+      id("error").textContent = reason ? `${t("Не получилось")}: ${reason}` : "";
+    }
+
+    // Tabs: the one looked at last opens next time, as on the Mac.
+    function showTab(name) {
+      for (const button of id("tabs").children) {
+        const chosen = button.dataset.tab === name;
+        button.classList.toggle("chosen", chosen);
+        button.setAttribute("aria-selected", chosen);
+        id(`tab-${button.dataset.tab}`).hidden = !chosen;
+      }
+      remember("claude-config-tab", name);
+    }
+    for (const button of id("tabs").children) button.onclick = () => showTab(button.dataset.tab);
+
+    // «Инструкции».
+    const hitsIn = (text, query) => {
+      const wanted = query.trim().toLowerCase();
+      if (!wanted) return [];
+      return text.split("\n").map((line, index) => [index + 1, line.trim()]).filter(([, line]) => line.toLowerCase().includes(wanted));
+    };
+    const shownText = (file) => file.draft ?? file.text;
+    const file = () => view.files.find((entry) => entry.path === selected);
+
+    function showFiles() {
+      const query = id("query").value;
+      const shown = query.trim() ? view.files.filter((entry) => hitsIn(entry.text, query).length > 0) : view.files;
+      const list = id("files");
+      list.replaceChildren();
+      let group = null;
+      for (const entry of shown) {
+        if (entry.group !== group) {
+          group = entry.group;
+          list.append(make("h3", "", group));
+        }
+        const row = make("button", entry.path === selected ? "chosen" : "");
+        row.title = entry.path;
+        row.append(make("span", "name", entry.title));
+        if (entry.draft != null) {
+          const dot = make("span", "dot");
+          dot.title = t("Есть несохранённые правки");
+          dot.setAttribute("role", "img");
+          dot.setAttribute("aria-label", dot.title);
+          row.append(dot);
+        }
+        if (query.trim()) row.append(make("span", "count", String(hitsIn(entry.text, query).length)));
+        row.onclick = () => { selected = entry.path; showFiles(); showEditor(true); };
+        list.append(row);
+      }
+      id("files-empty").hidden = shown.length > 0;
+      id("files-empty").textContent = query.trim() ? t("Нигде не встречается") : t("Файлов инструкций не нашлось");
+    }
+
+    function showHits() {
+      const current = file();
+      const hits = current ? hitsIn(id("editor").value, id("query").value).slice(0, 30) : [];
+      id("hits").hidden = hits.length === 0;
+      id("hits").replaceChildren(...hits.map(([line, text]) => make("div", "", `${line}: ${text}`)));
+    }
+
+    function showEditor(fill) {
+      const current = file();
+      id("file-bar").hidden = id("editor").hidden = !current;
+      id("no-file").hidden = Boolean(current);
+      if (!current) { id("hits").hidden = true; return; }
+      id("file-path").textContent = id("file-path").title = current.path;
+      if (fill) id("editor").value = shownText(current);
+      id("file-save").disabled = current.draft == null;
+      showHits();
+    }
+
+    id("query").oninput = () => { showFiles(); showHits(); };
+    let editTimer = null;
+    const sendEdit = (path, text) => invoke("claude_config_edit", { path, text }).catch(() => {});
+    id("editor").oninput = () => {
+      const current = file();
+      if (!current) return;
+      const text = id("editor").value;
+      const hadDraft = current.draft != null;
+      current.draft = text === current.text ? null : text;
+      id("file-save").disabled = current.draft == null;
+      if (hadDraft !== (current.draft != null)) showFiles();
+      showHits();
+      clearTimeout(editTimer);
+      editTimer = setTimeout(() => sendEdit(current.path, text), 400);
+    };
+    async function save() {
+      const current = file();
+      if (!current || current.draft == null) return;
+      clearTimeout(editTimer);
+      try {
+        apply(await invoke("claude_config_save", { path: current.path, text: id("editor").value }), false);
+        fail(null);
+      } catch (error) {
+        fail(String(error));
+      }
+    }
+    id("file-save").onclick = save;
+    window.addEventListener("keydown", (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") { event.preventDefault(); save(); }
+    });
+    id("file-reveal").onclick = () => invoke("claude_config_open", { path: selected, reveal: true }).catch((error) => fail(String(error)));
+    id("file-open").onclick = () => invoke("claude_config_open", { path: selected, reveal: false }).catch((error) => fail(String(error)));
+
+    // A row with a switch: MCP servers, skills, plugins.
+    function switchRow({ key, title, note, waiting, lines, on, change }) {
+      const row = make("div", "config-row");
+      const what = make("div", "what");
+      const head = make("div", "head");
+      head.append(make("strong", "", title));
+      if (note) head.append(make("span", "secondary", note));
+      if (waiting) head.append(make("span", "waiting", waiting));
+      what.append(head, ...lines);
+      const toggle = make("input");
+      toggle.type = "checkbox";
+      toggle.checked = on;
+      toggle.disabled = busy.has(key);
+      toggle.title = on ? t("Выключить «%@»", title) : t("Включить «%@»", title);
+      toggle.setAttribute("aria-label", toggle.title);
+      toggle.onchange = async () => {
+        busy.add(key);
+        toggle.disabled = true;
+        try {
+          const changed = await change(toggle.checked);
+          busy.delete(key);
+          apply(changed.view, false);
+          fail(changed.error);
+        } catch (error) {
+          busy.delete(key);
+          fail(String(error));
+          refresh();
+        }
+      };
+      row.append(what, toggle);
+      return row;
+    }
+    const line = (className, text) => { const element = make("div", className, text); element.title = text; return element; };
+
+    function showServers() {
+      const list = id("servers");
+      list.replaceChildren();
+      let group = null;
+      for (const server of view.servers) {
+        if (server.group !== group) {
+          group = server.group;
+          list.append(make("h3", "", group));
+        }
+        list.append(switchRow({
+          key: server.id, title: server.name, note: server.transport,
+          waiting: server.status === "pending" ? t("ждёт разрешения в Claude") : null,
+          lines: [line("secondary mono", server.target), line("secondary faint", server.scope)],
+          on: server.status !== "off",
+          change: (on) => invoke("set_mcp_server", { id: server.id, on }),
+        }));
+      }
+      list.hidden = view.servers.length === 0;
+      id("servers-empty").hidden = view.servers.length > 0;
+    }
+
+    function showExtras() {
+      const list = id("extras");
+      list.replaceChildren();
+      for (const agent of ["Claude Code", "Codex"]) {
+        const skills = view.skills.filter((skill) => skill.agent === agent);
+        if (skills.length === 0) continue;
+        list.append(make("h3", "", `Skills — ${agent}`));
+        for (const skill of skills) {
+          list.append(switchRow({
+            key: skill.id, title: skill.name, lines: skill.description ? [line("secondary two-lines", skill.description)] : [], on: skill.on,
+            change: (on) => invoke("set_agent_skill", { id: skill.id, on }),
+          }));
+        }
+      }
+      if (view.plugins.length > 0) {
+        list.append(make("h3", "", t("Плагины — %@", "Claude Code")));
+        for (const plugin of view.plugins) {
+          list.append(switchRow({
+            key: plugin.key, title: plugin.name, note: plugin.version || null, lines: plugin.marketplace ? [line("secondary", plugin.marketplace)] : [], on: plugin.on,
+            change: (on) => invoke("set_claude_plugin", { key: plugin.key, on }),
+          }));
+        }
+      }
+      if (view.hooks.length > 0) {
+        list.append(make("h3", "", "Hooks"));
+        for (const hook of view.hooks) {
+          const row = make("div", "config-row");
+          const what = make("div", "what");
+          const head = make("div", "head");
+          head.append(make("strong", "", hook.event), make("span", "secondary", hook.agent));
+          if (hook.ours) head.append(make("span", "ours", "AI Hub Bar"));
+          what.append(head, line("secondary mono", hook.command));
+          row.append(what);
+          list.append(row);
+        }
+      }
+      const nothing = view.skills.length + view.plugins.length + view.hooks.length === 0;
+      list.hidden = nothing;
+      id("extras-empty").hidden = !nothing;
+    }
+
+    // A new view from the files. The editor's text is left alone while its file is the same: typing is never undone.
+    function apply(fresh, fill) {
+      const typed = file() && file().draft != null && !fill ? { path: selected, text: id("editor").value } : null;
+      view = fresh;
+      if (!file()) selected = view.files[0]?.path ?? null;
+      if (typed && file() && file().path === typed.path && typed.text !== file().text && file().draft == null) file().draft = typed.text;
+      showFiles();
+      showEditor(fill || !typed);
+      showServers();
+      showExtras();
+    }
+    async function refresh() {
+      apply(await invoke("claude_config_view"), false);
+    }
+    for (const button of document.querySelectorAll(".refresh")) button.onclick = () => { fail(null); refresh(); };
+
+    showTab(["instructions", "mcp", "extras"].includes(remembered("claude-config-tab")) ? remembered("claude-config-tab") : "instructions");
+    apply(await invoke("claude_config_view"), true);
+  </script>
+</body>
+</html>

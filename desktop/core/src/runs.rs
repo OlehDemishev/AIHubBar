@@ -105,8 +105,32 @@ impl Run {
         dir.join(format!("{}.log", self.id))
     }
 
-    pub fn deadline(&self) -> DateTime<Utc> {
-        self.started_at + chrono::Duration::minutes(i64::from(self.time_limit_minutes))
+    /// When the time limit runs out; time spent paused by the limit guard doesn't count toward it.
+    pub fn deadline(&self, now: DateTime<Utc>) -> DateTime<Utc> {
+        let earlier = self.other.get("pausedSeconds").and_then(Value::as_f64).unwrap_or(0.0);
+        let this_pause = self.paused_at().map_or(0.0, |at| (now - at).num_milliseconds().max(0) as f64 / 1000.0);
+        self.started_at + chrono::Duration::minutes(i64::from(self.time_limit_minutes)) + chrono::Duration::milliseconds(((earlier + this_pause) * 1000.0) as i64)
+    }
+
+    /// Since when the limit guard holds the run (the Mac's `pausedAt`).
+    pub fn paused_at(&self) -> Option<DateTime<Utc>> {
+        self.other.get("pausedAt").and_then(Value::as_str).and_then(|text| DateTime::parse_from_rfc3339(text).ok()).map(|at| at.with_timezone(&Utc))
+    }
+
+    pub fn is_paused(&self) -> bool {
+        self.is_running() && self.paused_at().is_some()
+    }
+
+    pub fn mark_paused(&mut self, now: DateTime<Utc>) {
+        self.other.insert("pausedAt".into(), Value::String(now.to_rfc3339_opts(chrono::SecondsFormat::Secs, true)));
+    }
+
+    /// The pause is over: its length joins `pausedSeconds`.
+    pub fn mark_resumed(&mut self, now: DateTime<Utc>) {
+        let Some(at) = self.paused_at() else { return };
+        let earlier = self.other.get("pausedSeconds").and_then(Value::as_f64).unwrap_or(0.0);
+        self.other.insert("pausedSeconds".into(), serde_json::json!(earlier + (now - at).num_milliseconds().max(0) as f64 / 1000.0));
+        self.other.remove("pausedAt");
     }
 
     /// Run by Codex (`codex exec`), as the Mac's `BackgroundRun.agent == "codex"`.
@@ -710,7 +734,18 @@ not json at all
     #[test]
     fn reads_and_writes_the_macs_files() {
         let run = run();
-        assert_eq!(run.deadline(), "2026-11-18T11:30:00Z".parse::<DateTime<Utc>>().unwrap());
+        let at = |text: &str| text.parse::<DateTime<Utc>>().unwrap();
+        assert_eq!(run.deadline(at("2026-11-18T10:10:00Z")), at("2026-11-18T11:30:03.5Z"), "the limit and the earlier pause");
+        let mut paused = run.clone();
+        assert!(!paused.is_paused());
+        paused.mark_paused(at("2026-11-18T10:20:00Z"));
+        assert!(paused.is_paused());
+        assert_eq!(serde_json::to_value(&paused).unwrap()["pausedAt"], "2026-11-18T10:20:00Z", "the Mac's field");
+        assert_eq!(paused.deadline(at("2026-11-18T10:50:00Z")), at("2026-11-18T12:00:03.5Z"), "the pause doesn't count toward the limit");
+        paused.mark_resumed(at("2026-11-18T11:20:00Z"));
+        assert!(!paused.is_paused() && paused.other.get("pausedAt").is_none());
+        assert_eq!(paused.other["pausedSeconds"], 3603.5);
+        assert_eq!(paused.deadline(at("2026-11-18T13:00:00Z")), at("2026-11-18T12:30:03.5Z"));
         let written = serde_json::to_value(&run).unwrap();
         assert_eq!(written["startedAt"], "2026-11-18T10:00:00Z");
         assert_eq!(written["agent"], "codex", "fields of the Mac this version doesn't use stay");

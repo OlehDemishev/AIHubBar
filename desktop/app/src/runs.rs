@@ -78,7 +78,7 @@ impl Runs {
                 };
                 if gone {
                     ended.push(run.id.clone());
-                } else if now >= run.deadline() && !stopping.contains_key(&run.id) {
+                } else if now >= run.deadline(now) && !stopping.contains_key(&run.id) {
                     overdue.push(run.id.clone());
                 }
             }
@@ -105,6 +105,10 @@ impl Runs {
         }
         eprintln!("run {id}: stopping ({reason:?})");
         runs::kill(pid, false);
+        // A frozen process only gets the signal once it runs again.
+        if cfg!(unix) && run.is_paused() {
+            process::resume_tree(pid);
+        }
         // Claude runs its SessionEnd hooks on SIGTERM; then make sure it is gone (Windows ends it at once).
         if cfg!(unix) {
             let started = started(&run);
@@ -115,6 +119,46 @@ impl Runs {
                 }
             });
         }
+    }
+
+    /// The limit guard: freezes the run's processes where they are, so the work isn't lost to a hit limit.
+    pub fn pause(&self, id: &str) -> bool {
+        self.set_paused(id, true)
+    }
+
+    pub fn resume(&self, id: &str) -> bool {
+        self.set_paused(id, false)
+    }
+
+    fn set_paused(&self, id: &str, pause: bool) -> bool {
+        let now = Utc::now();
+        let mut state = self.state.lock().unwrap();
+        let ours = |run: &Run, pid: u32| state.children.contains_key(&run.id) || process::is_same_process(pid, started(run));
+        let Some(run) = state.runs.iter().find(|r| r.id == id && r.is_running() && r.is_paused() != pause).cloned() else { return false };
+        // The process is gone or not ours: a pause that can't be made is not written; one that is over is cleared.
+        match (run.pid.filter(|pid| ours(&run, *pid)), pause) {
+            (Some(pid), true) => {
+                if !process::suspend_tree(pid) {
+                    eprintln!("run {id}: could not be paused");
+                    process::resume_tree(pid);
+                    return false;
+                }
+            }
+            (Some(pid), false) => {
+                process::resume_tree(pid);
+            }
+            (None, true) => return false,
+            (None, false) => {}
+        }
+        let Some(run) = state.runs.iter_mut().find(|r| r.id == id) else { return false };
+        if pause { run.mark_paused(now) } else { run.mark_resumed(now) }
+        let run = run.clone();
+        drop(state);
+        eprintln!("run {id}: {}", if pause { "paused by the limit guard" } else { "resumed" });
+        if let Err(error) = runs::save(&paths::runs_dir(), &run) {
+            eprintln!("run {id} not saved: {error}");
+        }
+        true
     }
 
     fn finish(&self, app: &AppHandle, id: &str, now: DateTime<Utc>) {
@@ -159,7 +203,7 @@ impl Runs {
 // MARK: - Words
 
 /// The task's start, flattened, at most 60 characters (the Mac's `RunMessage.taskStart`).
-fn task_start(task: &str) -> String {
+pub(crate) fn task_start(task: &str) -> String {
     let flat = task.split_whitespace().collect::<Vec<_>>().join(" ");
     if flat.chars().count() > 60 { flat.chars().take(59).collect::<String>() + "…" } else { flat }
 }
@@ -168,6 +212,7 @@ pub fn outcome_text(texts: &Strings, run: &Run) -> String {
     match run.state {
         RunState::TimedOut => texts.format("остановлено по лимиту времени (%lld мин)", &[&run.time_limit_minutes.to_string()]),
         RunState::Stopped => texts.t("остановлено вручную").to_owned(),
+        RunState::Running if run.is_paused() => texts.t("на паузе до сброса лимита").to_owned(),
         RunState::Running => texts.t("выполняется").to_owned(),
         RunState::Succeeded => run.summary.clone().unwrap_or_else(|| texts.t("готово").to_owned()),
         RunState::Failed => run.summary.clone().unwrap_or_else(|| texts.t("завершилось с ошибкой").to_owned()),

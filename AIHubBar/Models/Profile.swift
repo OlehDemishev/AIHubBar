@@ -23,6 +23,8 @@ struct Profile: Codable, Identifiable, Equatable, Sendable {
     var service: String?
     var permissions: PermissionProfile
     var calendar: CalendarMode
+    /// «Цель по словам» of a folder profile: words a day in the projects' main files; 0 = no goal.
+    var wordGoal: Int
     var showProjects: Bool
     var commonCommands: CommonCommandsKind
     var showCommonCommands: Bool
@@ -38,7 +40,7 @@ struct Profile: Codable, Identifiable, Equatable, Sendable {
         source: ProjectSource = .none, card: ProjectCard = .none, stages: [String] = [], metrics: [String] = [], wordsPerMinute: Int = 150,
         launchMode: LaunchMode? = nil, service: String? = nil, permissions: PermissionProfile = .filesOnly, calendar: CalendarMode = .off,
         showProjects: Bool = true, commonCommands: CommonCommandsKind = .none, showCommonCommands: Bool = true, commands: [CommandTemplate] = [],
-        modules: [ProfileModule]? = nil, menuBar: MenuBarConfig? = nil
+        modules: [ProfileModule]? = nil, menuBar: MenuBarConfig? = nil, wordGoal: Int = 0
     ) {
         self.id = id
         self.name = name
@@ -59,11 +61,12 @@ struct Profile: Codable, Identifiable, Equatable, Sendable {
         self.commands = commands
         self.modules = modules
         self.menuBar = menuBar
+        self.wordGoal = wordGoal
     }
 
     enum CodingKeys: String, CodingKey {
         case id, name, icon, template, source, card, stages, metrics, wordsPerMinute, launchMode, service, permissions, calendar
-        case showProjects, commonCommands, showCommonCommands, commands, modules, menuBar
+        case showProjects, commonCommands, showCommonCommands, commands, modules, menuBar, wordGoal
     }
 
     init(from decoder: Decoder) throws {
@@ -87,6 +90,7 @@ struct Profile: Codable, Identifiable, Equatable, Sendable {
         commands = (try? c.decodeIfPresent([CommandTemplate].self, forKey: .commands)) ?? []
         modules = (try? c.decodeIfPresent(ModuleList.self, forKey: .modules))?.modules
         menuBar = try? c.decodeIfPresent(MenuBarConfig.self, forKey: .menuBar)
+        wordGoal = max(0, (try? c.decodeIfPresent(Int.self, forKey: .wordGoal)) ?? 0)
     }
 
     /// Stages without the empty items a half-typed list may have.

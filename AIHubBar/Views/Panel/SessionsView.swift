@@ -463,17 +463,19 @@ private struct SessionRowView: View {
             Button("Журнал") { showLog(run) }
             if run.isPaused { Button("Продолжить сейчас") { launcher.resumeNow(run.id) } }
             if let partner = PairCompare.partner(of: run, runs: runs.runs) {
-                Button("Сравнить с \(partner.agentTitle)") {
+                Button {
                     runs.selectedPair = run.pair
                     NSApp.activate()
                     openWindow(.pairCompare)
-                }
+                } label: { Text("Сравнить с \(partner.agentTitle)") + BetaBadge.suffix }
             }
             if launcher.canReview(run) {
-                Button("Проверить в \(CrossReview.reviewerIsCodex(run) ? AgentKind.codex.title : AgentKind.claudeCode.title)") { launcher.review(run) }
+                Button { launcher.review(run) } label: {
+                    Text("Проверить в \(CrossReview.reviewerIsCodex(run) ? AgentKind.codex.title : AgentKind.claudeCode.title)") + BetaBadge.suffix
+                }
             }
             if Handover.canHandOver(run), launcher.canHandOverPending {
-                Button("Передать \(AgentKind.codex.title)") { launcher.handOver(run) }
+                Button { launcher.handOver(run) } label: { Text("Передать \(AgentKind.codex.title)") + BetaBadge.suffix }
             }
             if run.state == .running { Button("Остановить…", role: .destructive) { askToStop() } }
         } else if let session = row.session {

@@ -194,6 +194,8 @@ final class ProfileStore {
         settings.defaultLaunchMode = mode.launchMode
         settings.activeSource = mode.source
         settings.activeResultPatterns = mode.resultPatterns
+        settings.activeProfileID = mode.id
+        settings.activeWordGoal = mode.source.isFolders ? mode.wordGoal : 0
         settings.promptStyle = mode.template == "developer-report" ? .workspace : .generic
         // The built-in git scanner arrives with the templates (SPEC-modes §9, stage 6).
         // The profile's modules decide what the panel shows (SPEC-profiles §9.2); the blocks in `AppSettings` follow

@@ -14,6 +14,7 @@ enum WindowID: String, CaseIterable, Sendable {
     case quickPrompt = "quick-prompt"
     case usageHistory = "usage-history"
     case pairCompare = "pair-compare"
+    case versions
     #if DEBUG
     /// Debug builds only: the panel's content in a plain window, for checks that must not open the menu bar panel.
     case debugPanel = "debug-panel"
