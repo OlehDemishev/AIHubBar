@@ -164,6 +164,8 @@ pub struct SessionRow {
 pub struct RunRow {
     id: String,
     running: bool,
+    /// Held by the limit guard: «Продолжить сейчас».
+    paused: bool,
     pull_request: Option<String>,
 }
 
@@ -251,10 +253,13 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
     // Background runs: on their hook session's row (same id), or a row of their own while they run and for a while after.
     let now = Utc::now();
     for run in &runs {
-        let row = RunRow { id: run.id.clone(), running: run.is_running(), pull_request: run.pull_request_url.clone() };
+        let row = RunRow { id: run.id.clone(), running: run.is_running(), paused: run.is_paused(), pull_request: run.pull_request_url.clone() };
         // Codex's hook names its session by Codex's thread, not by the run.
         let thread = run.is_codex().then(|| codex_thread(run)).flatten();
         if let Some(existing) = rows.iter_mut().find(|r| r.id == run.id || thread.as_deref() == Some(r.id.as_str())) {
+            if run.is_paused() {
+                existing.detail = Some(texts.t("на паузе до сброса лимита").to_owned());
+            }
             if !run.is_running() {
                 let state = run_state(run);
                 existing.state = state_key(state);
@@ -273,7 +278,7 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
                 worktree: run.worktree_branch.as_ref().and_then(|_| sessions::worktree_name(&run.folder)),
                 state: state_key(state),
                 state_title: state.title(&texts),
-                detail: Some(if run.is_running() { run.task.clone() } else { runs::outcome_text(&texts, run) }),
+                detail: Some(if run.is_running() && !run.is_paused() { run.task.clone() } else { runs::outcome_text(&texts, run) }),
                 progress: None,
                 context: None,
                 context_full: false,

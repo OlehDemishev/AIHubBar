@@ -38,6 +38,9 @@ final class SessionStore {
         didSet { UserDefaults.standard.set(Array(contextNotified.suffix(200)), forKey: "contextNotified") }
     }
 
+    /// Sessions that went quiet or keep repeating a command (`StuckWatch`).
+    private var stuck = StuckWatch()
+
     init(directory: URL = SessionFiles.sessionsDirectory, approvalsDirectory: URL = ApprovalFiles.directory) {
         self.directory = directory
         self.approvalsDirectory = approvalsDirectory
@@ -82,6 +85,7 @@ final class SessionStore {
         if open != approvals { approvals = open }
         announceWaiting(loaded)
         announceFullContext(loaded)
+        announceStuck(loaded)
     }
 
     /// The demo copy (`DemoMode`) shows sample sessions; it never starts the watcher, so they stay as they are.
@@ -231,6 +235,15 @@ final class SessionStore {
                 body: String(localized: "≈ \(Int(((item.context ?? 0) * 100).rounded())) %: скоро Claude сожмёт историю. Если задача большая — лучше начать новую сессию с кратким итогом."),
                 target: .session(id: item.id)
             )
+        }
+    }
+
+    /// Once per quiet stretch and once per repeated command.
+    private func announceStuck(_ items: [Item]) {
+        for alert in stuck.evaluate(items.map { ($0.session, $0.state) }) {
+            guard let session = items.first(where: { $0.id == alert.sessionID })?.session else { continue }
+            Notifier.post(id: "stuck-\(session.id)", title: StuckWatch.title(session), body: StuckWatch.body(alert.reason),
+                          target: .session(id: session.id))
         }
     }
 

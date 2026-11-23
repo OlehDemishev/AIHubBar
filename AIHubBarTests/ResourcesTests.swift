@@ -5,9 +5,9 @@ import Testing
 /// SPEC-profiles stage 4: «Ресурсы Mac», the first optional module.
 struct ResourcesTests {
     private func snapshot(cpu: Double = 10, pressure: SystemSnapshot.Pressure = .normal, diskFree: Int64 = 100_000_000_000,
-                          battery: SystemSnapshot.Battery? = nil) -> SystemSnapshot {
+                          battery: SystemSnapshot.Battery? = nil, swap: UInt64 = 0) -> SystemSnapshot {
         SystemSnapshot(cpu: cpu, memoryUsed: 8 << 30, memoryTotal: 16 << 30, pressure: pressure, diskFree: diskFree,
-                       diskTotal: 500_000_000_000, networkIn: 0, networkOut: 0, battery: battery, gpu: nil)
+                       diskTotal: 500_000_000_000, networkIn: 0, networkOut: 0, battery: battery, gpu: nil, swapUsed: swap)
     }
 
     @Test func alertsOncePerEvent() {
@@ -35,6 +35,20 @@ struct ResourcesTests {
         var plugged = low
         plugged.onAC = true
         #expect(alerts.evaluate(snapshot(battery: plugged), diskBelowGB: 20).isEmpty, "no alert while charging")
+    }
+
+    @Test func swapOverHalfOfTheMemory() {
+        var alerts = ResourceAlerts()
+        let gb: UInt64 = 1 << 30
+        #expect(ResourceAlerts.swapLimit(memoryTotal: 16 * gb) == 8 * gb)
+        #expect(ResourceAlerts.swapLimit(memoryTotal: 4 * gb) == 4 * gb, "not less than 4 GB on a small Mac")
+        #expect(alerts.evaluate(snapshot(swap: 7 * gb), diskBelowGB: 20).isEmpty)
+        #expect(alerts.evaluate(snapshot(swap: 9 * gb), diskBelowGB: 20) == [.swap(9 * gb)])
+        #expect(alerts.evaluate(snapshot(swap: 12 * gb), diskBelowGB: 20).isEmpty, "once")
+        #expect(alerts.evaluate(snapshot(swap: 7 * gb + 1), diskBelowGB: 20).isEmpty, "a little under the limit is not cleared yet")
+        #expect(alerts.evaluate(snapshot(swap: 9 * gb), diskBelowGB: 20).isEmpty)
+        _ = alerts.evaluate(snapshot(swap: 2 * gb), diskBelowGB: 20)
+        #expect(alerts.evaluate(snapshot(swap: 10 * gb), diskBelowGB: 20) == [.swap(10 * gb)], "again after it cleared")
     }
 
     @Test func topProcessesFromPs() {

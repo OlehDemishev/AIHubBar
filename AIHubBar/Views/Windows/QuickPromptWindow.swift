@@ -102,9 +102,12 @@ struct QuickPromptWindow: View {
                 .fixedSize()
             }
             if agent == .claudeCode, mode == .background, launcher.canLaunchBoth {
-                Toggle("И в Codex — сравнить", isOn: $alsoCodex)
-                    .toggleStyle(.checkbox)
-                    .help("Ту же задачу получат Claude и Codex, каждый в своём worktree проекта; итог придёт, когда закончат оба")
+                HStack(spacing: 6) {
+                    Toggle("И в Codex — сравнить", isOn: $alsoCodex)
+                        .toggleStyle(.checkbox)
+                        .help("Ту же задачу получат Claude и Codex, каждый в своём worktree проекта; итог придёт, когда закончат оба")
+                    BetaBadge()
+                }
             }
             HStack(spacing: 8) {
                 Picker("Где запустить", selection: $mode) {

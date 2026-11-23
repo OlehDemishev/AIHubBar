@@ -97,6 +97,15 @@ struct AIHubBarApp: App {
         .handlesExternalEvents(matching: [])
         .defaultSize(width: 820, height: 520)
 
+        Window("Версии", id: WindowID.versions.rawValue) {
+            VersionsWindow()
+                .appEnvironment(app)
+                .preferredColorScheme(app.settings.panelTheme.colorScheme)
+                .debugSnapshot("versions")
+        }
+        .handlesExternalEvents(matching: [])
+        .defaultSize(width: 900, height: 600)
+
         Window("Помощник", id: WindowID.assistant.rawValue) {
             AssistantView()
                 .appEnvironment(app)
