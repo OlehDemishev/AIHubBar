@@ -15114,6 +15114,82 @@
         }
       }
     },
+    "«Итог дня» начинается с того, что осталось за вами: сессии, которые ждут ответа, и пул-реквесты с упавшими проверками.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The day summary starts with what is left for you: sessions waiting for an answer and pull requests whose checks failed."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Підсумок дня» починається з того, що лишилося за вами: сесії, які чекають відповіді, і пул-реквести з проваленими перевірками."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Tagesbilanz beginnt mit dem, was noch bei Ihnen liegt: Sitzungen, die auf eine Antwort warten, und Pull Requests mit fehlgeschlagenen Prüfungen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le bilan du jour commence par ce qui vous attend : les sessions en attente d’une réponse et les pull requests dont les vérifications ont échoué."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El resumen del día empieza por lo que te queda pendiente: sesiones que esperan respuesta y pull requests con comprobaciones fallidas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il riepilogo del giorno inizia da ciò che resta a te: le sessioni in attesa di una risposta e le pull request con controlli falliti."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O resumo do dia começa pelo que ficou com você: sessões que esperam resposta e pull requests com verificações que falharam."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podsumowanie dnia zaczyna się od tego, co zostało po Twojej stronie: sesje czekające na odpowiedź i pull requesty z nieudanymi sprawdzeniami."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「今日のまとめ」は、あなたの対応が残っているものから始まります：応答待ちのセッションと、チェックに失敗したプルリクエストです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘오늘의 요약’은 사용자가 처리할 항목부터 시작합니다. 응답을 기다리는 세션과 검사에 실패한 풀 리퀘스트입니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«ملخص اليوم» تبدأ بما بقي عليك: الجلسات التي تنتظر ردًّا وطلبات السحب التي فشلت فحوصها."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ringkasan hari ini dimulai dari yang masih menunggu Anda: sesi yang menunggu jawaban dan pull request yang pemeriksaannya gagal."
+          }
+        }
+      }
+    },
     "«Лимиты Claude» для рабочего стола: правый клик по столу → «Изменить виджеты…» → AI Hub Bar. Маленький — кольцо сессии, средний — сессия и неделя.": {
       "localizations": {
         "ar": {
@@ -21505,6 +21581,82 @@
         }
       }
     },
+    "В окно «Быстрого запроса» можно перетащить файлы и снимки экрана — агент получит их пути вместе с задачей. Кнопка с микрофоном включает диктовку macOS в поле задачи.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drag files and screenshots into the Quick Prompt window — the agent gets their paths with the task. The microphone button starts macOS Dictation in the task field."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У вікно «Швидкого запиту» можна перетягнути файли та знімки екрана — агент отримає їхні шляхи разом із завданням. Кнопка з мікрофоном вмикає диктування macOS у полі завдання."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dateien und Bildschirmfotos lassen sich in das Fenster des Schnellauftrags ziehen – der Agent erhält ihre Pfade mit der Aufgabe. Die Mikrofontaste startet das macOS-Diktat im Aufgabenfeld."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glissez des fichiers et des captures d’écran dans la fenêtre de la Requête rapide : l’agent reçoit leurs chemins avec la tâche. Le bouton micro lance la dictée de macOS dans le champ de la tâche."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrastra archivos y capturas de pantalla a la ventana de la Petición rápida: el agente recibe sus rutas junto con la tarea. El botón del micrófono inicia el dictado de macOS en el campo de la tarea."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trascina file e istantanee nella finestra della Richiesta rapida: l’agente riceve i loro percorsi insieme all’attività. Il pulsante con il microfono avvia la dettatura di macOS nel campo dell’attività."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arraste arquivos e capturas de tela para a janela do Pedido rápido — o agente recebe os caminhos junto com a tarefa. O botão do microfone inicia o ditado do macOS no campo da tarefa."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do okna Szybkiego zapytania można przeciągnąć pliki i zrzuty ekranu — agent dostanie ich ścieżki razem z zadaniem. Przycisk z mikrofonem włącza dyktowanie macOS w polu zadania."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クイックプロンプトのウインドウにファイルやスクリーンショットをドラッグすると、エージェントにタスクと一緒にそのパスが渡されます。マイクのボタンは、タスク欄で macOS の音声入力を開始します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빠른 요청 윈도우로 파일과 스크린샷을 드래그하면 에이전트가 작업과 함께 해당 경로를 받습니다. 마이크 버튼은 작업 필드에서 macOS 받아쓰기를 시작합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن سحب الملفات ولقطات الشاشة إلى نافذة الطلب السريع — يحصل الوكيل على مساراتها مع المهمة. زر الميكروفون يشغّل إملاء macOS في حقل المهمة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seret file dan tangkapan layar ke jendela Permintaan cepat — agen menerima path-nya bersama tugas. Tombol mikrofon memulai Dikte macOS di kolom tugas."
+          }
+        }
+      }
+    },
     "В папке варианта есть незакоммиченные изменения — папка и ветка оставлены.": {
       "localizations": {
         "ar": {
@@ -21891,6 +22043,82 @@
         }
       }
     },
+    "В приложении «Команды» есть действия AI Hub Bar: лимиты Claude, быстрая команда, поиск, «Не спать», «Кто ждёт ответа» и «Задача Claude в фоне».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Shortcuts app has AI Hub Bar's actions: Claude limits, a quick command, search, “Keep Awake”, “Who is waiting” and “Claude task in the background”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У програмі «Команди» є дії AI Hub Bar: ліміти Claude, швидка команда, пошук, «Не спати», «Хто чекає відповіді» та «Завдання Claude у фоні»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In der App „Kurzbefehle“ gibt es Aktionen von AI Hub Bar: Claude-Limits, ein Schnellbefehl, Suche, „Wach bleiben“, „Wer wartet auf Antwort“ und „Claude-Aufgabe im Hintergrund“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’app Raccourcis propose les actions d’AI Hub Bar : limites de Claude, commande rapide, recherche, « Rester éveillé », « Qui attend une réponse » et « Tâche Claude en arrière-plan »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La app Atajos tiene acciones de AI Hub Bar: límites de Claude, comando rápido, búsqueda, «No dormir», «Quién espera respuesta» y «Tarea de Claude en segundo plano»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’app Comandi Rapidi ha le azioni di AI Hub Bar: limiti di Claude, comando rapido, ricerca, “Resta sveglio”, “Chi attende una risposta” e “Attività di Claude in background”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O app Atalhos tem ações do AI Hub Bar: limites do Claude, comando rápido, busca, “Não dormir”, “Quem espera resposta” e “Tarefa do Claude em segundo plano”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W aplikacji Skróty są czynności AI Hub Bar: limity Claude, szybkie polecenie, wyszukiwanie, „Bez usypiania”, „Kto czeka na odpowiedź” i „Zadanie Claude w tle”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「ショートカット」アプリに AI Hub Bar のアクションがあります：Claude の上限、クイックコマンド、検索、「スリープしない」、「応答待ちのセッション」、「Claude のバックグラウンドタスク」。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단축어 앱에 AI Hub Bar 동작이 있습니다: Claude 한도, 빠른 명령, 검색, ‘잠자기 방지’, ‘응답을 기다리는 세션’, ‘Claude 백그라운드 작업’."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في تطبيق «الاختصارات» إجراءات AI Hub Bar: حدود Claude، أمر سريع، البحث، «البقاء مستيقظًا»، «من ينتظر الرد» و«مهمة Claude في الخلفية»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikasi Pintasan memiliki tindakan AI Hub Bar: batas Claude, perintah cepat, pencarian, “Tetap terjaga”, “Siapa yang menunggu jawaban”, dan “Tugas Claude di latar belakang”."
+          }
+        }
+      }
+    },
     "В профилях": {
       "localizations": {
         "ar": {
@@ -22039,6 +22267,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Минулого разу AI Hub Bar закрився з помилкою"
+          }
+        }
+      }
+    },
+    "В развёрнутом проекте видно, что слушает порт из его папки: порт и программа. Отсюда же можно открыть адрес в браузере или остановить процесс — кнопка спросит ещё раз.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An expanded project shows what listens on a port from its folder: the port and the program. From there you can open the address in the browser or stop the process — the button asks once more."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У розгорнутому проєкті видно, що слухає порт із його папки: порт і програма. Звідси ж можна відкрити адресу в браузері або зупинити процес — кнопка запитає ще раз."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein aufgeklapptes Projekt zeigt, was aus seinem Ordner an einem Port lauscht: Port und Programm. Von dort lässt sich die Adresse im Browser öffnen oder der Prozess beenden – die Taste fragt noch einmal nach."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un projet déplié montre ce qui écoute sur un port depuis son dossier : le port et le programme. De là, vous pouvez ouvrir l’adresse dans le navigateur ou arrêter le processus — le bouton demande confirmation."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un proyecto desplegado muestra qué escucha en un puerto desde su carpeta: el puerto y el programa. Desde ahí puedes abrir la dirección en el navegador o detener el proceso; el botón pregunta una vez más."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un progetto espanso mostra cosa è in ascolto su una porta dalla sua cartella: la porta e il programma. Da lì puoi aprire l’indirizzo nel browser o fermare il processo: il pulsante chiede conferma."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um projeto expandido mostra o que escuta em uma porta a partir da pasta dele: a porta e o programa. Dali você pode abrir o endereço no navegador ou parar o processo — o botão pergunta mais uma vez."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rozwinięty projekt pokazuje, co nasłuchuje na porcie z jego folderu: port i program. Stamtąd można otworzyć adres w przeglądarce albo zatrzymać proces — przycisk zapyta jeszcze raz."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "展開したプロジェクトには、そのフォルダからポートを待ち受けているもの（ポートとプログラム）が表示されます。そこからアドレスをブラウザで開いたり、プロセスを停止したりできます。停止ボタンはもう一度確認します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "펼친 프로젝트에는 그 폴더에서 포트를 수신 중인 항목(포트와 프로그램)이 표시됩니다. 거기서 주소를 브라우저로 열거나 프로세스를 중지할 수 있으며, 중지 버튼은 한 번 더 묻습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المشروع الموسَّع يعرض ما يستمع إلى منفذ من مجلده: المنفذ والبرنامج. ومن هناك يمكن فتح العنوان في المتصفح أو إيقاف العملية — الزر يسأل مرة أخرى."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyek yang dibentangkan menampilkan apa yang mendengarkan port dari foldernya: port dan programnya. Dari sana Anda bisa membuka alamatnya di browser atau menghentikan prosesnya — tombolnya bertanya sekali lagi."
           }
         }
       }
@@ -38858,6 +39162,82 @@
         }
       }
     },
+    "Если сессия работает, но 20 минут ничего не делает или раз за разом запускает одну и ту же команду, придёт уведомление. Как часто — на странице модуля «Сессии агентов».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If a session is running but has done nothing for 20 minutes, or keeps running the same command over and over, a notification comes. How often is set on the Agent sessions module page."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Якщо сесія працює, але 20 хвилин нічого не робить або раз у раз запускає ту саму команду, прийде сповіщення. Як часто — на сторінці модуля «Сесії агентів»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wenn eine Sitzung läuft, aber 20 Minuten nichts tut oder immer wieder denselben Befehl ausführt, kommt eine Mitteilung. Wie oft, legen Sie auf der Seite des Moduls „Agentensitzungen“ fest."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si une session tourne mais ne fait rien depuis 20 minutes, ou relance sans cesse la même commande, une notification arrive. La fréquence se règle sur la page du module « Sessions des agents »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si una sesión sigue en marcha pero lleva 20 minutos sin hacer nada, o ejecuta el mismo comando una y otra vez, llega una notificación. La frecuencia se ajusta en la página del módulo «Sesiones de agentes»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se una sessione è in corso ma non fa nulla da 20 minuti, o continua a eseguire lo stesso comando, arriva una notifica. La frequenza si imposta nella pagina del modulo “Sessioni degli agenti”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se uma sessão está rodando mas não faz nada há 20 minutos, ou roda o mesmo comando repetidamente, chega uma notificação. A frequência fica na página do módulo “Sessões de agentes”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeśli sesja trwa, ale od 20 minut nic nie robi albo wciąż uruchamia to samo polecenie, przyjdzie powiadomienie. Jak często — ustawia się na stronie modułu „Sesje agentów”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションが実行中なのに 20 分間何もしていない、または同じコマンドを繰り返し実行している場合、通知が届きます。頻度はモジュール「エージェントのセッション」のページで設定します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션이 실행 중인데 20분 동안 아무것도 하지 않거나 같은 명령을 계속 실행하면 알림이 옵니다. 빈도는 ‘에이전트 세션’ 모듈 페이지에서 정합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إذا كانت الجلسة تعمل لكنها لم تفعل شيئًا منذ 20 دقيقة، أو تكرّر تشغيل الأمر نفسه، يصلك إشعار. التكرار يُضبط في صفحة وحدة «جلسات الوكلاء»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jika sesi berjalan tetapi 20 menit tidak melakukan apa-apa, atau terus menjalankan perintah yang sama, pemberitahuan akan datang. Seberapa sering — diatur di halaman modul “Sesi agen”."
+          }
+        }
+      }
+    },
     "Есть несохранённые правки": {
       "localizations": {
         "ar": {
@@ -54147,6 +54527,82 @@
         }
       }
     },
+    "Команды и Siri": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shortcuts and Siri"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Команди та Siri"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurzbefehle und Siri"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raccourcis et Siri"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atajos y Siri"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandi Rapidi e Siri"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atalhos e Siri"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skróty i Siri"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ショートカットと Siri"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단축어와 Siri"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاختصارات و Siri"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintasan dan Siri"
+          }
+        }
+      }
+    },
     "Команды появятся у каждого проекта. «Своя задача» есть всегда. Тексты можно поправить сейчас или позже в Настройках.": {
       "localizations": {
         "ar": {
@@ -59248,6 +59704,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Мінімум"
+          }
+        }
+      }
+    },
+    "Мог застрять": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "May be stuck"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Міг застрягти"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hängt vielleicht fest"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peut-être bloqué"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puede haberse atascado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forse bloccato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pode ter travado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mógł utknąć"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "止まっているかも"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "멈춘 것 같을 때"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ربما توقّف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mungkin macet"
           }
         }
       }
@@ -129900,6 +130432,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Файли + пошук в інтернеті"
+          }
+        }
+      }
+    },
+    "Файлы и диктовка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Files and dictation"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файли та диктування"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dateien und Diktat"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichiers et dictée"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivos y dictado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File e dettatura"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arquivos e ditado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pliki i dyktowanie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルと音声入力"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일과 받아쓰기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الملفات والإملاء"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File dan dikte"
           }
         }
       }
