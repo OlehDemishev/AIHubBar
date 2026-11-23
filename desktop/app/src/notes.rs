@@ -105,7 +105,10 @@ pub struct NotesSettings {
 
 #[tauri::command]
 pub fn notes_settings(app: AppHandle) -> NotesSettings {
-    NotesSettings { on: app.state::<AppState>().settings.lock().unwrap().module_on(KIND), folder: folder(&app).to_string_lossy().into_owned() }
+    // Its own statement: the lock must be let go before `folder` takes it again, or the main thread waits for
+    // itself and the Settings window freezes.
+    let on = app.state::<AppState>().settings.lock().unwrap().module_on(KIND);
+    NotesSettings { on, folder: folder(&app).to_string_lossy().into_owned() }
 }
 
 /// «Выбрать…»: another folder for the notes; the files stay where they are.

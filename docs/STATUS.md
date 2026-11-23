@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — fixed: the Settings window froze after loading and held the whole app (a lock taken twice in the notes' settings, in `main` since PR 530, in no release) (branch `fix/desktop-settings-freeze`)
 - 2026-11-23: Windows — «Тема» and «Размер текста» in Settings → «Основные» (branch `feat/desktop-appearance`; a dark theme with large text seen live)
 - 2026-11-23: Windows — the «История буфера» module: copied texts, search, pin, back to the clipboard in a click (branch `feat/desktop-clipboard`; seen live; its Settings card not seen)
 - 2026-11-23: Mac — SPEC-content stage 5 is ready in PR 534 (`feat/calendar-ics-word-goals`): the calendar as an `.ics` file and «Цель по словам» of a folder profile; **held until 0.12.0 is out**; the panel line and the file seen live, the windows not
@@ -183,6 +184,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: the Settings window froze the app (branch `fix/desktop-settings-freeze`)
+
+Done: found while porting — a test build with Settings open did not leave on `quit`. `notes_settings` (PR 530) took the settings' lock for the module's switch and, in the same statement, again for the folder; commands without `async` run on the main thread, so the main thread waited for itself as soon as the Settings page asked for the notes' card. The window stayed drawn but took no scrolling, and nothing sent to the main thread after that ran: `--app-command panel` / `quit`, the windows' own commands. The switch is now read in its own statement (`app/src/notes.rs`). In `main` since PR 530 (2026-11-23), in no released version — 0.1.7 does not have it.
+Checked: `cargo test --workspace`, `python scripts/strings.py --check`. Live on the laptop: before the fix `settings` then `quit` left the process running, with probes showing the second command handed to the main thread and never run; after it the same two commands end the process. With the window answering again the cards not reached earlier were seen by paging: «Свои промпты» with «Ревью ветки» and its text, «История буфера» and «Заметки» in «Модули» with their switches off, «Тема» and «Размер текста» in «Основные».
+Left: the cards' switches and fields were looked at, not pressed. No test catches a lock taken twice — the other new commands were read for the same pattern by eye and have none.
 
 ## 2026-11-23 — Windows: theme and text size (branch `feat/desktop-appearance`)
 
