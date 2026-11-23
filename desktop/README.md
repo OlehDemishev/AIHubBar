@@ -8,7 +8,7 @@ Tauri 2: a Rust core plus a small HTML interface. The plan and the stages are in
 - the settings window (language, start at sign-in);
 - 13 languages;
 - one running copy;
-- `claudepult --app-command panel|settings|quit`.
+- `claudepult --app-command panel|settings|quit|quick-prompt|search|help`.
 
 **Stage 2 «Лимиты»** is mostly done:
 - the session and week limits from Claude Code's token file;

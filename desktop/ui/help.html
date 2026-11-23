@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>AI Hub Bar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Laid out like Settings: topics on the left with a search, a topic's page on the right. -->
+  <div class="settings-split">
+  <nav class="settings-sidebar">
+    <input type="search" id="help-search" autocomplete="off" spellcheck="false" data-t-placeholder="Поиск по справке">
+    <div id="help-nav" class="settings-nav" role="tablist" aria-orientation="vertical"></div>
+    <p class="secondary" id="help-nothing" data-t="Ничего не найдено" hidden></p>
+  </nav>
+  <main class="settings help-page" id="help-page" role="tabpanel">
+    <header class="pane-header">
+      <span class="help-glyph" id="help-glyph" aria-hidden="true"></span>
+      <div class="help-head">
+        <h1 id="help-title"></h1>
+        <p class="secondary" id="help-summary"></p>
+      </div>
+      <button id="help-settings" data-t="Открыть в настройках" hidden></button>
+    </header>
+    <section class="card" id="help-start" hidden>
+      <h2 data-t="Как начать"></h2>
+      <ol id="help-steps"></ol>
+    </section>
+    <div id="help-sections"></div>
+  </main>
+  </div>
+  <script type="module">
+    import { loadTexts, invoke, t } from "./app.js";
+    await loadTexts();
+
+    const id = (name) => document.getElementById(name);
+    const element = (tag, className, text) => Object.assign(document.createElement(tag), { className: className ?? "", textContent: text ?? "" });
+    const search = id("help-search");
+    let view = await invoke("help_view", { query: "" });
+    let current = view.topics[0]?.id;
+
+    // What was typed, marked in a text: the cards the search found are seen at once.
+    function marked(text, query) {
+      const node = document.createDocumentFragment();
+      const at = query ? text.toLowerCase().indexOf(query) : -1;
+      if (at < 0) { node.append(text); return node; }
+      node.append(text.slice(0, at), element("mark", "", text.slice(at, at + query.length)), marked(text.slice(at + query.length), query));
+      return node;
+    }
+
+    function showNav() {
+      const nav = id("help-nav");
+      const rows = [];
+      let group = null;
+      for (const topic of view.topics.filter((topic) => view.found.includes(topic.id))) {
+        if (topic.group !== group) { group = topic.group; rows.push(element("h2", "", group)); }
+        const row = element("button", "nav-row");
+        row.setAttribute("role", "tab");
+        row.setAttribute("aria-selected", String(topic.id === current));
+        row.tabIndex = topic.id === current ? 0 : -1;
+        row.dataset.topic = topic.id;
+        row.append(element("span", "help-nav-glyph", topic.glyph), element("span", "name", topic.title));
+        row.onclick = () => { current = topic.id; show(); };
+        rows.push(row);
+      }
+      nav.replaceChildren(...rows);
+      id("help-nothing").hidden = view.found.length > 0;
+    }
+
+    function showPage() {
+      const topic = view.topics.find((topic) => topic.id === current);
+      id("help-page").hidden = !topic;
+      if (!topic) return;
+      const query = search.value.trim().toLowerCase();
+      id("help-glyph").textContent = topic.glyph;
+      id("help-title").textContent = topic.title;
+      id("help-summary").replaceChildren(marked(topic.summary, query));
+      id("help-settings").hidden = !topic.settings;
+      id("help-settings").onclick = () => invoke("open_settings", { page: topic.settings });
+      id("help-start").hidden = topic.steps.length === 0;
+      id("help-steps").replaceChildren(...topic.steps.map((step) => { const item = element("li"); item.append(marked(step, query)); return item; }));
+      id("help-sections").replaceChildren(...topic.sections.map((section) => {
+        const box = element("section", "card");
+        box.append(element("h2", "", section.title));
+        for (const fact of section.facts) {
+          const hit = query && (fact.name + " " + fact.detail).toLowerCase().includes(query);
+          const row = element("div", "help-fact" + (hit ? " help-found" : ""));
+          const name = element("strong");
+          name.append(marked(fact.name, query));
+          const detail = element("p", "secondary");
+          detail.append(marked(fact.detail, query));
+          row.append(name, detail);
+          box.append(row);
+        }
+        return box;
+      }));
+      id("help-page").scrollTop = 0;
+    }
+
+    function show() {
+      showNav();
+      showPage();
+    }
+
+    // The first topic the search finds opens at once, as on the Mac.
+    search.oninput = async () => {
+      view = await invoke("help_view", { query: search.value });
+      if (!view.found.includes(current)) current = view.found[0];
+      show();
+    };
+    search.onkeydown = (event) => {
+      if (event.key === "Escape" && search.value) { search.value = ""; search.oninput(); event.preventDefault(); }
+      if (event.key === "ArrowDown") { id("help-nav").querySelector('[aria-selected="true"]')?.focus(); event.preventDefault(); }
+    };
+    // ↑ ↓ Home End choose a topic; Ctrl+F goes to the search.
+    id("help-nav").onkeydown = (event) => {
+      const at = view.found.indexOf(current);
+      const to = { ArrowDown: at + 1, ArrowUp: at - 1, Home: 0, End: view.found.length - 1 }[event.key];
+      if (to === undefined || to < 0 || to >= view.found.length) return;
+      event.preventDefault();
+      current = view.found[to];
+      show();
+      id("help-nav").querySelector('[aria-selected="true"]')?.focus();
+    };
+    window.addEventListener("keydown", (event) => {
+      if (event.ctrlKey && event.code === "KeyF") { search.focus(); search.select(); event.preventDefault(); }
+    });
+    show();
+  </script>
+</body>
+</html>
