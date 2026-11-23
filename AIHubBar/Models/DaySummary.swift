@@ -14,6 +14,24 @@ enum DaySummary {
         var others: [ServiceUsage] = []
         /// Today's tokens at the person's own API price, dollars; nil without a price.
         var cost: Double? = nil
+        /// Sessions that wait for an answer right now: «Проект: чего ждёт» (`waitingLines`).
+        var waiting: [String] = []
+        /// Open pull requests with failed checks: «Проект #12: название» (`failedPRLines`).
+        var failedPRs: [String] = []
+    }
+
+    /// What is left for the person at the end of the day: sessions that wait for an answer.
+    static func waitingLines(_ sessions: [(session: Session, state: Session.State)]) -> [String] {
+        sessions.filter { $0.state == .waiting }.map { item in
+            [item.session.displayProject, item.session.message ?? item.session.task].compactMap { $0 }.joined(separator: ": ")
+        }
+    }
+
+    /// Open pull requests whose checks failed, from the projects block's last report.
+    static func failedPRLines(_ projects: [Project]) -> [String] {
+        projects.flatMap { project in
+            (project.openPRs ?? []).filter { $0.ci == .fail }.map { "\(project.name) #\($0.number): \($0.title)" }
+        }
     }
 
     struct Line: Equatable, Sendable {
@@ -39,6 +57,13 @@ enum DaySummary {
         }
         if input.hits > 0 { lines.append(Line(text: String(localized: "Упирался в лимит: \(input.hits)"))) }
 
+        if !input.waiting.isEmpty || !input.failedPRs.isEmpty {
+            lines.append(Line(text: String(localized: "Ждёт вас"), isHeading: true))
+            lines += input.waiting.prefix(5).map { Line(text: "✋ " + $0) }
+            lines += input.failedPRs.prefix(5).map { Line(text: "❌ CI · " + $0) }
+            let more = max(0, input.waiting.count - 5) + max(0, input.failedPRs.count - 5)
+            if more > 0 { lines.append(Line(text: String(localized: "и ещё \(more)"))) }
+        }
         if let breakdown = input.breakdown, !breakdown.projects.isEmpty {
             lines.append(Line(text: String(localized: "По проектам"), isHeading: true))
             for row in breakdown.projects.prefix(5) {
@@ -75,9 +100,9 @@ enum DaySummary {
         return limits.isEmpty ? nil : "\(usage.title) — " + limits.joined(separator: ", ")
     }
 
-    /// Nothing happened today: no spend and no runs. Then there is nothing to send.
+    /// Nothing happened today and nothing waits: no spend, no runs, no open question. Then there is nothing to send.
     static func isEmpty(_ input: Input) -> Bool {
-        (input.breakdown?.projects.isEmpty ?? true) && input.runs.isEmpty
+        (input.breakdown?.projects.isEmpty ?? true) && input.runs.isEmpty && input.waiting.isEmpty && input.failedPRs.isEmpty
     }
 
     static func html(_ input: Input) -> String {

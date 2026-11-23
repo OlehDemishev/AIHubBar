@@ -339,6 +339,7 @@ extension NotificationKind {
         switch self {
         case .waiting: "hand.raised"
         case .context: "gauge.with.needle"
+        case .stuck: "tortoise"
         case .background: "moon.zzz"
         case .limits: "gauge.with.dots.needle.67percent"
         case .pullRequests: "arrow.triangle.pull"

@@ -47,6 +47,35 @@ struct DaySummaryTests {
         #expect(DaySummary.isEmpty(.init(sessionPercent: 42, weekPercent: 18, breakdown: nil, hits: 0, runs: [])), "limits alone are not a day's work")
     }
 
+    @Test func whatWaitsForThePerson() throws {
+        func session(_ id: String, _ state: String, message: String? = nil) throws -> Session {
+            var json: [String: Any] = ["session_id": id, "cwd": "/P/\(id)", "project": id, "state": state,
+                                       "updated_at": date(17, 19).ISO8601Format(), "first_prompt": "Fix the build"]
+            if let message { json["message"] = message }
+            return try JSONDecoder().decode(Session.self, from: JSONSerialization.data(withJSONObject: json))
+        }
+        let ambo = try session("Ambo", "waiting", message: "Which port?")
+        let site = try session("Site", "running")
+        let notes = try session("Notes", "waiting")
+        let waiting = DaySummary.waitingLines([(ambo, .waiting), (site, .running), (notes, .waiting)])
+        #expect(waiting == ["Ambo: Which port?", "Notes: Fix the build"])
+
+        let project = try JSONDecoder().decode(Project.self, from: JSONSerialization.data(withJSONObject: [
+            "name": "Ambo", "path": "/p/Ambo", "health": "green", "dirty": 0, "stashes": 0, "worktrees": [], "attention": [],
+            "open_prs": [["number": 7, "title": "Add <search>", "ci": "fail"], ["number": 8, "title": "Docs", "ci": "ok"]],
+        ] as [String: Any]))
+        #expect(DaySummary.failedPRLines([project]) == ["Ambo #7: Add <search>"])
+
+        let input = DaySummary.Input(sessionPercent: 42, weekPercent: nil, breakdown: nil, hits: 0, runs: [], waiting: waiting,
+                                     failedPRs: DaySummary.failedPRLines([project]))
+        let lines = DaySummary.lines(input)
+        #expect(lines.first?.text.hasPrefix("Claude — ") == true)
+        #expect(Array(lines.map(\.text).dropFirst()) == ["Ждёт вас", "✋ Ambo: Which port?", "✋ Notes: Fix the build", "❌ CI · Ambo #7: Add <search>"])
+        #expect(lines.filter(\.isHeading).map(\.text) == ["Ждёт вас"])
+        #expect(!DaySummary.isEmpty(input), "an open question is worth the evening message")
+        #expect(DaySummary.html(input).contains("Add &lt;search&gt;"))
+    }
+
     @Test func theDayHasItsCostWhenThePriceIsKnown() {
         var input = DaySummary.Input(sessionPercent: nil, weekPercent: nil, breakdown: nil, hits: 0, runs: [], cost: 4.2)
         #expect(DaySummary.lines(input).count == 1)

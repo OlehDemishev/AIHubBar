@@ -136,7 +136,7 @@ struct LanguagePicker: View {
         Picker("Язык интерфейса", systemImage: "globe", selection: $choice) {
             Text("Как в системе").tag("")
             ForEach(languages, id: \.self) { code in
-                Text(Locale(identifier: code).localizedString(forIdentifier: code)?.capitalized ?? code).tag(code)
+                Text(verbatim: InterfaceLanguage.title(code)).tag(code)
             }
         }
         .onChange(of: choice) {

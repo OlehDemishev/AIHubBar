@@ -15,6 +15,7 @@ extension ClipboardHistory: ModuleService {}
 extension NotesStore: ModuleService {}
 extension NotchIsland: ModuleService {}
 extension LayoutSwitcher: ModuleService {}
+extension VersionKeeper: ModuleService {}
 extension QuickPromptController: ModuleService {}
 extension TelegramBotController: ModuleService {}
 
@@ -40,6 +41,7 @@ final class AppContainer {
     let store: ProjectStore
     let launcher: LaunchController
     let sessions: SessionStore
+    let antigravityWaits: AntigravityWaitWatcher
     let telegramApprovals: TelegramApprovals
     let telegramBot: TelegramBotController
     let widgetStatus: WidgetStatusWriter
@@ -67,6 +69,8 @@ final class AppContainer {
     let services: AIServiceStore
     let folders: FolderProjectStore
     let engine: CommandEngine
+    let versionKeeper: VersionKeeper
+    let batches: BatchRunner
     let calendar: CalendarStore
 
     init() {
@@ -97,6 +101,9 @@ final class AppContainer {
         self.commands = commands
         let sessions = SessionStore()
         self.sessions = sessions
+        let antigravityWaits = AntigravityWaitWatcher()
+        antigravityWaits.isActive = { [modes] in modes.isOn(.sessions) }
+        self.antigravityWaits = antigravityWaits
         let telegramApprovals = TelegramApprovals(settings: settings, sessions: sessions)
         self.telegramApprovals = telegramApprovals
         let usage = UsageStore(settings: settings, sessions: sessions)
@@ -122,12 +129,28 @@ final class AppContainer {
         self.runs = runs
         let engine = CommandEngine(settings: settings, runs: runs)
         self.engine = engine
+        let versionKeeper = VersionKeeper(settings: settings, folders: folders)
+        self.versionKeeper = versionKeeper
+        engine.beforeRun = { [versionKeeper] path, title in versionKeeper.takeBeforeRun(projectPath: path, title: title) }
+        engine.tracksVersions = { [versionKeeper] in versionKeeper.isActive() }
+        runs.tracksVersions = { [versionKeeper] in versionKeeper.isActive() }
         let launcher = LaunchController(settings: settings, store: store, runs: runs, usage: usage)
         let telegramBot = TelegramBotController(settings: settings, sessions: sessions, runs: runs, usage: usage, approvals: telegramApprovals)
         self.telegramBot = telegramBot
         telegramApprovals.botReads = { [telegramBot] token in telegramBot.reads(token) }
-        self.weeklySummary = WeeklySummarySender(settings: settings, usage: usage, runs: runs, hub: hub)
+        self.weeklySummary = WeeklySummarySender(settings: settings, usage: usage, runs: runs, hub: hub, sessions: sessions, projects: store)
         self.launcher = launcher
+        let batches = BatchRunner(engine: engine)
+        self.batches = batches
+        batches.profile = { [modes] id in modes.modes.first { $0.id == id } }
+        batches.isHeld = { [launcher] in launcher.guardHold != nil }
+        batches.nightStart = { [settings] now in NightQueue.nextStart(hour: settings.nightStartHour, now: now) }
+        batches.resetsAt = { [usage] in usage.snapshot?.session?.resetsAt }
+        batches.announce = { [settings] batch in
+            let summary = batch.summary
+            Notifier.post(id: "batch-\(batch.id)", title: summary.title, body: summary.body)
+            Telegram.notify(.backgroundResults, html: "📦 <b>\(RunMessage.escape(summary.title))</b>\n\(RunMessage.escape(summary.body))", settings: settings)
+        }
         let quickPrompt = QuickPromptController(settings: settings, launcher: launcher, services: services)
         self.quickPrompt = quickPrompt
         let hooks = HookController(settings: settings)
@@ -136,6 +159,7 @@ final class AppContainer {
         let moduleServices: [(ModuleKind, any ModuleService)] = [
             (.limits, usage), (.limits, hub), (.resources, monitor), (.keepAwake, keepAwake), (.clipboard, clipboard),
             (.notes, notesStore), (.notch, notchIsland), (.layout, layoutSwitcher), (.quickPrompt, quickPrompt),
+            (.versions, versionKeeper),
             (.telegram, telegramBot),
         ]
         for (kind, service) in moduleServices {
@@ -249,6 +273,7 @@ final class AppContainer {
                 followBetaUpdates()
                 Updates.start()
                 sessions.start()
+                antigravityWaits.start()
                 telegramApprovals.start()
                 widgetStatus.start { [keepAwake, widgetStatus] on in
                     AppLog.info("Keep awake \(on ? "on" : "off") from the widget or Control Center")
@@ -298,6 +323,7 @@ final class AppContainer {
                 await services.scan()
             }
             folders.start()
+            versionKeeper.start()
             // A first start without `_daily-report`: the assistant sets up the first mode (SPEC-modes §5).
             // The menu bar label, which opens windows, has to be on screen first.
             if modes.needsAssistant {
@@ -309,6 +335,7 @@ final class AppContainer {
             calendar.start()
             if live {
                 launcher.start()
+                batches.start()
                 // After the menu bar item is up, so the alert is not the first thing of a login.
                 Task {
                     try? await Task.sleep(for: .seconds(3))
@@ -330,6 +357,9 @@ final class AppContainer {
                     requests.openWindow(.runLog)
                 case let .openFile(path):
                     NSWorkspace.shared.open(URL(fileURLWithPath: path))
+                case let .openChanges(projectPath, before):
+                    versionKeeper.shown = .init(projectPath: projectPath, before: before)
+                    requests.openWindow(.versions)
                 case let .openWindow(id):
                     // The id comes from a notification or a widget link, stored as text.
                     if let window = WindowID(rawValue: id) { requests.openWindow(window) }
@@ -435,6 +465,7 @@ private struct AppEnvironment: ViewModifier {
             .environment(app.commandHotKeys)
             .environment(app.clipboard)
             .environment(app.notesStore)
+            .environment(app.versionKeeper)
             .environment(app.notchIsland)
             .environment(app.layoutSwitcher)
             .environment(app.quickPrompt)
@@ -443,6 +474,7 @@ private struct AppEnvironment: ViewModifier {
             .environment(app.services)
             .environment(app.folders)
             .environment(app.engine)
+            .environment(app.batches)
             .environment(app.calendar)
     }
 }
