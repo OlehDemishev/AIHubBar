@@ -67,7 +67,16 @@ pub struct DayBar {
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
+pub struct TodayLine {
+    text: String,
+    heading: bool,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct HistoryView {
+    /// «Сегодня»: the limits, today's spend by project, today's background runs, the other services.
+    today: Vec<TodayLine>,
     days: Vec<DayBar>,
     total: String,
     /// Over the days with any use.
@@ -93,7 +102,39 @@ fn view(app: &AppHandle, days: &[UsageDay], period: i64) -> HistoryView {
     let total: u64 = used.iter().map(|day| day.tokens()).sum();
     let cost = price.map(|price| used.iter().map(|day| day.cost(price)).sum::<f64>());
     let ratio = cost.and_then(|cost| token_usage::plan_ratio(cost, period, plan));
+    let today_key = token_usage::day_key(Utc::now());
+    let (session_percent, week_percent, breakdown) = app.state::<crate::limits::Limits>().today(&crate::profiles::projects_root(app), &texts);
+    let midnight = chrono::Local::now().date_naive().and_hms_opt(0, 0, 0).and_then(|t| t.and_local_timezone(chrono::Local).earliest()).map(|t| t.with_timezone(&Utc));
+    let runs = app
+        .state::<crate::runs::Runs>()
+        .list()
+        .iter()
+        .filter(|run| midnight.is_some_and(|start| run.started_at >= start))
+        .map(|run| {
+            let outcome = if run.is_running() { None } else { Some(run.state == claudepult_core::runs::RunState::Succeeded) };
+            (outcome, crate::runs::project_label(run), claudepult_core::launch::one_line(&run.task))
+        })
+        .collect();
+    let others = app
+        .state::<crate::hub::Hub>()
+        .telegram_services(&texts)
+        .into_iter()
+        .filter_map(|service| {
+            let limits: Vec<String> = service.windows.iter().filter_map(|w| w.percent.map(|p| format!("{} {} %", w.title, p.round() as i64))).collect();
+            (!limits.is_empty()).then(|| format!("{} — {}", service.title, limits.join(", ")))
+        })
+        .collect();
+    let input = token_usage::DayInput {
+        session_percent,
+        week_percent,
+        breakdown,
+        runs,
+        others,
+        cost: price.and_then(|price| days.iter().find(|day| day.day == today_key).map(|day| day.cost(price))),
+        hits: crate::limits::hits_today(),
+    };
     HistoryView {
+        today: token_usage::day_lines(&input, &texts).into_iter().map(|(text, heading)| TodayLine { text, heading }).collect(),
         days: shown.iter().map(|day| DayBar { day: day.day.clone(), tokens: day.tokens(), text: token_usage::tokens_text(day.tokens(), &texts) }).collect(),
         total: token_usage::tokens_text(total, &texts),
         average: token_usage::tokens_text(if used.is_empty() { 0 } else { total / used.len() as u64 }, &texts),

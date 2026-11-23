@@ -40,7 +40,7 @@ impl CommandHotKeys {
 fn reserved(app: &AppHandle) -> Vec<(KeyCombo, String)> {
     let settings = app.state::<AppState>().settings.lock().unwrap().clone();
     let own = settings.module_on("quickPrompt").then(|| HotKey::parse(&settings.quick_prompt_hot_key).and_then(HotKey::combo)).flatten();
-    own.map(|combo| (combo, strings(app).t("Быстрый запрос").to_owned())).into_iter().collect()
+    own.map(|combo| (combo, strings(app).t("Быстрый запрос").to_owned())).into_iter().chain(crate::search::reserved(app)).collect()
 }
 
 fn plan(app: &AppHandle) -> hot_keys::Plan {
@@ -62,6 +62,7 @@ pub fn sync(app: &AppHandle) {
         }
     }
     crate::quick_prompt::sync(app);
+    crate::search::sync(app);
     if !changed {
         return;
     }

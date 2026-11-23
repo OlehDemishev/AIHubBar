@@ -47,6 +47,13 @@ pub struct Limits {
     wake: Arc<(Mutex<bool>, Condvar)>,
 }
 
+impl Limits {
+    /// Claude's limits as last read.
+    pub fn snapshot(&self) -> Option<UsageSnapshot> {
+        self.state.lock().unwrap().snapshot.clone()
+    }
+}
+
 fn notified_file() -> std::path::PathBuf {
     paths::data_dir().join("usage-notified.json")
 }
@@ -54,6 +61,18 @@ fn notified_file() -> std::path::PathBuf {
 /// The session's readings for the forecast, kept across restarts (the Mac's file and format).
 fn history_file() -> std::path::PathBuf {
     paths::data_dir().join("usage-history.json")
+}
+
+/// When a limit reached 100 %, kept 30 days (the Mac keeps the same in its settings).
+fn hits_file() -> std::path::PathBuf {
+    paths::data_dir().join("limit-hits.json")
+}
+
+/// How many times a Claude limit reached 100 % today.
+pub fn hits_today() -> usize {
+    let Some(midnight) = chrono::Local::now().date_naive().and_hms_opt(0, 0, 0).and_then(|t| t.and_local_timezone(chrono::Local).earliest()) else { return 0 };
+    let hits = std::fs::read_to_string(hits_file()).map(|text| usage::parse_hits(&text)).unwrap_or_default();
+    hits.iter().filter(|(_, date)| *date >= midnight.with_timezone(&Utc)).count()
 }
 
 impl Limits {
@@ -122,6 +141,17 @@ impl Limits {
                     state.error = None;
                     state.outage = None;
                     let before = state.snapshot.as_ref().and_then(|s| s.session()).map(|w| w.utilization);
+                    let week_before = state.snapshot.as_ref().and_then(|s| s.week()).map(|w| w.utilization);
+                    let fresh = (snapshot.session().map(|w| w.utilization), snapshot.week().map(|w| w.utilization));
+                    if fresh.0.is_some_and(|v| v >= 100.0) || fresh.1.is_some_and(|v| v >= 100.0) {
+                        let old = std::fs::read_to_string(hits_file()).map(|text| usage::parse_hits(&text)).unwrap_or_default();
+                        let hits = usage::noting_hit(&usage::noting_hit(&old, "five_hour", before, fresh.0, now), "seven_day", week_before, fresh.1, now);
+                        if hits != old {
+                            if let Err(error) = std::fs::write(hits_file(), usage::hits_json(&hits)) {
+                                eprintln!("limit hits not saved: {error}");
+                            }
+                        }
+                    }
                     if let (Some(before), Some(now_value)) = (before, snapshot.session().map(|w| w.utilization)) {
                         if now_value > before {
                             state.last_growth = Some(now);
@@ -236,6 +266,25 @@ impl Limits {
                 let _ = tray.set_icon(Some(Image::new_owned(pixels, ICON_SIZE, ICON_SIZE)));
             }
         });
+    }
+
+    /// Today's part of «Сегодня» that the limits know: Claude's session and week, and today's tokens by project.
+    pub fn today(&self, projects_dir: &std::path::Path, texts: &Strings) -> (Option<f64>, Option<f64>, token_usage::Breakdown) {
+        let now = Utc::now();
+        let fresh = self.state.lock().unwrap().spend.as_ref().is_some_and(|(_, at)| now - *at < Duration::minutes(1));
+        if !fresh {
+            let records = self.scanner.lock().unwrap().scan(&paths::claude_dir().join("projects"), 8, now - Duration::days(8), now);
+            self.state.lock().unwrap().spend = Some((records, now));
+        }
+        let state = self.state.lock().unwrap();
+        let records = state.spend.as_ref().map(|(records, _)| records.as_slice()).unwrap_or(&[]);
+        let midnight = chrono::Local::now().date_naive().and_hms_opt(0, 0, 0).and_then(|t| t.and_local_timezone(chrono::Local).earliest()).map(|t| t.with_timezone(&Utc)).unwrap_or(now - Duration::hours(24));
+        let snapshot = state.snapshot.as_ref();
+        (
+            snapshot.and_then(|s| s.session()).map(|w| w.utilization),
+            snapshot.and_then(|s| s.week()).map(|w| w.utilization),
+            token_usage::Breakdown::make(records, midnight, projects_dir, texts.t("Другое")),
+        )
     }
 
     /// «Расход по проектам» for the panel: reads what is new in Claude Code's journals when the last read is older

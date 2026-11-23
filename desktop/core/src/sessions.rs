@@ -67,6 +67,8 @@ pub struct Session {
     pub agent: Option<String>,
     /// What the session was asked: its first prompt, else the latest one.
     pub task: Option<String>,
+    /// Claude Code's journal of the session.
+    pub transcript_path: Option<String>,
 }
 
 fn text(value: &Value, key: &str) -> Option<String> {
@@ -98,6 +100,7 @@ impl Session {
             progress,
             agent: text(&value, "agent"),
             task: text(&value, "first_prompt").or_else(|| text(&value, "last_prompt")),
+            transcript_path: text(&value, "transcript_path"),
         })
     }
 
@@ -187,6 +190,33 @@ pub fn load(dir: &Path, now: DateTime<Utc>, alive: impl Fn(u32) -> Option<bool>)
     shown
 }
 
+/// How many finished sessions the panel offers to continue.
+pub const RESUMABLE_COUNT: usize = 5;
+
+/// «Недавно завершённые»: finished Claude Code sessions that have left the list and can still be continued with
+/// `claude --resume` — the folder is there and nothing runs them. Newest first.
+pub fn load_resumable(dir: &Path, now: DateTime<Utc>, alive: impl Fn(u32) -> Option<bool>) -> Vec<Session> {
+    let mut found: Vec<Session> = std::fs::read_dir(dir)
+        .into_iter()
+        .flatten()
+        .flatten()
+        .filter(|entry| entry.path().extension().and_then(|e| e.to_str()) == Some("json"))
+        .filter_map(|entry| std::fs::read_to_string(entry.path()).ok().and_then(|text| Session::parse(&text)))
+        .filter(|session| {
+            let is_alive = session.claude_pid.and_then(&alive);
+            is_resumable(session, is_alive, now, Path::new(&session.cwd).is_dir())
+        })
+        .collect();
+    found.sort_by(|a, b| b.updated_at.cmp(&a.updated_at));
+    found.truncate(RESUMABLE_COUNT);
+    found
+}
+
+pub fn is_resumable(session: &Session, alive: Option<bool>, now: DateTime<Utc>, folder_exists: bool) -> bool {
+    let claude = matches!(session.agent.as_deref(), None | Some("claude"));
+    folder_exists && alive != Some(true) && claude && !session.cwd.is_empty() && !is_visible(session, alive, now)
+}
+
 /// `cb-fix` of `…/.claude/worktrees/cb-fix/src`, with either slash.
 pub fn worktree_name(folder: &str) -> Option<String> {
     let folder = folder.replace('\\', "/");
@@ -249,6 +279,22 @@ mod tests {
         assert_eq!(parsed.action_text(&s).as_deref(), Some("инструмент request"));
         assert_eq!(State::Waiting.title(&s), "ждёт ответа");
         assert!(Session::parse(r#"{"state": "running"}"#).is_none(), "no id, no session");
+    }
+
+    #[test]
+    fn finished_sessions_to_continue() {
+        let now = Utc::now();
+        let session = |state: &str, minutes: i64, agent: Option<&str>| {
+            let mut session = Session::parse(&format!(r#"{{"session_id": "s", "cwd": "/p/shop", "state": "{state}", "updated_at": "{}"}}"#, (now - Duration::minutes(minutes)).to_rfc3339())).unwrap();
+            session.agent = agent.map(str::to_owned);
+            session
+        };
+        assert!(is_resumable(&session("ended", 20, None), None, now, true), "left the list a while ago");
+        assert!(!is_resumable(&session("ended", 5, None), None, now, true), "still in the list");
+        assert!(!is_resumable(&session("ended", 20, None), None, now, false), "its folder is gone");
+        assert!(!is_resumable(&session("running", 60 * 30, None), Some(true), now, true), "something runs it");
+        assert!(!is_resumable(&session("ended", 20, Some("codex")), None, now, true), "other agents have their own way");
+        assert!(is_resumable(&session("ended", 20, Some("claude")), Some(false), now, true));
     }
 
     #[test]
