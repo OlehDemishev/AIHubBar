@@ -5,15 +5,15 @@ use crate::i18n::Strings;
 
 /// Changes with a release that has something to say; a release without news keeps the old value and shows nothing.
 /// The Windows and Linux version has its own line of versions, so its own value and lines.
-pub const VERSION: &str = "0.1.9";
+pub const VERSION: &str = "0.1.10";
 
 pub fn items(s: &Strings) -> Vec<String> {
     [
-        s.t("Настройки устроены как на Mac: разделы слева, страница справа, сверху поиск."),
-        s.t("Фоновую задачу можно отложить на ночь или до сброса лимита."),
-        s.t("У лимита фоновые задачи Claude встают на паузу и продолжают после сброса."),
-        s.t("Фоновую задачу можно передать Codex, а готовую — проверить другим сервисом."),
-        s.t("Инструкции CLAUDE.md, MCP-серверы, skills и плагины собраны в одном окне."),
+        s.t("Появилась справка: кнопка «?» вверху панели."),
+        s.t("В панели можно показать лимиты других аккаунтов Claude."),
+        s.t("Настройки сервисов AI разложены по сервисам: Claude Code, Codex, Gemini, Copilot, Cursor."),
+        s.t("Одну задачу можно дать сразу Claude и Codex — каждому в своём worktree."),
+        s.t("Идею или проблему можно отправить из Настроек: откроется форма на GitHub."),
     ]
     .map(str::to_owned)
     .to_vec()
@@ -31,7 +31,7 @@ mod tests {
 
     #[test]
     fn who_sees_the_card() {
-        assert!(should_show(None, true) && should_show(Some("0.1.8"), true));
+        assert!(should_show(None, true) && should_show(Some("0.1.9"), true));
         assert!(!should_show(Some(VERSION), true), "closed once");
         assert!(!should_show(None, false), "a new person has nothing to compare with");
         let items = items(&Strings::default());
