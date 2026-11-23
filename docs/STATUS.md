@@ -142,7 +142,6 @@
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
 **Needs Oleh:**
-- 1.0 list: the shared Telegram bot and the Mini App were put under «not in 1.0» by mistake (the Worker is deployed since 2026-11-03 and you confirmed both on 2026-11-08) — say whether they go in as ready or with «бета»
 - Windows laptop, Telegram (0.1.7 is installed; nothing of it was tried with a real bot): 1) in @BotFather make a new bot — the Mac mini reads your present one; 2) Settings → «Telegram»: paste the token, «Привязать чат», «Start» in Telegram, «Проверить»; 3) start a small background task and see its result come to the chat; 4) «Этот компьютер отвечает боту» on, `/menu` in the chat — 🏠, then 🤖 and ⏳; 5) «Запросы разрешений в этот бот» on, start `claude --permission-mode default` in a project, ask it to create a file and answer ✅ from the phone. Say what did not work
 - update to 0.12.0-beta.2 (Settings → «Основные» → «Обновления», «Бета-версии» on): does the «Что нового» card show once with six lines; is the bell in the panel's header left of the gear, and does a press turn it orange; the «Telegram» tile in «Быстрые переключатели» if they are on
 - Windows laptop, Telegram (in the next Windows version, or a build from `main`): Settings → «Telegram» — paste a bot's token from @BotFather (a new bot is the safest: the Mac mini reads your present one, and then «Start» reaches the Mac instead — the page says so and asks for the chat's id), «Привязать чат», «Start» in Telegram, «Проверить»; then start a small background task and see its result come to the chat
@@ -186,6 +185,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — 1.0 list: the shared Telegram bot and the Mini App go in as ready (branch `chore/status-shared-bot-ready`)
+
+Done: Oleh's answer «Как готовое» to the question left by the entry of `fix/telegram-help`: in the 1.0 list (entry «the list for 1.0» below, not rewritten) the shared Telegram bot through the Cloudflare Worker and the Mini App move from «Not in 1.0» to the ready part, with no «бета» badge. The line is gone from «Needs Oleh».
+Checked: docs only; `scripts/check.sh`.
+Left: the agent still has not paired or pressed the shared bot itself — Oleh's word of 2026-11-08 stands behind «works». Still not in 1.0: Windows and Linux, Cursor CLI, automatic crash reports (until Oleh decides).
 
 ## 2026-11-23 — Windows: the search on a hot key (branch `feat/desktop-search-key`)
 
