@@ -409,6 +409,10 @@
               "name" : "Vergleichen"
             },
             {
+              "detail" : "Das Modul „Versionen“ sichert die Texte und die Karte eines Ordnerprojekts vor jedem KI-Lauf und während des Schreibens – im Ordner der App, nicht im Projekt. Wie oft und wie lange: Einstellungen → „Module“ → „Versionen“.",
+              "name" : "Versionen"
+            },
+            {
               "detail" : "Die Phasen des Profils, durch Kommas getrennt; die Phase wechselt per Taste im aufgeklappten Projekt. Wörter, Dauer, Lesezeit und Seiten werden in der Hauptdatei gezählt (.md, .txt, .rtf, .docx).",
               "name" : "Phasen und Kennzahlen"
             }

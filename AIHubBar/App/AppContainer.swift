@@ -15,6 +15,7 @@ extension ClipboardHistory: ModuleService {}
 extension NotesStore: ModuleService {}
 extension NotchIsland: ModuleService {}
 extension LayoutSwitcher: ModuleService {}
+extension VersionKeeper: ModuleService {}
 extension QuickPromptController: ModuleService {}
 extension TelegramBotController: ModuleService {}
 
@@ -67,6 +68,7 @@ final class AppContainer {
     let services: AIServiceStore
     let folders: FolderProjectStore
     let engine: CommandEngine
+    let versionKeeper: VersionKeeper
     let calendar: CalendarStore
 
     init() {
@@ -122,6 +124,9 @@ final class AppContainer {
         self.runs = runs
         let engine = CommandEngine(settings: settings, runs: runs)
         self.engine = engine
+        let versionKeeper = VersionKeeper(settings: settings, folders: folders)
+        self.versionKeeper = versionKeeper
+        engine.beforeRun = { [versionKeeper] path, title in versionKeeper.takeBeforeRun(projectPath: path, title: title) }
         let launcher = LaunchController(settings: settings, store: store, runs: runs, usage: usage)
         let telegramBot = TelegramBotController(settings: settings, sessions: sessions, runs: runs, usage: usage, approvals: telegramApprovals)
         self.telegramBot = telegramBot
@@ -136,6 +141,7 @@ final class AppContainer {
         let moduleServices: [(ModuleKind, any ModuleService)] = [
             (.limits, usage), (.limits, hub), (.resources, monitor), (.keepAwake, keepAwake), (.clipboard, clipboard),
             (.notes, notesStore), (.notch, notchIsland), (.layout, layoutSwitcher), (.quickPrompt, quickPrompt),
+            (.versions, versionKeeper),
             (.telegram, telegramBot),
         ]
         for (kind, service) in moduleServices {
@@ -298,6 +304,7 @@ final class AppContainer {
                 await services.scan()
             }
             folders.start()
+            versionKeeper.start()
             // A first start without `_daily-report`: the assistant sets up the first mode (SPEC-modes §5).
             // The menu bar label, which opens windows, has to be on screen first.
             if modes.needsAssistant {
@@ -435,6 +442,7 @@ private struct AppEnvironment: ViewModifier {
             .environment(app.commandHotKeys)
             .environment(app.clipboard)
             .environment(app.notesStore)
+            .environment(app.versionKeeper)
             .environment(app.notchIsland)
             .environment(app.layoutSwitcher)
             .environment(app.quickPrompt)

@@ -3451,6 +3451,82 @@
         }
       }
     },
+    "%lld МБ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld MB"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld МБ"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld MB"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Mo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld MB"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld MB"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld MB"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld MB"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld MB"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lldMB"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld م.ب"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld MB"
+          }
+        }
+      }
+    },
     "%lld в ряд": {
       "localizations": {
         "ar": {
@@ -21733,6 +21809,310 @@
         }
       }
     },
+    "Версии": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versions"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Версії"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versionen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versiones"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versioni"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versões"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wersje"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النسخ"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi"
+          }
+        }
+      }
+    },
+    "Версии всех проектов будут удалены. Сами проекты не меняются. Отменить нельзя.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The versions of every project will be deleted. The projects themselves don’t change. This can’t be undone."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Версії всіх проєктів буде видалено. Самі проєкти не змінюються. Скасувати не можна."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Versionen aller Projekte werden gelöscht. Die Projekte selbst ändern sich nicht. Das lässt sich nicht rückgängig machen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les versions de tous les projets seront supprimées. Les projets eux-mêmes ne changent pas. Cette action est irréversible."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se eliminarán las versiones de todos los proyectos. Los proyectos en sí no cambian. No se puede deshacer."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le versioni di tutti i progetti verranno eliminate. I progetti in sé non cambiano. Non si può annullare."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As versões de todos os projetos serão apagadas. Os projetos em si não mudam. Não dá para desfazer."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wersje wszystkich projektów zostaną usunięte. Same projekty się nie zmienią. Tego nie można cofnąć."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてのプロジェクトのバージョンを削除します。プロジェクト自体は変わりません。取り消せません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모든 프로젝트의 버전이 삭제됩니다. 프로젝트 자체는 바뀌지 않습니다. 되돌릴 수 없습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ستُحذف نسخ جميع المشاريع. المشاريع نفسها لا تتغير. لا يمكن التراجع."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi semua proyek akan dihapus. Proyeknya sendiri tidak berubah. Tidak bisa dibatalkan."
+          }
+        }
+      }
+    },
+    "Версии лежат в папке приложения, не в папке проекта. Версии проекта, папки которого больше нет, удаляются через месяц.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versions are kept in the app’s folder, not in the project folder. The versions of a project whose folder is gone are removed after a month."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Версії лежать у папці застосунку, а не в папці проєкту. Версії проєкту, папки якого вже немає, видаляються через місяць."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versionen liegen im Ordner der App, nicht im Projektordner. Die Versionen eines Projekts, dessen Ordner es nicht mehr gibt, werden nach einem Monat entfernt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les versions sont conservées dans le dossier de l’app, pas dans celui du projet. Les versions d’un projet dont le dossier n’existe plus sont supprimées au bout d’un mois."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las versiones se guardan en la carpeta de la app, no en la del proyecto. Las versiones de un proyecto cuya carpeta ya no existe se eliminan al cabo de un mes."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le versioni stanno nella cartella dell’app, non in quella del progetto. Le versioni di un progetto la cui cartella non esiste più vengono rimosse dopo un mese."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As versões ficam na pasta do app, não na pasta do projeto. As versões de um projeto cuja pasta não existe mais são removidas depois de um mês."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wersje leżą w folderze aplikacji, nie w folderze projektu. Wersje projektu, którego folderu już nie ma, są usuwane po miesiącu."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョンはプロジェクトのフォルダではなく、アプリのフォルダに保存されます。フォルダがなくなったプロジェクトのバージョンは1か月後に削除されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전은 프로젝트 폴더가 아니라 앱의 폴더에 보관됩니다. 폴더가 없어진 프로젝트의 버전은 한 달 뒤에 삭제됩니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُحفظ النسخ في مجلد التطبيق لا في مجلد المشروع. نسخ المشروع الذي لم يعد مجلده موجودًا تُحذف بعد شهر."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi disimpan di folder app, bukan di folder proyek. Versi proyek yang foldernya sudah tidak ada dihapus setelah sebulan."
+          }
+        }
+      }
+    },
+    "Версии черновиков для проектов-папок: тексты и карточка проекта сохраняются перед каждым запуском AI и пока вы пишете. Хранятся в папке приложения, не в проекте, и никуда не отправляются.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Draft versions for folder projects: the texts and the project card are saved before every AI run and while you write. They are kept in the app’s folder, not in the project, and are not sent anywhere."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Версії чернеток для проєктів-папок: тексти й картка проєкту зберігаються перед кожним запуском AI і поки ви пишете. Лежать у папці застосунку, не в проєкті, і нікуди не надсилаються."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entwurfsversionen für Ordnerprojekte: Texte und Projektkarte werden vor jedem KI-Lauf und während des Schreibens gesichert. Sie liegen im Ordner der App, nicht im Projekt, und werden nirgendwohin gesendet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versions des brouillons pour les projets-dossiers : les textes et la fiche du projet sont enregistrés avant chaque lancement de l’IA et pendant que vous écrivez. Elles restent dans le dossier de l’app, pas dans le projet, et ne sont envoyées nulle part."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versiones de los borradores para proyectos de carpeta: los textos y la ficha del proyecto se guardan antes de cada ejecución de la IA y mientras escribes. Se guardan en la carpeta de la app, no en el proyecto, y no se envían a ningún sitio."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versioni delle bozze per i progetti-cartella: i testi e la scheda del progetto vengono salvati prima di ogni avvio dell’IA e mentre scrivi. Restano nella cartella dell’app, non nel progetto, e non vengono inviate da nessuna parte."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versões dos rascunhos para projetos de pasta: os textos e o cartão do projeto são salvos antes de cada execução da IA e enquanto você escreve. Ficam na pasta do app, não no projeto, e não são enviadas a lugar nenhum."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wersje szkiców dla projektów-folderów: teksty i karta projektu są zapisywane przed każdym uruchomieniem AI i gdy piszesz. Leżą w folderze aplikacji, nie w projekcie, i nigdzie nie są wysyłane."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダプロジェクトの下書きのバージョン。テキストとプロジェクトカードを、AIを実行するたびにその前と、執筆中に保存します。プロジェクトではなくアプリのフォルダに保管され、どこにも送信されません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 프로젝트의 초안 버전: 텍스트와 프로젝트 카드를 AI를 실행하기 전마다, 그리고 글을 쓰는 동안 저장합니다. 프로젝트가 아니라 앱의 폴더에 보관되며 어디로도 전송되지 않습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نسخ المسودات لمشاريع المجلدات: تُحفظ النصوص وبطاقة المشروع قبل كل تشغيل للذكاء الاصطناعي وأثناء كتابتك. تبقى في مجلد التطبيق لا في المشروع، ولا تُرسل إلى أي مكان."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi draf untuk proyek folder: teks dan kartu proyek disimpan sebelum setiap AI dijalankan dan selama Anda menulis. Disimpan di folder app, bukan di proyek, dan tidak dikirim ke mana pun."
+          }
+        }
+      }
+    },
     "Версия": {
       "localizations": {
         "ar": {
@@ -33676,6 +34056,82 @@
         }
       }
     },
+    "Дней: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld days"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Днів: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Tage"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld jours"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld días"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld giorni"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld dias"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dni: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld日"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld일"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld يومًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld hari"
+          }
+        }
+      }
+    },
     "До сброса сессии": {
       "localizations": {
         "ar": {
@@ -45315,6 +45771,158 @@
         }
       }
     },
+    "Каждые 10 минут, если что-то изменилось": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every 10 minutes, if something changed"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кожні 10 хвилин, якщо щось змінилося"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle 10 Minuten, wenn sich etwas geändert hat"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les 10 minutes, si quelque chose a changé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada 10 minutos, si algo cambió"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ogni 10 minuti, se qualcosa è cambiato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A cada 10 minutos, se algo mudou"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Co 10 minut, jeśli coś się zmieniło"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更があれば10分ごと"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "변경이 있으면 10분마다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل 10 دقائق إذا تغيّر شيء"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Setiap 10 menit, jika ada yang berubah"
+          }
+        }
+      }
+    },
+    "Каждые 30 минут, если что-то изменилось": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every 30 minutes, if something changed"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кожні 30 хвилин, якщо щось змінилося"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle 30 Minuten, wenn sich etwas geändert hat"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les 30 minutes, si quelque chose a changé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada 30 minutos, si algo cambió"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ogni 30 minuti, se qualcosa è cambiato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A cada 30 minutos, se algo mudou"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Co 30 minut, jeśli coś się zmieniło"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更があれば30分ごと"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "변경이 있으면 30분마다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل 30 دقيقة إذا تغيّر شيء"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Setiap 30 menit, jika ada yang berubah"
+          }
+        }
+      }
+    },
     "Как": {
       "localizations": {
         "ar": {
@@ -45691,6 +46299,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Як часто"
+          }
+        }
+      }
+    },
+    "Как часто сохранять": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How often to save"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Як часто зберігати"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wie oft sichern"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fréquence d’enregistrement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada cuánto guardar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ogni quanto salvare"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com que frequência salvar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jak często zapisywać"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存の頻度"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "저장 주기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كم مرة يُحفظ"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seberapa sering menyimpan"
           }
         }
       }
@@ -56276,6 +56960,82 @@
         }
       }
     },
+    "Модуль «Версии» сохраняет тексты и карточку проекта-папки перед каждым запуском AI и пока вы пишете — в папке приложения, не в проекте. Как часто и сколько хранить — Настройки → «Модули» → «Версии».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Versions module saves the texts and the card of a folder project before every AI run and while you write — in the app’s folder, not in the project. How often and how long to keep: Settings → Modules → Versions."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Модуль «Версії» зберігає тексти й картку проєкту-папки перед кожним запуском AI і поки ви пишете — у папці застосунку, не в проєкті. Як часто й скільки зберігати — Параметри → «Модулі» → «Версії»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Modul „Versionen“ sichert die Texte und die Karte eines Ordnerprojekts vor jedem KI-Lauf und während des Schreibens – im Ordner der App, nicht im Projekt. Wie oft und wie lange: Einstellungen → „Module“ → „Versionen“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le module « Versions » enregistre les textes et la fiche d’un projet-dossier avant chaque lancement de l’IA et pendant que vous écrivez — dans le dossier de l’app, pas dans le projet. Fréquence et durée de conservation : Réglages → « Modules » → « Versions »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El módulo «Versiones» guarda los textos y la ficha de un proyecto de carpeta antes de cada ejecución de la IA y mientras escribes, en la carpeta de la app, no en el proyecto. Cada cuánto y cuánto tiempo: Ajustes → «Módulos» → «Versiones»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il modulo «Versioni» salva i testi e la scheda di un progetto-cartella prima di ogni avvio dell’IA e mentre scrivi, nella cartella dell’app, non nel progetto. Ogni quanto e per quanto tempo: Impostazioni → «Moduli» → «Versioni»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O módulo “Versões” salva os textos e o cartão de um projeto de pasta antes de cada execução da IA e enquanto você escreve — na pasta do app, não no projeto. Com que frequência e por quanto tempo: Ajustes → “Módulos” → “Versões”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moduł „Wersje” zapisuje teksty i kartę projektu-folderu przed każdym uruchomieniem AI i gdy piszesz — w folderze aplikacji, nie w projekcie. Jak często i jak długo przechowywać: Ustawienia → „Moduły” → „Wersje”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「バージョン」モジュールは、フォルダプロジェクトのテキストとカードを、AIを実行するたびにその前と執筆中に保存します。保存先はプロジェクトではなくアプリのフォルダです。頻度と保存期間は、設定 →「モジュール」→「バージョン」で選べます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“버전” 모듈은 폴더 프로젝트의 텍스트와 카드를 AI를 실행하기 전마다, 그리고 글을 쓰는 동안 저장합니다. 저장 위치는 프로젝트가 아니라 앱의 폴더입니다. 주기와 보관 기간은 설정 → “모듈” → “버전”에서 정합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وحدة «النسخ» تحفظ نصوص مشروع المجلد وبطاقته قبل كل تشغيل للذكاء الاصطناعي وأثناء كتابتك — في مجلد التطبيق لا في المشروع. كم مرة وكم تُحفظ: الإعدادات ← «الوحدات» ← «النسخ»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modul “Versi” menyimpan teks dan kartu proyek folder sebelum setiap AI dijalankan dan selama Anda menulis — di folder app, bukan di proyek. Seberapa sering dan berapa lama disimpan: Pengaturan → “Modul” → “Versi”."
+          }
+        }
+      }
+    },
     "Модуль выключен: не работает в фоне, не виден в панели и строке меню, не присылает уведомлений. Настройки и место в профилях сохранены.": {
       "localizations": {
         "ar": {
@@ -56652,6 +57412,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Блискавка"
+          }
+        }
+      }
+    },
+    "На диске": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On disk"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "На диску"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf dem Datenträger"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur le disque"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En disco"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Su disco"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No disco"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na dysku"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ディスク使用量"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "디스크 사용량"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "على القرص"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di disk"
           }
         }
       }
@@ -94800,6 +95636,82 @@
         }
       }
     },
+    "Пропускать файлы больше": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skip files larger than"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пропускати файли, більші за"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dateien überspringen, die größer sind als"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignorer les fichiers de plus de"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omitir archivos de más de"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salta i file più grandi di"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignorar arquivos maiores que"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pomijaj pliki większe niż"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "これより大きいファイルは除外"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이보다 큰 파일은 건너뛰기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تخطّي الملفات الأكبر من"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lewati file yang lebih besar dari"
+          }
+        }
+      }
+    },
     "Просторно": {
       "localizations": {
         "ar": {
@@ -105920,6 +106832,82 @@
         }
       }
     },
+    "Сколько хранить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How long to keep"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скільки зберігати"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wie lange aufbewahren"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durée de conservation"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuánto tiempo conservar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per quanto tempo conservare"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por quanto tempo manter"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jak długo przechowywać"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存期間"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보관 기간"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مدة الحفظ"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berapa lama disimpan"
+          }
+        }
+      }
+    },
     "Скопированные файлы": {
       "localizations": {
         "ar": {
@@ -109793,6 +110781,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Зберегти всі налаштування у файл."
+          }
+        }
+      }
+    },
+    "Сохраняются тексты (.md, .txt, .rtf, .docx, .fountain) и карточка проекта; картинки, звук и видео — нет. Все версии за последние сутки, дальше по одной в день. Перед каждым запуском AI версия снимается всегда. У git-проектов версий нет: там есть git.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texts (.md, .txt, .rtf, .docx, .fountain) and the project card are saved; pictures, audio and video are not. Every version of the last 24 hours is kept, then one a day. A version is always taken before an AI run. Git projects have no versions: they have git."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зберігаються тексти (.md, .txt, .rtf, .docx, .fountain) і картка проєкту; зображення, звук і відео — ні. Усі версії за останню добу, далі по одній на день. Перед кожним запуском AI версія знімається завжди. У git-проєктів версій немає: там є git."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gesichert werden Texte (.md, .txt, .rtf, .docx, .fountain) und die Projektkarte; Bilder, Ton und Video nicht. Alle Versionen der letzten 24 Stunden bleiben, danach eine pro Tag. Vor jedem KI-Lauf wird immer eine Version angelegt. Git-Projekte haben keine Versionen: Dort gibt es git."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les textes (.md, .txt, .rtf, .docx, .fountain) et la fiche du projet sont enregistrés ; les images, le son et la vidéo ne le sont pas. Toutes les versions des dernières 24 heures sont conservées, puis une par jour. Une version est toujours prise avant un lancement de l’IA. Les projets git n’ont pas de versions : ils ont git."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se guardan los textos (.md, .txt, .rtf, .docx, .fountain) y la ficha del proyecto; las imágenes, el audio y el vídeo no. Se conservan todas las versiones de las últimas 24 horas y después una al día. Antes de cada ejecución de la IA siempre se toma una versión. Los proyectos git no tienen versiones: ya tienen git."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vengono salvati i testi (.md, .txt, .rtf, .docx, .fountain) e la scheda del progetto; immagini, audio e video no. Restano tutte le versioni delle ultime 24 ore, poi una al giorno. Prima di ogni avvio dell’IA una versione viene sempre salvata. I progetti git non hanno versioni: hanno già git."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "São salvos os textos (.md, .txt, .rtf, .docx, .fountain) e o cartão do projeto; imagens, áudio e vídeo não. Ficam todas as versões das últimas 24 horas e depois uma por dia. Antes de cada execução da IA uma versão é sempre criada. Projetos git não têm versões: eles já têm o git."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapisywane są teksty (.md, .txt, .rtf, .docx, .fountain) i karta projektu; obrazy, dźwięk i wideo nie. Zostają wszystkie wersje z ostatniej doby, potem jedna dziennie. Przed każdym uruchomieniem AI wersja jest tworzona zawsze. Projekty git nie mają wersji: mają git."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テキスト（.md、.txt、.rtf、.docx、.fountain）とプロジェクトカードを保存します。画像、音声、動画は保存しません。直近24時間のバージョンはすべて、それ以降は1日1つを残します。AIを実行する前には必ずバージョンを作成します。gitプロジェクトにはバージョンがありません。gitがあるためです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "텍스트(.md, .txt, .rtf, .docx, .fountain)와 프로젝트 카드를 저장합니다. 이미지, 오디오, 비디오는 저장하지 않습니다. 최근 24시간의 버전은 모두, 그 이후는 하루에 하나씩 남깁니다. AI를 실행하기 전에는 항상 버전을 만듭니다. git 프로젝트에는 버전이 없습니다. git이 있기 때문입니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُحفظ النصوص (.md و.txt و.rtf و.docx و.fountain) وبطاقة المشروع؛ الصور والصوت والفيديو لا تُحفظ. تبقى كل نسخ آخر 24 ساعة ثم نسخة واحدة في اليوم. تؤخذ نسخة دائمًا قبل كل تشغيل للذكاء الاصطناعي. مشاريع git ليست لها نسخ: فيها git."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yang disimpan adalah teks (.md, .txt, .rtf, .docx, .fountain) dan kartu proyek; gambar, audio, dan video tidak. Semua versi dari 24 jam terakhir disimpan, setelah itu satu per hari. Versi selalu dibuat sebelum AI dijalankan. Proyek git tidak punya versi: sudah ada git."
           }
         }
       }
@@ -115652,6 +116716,82 @@
         }
       }
     },
+    "Только перед запуском AI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only before an AI run"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Лише перед запуском AI"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur vor einem KI-Lauf"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seulement avant un lancement de l’IA"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo antes de ejecutar la IA"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo prima di un avvio dell’IA"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Só antes de executar a IA"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tylko przed uruchomieniem AI"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AIの実行前のみ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 실행 전에만"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قبل تشغيل الذكاء الاصطناعي فقط"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya sebelum AI dijalankan"
+          }
+        }
+      }
+    },
     "Только раскладка": {
       "localizations": {
         "ar": {
@@ -119449,6 +120589,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Видалити worktree (лише якщо немає незакоміченого і гілку запушено)"
+          }
+        }
+      }
+    },
+    "Удалить все версии?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete all versions?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Видалити всі версії?"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Versionen löschen?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer toutes les versions ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar todas las versiones?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminare tutte le versioni?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apagar todas as versões?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usunąć wszystkie wersje?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてのバージョンを削除しますか？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모든 버전을 삭제할까요?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حذف كل النسخ؟"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus semua versi?"
           }
         }
       }
@@ -124563,6 +125779,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Чим ви займаєтеся?"
+          }
+        }
+      }
+    },
+    "Черновики не пропадают": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drafts don’t get lost"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Чернетки не зникають"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entwürfe gehen nicht verloren"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les brouillons ne se perdent pas"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los borradores no se pierden"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le bozze non vanno perse"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os rascunhos não se perdem"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szkice nie przepadają"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下書きを失わない"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "초안이 사라지지 않습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المسودات لا تضيع"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Draf tidak hilang"
           }
         }
       }

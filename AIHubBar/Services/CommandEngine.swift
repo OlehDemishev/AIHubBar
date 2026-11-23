@@ -57,6 +57,9 @@ final class CommandEngine {
         Notifier.post(id: $0, title: $1, body: $2, target: $3)
     }
 
+    /// «Версии»: called before a command starts on a project, whatever runs it (background, Terminal, API).
+    @ObservationIgnored var beforeRun: @MainActor (_ projectPath: String, _ title: String) -> Void = { _, _ in }
+
     init(settings: AppSettings, runs: RunStore,
          spendURL: URL = SessionFiles.supportDirectory.appending(path: "api-spend.json"), defaults: UserDefaults = .standard) {
         self.settings = settings
@@ -112,6 +115,7 @@ final class CommandEngine {
         var job = Job(projectPath: project.path, title: template.title, service: service.shortName(compatibleName: settings.aiServices.compatibleName),
                       resultFile: resultPath, state: .running)
         AppLog.info("Command «\(template.title)» → \(service.id) in \(project.path) → \(name)")
+        beforeRun(project.path, template.title)
 
         switch service {
         case let .api(provider):
