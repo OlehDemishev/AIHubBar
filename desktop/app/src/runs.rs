@@ -241,6 +241,64 @@ pub fn stop_run(app: AppHandle, id: String) {
     app.state::<Runs>().stop(&id, RunState::Stopped);
 }
 
+/// Another background run in the folder of `run`: the same project, worktree and branch.
+fn start_beside(app: &AppHandle, run: &Run, program: &std::path::Path, command_title: &str, task: &str, prompt: &str, codex: bool, review: bool) -> Result<(), String> {
+    let folder = std::path::Path::new(&run.folder);
+    // The folder may be gone (a removed worktree): the system's own words say so.
+    std::fs::read_dir(folder).map_err(|error| format!("{}: {error}", run.folder))?;
+    let time_limit_minutes = app.state::<crate::AppState>().settings.lock().unwrap().background_time_limit_minutes;
+    let new = runs::NewRun {
+        project: &run.project,
+        project_path: std::path::Path::new(&run.project_path),
+        folder,
+        worktree_branch: run.worktree_branch.as_deref(),
+        command_title,
+        task,
+        prompt,
+        time_limit_minutes,
+        permissions: if review { runs::REVIEW } else { "code" },
+        result_file: None,
+        codex,
+        review_of: review.then_some(run.id.as_str()),
+    };
+    let (started, child) = runs::start(&paths::runs_dir(), program, &new).map_err(|error| error.to_string())?;
+    eprintln!("run {} started beside {}: «{command_title}»{}", started.id, run.id, if codex { " (Codex)" } else { "" });
+    app.state::<Runs>().add(app, started, child);
+    Ok(())
+}
+
+fn codex_program(app: &AppHandle) -> Result<std::path::PathBuf, String> {
+    let kind = claudepult_core::agents::kind("codex").expect("listed");
+    claudepult_core::agents::detect(kind).ok_or_else(|| strings(app).format("%@ не установлен", &[kind.title]))
+}
+
+/// «Передать Codex» on a Claude run that is paused by the limit or ended badly: the run stops and Codex goes on in
+/// the same folder (the worktree included) with the same task and a word about the work already there.
+#[tauri::command]
+pub async fn hand_over_run(app: AppHandle, id: String) -> Result<(), String> {
+    let runs = app.state::<Runs>();
+    let run = runs.list().into_iter().find(|run| run.id == id && run.can_hand_over()).ok_or("this run can't be handed over")?;
+    let codex = codex_program(&app)?;
+    if run.is_running() {
+        runs.stop(&id, RunState::Stopped);
+    }
+    let prompt = runs::handover_prompt(run.prompt.as_deref().unwrap_or_default(), run.agent_title());
+    start_beside(&app, &run, &codex, &run.command_title, &run.task, &prompt, true, false)
+}
+
+/// «Проверить в Codex / Claude Code» on a finished run: the other service reads the changes in the run's folder and
+/// changes nothing.
+#[tauri::command]
+pub async fn review_run(app: AppHandle, id: String) -> Result<(), String> {
+    let texts = strings(&app);
+    let all = app.state::<Runs>().list();
+    let run = all.iter().find(|run| run.id == id && run.can_review(&all)).ok_or("this run can't be reviewed")?;
+    let codex = run.reviewer_is_codex();
+    let program = if codex { codex_program(&app)? } else { claudepult_core::launch::find_claude().ok_or_else(|| texts.t("Claude Code не установлен").to_owned())? };
+    let prompt = runs::review_prompt(run.prompt.as_deref().unwrap_or_default(), run.agent_title());
+    start_beside(&app, run, &program, texts.t("Проверка"), &texts.format("Проверка: %@", &[&run.task]), &prompt, codex, true)
+}
+
 #[derive(Serialize)]
 pub struct LogEntry {
     kind: &'static str,
