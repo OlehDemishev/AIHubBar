@@ -273,6 +273,22 @@
     </section>
     <section class="card">
       <div class="row">
+        <label for="module-notes"><strong data-t="Заметки"></strong></label>
+        <input type="checkbox" class="switch" id="module-notes">
+      </div>
+      <p class="secondary" data-t="Заметки в Markdown прямо в панели: вкладки, обычные файлы .md в папке, которую откроет любой редактор."></p>
+      <div id="notes-options" hidden>
+        <div class="row">
+          <span data-t="Папка"></span>
+          <span class="secondary notes-folder" id="notes-folder"></span>
+          <button id="notes-choose" data-t="Выбрать…"></button>
+          <button id="notes-open-folder" data-t="Открыть папку"></button>
+        </div>
+        <p class="secondary" data-t="Каждая заметка — файл .md в этой папке; удалённые уходят в корзину."></p>
+      </div>
+    </section>
+    <section class="card">
+      <div class="row">
         <label for="module-quick-prompt"><strong data-t="Быстрый запрос"></strong></label>
         <input type="checkbox" class="switch" id="module-quick-prompt">
       </div>
@@ -978,6 +994,22 @@
     };
     quick = await invoke("quick_commands_library");
     showQuickLibrary();
+
+    // «Заметки»: on or off, and the folder of the notes.
+    const notesModule = document.getElementById("module-notes");
+    function showNotesSettings(view) {
+      notesModule.checked = view.on;
+      document.getElementById("notes-options").hidden = !view.on;
+      const folder = document.getElementById("notes-folder");
+      folder.textContent = folder.title = view.folder;
+    }
+    notesModule.onchange = async () => {
+      await invoke("set_module", { kind: "notes", on: notesModule.checked });
+      showNotesSettings(await invoke("notes_settings"));
+    };
+    document.getElementById("notes-choose").onclick = async () => showNotesSettings(await invoke("choose_notes_folder"));
+    document.getElementById("notes-open-folder").onclick = () => invoke("open_notes_folder");
+    invoke("notes_settings").then(showNotesSettings);
 
     // «Быстрые переключатели»: on or off, and which tiles show.
     const togglesModule = document.getElementById("module-toggles");

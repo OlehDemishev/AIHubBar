@@ -12,6 +12,7 @@ mod commands;
 mod history;
 mod hub;
 mod keep_awake;
+mod notes;
 mod limits;
 mod profiles;
 mod resources;
@@ -432,7 +433,8 @@ fn main() {
             keep_awake::set_module, keep_awake::set_keep_awake_rules, keep_awake::choose_keep_awake_apps,
             resources::resources_view, resources::open_task_manager, resources::resource_settings, resources::set_resource_alerts,
             quick_commands::quick_commands_view, quick_commands::run_quick_command, quick_commands::quick_commands_library,
-            quick_commands::set_quick_commands, quick_commands::new_quick_command, toggles::toggles_view, toggles::perform_toggle,
+            quick_commands::set_quick_commands, quick_commands::new_quick_command, notes::notes_view, notes::notes_select, notes::notes_create, notes::notes_save, notes::notes_trash, notes::notes_open,
+            notes::notes_settings, notes::choose_notes_folder, notes::open_notes_folder, toggles::toggles_view, toggles::perform_toggle,
             toggles::quick_toggle_settings, toggles::set_quick_toggles, hub::hub_view, hub::refresh_hub, hub::hub_settings,
             hub::set_hub_enabled, hub::save_hub_key, hub::delete_hub_key, hub::set_gemini_options, hub::open_hub_key_page,
             hub::main_service, hub::set_main_service, limits::tray_styles, limits::set_tray_style, quick_prompt::quick_prompt_start, quick_prompt::quick_prompt_send,
