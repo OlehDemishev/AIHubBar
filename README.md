@@ -71,7 +71,7 @@ A command's result is always a **new file** — nothing is overwritten. **Compar
 2. Open it and drag **AI Hub Bar** to Applications.
 3. Open the app. It is signed with a Developer ID and notarized by Apple.
 
-Or with Homebrew:
+Or with Homebrew (beta: not yet tried on a Mac without the app):
 
 ```bash
 brew tap olehdemishev/aihubbar https://github.com/OlehDemishev/AIHubBar

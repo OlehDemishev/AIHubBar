@@ -17546,6 +17546,82 @@
         }
       }
     },
+    "Бета: уже работает, но проверено меньше остального. Напишите, если что-то не так.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beta: it already works but has been checked less than the rest. Tell us if something is off."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Бета: уже працює, але перевірено менше за решту. Напишіть, якщо щось не так."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beta: funktioniert bereits, wurde aber weniger geprüft als der Rest. Schreiben Sie uns, wenn etwas nicht stimmt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bêta : cela fonctionne déjà, mais a été moins vérifié que le reste. Écrivez-nous si quelque chose ne va pas."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beta: ya funciona, pero se ha comprobado menos que el resto. Escríbanos si algo va mal."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beta: funziona già, ma è stata verificata meno del resto. Scriveteci se qualcosa non va."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beta: já funciona, mas foi menos verificado que o restante. Escreva para nós se algo estiver errado."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beta: już działa, ale sprawdzono ją słabiej niż resztę. Napisz, jeśli coś jest nie tak."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ベータ: すでに動作しますが、ほかの機能ほど検証されていません。問題があればお知らせください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "베타: 이미 작동하지만 다른 기능보다 덜 검증되었습니다. 문제가 있으면 알려 주세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تجريبي: يعمل بالفعل، لكنه فُحص أقل من غيره. اكتب لنا إن وجدت خطأً."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beta: sudah berfungsi, tetapi belum diperiksa sebanyak yang lain. Beri tahu kami jika ada yang salah."
+          }
+        }
+      }
+    },
     "Ближайшая дата календаря": {
       "localizations": {
         "ar": {

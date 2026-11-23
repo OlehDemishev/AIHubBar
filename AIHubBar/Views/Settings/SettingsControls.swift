@@ -128,16 +128,34 @@ struct Footnote: View {
     }
 }
 
-/// «бета» next to a module still in beta testing.
+/// «бета» next to a module still in beta testing, and next to a feature that is in the release but checked less than
+/// the rest (a service other than Claude, «Сравнить», a translation nobody has read): the feature stays in sight.
 struct BetaBadge: View {
+    /// For a menu item, which can't hold the badge: « — бета» after its title.
+    static var suffix: Text { Text(verbatim: " — " + String(localized: "бета")) }
+
     var body: some View {
-        Text("бета")
+        // Upper case in the string, not by `textCase`: that one reached the hover hint too (seen live 2026-11-23).
+        Text(verbatim: String(localized: "бета").uppercased())
             .font(.caption2.weight(.semibold))
-            .textCase(.uppercase)
             .padding(.horizontal, 5)
             .padding(.vertical, 1)
             .foregroundStyle(.orange)
             .background(.orange.opacity(0.15), in: Capsule())
+            .help("Бета: уже работает, но проверено меньше остального. Напишите, если что-то не так.")
+    }
+}
+
+/// Which interface languages carry «бета»: every translation but the two read by their author.
+extension InterfaceLanguage {
+    static func isBeta(_ code: String) -> Bool {
+        !["ru", "en"].contains(Locale(identifier: code).language.languageCode?.identifier ?? code)
+    }
+
+    /// The language's own name, with «бета» after an unread translation (a menu item can't hold the badge).
+    static func title(_ code: String) -> String {
+        let name = Locale(identifier: code).localizedString(forIdentifier: code)?.capitalized ?? code
+        return isBeta(code) ? name + " — " + String(localized: "бета") : name
     }
 }
 
