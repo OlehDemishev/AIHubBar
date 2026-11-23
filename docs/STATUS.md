@@ -189,6 +189,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: the help knows the newest features (branch `feat/help-new-features`)
+
+Done: on Oleh's «Дальше по плану … до 9:00». The help had no word about what went into `main` on 2026-11-23. Five facts: «Команды и Siri» (the panel topic — the six Shortcuts actions), «Ждёт вас» (limits, after «Итог дня»), «Мог застрять» (sessions), «Файлы и диктовка» (sessions, beside «Codex в фоне»), «Локальные серверы» (projects). Eight new texts in 12 languages, with the modules' and actions' names as the catalog already has them. Swap has no fact of its own: the utilities topic is built from the modules' summaries.
+Checked: `HelpTests` locally (every topic has content, the search, the export); both string checks. The PR's CI runs everything.
+Left: the help window was not opened. The translations were written by the agent and read by no one. The site's copy of the help (`scripts/export-help.sh`) is not regenerated — that goes with a release.
+
 ## 2026-11-23 — Mac: the «бета» badge for «Версии» and batch tasks (branch `feat/beta-badge-versions-batch`)
 
 Done: the plan's step after PR 529, on Oleh's «Дальше по плану … до 9:00, подтверждение не жди». «Версии» and batch tasks are «бета» in the 1.0 list. A module's `isBeta` is the beta gate (the module is offered and works only with «Бета-версии» on), so it could not be used: new `ModuleDefinition.hasBetaMark` carries the badge and hides nothing; «Версии» has it. The badge now stands beside the module in Settings → «Что показывать», beside the «Версии» link in an open folder project and beside «Выбрать» in a folder profile's projects block. No new texts.
