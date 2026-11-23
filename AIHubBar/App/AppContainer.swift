@@ -253,6 +253,26 @@ final class AppContainer {
         commandHotKeys.quickPromptOn = { [modes] in modes.isOn(.quickPrompt) }
         IntentBridge.settings = settings
         IntentBridge.quickTools = quickTools
+        IntentBridge.sessions = sessions
+        IntentBridge.projects = { [store] in store.projects }
+        IntentBridge.keepAwake = { [modes, keepAwake] choice in
+            guard modes.isOn(.keepAwake) else { return nil }
+            switch choice {
+            case .hour: keepAwake.holdManually(for: 3600)
+            case .untilOff: keepAwake.holdManually(for: nil)
+            case .off: keepAwake.stopManual()
+            }
+            return KeepAwakeText.status(keepAwake.reason)
+        }
+        IntentBridge.startTask = { [launcher] text, project in
+            launcher.launch(.customTask(text), in: project, mode: .background)
+            // The launcher answers through the project's message: started, a question about the limit, or an error.
+            for _ in 0..<40 {
+                if let message = launcher.messages[project.launchTarget.path] { return message.text }
+                try? await Task.sleep(for: .milliseconds(250))
+            }
+            return String(localized: "Запускается: \(project.name)")
+        }
         layoutSwitcher.openSettings = { [requests] in
             SettingsRoute.open(module: .layout)
             requests.openWindow(.settings)
