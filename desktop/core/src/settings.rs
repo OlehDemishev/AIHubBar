@@ -50,6 +50,9 @@ pub struct Settings {
     pub telegram_answers: bool,
     /// «Запросы разрешений в этот бот» (the Mac's `telegramApprovals`).
     pub telegram_requests: bool,
+    /// «Заметки»: the folder of the notes (None — `notes::default_folder`) and the note shown last.
+    pub notes_folder: Option<String>,
+    pub notes_selected: Option<String>,
     pub resource_disk_below_gb: u64,
     /// «Быстрые команды»: the library (the Mac's `[QuickCommand]`); None — the starting examples, until edited.
     pub quick_commands: Option<Vec<crate::quick_commands::QuickCommand>>,
@@ -94,6 +97,8 @@ impl Default for Settings {
             telegram_off: Vec::new(),
             telegram_answers: false,
             telegram_requests: false,
+            notes_folder: None,
+            notes_selected: None,
             resource_disk_below_gb: 20,
             quick_commands: None,
             quick_toggles: None,
@@ -155,6 +160,8 @@ impl Settings {
             renew_claude_login: value.get("renew_claude_login").and_then(Value::as_bool).unwrap_or(defaults.renew_claude_login),
             telegram_answers: value.get("telegram_answers").and_then(Value::as_bool).unwrap_or(false),
             telegram_requests: value.get("telegram_requests").and_then(Value::as_bool).unwrap_or(false),
+            notes_folder: value.get("notes_folder").and_then(Value::as_str).map(str::to_owned).filter(|f| !f.trim().is_empty()),
+            notes_selected: value.get("notes_selected").and_then(Value::as_str).map(str::to_owned),
             telegram_chat: value.get("telegram_chat").and_then(Value::as_str).map(str::to_owned).filter(|c| !c.is_empty()),
             telegram_off: value.get("telegram_off").and_then(Value::as_array).map(|list| list.iter().filter_map(Value::as_str).filter(|e| crate::telegram::EVENTS.contains(e)).map(str::to_owned).collect()).unwrap_or_default(),
             quick_commands: crate::quick_commands::library(value.get("quick_commands")),
@@ -317,7 +324,7 @@ impl Settings {
 // MARK: - Modules: the Mac's `installed` and `off` lists, so `.claudepult` files carry them both ways
 
 /// The stage 6 modules this version has, as the Mac's `ModuleKind` names them.
-pub const MODULES: [&str; 5] = ["resources", "keepAwake", "quickCommands", "toggles", "quickPrompt"];
+pub const MODULES: [&str; 6] = ["resources", "keepAwake", "quickCommands", "toggles", "quickPrompt", "notes"];
 
 impl Settings {
     fn kinds(&self, key: &str) -> Vec<String> {

@@ -20,6 +20,7 @@ pub mod ipc;
 pub mod keep_awake;
 pub mod keys;
 pub mod launch;
+pub mod notes;
 pub mod paths;
 pub mod process;
 pub mod profiles;

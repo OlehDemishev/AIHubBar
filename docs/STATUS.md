@@ -5,6 +5,7 @@
 **Updated:** 2026-11-21
 
 **Now:**
+- 2026-11-23: Windows — the «Заметки» module (branch `feat/desktop-notes`; typing, a new note and the Recycle Bin seen live; its Settings card not seen)
 - 2026-11-21: Windows — limit hits are counted, «Упирался в лимит: N» in «Сегодня» (branch `feat/desktop-limit-hits`; the line seen live from a made-up record)
 - 2026-11-21: Windows 0.1.7 published as an unsigned pre-release (tag `desktop-v0.1.7`) on Oleh's «Да, выпускай»: outages, «Недавно завершённые», context fullness, «Сегодня»; the laptop updated itself from 0.1.6; «latest» stays the Mac's v0.11.0
 - 2026-11-21: Windows — «Сегодня» on top of the «История расхода» window: Claude's limits, today's spend by project, today's background runs, the other services (branch `feat/desktop-today`; seen live)
@@ -176,6 +177,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: the «Заметки» module (branch `feat/desktop-notes`)
+
+Done: on Oleh's «Продолжаем доводить функционал до мака». The Mac's `NotesStore` / `NotesView` / `NotesSection`: a note per `.md` file of one folder (`Documents\ClaudePult Notes` unless another is chosen), in the panel — the text, a list when there are two or more, «Новая заметка», «Открыть в редакторе», «В корзину» with a question; what is typed is written a second after the last key and when the field or the panel is left; a note changed elsewhere is read again when the panel comes back. Removed notes go to the Recycle Bin (`SHFileOperationW`; `gio trash` on Linux). Settings → «Модули» → «Заметки»: the switch, the folder, «Выбрать…», «Открыть папку». `core/src/notes.rs`, `app/src/notes.rs`, `ui/panel.html`, `ui/settings.html`; settings `notes_folder`, `notes_selected`; the module's kind is the Mac's `notes`. One new text in the catalog — the Mac's footer without its iCloud sentence, in 12 languages.
+Checked: `python scripts/strings.py --check` (683 texts), `cargo test --workspace` on Windows (names in order, a free name, a name that is not a path, a folder made on first use, the same text not written twice). Live on the laptop, a build from the branch with the module on and a temporary folder set in `settings.json`: the card showed «Заметка»; «first note» typed there was in `Заметка.md` two seconds later; «+» made «Заметка 2» and the list appeared; 🗑 asked «"Заметка 2" — в корзину?», and «В корзину» removed the file from the folder and showed the first note again. The settings were put back after.
+Left: not seen — the module's card in Settings, «Выбрать…» (a system dialog), «Открыть папку», «Открыть в редакторе», the «Не сохранено» line, Linux. The empty test note «Заметка 2» is in the laptop's Recycle Bin. Seen in Russian only. Next modules not ported: clipboard history, search, saved prompts.
 
 ## 2026-11-21 — Windows: limit hits are counted (branch `feat/desktop-limit-hits`)
 
