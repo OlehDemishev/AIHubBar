@@ -189,6 +189,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: the «бета» badge for «Версии» and batch tasks (branch `feat/beta-badge-versions-batch`)
+
+Done: the plan's step after PR 529, on Oleh's «Дальше по плану … до 9:00, подтверждение не жди». «Версии» and batch tasks are «бета» in the 1.0 list. A module's `isBeta` is the beta gate (the module is offered and works only with «Бета-версии» on), so it could not be used: new `ModuleDefinition.hasBetaMark` carries the badge and hides nothing; «Версии» has it. The badge now stands beside the module in Settings → «Что показывать», beside the «Версии» link in an open folder project and beside «Выбрать» in a folder profile's projects block. No new texts.
+Checked: `BetaMarkTests` locally (the badge alone gates nothing: no module has `isBeta`); `main` itself, with all twelve held PRs merged, passed the full local `scripts/check.sh` at `c50e477` just before. The PR's CI runs everything.
+Left: the three places are looked at live in the same session (next entry if something is wrong). The module's own Settings page and the «Версии» window carry no badge; the help's facts about versions neither — `HelpFact` has no beta mark, only a topic has.
+
 ## 2026-11-23 — Mac: twelve held PRs merged after 0.12.0; notes and reference for the next release (branch `chore/status-after-0.12.0`)
 
 Done: on Oleh's «Дальше по плану … до 9:00, подтверждение не жди». After 0.12.0 the twelve held PRs went into `main` one by one — 506, 508, 510 (the stack, retargeted in turn), 520, 529, 534, 544–549 — each with `main` merged in first (STATUS entries kept on top, the string catalog merged three-way by keys), the Mac checks green on the merged state, the PR's state read as MERGED before its branch was deleted. Once `main` moved under a running check (a Windows PR): the PR was not merged, `main` was merged in again and the checks repeated. `docs/release-notes/0.13.0.md` got ten lines for what the older draft did not name; `docs/REFERENCE.md` got three paragraphs (stuck sessions, local servers and swap; the Shortcuts actions; files and dictation in the quick prompt). The header: the held-PR lines are gone, the next release names what waits in `main`.
