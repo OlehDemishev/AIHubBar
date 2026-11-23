@@ -54,6 +54,16 @@ pub struct Projects {
 }
 
 impl Projects {
+    /// «Ждёт вас» in the day's summary: open pull requests whose checks failed, «Проект #12: название».
+    pub fn failed_pull_requests(&self) -> Vec<String> {
+        let state = self.state.lock().unwrap();
+        state
+            .projects
+            .iter()
+            .flat_map(|project| project.open_prs.iter().flatten().filter(|pr| pr.ci == claudepult_core::projects::Ci::Fail).map(|pr| format!("{} #{}: {}", project.name, pr.number, pr.title)))
+            .collect()
+    }
+
     pub fn start(&self, app: AppHandle) {
         let this = self.clone();
         std::thread::spawn(move || {

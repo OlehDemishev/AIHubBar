@@ -143,6 +143,18 @@
         </section>
         <h2 class="group" data-t="Уведомления в Telegram"></h2>
         <section class="card" id="telegram-events"></section>
+        <section class="card" id="day-summary">
+          <div class="row">
+            <label for="day-summary-on" data-t="Итог дня в Telegram"></label>
+            <input type="checkbox" class="switch" id="day-summary-on">
+          </div>
+          <div class="row" id="day-summary-hour-row">
+            <label for="day-summary-hour" data-t="Час"></label>
+            <select id="day-summary-hour"></select>
+          </div>
+          <p class="secondary" data-t="«Итог дня» начинается с того, что осталось за вами: сессии, которые ждут ответа, и пул-реквесты с упавшими проверками."></p>
+          <p><button id="day-summary-send" data-t="Отправить сейчас"></button> <span class="secondary" id="day-summary-note"></span></p>
+        </section>
       </div>
 
       <div class="page" id="page-show" role="tabpanel" hidden>
@@ -1190,6 +1202,27 @@
     document.getElementById("keep-awake-choose").onclick = async () => showModules(await invoke("choose_keep_awake_apps"));
     document.getElementById("keep-awake-clear").onclick = () => saveRules({ whileApps: [] });
     showModules(await invoke("modules_view"));
+
+    // «Итог дня в Telegram»: once a day at the chosen hour, or now by hand.
+    const dayOn = document.getElementById("day-summary-on");
+    const dayHour = document.getElementById("day-summary-hour");
+    for (let hour = 0; hour < 24; hour += 1) dayHour.add(new Option(String(hour).padStart(2, "0") + ":00", String(hour)));
+    function showDay(view) {
+      dayOn.checked = view.on;
+      dayHour.value = String(view.hour);
+      document.getElementById("day-summary-hour-row").hidden = !view.on;
+    }
+    const saveDay = async () => showDay(await invoke("set_day_summary", { on: dayOn.checked, hour: Number(dayHour.value) }));
+    dayOn.onchange = saveDay;
+    dayHour.onchange = saveDay;
+    document.getElementById("day-summary-send").onclick = async (event) => {
+      const note = document.getElementById("day-summary-note");
+      event.target.disabled = true;
+      try { await invoke("send_day_summary"); note.className = "secondary"; note.textContent = t("Отправлено"); }
+      catch (problem) { note.className = "error"; note.textContent = String(problem); }
+      event.target.disabled = false;
+    };
+    showDay(await invoke("day_summary_settings"));
 
     // «Обратная связь»: the repository's forms on GitHub, opened in the browser.
     document.getElementById("feedback-idea").onclick = () => invoke("open_feedback", { kind: "idea" });

@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — «Итог дня в Telegram» once a day at a chosen hour, and «Ждёт вас» (sessions waiting for an answer, pull requests with failed checks) at the top of the day's lines in the history window and the summary (branch `feat/desktop-day-summary`; the settings seen live, a real send not — no bot on the laptop)
 - 2026-11-23: Windows 0.1.10 published as an unsigned pre-release (tag `desktop-v0.1.10`) on Oleh's «Да, выпускай»: the help window, other Claude accounts, «Сервисы AI» by service, feedback buttons, one task for Claude and Codex; installed on the laptop by the agent (0.1.8 → 0.1.9 → 0.1.10); «latest» stays the Mac's v0.12.0
 - 2026-11-23: Windows — «Сервисы AI» by service: capsules Claude Code, Codex, Gemini, Copilot, Cursor, «Другие» with a dot, each showing only its own agents, hooks, limits and keys (branch `feat/desktop-service-pages`; every capsule seen live)
 - 2026-11-23: Windows — «Предложить идею…» and «Сообщить о проблеме…» in Settings → «Основные» and under the help's topics: the repository's forms on GitHub, the bug form with the version and the system filled in (branch `feat/desktop-feedback`; the buttons seen, not pressed)
@@ -206,6 +207,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: the day's summary in Telegram and «Ждёт вас» (branch `feat/desktop-day-summary`)
+
+Done: the second Mac feature of «Надо догонять». The Mac's `DaySummary` and its daily send. The day's lines («Сегодня» in the «История расхода» window) now begin with «Ждёт вас» when something waits: sessions that wait for an answer («✋ Проект: чего ждёт») and open pull requests with failed checks («❌ CI · Проект #12: название»), five of each and «и ещё N». Settings → «Основные» → «Telegram» → «Итог дня в Telegram» with «Час» (21:00 unless chosen) and «Отправить сейчас»: once a day at that hour the same lines go to the person's own bot under «🗓 Итог дня»; a day with no spend, no runs and nothing waiting sends nothing; an app that was off through the evening sends no summary of yesterday in the morning (three hours late at most); switched on after today's hour, the first one goes tomorrow. Checked every ten minutes. A review run is no longer a line of the day's runs, as on the Mac. The day's input is one function the window and the summary share. Settings `day_summary`, `day_summary_hour`, `day_summary_sent`. `core/src/token_usage.rs`, `app/src/history.rs`, `app/src/sessions.rs`, `app/src/projects.rs`, `ui/settings.html`; all texts are the Mac's.
+Checked: `python scripts/strings.py --check` (910 texts), `cargo test --workspace` on Windows (the day's lines with «Ждёт вас» and «и ещё», the Telegram text with its escaping, when the summary is due). Live on the laptop, the build from the branch, driven through WebView2's debugging port (a temporary line, not in the commit): on the Telegram page the switch and the hour were saved (`{"on":true,"hour":20}`) and the hour's row hid with the switch off; «Отправить сейчас» without a bot said «Сначала сохраните токен бота»; the day's lines read in the window: the limits, a limit hit, spend by project, today's runs. The settings file was put back and the installed app started again.
+Left: no summary was sent — the laptop has no bot yet (Needs Oleh). «Ждёт вас» was not seen with something in it: no session waited and no pull request had failed checks at the time. The Mac's weekly summary is not here. Seen in Russian, the light theme.
 
 ## 2026-11-23 — Windows 0.1.10 released (branch `chore/desktop-0.1.10-note`)
 
