@@ -110,7 +110,7 @@
     document.getElementById("send").onclick = () => send();
     document.getElementById("again").onclick = () => send(true);
     document.getElementById("cancel").onclick = () => invoke("close_quick_prompt");
-    document.getElementById("settings").onclick = async () => { await invoke("open_settings"); invoke("close_quick_prompt"); };
+    document.getElementById("settings").onclick = async () => { await invoke("open_settings", { page: "module.quickPrompt" }); invoke("close_quick_prompt"); };
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") invoke("close_quick_prompt");
       if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) { event.preventDefault(); send(); }

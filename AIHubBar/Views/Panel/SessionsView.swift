@@ -282,7 +282,7 @@ private struct SessionRowView: View {
             HStack(spacing: 6) {
                 Image(systemName: paused ? "pause.circle.fill" : inBackground ? "moon.zzz.fill" : row.state.symbol)
                     .foregroundStyle(paused ? Color.orange : row.state.color)
-                    .symbolEffect(.pulse, options: .repeating, isActive: row.state == .running && !paused && !reduceMotion && panelIsShown)
+                    .modifier(SteppedPulse(isActive: row.state == .running && !paused && !reduceMotion && panelIsShown))
                     .frame(width: 14)
                     .accessibilityLabel(paused ? String(localized: "на паузе до сброса лимита") : inBackground ? String(localized: "в фоне") : row.state.title)
                     .help(paused ? String(localized: "на паузе до сброса лимита") : inBackground ? String(localized: "в фоне") : row.state.title)
@@ -628,6 +628,24 @@ extension Session.State {
         case .done: .green
         case .ended, .unknown: .secondary
         case .error: .red
+        }
+    }
+}
+
+/// «Работает»: the icon dims and comes back about once a second, in steps. A repeating symbol effect did the same
+/// smoothly, but it made SwiftUI redraw the open panel on every frame — about 40 % of a core for as long as one
+/// session worked (measured 2026-11-23).
+private struct SteppedPulse: ViewModifier {
+    let isActive: Bool
+    static let step: TimeInterval = 0.8
+
+    func body(content: Content) -> some View {
+        if isActive {
+            TimelineView(.periodic(from: .now, by: Self.step)) { context in
+                content.opacity(Int(context.date.timeIntervalSinceReferenceDate / Self.step).isMultiple(of: 2) ? 1 : 0.45)
+            }
+        } else {
+            content
         }
     }
 }

@@ -143,6 +143,15 @@ final class KeepAwakeController {
         evaluate()
     }
 
+    /// «Не гасить и экран» from the panel: taken or released at once, not at the next look.
+    func setKeepDisplayOn(_ on: Bool) {
+        settings.keepAwakeRules.keepDisplayOn = on
+        evaluate()
+    }
+
+    /// Whether the display is held on right now, not only the system.
+    var holdsDisplay: Bool { displayAssertion != nil }
+
     func evaluate() {
         guard isActive() else {
             manualUntil = nil

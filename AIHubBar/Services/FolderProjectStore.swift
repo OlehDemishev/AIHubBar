@@ -76,7 +76,10 @@ final class FolderProjectStore {
     private func countWords(of projects: [FolderProject]) {
         let profile = settings.activeProfileID
         guard !profile.isEmpty else { wordsToday = nil; return }
-        let counts = Dictionary(projects.compactMap { project in project.words.map { (project.path, $0) } }, uniquingKeysWith: { first, _ in first })
+        // By project and main file: when another file becomes the main one, it starts from what it has — its words
+        // were not written today.
+        let counts = Dictionary(projects.compactMap { project in project.words.map { (WordGoal.key(project: project.path, mainFile: project.mainFile), $0) } },
+                                uniquingKeysWith: { first, _ in first })
         var records = WordGoal.load()
         var record = WordGoal.advanced(records[profile], counts: counts, now: .now)
         let words = record.written(counts)

@@ -6,15 +6,15 @@ import SwiftUI
 /// `docs/release-notes/` and goes to the release page and Sparkle's window (scripts/release.sh).
 enum WhatsNew {
     /// Changes with a release that has something to say; a release without news keeps the old value and shows nothing.
-    static let version = "0.12"
+    static let version = "0.13"
 
     static var items: [String] {
-        [String(localized: "Codex работает как Claude: «Разрешить» и «Отклонить» на его запросы прямо из панели, и задачи в фоне из «Быстрого запроса»."),
-         String(localized: "Одну задачу можно дать Claude и Codex сразу: окно сравнения покажет оба ответа и изменённые файлы, а выбранный вариант вливается в вашу ветку."),
-         String(localized: "У готовой фоновой задачи в меню есть «Проверить в Codex», а у остановленной по лимиту — «Передать Codex»."),
-         String(localized: "В окне «Claude Code» новая вкладка «Skills и плагины»: выключатель у каждого."),
-         String(localized: "«История расхода» открывается сводкой «Сегодня» и сравнивает расход по цене API с ценой плана."),
-         String(localized: "Колокольчик в шапке панели выключает уведомления в Telegram, пока не нажмёте снова.")]
+        [String(localized: "Новый модуль «Версии»: тексты проекта-папки сохраняются перед каждым запуском AI — прежний вариант можно сравнить с текущим и вернуть."),
+         String(localized: "«Выбрать» под списком проектов-папок запускает одну команду в нескольких проектах по очереди: сейчас, ночью или после сброса лимита."),
+         String(localized: "Придёт уведомление, если агент 20 минут ничего не делает или раз за разом запускает одну и ту же команду."),
+         String(localized: "В развёрнутом проекте видны локальные серверы из его папки: порт, программа, кнопки «открыть» и «остановить»."),
+         String(localized: "В окно «Быстрого запроса» можно перетащить файлы, а кнопка с микрофоном включает диктовку."),
+         String(localized: "Календарь выгружается в файл .ics, а у профиля для текстов появилась цель по словам на день.")]
     }
 
     /// Shown to whoever already had a profile and has not seen this version's card. A new person has nothing to compare
