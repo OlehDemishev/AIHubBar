@@ -66553,6 +66553,158 @@
         }
       }
     },
+    "Не запущено. %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not started. %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не запущено. %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht gestartet. %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non lancé. %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No iniciado. %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non avviato. %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não iniciado. %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie uruchomiono. %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始していません。%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시작되지 않음. %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يبدأ. %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dimulai. %@"
+          }
+        }
+      }
+    },
+    "Не запущено: в этом проекте уже запускается другая задача.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not started: another task is already starting in this project."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не запущено: у цьому проєкті вже запускається інше завдання."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht gestartet: In diesem Projekt startet bereits eine andere Aufgabe."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non lancé : une autre tâche est déjà en cours de lancement dans ce projet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No iniciado: ya se está iniciando otra tarea en este proyecto."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non avviato: in questo progetto è già in avvio un’altra attività."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não iniciado: outra tarefa já está sendo iniciada neste projeto."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie uruchomiono: w tym projekcie uruchamia się już inne zadanie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始していません：このプロジェクトでは別のタスクがすでに開始処理中です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시작되지 않음: 이 프로젝트에서 다른 작업이 이미 시작되는 중입니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يبدأ: هناك مهمة أخرى قيد البدء في هذا المشروع."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dimulai: tugas lain sedang dimulai di proyek ini."
+          }
+        }
+      }
+    },
     "Не знаю такой команды. Все команды: /help": {
       "localizations": {
         "ar": {
@@ -129666,6 +129818,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "File"
+          }
+        }
+      }
+    },
+    "Файл «%@» не удалось сохранить перед возвратом — ничего не изменено.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file “%@” could not be saved before the restore — nothing was changed."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файл «%@» не вдалося зберегти перед поверненням — нічого не змінено."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Datei „%@“ konnte vor dem Zurückholen nicht gesichert werden – nichts wurde geändert."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le fichier « %@ » n’a pas pu être enregistré avant le rétablissement — rien n’a été modifié."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo guardar el archivo «%@» antes de restaurar; no se ha cambiado nada."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non è stato possibile salvare il file “%@” prima del ripristino: non è stato modificato nulla."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível salvar o arquivo “%@” antes de restaurar — nada foi alterado."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się zapisać pliku „%@” przed przywróceniem — nic nie zostało zmienione."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "復元の前にファイル「%@」を保存できませんでした。何も変更されていません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복원하기 전에 ‘%@’ 파일을 저장하지 못했습니다. 아무것도 변경되지 않았습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذّر حفظ الملف «%@» قبل الاستعادة — لم يتغيّر شيء."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File “%@” tidak dapat disimpan sebelum pemulihan — tidak ada yang diubah."
           }
         }
       }

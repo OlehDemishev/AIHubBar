@@ -124,8 +124,23 @@ final class VersionKeeper {
     }
 
     func tick(now: Date = .now) async {
-        guard isActive(), Self.isDue(last: lastSweep, pace: settings.versions.pace, now: now) else { return }
-        await sweep(now: now)
+        guard isActive() else { return }
+        if Self.isDue(last: lastSweep, pace: settings.versions.pace, now: now) {
+            await sweep(now: now)
+        } else if settings.versions.pace.seconds == nil, lastCleanup.map({ now.timeIntervalSince($0) > 86_400 }) ?? true {
+            await cleanUp(now: now)
+        }
+    }
+
+    /// «Только перед запуском AI» takes no versions by the clock, but the old ones still have to go: once a day.
+    func cleanUp(now: Date = .now) async {
+        lastCleanup = now
+        let paths = folders.projects.map(\.path)
+        let store = store, keepDays = settings.versions.keepDays
+        await Task.detached(priority: .utility) {
+            for path in paths { store.prune(projectPath: path, now: now, keepDays: keepDays) }
+            store.removeOrphans(now: now, after: keepDays)
+        }.value
     }
 
     /// A version of every folder project of the current profile that changed, then the clean-up of old ones.

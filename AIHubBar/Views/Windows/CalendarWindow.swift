@@ -84,6 +84,7 @@ struct CalendarWindow: View {
         panel.nameFieldStringValue = "AI Hub Bar.ics"
         panel.allowedContentTypes = [.calendarEvent]
         guard panel.runModal() == .OK, let url = panel.url else { return }
+        exportError = nil
         do {
             try CalendarICS.text(entries).write(to: url, atomically: true, encoding: .utf8)
             AppLog.info("Calendar exported: \(entries.count) dates to \(url.lastPathComponent)")

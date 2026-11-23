@@ -9,8 +9,13 @@ enum CalendarICS {
     static func text(_ entries: [CalendarEntry], now: Date = .now, calendar: Calendar = .current) -> String {
         var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//AI Hub Bar//Calendar//EN", "CALSCALE:GREGORIAN",
                      "METHOD:PUBLISH", "X-WR-CALNAME:AI Hub Bar"]
+        var seen: [String: Int] = [:]
         for entry in entries.sorted(by: { ($0.date, $0.id) < ($1.date, $1.id) }) {
-            lines += ["BEGIN:VEVENT", "UID:\(uid(entry))", "DTSTAMP:\(utc(now))"]
+            // Two rows with the same name are two events: the later one gets a number.
+            var id = uid(entry)
+            seen[id, default: 0] += 1
+            if let count = seen[id], count > 1 { id = "\(count)-" + id }
+            lines += ["BEGIN:VEVENT", "UID:\(id)", "DTSTAMP:\(utc(now))"]
             if entry.hasTime {
                 lines += ["DTSTART:\(utc(entry.date))", "DURATION:PT30M"]
             } else {
@@ -27,8 +32,14 @@ enum CalendarICS {
         return lines.flatMap(folded).joined(separator: "\r\n") + "\r\n"
     }
 
+    /// A plan row is known by its file, kind and title, not by its line: a row removed above it must not turn it
+    /// into another event at the next import. A new date keeps the id, so the calendar moves the event.
     static func uid(_ entry: CalendarEntry) -> String {
-        let digest = SHA256.hash(data: Data(entry.id.utf8)).prefix(12).map { String(format: "%02x", $0) }.joined()
+        let key: String = switch entry.source {
+        case .card: entry.id
+        case let .plan(path, _): "\(path)|\(entry.kind.rawValue)|\(entry.title)"
+        }
+        let digest = SHA256.hash(data: Data(key.utf8)).prefix(12).map { String(format: "%02x", $0) }.joined()
         return digest + "@aihubbar"
     }
 

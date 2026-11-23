@@ -265,10 +265,19 @@ final class AppContainer {
             return KeepAwakeText.status(keepAwake.reason)
         }
         IntentBridge.startTask = { [launcher] text, project in
+            let path = project.launchTarget.path
+            // A launch under way in this project would drop the new task without a word.
+            guard !launcher.working.contains(path) else {
+                return String(localized: "Не запущено: в этом проекте уже запускается другая задача.")
+            }
             launcher.launch(.customTask(text), in: project, mode: .background)
             // The launcher answers through the project's message: started, a question about the limit, or an error.
             for _ in 0..<40 {
-                if let message = launcher.messages[project.launchTarget.path] { return message.text }
+                if let message = launcher.messages[path] {
+                    // A question nobody can answer from Shortcuts means nothing started.
+                    let asks = launcher.pendingLimit[path] != nil || launcher.pendingConfirmation[path] != nil
+                    return asks ? String(localized: "Не запущено. \(message.text)") : message.text
+                }
                 try? await Task.sleep(for: .milliseconds(250))
             }
             return String(localized: "Запускается: \(project.name)")
