@@ -25,6 +25,7 @@ pub mod ipc;
 pub mod keep_awake;
 pub mod keys;
 pub mod launch;
+pub mod local_servers;
 pub mod notes;
 pub mod pair_compare;
 pub mod paths;
