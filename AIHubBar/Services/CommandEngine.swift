@@ -57,6 +57,11 @@ final class CommandEngine {
         Notifier.post(id: $0, title: $1, body: $2, target: $3)
     }
 
+    /// «Версии»: called before a command starts on a project, whatever runs it (background, Terminal, API).
+    @ObservationIgnored var beforeRun: @MainActor (_ projectPath: String, _ title: String) -> Void = { _, _ in }
+    /// «Версии» is on: a finished command's notification gets «Что изменилось».
+    @ObservationIgnored var tracksVersions: @MainActor () -> Bool = { false }
+
     init(settings: AppSettings, runs: RunStore,
          spendURL: URL = SessionFiles.supportDirectory.appending(path: "api-spend.json"), defaults: UserDefaults = .standard) {
         self.settings = settings
@@ -74,6 +79,16 @@ final class CommandEngine {
                 ? .done : .failed(run.summary ?? String(localized: "Фоновая задача: \(run.state.rawValue)"))
             return finished
         }
+    }
+
+    /// Where a started command is, by the file it writes. A background run is found after a restart too; nil when
+    /// nothing knows about the command any more.
+    func state(ofResult path: String, projectPath: String) -> Job.State? {
+        if let job = jobs(for: projectPath).first(where: { $0.resultFile == path }) { return job.state }
+        guard let run = runs.runs.first(where: { $0.resultFile == path }) else { return nil }
+        guard run.state.isFinished else { return .background(runID: run.id) }
+        return run.state == .succeeded && FileManager.default.fileExists(atPath: path)
+            ? .done : .failed(run.summary ?? String(localized: "Фоновая задача: \(run.state.rawValue)"))
     }
 
     func clearFinished(in projectPath: String) {
@@ -101,7 +116,7 @@ final class CommandEngine {
     /// Starts one command; returns the result file it will write.
     @discardableResult
     func run(_ template: CommandTemplate, project: FolderProject, mode: Profile, service: AIService, text: String?,
-             suffix: String? = nil) -> String {
+             suffix: String? = nil, quiet: Bool = false) -> String {
         let context = context(template, project: project, mode: mode, text: text)
         let folder = URL(fileURLWithPath: project.path)
         let name = CommandText.uniqueName(CommandText.outputName(template.output, context, suffix: suffix)) {
@@ -112,6 +127,7 @@ final class CommandEngine {
         var job = Job(projectPath: project.path, title: template.title, service: service.shortName(compatibleName: settings.aiServices.compatibleName),
                       resultFile: resultPath, state: .running)
         AppLog.info("Command «\(template.title)» → \(service.id) in \(project.path) → \(name)")
+        beforeRun(project.path, template.title)
 
         switch service {
         case let .api(provider):
@@ -119,7 +135,7 @@ final class CommandEngine {
             let fileText = context.file.flatMap { FolderScanner.text(of: folder.appending(path: $0)) }
             let prompt = CommandText.apiPrompt(task: task, context: context, fileText: fileText)
             let config = settings.aiServices
-            let id = job.id
+            let id = job.id, started = job.startedAt
             Task {
                 do {
                     let reply = try await complete(provider, config, prompt)
@@ -127,7 +143,10 @@ final class CommandEngine {
                     record(SpendRecord(date: .now, provider: provider, model: config.model(provider) ?? "?",
                                        inputTokens: reply.inputTokens, outputTokens: reply.outputTokens))
                     update(id) { $0.state = .done }
-                    post("command-\(id)", String(localized: "Готово: \(template.title)"), "\(project.name) · \(name)", .file(path: resultPath))
+                    if !quiet {
+                        post("command-\(id)", String(localized: "Готово: \(template.title)"), "\(project.name) · \(name)",
+                             .commandResult(path: resultPath, project: project.path, started: started, versions: tracksVersions()))
+                    }
                 } catch {
                     update(id) { $0.state = .failed(error.localizedDescription) }
                     AppLog.error("Command «\(template.title)» via \(provider.rawValue) failed: \(error.localizedDescription)")
@@ -147,7 +166,7 @@ final class CommandEngine {
                     let run = try runs.launch(
                         title: template.title, prompt: prompt, project: project.name, projectPath: project.path,
                         folder: project.path, worktreeBranch: nil, profile: mode.permissions, resultFile: resultPath,
-                        claudePath: claude, taskTitle: CommandText.runTitle(template.title, text: context.text)
+                        claudePath: claude, taskTitle: CommandText.runTitle(template.title, text: context.text), quiet: quiet
                     )
                     job.state = .background(runID: run.id)
                 } catch {

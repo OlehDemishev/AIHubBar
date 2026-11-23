@@ -182,7 +182,7 @@ fn send(app: &AppHandle, text: String, project: String, agent: String, mode: Str
     let codex_background = agent == "codex" && mode == "background";
     if agent == "claude-code" || codex_background {
         eprintln!("quick prompt → {agent} ({mode}) in {project}");
-        return match launch_now(app, Path::new(&project), "custom", Some(text), allow_busy, Some(mode), false, codex_background) {
+        return match launch_now(app, Path::new(&project), "custom", Some(text), allow_busy, Some(mode), false, codex_background, true) {
             Ok(reply) => SendReply { close: !reply.confirm, confirm: reply.confirm, message: reply.message, ..SendReply::default() },
             Err(error) => SendReply { message: error, error: true, ..SendReply::default() },
         };

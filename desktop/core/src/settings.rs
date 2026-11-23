@@ -19,6 +19,10 @@ pub struct Settings {
     pub tray_hint_seen: bool,
     /// The `whats_new::VERSION` whose card was closed.
     pub whats_new_seen: Option<String>,
+    /// «Ночные задачи начинаются в» (`queue::HOURS`).
+    pub night_start_hour: u32,
+    /// When the night's first run started, in seconds: the batch that gets one summary once it is done.
+    pub night_batch_start: Option<i64>,
     /// A background run is stopped after this many minutes.
     pub background_time_limit_minutes: u32,
     /// Notify when a PR's CI fails or is fixed and when a PR closes (on by default, as on the Mac).
@@ -91,6 +95,8 @@ impl Default for Settings {
             language: None,
             tray_hint_seen: false,
             whats_new_seen: None,
+            night_start_hour: crate::queue::DEFAULT_HOUR,
+            night_batch_start: None,
             background_time_limit_minutes: crate::runs::DEFAULT_TIME_LIMIT_MINUTES,
             pull_request_alerts: true,
             profiles: Vec::new(),
@@ -147,6 +153,8 @@ impl Settings {
         Settings {
             language: text("language").or(defaults.language),
             whats_new_seen: value.get("whats_new_seen").and_then(Value::as_str).map(str::to_owned),
+            night_start_hour: value.get("night_start_hour").and_then(Value::as_u64).map(|hour| hour as u32).filter(|hour| crate::queue::HOURS.contains(hour)).unwrap_or(defaults.night_start_hour),
+            night_batch_start: value.get("night_batch_start").and_then(Value::as_i64),
             tray_hint_seen: value.get("tray_hint_seen").and_then(Value::as_bool).unwrap_or(defaults.tray_hint_seen),
             background_time_limit_minutes: value
                 .get("background_time_limit_minutes")

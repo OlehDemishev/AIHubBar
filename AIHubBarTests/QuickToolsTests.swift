@@ -158,3 +158,19 @@ struct ScreenLockTests {
         #expect(QuickToggle.lockScreen.hint(isOn: nil) == QuickToggle.lockScreen.title)
     }
 }
+
+/// What carries «бета» in 1.0 (agreed with Oleh 2026-11-21): the mark only labels, it hides nothing.
+struct BetaMarkTests {
+    @Test func servicesOtherThanClaudeAreBeta() {
+        #expect(ServiceTab.allCases.filter(\.isBeta) == [.codex, .gemini, .copilot, .cursor])
+    }
+
+    @Test func translationsNobodyReadAreBeta() {
+        #expect(!InterfaceLanguage.isBeta("ru"))
+        #expect(!InterfaceLanguage.isBeta("en"))
+        #expect(InterfaceLanguage.isBeta("pt-BR"))
+        #expect(InterfaceLanguage.isBeta("ja"))
+        #expect(InterfaceLanguage.title("en") == "English")
+        #expect(InterfaceLanguage.title("de").hasPrefix("Deutsch — "))
+    }
+}
