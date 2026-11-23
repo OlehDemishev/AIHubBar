@@ -147,8 +147,8 @@
 
 **Next:**
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
-- 0.12.0 is out (2026-11-23); of its features still unseen with real agents: a real `codex` asking for a permission, handover, review, the pair's notification banner
-- **0.13.0 tomorrow, Tuesday 2026-11-24** (Oleh, 2026-11-23 afternoon: «сегодня работаем до упора, к вечеру сделаем рабочий релиз на завтра» — it replaces «not before 2026-12-01»); the release command itself still waits for his word. In `main` for it: «Версии» and its card, batch tasks, the Antigravity «ждёт» notification, the «бета» badges, the calendar's `.ics` export and the word goal, the stuck-agent notification, «Ждёт вас» in the day's summary, the swap notification, three Shortcuts actions, files and dictation in the quick prompt, local servers in a project row, «Не гасить и экран» beside «Не спать» (another session's PR 560). Ready: `docs/release-notes/0.13.0.md`, the «Что нового» card and the demo at «0.13», the help's facts. Today, in order: an independent review of everything since `v0.12.0` and its fixes; a live pass over the features in an isolated copy; the full check on the final `main`; in the evening Oleh decides — a beta first (docs/RELEASE.md asks for one when the panel changes) or straight to everyone
+- from 0.12.0 still unseen with real agents: a real `codex` asking for a permission, handover, review, the pair's notification banner
+- 0.13.0 is out (2026-11-23, to everyone); the next release is not before Tuesday 2026-12-01 and only on Oleh's word; merged work waits in `main`. Unseen live from 0.13.0: notification banners themselves, the swap notification, the Shortcuts actions run, a dropped file and dictation in the quick prompt, local servers and «Версии» on Oleh's own profile
 - towards 1.0: what is in, what is «бета» and what is out is agreed (journal 2026-11-21; the shared Telegram bot and the Mini App are in as ready, 2026-11-23); the «бета» badges are in `main` (PR 529, PR 561); left — translations read by people, feedback from strangers, the island at the real notch
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
@@ -157,6 +157,7 @@
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
 **Needs Oleh:**
+- update to 0.13.0 (Settings → «Основные» → «Обновления»; the installed copy is build 1341 of the same code): does the update window show the list of changes; the «Что нового» card with six lines — press «Понятно»
 - Windows laptop: update to 0.1.9 (Settings → «Основные» → «Обновления» → «Проверить сейчас», or wait a day) and look at the new Settings: the sidebar, «Что показывать» and a module's page with the back button, «Профили» and «Клавиши» (no control was changed there before the release); say what still looks unlike the Mac
 - Windows laptop, Telegram (0.1.7 is installed; nothing of it was tried with a real bot): 1) in @BotFather make a new bot — the Mac mini reads your present one; 2) Settings → «Telegram»: paste the token, «Привязать чат», «Start» in Telegram, «Проверить»; 3) start a small background task and see its result come to the chat; 4) «Этот компьютер отвечает боту» on, `/menu` in the chat — 🏠, then 🤖 and ⏳; 5) «Запросы разрешений в этот бот» on, start `claude --permission-mode default` in a project, ask it to create a file and answer ✅ from the phone. Say what did not work
 - update to 0.12.0 (Settings → «Основные» → «Обновления»): does the update window show the list of changes; does the «Что нового» card show once with six lines; is the bell in the panel's header left of the gear, and does a press turn it orange; the «Telegram» tile in «Быстрые переключатели» if they are on
@@ -200,6 +201,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Mac: the header after 0.13.0; the version before a run stays on the main thread (branch `chore/status-after-0.13.0`)
+
+Done: the header's Next and Needs Oleh say 0.13.0 is out. The review's finding «a version before a run is taken on the main thread» was read again and left as it is: `CommandEngine.run` returns the result file at once to the panel, the island and the batch runner, so taking the version off the main thread means making the whole start of a command asynchronous; the cost it would remove is reading and hashing the project's text files (each at most 20 MB), a fraction of a second even for hundreds of megabytes.
+Checked: read `VersionStore.take`, `VersionKeeper.takeBeforeRun`, `CommandEngine.run` and its three callers; nothing measured. The Mac CI run on `main` at 15:05 UTC shows «failure» because its «Mac tests» job was cancelled, not failed; the full local check passed on the released commit twice.
+Left: the stuck notification for one tool call longer than 20 minutes (the session file has no sign that a tool is still running).
 
 ## 2026-11-23 — Mac: the site's help exported for 0.13.0 (branch `chore/help-export-0.13`)
 
