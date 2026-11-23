@@ -10407,82 +10407,6 @@
         }
       }
     },
-    "Codex работает как Claude: «Разрешить» и «Отклонить» на его запросы прямо из панели, и задачи в фоне из «Быстрого запроса».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex يعمل مثل Claude: «سماح» و«رفض» لطلباته من اللوحة مباشرة، ومهام في الخلفية من «طلب سريع»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex arbeitet wie Claude: „Erlauben“ und „Ablehnen“ für seine Anfragen direkt im Panel und Hintergrundaufgaben aus dem „Schnellauftrag“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex works like Claude: “Allow” and “Deny” for its requests right from the panel, and background tasks from Quick Prompt."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex funciona como Claude: «Permitir» y «Rechazar» para sus solicitudes desde el propio panel, y tareas en segundo plano desde «Petición rápida»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex fonctionne comme Claude : « Autoriser » et « Refuser » pour ses demandes directement dans le panneau, et des tâches en arrière-plan depuis « Requête rapide »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex bekerja seperti Claude: “Izinkan” dan “Tolak” untuk permintaannya langsung dari panel, dan tugas di latar belakang dari “Permintaan cepat”."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex funziona come Claude: «Consenti» e «Rifiuta» per le sue richieste direttamente dal pannello, e attività in background da «Richiesta rapida»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CodexもClaudeと同じように使えます。リクエストへの「許可」と「拒否」をパネルから直接行え、「クイックプロンプト」からバックグラウンドのタスクも実行できます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex도 Claude처럼 작동합니다. 요청에 대한 “허용”과 “거부”를 패널에서 바로 할 수 있고, “빠른 요청”에서 백그라운드 작업도 보낼 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex działa jak Claude: „Zezwól” i „Odrzuć” na jego prośby prosto z panelu oraz zadania w tle z „Szybkiego zapytania”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O Codex funciona como o Claude: “Permitir” e “Recusar” para os pedidos dele direto no painel, e tarefas em segundo plano pelo “Pedido rápido”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex працює як Claude: «Дозволити» й «Відхилити» на його запити просто з панелі, і задачі у фоні зі «Швидкого запиту»."
-          }
-        }
-      }
-    },
     "Codex, Copilot, Gemini, Antigravity, Cursor и расход по API — такими же карточками, как Claude.": {
       "localizations": {
         "ar": {
@@ -14810,6 +14734,82 @@
         }
       }
     },
+    "«Выбрать» под списком проектов-папок запускает одну команду в нескольких проектах по очереди: сейчас, ночью или после сброса лимита.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Choose” under the list of folder projects runs one command in several projects, one after another: now, at night or after the limit resets."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Вибрати» під списком проєктів-папок запускає одну команду в кількох проєктах по черзі: зараз, уночі або після скидання ліміту."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Wählen“ unter der Liste der Ordnerprojekte führt einen Befehl nacheinander in mehreren Projekten aus: jetzt, nachts oder nach dem Zurücksetzen des Limits."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Choisir », sous la liste des projets-dossiers, lance une même commande dans plusieurs projets à la suite : maintenant, la nuit ou après la remise à zéro de la limite."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Elegir», bajo la lista de proyectos-carpeta, ejecuta un mismo comando en varios proyectos, uno tras otro: ahora, por la noche o cuando se restablezca el límite."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Scegli”, sotto l’elenco dei progetti-cartella, esegue un comando in più progetti, uno dopo l’altro: ora, di notte o dopo l’azzeramento del limite."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Escolher”, abaixo da lista de projetos-pasta, roda um comando em vários projetos, um após o outro: agora, à noite ou depois que o limite zerar."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Wybierz” pod listą projektów-folderów uruchamia jedno polecenie w kilku projektach po kolei: teraz, w nocy albo po zresetowaniu limitu."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダプロジェクトの一覧の下にある「選択」で、1 つのコマンドを複数のプロジェクトで順番に実行できます。今すぐ、夜間、または上限のリセット後に。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 프로젝트 목록 아래의 ‘선택’으로 하나의 명령을 여러 프로젝트에서 차례로 실행합니다. 지금, 밤에, 또는 한도 재설정 후에."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«اختيار» تحت قائمة مشاريع المجلدات يشغّل أمرًا واحدًا في عدة مشاريع بالتتابع: الآن، أو ليلًا، أو بعد إعادة ضبط الحد."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Pilih” di bawah daftar proyek folder menjalankan satu perintah di beberapa proyek secara bergiliran: sekarang, malam hari, atau setelah batas direset."
+          }
+        }
+      }
+    },
     "«Выбрать» под списком проектов: отметьте проекты, команду профиля и когда запустить — «Сейчас», «На ночь» или «После сброса лимита». Проекты идут по очереди в фоне (Claude Code или модель по API), у лимита пакет ждёт сброса, в конце приходит одна сводка.": {
       "localizations": {
         "en": {
@@ -14962,82 +14962,6 @@
         }
       }
     },
-    "«История расхода» открывается сводкой «Сегодня» и сравнивает расход по цене API с ценой плана.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«سجل الاستهلاك» يفتح على ملخص «اليوم» ويقارن الاستهلاك بسعر API مع سعر الخطة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der „Verbrauchsverlauf“ öffnet sich mit der Übersicht „Heute“ und vergleicht den Verbrauch zum API-Preis mit dem Preis des Plans."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usage History opens with the “Today” summary and compares your spend at the API price with the price of the plan."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«Historial de consumo» se abre con el resumen «Hoy» y compara el gasto a precio de API con el precio del plan."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "« Historique de consommation » s’ouvre sur le résumé « Aujourd’hui » et compare la dépense au prix de l’API avec le prix du forfait."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "“Riwayat pemakaian” dibuka dengan ringkasan “Hari ini” dan membandingkan pemakaian dengan harga API terhadap harga paket."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«Cronologia dei consumi» si apre con il riepilogo «Oggi» e confronta la spesa al prezzo dell’API con il prezzo del piano."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「使用履歴」は「今日」のまとめから始まり、API料金で見た消費額とプランの料金を比べます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "“사용 기록”은 “오늘” 요약으로 열리며, API 가격 기준 사용액을 요금제 가격과 비교합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "„Historia zużycia” otwiera się podsumowaniem „Dziś” i porównuje zużycie w cenie API z ceną planu."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O “Histórico de consumo” abre com o resumo “Hoje” e compara o gasto pelo preço da API com o preço do plano."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«Історія витрат» відкривається зведенням «Сьогодні» й порівнює витрати за ціною API з ціною плану."
-          }
-        }
-      }
-    },
     "«История расхода…» под расходом по проектам открывает окно: токены Claude Code по дням за последние недели.": {
       "localizations": {
         "ar": {
@@ -15110,6 +15034,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "«Історія витрат…» під витратами за проєктами відкриває вікно: токени Claude Code за днями за останні тижні."
+          }
+        }
+      }
+    },
+    "«Итог дня» начинается с того, что осталось за вами: сессии, которые ждут ответа, и пул-реквесты с упавшими проверками.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The day summary starts with what is left for you: sessions waiting for an answer and pull requests whose checks failed."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Підсумок дня» починається з того, що лишилося за вами: сесії, які чекають відповіді, і пул-реквести з проваленими перевірками."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Tagesbilanz beginnt mit dem, was noch bei Ihnen liegt: Sitzungen, die auf eine Antwort warten, und Pull Requests mit fehlgeschlagenen Prüfungen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le bilan du jour commence par ce qui vous attend : les sessions en attente d’une réponse et les pull requests dont les vérifications ont échoué."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El resumen del día empieza por lo que te queda pendiente: sesiones que esperan respuesta y pull requests con comprobaciones fallidas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il riepilogo del giorno inizia da ciò che resta a te: le sessioni in attesa di una risposta e le pull request con controlli falliti."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O resumo do dia começa pelo que ficou com você: sessões que esperam resposta e pull requests com verificações que falharam."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podsumowanie dnia zaczyna się od tego, co zostało po Twojej stronie: sesje czekające na odpowiedź i pull requesty z nieudanymi sprawdzeniami."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「今日のまとめ」は、あなたの対応が残っているものから始まります：応答待ちのセッションと、チェックに失敗したプルリクエストです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘오늘의 요약’은 사용자가 처리할 항목부터 시작합니다. 응답을 기다리는 세션과 검사에 실패한 풀 리퀘스트입니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«ملخص اليوم» تبدأ بما بقي عليك: الجلسات التي تنتظر ردًّا وطلبات السحب التي فشلت فحوصها."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ringkasan hari ini dimulai dari yang masih menunggu Anda: sesi yang menunggu jawaban dan pull request yang pemeriksaannya gagal."
           }
         }
       }
@@ -21277,82 +21277,6 @@
         }
       }
     },
-    "В окне «Claude Code» новая вкладка «Skills и плагины»: выключатель у каждого.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "في نافذة «Claude Code» تبويب جديد «المهارات والإضافات»: مفتاح لكل واحدة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das Fenster „Claude Code“ hat einen neuen Tab „Skills und Plug-ins“: ein Schalter für jeden Eintrag."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The Claude Code window has a new tab, “Skills and Plugins”: a switch for each one."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La ventana «Claude Code» tiene una pestaña nueva, «Skills y plugins»: un interruptor para cada uno."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La fenêtre « Claude Code » a un nouvel onglet « Skills et plugins » : un interrupteur pour chacun."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jendela “Claude Code” punya tab baru “Skill dan plugin”: ada sakelar untuk masing-masing."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La finestra «Claude Code» ha una nuova scheda «Skill e plugin»: un interruttore per ciascuno."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「Claude Code」ウインドウに新しいタブ「スキルとプラグイン」が加わりました。それぞれにスイッチがあります。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "“Claude Code” 창에 새 탭 “스킬과 플러그인”이 생겼습니다. 항목마다 스위치가 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "W oknie „Claude Code” jest nowa karta „Skille i wtyczki”: przy każdym przełącznik."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A janela “Claude Code” tem uma aba nova, “Skills e plugins”: um interruptor para cada um."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У вікні «Claude Code» нова вкладка «Skills і плагіни»: вимикач у кожного."
-          }
-        }
-      }
-    },
     "В окне «История расхода» видно, сколько раз за день вы упёрлись в лимит.": {
       "localizations": {
         "ar": {
@@ -21501,6 +21425,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "У вікні порівняння клік по файлу показує зміни порядково. «Залишити цей варіант» видаляє інший, «Влити в …» вливає гілку варіанта в гілку проєкту (без push), а «Прибрати папку й гілку» потім прибирає за ним. Кожна дія просить підтвердження."
+          }
+        }
+      }
+    },
+    "В окно «Быстрого запроса» можно перетащить файлы и снимки экрана — агент получит их пути вместе с задачей. Кнопка с микрофоном включает диктовку macOS в поле задачи.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drag files and screenshots into the Quick Prompt window — the agent gets their paths with the task. The microphone button starts macOS Dictation in the task field."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У вікно «Швидкого запиту» можна перетягнути файли та знімки екрана — агент отримає їхні шляхи разом із завданням. Кнопка з мікрофоном вмикає диктування macOS у полі завдання."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dateien und Bildschirmfotos lassen sich in das Fenster des Schnellauftrags ziehen – der Agent erhält ihre Pfade mit der Aufgabe. Die Mikrofontaste startet das macOS-Diktat im Aufgabenfeld."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glissez des fichiers et des captures d’écran dans la fenêtre de la Requête rapide : l’agent reçoit leurs chemins avec la tâche. Le bouton micro lance la dictée de macOS dans le champ de la tâche."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrastra archivos y capturas de pantalla a la ventana de la Petición rápida: el agente recibe sus rutas junto con la tarea. El botón del micrófono inicia el dictado de macOS en el campo de la tarea."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trascina file e istantanee nella finestra della Richiesta rapida: l’agente riceve i loro percorsi insieme all’attività. Il pulsante con il microfono avvia la dettatura di macOS nel campo dell’attività."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arraste arquivos e capturas de tela para a janela do Pedido rápido — o agente recebe os caminhos junto com a tarefa. O botão do microfone inicia o ditado do macOS no campo da tarefa."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do okna Szybkiego zapytania można przeciągnąć pliki i zrzuty ekranu — agent dostanie ich ścieżki razem z zadaniem. Przycisk z mikrofonem włącza dyktowanie macOS w polu zadania."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クイックプロンプトのウインドウにファイルやスクリーンショットをドラッグすると、エージェントにタスクと一緒にそのパスが渡されます。マイクのボタンは、タスク欄で macOS の音声入力を開始します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빠른 요청 윈도우로 파일과 스크린샷을 드래그하면 에이전트가 작업과 함께 해당 경로를 받습니다. 마이크 버튼은 작업 필드에서 macOS 받아쓰기를 시작합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن سحب الملفات ولقطات الشاشة إلى نافذة الطلب السريع — يحصل الوكيل على مساراتها مع المهمة. زر الميكروفون يشغّل إملاء macOS في حقل المهمة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seret file dan tangkapan layar ke jendela Permintaan cepat — agen menerima path-nya bersama tugas. Tombol mikrofon memulai Dikte macOS di kolom tugas."
+          }
+        }
+      }
+    },
+    "В окно «Быстрого запроса» можно перетащить файлы, а кнопка с микрофоном включает диктовку.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drag files into the Quick Prompt window, and the microphone button starts dictation."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У вікно «Швидкого запиту» можна перетягнути файли, а кнопка з мікрофоном вмикає диктування."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In das Fenster des Schnellauftrags lassen sich Dateien ziehen, und die Mikrofontaste startet das Diktat."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glissez des fichiers dans la fenêtre de la Requête rapide ; le bouton micro lance la dictée."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrastra archivos a la ventana de la Petición rápida; el botón del micrófono inicia el dictado."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trascina i file nella finestra della Richiesta rapida; il pulsante con il microfono avvia la dettatura."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arraste arquivos para a janela do Pedido rápido; o botão do microfone inicia o ditado."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do okna Szybkiego zapytania można przeciągnąć pliki, a przycisk z mikrofonem włącza dyktowanie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クイックプロンプトのウインドウにファイルをドラッグできます。マイクのボタンで音声入力が始まります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빠른 요청 윈도우로 파일을 드래그할 수 있고, 마이크 버튼으로 받아쓰기를 시작합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن سحب الملفات إلى نافذة الطلب السريع، وزر الميكروفون يشغّل الإملاء."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seret file ke jendela Permintaan cepat, dan tombol mikrofon memulai dikte."
           }
         }
       }
@@ -21891,6 +21967,82 @@
         }
       }
     },
+    "В приложении «Команды» есть действия AI Hub Bar: лимиты Claude, быстрая команда, поиск, «Не спать», «Кто ждёт ответа» и «Задача Claude в фоне».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Shortcuts app has AI Hub Bar's actions: Claude limits, a quick command, search, “Keep Awake”, “Who is waiting” and “Claude task in the background”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У програмі «Команди» є дії AI Hub Bar: ліміти Claude, швидка команда, пошук, «Не спати», «Хто чекає відповіді» та «Завдання Claude у фоні»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In der App „Kurzbefehle“ gibt es Aktionen von AI Hub Bar: Claude-Limits, ein Schnellbefehl, Suche, „Wach bleiben“, „Wer wartet auf Antwort“ und „Claude-Aufgabe im Hintergrund“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’app Raccourcis propose les actions d’AI Hub Bar : limites de Claude, commande rapide, recherche, « Rester éveillé », « Qui attend une réponse » et « Tâche Claude en arrière-plan »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La app Atajos tiene acciones de AI Hub Bar: límites de Claude, comando rápido, búsqueda, «No dormir», «Quién espera respuesta» y «Tarea de Claude en segundo plano»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’app Comandi Rapidi ha le azioni di AI Hub Bar: limiti di Claude, comando rapido, ricerca, “Resta sveglio”, “Chi attende una risposta” e “Attività di Claude in background”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O app Atalhos tem ações do AI Hub Bar: limites do Claude, comando rápido, busca, “Não dormir”, “Quem espera resposta” e “Tarefa do Claude em segundo plano”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W aplikacji Skróty są czynności AI Hub Bar: limity Claude, szybkie polecenie, wyszukiwanie, „Bez usypiania”, „Kto czeka na odpowiedź” i „Zadanie Claude w tle”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「ショートカット」アプリに AI Hub Bar のアクションがあります：Claude の上限、クイックコマンド、検索、「スリープしない」、「応答待ちのセッション」、「Claude のバックグラウンドタスク」。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단축어 앱에 AI Hub Bar 동작이 있습니다: Claude 한도, 빠른 명령, 검색, ‘잠자기 방지’, ‘응답을 기다리는 세션’, ‘Claude 백그라운드 작업’."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في تطبيق «الاختصارات» إجراءات AI Hub Bar: حدود Claude، أمر سريع، البحث، «البقاء مستيقظًا»، «من ينتظر الرد» و«مهمة Claude في الخلفية»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikasi Pintasan memiliki tindakan AI Hub Bar: batas Claude, perintah cepat, pencarian, “Tetap terjaga”, “Siapa yang menunggu jawaban”, dan “Tugas Claude di latar belakang”."
+          }
+        }
+      }
+    },
     "В профилях": {
       "localizations": {
         "ar": {
@@ -22039,6 +22191,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Минулого разу AI Hub Bar закрився з помилкою"
+          }
+        }
+      }
+    },
+    "В развёрнутом проекте видно, что слушает порт из его папки: порт и программа. Отсюда же можно открыть адрес в браузере или остановить процесс — кнопка спросит ещё раз.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An expanded project shows what listens on a port from its folder: the port and the program. From there you can open the address in the browser or stop the process — the button asks once more."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У розгорнутому проєкті видно, що слухає порт із його папки: порт і програма. Звідси ж можна відкрити адресу в браузері або зупинити процес — кнопка запитає ще раз."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein aufgeklapptes Projekt zeigt, was aus seinem Ordner an einem Port lauscht: Port und Programm. Von dort lässt sich die Adresse im Browser öffnen oder der Prozess beenden – die Taste fragt noch einmal nach."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un projet déplié montre ce qui écoute sur un port depuis son dossier : le port et le programme. De là, vous pouvez ouvrir l’adresse dans le navigateur ou arrêter le processus — le bouton demande confirmation."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un proyecto desplegado muestra qué escucha en un puerto desde su carpeta: el puerto y el programa. Desde ahí puedes abrir la dirección en el navegador o detener el proceso; el botón pregunta una vez más."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un progetto espanso mostra cosa è in ascolto su una porta dalla sua cartella: la porta e il programma. Da lì puoi aprire l’indirizzo nel browser o fermare il processo: il pulsante chiede conferma."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um projeto expandido mostra o que escuta em uma porta a partir da pasta dele: a porta e o programa. Dali você pode abrir o endereço no navegador ou parar o processo — o botão pergunta mais uma vez."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rozwinięty projekt pokazuje, co nasłuchuje na porcie z jego folderu: port i program. Stamtąd można otworzyć adres w przeglądarce albo zatrzymać proces — przycisk zapyta jeszcze raz."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "展開したプロジェクトには、そのフォルダからポートを待ち受けているもの（ポートとプログラム）が表示されます。そこからアドレスをブラウザで開いたり、プロセスを停止したりできます。停止ボタンはもう一度確認します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "펼친 프로젝트에는 그 폴더에서 포트를 수신 중인 항목(포트와 프로그램)이 표시됩니다. 거기서 주소를 브라우저로 열거나 프로세스를 중지할 수 있으며, 중지 버튼은 한 번 더 묻습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المشروع الموسَّع يعرض ما يستمع إلى منفذ من مجلده: المنفذ والبرنامج. ومن هناك يمكن فتح العنوان في المتصفح أو إيقاف العملية — الزر يسأل مرة أخرى."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyek yang dibentangkan menampilkan apa yang mendengarkan port dari foldernya: port dan programnya. Dari sana Anda bisa membuka alamatnya di browser atau menghentikan prosesnya — tombolnya bertanya sekali lagi."
+          }
+        }
+      }
+    },
+    "В развёрнутом проекте видны локальные серверы из его папки: порт, программа, кнопки «открыть» и «остановить».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An expanded project shows the local servers running from its folder: the port, the program, and buttons to open and to stop."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У розгорнутому проєкті видно локальні сервери з його папки: порт, програма, кнопки «відкрити» та «зупинити»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein aufgeklapptes Projekt zeigt die lokalen Server aus seinem Ordner: Port, Programm, Tasten zum Öffnen und Beenden."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un projet déplié montre les serveurs locaux lancés depuis son dossier : le port, le programme, des boutons pour ouvrir et arrêter."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un proyecto desplegado muestra los servidores locales de su carpeta: el puerto, el programa y botones para abrir y detener."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un progetto espanso mostra i server locali avviati dalla sua cartella: la porta, il programma, i pulsanti per aprire e fermare."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um projeto expandido mostra os servidores locais da pasta dele: a porta, o programa e botões para abrir e parar."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rozwinięty projekt pokazuje lokalne serwery z jego folderu: port, program, przyciski otwarcia i zatrzymania."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "展開したプロジェクトに、そのフォルダから動いているローカルサーバが表示されます：ポート、プログラム、開くボタンと停止ボタン。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "펼친 프로젝트에 그 폴더에서 실행 중인 로컬 서버가 표시됩니다: 포트, 프로그램, 열기와 중지 버튼."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المشروع الموسَّع يعرض الخوادم المحلية العاملة من مجلده: المنفذ، البرنامج، وزرّا الفتح والإيقاف."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyek yang dibentangkan menampilkan server lokal dari foldernya: port, program, serta tombol buka dan hentikan."
           }
         }
       }
@@ -38858,6 +39162,82 @@
         }
       }
     },
+    "Если сессия работает, но 20 минут ничего не делает или раз за разом запускает одну и ту же команду, придёт уведомление. Как часто — на странице модуля «Сессии агентов».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If a session is running but has done nothing for 20 minutes, or keeps running the same command over and over, a notification comes. How often is set on the Agent sessions module page."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Якщо сесія працює, але 20 хвилин нічого не робить або раз у раз запускає ту саму команду, прийде сповіщення. Як часто — на сторінці модуля «Сесії агентів»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wenn eine Sitzung läuft, aber 20 Minuten nichts tut oder immer wieder denselben Befehl ausführt, kommt eine Mitteilung. Wie oft, legen Sie auf der Seite des Moduls „Agentensitzungen“ fest."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si une session tourne mais ne fait rien depuis 20 minutes, ou relance sans cesse la même commande, une notification arrive. La fréquence se règle sur la page du module « Sessions des agents »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si una sesión sigue en marcha pero lleva 20 minutos sin hacer nada, o ejecuta el mismo comando una y otra vez, llega una notificación. La frecuencia se ajusta en la página del módulo «Sesiones de agentes»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se una sessione è in corso ma non fa nulla da 20 minuti, o continua a eseguire lo stesso comando, arriva una notifica. La frequenza si imposta nella pagina del modulo “Sessioni degli agenti”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se uma sessão está rodando mas não faz nada há 20 minutos, ou roda o mesmo comando repetidamente, chega uma notificação. A frequência fica na página do módulo “Sessões de agentes”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeśli sesja trwa, ale od 20 minut nic nie robi albo wciąż uruchamia to samo polecenie, przyjdzie powiadomienie. Jak często — ustawia się na stronie modułu „Sesje agentów”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションが実行中なのに 20 分間何もしていない、または同じコマンドを繰り返し実行している場合、通知が届きます。頻度はモジュール「エージェントのセッション」のページで設定します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션이 실행 중인데 20분 동안 아무것도 하지 않거나 같은 명령을 계속 실행하면 알림이 옵니다. 빈도는 ‘에이전트 세션’ 모듈 페이지에서 정합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إذا كانت الجلسة تعمل لكنها لم تفعل شيئًا منذ 20 دقيقة، أو تكرّر تشغيل الأمر نفسه، يصلك إشعار. التكرار يُضبط في صفحة وحدة «جلسات الوكلاء»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jika sesi berjalan tetapi 20 menit tidak melakukan apa-apa, atau terus menjalankan perintah yang sama, pemberitahuan akan datang. Seberapa sering — diatur di halaman modul “Sesi agen”."
+          }
+        }
+      }
+    },
     "Есть несохранённые правки": {
       "localizations": {
         "ar": {
@@ -49507,6 +49887,82 @@
         }
       }
     },
+    "Календарь выгружается в файл .ics, а у профиля для текстов появилась цель по словам на день.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The calendar exports to an .ics file, and a profile for texts can have a daily word goal."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Календар вивантажується у файл .ics, а в профілю для текстів з’явилася ціль за словами на день."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Kalender lässt sich als .ics-Datei exportieren, und ein Profil für Texte kann ein tägliches Wortziel haben."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le calendrier s’exporte dans un fichier .ics, et un profil pour les textes peut avoir un objectif de mots par jour."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El calendario se exporta a un archivo .ics, y un perfil para textos puede tener un objetivo diario de palabras."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il calendario si esporta in un file .ics, e un profilo per i testi può avere un obiettivo giornaliero di parole."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O calendário é exportado para um arquivo .ics, e um perfil para textos pode ter uma meta diária de palavras."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalendarz można wyeksportować do pliku .ics, a profil do tekstów może mieć dzienny cel słów."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カレンダーを .ics ファイルに書き出せます。テキスト用のプロファイルには 1 日の語数目標を設定できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "캘린더를 .ics 파일로 내보낼 수 있고, 텍스트용 프로필에 하루 단어 목표를 둘 수 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن تصدير التقويم إلى ملف ‎.ics، وصار لملف تعريف النصوص هدف يومي لعدد الكلمات."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalender bisa diekspor ke file .ics, dan profil untuk teks bisa memiliki target kata harian."
+          }
+        }
+      }
+    },
     "Календарь: дедлайны и публикации": {
       "localizations": {
         "ar": {
@@ -52775,82 +53231,6 @@
         }
       }
     },
-    "Колокольчик в шапке панели выключает уведомления в Telegram, пока не нажмёте снова.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "جرس في رأس اللوحة يوقف إشعارات Telegram إلى أن تضغطه من جديد."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eine Glocke in der Kopfzeile des Panels schaltet Telegram-Mitteilungen aus, bis Sie sie erneut drücken."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A bell in the panel’s header turns Telegram notifications off until you press it again."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una campana en la cabecera del panel desactiva las notificaciones de Telegram hasta que la pulses de nuevo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une cloche dans l’en-tête du panneau coupe les notifications Telegram jusqu’à ce que vous appuyiez de nouveau."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lonceng di header panel mematikan notifikasi Telegram sampai Anda menekannya lagi."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una campanella nell’intestazione del pannello disattiva le notifiche di Telegram finché non la premi di nuovo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パネルのヘッダーにあるベルで、もう一度押すまでTelegramの通知をオフにできます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "패널 헤더의 종 아이콘으로 다시 누를 때까지 Telegram 알림을 끌 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dzwonek w nagłówku panelu wyłącza powiadomienia w Telegramie, dopóki nie naciśniesz go ponownie."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Um sino no cabeçalho do painel desativa as notificações do Telegram até você pressioná-lo de novo."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Дзвіночок у шапці панелі вимикає сповіщення в Telegram, доки не натиснете знову."
-          }
-        }
-      }
-    },
     "Кольца": {
       "localizations": {
         "ar": {
@@ -54143,6 +54523,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Команди для скриптів викликаються так: %@ --sessions"
+          }
+        }
+      }
+    },
+    "Команды и Siri": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shortcuts and Siri"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Команди та Siri"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurzbefehle und Siri"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raccourcis et Siri"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atajos y Siri"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandi Rapidi e Siri"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atalhos e Siri"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skróty i Siri"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ショートカットと Siri"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단축어와 Siri"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاختصارات و Siri"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintasan dan Siri"
           }
         }
       }
@@ -57807,6 +58263,82 @@
         }
       }
     },
+    "Локальные серверы": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Local servers"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Локальні сервери"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lokale Server"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serveurs locaux"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servidores locales"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Server locali"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servidores locais"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serwery lokalne"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ローカルサーバ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로컬 서버"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخوادم المحلية"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Server lokal"
+          }
+        }
+      }
+    },
     "Любое сработавшее правило не даёт Mac уснуть; вручную — переключателем и таймерами в панели. Системные настройки не меняются: как только правил нет, Mac засыпает как обычно. На Mac без своего экрана любой монитор считается внешним.": {
       "localizations": {
         "ar": {
@@ -59172,6 +59704,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Мінімум"
+          }
+        }
+      }
+    },
+    "Мог застрять": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "May be stuck"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Міг застрягти"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hängt vielleicht fest"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peut-être bloqué"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puede haberse atascado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forse bloccato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pode ter travado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mógł utknąć"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "止まっているかも"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "멈춘 것 같을 때"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ربما توقّف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mungkin macet"
           }
         }
       }
@@ -65945,6 +66553,158 @@
         }
       }
     },
+    "Не запущено. %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not started. %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не запущено. %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht gestartet. %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non lancé. %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No iniciado. %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non avviato. %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não iniciado. %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie uruchomiono. %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始していません。%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시작되지 않음. %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يبدأ. %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dimulai. %@"
+          }
+        }
+      }
+    },
+    "Не запущено: в этом проекте уже запускается другая задача.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not started: another task is already starting in this project."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не запущено: у цьому проєкті вже запускається інше завдання."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht gestartet: In diesem Projekt startet bereits eine andere Aufgabe."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non lancé : une autre tâche est déjà en cours de lancement dans ce projet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No iniciado: ya se está iniciando otra tarea en este proyecto."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non avviato: in questo progetto è già in avvio un’altra attività."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não iniciado: outra tarefa já está sendo iniciada neste projeto."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie uruchomiono: w tym projekcie uruchamia się już inne zadanie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始していません：このプロジェクトでは別のタスクがすでに開始処理中です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시작되지 않음: 이 프로젝트에서 다른 작업이 이미 시작되는 중입니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يبدأ: هناك مهمة أخرى قيد البدء في هذا المشروع."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dimulai: tugas lain sedang dimulai di proyek ini."
+          }
+        }
+      }
+    },
     "Не знаю такой команды. Все команды: /help": {
       "localizations": {
         "ar": {
@@ -72583,6 +73343,82 @@
         }
       }
     },
+    "Новый модуль «Версии»: тексты проекта-папки сохраняются перед каждым запуском AI — прежний вариант можно сравнить с текущим и вернуть.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A new module, “Versions”: a folder project's texts are saved before every AI run — an earlier draft can be compared with the current one and brought back."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Новий модуль «Версії»: тексти проєкту-папки зберігаються перед кожним запуском AI — попередній варіант можна порівняти з поточним і повернути."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neues Modul „Versionen“: Die Texte eines Ordnerprojekts werden vor jedem KI-Lauf gesichert – eine frühere Fassung lässt sich mit der aktuellen vergleichen und zurückholen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveau module « Versions » : les textes d’un projet-dossier sont enregistrés avant chaque lancement de l’IA — une version antérieure peut être comparée à l’actuelle et rétablie."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuevo módulo «Versiones»: los textos de un proyecto-carpeta se guardan antes de cada ejecución de IA; una versión anterior puede compararse con la actual y recuperarse."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuovo modulo “Versioni”: i testi di un progetto-cartella vengono salvati prima di ogni avvio dell’IA: una versione precedente si può confrontare con quella attuale e ripristinare."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novo módulo “Versões”: os textos de um projeto-pasta são salvos antes de cada execução de IA — uma versão anterior pode ser comparada com a atual e restaurada."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowy moduł „Wersje”: teksty projektu-folderu są zapisywane przed każdym uruchomieniem AI — wcześniejszą wersję można porównać z bieżącą i przywrócić."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいモジュール「バージョン」：フォルダプロジェクトのテキストは AI を実行する前に毎回保存されます。以前の版を現在のものと比較して、元に戻せます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 모듈 ‘버전’: 폴더 프로젝트의 텍스트가 AI를 실행할 때마다 먼저 저장됩니다. 이전 버전을 현재와 비교하고 되돌릴 수 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وحدة جديدة «النسخ»: نصوص مشروع المجلد تُحفظ قبل كل تشغيل للذكاء الاصطناعي — يمكن مقارنة نسخة سابقة بالحالية واستعادتها."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modul baru “Versi”: teks proyek folder disimpan sebelum setiap AI dijalankan — versi sebelumnya bisa dibandingkan dengan yang sekarang dan dikembalikan."
+          }
+        }
+      }
+    },
     "Новый проект": {
       "localizations": {
         "ar": {
@@ -76012,82 +76848,6 @@
         }
       }
     },
-    "Одну задачу можно дать Claude и Codex сразу: окно сравнения покажет оба ответа и изменённые файлы, а выбранный вариант вливается в вашу ветку.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يمكن إعطاء المهمة نفسها لـ Claude و Codex معًا: نافذة المقارنة تعرض الإجابتين والملفات المتغيّرة، والنسخة التي تختارها تُدمج في فرعك."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eine Aufgabe kann gleichzeitig an Claude und Codex gehen: Das Vergleichsfenster zeigt beide Antworten und die geänderten Dateien, und die gewählte Variante wird in Ihren Branch gemergt."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One task can go to Claude and Codex at once: the comparison window shows both answers and the changed files, and the version you choose is merged into your branch."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una misma tarea puede darse a Claude y a Codex a la vez: la ventana de comparación muestra ambas respuestas y los archivos cambiados, y la variante elegida se fusiona en tu rama."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une même tâche peut être confiée à Claude et à Codex en même temps : la fenêtre de comparaison montre les deux réponses et les fichiers modifiés, et la version choisie est fusionnée dans votre branche."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Satu tugas bisa diberikan ke Claude dan Codex sekaligus: jendela perbandingan menampilkan kedua jawaban dan file yang berubah, dan varian yang dipilih digabung ke branch Anda."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La stessa attività può andare a Claude e a Codex insieme: la finestra di confronto mostra entrambe le risposte e i file modificati, e la variante scelta viene unita al tuo ramo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1つのタスクをClaudeとCodexに同時に渡せます。比較ウインドウに両方の回答と変更されたファイルが並び、選んだ案をあなたのブランチにマージできます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "하나의 작업을 Claude와 Codex에 동시에 맡길 수 있습니다. 비교 창에 두 답변과 변경된 파일이 표시되고, 고른 결과는 내 브랜치에 병합됩니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jedno zadanie można dać Claude i Codex jednocześnie: okno porównania pokaże obie odpowiedzi i zmienione pliki, a wybrany wariant zostaje scalony z twoją gałęzią."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma mesma tarefa pode ir para o Claude e o Codex de uma vez: a janela de comparação mostra as duas respostas e os arquivos alterados, e a variante escolhida é mesclada no seu branch."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Одну задачу можна дати Claude і Codex одразу: вікно порівняння покаже обидві відповіді та змінені файли, а вибраний варіант вливається у вашу гілку."
-          }
-        }
-      }
-    },
     "Окно «История расхода» открывается разделом «Сегодня»: расход по проектам, фоновые задачи и лимиты. То же раз в день приходит в Telegram, если включить «Итог дня в Telegram» на странице «Лимиты AI». Там же цена подписки сравнивается с расходом по вашей цене API.": {
       "localizations": {
         "ar": {
@@ -77224,6 +77984,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Зупинити «%1$@» в «%2$@»?"
+          }
+        }
+      }
+    },
+    "Остановить процесс": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop the process"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зупинити процес"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prozess beenden"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêter le processus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detener el proceso"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ferma il processo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parar o processo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatrzymaj proces"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロセスを停止"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로세스 중지"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف العملية"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hentikan proses"
           }
         }
       }
@@ -81107,6 +81943,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Відкрити в Терміналі"
+          }
+        }
+      }
+    },
+    "Открыть в браузере": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open in the browser"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити в браузері"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Browser öffnen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir dans le navigateur"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir en el navegador"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri nel browser"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir no navegador"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz w przeglądarce"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブラウザで開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "브라우저에서 열기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح في المتصفح"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka di browser"
           }
         }
       }
@@ -96783,6 +97695,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Прив’язати чат"
+          }
+        }
+      }
+    },
+    "Придёт уведомление, если агент 20 минут ничего не делает или раз за разом запускает одну и ту же команду.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A notification comes if an agent has done nothing for 20 minutes or keeps running the same command over and over."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прийде сповіщення, якщо агент 20 хвилин нічого не робить або раз у раз запускає ту саму команду."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Mitteilung kommt, wenn ein Agent 20 Minuten nichts tut oder immer wieder denselben Befehl ausführt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une notification arrive si un agent ne fait rien depuis 20 minutes ou relance sans cesse la même commande."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Llega una notificación si un agente lleva 20 minutos sin hacer nada o ejecuta el mismo comando una y otra vez."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arriva una notifica se un agente non fa nulla da 20 minuti o continua a eseguire lo stesso comando."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chega uma notificação se um agente não faz nada há 20 minutos ou roda o mesmo comando repetidamente."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przyjdzie powiadomienie, jeśli agent od 20 minut nic nie robi albo wciąż uruchamia to samo polecenie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エージェントが 20 分間何もしていない、または同じコマンドを繰り返し実行していると、通知が届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "에이전트가 20분 동안 아무것도 하지 않거나 같은 명령을 계속 실행하면 알림이 옵니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يصلك إشعار إذا لم يفعل الوكيل شيئًا منذ 20 دقيقة أو ظلّ يكرّر تشغيل الأمر نفسه."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemberitahuan datang jika agen 20 menit tidak melakukan apa-apa atau terus menjalankan perintah yang sama."
           }
         }
       }
@@ -123353,82 +124341,6 @@
         }
       }
     },
-    "У готовой фоновой задачи в меню есть «Проверить в Codex», а у остановленной по лимиту — «Передать Codex».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "في قائمة المهمة المنتهية في الخلفية «مراجعة في Codex»، وفي المهمة المتوقفة بسبب الحد «تسليم إلى Codex»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eine fertige Hintergrundaufgabe hat im Menü „In Codex prüfen“, eine am Limit angehaltene „An Codex übergeben“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A finished background task has “Review in Codex” in its menu, and one stopped by the limit has “Hand Over to Codex”."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una tarea en segundo plano terminada tiene «Revisar en Codex» en su menú, y una detenida por el límite, «Pasar a Codex»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une tâche d’arrière-plan terminée propose « Relire dans Codex » dans son menu, et une tâche arrêtée par la limite « Confier à Codex »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tugas latar belakang yang selesai punya “Tinjau di Codex” di menunya, dan yang terhenti karena batas punya “Serahkan ke Codex”."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un’attività in background conclusa ha «Rivedi in Codex» nel menu, e una fermata dal limite ha «Passa a Codex»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "完了したバックグラウンドタスクのメニューに「Codex でレビュー」が、上限で止まったタスクには「Codex に引き継ぐ」があります。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "끝난 백그라운드 작업의 메뉴에는 “Codex에서 검토”가, 한도로 멈춘 작업에는 “Codex에 넘기기”가 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gotowe zadanie w tle ma w menu „Sprawdź w Codex”, a zatrzymane przez limit — „Przekaż do Codex”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma tarefa em segundo plano concluída tem “Revisar no Codex” no menu, e uma parada pelo limite tem “Passar para Codex”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У готової фонової задачі в меню є «Перевірити в Codex», а в зупиненої через ліміт — «Передати Codex»."
-          }
-        }
-      }
-    },
     "У значка": {
       "localizations": {
         "ar": {
@@ -128910,6 +129822,82 @@
         }
       }
     },
+    "Файл «%@» не удалось сохранить перед возвратом — ничего не изменено.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file “%@” could not be saved before the restore — nothing was changed."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файл «%@» не вдалося зберегти перед поверненням — нічого не змінено."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Datei „%@“ konnte vor dem Zurückholen nicht gesichert werden – nichts wurde geändert."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le fichier « %@ » n’a pas pu être enregistré avant le rétablissement — rien n’a été modifié."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo guardar el archivo «%@» antes de restaurar; no se ha cambiado nada."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non è stato possibile salvare il file “%@” prima del ripristino: non è stato modificato nulla."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível salvar o arquivo “%@” antes de restaurar — nada foi alterado."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się zapisać pliku „%@” przed przywróceniem — nic nie zostało zmienione."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "復元の前にファイル「%@」を保存できませんでした。何も変更されていません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복원하기 전에 ‘%@’ 파일을 저장하지 못했습니다. 아무것도 변경되지 않았습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذّر حفظ الملف «%@» قبل الاستعادة — لم يتغيّر شيء."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File “%@” tidak dapat disimpan sebelum pemulihan — tidak ada yang diubah."
+          }
+        }
+      }
+    },
     "Файл «%@» сейчас больше лимита версий: сохранить его перед возвратом нельзя, поэтому он не тронут.": {
       "localizations": {
         "en": {
@@ -129672,6 +130660,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Файли + пошук в інтернеті"
+          }
+        }
+      }
+    },
+    "Файлы и диктовка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Files and dictation"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файли та диктування"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dateien und Diktat"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichiers et dictée"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivos y dictado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File e dettatura"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arquivos e ditado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pliki i dyktowanie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルと音声入力"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일과 받아쓰기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الملفات والإملاء"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File dan dikte"
           }
         }
       }
@@ -156062,6 +157126,234 @@
           "stringUnit": {
             "state": "translated",
             "value": "❌ CI впав: %@ #%lld"
+          }
+        }
+      }
+    },
+    "Модули панели и их настройки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The panel's modules and their settings"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Модулі панелі та їхні налаштування"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Module des Panels und ihre Einstellungen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les modules du panneau et leurs réglages"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los módulos del panel y sus ajustes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I moduli del pannello e le loro impostazioni"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os módulos do painel e seus ajustes"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moduły panelu i ich ustawienia"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルのモジュールとその設定"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널의 모듈과 각 설정"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وحدات اللوحة وإعداداتها"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modul panel dan pengaturannya"
+          }
+        }
+      }
+    },
+    "Тема, размер текста и значок в трее": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Theme, text size and the tray icon"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тема, розмір тексту та значок у треї"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Design, Textgröße und Symbol im Infobereich"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thème, taille du texte et icône de la zone de notification"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema, tamaño del texto e icono de la bandeja"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema, dimensione del testo e icona nell'area di notifica"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema, tamanho do texto e ícone da bandeja"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motyw, rozmiar tekstu i ikona w zasobniku"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テーマ、文字サイズ、トレイのアイコン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "테마, 글자 크기, 트레이 아이콘"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السمة وحجم النص وأيقونة شريط النظام"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema, ukuran teks, dan ikon baki"
+          }
+        }
+      }
+    },
+    "Агенты, лимиты, ключи API и hooks": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agents, limits, API keys and hooks"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Агенти, ліміти, ключі API та hooks"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agenten, Limits, API-Schlüssel und Hooks"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agents, limites, clés API et hooks"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agentes, límites, claves de API y hooks"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agenti, limiti, chiavi API e hook"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agentes, limites, chaves de API e hooks"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agenci, limity, klucze API i hooki"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エージェント、上限、APIキー、フック"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "에이전트, 한도, API 키, 훅"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوكلاء والحدود ومفاتيح API والـ hooks"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agen, batas, kunci API, dan hooks"
           }
         }
       }

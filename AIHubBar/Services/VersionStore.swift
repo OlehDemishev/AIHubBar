@@ -137,8 +137,14 @@ struct VersionStore: Sendable {
     }
 
     /// Takes a version of the project's texts; nil when nothing differs from the last one, or there is no text at all.
+    /// One at a time over the whole store: the clean-up runs off the main actor and must not remove the contents a
+    /// version being taken has just written and not yet named.
+    private static let lock = NSRecursiveLock()
+
     @discardableResult
     func take(projectPath: String, reason: VersionReason, now: Date = .now, sizeLimit: Int = defaultSizeLimit) throws -> ProjectVersion? {
+        Self.lock.lock()
+        defer { Self.lock.unlock() }
         let scanned = Self.scan(folder: URL(fileURLWithPath: projectPath), sizeLimit: sizeLimit)
         let last = versions(projectPath: projectPath).first
         let version = ProjectVersion(id: Self.name(now), takenAt: now, reason: reason, files: scanned.files.map(\.file), skipped: scanned.skipped)
@@ -167,10 +173,13 @@ struct VersionStore: Sendable {
         case missingContent(String)
         /// The file as it is now is over the size limit, so it can't be saved first.
         case currentTooLarge(String)
+        /// The file as it is now did not get into the version taken before the restore.
+        case currentNotSaved(String)
 
         var errorDescription: String? {
             switch self {
             case let .missingContent(path): String(localized: "Содержимое файла «\(path)» в этой версии не найдено.")
+            case let .currentNotSaved(path): String(localized: "Файл «\(path)» не удалось сохранить перед возвратом — ничего не изменено.")
             case let .currentTooLarge(path): String(localized: "Файл «\(path)» сейчас больше лимита версий: сохранить его перед возвратом нельзя, поэтому он не тронут.")
             }
         }
@@ -188,21 +197,35 @@ struct VersionStore: Sendable {
                  sizeLimit: Int = defaultSizeLimit) throws -> [String] {
         let fm = FileManager.default
         let base = URL(fileURLWithPath: projectPath)
-        var writes: [(url: URL, path: String, data: Data)] = []
+        var writes: [(url: URL, path: String, data: Data, currentHash: String?)] = []
         // Everything is checked before anything is written.
         for file in version.files where paths?.contains(file.path) ?? true {
             guard Self.isSafe(file.path), let data = content(projectPath: projectPath, hash: file.hash) else {
                 throw RestoreError.missingContent(file.path)
             }
             let url = base.appending(path: file.path)
+            var currentHash: String?
             if let current = try? Data(contentsOf: url) {
                 if current == data { continue }
                 if current.count > sizeLimit { throw RestoreError.currentTooLarge(file.path) }
+                currentHash = SHA256.hash(data: current).map { String(format: "%02x", $0) }.joined()
             }
-            writes.append((url, file.path, data))
+            writes.append((url, file.path, data, currentHash))
         }
         guard !writes.isEmpty else { return [] }
+        Self.lock.lock()
+        defer { Self.lock.unlock() }
         try take(projectPath: projectPath, reason: .beforeRestore, now: now, sizeLimit: sizeLimit)
+        // «Saved first» is checked, not assumed: every file about to be overwritten must be in the newest version as
+        // it is now, with its content in the store (a scan stops at its file limit, a write can fail).
+        let saved = versions(projectPath: projectPath).first
+        for write in writes {
+            guard let hash = write.currentHash else { continue }
+            guard saved?.files.contains(where: { $0.path == write.path && $0.hash == hash }) == true,
+                  content(projectPath: projectPath, hash: hash) != nil else {
+                throw RestoreError.currentNotSaved(write.path)
+            }
+        }
         for write in writes {
             try fm.createDirectory(at: write.url.deletingLastPathComponent(), withIntermediateDirectories: true)
             try write.data.write(to: write.url, options: .atomic)
@@ -236,6 +259,8 @@ struct VersionStore: Sendable {
     /// Removes the versions past their time and the contents no version names any more; returns how many versions went.
     @discardableResult
     func prune(projectPath: String, now: Date = .now, keepDays: Int = Self.defaultKeepDays, calendar: Calendar = .current) -> Int {
+        Self.lock.lock()
+        defer { Self.lock.unlock() }
         let all = versions(projectPath: projectPath)
         let kept = Self.kept(all, now: now, keepDays: keepDays, calendar: calendar)
         let folder = folder(projectPath: projectPath)
@@ -254,6 +279,8 @@ struct VersionStore: Sendable {
     /// The stores of projects whose folder is gone, once their newest version is older than `after` days.
     @discardableResult
     func removeOrphans(now: Date = .now, after days: Int = Self.defaultKeepDays) -> [String] {
+        Self.lock.lock()
+        defer { Self.lock.unlock() }
         let fm = FileManager.default
         var removed: [String] = []
         for folder in (try? fm.contentsOfDirectory(at: root, includingPropertiesForKeys: nil)) ?? [] {

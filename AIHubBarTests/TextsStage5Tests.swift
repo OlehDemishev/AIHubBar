@@ -41,6 +41,16 @@ struct CalendarICSTests {
         let first = entry("Статья", .now, hasTime: false)
         let moved = entry("Статья", .now.addingTimeInterval(86_400 * 3), hasTime: false)
         #expect(CalendarICS.uid(first) == CalendarICS.uid(moved))
+        // A plan row keeps its id when a row above it is removed, and two rows of one name stay two events.
+        func row(_ title: String, line: Int) -> CalendarEntry {
+            var entry = entry(title, .now, hasTime: false)
+            entry.source = .plan(path: "/p/plan.md", line: line)
+            return entry
+        }
+        #expect(CalendarICS.uid(row("Пост", line: 7)) == CalendarICS.uid(row("Пост", line: 6)))
+        #expect(CalendarICS.uid(row("Пост", line: 7)) != CalendarICS.uid(row("Обзор", line: 7)))
+        let twice = CalendarICS.text([row("Пост", line: 3), row("Пост", line: 9)])
+        #expect(Set(twice.components(separatedBy: "\r\n").filter { $0.hasPrefix("UID:") }).count == 2)
         #expect(CalendarICS.uid(first) != CalendarICS.uid(entry("Статья", .now, hasTime: false, path: "/p/other")))
     }
 }
@@ -52,6 +62,16 @@ struct WordGoalTests {
         return calendar
     }
     private let morning = Date(timeIntervalSince1970: 1_793_750_400 + 9 * 3600) // 2026-11-04 09:00 UTC
+
+    @Test func anotherMainFileIsNotTodaysWords() {
+        // The day began on notes.md; then chapter.md, long written, became the project's main file.
+        let notes = WordGoal.key(project: "/p", mainFile: "notes.md"), chapter = WordGoal.key(project: "/p", mainFile: "chapter.md")
+        #expect(notes != chapter)
+        var record = WordGoal.advanced(nil, counts: [notes: 300], now: morning, calendar: calendar)
+        record = WordGoal.advanced(record, counts: [chapter: 5000], now: morning.addingTimeInterval(3600), calendar: calendar)
+        #expect(record.written([chapter: 5000]) == 0, "an old text is not today's work")
+        #expect(record.written([chapter: 5040]) == 40)
+    }
 
     @Test func theFirstLookStartsFromWhatIsThere() {
         let record = WordGoal.advanced(nil, counts: ["/a": 500], now: morning, calendar: calendar)
