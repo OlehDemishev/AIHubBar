@@ -76,6 +76,8 @@ pub struct Settings {
     pub tray_style: String,
     /// «Быстрый запрос» (the Mac's `QuickPromptSettings`): the hot key, and the project and mode used last.
     pub quick_prompt_hot_key: String,
+    /// «Открывать поиск с клавиатуры» (`search::SEARCH_KEYS`); «off» until chosen — no global key is taken unasked.
+    pub search_hot_key: String,
     pub quick_prompt_last_project: Option<String>,
     pub quick_prompt_last_mode: Option<String>,
     /// `projects_dir` and `launch_mode` of a file from before profiles, for the first profile.
@@ -119,6 +121,7 @@ impl Default for Settings {
             main_service: String::new(),
             tray_style: String::new(),
             quick_prompt_hot_key: crate::quick_prompt::DEFAULT_HOT_KEY.id().to_owned(),
+            search_hot_key: "off".into(),
             quick_prompt_last_project: None,
             quick_prompt_last_mode: None,
             before_profiles: (None, None),
@@ -185,6 +188,7 @@ impl Settings {
             main_service: value.get("main_service").and_then(Value::as_str).unwrap_or_default().to_owned(),
             tray_style: value.get("tray_style").and_then(Value::as_str).unwrap_or_default().to_owned(),
             quick_prompt_hot_key: text("quick_prompt_hot_key").filter(|k| crate::quick_prompt::HotKey::parse(k).is_some()).unwrap_or(defaults.quick_prompt_hot_key),
+            search_hot_key: text("search_hot_key").filter(|k| crate::search::SEARCH_KEYS.iter().any(|(id, _, _)| id == k)).unwrap_or_else(|| "off".into()),
             quick_prompt_last_project: text("quick_prompt_last_project"),
             quick_prompt_last_mode: text("quick_prompt_last_mode").filter(|m| LAUNCH_MODES.contains(&m.as_str())),
             hub_gemini_daily_limit: value.get("hub_gemini_daily_limit").and_then(Value::as_u64).filter(|n| *n > 0).unwrap_or(1000),

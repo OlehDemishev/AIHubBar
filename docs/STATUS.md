@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — «Открывать поиск с клавиатуры»: a hot key brings the panel up with the cursor in its search (branch `feat/desktop-search-key`; the command seen live, a real press of the key not)
 - 2026-11-23: Windows — the «Что нового» card with five lines for the next Windows version, 0.1.8 (branch `feat/desktop-whats-new`; seen live). In `main` and waiting for a Windows release: notes, clipboard history, the panel's search, saved prompts, theme and text size, limit hits
 - 2026-11-23: Windows — fixed: the Settings window froze after loading and held the whole app (a lock taken twice in the notes' settings, in `main` since PR 530, in no release) (branch `fix/desktop-settings-freeze`)
 - 2026-11-23: Windows — «Тема» and «Размер текста» in Settings → «Основные» (branch `feat/desktop-appearance`; a dark theme with large text seen live)
@@ -185,6 +186,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: the search on a hot key (branch `feat/desktop-search-key`)
+
+Done: on Oleh's «давай дальше». The Mac's `PanelHotKey`: Settings → «Основные» → «Открывать поиск с клавиатуры» — «Выключено», Ctrl+Alt+C, Ctrl+Alt+Space, Ctrl+Alt+K (the Mac's ⌥⌘K: Alt with the Windows key belongs to the system). The key, and `claudepult --app-command search`, bring the panel up with the cursor in its search field — the Mac opens a separate window with the same search; here the panel is that window, so sessions, projects, quick commands and saved prompts work from it as they are. A quick command can't take the chosen combination («поиск AI Hub Bar»), and the key is let go while Settings records a command's. Two differences from the Mac: the key is off until chosen (no global key is taken unasked), and there is no second window. `core/src/search.rs`, `app/src/search.rs`, `app/src/quick_prompt.rs` (the shared handler), `app/src/command_hot_keys.rs`; the setting is `search_hot_key`. All texts are the Mac's.
+Checked: `python scripts/strings.py --check` (733 texts), `cargo test --workspace` on Windows (the choices, none of them a key of «Быстрый запрос»). Live on the laptop, a build from the branch with Ctrl+Alt+C written to `settings.json`: the log said «search hot key: control+alt+KeyC»; `--app-command search` brought the panel up, and «aih» typed without a click went into the search and found the session and the project. The settings were put back after.
+Left: the key itself was not pressed (the agent can press keys only into the app's own windows), and the list in Settings was not seen. Seen in Russian only.
 
 ## 2026-11-23 — Windows: the «Что нового» card (branch `feat/desktop-whats-new`)
 
