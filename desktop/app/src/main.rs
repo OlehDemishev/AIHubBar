@@ -14,6 +14,7 @@ mod clipboard;
 mod commands;
 mod accounts;
 mod help;
+mod pair_compare;
 mod history;
 mod hub;
 mod keep_awake;
@@ -530,6 +531,7 @@ fn main() {
         .manage(changes::ChangesStore::default())
         .manage(hub::Hub::default())
         .manage(accounts::Accounts::default())
+        .manage(pair_compare::PairCompare::default())
         .manage(updates::Updates::default())
         .manage(history::History::default())
         .manage(telegram::Telegram::default())
@@ -558,7 +560,8 @@ fn main() {
             claude_config::open_claude_config, claude_config::claude_config_view, claude_config::claude_config_edit, claude_config::claude_config_save,
             claude_config::claude_config_open, claude_config::set_mcp_server, claude_config::set_agent_skill, claude_config::set_claude_plugin,
             changes::open_changed, projects::launch_both, runs::hand_over_run, runs::review_run, queue::resume_run_now, queue::run_guard, queue::set_run_guard, queue::queue_launch, queue::queued_view, queue::cancel_queued, queue::night_hour, queue::set_night_hour,
-            help::open_help, help::help_view, help::open_feedback, accounts::claude_accounts, accounts::add_claude_account, accounts::rename_claude_account,
+            pair_compare::open_pair_compare, pair_compare::pair_view, pair_compare::pair_file_diff, pair_compare::pair_between_diff,
+            pair_compare::pair_action, pair_compare::pair_open_folder, help::open_help, help::help_view, help::open_feedback, accounts::claude_accounts, accounts::add_claude_account, accounts::rename_claude_account,
             accounts::remove_claude_account, accounts::sign_in_claude_account, accounts::refresh_claude_accounts, history::open_history, history::history_view, history::set_plan_price, history::export_history,
             updates::updates_view, updates::set_updates_daily, updates::check_updates, updates::install_update,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
