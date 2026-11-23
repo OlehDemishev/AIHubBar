@@ -138,6 +138,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`, PR 520, PR 529 and PR 534; all four contain `main` as of 2026-11-21 and are green
+- the batch of 2026-11-23 (Oleh's «с 1 по 10 все сразу»), six PRs, each **held until 0.12.0 is out** and none seen live or built locally (CI only): PR 544 `feat/stuck-agent` (a notification when an agent may be stuck), PR 545 `feat/day-summary-waiting` («Ждёт вас» in the day's summary), PR 546 `feat/swap-alert` (swap in the resource alerts), PR 547 `feat/more-shortcuts` (three Shortcuts actions), PR 548 `feat/quick-prompt-files-dictation` (dropped files and dictation in the quick prompt), PR 549 `feat/local-servers` (local servers in a project row). Already there before, so not made again: PR and CI in a project row, spend by project. Not made: an iPhone app (needs Oleh's decision and Apple push keys), a drop on the menu bar item, a button that frees disk space
 - batch tasks and «Версии», left to see live (the rest was seen 2026-11-21 in an isolated copy): a batch with a typed text, a model by API, the wait near the limit, the summary and «Что изменилось» as a banner and in Telegram
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
@@ -185,6 +186,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — The batch of ten ideas: what was made (branch `chore/status-batch-header`)
+
+Done: the header's «Next» lists the six held PRs of the batch (544–549; each has its own entry in its branch). Of the ten ideas the agent offered on 2026-11-23, the code already had two in full (PR and CI in a project row with CI notifications; spend by project in «История расхода») and three in part (the day's summary, memory and disk alerts, Shortcuts actions) — the agent had offered them without checking the code and said so. The partly made ones got what they lacked; the stuck-agent notification, files and dictation in the quick prompt and the local servers list are new.
+Checked: docs only; `scripts/strings-check.py` and `desktop/scripts/strings.py --check`.
+Left: the iPhone app is not started: it needs an iOS target, a way for the data to reach the phone and Apple push keys for a Live Activity — Oleh's decision first. Nothing of the batch was seen live: swap stood at 10.4 of 11 GB, so no local build and no isolated copy; the six PRs rest on unit tests in CI.
 
 ## 2026-11-23 — 1.0 list: the shared Telegram bot and the Mini App go in as ready (branch `chore/status-shared-bot-ready`)
 
