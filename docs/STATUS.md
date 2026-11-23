@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — «Свои промпты»: kept in Settings, found by the panel's search, started in a chosen project (branch `feat/desktop-saved-prompts`; the two search steps seen live, the start and the Settings card not)
 - 2026-11-23: Windows — the search field in the panel: sessions, projects, quick commands (branch `feat/desktop-panel-search`; seen live). Saved prompts and the hot-key search window are next
 - 2026-11-23: Windows — the «Заметки» module (branch `feat/desktop-notes`; typing, a new note and the Recycle Bin seen live; its Settings card not seen)
 - 2026-11-21: Windows — limit hits are counted, «Упирался в лимит: N» in «Сегодня» (branch `feat/desktop-limit-hits`; the line seen live from a made-up record)
@@ -178,6 +179,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: «Свои промпты» (branch `feat/desktop-saved-prompts`)
+
+Done: on Oleh's «Продолжай, пока не упрешься в текущую версию на маке». The Mac's `SavedPrompt`: a title and a text kept in `settings.json` (`saved_prompts`; the Mac's two examples until the list is edited), Settings → «Сервисы AI» → «Свои промпты» with «Добавить промпт» and removal after a question. The panel's search finds a prompt by its title or text («свой промпт»); choosing it turns the field into «Проект для «…»…» with the projects below, and the chosen project starts Claude with the text as its «Своя задача…» does — {проект} and {ветка} (or {project}, {branch}) filled in, the project's row showing what the start said. Not offered in a profile with folder projects, as on the Mac. Esc in the search no longer closes the panel while there is text or a prompt's step to leave. `core/src/search.rs`, `app/src/search.rs`, `ui/panel.html`, `ui/settings.html`. One new text in the catalog — the Mac's footer without ⌃⌥C and the Finder file, in 12 languages.
+Checked: `python scripts/strings.py --check` (704 texts), `cargo test --workspace` on Windows (placeholders in both languages, the examples, the kept list with ids made unique, a prompt among the results, the projects of step two). Live on the laptop, a build from the branch: «ревью» found «Ревью ветки — свой промпт»; Enter gave the field «Проект для «Ревью ветки»…» and the row «AIHubBar — feat/desktop-saved-prompts»; Esc brought the plain search back with the panel still open (before the fix it closed the panel).
+Left: {файл} stays empty — nothing asks Explorer for its selected file. Not seen: the start itself (it would have opened a real Claude session in this repository), the card in Settings — the agent's scrolling did not reach it — and editing a prompt there. The search window on a hot key is not ported. Seen in Russian only.
 
 ## 2026-11-23 — Windows: the search in the panel (branch `feat/desktop-panel-search`)
 
