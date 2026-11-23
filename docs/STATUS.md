@@ -192,6 +192,18 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: the quick prompt window with the new row seen live (branch `feat/quick-prompt-files-dictation`)
+
+Done: after Oleh restarted the Mac and said «Да, открывай», the window was opened once in an isolated copy built from the batch's six branches merged together, captured and closed with «Отмена» within seconds. Seen: the microphone button right of the task field with its hint, and under the field the line «Файлы и снимки экрана можно перетащить в это окно — агент получит их пути.»; the rest of the window as before. No code change.
+Checked: `scripts/check.sh` on the six branches merged together: all passed. The window's screenshot and its AX tree.
+Left: **held until 0.12.0 is out.** Not done on purpose: the microphone button was not pressed (it would start macOS dictation on Oleh's Mac and may ask to turn it on in System Settings), and no file was dropped — a drop needs a real drag with the mouse — so the file rows, their remove buttons and the paths in the sent task rest on the unit test. Whether a background run may read a file outside the project is still untried.
+
+## 2026-11-23 — Mac: files and dictation in «Быстрый запрос» (branch `feat/quick-prompt-files-dictation`)
+
+Done: the sixth and seventh of the ten ideas of 2026-11-23, both in the quick prompt's window. **Files:** files and screenshots dropped on the window are listed under the task (a name, the path in the tooltip, a button to remove each; up to 8, each once), and their paths go to the agent after the task («Files:» and a path per line) — for Claude Code, Codex and the agents opened in Terminal alike. **Dictation:** a microphone button beside the field puts the cursor in it and starts macOS' own dictation (`startDictation:`), so the app asks for no microphone or speech permission. `QuickPrompt.adding` / `QuickPrompt.task`, `QuickPromptWindow`. Four texts in 12 languages.
+Checked: not built locally (swap 10.4 of 11 GB): the PR's CI runs the tests and the catalog check (`QuickPromptTests.droppedFilesGoWithTheTask`). Both string checks pass.
+Left: **held until 0.12.0 is out.** Nothing of it was seen live: the window takes the keyboard, so it was not opened. Not made: a drop on the menu bar item itself — `MenuBarExtra` gives no access to its status item's button; the window is where a file goes. Untried: whether a background Claude run may read a file outside the project (its rules allow `Read` everywhere but for secrets), and what macOS does on the button with dictation off in System Settings. An image is passed as a path, not pasted into the conversation.
+
 ## 2026-11-23 — Mac: three more Shortcuts actions (branch `feat/more-shortcuts`)
 
 Done: the fifth of the ten ideas of 2026-11-23. Shortcuts already had «Лимиты Claude», «Быстрая команда AI Hub Bar» and «Поиск AI Hub Bar». New in `AIHubBar/App/Intents.swift`: «Не спать» (for an hour, until turned off, off; answers with the module's own status line, or that the module is off), «Кто ждёт ответа» (the waiting sessions as text, also an App Shortcut with a phrase) and «Задача Claude в фоне» (a task and a project's name; goes through the projects' own launch, so the 90 % limit question, a busy folder and errors come back as the action's answer instead of a silent start). A project is found like a quick command: the whole name in any case, or a part that means one project (`IntentMatch`). 14 texts in 12 languages.

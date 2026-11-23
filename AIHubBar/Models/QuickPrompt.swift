@@ -105,6 +105,26 @@ enum QuickPrompt {
         return [last, preferred].compactMap { $0 }.first(where: allowed.contains) ?? allowed[0]
     }
 
+    /// How many files one request takes.
+    static let maxFiles = 8
+
+    /// Files dropped on the window, joined to the ones already there: files only, each once, at most `maxFiles`.
+    static func adding(_ dropped: [URL], to files: [URL]) -> [URL] {
+        var result = files
+        for url in dropped where url.isFileURL {
+            let file = url.standardizedFileURL
+            if !result.contains(file) { result.append(file) }
+        }
+        return Array(result.prefix(maxFiles))
+    }
+
+    /// The task with its files: their paths after the text, one per line, for the agent to open. The heading is
+    /// English on purpose — it is read by the agent, in whatever language the task is.
+    static func task(_ text: String, files: [URL]) -> String {
+        guard !files.isEmpty else { return text }
+        return text.trimmingCharacters(in: .whitespacesAndNewlines) + "\n\nFiles:\n" + files.map(\.path).joined(separator: "\n")
+    }
+
     static func canSend(_ text: String, project: String?) -> Bool {
         project != nil && !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
