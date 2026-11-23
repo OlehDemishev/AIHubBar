@@ -197,7 +197,7 @@ impl Projects {
             .collect()
     }
 
-    fn launch_target(&self, path: &Path) -> Option<(String, Vec<String>)> {
+    pub(crate) fn launch_target(&self, path: &Path) -> Option<(String, Vec<String>)> {
         let state = self.state.lock().unwrap();
         let project = state.projects.iter().find(|p| p.path == path)?;
         let next = project.status.as_ref().and_then(|s| s.summary.as_ref()).map(|s| s.next.clone()).unwrap_or_default();
@@ -606,6 +606,8 @@ pub struct LaunchReply {
     pub(crate) confirm: bool,
     /// No mode chosen yet: «Где запустить «…»?» with «Терминал» / «Фон».
     pub(crate) choose: Option<String>,
+    /// The session is nearly used up: «Запустить после сброса» / «Запустить сейчас».
+    pub(crate) limit: bool,
 }
 
 /// «Следующий шаг», «Своя задача», «Завершить», as the Mac's `LaunchController`: in a terminal window or in the
@@ -622,9 +624,10 @@ pub async fn launch_claude(
     mode: Option<String>,
     remember: bool,
     agent: Option<String>,
+    skip_limit: bool,
 ) -> Result<LaunchReply, String> {
     let codex = agent.as_deref() == Some("codex");
-    tauri::async_runtime::spawn_blocking(move || launch_now(&app, Path::new(&path), &command, task, allow_busy, mode, remember, codex))
+    tauri::async_runtime::spawn_blocking(move || launch_now(&app, Path::new(&path), &command, task, allow_busy, mode, remember, codex, skip_limit))
         .await
         .map_err(|e| e.to_string())?
 }
@@ -638,6 +641,7 @@ pub(crate) fn launch_now(
     mode: Option<String>,
     remember: bool,
     codex: bool,
+    skip_limit: bool,
 ) -> Result<LaunchReply, String> {
     let texts = strings(app);
     let projects = app.state::<Projects>();
@@ -665,6 +669,15 @@ pub(crate) fn launch_now(
         return Ok(LaunchReply { choose: Some(texts.format("Где запустить «%@»?", &[&title])), ..LaunchReply::default() });
     };
     let background = mode == "background";
+    // Near the session's limit a background run of Claude asks first (the Mac's limit guard).
+    if background && !codex && !skip_limit {
+        let session = app.state::<crate::limits::Limits>().snapshot().and_then(|snapshot| snapshot.session().cloned());
+        if let Some(session) = session.filter(|session| session.utilization > claudepult_core::queue::LAUNCH_WARNING) {
+            let reset = session.resets_at.map(|at| texts.format(", сброс в %@", &[&at.with_timezone(&chrono::Local).format("%H:%M").to_string()])).unwrap_or_default();
+            let message = texts.format("Сессия использована на %@%@. Фоновая задача может упереться в лимит.", &[&claudepult_core::texts::percent(session.utilization), &reset]);
+            return Ok(LaunchReply { message, limit: true, ..LaunchReply::default() });
+        }
+    }
     let program = if codex {
         let kind = claudepult_core::agents::kind("codex").expect("listed");
         claudepult_core::agents::detect(kind).ok_or_else(|| texts.format("%@ не установлен", &[kind.title]))?
@@ -689,7 +702,7 @@ pub(crate) fn launch_now(
             worktree = Some(plan);
         } else if !allow_busy {
             let message = texts.t("В этой папке уже работает сессия Claude. Запустить ещё одну там же?").to_owned();
-            return Ok(LaunchReply { message, confirm: true, choose: None });
+            return Ok(LaunchReply { message, confirm: true, ..LaunchReply::default() });
         }
     }
 

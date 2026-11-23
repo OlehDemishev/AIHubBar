@@ -351,6 +351,10 @@
         <label for="time-limit" data-t="Лимит времени"></label>
         <select id="time-limit"></select>
       </div>
+      <div class="row">
+        <label for="night-hour" data-t="Ночные задачи начинаются в"></label>
+        <select id="night-hour"></select>
+      </div>
     </section>
     <h1 data-t="Проекты"></h1>
     <section class="card">
@@ -474,6 +478,10 @@
       limit.add(new Option(t("%lld мин", launch.timeLimitMinutes), String(launch.timeLimitMinutes)));
     }
     limit.value = String(launch.timeLimitMinutes);
+    // «Ночные задачи начинаются в»: when «На ночь» runs start.
+    const nightHour = document.getElementById("night-hour");
+    invoke("night_hour").then((view) => nightHour.replaceChildren(...view.hours.map(([hour, title]) => new Option(title, hour, false, hour === view.hour))));
+    nightHour.onchange = () => invoke("set_night_hour", { hour: Number(nightHour.value) });
     const saveLaunch = () => invoke("set_launch_settings", { mode: mode.value || null, timeLimitMinutes: Number(limit.value) });
     mode.onchange = saveLaunch;
     limit.onchange = saveLaunch;

@@ -514,3 +514,7 @@ body.config-window { display: flex; flex-direction: column; height: 100vh; margi
 .config-empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; }
 .config-foot { display: flex; align-items: center; gap: 12px; }
 .config-foot .secondary { flex: 1; text-align: end; }
+
+/* A run waiting for the night or for the limit's reset */
+.queued { display: flex; align-items: center; gap: 6px; padding: 3px 2px; font-size: 12px; }
+.queued .text { flex: 1; min-width: 0; overflow-wrap: anywhere; }
