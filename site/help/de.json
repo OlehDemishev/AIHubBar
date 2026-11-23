@@ -110,6 +110,10 @@
               "name" : "Suchen"
             },
             {
+              "detail" : "In der App „Kurzbefehle“ gibt es Aktionen von AI Hub Bar: Claude-Limits, ein Schnellbefehl, Suche, „Wach bleiben“, „Wer wartet auf Antwort“ und „Claude-Aufgabe im Hintergrund“.",
+              "name" : "Kurzbefehle und Siri"
+            },
+            {
               "detail" : "Ein Klick auf den Titel eines Blocks klappt ihn zu; das Panel merkt sich das.",
               "name" : "Block zuklappen"
             },
@@ -223,6 +227,10 @@
               "name" : "Tagesbilanz"
             },
             {
+              "detail" : "Die Tagesbilanz beginnt mit dem, was noch bei Ihnen liegt: Sitzungen, die auf eine Antwort warten, und Pull Requests mit fehlgeschlagenen Prüfungen.",
+              "name" : "Wartet auf Sie"
+            },
+            {
               "detail" : "Einmal pro Fenster bei 50/80/95 Prozent (Schwellen in den Einstellungen) und wenn das Limit zurück ist; auf Wunsch auch an Telegram.",
               "name" : "Mitteilungen"
             },
@@ -258,6 +266,10 @@
               "name" : "Liste"
             },
             {
+              "detail" : "Wenn eine Sitzung läuft, aber 20 Minuten nichts tut oder immer wieder denselben Befehl ausführt, kommt eine Mitteilung. Wie oft, legen Sie auf der Seite des Moduls „Agentensitzungen“ fest.",
+              "name" : "Hängt vielleicht fest"
+            },
+            {
               "detail" : "„Erlauben“ und „Ablehnen“ — in der Mitteilung, in der Sitzungszeile, auf der Insel und, falls aktiviert, in Telegram. Es gilt die Antwort, die zuerst eintrifft.",
               "name" : "Berechtigungen"
             },
@@ -276,6 +288,10 @@
             {
               "detail" : "Im „Schnellauftrag“ läuft auch Codex im Hintergrund: Es schreibt nur im Projektordner, hat kein Netz, und das Ergebnis kommt als Mitteilung. An der Schwelle halten es die eigenen Limits von Codex an.",
               "name" : "Codex im Hintergrund"
+            },
+            {
+              "detail" : "Dateien und Bildschirmfotos lassen sich in das Fenster des Schnellauftrags ziehen – der Agent erhält ihre Pfade mit der Aufgabe. Die Mikrofontaste startet das macOS-Diktat im Aufgabenfeld.",
+              "name" : "Dateien und Diktat"
             },
             {
               "detail" : "Eine Claude-Aufgabe am Limit lässt sich an Codex übergeben („An Codex“, „An Codex übergeben“), eine fertige dem anderen Dienst zur Prüfung geben („In … prüfen“ im Menü der Aufgabe). Das Häkchen „Auch in Codex — zum Vergleich“ im „Schnellauftrag“ gibt die Aufgabe beiden zugleich, jedem in seinem eigenen Worktree.",
@@ -385,6 +401,10 @@
             {
               "detail" : "Den Projektordner oder das Repository öffnen.",
               "name" : "Terminal · Finder · GitHub"
+            },
+            {
+              "detail" : "Ein aufgeklapptes Projekt zeigt, was aus seinem Ordner an einem Port lauscht: Port und Programm. Von dort lässt sich die Adresse im Browser öffnen oder der Prozess beenden – die Taste fragt noch einmal nach.",
+              "name" : "Lokale Server"
             }
           ],
           "monospaced" : false,
@@ -423,6 +443,10 @@
             {
               "detail" : "Die Phasen des Profils, durch Kommas getrennt; die Phase wechselt per Taste im aufgeklappten Projekt. Wörter, Dauer, Lesezeit und Seiten werden in der Hauptdatei gezählt (.md, .txt, .rtf, .docx).",
               "name" : "Phasen und Kennzahlen"
+            },
+            {
+              "detail" : "Legen Sie in den Einstellungen eines Ordnerprofils ein Ziel in Wörtern pro Tag fest: Das Panel zeigt, wie viele Wörter heute in den Hauptdateien der Projekte hinzugekommen sind. Gelöschter Text zählt nicht ins Minus.",
+              "name" : "Wortziel"
             }
           ],
           "monospaced" : false,
@@ -457,6 +481,10 @@
             {
               "detail" : "Auf der Seite des Moduls „Demnächst“: wie lange vorher erinnert wird und ob auch an Telegram gesendet wird.",
               "name" : "Erinnerungen"
+            },
+            {
+              "detail" : "Die Taste im Fenster „Kalender“ sichert die Termine als .ics-Datei: Öffnen Sie sie im macOS-Kalender oder laden Sie sie in Google Kalender. Ein erneuter Export aktualisiert dieselben Termine, statt sie zu verdoppeln.",
+              "name" : "Export als .ics"
             }
           ],
           "monospaced" : false,
@@ -649,15 +677,19 @@
               "name" : "Wie oft"
             },
             {
-              "detail" : "Der Bot ist das Modul „Telegram“: Token, Chat und ein Menü im Bot selbst (/menu – Limits, Sitzungen, Berichte, Aufräumen). Was dorthin kopiert wird – der Chip „Telegram“ auf der Modulseite.",
+              "detail" : "Das Modul „Telegram“. Der gemeinsame Bot wird mit einer Taste verbunden: „Telegram verbinden“, dann „Start“ im Chat – nichts muss angelegt werden. Der eigene Bot braucht ein Token von @BotFather, ohne Server von AI Hub Bar dazwischen. Das Menü ist im Bot selbst: /menu – Limits, Sitzungen, Berichte, Aufräumen. Was dupliziert wird, bestimmt der Chip „Telegram“ auf der Seite des Moduls.",
               "name" : "Telegram"
+            },
+            {
+              "detail" : "Die Menütaste des gemeinsamen Bots öffnet eine App direkt in Telegram: Limits, Sitzungen mit „Erlauben“ und „Ablehnen“, Aufgaben, Berichte und Mitteilungseinstellungen.",
+              "name" : "Die App im Bot"
             },
             {
               "detail" : "Die Kachel „Telegram“ in den Schnellschaltern schaltet Mitteilungen in Telegram mit einem Klick aus und lässt sie aus, bis Sie erneut klicken. Berechtigungsanfragen und die Antworten des Bots kommen weiterhin.",
               "name" : "Telegram vorübergehend ausschalten"
             },
             {
-              "detail" : "Berechtigungsanfragen von Claude können Sie mit Tasten in Telegram annehmen oder ablehnen — ein eigener Bot, Seite „Agentensitzungen“.",
+              "detail" : "Berechtigungsanfragen kommen im selben Bot mit den Tasten ✅ und ❌ an: Schalten Sie „Berechtigungsanfragen an diesen Bot“ auf der Seite des Moduls „Telegram“ ein. Über den gemeinsamen Bot können Sie antworten, sobald dort auch „Antworten über den gemeinsamen Bot“ eingeschaltet ist.",
               "name" : "Antworten aus Telegram"
             },
             {

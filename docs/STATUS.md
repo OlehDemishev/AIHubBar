@@ -201,6 +201,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: the site's help exported for 0.13.0 (branch `chore/help-export-0.13`)
+
+Done: `scripts/export-help.sh` run on `main` after the release: `site/help/*.json` for the 13 languages now carry the five facts added for 0.13 (the files were last exported 2026-11-21).
+Checked: the export printed 15 topics for every language; `python3 -m json.tool` reads each file. No app code changed, so the Mac tests were not run again.
+Left: the help page on the site itself was not opened after the push.
+
 ## 2026-11-23 — Mac: 0.13.0 published (branch `chore/release-0.13.0`)
 
 Done: `scripts/release.sh 0.13.0 --publish` from `main` at `08d0d37` on Oleh's «Сразу всем» and «Выпускай»: build 1361, signed with the Developer ID, the app and the disk image notarized and stapled, GitHub release `v0.13.0` marked «Latest», the beta feed replaced (0.13.0 and 0.12.0-beta.2). The cask points at 0.13.0 with the image's checksum.

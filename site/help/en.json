@@ -110,6 +110,10 @@
               "name" : "Search"
             },
             {
+              "detail" : "The Shortcuts app has AI Hub Bar's actions: Claude limits, a quick command, search, “Keep Awake”, “Who is waiting” and “Claude task in the background”.",
+              "name" : "Shortcuts and Siri"
+            },
+            {
               "detail" : "Clicking a block’s header collapses it; the panel remembers this.",
               "name" : "Collapse a block"
             },
@@ -223,6 +227,10 @@
               "name" : "Day Summary"
             },
             {
+              "detail" : "The day summary starts with what is left for you: sessions waiting for an answer and pull requests whose checks failed.",
+              "name" : "Waiting for you"
+            },
+            {
               "detail" : "Once per window at 50/80/95% (thresholds in Settings) and when the limit is back; optionally to Telegram too.",
               "name" : "Notifications"
             },
@@ -258,6 +266,10 @@
               "name" : "List"
             },
             {
+              "detail" : "If a session is running but has done nothing for 20 minutes, or keeps running the same command over and over, a notification comes. How often is set on the Agent sessions module page.",
+              "name" : "May be stuck"
+            },
+            {
               "detail" : "“Allow” and “Deny” — in the notification, the session row, the island and, if turned on, Telegram. The first answer to arrive wins.",
               "name" : "Permissions"
             },
@@ -276,6 +288,10 @@
             {
               "detail" : "In Quick Prompt Codex runs in the background too: it writes only in the project folder, has no network, and the result comes as a notification. Near the threshold it is held by Codex’s own limits.",
               "name" : "Codex in the background"
+            },
+            {
+              "detail" : "Drag files and screenshots into the Quick Prompt window — the agent gets their paths with the task. The microphone button starts macOS Dictation in the task field.",
+              "name" : "Files and dictation"
             },
             {
               "detail" : "A Claude task at the limit can be handed to Codex (“To Codex”, “Hand Over to Codex”), and a finished one given to the other service to review (“Review in…” in the task’s menu). The “Also in Codex — to compare” checkbox in Quick Prompt gives the task to both at once, each in its own worktree.",
@@ -385,6 +401,10 @@
             {
               "detail" : "Open the project folder or the repository.",
               "name" : "Terminal · Finder · GitHub"
+            },
+            {
+              "detail" : "An expanded project shows what listens on a port from its folder: the port and the program. From there you can open the address in the browser or stop the process — the button asks once more.",
+              "name" : "Local servers"
             }
           ],
           "monospaced" : false,
@@ -423,6 +443,10 @@
             {
               "detail" : "The profile’s stages, comma-separated; a stage changes with a button in an expanded project. Words, duration, reading time and pages are counted from the main file (.md, .txt, .rtf, .docx).",
               "name" : "Stages and metrics"
+            },
+            {
+              "detail" : "In the settings of a folder profile set a goal in words a day: the panel shows how many words were added today to the projects' main files. Deleted text does not count below zero.",
+              "name" : "Word goal"
             }
           ],
           "monospaced" : false,
@@ -457,6 +481,10 @@
             {
               "detail" : "On the “Upcoming” module page: how far ahead to remind you and whether to also send it to Telegram.",
               "name" : "Reminders"
+            },
+            {
+              "detail" : "The button in the Calendar window saves the dates as an .ics file: open it in macOS Calendar or upload it to Google Calendar. Exporting again updates the same events instead of creating second ones.",
+              "name" : "Export to .ics"
             }
           ],
           "monospaced" : false,
@@ -649,15 +677,19 @@
               "name" : "How often"
             },
             {
-              "detail" : "The bot is the “Telegram” module: the token, the chat and a menu in the bot itself (/menu — limits, sessions, reports, cleanup). What to copy there — the “Telegram” chip on a module’s page.",
+              "detail" : "The Telegram module. The shared bot connects with one button: “Connect Telegram”, then “Start” in the chat — nothing to create. Your own bot takes a token from @BotFather, with no AI Hub Bar server in between. The menu is in the bot itself: /menu — limits, sessions, reports, cleanup. What to duplicate is set by the “Telegram” chip on a module's page.",
               "name" : "Telegram"
+            },
+            {
+              "detail" : "The shared bot's menu button opens an app right in Telegram: limits, sessions with “Allow” and “Deny”, tasks, reports and notification settings.",
+              "name" : "The app inside the bot"
             },
             {
               "detail" : "The “Telegram” tile in Quick Toggles turns Telegram notifications off with one click and keeps them off until you press it again. Permission requests and the bot’s replies still come.",
               "name" : "Pause Telegram"
             },
             {
-              "detail" : "Claude’s permission requests can be allowed or denied with buttons in Telegram — a separate bot, on the “Agent sessions” page.",
+              "detail" : "Permission requests come to the same bot with ✅ and ❌ buttons: switch on “Permission requests to this bot” on the Telegram module's page. Over the shared bot you can answer after “Answers to requests over the shared bot” is on there too.",
               "name" : "Answers from Telegram"
             },
             {

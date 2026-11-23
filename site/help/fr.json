@@ -110,6 +110,10 @@
               "name" : "Rechercher"
             },
             {
+              "detail" : "L’app Raccourcis propose les actions d’AI Hub Bar : limites de Claude, commande rapide, recherche, « Rester éveillé », « Qui attend une réponse » et « Tâche Claude en arrière-plan ».",
+              "name" : "Raccourcis et Siri"
+            },
+            {
               "detail" : "Un clic sur l’en-tête d’un bloc le réduit ; le panneau s’en souvient.",
               "name" : "Réduire un bloc"
             },
@@ -223,6 +227,10 @@
               "name" : "Bilan du jour"
             },
             {
+              "detail" : "Le bilan du jour commence par ce qui vous attend : les sessions en attente d’une réponse et les pull requests dont les vérifications ont échoué.",
+              "name" : "En attente de vous"
+            },
+            {
               "detail" : "Une fois par fenêtre à 50/80/95 % (seuils dans Réglages) et quand la limite revient ; si vous le souhaitez, aussi sur Telegram.",
               "name" : "Notifications"
             },
@@ -258,6 +266,10 @@
               "name" : "Liste"
             },
             {
+              "detail" : "Si une session tourne mais ne fait rien depuis 20 minutes, ou relance sans cesse la même commande, une notification arrive. La fréquence se règle sur la page du module « Sessions des agents ».",
+              "name" : "Peut-être bloqué"
+            },
+            {
               "detail" : "« Autoriser » et « Refuser » — dans la notification, la ligne de la session, l’île et, si activé, Telegram. C’est la première réponse arrivée qui compte.",
               "name" : "Autorisations"
             },
@@ -276,6 +288,10 @@
             {
               "detail" : "Dans « Requête rapide », Codex travaille aussi en arrière-plan : il n’écrit que dans le dossier du projet, sans réseau, et le résultat arrive en notification. Près du seuil, ce sont les limites de Codex qui le retiennent.",
               "name" : "Codex en arrière-plan"
+            },
+            {
+              "detail" : "Glissez des fichiers et des captures d’écran dans la fenêtre de la Requête rapide : l’agent reçoit leurs chemins avec la tâche. Le bouton micro lance la dictée de macOS dans le champ de la tâche.",
+              "name" : "Fichiers et dictée"
             },
             {
               "detail" : "Une tâche de Claude arrivée à la limite peut être confiée à Codex (« Vers Codex », « Confier à Codex »), et une tâche terminée donnée à relire à l’autre service (« Relire dans… » dans le menu de la tâche). La case « Aussi dans Codex — pour comparer » de « Requête rapide » donne la tâche aux deux à la fois, chacun dans son worktree.",
@@ -385,6 +401,10 @@
             {
               "detail" : "Ouvrir le dossier du projet ou le dépôt.",
               "name" : "Terminal · Finder · GitHub"
+            },
+            {
+              "detail" : "Un projet déplié montre ce qui écoute sur un port depuis son dossier : le port et le programme. De là, vous pouvez ouvrir l’adresse dans le navigateur ou arrêter le processus — le bouton demande confirmation.",
+              "name" : "Serveurs locaux"
             }
           ],
           "monospaced" : false,
@@ -423,6 +443,10 @@
             {
               "detail" : "Les étapes du profil, séparées par des virgules ; l’étape change avec un bouton dans le projet déplié. Mots, durée, temps de lecture et pages sont comptés dans le fichier principal (.md, .txt, .rtf, .docx).",
               "name" : "Étapes et métriques"
+            },
+            {
+              "detail" : "Dans les réglages d’un profil à dossiers, fixez un objectif en mots par jour : le panneau indique combien de mots ont été ajoutés aujourd’hui aux fichiers principaux des projets. Le texte supprimé ne compte pas en négatif.",
+              "name" : "Objectif de mots"
             }
           ],
           "monospaced" : false,
@@ -457,6 +481,10 @@
             {
               "detail" : "Sur la page du module « À venir » : combien de temps avant rappeler, et s’il faut aussi envoyer dans Telegram.",
               "name" : "Rappels"
+            },
+            {
+              "detail" : "Le bouton de la fenêtre « Calendrier » enregistre les dates dans un fichier .ics : ouvrez-le dans Calendrier de macOS ou importez-le dans Google Agenda. Un nouvel export met à jour les mêmes événements au lieu d’en créer d’autres.",
+              "name" : "Export en .ics"
             }
           ],
           "monospaced" : false,
@@ -649,15 +677,19 @@
               "name" : "Fréquence"
             },
             {
-              "detail" : "Le bot est le module « Telegram » : jeton, chat et menu dans le bot lui-même (/menu — limites, sessions, rapports, nettoyage). Ce qu’il faut y copier — la puce « Telegram » sur la page du module.",
+              "detail" : "Le module « Telegram ». Le bot partagé se connecte avec un seul bouton : « Connecter Telegram », puis « Start » dans la conversation — rien à créer. Votre propre bot utilise un jeton de @BotFather, sans serveur AI Hub Bar entre vous. Le menu est dans le bot : /menu — limites, sessions, rapports, nettoyage. Ce qui est dupliqué se règle avec la pastille « Telegram » sur la page du module.",
               "name" : "Telegram"
+            },
+            {
+              "detail" : "Le bouton de menu du bot partagé ouvre une app directement dans Telegram : limites, sessions avec « Autoriser » et « Refuser », tâches, rapports et réglages des notifications.",
+              "name" : "L’app dans le bot"
             },
             {
               "detail" : "La tuile « Telegram » des bascules rapides désactive les notifications Telegram d’un clic et les garde désactivées jusqu’au clic suivant. Les demandes d’autorisation et les réponses du bot arrivent toujours.",
               "name" : "Mettre Telegram en pause"
             },
             {
-              "detail" : "Les demandes d’autorisation de Claude s’acceptent ou se refusent avec des boutons dans Telegram — un bot distinct, page « Sessions des agents ».",
+              "detail" : "Les demandes d’autorisation arrivent dans le même bot avec les boutons ✅ et ❌ : activez « Demandes d’autorisation dans ce bot » sur la page du module « Telegram ». Avec le bot partagé, vous pouvez répondre après avoir activé « Réponses aux demandes via le bot partagé » au même endroit.",
               "name" : "Réponses depuis Telegram"
             },
             {
