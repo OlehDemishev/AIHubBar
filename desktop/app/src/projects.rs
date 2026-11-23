@@ -725,6 +725,7 @@ pub(crate) fn launch_now(
             permissions: "code",
             result_file: None,
             codex,
+            review_of: None,
         };
         let (run, child) = claudepult_core::runs::start(&paths::runs_dir(), &program, &new).map_err(|e| e.to_string())?;
         eprintln!("run {} started: «{title}» in {}{}", run.id, folder.display(), if codex { " (Codex)" } else { "" });

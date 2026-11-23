@@ -460,6 +460,7 @@
     // A background run under its row: «Остановить» (a second click within a few seconds stops it), «Журнал», its PR.
     const openLogs = new Set();
     const confirmStop = new Set();
+    const runErrors = new Map();
     function runControls(run) {
       const line = document.createElement("div");
       line.className = "run-controls";
@@ -471,6 +472,13 @@
         return b;
       };
       if (run.paused) line.append(button(t("Продолжить сейчас"), () => invoke("resume_run_now", { id: run.id })));
+      // The other service: Codex goes on with a task Claude left at its limit, or one reads what the other did.
+      const beside = (title, command) => button(title, async (event) => {
+        event.target.disabled = true;
+        try { await invoke(command, { id: run.id }); } catch (problem) { runErrors.set(run.id, String(problem)); showSessions(); }
+      });
+      if (run.handover) line.append(beside(t("Передать %@", "Codex"), "hand_over_run"));
+      if (run.review) line.append(beside(t("Проверить в %@", run.review), "review_run"));
       if (run.running) {
         const asking = confirmStop.has(run.id);
         line.append(button(asking ? t("Остановить?") : t("Остановить"), () => {
@@ -490,6 +498,7 @@
       }));
       if (run.pullRequest) line.append(button("PR", () => invoke("open_link", { url: run.pullRequest })));
       const parts = [line];
+      if (runErrors.has(run.id)) parts.push(element("div", "error", runErrors.get(run.id)));
       if (openLogs.has(run.id)) {
         const log = document.createElement("div");
         log.className = "run-log";
