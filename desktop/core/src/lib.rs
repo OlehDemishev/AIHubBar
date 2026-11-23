@@ -26,6 +26,7 @@ pub mod notes;
 pub mod paths;
 pub mod process;
 pub mod profiles;
+pub mod queue;
 pub mod quick_commands;
 pub mod quick_prompt;
 pub mod resources;
