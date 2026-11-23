@@ -14,6 +14,14 @@
         <select id="language"></select>
       </div>
       <div class="row">
+        <label for="theme" data-t="Тема"></label>
+        <select id="theme"></select>
+      </div>
+      <div class="row">
+        <label for="text-size" data-t="Размер текста"></label>
+        <select id="text-size"></select>
+      </div>
+      <div class="row">
         <label for="autostart" data-t="Запускать при входе в систему"></label>
         <input type="checkbox" id="autostart">
       </div>
@@ -1078,6 +1086,16 @@
     clipboardLimit.onchange = saveClipboard;
     clipboardRemember.onchange = saveClipboard;
     invoke("clipboard_settings").then(showClipboardSettings);
+
+    // «Тема» and «Размер текста».
+    const themeSelect = document.getElementById("theme");
+    const textSizeSelect = document.getElementById("text-size");
+    function showAppearance(view) {
+      themeSelect.replaceChildren(...view.themes.map((c) => new Option(c.title, c.id, false, c.id === view.theme)));
+      textSizeSelect.replaceChildren(...view.text_sizes.map((c) => new Option(c.title, c.id, false, c.id === view.text_size)));
+    }
+    themeSelect.onchange = textSizeSelect.onchange = async () => showAppearance(await invoke("set_appearance", { theme: themeSelect.value, textSize: textSizeSelect.value }));
+    invoke("appearance_view").then(showAppearance);
 
     // «Заметки»: on or off, and the folder of the notes.
     const notesModule = document.getElementById("module-notes");
