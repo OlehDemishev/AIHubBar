@@ -90,18 +90,14 @@ pub struct HistoryView {
     verdict_good: bool,
 }
 
-fn view(app: &AppHandle, days: &[UsageDay], period: i64) -> HistoryView {
+/// What today's summary is made of; the «История расхода» window shows the same (the Mac's `dayInput`).
+pub(crate) fn day_input(app: &AppHandle, days: &[UsageDay]) -> token_usage::DayInput {
     let texts = crate::strings(app);
-    let (price, plan) = {
+    let price = {
         let state = app.state::<crate::AppState>();
         let settings = state.settings.lock().unwrap();
-        (ai::price(&settings.services(), "anthropic"), settings.claude_plan_price)
+        ai::price(&settings.services(), "anthropic")
     };
-    let shown = token_usage::recent(days, period, Utc::now());
-    let used: Vec<&UsageDay> = shown.iter().filter(|day| day.tokens() > 0).collect();
-    let total: u64 = used.iter().map(|day| day.tokens()).sum();
-    let cost = price.map(|price| used.iter().map(|day| day.cost(price)).sum::<f64>());
-    let ratio = cost.and_then(|cost| token_usage::plan_ratio(cost, period, plan));
     let today_key = token_usage::day_key(Utc::now());
     let (session_percent, week_percent, breakdown) = app.state::<crate::limits::Limits>().today(&crate::profiles::projects_root(app), &texts);
     let midnight = chrono::Local::now().date_naive().and_hms_opt(0, 0, 0).and_then(|t| t.and_local_timezone(chrono::Local).earliest()).map(|t| t.with_timezone(&Utc));
@@ -109,7 +105,8 @@ fn view(app: &AppHandle, days: &[UsageDay], period: i64) -> HistoryView {
         .state::<crate::runs::Runs>()
         .list()
         .iter()
-        .filter(|run| midnight.is_some_and(|start| run.started_at >= start))
+        // A review is not a task of its own, as on the Mac.
+        .filter(|run| midnight.is_some_and(|start| run.started_at >= start) && run.review_of().is_none())
         .map(|run| {
             let outcome = if run.is_running() { None } else { Some(run.state == claudepult_core::runs::RunState::Succeeded) };
             (outcome, crate::runs::project_label(run), claudepult_core::launch::one_line(&run.task))
@@ -124,7 +121,7 @@ fn view(app: &AppHandle, days: &[UsageDay], period: i64) -> HistoryView {
             (!limits.is_empty()).then(|| format!("{} — {}", service.title, limits.join(", ")))
         })
         .collect();
-    let input = token_usage::DayInput {
+    token_usage::DayInput {
         session_percent,
         week_percent,
         breakdown,
@@ -132,7 +129,24 @@ fn view(app: &AppHandle, days: &[UsageDay], period: i64) -> HistoryView {
         others,
         cost: price.and_then(|price| days.iter().find(|day| day.day == today_key).map(|day| day.cost(price))),
         hits: crate::limits::hits_today(),
+        waiting: crate::sessions::waiting_lines(),
+        failed_prs: app.state::<crate::projects::Projects>().failed_pull_requests(),
+    }
+}
+
+fn view(app: &AppHandle, days: &[UsageDay], period: i64) -> HistoryView {
+    let texts = crate::strings(app);
+    let (price, plan) = {
+        let state = app.state::<crate::AppState>();
+        let settings = state.settings.lock().unwrap();
+        (ai::price(&settings.services(), "anthropic"), settings.claude_plan_price)
     };
+    let shown = token_usage::recent(days, period, Utc::now());
+    let used: Vec<&UsageDay> = shown.iter().filter(|day| day.tokens() > 0).collect();
+    let total: u64 = used.iter().map(|day| day.tokens()).sum();
+    let cost = price.map(|price| used.iter().map(|day| day.cost(price)).sum::<f64>());
+    let ratio = cost.and_then(|cost| token_usage::plan_ratio(cost, period, plan));
+    let input = day_input(app, days);
     HistoryView {
         today: token_usage::day_lines(&input, &texts).into_iter().map(|(text, heading)| TodayLine { text, heading }).collect(),
         days: shown.iter().map(|day| DayBar { day: day.day.clone(), tokens: day.tokens(), text: token_usage::tokens_text(day.tokens(), &texts) }).collect(),
@@ -203,4 +217,75 @@ pub fn open_history(app: AppHandle) {
     crate::off_main_thread(move || {
         let _ = tauri::WebviewWindowBuilder::new(&app, "history", tauri::WebviewUrl::App("history.html".into())).title(title).inner_size(720.0, 520.0).min_inner_size(620.0, 420.0).center().build();
     });
+}
+
+// MARK: - «Итог дня» in Telegram
+
+/// Every ten minutes: the day's summary goes to Telegram at the chosen hour, once a day, and only when something
+/// happened or something waits (the Mac's `sendDayIfDue`).
+pub fn start_day_summary(app: AppHandle) {
+    std::thread::spawn(move || loop {
+        std::thread::sleep(std::time::Duration::from_secs(60));
+        let (on, hour, sent) = {
+            let state = app.state::<crate::AppState>();
+            let settings = state.settings.lock().unwrap();
+            (settings.day_summary, settings.day_summary_hour, settings.day_summary_sent.and_then(|at| chrono::DateTime::from_timestamp(at, 0)))
+        };
+        if on && token_usage::day_send_due(hour, sent, chrono::Local::now()) && send_day(&app, false).is_ok() {
+            crate::save(&app, |settings| settings.day_summary_sent = Some(Utc::now().timestamp()));
+        }
+        std::thread::sleep(std::time::Duration::from_secs(540));
+    });
+}
+
+/// The summary to the person's own bot. Nothing to tell and not asked by hand: nothing is sent, and that counts as done.
+fn send_day(app: &AppHandle, even_if_empty: bool) -> Result<(), String> {
+    let texts = crate::strings(app);
+    let chat = app.state::<crate::AppState>().settings.lock().unwrap().telegram_chat.clone().ok_or_else(|| texts.t("Сначала сохраните токен бота").to_owned())?;
+    let token = claudepult_core::keys::read(claudepult_core::telegram::KEY).ok_or_else(|| texts.t("Сначала сохраните токен бота").to_owned())?;
+    let input = day_input(app, &refresh(app));
+    if !even_if_empty && input.is_empty() {
+        eprintln!("day summary: nothing to tell");
+        return Ok(());
+    }
+    claudepult_core::telegram::send(&token, &chat, &token_usage::day_html(&input, &texts)).map_err(|error| format!("{error:?}"))?;
+    eprintln!("day summary: sent");
+    Ok(())
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DaySummarySettings {
+    on: bool,
+    hour: u32,
+}
+
+fn day_settings(app: &AppHandle) -> DaySummarySettings {
+    let settings = app.state::<crate::AppState>().settings.lock().unwrap().clone();
+    DaySummarySettings { on: settings.day_summary, hour: settings.day_summary_hour }
+}
+
+#[tauri::command]
+pub fn day_summary_settings(app: AppHandle) -> DaySummarySettings {
+    day_settings(&app)
+}
+
+#[tauri::command]
+pub fn set_day_summary(app: AppHandle, on: bool, hour: u32) -> DaySummarySettings {
+    // Turned on after today's hour: today's summary is not sent late, the next one goes tomorrow.
+    let now = Utc::now().timestamp();
+    crate::save(&app, |settings| {
+        if on && !settings.day_summary {
+            settings.day_summary_sent = Some(now);
+        }
+        settings.day_summary = on;
+        settings.day_summary_hour = hour.min(23);
+    });
+    day_settings(&app)
+}
+
+/// «Отправить сейчас»: today's summary, even an empty one.
+#[tauri::command]
+pub async fn send_day_summary(app: AppHandle) -> Result<(), String> {
+    tauri::async_runtime::spawn_blocking(move || send_day(&app, true)).await.map_err(|e| e.to_string())?
 }

@@ -39,6 +39,15 @@ pub struct Sessions {
 }
 
 /// The sessions to show; a process that is gone ends its session.
+/// «Ждёт вас» in the day's summary: sessions that wait for an answer now, «Проект: чего ждёт».
+pub(crate) fn waiting_lines() -> Vec<String> {
+    shown()
+        .into_iter()
+        .filter(|(_, state)| *state == State::Waiting)
+        .map(|(session, _)| [Some(session.display_project()), session.message.clone().or(session.task.clone())].into_iter().flatten().collect::<Vec<_>>().join(": "))
+        .collect()
+}
+
 pub(crate) fn shown() -> Vec<(Session, State)> {
     sessions::load(&paths::sessions_dir(), Utc::now(), process::is_alive)
 }

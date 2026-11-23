@@ -127,6 +127,8 @@ pub struct ProfileDetails {
     stages: Vec<String>,
     metrics: Vec<String>,
     words_per_minute: u64,
+    /// «Цель по словам», words a day; 0 — none.
+    word_goal: usize,
     /// None — Claude Code.
     service: Option<String>,
     permissions: String,
@@ -145,6 +147,7 @@ pub fn profile_details(app: AppHandle) -> Option<ProfileDetails> {
         stages: raw("stages").as_array().into_iter().flatten().filter_map(|s| s.as_str().map(str::to_owned)).collect(),
         metrics: profile.metrics(),
         words_per_minute: profile.words_per_minute(),
+        word_goal: profile.word_goal(),
         service: profile.other.get("service").and_then(|s| s.as_str()).filter(|s| *s != "claude-code").map(str::to_owned),
         permissions: profile.permissions().to_owned(),
         commands: raw("commands"),
