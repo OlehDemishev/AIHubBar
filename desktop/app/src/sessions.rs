@@ -12,6 +12,7 @@ use claudepult_core::agent_hooks;
 use claudepult_core::approvals::{self, Request};
 use claudepult_core::hooks::{self, HookCommand, HookStatus};
 use claudepult_core::sessions::{self, Session, State};
+use claudepult_core::token_usage;
 use claudepult_core::{paths, process};
 use serde::Serialize;
 use std::collections::{HashMap, HashSet};
@@ -31,6 +32,8 @@ pub struct Sessions {
     pub attention: Arc<AtomicBool>,
     /// Requests already announced by a notification.
     notified: Arc<Mutex<HashSet<String>>>,
+    /// Sessions already told that their context is nearly full.
+    context_notified: Arc<Mutex<HashSet<String>>>,
 }
 
 /// The sessions to show; a process that is gone ends its session.
@@ -71,10 +74,32 @@ impl Sessions {
                     app.state::<Limits>().update_tray(&app);
                 }
                 this.announce(&app, &open);
+                this.announce_full_context(&app, &shown);
                 let _ = app.emit("sessions-changed", ());
             }
             std::thread::sleep(std::time::Duration::from_secs(3));
         });
+    }
+
+    /// Once per session: the context is nearly full, Claude will soon compact the conversation.
+    fn announce_full_context(&self, app: &AppHandle, shown: &[(Session, State)]) {
+        let mut told = self.context_notified.lock().unwrap();
+        for (session, state) in shown {
+            if *state == State::Ended || told.contains(&session.id) {
+                continue;
+            }
+            let Some(context) = context_of(session).filter(|part| *part >= token_usage::CONTEXT_NOTIFY_AT) else { continue };
+            told.insert(session.id.clone());
+            let texts = strings(app);
+            let percent = ((context * 100.0).round() as i64).to_string();
+            let _ = app
+                .notification()
+                .builder()
+                .title(texts.format("Контекст почти заполнен — %@", &[&session.display_project()]))
+                .body(texts.format("≈ %lld %%: скоро Claude сожмёт историю. Если задача большая — лучше начать новую сессию с кратким итогом.", &[&percent]))
+                .show();
+        }
+        told.retain(|id| shown.iter().any(|(session, _)| &session.id == id));
     }
 
     /// One notification per new request; the answer is in the panel (buttons in the notification itself are not
@@ -101,6 +126,11 @@ pub fn stop() {
     approvals::stop_alive(&paths::approvals_dir());
 }
 
+/// How full the session's context is, from its journal; None without one.
+fn context_of(session: &Session) -> Option<f64> {
+    token_usage::context_fraction(Path::new(session.transcript_path.as_deref()?))
+}
+
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RequestRow {
@@ -120,6 +150,9 @@ pub struct SessionRow {
     state_title: String,
     detail: Option<String>,
     progress: Option<String>,
+    /// «контекст 82 %» once the context is 70 % full, and whether it is nearly full (90 %).
+    context: Option<String>,
+    context_full: bool,
     /// A permission request to answer from the panel.
     request: Option<RequestRow>,
     /// A background run (`runs.rs`): it can be stopped while it runs, its log read.
@@ -166,7 +199,21 @@ fn run_state(run: &Run) -> State {
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
+pub struct ResumableRow {
+    id: String,
+    project: String,
+    task: Option<String>,
+    /// «2 ч назад».
+    ago: String,
+    /// The task and «Продолжить в Терминале · folder».
+    hint: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct SessionsView {
+    /// «Недавно завершённые»: finished Claude Code sessions a click continues in a terminal.
+    resumable: Vec<ResumableRow>,
     rows: Vec<SessionRow>,
     hooks: &'static str,
 }
@@ -179,7 +226,11 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
     let runs = app.state::<Runs>().list();
     let mut rows: Vec<SessionRow> = shown
         .into_iter()
-        .map(|(session, state)| SessionRow {
+        .map(|(session, state)| {
+            let context = if state == State::Ended { None } else { context_of(&session).filter(|part| *part >= token_usage::CONTEXT_WARN_AT) };
+            SessionRow {
+            context: context.map(|part| texts.format("контекст %lld %%", &[&((part * 100.0).round() as i64).to_string()])),
+            context_full: context.is_some_and(|part| part >= token_usage::CONTEXT_NOTIFY_AT),
             request: open.remove(&session.id).map(|r| RequestRow { title: r.asks_title(&texts), text: r.text(), id: r.id }),
             id: session.id.clone(),
             project: session.display_project(),
@@ -194,6 +245,7 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
             },
             progress: session.progress.map(|(done, total)| format!("{done}/{total}")),
             run: None,
+            }
         })
         .collect();
     // Background runs: on their hook session's row (same id), or a row of their own while they run and for a while after.
@@ -223,12 +275,41 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
                 state_title: state.title(&texts),
                 detail: Some(if run.is_running() { run.task.clone() } else { runs::outcome_text(&texts, run) }),
                 progress: None,
+                context: None,
+                context_full: false,
                 request: None,
                 run: Some(row),
             });
         }
     }
-    SessionsView { rows, hooks: status_key(hook_status(&projects_root(&app))) }
+    let resumable = sessions::load_resumable(&paths::sessions_dir(), now, process::is_alive)
+        .into_iter()
+        .map(|session| {
+            let folder = texts.format("Продолжить в Терминале · %@", &[&session.cwd]);
+            ResumableRow {
+                hint: match &session.task {
+                    Some(task) => format!("{task}\n{folder}"),
+                    None => folder,
+                },
+                id: session.id.clone(),
+                project: session.display_project(),
+                ago: claudepult_core::projects::ago(&texts, session.updated_at, now),
+                task: session.task,
+            }
+        })
+        .collect();
+    SessionsView { resumable, rows, hooks: status_key(hook_status(&projects_root(&app))) }
+}
+
+/// A click on a finished session: `claude --resume <id>` in a terminal window in its folder. Only sessions the list
+/// offers.
+#[tauri::command]
+pub fn resume_session(app: AppHandle, id: String) -> Result<(), String> {
+    let texts = strings(&app);
+    let session = sessions::load_resumable(&paths::sessions_dir(), Utc::now(), process::is_alive).into_iter().find(|s| s.id == id).ok_or("unknown session")?;
+    let claude = claudepult_core::launch::find_claude().ok_or_else(|| texts.t("Claude Code не установлен").to_owned())?;
+    eprintln!("resume session {id}");
+    claudepult_core::launch::open_in_terminal(Path::new(&session.cwd), &claude, &["--resume", &session.id]).map_err(|e| texts.format("Не удалось открыть Терминал: %@", &[&e]))
 }
 
 /// «Разрешить» / «Отклонить» from the panel. An error leaves the request open: answer again or in Claude.

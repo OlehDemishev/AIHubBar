@@ -159,7 +159,7 @@ impl Runs {
 // MARK: - Words
 
 /// The task's start, flattened, at most 60 characters (the Mac's `RunMessage.taskStart`).
-fn task_start(task: &str) -> String {
+pub(crate) fn task_start(task: &str) -> String {
     let flat = task.split_whitespace().collect::<Vec<_>>().join(" ");
     if flat.chars().count() > 60 { flat.chars().take(59).collect::<String>() + "…" } else { flat }
 }
