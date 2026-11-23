@@ -117,10 +117,16 @@ final class WeeklySummarySender {
     private let usage: UsageStore
     private let runs: RunStore
     private let hub: HubLimitsStore
+    /// For «Ждёт вас» in the day's summary: waiting sessions and pull requests with failed checks.
+    private let sessions: SessionStore?
+    private let projects: ProjectStore?
     private var loop: Task<Void, Never>?
     private static let sentKey = "weeklySummarySent"
 
-    init(settings: AppSettings, usage: UsageStore, runs: RunStore, hub: HubLimitsStore) {
+    init(settings: AppSettings, usage: UsageStore, runs: RunStore, hub: HubLimitsStore, sessions: SessionStore? = nil,
+         projects: ProjectStore? = nil) {
+        self.sessions = sessions
+        self.projects = projects
         self.settings = settings
         self.usage = usage
         self.runs = runs
@@ -149,7 +155,9 @@ final class WeeklySummarySender {
             sessionPercent: usage.snapshot?.session?.utilization, weekPercent: usage.snapshot?.week?.utilization,
             breakdown: usage.breakdowns[.today], hits: LimitHits.all().filter { $0.date >= start }.count,
             runs: DaySummary.today(runs.runs, now: now), others: hub.usages,
-            cost: price.flatMap { price in today.map { $0.cost(price) } }
+            cost: price.flatMap { price in today.map { $0.cost(price) } },
+            waiting: DaySummary.waitingLines((sessions?.items ?? []).map { ($0.session, $0.state) }),
+            failedPRs: DaySummary.failedPRLines(projects?.report?.projects ?? [])
         )
     }
 

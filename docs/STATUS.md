@@ -186,6 +186,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: «Ждёт вас» in the day's summary (branch `feat/day-summary-waiting`)
+
+Done: the second of the ten ideas of 2026-11-23. «Итог дня» was already there (the «История расхода» window and a daily Telegram message: limits, spend by project, background runs); what it lacked was what is left for the person. New section «Ждёт вас» right under the limits: sessions that wait for an answer now («Проект: чего ждёт») and open pull requests with failed checks («❌ CI · Проект #7: название»), five of each and «и ещё N». A day with nothing done but with something waiting is now sent too. `DaySummary.waitingLines` / `failedPRLines`; `WeeklySummarySender` takes the session and project stores. One new text in 12 languages.
+Checked: not built locally (swap 10.4 of 11 GB): the PR's CI runs the tests and the catalog check (`DaySummaryTests.whatWaitsForThePerson`). `scripts/strings-check.py` passes.
+Left: **held until 0.12.0 is out.** Not seen live, neither in the window nor in Telegram. No card in the panel in the evening — the summary stays in the window and in Telegram. The failed checks come from the projects block's last report, so they are as old as its last refresh.
+
 ## 2026-11-23 — 1.0 list: the shared Telegram bot and the Mini App go in as ready (branch `chore/status-shared-bot-ready`)
 
 Done: Oleh's answer «Как готовое» to the question left by the entry of `fix/telegram-help`: in the 1.0 list (entry «the list for 1.0» below, not rewritten) the shared Telegram bot through the Cloudflare Worker and the Mini App move from «Not in 1.0» to the ready part, with no «бета» badge. The line is gone from «Needs Oleh».

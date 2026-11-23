@@ -126,7 +126,7 @@ final class AppContainer {
         let telegramBot = TelegramBotController(settings: settings, sessions: sessions, runs: runs, usage: usage, approvals: telegramApprovals)
         self.telegramBot = telegramBot
         telegramApprovals.botReads = { [telegramBot] token in telegramBot.reads(token) }
-        self.weeklySummary = WeeklySummarySender(settings: settings, usage: usage, runs: runs, hub: hub)
+        self.weeklySummary = WeeklySummarySender(settings: settings, usage: usage, runs: runs, hub: hub, sessions: sessions, projects: store)
         self.launcher = launcher
         let quickPrompt = QuickPromptController(settings: settings, launcher: launcher, services: services)
         self.quickPrompt = quickPrompt
