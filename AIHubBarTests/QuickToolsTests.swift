@@ -165,6 +165,11 @@ struct BetaMarkTests {
         #expect(ServiceTab.allCases.filter(\.isBeta) == [.codex, .gemini, .copilot, .cursor])
     }
 
+    @Test func theBadgeAloneHidesNothing() {
+        #expect(ModuleKind.allCases.filter(\.hasBetaMark) == [.versions])
+        #expect(ModuleKind.allCases.filter(\.isBeta).isEmpty, "a badge is not the beta gate")
+    }
+
     @Test func translationsNobodyReadAreBeta() {
         #expect(!InterfaceLanguage.isBeta("ru"))
         #expect(!InterfaceLanguage.isBeta("en"))

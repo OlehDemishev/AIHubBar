@@ -138,6 +138,36 @@ impl Run {
         self.other.get("agent").and_then(Value::as_str) == Some(codex::AGENT)
     }
 
+    /// «Codex» or «Claude Code»: who does the run.
+    pub fn agent_title(&self) -> &'static str {
+        if self.is_codex() { "Codex" } else { "Claude Code" }
+    }
+
+    /// The run this one reviews (the Mac's `reviewOf`).
+    pub fn review_of(&self) -> Option<&str> {
+        self.other.get("reviewOf").and_then(Value::as_str)
+    }
+
+    fn has_prompt(&self) -> bool {
+        self.prompt.as_deref().is_some_and(|prompt| !prompt.is_empty())
+    }
+
+    /// «Передать Codex» (the Mac's `Handover`): a Claude run that has not finished well and whose task was kept.
+    pub fn can_hand_over(&self) -> bool {
+        !self.is_codex() && self.other.get("agent").is_none() && self.has_prompt() && (self.is_paused() || matches!(self.state, RunState::Failed | RunState::Stopped))
+    }
+
+    /// «Проверить в …» (the Mac's `CrossReview`): a finished run can be reviewed once; a review is not reviewed
+    /// again.
+    pub fn can_review(&self, all: &[Run]) -> bool {
+        self.state == RunState::Succeeded && self.review_of().is_none() && self.has_prompt() && !all.iter().any(|run| run.review_of() == Some(self.id.as_str()) && run.state != RunState::Failed)
+    }
+
+    /// Who reads: the service that did not write. True — Codex.
+    pub fn reviewer_is_codex(&self) -> bool {
+        !self.is_codex()
+    }
+
     pub fn is_running(&self) -> bool {
         self.state == RunState::Running
     }
@@ -269,6 +299,9 @@ pub fn rules(windows: bool) -> (Vec<String>, Vec<String>) {
 /// the project folder, no shell and no network; `filesAndWeb` — that plus web search and page fetching. The shells are
 /// denied by name (`Bash`, and `PowerShell` on Windows); secrets stay unreadable in every profile.
 pub fn profile_rules(permissions: &str, windows: bool) -> (Vec<String>, Vec<String>) {
+    if permissions == REVIEW {
+        return review_rules(windows);
+    }
     let web = match permissions {
         "filesOnly" => false,
         "filesAndWeb" => true,
@@ -286,6 +319,26 @@ pub fn profile_rules(permissions: &str, windows: bool) -> (Vec<String>, Vec<Stri
     }
     deny.push("NotebookEdit".into());
     deny.extend(READ_DENY.iter().map(|r| (*r).to_owned()));
+    (allow, deny)
+}
+
+/// The permissions of a review of someone else's work.
+pub const REVIEW: &str = "review";
+
+const REVIEW_GIT: &[&str] = &[
+    "git status", "git status *", "git diff", "git diff *", "git log *", "git log", "git show *", "git branch", "git branch *",
+    "git rev-parse *", "git ls-files *", "git merge-base *",
+];
+
+/// A review (the Mac's `BackgroundPermissions.reviewRules`): read files and git history, change nothing, no network.
+pub fn review_rules(windows: bool) -> (Vec<String>, Vec<String>) {
+    let shells: &[&str] = if windows { &["Bash", "PowerShell"] } else { &["Bash"] };
+    let mut allow: Vec<String> = ["Read", "Glob", "Grep", "TodoWrite"].map(String::from).to_vec();
+    for shell in shells {
+        allow.extend(REVIEW_GIT.iter().map(|c| format!("{shell}({c})")));
+    }
+    let mut deny: Vec<String> = ["Edit", "Write", "NotebookEdit", "WebFetch", "WebSearch"].map(String::from).to_vec();
+    deny.extend(rules(windows).1);
     (allow, deny)
 }
 
@@ -315,6 +368,30 @@ pub fn arguments(prompt: &str, session_id: &str, settings_file: &Path) -> Vec<St
     .collect()
 }
 
+/// What the next agent is asked when a task is handed over at a limit. English: it is read by the agent, and both
+/// Claude and Codex take it. The other agent is told that work may already be there, so it reads the folder before
+/// it writes.
+pub fn handover_prompt(task: &str, from: &str) -> String {
+    format!(
+        "Another agent ({from}) started this task in this folder and stopped at its usage limit. Before changing anything, \
+         look at what is already done: run `git status`, `git diff` and `git log -5 --oneline`. Keep that work and \
+         finish the task; do not start over.\n\nThe task:\n{task}"
+    )
+}
+
+/// What the reviewing agent is asked; the answer comes in the task's language.
+pub fn review_prompt(task: &str, author: &str) -> String {
+    format!(
+        "Review the work another agent ({author}) did in this folder. Do not change, create or delete any file and do \
+         not commit: only read. Look at `git status`, `git diff` for uncommitted changes, and the branch's own commits \
+         (`git log --oneline -15`, then `git show` or a diff against the branch it started from).\n\n\
+         Check against the task below: does the change do what was asked, are there bugs, broken edge cases, missing \
+         tests, leftovers or unrelated edits? Start your answer with one line — «OK» if nothing must be fixed, else \
+         «Fix: N» with the number of problems. Then list the problems, most serious first, each with file and line and \
+         one sentence on what is wrong. Be brief; no praise. Answer in the language of the task.\n\nThe task:\n{task}"
+    )
+}
+
 // MARK: - Start and stop
 
 pub struct NewRun<'a> {
@@ -332,6 +409,9 @@ pub struct NewRun<'a> {
     pub result_file: Option<&'a Path>,
     /// Run by Codex (`codex exec` in its `workspace-write` sandbox) instead of Claude; `program` is then codex.
     pub codex: bool,
+    /// A review: the run it reads (the Mac's `reviewOf`). Codex then gets its `read-only` sandbox; Claude's
+    /// `permissions` are `REVIEW`.
+    pub review_of: Option<&'a str>,
 }
 
 /// Starts `claude -p` (or `codex exec`) in the folder with no window, its output into the log; the run is saved before
@@ -366,9 +446,12 @@ pub fn start(dir: &Path, program: &Path, new: &NewRun) -> io::Result<(Run, Child
     if new.codex {
         run.other.insert("agent".into(), json!(codex::AGENT));
     }
+    if let Some(reviewed) = new.review_of {
+        run.other.insert("reviewOf".into(), json!(reviewed));
+    }
     let log = File::create(run.log_path(dir))?;
     let mut process = command::command(program);
-    let args = if new.codex { codex::arguments(new.prompt, codex::git_directory(new.folder).as_deref(), false) } else { arguments(new.prompt, &id, &settings) };
+    let args = if new.codex { codex::arguments(new.prompt, codex::git_directory(new.folder).as_deref(), new.review_of.is_some()) } else { arguments(new.prompt, &id, &settings) };
     process.args(args).current_dir(new.folder);
     process.stdin(Stdio::null()).stdout(log.try_clone()?).stderr(log);
     let child = process.spawn()?;
@@ -808,6 +891,52 @@ not json at all
     }
 
     #[test]
+    fn a_review_only_reads() {
+        let (allow, deny) = review_rules(true);
+        assert!(allow.contains(&"Read".to_owned()) && allow.contains(&"Bash(git diff *)".to_owned()) && allow.contains(&"PowerShell(git log *)".to_owned()));
+        assert!(!allow.iter().any(|rule| rule.starts_with("Edit") || rule.contains("git commit") || rule.contains("git add") || rule.contains("cargo")), "{allow:?}");
+        for rule in ["Edit", "Write", "WebFetch", "Bash(rm *)", "Read(**/.env)"] {
+            assert!(deny.contains(&rule.to_owned()), "{rule}");
+        }
+        assert!(!review_rules(false).0.iter().any(|rule| rule.starts_with("PowerShell")));
+        assert_eq!(settings_json(REVIEW, false)["permissions"]["allow"].as_array().unwrap().len(), review_rules(false).0.len());
+        assert!(review_prompt("Сделай экспорт", "Codex").ends_with("The task:\nСделай экспорт") && review_prompt("x", "Codex").contains("(Codex)"));
+        assert!(handover_prompt("Сделай экспорт", "Claude Code").starts_with("Another agent (Claude Code) started this task"));
+        assert!(!handover_prompt("x", "y").contains("  "), "the lines are joined with single spaces");
+    }
+
+    #[test]
+    fn who_can_be_handed_over_and_reviewed() {
+        let claude: Run = serde_json::from_str(
+            r#"{"id":"c1","project":"Shop","projectPath":"/P/Shop","folder":"/P/Shop","commandTitle":"Своя задача","task":"Экспорт",
+                "startedAt":"2026-11-18T10:00:00Z","timeLimitMinutes":90,"pid":42,"state":"running","notified":false,"prompt":"Do the export"}"#,
+        )
+        .unwrap();
+        assert!(!claude.can_hand_over(), "it works");
+        let mut paused = claude.clone();
+        paused.mark_paused("2026-11-18T10:20:00Z".parse().unwrap());
+        assert!(paused.can_hand_over());
+        let with = |state: RunState| Run { state, ..claude.clone() };
+        assert!(with(RunState::Failed).can_hand_over() && with(RunState::Stopped).can_hand_over());
+        assert!(!with(RunState::Succeeded).can_hand_over() && !with(RunState::TimedOut).can_hand_over());
+        assert!(!Run { prompt: None, ..with(RunState::Failed) }.can_hand_over(), "the task was not kept");
+        let mut codex = with(RunState::Failed);
+        codex.other.insert("agent".into(), json!("codex"));
+        assert!(!codex.can_hand_over(), "Codex's own run");
+        assert_eq!((codex.agent_title(), claude.agent_title()), ("Codex", "Claude Code"));
+
+        let done = with(RunState::Succeeded);
+        assert!(done.can_review(&[]) && done.reviewer_is_codex() && !claude.can_review(&[]));
+        let mut review = Run { id: "r1".into(), state: RunState::Running, ..claude.clone() };
+        review.other.insert("reviewOf".into(), json!("c1"));
+        review.other.insert("agent".into(), json!("codex"));
+        assert!(!done.can_review(&[review.clone()]), "being reviewed");
+        assert!(!Run { state: RunState::Succeeded, ..review.clone() }.can_review(&[]), "a review is not reviewed");
+        assert!(done.can_review(&[Run { state: RunState::Failed, ..review.clone() }]), "a failed review can be asked again");
+        assert!(!review.reviewer_is_codex());
+    }
+
+    #[test]
     fn rules_per_system() {
         let (allow, deny) = rules(false);
         assert!(allow.contains(&"Bash(git push origin *)".to_owned()) && allow.contains(&"Bash(npm)".to_owned()));
@@ -913,6 +1042,7 @@ not json at all
             project: "Shop", project_path: &dir, folder: &dir, worktree_branch: None, command_title: "Своя задача",
             task: "Do it", prompt: "Задача: «it's done» & more", time_limit_minutes: 5, permissions: "code", result_file: None,
             codex: false,
+            review_of: None,
         };
         let (mut run, mut child) = start(&runs, &fake, &new).unwrap();
         assert!(child.wait().unwrap().success());

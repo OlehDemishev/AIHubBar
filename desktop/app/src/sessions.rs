@@ -166,6 +166,10 @@ pub struct RunRow {
     running: bool,
     /// Held by the limit guard: «Продолжить сейчас».
     paused: bool,
+    /// «Передать Codex»: a Claude run that is paused or ended badly, with Codex installed.
+    handover: bool,
+    /// «Проверить в …»: who would read this finished run's work.
+    review: Option<&'static str>,
     pull_request: Option<String>,
 }
 
@@ -252,8 +256,10 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
         .collect();
     // Background runs: on their hook session's row (same id), or a row of their own while they run and for a while after.
     let now = Utc::now();
+    let has_codex = app.state::<crate::services::Agents>().found().iter().any(|agent| agent.id == "codex");
     for run in &runs {
-        let row = RunRow { id: run.id.clone(), running: run.is_running(), paused: run.is_paused(), pull_request: run.pull_request_url.clone() };
+        let review = run.can_review(&runs).then(|| if run.reviewer_is_codex() { "Codex" } else { "Claude Code" }).filter(|reviewer| *reviewer != "Codex" || has_codex);
+        let row = RunRow { id: run.id.clone(), running: run.is_running(), paused: run.is_paused(), handover: has_codex && run.can_hand_over(), review, pull_request: run.pull_request_url.clone() };
         // Codex's hook names its session by Codex's thread, not by the run.
         let thread = run.is_codex().then(|| codex_thread(run)).flatten();
         if let Some(existing) = rows.iter_mut().find(|r| r.id == run.id || thread.as_deref() == Some(r.id.as_str())) {
