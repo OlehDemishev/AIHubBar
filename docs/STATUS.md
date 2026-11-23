@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Mac — SPEC-content stage 5 is ready in PR 534 (`feat/calendar-ics-word-goals`): the calendar as an `.ics` file and «Цель по словам» of a folder profile; **held until 0.12.0 is out**; the panel line and the file seen live, the windows not
 - 2026-11-23: Windows — «Свои промпты»: kept in Settings, found by the panel's search, started in a chosen project (branch `feat/desktop-saved-prompts`; the two search steps seen live, the start and the Settings card not)
 - 2026-11-23: Windows — the search field in the panel: sessions, projects, quick commands (branch `feat/desktop-panel-search`; seen live). Saved prompts and the hot-key search window are next
 - 2026-11-23: Windows — the «Заметки» module (branch `feat/desktop-notes`; typing, a new note and the Recycle Bin seen live; its Settings card not seen)
@@ -131,7 +132,7 @@
 - towards 1.0: what is in, what is «бета» and what is out is agreed (journal 2026-11-21); the «бета» badge beside a feature is ready in PR 529 (`feat/beta-badge`), **held until 0.12.0 is out** (after it: the badge for «Версии» and batch tasks); left — release notes, translations read by people, feedback from strangers, the island at the real notch
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
-- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`, PR 520 and PR 529; all four contain `main` as of 2026-11-21 and are green
+- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`, PR 520, PR 529 and PR 534; all four contain `main` as of 2026-11-21 and are green
 - batch tasks and «Версии», left to see live (the rest was seen 2026-11-21 in an isolated copy): a batch with a typed text, a model by API, the wait near the limit, the summary and «Что изменилось» as a banner and in Telegram
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
