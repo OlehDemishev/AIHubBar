@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — «Цель по словам» of a folder profile: Settings → «Профили» sets words a day, the panel says «Слов сегодня: N из M» with a bar and «Дней подряд», one notification «Цель дня выполнена» (branch `feat/desktop-word-goal`; seen live on a scratch «Тексты» profile)
 - 2026-11-23: Windows — «Агент мог застрять»: a notification when a working session has done nothing for 20 minutes or runs the same command again and again, and «тихо N мин» on its row after 10 (branch `feat/desktop-stuck-watch`; the row and the quiet notification's trigger seen live on a scratch session)
 - 2026-11-23: Windows — the pair's «Сравнение» window: «Сравнить с …» under a run of a pair, both sides with their files, a file's changes line by line, «Различия между вариантами», «Оставить этот вариант», «Влить в …», «Убрать папку и ветку» (branch `feat/desktop-pair-compare`; seen live on a scratch pair)
 - 2026-11-23: Windows 0.1.10 published as an unsigned pre-release (tag `desktop-v0.1.10`) on Oleh's «Да, выпускай»: the help window, other Claude accounts, «Сервисы AI» by service, feedback buttons, one task for Claude and Codex; installed on the laptop by the agent (0.1.8 → 0.1.9 → 0.1.10); «latest» stays the Mac's v0.12.0
@@ -208,6 +209,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: the word goal of a folder profile (branch `feat/desktop-word-goal`)
+
+Done: the fifth Mac feature of «Надо догонять». The Mac's `WordGoal` and `WordProgress`. Settings → «Профили» → a folder profile → «Цель по словам: нет» / «Цель: N слов/день» (0–20 000, by hundreds; the profile's `wordGoal`, the Mac's field). Above the profile's projects the panel says «Слов сегодня: N из M» with a small bar, ✓ and green once reached, and «Дней подряд: K» from two days on; the first look that sees the goal reached gives one notification «Цель дня выполнена» a day. The words are those added today to the projects' main files: a day starts from what each file had at the last look the day before, a file first seen today starts from what it has (an old text dropped in is not today's work), cut text never counts below zero, and after a longer break the count starts from what is there. The record is kept even while the goal is off, in `word-goals.json` in the app's data folder, the Mac's format (numbers only, no text). `core/src/word_goal.rs`, `core/src/profiles.rs`, `app/src/projects.rs`, `app/src/profiles.rs`, `ui/panel.html`, `ui/settings.html`; all texts are the Mac's.
+Checked: `python scripts/strings.py --check`, `cargo test --workspace` on Windows (three new: words written today — first look, a new file, cut text, the next day, a long break; days in a row; the Mac's file read and written back as it was). Live on the laptop, the build from the branch, with a temporary «Тексты» profile on a scratch folder (one article, 200 words, goal 50) made current: the panel said «✎ Слов сегодня: 0 из 50»; 30 words added and the projects read again — «30 из 50»; 30 more — «✓ Слов сегодня: 60 из 50» and the log «word goal reached: 60 of 50» (the toast itself the agent can't see); `word-goals.json` had the day, the baseline 201 and the latest 261 by project and main file; in Settings → «Профили» 230 typed became «Цель: 200 слов/день» and was saved. The scratch profile, folder and `word-goals.json` were removed, the settings file put back and the installed app started again.
+Left: «Дней подряд» not seen (it needs two days); a profile from a Mac with its `word-goals.json` not tried. The goal's entry is a number field, not the Mac's stepper. Seen in Russian.
 
 ## 2026-11-23 — Windows: «Агент мог застрять» (branch `feat/desktop-stuck-watch`)
 

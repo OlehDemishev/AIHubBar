@@ -127,6 +127,11 @@ impl Profile {
         self.other.get("wordsPerMinute").and_then(Value::as_u64).filter(|&n| n > 0).unwrap_or(150)
     }
 
+    /// «Цель по словам»: words a day in the projects' main files; 0 — none (the Mac's `wordGoal`).
+    pub fn word_goal(&self) -> usize {
+        self.other.get("wordGoal").and_then(Value::as_u64).map_or(0, |n| n.min(20_000) as usize)
+    }
+
     /// `off`, `dates` (the cards' deadlines and publications) or `contentPlan` (also `контент-план.md`).
     pub fn calendar(&self) -> &str {
         self.other.get("calendar").and_then(Value::as_str).filter(|c| ["off", "dates", "contentPlan"].contains(c)).unwrap_or("off")
@@ -169,6 +174,7 @@ impl Profile {
             "stages" => value.as_array().map(|list| json!(list.iter().map(|s| s.as_str().unwrap_or_default()).collect::<Vec<_>>())),
             "metrics" => value.as_array().map(|list| json!(METRICS.iter().filter(|m| list.iter().any(|v| v == **m)).collect::<Vec<_>>())),
             "wordsPerMinute" => value.as_u64().map(|n| json!(n.clamp(80, 250))),
+            "wordGoal" => value.as_u64().map(|n| json!(n.min(20_000))),
             "permissions" => value.as_str().filter(|p| PERMISSIONS.contains(p)).map(|p| json!(p)),
             "service" => match value {
                 Value::Null => {
