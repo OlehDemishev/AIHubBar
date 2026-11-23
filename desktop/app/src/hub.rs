@@ -151,13 +151,29 @@ pub struct WindowView {
     forecast: Option<String>,
 }
 
+impl WindowView {
+    /// A window of Claude's own limits (another account's): no forecast, that comes from the main account's journals.
+    pub(crate) fn of_claude(s: &claudepult_core::i18n::Strings, window: &claudepult_core::usage::UsageWindow, now: chrono::DateTime<Utc>) -> WindowView {
+        WindowView {
+            title: texts::window_title(s, window),
+            percent: Some(window.utilization),
+            value: Some(texts::percent(window.utilization)),
+            color: Some(color(window.utilization)),
+            detail: None,
+            reset: texts::reset_text(s, window.resets_at, now),
+            forecast: None,
+        }
+    }
+}
+
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ServiceView {
-    id: &'static str,
-    title: String,
-    windows: Vec<WindowView>,
-    error: Option<String>,
+    /// A source's id, or `claudeAccount.<id>` for another Claude account.
+    pub(crate) id: String,
+    pub(crate) title: String,
+    pub(crate) windows: Vec<WindowView>,
+    pub(crate) error: Option<String>,
 }
 
 fn color(percent: f64) -> String {
@@ -187,7 +203,7 @@ pub fn hub_view(app: AppHandle) -> HubView {
     let services = state
         .into_iter()
         .map(|limit| ServiceView {
-            id: limit.source.id(),
+            id: limit.source.id().to_owned(),
             title: limit.source.title(&texts),
             error: limit.error.clone(),
             windows: limit
@@ -204,8 +220,11 @@ pub fn hub_view(app: AppHandle) -> HubView {
                 })
                 .collect(),
         })
-        .collect();
-    HubView { main, services }
+        .collect::<Vec<_>>();
+    // Other Claude accounts first, as the Mac puts them right under Claude.
+    let mut all = app.state::<crate::accounts::Accounts>().services(&app, &texts, now);
+    all.extend(services);
+    HubView { main, services: all }
 }
 
 /// «Обновить» in the panel.

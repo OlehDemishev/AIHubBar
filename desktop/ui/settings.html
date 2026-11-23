@@ -357,6 +357,13 @@
           </div>
           <p class="error" hidden></p>
         </section>
+        <section class="card" id="claude-accounts">
+          <h2 data-t="Другие аккаунты Claude"></h2>
+          <div id="claude-account-rows"></div>
+          <p style="margin-top: 8px"><button id="claude-account-add" data-t="Добавить аккаунт…"></button> <button id="claude-account-refresh" data-t="Обновить"></button></p>
+          <p class="error" id="claude-account-note" hidden></p>
+          <p class="secondary" data-t="Основной аккаунт настраивать не нужно. Для другого выберите его папку настроек (CLAUDE_CONFIG_DIR) и нажмите «Войти»: его лимиты появятся в панели. Прогноза и истории у таких аккаунтов нет."></p>
+        </section>
         <section class="card services">
           <h2 data-t="Другие AI"></h2>
           <div class="row">
@@ -1120,6 +1127,44 @@
     document.getElementById("keep-awake-choose").onclick = async () => showModules(await invoke("choose_keep_awake_apps"));
     document.getElementById("keep-awake-clear").onclick = () => saveRules({ whileApps: [] });
     showModules(await invoke("modules_view"));
+
+    // «Другие аккаунты Claude»: a name, the config folder, «Войти» in a terminal, and removing in two clicks.
+    function showClaudeAccounts(view) {
+      const note = document.getElementById("claude-account-note");
+      note.hidden = !view.message;
+      note.textContent = view.message ?? "";
+      document.getElementById("claude-account-refresh").hidden = view.accounts.length === 0;
+      document.getElementById("claude-account-rows").replaceChildren(...view.accounts.map((account) => {
+        const box = document.createElement("div");
+        box.className = "claude-account";
+        const row = document.createElement("div");
+        row.className = "row";
+        const name = Object.assign(document.createElement("input"), { type: "text", value: account.name });
+        name.setAttribute("aria-label", t("Название"));
+        name.onchange = async () => showClaudeAccounts(await invoke("rename_claude_account", { id: account.id, name: name.value }));
+        const folder = Object.assign(document.createElement("span"), { className: "secondary path", textContent: account.configDir, title: account.configDir });
+        const signIn = Object.assign(document.createElement("button"), { textContent: t("Войти") });
+        signIn.onclick = async () => showClaudeAccounts(await invoke("sign_in_claude_account", { id: account.id }));
+        const remove = Object.assign(document.createElement("button"), { textContent: t("Убрать аккаунт") });
+        remove.onclick = async () => {
+          if (!remove.dataset.asked) { remove.dataset.asked = "1"; remove.textContent = t("Убрать"); return; }
+          showClaudeAccounts(await invoke("remove_claude_account", { id: account.id }));
+        };
+        const buttons = document.createElement("span");
+        buttons.append(signIn, " ", remove);
+        row.append(name, folder, buttons);
+        box.append(row);
+        if (account.status) box.append(Object.assign(document.createElement("p"), { className: account.isError ? "error" : "secondary", textContent: account.status }));
+        return box;
+      }));
+    }
+    document.getElementById("claude-account-add").onclick = async () => showClaudeAccounts(await invoke("add_claude_account"));
+    document.getElementById("claude-account-refresh").onclick = async () => showClaudeAccounts(await invoke("refresh_claude_accounts"));
+    showClaudeAccounts(await invoke("claude_accounts"));
+    window.__TAURI__.event.listen("hub-changed", async () => {
+      // Not while a name is being typed: the rows are built anew.
+      if (!document.activeElement?.closest?.("#claude-account-rows")) showClaudeAccounts(await invoke("claude_accounts"));
+    });
 
     // «Быстрые команды»: on or off, and the library — each command a small form, written when a field is left.
     let quick = null;

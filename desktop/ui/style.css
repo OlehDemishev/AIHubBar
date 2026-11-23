@@ -83,6 +83,9 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .pane-icon.telegram { background: #2aabee; }
 .settings { flex: 1; min-width: 0; overflow-y: auto; scrollbar-width: thin; padding: 18px 24px 24px; display: flex; flex-direction: column; gap: 14px; }
 .settings > * { flex: none; }
+.claude-account .row input { flex: none; width: 150px; }
+.claude-account .row .path { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.claude-account p { margin: 0 0 6px; }
 /* «Справка»: the Settings layout with topics in the sidebar. */
 .help-nav-glyph { flex: none; width: 18px; text-align: center; }
 .help-glyph { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--accent); color: #fff; font-size: 20px; }
