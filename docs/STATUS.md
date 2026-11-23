@@ -186,6 +186,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Mac: local servers in an open project row (branch `feat/local-servers`)
+
+Done: the eighth of the ten ideas of 2026-11-23. An expanded project row gets «Локальные серверы»: every process that listens on a TCP port and runs in the project's folder or below it (its worktrees too) — the port, the program's name, a button that opens `http://localhost:<port>` and a stop button. Stop asks once more in the row («Остановить?», 4 seconds), then sends SIGTERM — and only if the same process still listens on that port from that folder. Read by `lsof` every 10 seconds, only while the row is open; the section is not shown when nothing listens. `AIHubBar/Services/LocalServers.swift`, `ProjectRowView`. Three new texts in 12 languages.
+Checked: not built locally (swap 10.4 of 11 GB): the PR's CI runs the tests and the catalog check (`LocalServersTests`: reading `lsof`'s output, a server and its project). Both string checks pass.
+Left: **held until 0.12.0 is out.** Not seen live and no process was stopped by it. A server started from another folder (a global tool, Docker) is not tied to a project and is not shown; there is no list of all ports. The stop is a polite one — a program that ignores SIGTERM stays. Folder projects (non-git modes) have no such section.
+
 ## 2026-11-23 — 1.0 list: the shared Telegram bot and the Mini App go in as ready (branch `chore/status-shared-bot-ready`)
 
 Done: Oleh's answer «Как готовое» to the question left by the entry of `fix/telegram-help`: in the 1.0 list (entry «the list for 1.0» below, not rewritten) the shared Telegram bot through the Cloudflare Worker and the Mini App move from «Not in 1.0» to the ready part, with no «бета» badge. The line is gone from «Needs Oleh».

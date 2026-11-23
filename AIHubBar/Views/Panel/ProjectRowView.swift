@@ -78,6 +78,13 @@ struct ProjectRowView: View {
 
 private struct ProjectDetailsView: View {
     let project: Project
+    /// What listens on a port from this project's folder, read while the row is open.
+    @State private var servers: [LocalServer] = []
+
+    private func readServers() async {
+        let all = await LocalServers.scan()
+        servers = LocalServers.servers(all, in: project.path)
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -140,6 +147,88 @@ private struct ProjectDetailsView: View {
             if !project.worktrees.isEmpty {
                 WorktreeListView(project: project)
             }
+
+            if !servers.isEmpty {
+                LocalServersView(servers: servers) { await readServers() }
+            }
+        }
+        .task(id: project.path) {
+            // Only while the row is open: the task ends with the view.
+            while !Task.isCancelled {
+                await readServers()
+                try? await Task.sleep(for: .seconds(10))
+            }
+        }
+    }
+}
+
+/// «Локальные серверы»: a port, the program, a link and a stop button with a second press to confirm.
+private struct LocalServersView: View {
+    let servers: [LocalServer]
+    let reload: () async -> Void
+    /// The server whose stop button was pressed once: the second press within a few seconds stops it.
+    @State private var confirming: String?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text("Локальные серверы")
+                .scaledFont(.caption, weight: .semibold)
+                .foregroundStyle(.secondary)
+            ForEach(servers) { server in
+                serverRow(server)
+            }
+        }
+    }
+
+    private func serverRow(_ server: LocalServer) -> some View {
+        HStack(spacing: 6) {
+            Image(systemName: "network").foregroundStyle(.secondary)
+            Text(verbatim: ":\(server.port)").monospacedDigit()
+            Text(verbatim: server.command).foregroundStyle(.secondary).lineLimit(1).truncationMode(.tail)
+            Spacer(minLength: 4)
+            if confirming == server.id {
+                Button("Остановить?") { stop(server) }
+                    .buttonStyle(.borderless)
+                    .foregroundStyle(.red)
+            } else {
+                if let url = server.url {
+                    Button {
+                        ProjectActions.open(url)
+                    } label: {
+                        Image(systemName: "safari")
+                    }
+                    .buttonStyle(.borderless)
+                    .help("Открыть в браузере")
+                    .accessibilityLabel("Открыть в браузере")
+                }
+                Button {
+                    ask(server)
+                } label: {
+                    Image(systemName: "stop.circle")
+                }
+                .buttonStyle(.borderless)
+                .help("Остановить процесс")
+                .accessibilityLabel("Остановить процесс")
+            }
+        }
+        .scaledFont(.caption)
+        .help(server.folder)
+    }
+
+    private func ask(_ server: LocalServer) {
+        confirming = server.id
+        Task {
+            try? await Task.sleep(for: .seconds(4))
+            if confirming == server.id { confirming = nil }
+        }
+    }
+
+    private func stop(_ server: LocalServer) {
+        confirming = nil
+        Task {
+            await LocalServers.stop(server)
+            try? await Task.sleep(for: .seconds(1))
+            await reload()
         }
     }
 }
