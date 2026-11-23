@@ -138,8 +138,8 @@
 **Next:**
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
 - 0.12.0 is out (2026-11-23); of its features still unseen with real agents: a real `codex` asking for a permission, handover, review, the pair's notification banner
-- the next release, 0.13.0: not before Tuesday 2026-12-01, on Oleh's word, a beta first. In `main` for it since 2026-11-23 (twelve PRs held for 0.12.0, merged one by one with green Mac checks): «Версии» and its card, batch tasks, the Antigravity «ждёт» notification, the «бета» badge, the calendar's `.ics` export and the word goal, the stuck-agent notification, «Ждёт вас» in the day's summary, the swap notification, three Shortcuts actions, files and dictation in the quick prompt, local servers in a project row. `docs/release-notes/0.13.0.md` names them all; left for the release: the «Что нового» card (`WhatsNew.version`, `DemoData.version`), the help's facts about the six newest (none yet), translations of the new texts read by nobody
-- towards 1.0: what is in, what is «бета» and what is out is agreed (journal 2026-11-21; the shared Telegram bot and the Mini App are in as ready, 2026-11-23); the «бета» badge is in `main` (PR 529), the one for «Версии» and batch tasks is PR 561 (`feat/beta-badge-versions-batch`); left — translations read by people, feedback from strangers, the island at the real notch
+- **0.13.0 tomorrow, Tuesday 2026-11-24** (Oleh, 2026-11-23 afternoon: «сегодня работаем до упора, к вечеру сделаем рабочий релиз на завтра» — it replaces «not before 2026-12-01»); the release command itself still waits for his word. In `main` for it: «Версии» and its card, batch tasks, the Antigravity «ждёт» notification, the «бета» badges, the calendar's `.ics` export and the word goal, the stuck-agent notification, «Ждёт вас» in the day's summary, the swap notification, three Shortcuts actions, files and dictation in the quick prompt, local servers in a project row, «Не гасить и экран» beside «Не спать» (another session's PR 560). Ready: `docs/release-notes/0.13.0.md`, the «Что нового» card and the demo at «0.13», the help's facts. Today, in order: an independent review of everything since `v0.12.0` and its fixes; a live pass over the features in an isolated copy; the full check on the final `main`; in the evening Oleh decides — a beta first (docs/RELEASE.md asks for one when the panel changes) or straight to everyone
+- towards 1.0: what is in, what is «бета» and what is out is agreed (journal 2026-11-21; the shared Telegram bot and the Mini App are in as ready, 2026-11-23); the «бета» badges are in `main` (PR 529, PR 561); left — translations read by people, feedback from strangers, the island at the real notch
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - version 1.1: the iPhone app (Oleh, 2026-11-23: «приложение на версию 1.1») — not before 1.0 is out; the agent's offer for a first version: sessions, permission requests, limits and a Live Activity, the rest stays with the Telegram bot. Before any code agree with Oleh what it shows and how the data reaches the phone; the Apple side (App ID, signing, push keys) is his
@@ -189,6 +189,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Mac: 0.13.0 is for tomorrow (branch `chore/status-0.13-tomorrow`)
+
+Done: Oleh, 2026-11-23 about 14:15: «сегодня работаем до упора. К вечеру сделаем рабочий релиз на завтра. А пока продолжай по плану». The header's «Next» moves 0.13.0 from «not before 2026-12-01» to Tuesday 2026-11-24 and lists the day's order: a review of everything since `v0.12.0` by a reader who did not write it, its fixes, a live pass, the full check, and Oleh's decision in the evening between a beta first and a release for everyone.
+Checked: docs only; both string checks.
+Left: the release is not started: it runs on Oleh's word.
 
 ## 2026-11-23 — Mac: «Ждёт вас», the badge in Settings and the help window seen live (branch `chore/status-windows-seen`)
 
