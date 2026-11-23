@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — the search field in the panel: sessions, projects, quick commands (branch `feat/desktop-panel-search`; seen live). Saved prompts and the hot-key search window are next
 - 2026-11-23: Windows — the «Заметки» module (branch `feat/desktop-notes`; typing, a new note and the Recycle Bin seen live; its Settings card not seen)
 - 2026-11-21: Windows — limit hits are counted, «Упирался в лимит: N» in «Сегодня» (branch `feat/desktop-limit-hits`; the line seen live from a made-up record)
 - 2026-11-21: Windows 0.1.7 published as an unsigned pre-release (tag `desktop-v0.1.7`) on Oleh's «Да, выпускай»: outages, «Недавно завершённые», context fullness, «Сегодня»; the laptop updated itself from 0.1.6; «latest» stays the Mac's v0.11.0
@@ -177,6 +178,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: the search in the panel (branch `feat/desktop-panel-search`)
+
+Done: on Oleh's «Продолжай, пока не упрешься в текущую версию на маке». The Mac's `PanelSearch` and its field under the header: sessions (by project and by what they do), projects (by name and branch) and quick commands (by name and text), twelve at most; a query typed on the other keyboard layout counts («фшр» for «aih»). ↑ ↓ choose, Enter or a click does the chosen one — a session's row is brought into view and marked, a project is expanded in the panel, a quick command is pressed (its own «Запустить?» stays); Esc clears the text and, with nothing typed, puts the panel away. `core/src/search.rs`, `app/src/search.rs`, `ui/panel.html`. All texts are the Mac's.
+Checked: `python scripts/strings.py --check` (689 texts), `cargo test --workspace` on Windows (the other layout, the order, a session by its task, a project by its branch, the limit of twelve). Live on the laptop, a build from the branch: «фшр» typed in the field found the session «AIHubBar — инструмент screenshot» and the project «AIHubBar — feat/desktop-panel-search», the first row marked with «↵»; ↓ and Enter cleared the field and expanded the project with its STATUS in the panel.
+Left: not ported — report commands in the search (the Windows version has no such block), saved prompts, the search window on a hot key; «Показать сессию» only points at the row (there is no «Показать» on Windows yet). Not seen: a quick command from the search (the module is off here), Esc, «Ничего не найдено». After the look the project's row now scrolls to its top, not its middle — that change was not seen. Seen in Russian only.
 
 ## 2026-11-23 — Windows: the «Заметки» module (branch `feat/desktop-notes`)
 
