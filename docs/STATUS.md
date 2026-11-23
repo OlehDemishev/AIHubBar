@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — «Сервисы AI» by service: capsules Claude Code, Codex, Gemini, Copilot, Cursor, «Другие» with a dot, each showing only its own agents, hooks, limits and keys (branch `feat/desktop-service-pages`; every capsule seen live)
 - 2026-11-23: Windows — «Предложить идею…» and «Сообщить о проблеме…» in Settings → «Основные» and under the help's topics: the repository's forms on GitHub, the bug form with the version and the system filled in (branch `feat/desktop-feedback`; the buttons seen, not pressed)
 - 2026-11-23: Windows — «Другие аккаунты Claude»: an account is a Claude Code config folder, its limits are a row in the panel under the main account's; Settings → «Сервисы AI» adds, names, signs in and removes one (branch `feat/desktop-claude-accounts`; seen live with two test accounts, «Войти» and the folder dialog not)
 - 2026-11-23: Windows — the «Справка» window: ten topics true for Windows with a search, «Как начать», what each part does and «Открыть в настройках»; «?» in the panel's header and `claudepult --app-command help` (branch `feat/desktop-help`; seen live). A first version: far fewer facts than the Mac's, no pictures
@@ -204,6 +205,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: «Сервисы AI» by service (branch `feat/desktop-service-pages`)
+
+Done: the third of the four tasks of «Все предложенное подряд»; it was the «Left» of the Settings sidebar («the services are one long page, not the Mac's page per service»). On top of «Сервисы AI» a capsule per service, the Mac's six: Claude Code, Codex, Gemini, Copilot, Cursor, «Другие», each with a dot that is green when something of the service works here (an agent installed, a limit read, a key that answers, hooks in place). Below only the chosen service's own: its agent, its hooks, its row of «Другие AI», its model by API. Claude Code also keeps what belongs to no other service — «Главный сервис», the alert thresholds, the pause near a limit, the sign-in renewal, «Другие аккаунты Claude», «Фоновые задачи», «CLAUDE.md и MCP», «Свои промпты»; «Другие» has OpenRouter, the other models by API and «Расход по API». A block whose rows all belong to other services is not shown. The capsule is remembered, and the Mac's link `service.<name>` opens Settings on it. The data is not split in the app: the lists are filled as before and each row is marked with its service (`ui/settings.html`, `ui/style.css`). One Mac text used, «Другие».
+Checked: `python scripts/strings.py --check`, `cargo test --workspace` on Windows. Live on the laptop, the build from the branch, driven through WebView2's debugging port (a temporary line, not in the commit): each of the six capsules chosen and what is under it read — Codex: the agent, its hooks, «Codex» and «OpenAI API» in «Другие AI», OpenAI by API; Gemini: Gemini CLI and Antigravity, «Gemini CLI», Google Gemini; Copilot: the agent, its hooks, «GitHub Copilot»; Cursor: the agent alone; «Другие»: OpenRouter, eight models by API, «Расход по API»; Claude Code: the rest. Codex had the green dot (installed). `service.gemini` sent to the window opened «Сервисы AI» on Gemini; the capsule was remembered. The settings file was put back and the installed app started again.
+Left: Claude Code's dot was grey on the first look (the hooks pointed at another build) — changed to green whenever its hooks are there at all, not seen again. The general settings sit under Claude Code because Windows has no «Лимиты AI» page for them, as the Mac has. The Settings search still finds «Сервисы AI» as one page, not a service. The capsules are not reached with arrow keys, only Tab. Seen in Russian, the light theme.
 
 ## 2026-11-23 — Windows: feedback buttons (branch `feat/desktop-feedback`)
 
