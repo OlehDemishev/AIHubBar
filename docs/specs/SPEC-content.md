@@ -111,7 +111,8 @@ No new module: it is a way to run the existing commands.
    `--calendar-ics <file>`: a file the person saves, no access to their calendars; the UID comes from where the date
    lives, so a newer file moves the events. «Цель по словам» of a folder profile (`Profile.wordGoal`, words a day,
    0 = none): the projects block says «Слов сегодня: N из M» — words added today to the main files, counted from
-   yesterday's last look (`WordGoal`, `word-goals.json`: numbers only).
+   yesterday's last look (`WordGoal`, `word-goals.json`: numbers only). A notification once a day when the goal is reached, and «Дней подряд: N»
+   from the finished days' counts (kept 60 days).
 
 Rules for every stage: hover hint on each icon-only control, all strings in 13 languages, nothing sent anywhere but
 the AI service chosen for the command.

@@ -82,6 +82,30 @@ struct WordGoalTests {
         #expect(today.written(["/a": 3000]) == 0)
     }
 
+    @Test func aFinishedDayGoesToTheHistoryAndDaysInARowAreCounted() {
+        var record = WordGoal.advanced(nil, counts: ["/a": 0], now: morning.addingTimeInterval(-86_400 * 2), calendar: calendar)
+        record = WordGoal.advanced(record, counts: ["/a": 400], now: morning.addingTimeInterval(-86_400 * 2 + 3600), calendar: calendar)
+        record = WordGoal.advanced(record, counts: ["/a": 400], now: morning.addingTimeInterval(-86_400), calendar: calendar)
+        record = WordGoal.advanced(record, counts: ["/a": 750], now: morning.addingTimeInterval(-86_400 + 3600), calendar: calendar)
+        record = WordGoal.advanced(record, counts: ["/a": 750], now: morning, calendar: calendar)
+        #expect(record.history == ["2026-11-02": 400, "2026-11-03": 350])
+        // Today is not over: two days behind count while today's goal is open, three once it is reached.
+        #expect(record.streak(goal: 300, today: 0, now: morning, calendar: calendar) == 2)
+        #expect(record.streak(goal: 300, today: 300, now: morning, calendar: calendar) == 3)
+        #expect(record.streak(goal: 380, today: 0, now: morning, calendar: calendar) == 0)
+        #expect(record.streak(goal: 0, today: 100, now: morning, calendar: calendar) == 0)
+    }
+
+    @Test func theAnnouncedDayStaysThroughTheDaysLooks() {
+        var record = WordGoal.advanced(nil, counts: ["/a": 0], now: morning, calendar: calendar)
+        record.announcedDay = record.day
+        record = WordGoal.advanced(record, counts: ["/a": 900], now: morning.addingTimeInterval(3600), calendar: calendar)
+        #expect(record.announcedDay == "2026-11-04")
+        let next = WordGoal.advanced(record, counts: ["/a": 900], now: morning.addingTimeInterval(86_400), calendar: calendar)
+        #expect(next.announcedDay == nil)
+        #expect(next.history == ["2026-11-04": 900])
+    }
+
     @Test func theRecordSurvivesTheFile() throws {
         let url = FileManager.default.temporaryDirectory.appending(path: "word-goals-\(UUID().uuidString).json")
         defer { try? FileManager.default.removeItem(at: url) }

@@ -30,6 +30,11 @@ struct FolderProjectsView: View {
                     Text("Слов сегодня: \(words) из \(goal)")
                         .scaledFont(.caption)
                         .foregroundStyle(.secondary)
+                    if store.wordStreak >= 2 {
+                        Text("Дней подряд: \(store.wordStreak)")
+                            .scaledFont(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                     ProgressView(value: Double(min(words, goal)), total: Double(goal))
                         .tint(words >= goal ? .green : .accentColor)
                         .frame(maxWidth: 90)

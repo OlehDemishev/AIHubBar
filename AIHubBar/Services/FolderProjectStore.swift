@@ -12,6 +12,9 @@ final class FolderProjectStore {
     private(set) var lastError: String?
     /// Words added today to the main files of the profile's projects; the view shows it when the profile has a goal.
     private(set) var wordsToday: Int?
+    /// Days in a row with the goal reached, today included once it is.
+    private(set) var wordStreak = 0
+    @ObservationIgnored var post: (_ id: String, _ title: String, _ body: String) -> Void = { Notifier.post(id: $0, title: $1, body: $2) }
 
     private let settings: AppSettings
     private var loop: Task<Void, Never>?
@@ -52,6 +55,7 @@ final class FolderProjectStore {
             projects = []
             scannedSource = source
             wordsToday = nil
+            wordStreak = 0
             return
         }
         isRefreshing = true
@@ -74,12 +78,20 @@ final class FolderProjectStore {
         guard !profile.isEmpty else { wordsToday = nil; return }
         let counts = Dictionary(projects.compactMap { project in project.words.map { (project.path, $0) } }, uniquingKeysWith: { first, _ in first })
         var records = WordGoal.load()
-        let record = WordGoal.advanced(records[profile], counts: counts, now: .now)
+        var record = WordGoal.advanced(records[profile], counts: counts, now: .now)
+        let words = record.written(counts)
+        let goal = settings.activeWordGoal
+        // Once a day, at the look that first sees the goal reached.
+        if goal > 0, words >= goal, record.announcedDay != record.day {
+            record.announcedDay = record.day
+            post("word-goal-\(profile)-\(record.day)", String(localized: "Цель дня выполнена"), String(localized: "Слов сегодня: \(words) из \(goal)"))
+        }
         if records[profile] != record {
             records[profile] = record
             WordGoal.save(records)
         }
-        wordsToday = record.written(counts)
+        wordsToday = words
+        wordStreak = record.streak(goal: goal, today: words, now: .now)
     }
 
     private func folderMissing(_ source: ProjectSource) -> Bool {

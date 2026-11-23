@@ -11,9 +11,26 @@ struct WordProgress: Codable, Equatable, Sendable {
     var baselines: [String: Int]
     /// The same at the last look.
     var latest: [String: Int]
+    /// Words written on the days before, by day; the last 60.
+    var history: [String: Int]?
+    /// The day whose reached goal was already announced.
+    var announcedDay: String?
 
     func written(_ counts: [String: Int]) -> Int {
         counts.reduce(0) { $0 + max(0, $1.value - (baselines[$1.key] ?? $1.value)) }
+    }
+
+    /// Days in a row with the goal reached, ending today (when today's is reached) or yesterday (the day is not over).
+    func streak(goal: Int, today words: Int, now: Date, calendar: Calendar = .current) -> Int {
+        guard goal > 0 else { return 0 }
+        var count = words >= goal ? 1 : 0
+        var date = now
+        while let previous = calendar.date(byAdding: .day, value: -1, to: date),
+              (history?[WordGoal.day(previous, calendar: calendar)] ?? 0) >= goal {
+            count += 1
+            date = previous
+        }
+        return count
     }
 }
 
@@ -29,15 +46,21 @@ enum WordGoal {
         let today = day(now, calendar: calendar)
         guard let previous else { return WordProgress(day: today, baselines: counts, latest: counts) }
         if previous.day == today {
-            var baselines = previous.baselines
-            for (path, count) in counts where baselines[path] == nil { baselines[path] = count }
-            return WordProgress(day: today, baselines: baselines, latest: counts)
+            var record = previous
+            for (path, count) in counts where record.baselines[path] == nil { record.baselines[path] = count }
+            record.latest = counts
+            return record
         }
+        // The day that ended goes to the history with what its last look saw.
+        var history = previous.history ?? [:]
+        history[previous.day] = previous.written(previous.latest)
+        for old in history.keys.sorted().dropLast(60) { history[old] = nil }
         let yesterday = calendar.date(byAdding: .day, value: -1, to: now).map { day($0, calendar: calendar) }
-        guard previous.day == yesterday else { return WordProgress(day: today, baselines: counts, latest: counts) }
-        var baselines: [String: Int] = [:]
-        for (path, count) in counts { baselines[path] = previous.latest[path] ?? count }
-        return WordProgress(day: today, baselines: baselines, latest: counts)
+        var baselines = counts
+        if previous.day == yesterday {
+            for (path, count) in counts { baselines[path] = previous.latest[path] ?? count }
+        }
+        return WordProgress(day: today, baselines: baselines, latest: counts, history: history)
     }
 
     static var fileURL: URL { SessionFiles.supportDirectory.appending(path: "word-goals.json") }
