@@ -7,7 +7,7 @@ import Foundation
 struct WordProgress: Codable, Equatable, Sendable {
     /// `2026-11-23` in the Mac's own calendar.
     var day: String
-    /// Words in each project's main file when the day began, by project path.
+    /// Words in each project's main file when the day began, by `WordGoal.key` (project and main file).
     var baselines: [String: Int]
     /// The same at the last look.
     var latest: [String: Int]
@@ -35,6 +35,9 @@ struct WordProgress: Codable, Equatable, Sendable {
 }
 
 enum WordGoal {
+    /// What a count belongs to: the project and its main file. A project whose main file changes gets a new key.
+    static func key(project: String, mainFile: String?) -> String { project + "#" + (mainFile ?? "") }
+
     static func day(_ date: Date, calendar: Calendar = .current) -> String {
         let parts = calendar.dateComponents([.year, .month, .day], from: date)
         return String(format: "%04d-%02d-%02d", parts.year ?? 0, parts.month ?? 0, parts.day ?? 0)
