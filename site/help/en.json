@@ -409,6 +409,18 @@
               "name" : "Compare"
             },
             {
+              "detail" : "“Choose” under the list of projects: tick the projects, pick one of the profile’s commands and when to run it — “Now”, “Overnight” or “After the limit resets”. The projects go one after another in the background (Claude Code or a model by API), near a limit the batch waits for the reset, and one summary comes at the end.",
+              "name" : "Several projects at once"
+            },
+            {
+              "detail" : "The Versions module saves the texts and the card of a folder project before every AI run and while you write — in the app’s folder, not in the project. How often and how long to keep: Settings → Modules → Versions.",
+              "name" : "Versions"
+            },
+            {
+              "detail" : "“Versions” in an expanded project opens the list of versions: a file from a version next to the current one, “Restore This File” and “Restore the Whole Version”. The current state is saved before a restore, and files that appeared later stay. “What Changed” in the notification about a finished command and in the Log shows the texts before the task and now.",
+              "name" : "Restoring a version"
+            },
+            {
               "detail" : "The profile’s stages, comma-separated; a stage changes with a button in an expanded project. Words, duration, reading time and pages are counted from the main file (.md, .txt, .rtf, .docx).",
               "name" : "Stages and metrics"
             }

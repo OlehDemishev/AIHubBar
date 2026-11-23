@@ -44,6 +44,7 @@ struct ProjectCommandsView: View {
                     .toggleStyle(.button)
                     .controlSize(.mini)
                     .help("Выполнить одну команду 2–3 сервисами и положить результаты рядом")
+                if comparing { BetaBadge() }
             }
 
             if comparing {

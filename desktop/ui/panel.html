@@ -470,6 +470,7 @@
         b.onclick = onclick;
         return b;
       };
+      if (run.paused) line.append(button(t("Продолжить сейчас"), () => invoke("resume_run_now", { id: run.id })));
       if (run.running) {
         const asking = confirmStop.has(run.id);
         line.append(button(asking ? t("Остановить?") : t("Остановить"), () => {
@@ -554,8 +555,19 @@
         };
         return item;
       }));
+      // Runs put off for the night or until the limit resets, each with «Отменить».
+      const queued = await invoke("queued_view");
+      rows.append(...queued.map((waiting) => {
+        const item = element("div", "queued");
+        const clock = element("span", "", "🕓");
+        clock.setAttribute("aria-hidden", "true");
+        const text = element("span", "text", waiting.text);
+        text.title = waiting.text;
+        item.append(clock, text, action(t("Отменить"), () => invoke("cancel_queued", { id: waiting.id })));
+        return item;
+      }));
       document.getElementById("no-hooks").hidden = view.hooks === "installed";
-      document.getElementById("no-sessions").hidden = view.rows.length > 0 || view.hooks !== "installed";
+      document.getElementById("no-sessions").hidden = view.rows.length > 0 || queued.length > 0 || view.hooks !== "installed";
     }
     document.getElementById("hooks-settings").onclick = () => invoke("open_settings");
     await showSessions();
@@ -803,10 +815,10 @@ ${command.hotKey}` : command.value;
         launches.set(project.id, { working: true });
         await showProjects();
         pointAt(project.id, "start");
-        const reply = await invoke("launch_claude", { path: project.id, command: "custom", task, allowBusy: false, mode: null, remember: false, agent: null });
+        const reply = await invoke("launch_claude", { path: project.id, command: "custom", task, allowBusy: false, mode: null, remember: false, agent: null, skipLimit: false });
         next = reply.choose
           ? { choose: { question: reply.choose, command: "custom", task, allowBusy: false } }
-          : { message: reply.message, confirm: reply.confirm ? { command: "custom", task, mode: null, agent: null } : null };
+          : { message: reply.message, confirm: reply.confirm ? { command: "custom", task, mode: null, agent: null } : null, limit: reply.limit ? { command: "custom", task, allowBusy: false } : null };
       } catch (error) {
         next = { message: String(error), error: true };
       }
@@ -1063,15 +1075,28 @@ ${command.hotKey}` : command.value;
       const box = element("div", "claude");
       const state = launches.get(row.path) ?? {};
       const buttons = element("div", "actions");
-      const start = async (command, task, allowBusy = false, mode = null, remember = false, agent = null) => {
+      const start = async (command, task, allowBusy = false, mode = null, remember = false, agent = null, skipLimit = false) => {
         launches.set(row.path, { working: true });
         showProjects();
         let next;
         try {
-          const reply = await invoke("launch_claude", { path: row.path, command, task: task ?? null, allowBusy, mode, remember, agent });
+          const reply = await invoke("launch_claude", { path: row.path, command, task: task ?? null, allowBusy, mode, remember, agent, skipLimit });
           next = reply.choose
             ? { choose: { question: reply.choose, command, task, allowBusy } }
-            : { message: reply.message, confirm: reply.confirm ? { command, task, mode, agent } : null };
+            : { message: reply.message, confirm: reply.confirm ? { command, task, mode, agent, skipLimit } : null, limit: reply.limit ? { command, task, allowBusy } : null };
+        } catch (error) {
+          next = { message: String(error), error: true };
+        }
+        launches.set(row.path, next);
+        showProjects();
+      };
+      // «На ночь» and «После сброса»: the run waits in the queue, the row in «Сессии» can cancel it.
+      const later = async (command, task, when, agent = null) => {
+        launches.set(row.path, { working: true });
+        showProjects();
+        let next;
+        try {
+          next = { message: await invoke("queue_launch", { path: row.path, command, task: task ?? null, when, agent }) };
         } catch (error) {
           next = { message: String(error), error: true };
         }
@@ -1087,8 +1112,14 @@ ${command.hotKey}` : command.value;
       });
       const finish = action(t("Завершить"), () => start("finish"));
       finish.title = t("Завершить сессию: проверки, коммит, push, PR и STATUS по разделу «Конец сессии»");
-      for (const button of [nextStep, custom, finish]) button.disabled = !!state.working;
-      buttons.append(element("span", "bullets-title", "Claude"), nextStep, custom, finish);
+      const postpone = element("select", "service-choice");
+      postpone.title = t("Следующий шаг — в фоне позже: ночью (утром сводка) или когда сбросится лимит сессии. Свою задачу — в «Своя задача…»");
+      postpone.add(new Option(t("Позже"), ""));
+      postpone.add(new Option(t("На ночь"), "night"));
+      postpone.add(new Option(t("После сброса лимита"), "reset"));
+      postpone.onchange = () => { const when = postpone.value; postpone.value = ""; if (when) later("next", null, when); };
+      for (const button of [nextStep, custom, finish, postpone]) button.disabled = !!state.working;
+      buttons.append(element("span", "bullets-title", "Claude"), nextStep, custom, finish, postpone);
       // «Открыть в…»: another installed agent in a terminal, in the project folder.
       if (otherAgents.length) {
         const open = element("select", "service-choice");
@@ -1109,7 +1140,7 @@ ${command.hotKey}` : command.value;
         field.rows = 3;
         field.placeholder = t("Что сделать в %@?", row.name);
         field.value = state.draft ?? "";
-        field.oninput = () => { state.draft = field.value; launches.set(row.path, state); go.disabled = !field.value.trim(); };
+        field.oninput = () => { state.draft = field.value; launches.set(row.path, state); for (const button of [go, night, afterReset]) button.disabled = !field.value.trim(); };
         const cancel = action(t("Отмена"), () => { launches.set(row.path, {}); showProjects(); });
         // Who does it: Claude Code (where the profile says), or Codex in the background when it is installed.
         const codex = otherAgents.some((agent) => agent.id === "codex");
@@ -1124,14 +1155,18 @@ ${command.hotKey}` : command.value;
         const send = () => start("custom", field.value, false, null, false, agent.value || null);
         const go = action(t("Запустить"), send);
         go.classList.add("prominent");
-        go.disabled = !field.value.trim();
+        const night = action(t("На ночь"), () => later("custom", field.value, "night", agent.value || null));
+        night.title = t("Запустить в фоне ночью; утром придёт сводка");
+        const afterReset = action(t("После сброса"), () => later("custom", field.value, "reset", agent.value || null));
+        afterReset.title = t("Запустить в фоне, когда сбросится лимит сессии");
+        for (const button of [go, night, afterReset]) button.disabled = !field.value.trim();
         field.onkeydown = (event) => {
           if (event.key === "Enter" && (event.ctrlKey || event.metaKey) && field.value.trim()) send();
           if (event.key === "Escape") { event.stopPropagation(); cancel.onclick(); }
         };
         const line = element("div", "actions end");
         if (codex) line.append(agent);
-        line.append(cancel, go);
+        line.append(cancel, night, afterReset, go);
         editor.append(field, line, note);
         box.append(editor);
         setTimeout(() => field.focus(), 0);
@@ -1159,7 +1194,19 @@ ${command.hotKey}` : command.value;
         const message = element("div", `launch-message${state.error ? " error" : ""}`);
         message.append(element("span", "", state.message));
         const line = element("div", "actions");
-        if (state.confirm) line.append(action(t("Запустить всё равно"), () => start(state.confirm.command, state.confirm.task, true, state.confirm.mode, false, state.confirm.agent)));
+        if (state.confirm) line.append(action(t("Запустить всё равно"), () => start(state.confirm.command, state.confirm.task, true, state.confirm.mode, false, state.confirm.agent, state.confirm.skipLimit)));
+        if (state.limit) {
+          const waiting = state.limit;
+          line.append(
+            action(t("Запустить после сброса"), () => later(waiting.command, waiting.task, "reset")),
+            action(t("Запустить сейчас"), () => start(waiting.command, waiting.task, waiting.allowBusy, "background", false, null, true)),
+          );
+          if (otherAgents.some((agent) => agent.id === "codex")) {
+            const codex = action(t("В %@", "Codex"), () => start(waiting.command, waiting.task, waiting.allowBusy, "background", false, "codex"));
+            codex.title = t("Claude близок к лимиту: ту же задачу выполнит Codex в фоне");
+            line.append(codex);
+          }
+        }
         line.append(action(t("Скрыть"), () => { launches.delete(row.path); showProjects(); }));
         message.append(line);
         box.append(message);

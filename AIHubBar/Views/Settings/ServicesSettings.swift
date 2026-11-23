@@ -5,6 +5,10 @@ import SwiftUI
 enum ServiceTab: String, CaseIterable, Sendable {
     case claude, codex, gemini, copilot, cursor, other
 
+    /// In 1.0 with the «бета» mark (agreed 2026-11-21): what leans on another program's hooks or undocumented files
+    /// and was not seen on real runs. The mark hides nothing.
+    var isBeta: Bool { self != .claude && self != .other }
+
     var title: String {
         switch self {
         case .claude: "Claude Code"
@@ -88,6 +92,7 @@ struct ServiceTabsBar: View {
                             .frame(width: 7, height: 7)
                         Text(service.title)
                             .font(.system(size: 13, weight: chosen ? .semibold : .regular))
+                        if service.isBeta { BetaBadge() }
                     }
                     .padding(.horizontal, 11)
                     .padding(.vertical, 5)

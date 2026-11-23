@@ -4,6 +4,10 @@ import SwiftUI
 /// «Журнал» window: a readable view of a background run's stream-json log, refreshed while it runs.
 struct RunLogView: View {
     @Environment(RunStore.self) private var runs
+    @Environment(VersionKeeper.self) private var versions
+    @Environment(\.openWindow) private var openWindow
+    /// There is a version of the project taken before this run: «Что изменилось» has something to show.
+    @State private var hasVersion = false
     @State private var entries: [StreamJSON.Entry] = []
     @State private var followsEnd = true
 
@@ -22,6 +26,10 @@ struct RunLogView: View {
             }
         }
         .frame(minWidth: 480, minHeight: 320)
+        .task(id: runs.selectedLogRunID) {
+            hasVersion = false
+            if let run, versions.isActive() { hasVersion = await versions.hasVersion(projectPath: run.projectPath, before: run.startedAt) }
+        }
         .task(id: runs.selectedLogRunID) {
             while !Task.isCancelled {
                 if let run {
@@ -60,6 +68,13 @@ struct RunLogView: View {
                 ConfirmedButton(title: "Остановить", message: run.task, confirm: "Остановить", role: nil) {
                     runs.stop(run.id)
                 } label: { Text("Остановить") }
+            }
+            if hasVersion {
+                Button("Что изменилось") {
+                    versions.shown = .init(projectPath: run.projectPath, before: run.startedAt)
+                    openWindow(.versions)
+                }
+                .help("Тексты проекта до этой задачи и сейчас")
             }
             Button("Файл журнала") {
                 NSWorkspace.shared.activateFileViewerSelecting([run.logURL])
