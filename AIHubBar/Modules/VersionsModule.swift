@@ -83,6 +83,16 @@ final class VersionKeeper {
     /// When the timer last went over the projects.
     private(set) var lastSweep: Date?
 
+    /// What the «Версии» window shows: a project, and optionally its state before a run that started at `before`.
+    struct Shown: Equatable {
+        var projectPath: String
+        var before: Date?
+    }
+
+    var shown: Shown?
+    /// Grows with every version taken, so an open «Версии» window reads its list again.
+    private(set) var taken = 0
+
     let store: VersionStore
     private let settings: AppSettings
     private let folders: FolderProjectStore
@@ -139,7 +149,10 @@ final class VersionKeeper {
             if cleanUp { store.removeOrphans(now: now, after: keepDays) }
             return taken
         }.value
-        if taken > 0 { AppLog.info("Versions: \(taken) of \(paths.count) projects changed") }
+        if taken > 0 {
+            self.taken += taken
+            AppLog.info("Versions: \(taken) of \(paths.count) projects changed")
+        }
     }
 
     /// Before an AI run: taken at once, so the run starts on files that are already safe.
@@ -147,11 +160,56 @@ final class VersionKeeper {
         guard isActive() else { return }
         do {
             if try store.take(projectPath: projectPath, reason: .beforeRun(title), now: now, sizeLimit: settings.versions.sizeLimit) != nil {
+                taken += 1
                 AppLog.info("Versions: taken before «\(title)» in \(projectPath)")
             }
         } catch {
             AppLog.error("Versions: \(projectPath) not saved before «\(title)»: \(error.localizedDescription)")
         }
+    }
+
+    // MARK: The «Версии» window
+
+    /// What the window needs about a project: its versions, newest first, and the hashes of its files as they are now.
+    func load(projectPath: String) async -> (versions: [ProjectVersion], current: [String: String]) {
+        let store = store, limit = settings.versions.sizeLimit
+        return await Task.detached(priority: .userInitiated) {
+            let scanned = VersionStore.scan(folder: URL(fileURLWithPath: projectPath), sizeLimit: limit)
+            return (store.versions(projectPath: projectPath), Dictionary(scanned.files.map { ($0.file.path, $0.file.hash) }, uniquingKeysWith: { first, _ in first }))
+        }.value
+    }
+
+    /// Whether there is a version to compare a run that started at `date` with.
+    func hasVersion(projectPath: String, before date: Date) async -> Bool {
+        let store = store
+        return await Task.detached(priority: .utility) { store.version(projectPath: projectPath, before: date) != nil }.value
+    }
+
+    /// A file as it was in a version (`hash`; nil — it was not there yet) and as it is now, as rows side by side.
+    func compare(projectPath: String, path: String, hash: String?) async -> (rows: [TextCompare.Row], cut: Bool)? {
+        let store = store
+        return await Task.detached(priority: .userInitiated) { () -> (rows: [TextCompare.Row], cut: Bool)? in
+            var old = ""
+            if let hash {
+                guard let data = store.content(projectPath: projectPath, hash: hash),
+                      let text = TextCompare.text(of: data, path: path) else { return nil }
+                old = text
+            }
+            let now = FolderScanner.text(of: URL(fileURLWithPath: projectPath).appending(path: path)) ?? ""
+            return TextCompare.rows(old: old, new: now)
+        }.value
+    }
+
+    /// «Вернуть этот файл» / «Вернуть всю версию»: the current state is saved first.
+    @discardableResult
+    func restore(projectPath: String, version: ProjectVersion, paths: Set<String>? = nil) async throws -> [String] {
+        let store = store, limit = settings.versions.sizeLimit
+        let restored = try await Task.detached(priority: .userInitiated) {
+            try store.restore(projectPath: projectPath, version: version, paths: paths, sizeLimit: limit)
+        }.value
+        AppLog.info("Versions: \(restored.count) file(s) of \(version.id) put back in \(projectPath)")
+        await folders.refresh()
+        return restored
     }
 
     func refreshSize() async {
@@ -165,6 +223,17 @@ final class VersionKeeper {
         await Task.detached(priority: .utility) { store.clear() }.value
         AppLog.info("Versions: cleared")
         await refreshSize()
+    }
+}
+
+extension VersionReason {
+    /// «перед «Редактура»», «автоматически»: why the version is in the list.
+    var title: String {
+        switch self {
+        case .automatic: String(localized: "автоматически")
+        case let .beforeRun(command): String(localized: "перед «\(command)»")
+        case .beforeRestore: String(localized: "перед возвратом версии")
+        }
     }
 }
 

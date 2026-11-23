@@ -108,6 +108,8 @@ private struct FolderProjectRow: View {
 
     @Environment(FolderProjectStore.self) private var store
     @Environment(CalendarStore.self) private var calendar
+    @Environment(VersionKeeper.self) private var versions
+    @Environment(\.openWindow) private var openWindow
     @State private var isHovered = false
 
     /// «просрочено 2 дн», unless the work is finished. The deadline itself may not be among the row's metrics.
@@ -216,6 +218,13 @@ private struct FolderProjectRow: View {
                 } else {
                     Button("Создать \(ProjectCardFile.fileName)") { store.createCard(for: project, firstStage: stages.first) }
                         .help("Карточка проекта: этап, дедлайн, дата публикации, формат, главный файл")
+                }
+                if versions.isActive() {
+                    Button("Версии") {
+                        versions.shown = .init(projectPath: project.path)
+                        openWindow(.versions)
+                    }
+                    .help("Прежние версии текстов: сравнить с текущими и вернуть")
                 }
             }
             .buttonStyle(.link)

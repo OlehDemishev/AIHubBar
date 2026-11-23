@@ -413,6 +413,10 @@
               "name" : "Versões"
             },
             {
+              "detail" : "“Versões” em um projeto expandido abre a lista de versões: um arquivo de uma versão ao lado do atual, “Restaurar este arquivo” e “Restaurar a versão inteira”. O estado atual é salvo antes da restauração, e os arquivos que apareceram depois ficam. “O que mudou” na notificação de um comando concluído e no “Registro” mostra os textos antes da tarefa e agora.",
+              "name" : "Restaurar uma versão"
+            },
+            {
               "detail" : "As etapas do perfil, separadas por vírgula; a etapa muda com um botão no projeto expandido. Palavras, duração, tempo de leitura e páginas são contados no arquivo principal (.md, .txt, .rtf, .docx).",
               "name" : "Etapas e métricas"
             }

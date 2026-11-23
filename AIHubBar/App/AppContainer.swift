@@ -127,6 +127,8 @@ final class AppContainer {
         let versionKeeper = VersionKeeper(settings: settings, folders: folders)
         self.versionKeeper = versionKeeper
         engine.beforeRun = { [versionKeeper] path, title in versionKeeper.takeBeforeRun(projectPath: path, title: title) }
+        engine.tracksVersions = { [versionKeeper] in versionKeeper.isActive() }
+        runs.tracksVersions = { [versionKeeper] in versionKeeper.isActive() }
         let launcher = LaunchController(settings: settings, store: store, runs: runs, usage: usage)
         let telegramBot = TelegramBotController(settings: settings, sessions: sessions, runs: runs, usage: usage, approvals: telegramApprovals)
         self.telegramBot = telegramBot
@@ -337,6 +339,9 @@ final class AppContainer {
                     requests.openWindow(.runLog)
                 case let .openFile(path):
                     NSWorkspace.shared.open(URL(fileURLWithPath: path))
+                case let .openChanges(projectPath, before):
+                    versionKeeper.shown = .init(projectPath: projectPath, before: before)
+                    requests.openWindow(.versions)
                 case let .openWindow(id):
                     // The id comes from a notification or a widget link, stored as text.
                     if let window = WindowID(rawValue: id) { requests.openWindow(window) }

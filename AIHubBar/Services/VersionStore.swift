@@ -37,6 +37,17 @@ struct ProjectVersion: Codable, Equatable, Identifiable, Sendable {
         let now = Dictionary(files.map { ($0.path, $0.hash) }, uniquingKeysWith: { first, _ in first })
         return Set(before.keys).union(now.keys).filter { before[$0] != now[$0] }.sorted()
     }
+
+    /// The version's files that are different now (changed or gone), against the hashes of the files as they are.
+    func differing(from current: [String: String]) -> [String] {
+        files.filter { current[$0.path] != $0.hash }.map(\.path)
+    }
+
+    /// The files that appeared after the version; putting it back leaves them.
+    func added(in current: [String: String]) -> [String] {
+        let known = Set(files.map(\.path))
+        return current.keys.filter { !known.contains($0) }.sorted()
+    }
 }
 
 /// «Версии»: the draft versions of folder projects, kept outside the project's folder and without git
@@ -147,6 +158,61 @@ struct VersionStore: Sendable {
         // The objects first: a version file never names content that is not there.
         try Self.encoder.encode(version).write(to: folder(projectPath: projectPath).appending(path: version.id + ".json"), options: .atomic)
         return version
+    }
+
+    // MARK: Putting a version back
+
+    enum RestoreError: LocalizedError, Equatable {
+        /// The version names a content the store no longer has.
+        case missingContent(String)
+        /// The file as it is now is over the size limit, so it can't be saved first.
+        case currentTooLarge(String)
+
+        var errorDescription: String? {
+            switch self {
+            case let .missingContent(path): String(localized: "Содержимое файла «\(path)» в этой версии не найдено.")
+            case let .currentTooLarge(path): String(localized: "Файл «\(path)» сейчас больше лимита версий: сохранить его перед возвратом нельзя, поэтому он не тронут.")
+            }
+        }
+    }
+
+    /// A path from a version file stays inside the project's folder.
+    static func isSafe(_ path: String) -> Bool {
+        !path.isEmpty && !path.hasPrefix("/") && !path.split(separator: "/").contains("..")
+    }
+
+    /// Puts the version's files (all, or only `paths`) back in place. The current state is saved as a version first,
+    /// so nothing is lost; files added since the version stay. Returns the paths that were written.
+    @discardableResult
+    func restore(projectPath: String, version: ProjectVersion, paths: Set<String>? = nil, now: Date = .now,
+                 sizeLimit: Int = defaultSizeLimit) throws -> [String] {
+        let fm = FileManager.default
+        let base = URL(fileURLWithPath: projectPath)
+        var writes: [(url: URL, path: String, data: Data)] = []
+        // Everything is checked before anything is written.
+        for file in version.files where paths?.contains(file.path) ?? true {
+            guard Self.isSafe(file.path), let data = content(projectPath: projectPath, hash: file.hash) else {
+                throw RestoreError.missingContent(file.path)
+            }
+            let url = base.appending(path: file.path)
+            if let current = try? Data(contentsOf: url) {
+                if current == data { continue }
+                if current.count > sizeLimit { throw RestoreError.currentTooLarge(file.path) }
+            }
+            writes.append((url, file.path, data))
+        }
+        guard !writes.isEmpty else { return [] }
+        try take(projectPath: projectPath, reason: .beforeRestore, now: now, sizeLimit: sizeLimit)
+        for write in writes {
+            try fm.createDirectory(at: write.url.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try write.data.write(to: write.url, options: .atomic)
+        }
+        return writes.map(\.path)
+    }
+
+    /// The newest version taken no later than `date`: what the project was before a run that started then.
+    func version(projectPath: String, before date: Date) -> ProjectVersion? {
+        versions(projectPath: projectPath).first { $0.takenAt <= date.addingTimeInterval(1) }
     }
 
     // MARK: Keeping and removing
