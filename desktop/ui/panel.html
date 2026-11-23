@@ -470,6 +470,7 @@
         b.onclick = onclick;
         return b;
       };
+      if (run.paused) line.append(button(t("Продолжить сейчас"), () => invoke("resume_run_now", { id: run.id })));
       if (run.running) {
         const asking = confirmStop.has(run.id);
         line.append(button(asking ? t("Остановить?") : t("Остановить"), () => {
