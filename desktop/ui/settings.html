@@ -246,6 +246,15 @@
             <label for="clipboard-remember" data-t="Помнить после перезапуска"></label>
             <input type="checkbox" class="switch" id="clipboard-remember">
           </div>
+          <div class="row">
+            <span data-t="Не запоминать из приложений"></span>
+            <span>
+              <button class="link" id="clipboard-excluded-toggle" data-t-title="Показать приложения"></button>
+              <button id="clipboard-excluded-add" data-t="Добавить…"></button>
+              <button id="clipboard-excluded-reset" data-t="По умолчанию"></button>
+            </span>
+          </div>
+          <div id="clipboard-excluded" hidden></div>
         </section>
       </div>
 
@@ -1321,7 +1330,27 @@
       document.getElementById("clipboard-options").hidden = !view.on;
       clipboardLimit.replaceChildren(...view.limits.map((n) => new Option(String(n), String(n), false, n === view.limit)));
       clipboardRemember.checked = view.remember;
+      // «Не запоминать из приложений»: the count opens the list; each program can be taken out.
+      const toggle = document.getElementById("clipboard-excluded-toggle");
+      const list = document.getElementById("clipboard-excluded");
+      toggle.textContent = `${view.excluded.length} ${list.hidden ? "▸" : "▾"}`;
+      toggle.onclick = () => { list.hidden = !list.hidden; showClipboardSettings(view); };
+      list.replaceChildren(...view.excluded.map((name) => {
+        const row = document.createElement("div");
+        row.className = "row";
+        const title = document.createElement("span");
+        title.className = "secondary";
+        title.textContent = name;
+        const remove = document.createElement("button");
+        remove.className = "small";
+        remove.textContent = t("Убрать");
+        remove.onclick = async () => showClipboardSettings(await invoke("remove_clipboard_excluded", { name, reset: false }));
+        row.append(title, remove);
+        return row;
+      }));
     }
+    document.getElementById("clipboard-excluded-add").onclick = async () => showClipboardSettings(await invoke("add_clipboard_excluded"));
+    document.getElementById("clipboard-excluded-reset").onclick = async () => showClipboardSettings(await invoke("remove_clipboard_excluded", { name: "", reset: true }));
     clipboardModule.onchange = async () => {
       await invoke("set_module", { kind: "clipboard", on: clipboardModule.checked });
       showClipboardSettings(await invoke("clipboard_settings"));
