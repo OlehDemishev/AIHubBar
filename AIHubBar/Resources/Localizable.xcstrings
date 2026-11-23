@@ -9953,16 +9953,10 @@
     },
     "Codex работает как Claude: «Разрешить» и «Отклонить» на его запросы прямо из панели, и задачи в фоне из «Быстрого запроса».": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex works like Claude: “Allow” and “Deny” for its requests right from the panel, and background tasks from Quick Prompt."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex працює як Claude: «Дозволити» й «Відхилити» на його запити просто з панелі, і задачі у фоні зі «Швидкого запиту»."
+            "value": "Codex يعمل مثل Claude: «سماح» و«رفض» لطلباته من اللوحة مباشرة، ومهام في الخلفية من «طلب سريع»."
           }
         },
         "de": {
@@ -9971,10 +9965,10 @@
             "value": "Codex arbeitet wie Claude: „Erlauben“ und „Ablehnen“ für seine Anfragen direkt im Panel und Hintergrundaufgaben aus dem „Schnellauftrag“."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex fonctionne comme Claude : « Autoriser » et « Refuser » pour ses demandes directement dans le panneau, et des tâches en arrière-plan depuis « Requête rapide »."
+            "value": "Codex works like Claude: “Allow” and “Deny” for its requests right from the panel, and background tasks from Quick Prompt."
           }
         },
         "es": {
@@ -9983,22 +9977,22 @@
             "value": "Codex funciona como Claude: «Permitir» y «Rechazar» para sus solicitudes desde el propio panel, y tareas en segundo plano desde «Petición rápida»."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex fonctionne comme Claude : « Autoriser » et « Refuser » pour ses demandes directement dans le panneau, et des tâches en arrière-plan depuis « Requête rapide »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex bekerja seperti Claude: “Izinkan” dan “Tolak” untuk permintaannya langsung dari panel, dan tugas di latar belakang dari “Permintaan cepat”."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Codex funziona come Claude: «Consenti» e «Rifiuta» per le sue richieste direttamente dal pannello, e attività in background da «Richiesta rapida»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O Codex funciona como o Claude: “Permitir” e “Recusar” para os pedidos dele direto no painel, e tarefas em segundo plano pelo “Pedido rápido”."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex działa jak Claude: „Zezwól” i „Odrzuć” na jego prośby prosto z panelu oraz zadania w tle z „Szybkiego zapytania”."
           }
         },
         "ja": {
@@ -10013,16 +10007,22 @@
             "value": "Codex도 Claude처럼 작동합니다. 요청에 대한 “허용”과 “거부”를 패널에서 바로 할 수 있고, “빠른 요청”에서 백그라운드 작업도 보낼 수 있습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex يعمل مثل Claude: «سماح» و«رفض» لطلباته من اللوحة مباشرة، ومهام في الخلفية من «طلب سريع»."
+            "value": "Codex działa jak Claude: „Zezwól” i „Odrzuć” na jego prośby prosto z panelu oraz zadania w tle z „Szybkiego zapytania”."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex bekerja seperti Claude: “Izinkan” dan “Tolak” untuk permintaannya langsung dari panel, dan tugas di latar belakang dari “Permintaan cepat”."
+            "value": "O Codex funciona como o Claude: “Permitir” e “Recusar” para os pedidos dele direto no painel, e tarefas em segundo plano pelo “Pedido rápido”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex працює як Claude: «Дозволити» й «Відхилити» на його запити просто з панелі, і задачі у фоні зі «Швидкого запиту»."
           }
         }
       }
@@ -14274,16 +14274,10 @@
     },
     "«История расхода» открывается сводкой «Сегодня» и сравнивает расход по цене API с ценой плана.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Usage History opens with the “Today” summary and compares your spend at the API price with the price of the plan."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«Історія витрат» відкривається зведенням «Сьогодні» й порівнює витрати за ціною API з ціною плану."
+            "value": "«سجل الاستهلاك» يفتح على ملخص «اليوم» ويقارن الاستهلاك بسعر API مع سعر الخطة."
           }
         },
         "de": {
@@ -14292,10 +14286,10 @@
             "value": "Der „Verbrauchsverlauf“ öffnet sich mit der Übersicht „Heute“ und vergleicht den Verbrauch zum API-Preis mit dem Preis des Plans."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "« Historique de consommation » s’ouvre sur le résumé « Aujourd’hui » et compare la dépense au prix de l’API avec le prix du forfait."
+            "value": "Usage History opens with the “Today” summary and compares your spend at the API price with the price of the plan."
           }
         },
         "es": {
@@ -14304,22 +14298,22 @@
             "value": "«Historial de consumo» se abre con el resumen «Hoy» y compara el gasto a precio de API con el precio del plan."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Historique de consommation » s’ouvre sur le résumé « Aujourd’hui » et compare la dépense au prix de l’API avec le prix du forfait."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Riwayat pemakaian” dibuka dengan ringkasan “Hari ini” dan membandingkan pemakaian dengan harga API terhadap harga paket."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "«Cronologia dei consumi» si apre con il riepilogo «Oggi» e confronta la spesa al prezzo dell’API con il prezzo del piano."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O “Histórico de consumo” abre com o resumo “Hoje” e compara o gasto pelo preço da API com o preço do plano."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "„Historia zużycia” otwiera się podsumowaniem „Dziś” i porównuje zużycie w cenie API z ceną planu."
           }
         },
         "ja": {
@@ -14334,16 +14328,22 @@
             "value": "“사용 기록”은 “오늘” 요약으로 열리며, API 가격 기준 사용액을 요금제 가격과 비교합니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "«سجل الاستهلاك» يفتح على ملخص «اليوم» ويقارن الاستهلاك بسعر API مع سعر الخطة."
+            "value": "„Historia zużycia” otwiera się podsumowaniem „Dziś” i porównuje zużycie w cenie API z ceną planu."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "“Riwayat pemakaian” dibuka dengan ringkasan “Hari ini” dan membandingkan pemakaian dengan harga API terhadap harga paket."
+            "value": "O “Histórico de consumo” abre com o resumo “Hoje” e compara o gasto pelo preço da API com o preço do plano."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Історія витрат» відкривається зведенням «Сьогодні» й порівнює витрати за ціною API з ціною плану."
           }
         }
       }
@@ -18453,82 +18453,6 @@
         }
       }
     },
-    "Бот — модуль «Telegram»: токен, чат и меню в самом боте (/menu — лимиты, сессии, отчёты, очистка). Что дублировать — чипом «Telegram» на странице модуля.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "البوت هو وحدة «Telegram»: الرمز المميز والدردشة وقائمة داخل البوت نفسه (‎/menu — الحدود والجلسات والتقارير والتنظيف). ما يُنسخ إليه — شريحة «Telegram» في صفحة الوحدة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der Bot ist das Modul „Telegram“: Token, Chat und ein Menü im Bot selbst (/menu – Limits, Sitzungen, Berichte, Aufräumen). Was dorthin kopiert wird – der Chip „Telegram“ auf der Modulseite."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The bot is the “Telegram” module: the token, the chat and a menu in the bot itself (/menu — limits, sessions, reports, cleanup). What to copy there — the “Telegram” chip on a module’s page."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El bot es el módulo «Telegram»: token, chat y un menú en el propio bot (/menu: límites, sesiones, informes, limpieza). Qué duplicar allí: el chip «Telegram» en la página del módulo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le bot est le module « Telegram » : jeton, chat et menu dans le bot lui-même (/menu — limites, sessions, rapports, nettoyage). Ce qu’il faut y copier — la puce « Telegram » sur la page du module."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bot adalah modul “Telegram”: token, chat, dan menu di dalam bot (/menu — batas, sesi, laporan, pembersihan). Apa yang diteruskan — chip “Telegram” di halaman modul."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il bot è il modulo «Telegram»: token, chat e un menu nel bot stesso (/menu — limiti, sessioni, report, pulizia). Cosa duplicare — il chip «Telegram» nella pagina del modulo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ボットは「Telegram」モジュールです:トークン、チャット、ボット内のメニュー(/menu — 上限、セッション、レポート、クリーンアップ)。何を送るかはモジュールページの「Telegram」チップで。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "봇은 «Telegram» 모듈입니다: 토큰, 채팅, 봇 안의 메뉴(/menu — 한도, 세션, 보고서, 정리). 무엇을 보낼지는 모듈 페이지의 «Telegram» 칩으로 정합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bot to moduł „Telegram”: token, czat i menu w samym bocie (/menu — limity, sesje, raporty, czyszczenie). Co powielać — chip „Telegram” na stronie modułu."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O bot é o módulo “Telegram”: token, chat e um menu no próprio bot (/menu — limites, sessões, relatórios, limpeza). O que duplicar — o chip “Telegram” na página do módulo."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Бот — модуль «Telegram»: токен, чат і меню в самому боті (/menu — ліміти, сесії, звіти, очищення). Що дублювати — чипом «Telegram» на сторінці модуля."
-          }
-        }
-      }
-    },
     "Бот, чат и меню — модуль «Telegram»": {
       "localizations": {
         "ar": {
@@ -20355,16 +20279,10 @@
     },
     "В окне «Claude Code» новая вкладка «Skills и плагины»: выключатель у каждого.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The Claude Code window has a new tab, “Skills and Plugins”: a switch for each one."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У вікні «Claude Code» нова вкладка «Skills і плагіни»: вимикач у кожного."
+            "value": "في نافذة «Claude Code» تبويب جديد «المهارات والإضافات»: مفتاح لكل واحدة."
           }
         },
         "de": {
@@ -20373,10 +20291,10 @@
             "value": "Das Fenster „Claude Code“ hat einen neuen Tab „Skills und Plug-ins“: ein Schalter für jeden Eintrag."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "La fenêtre « Claude Code » a un nouvel onglet « Skills et plugins » : un interrupteur pour chacun."
+            "value": "The Claude Code window has a new tab, “Skills and Plugins”: a switch for each one."
           }
         },
         "es": {
@@ -20385,22 +20303,22 @@
             "value": "La ventana «Claude Code» tiene una pestaña nueva, «Skills y plugins»: un interruptor para cada uno."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fenêtre « Claude Code » a un nouvel onglet « Skills et plugins » : un interrupteur pour chacun."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jendela “Claude Code” punya tab baru “Skill dan plugin”: ada sakelar untuk masing-masing."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "La finestra «Claude Code» ha una nuova scheda «Skill e plugin»: un interruttore per ciascuno."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A janela “Claude Code” tem uma aba nova, “Skills e plugins”: um interruptor para cada um."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "W oknie „Claude Code” jest nowa karta „Skille i wtyczki”: przy każdym przełącznik."
           }
         },
         "ja": {
@@ -20415,16 +20333,22 @@
             "value": "“Claude Code” 창에 새 탭 “스킬과 플러그인”이 생겼습니다. 항목마다 스위치가 있습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "في نافذة «Claude Code» تبويب جديد «المهارات والإضافات»: مفتاح لكل واحدة."
+            "value": "W oknie „Claude Code” jest nowa karta „Skille i wtyczki”: przy każdym przełącznik."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jendela “Claude Code” punya tab baru “Skill dan plugin”: ada sakelar untuk masing-masing."
+            "value": "A janela “Claude Code” tem uma aba nova, “Skills e plugins”: um interruptor para cada um."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У вікні «Claude Code» нова вкладка «Skills і плагіни»: вимикач у кожного."
           }
         }
       }
@@ -40525,82 +40449,6 @@
         }
       }
     },
-    "Запросы разрешений Claude можно принимать и отклонять кнопками в Telegram — отдельный бот, страница «Сессии агентов».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يمكن قبول طلبات أذونات Claude أو رفضها بأزرار في Telegram — بوت منفصل، صفحة «جلسات الوكلاء»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Berechtigungsanfragen von Claude können Sie mit Tasten in Telegram annehmen oder ablehnen — ein eigener Bot, Seite „Agentensitzungen“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude’s permission requests can be allowed or denied with buttons in Telegram — a separate bot, on the “Agent sessions” page."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Las solicitudes de permiso de Claude se pueden aceptar o rechazar con botones en Telegram — un bot aparte, página «Sesiones de agentes»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les demandes d’autorisation de Claude s’acceptent ou se refusent avec des boutons dans Telegram — un bot distinct, page « Sessions des agents »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Permintaan izin Claude bisa diterima atau ditolak dengan tombol di Telegram — bot terpisah, halaman “Sesi agen”."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le richieste di permesso di Claude si possono accettare o rifiutare con i pulsanti in Telegram — un bot a parte, pagina «Sessioni degli agenti»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude の許可リクエストは Telegram のボタンで許可・拒否できます — 専用のボット、「エージェントのセッション」ページ。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude의 권한 요청은 Telegram 버튼으로 허용하거나 거부할 수 있습니다 — 별도의 봇, «에이전트 세션» 페이지."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prośby Claude o zgodę można przyjmować i odrzucać przyciskami w Telegramie — osobny bot, strona „Sesje agentów”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os pedidos de permissão do Claude podem ser aceitos ou recusados com botões no Telegram — um bot separado, página “Sessões de agentes”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Запити дозволів Claude можна приймати й відхиляти кнопками в Telegram — окремий бот, сторінка «Сесії агентів»."
-          }
-        }
-      }
-    },
     "Запросы разрешений в этот бот": {
       "localizations": {
         "ar": {
@@ -40673,6 +40521,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Запити дозволів у цей бот"
+          }
+        }
+      }
+    },
+    "Запросы разрешений приходят в тот же бот с кнопками ✅ и ❌: включите «Запросы разрешений в этот бот» на странице модуля «Telegram». Через общий бот отвечать можно после «Ответы на запросы через общий бот» там же.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permission requests come to the same bot with ✅ and ❌ buttons: switch on “Permission requests to this bot” on the Telegram module's page. Over the shared bot you can answer after “Answers to requests over the shared bot” is on there too."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запити дозволів приходять у той самий бот із кнопками ✅ і ❌: увімкніть «Запити дозволів у цей бот» на сторінці модуля «Telegram». Через спільний бот відповідати можна після «Відповіді на запити через спільний бот» там само."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berechtigungsanfragen kommen im selben Bot mit den Tasten ✅ und ❌ an: Schalten Sie „Berechtigungsanfragen an diesen Bot“ auf der Seite des Moduls „Telegram“ ein. Über den gemeinsamen Bot können Sie antworten, sobald dort auch „Antworten über den gemeinsamen Bot“ eingeschaltet ist."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les demandes d’autorisation arrivent dans le même bot avec les boutons ✅ et ❌ : activez « Demandes d’autorisation dans ce bot » sur la page du module « Telegram ». Avec le bot partagé, vous pouvez répondre après avoir activé « Réponses aux demandes via le bot partagé » au même endroit."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las solicitudes de permiso llegan al mismo bot con los botones ✅ y ❌: active «Solicitudes de permiso a este bot» en la página del módulo «Telegram». Por el bot compartido se puede responder tras activar allí mismo «Respuestas a solicitudes por el bot compartido»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le richieste di permesso arrivano nello stesso bot con i pulsanti ✅ e ❌: attivate «Richieste di permesso a questo bot» nella pagina del modulo «Telegram». Tramite il bot condiviso si può rispondere dopo aver attivato lì anche «Risposte alle richieste tramite il bot condiviso»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os pedidos de permissão chegam ao mesmo bot com os botões ✅ e ❌: ative “Pedidos de permissão para este bot” na página do módulo “Telegram”. Pelo bot compartilhado, dá para responder depois de ativar ali também “Respostas a pedidos pelo bot compartilhado”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prośby o zgodę przychodzą do tego samego bota z przyciskami ✅ i ❌: włącz „Prośby o zgodę do tego bota” na stronie modułu „Telegram”. Przez wspólnego bota można odpowiadać po włączeniu tam także „Odpowiedzi na prośby przez wspólnego bota”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可リクエストは同じボットに ✅ と ❌ のボタン付きで届きます。「Telegram」モジュールのページで「許可リクエストをこのボットへ」をオンにしてください。共有ボット経由で応答するには、同じページの「共有ボット経由でリクエストに応答」もオンにします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "권한 요청은 같은 봇에 ✅ 및 ❌ 버튼과 함께 옵니다. ‘Telegram’ 모듈 페이지에서 ‘권한 요청을 이 봇으로’를 켜세요. 공용 봇으로 응답하려면 같은 페이지에서 ‘공용 봇으로 요청에 응답’도 켜야 합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "طلبات الإذن تصل إلى البوت نفسه مع زرّي ✅ و❌: فعّل «طلبات الإذن إلى هذا البوت» في صفحة وحدة «Telegram». عبر البوت المشترك يمكن الرد بعد تفعيل «الرد على الطلبات عبر البوت المشترك» هناك أيضًا."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permintaan izin masuk ke bot yang sama dengan tombol ✅ dan ❌: nyalakan “Permintaan izin ke bot ini” di halaman modul “Telegram”. Lewat bot bersama, Anda bisa menjawab setelah “Jawab permintaan lewat bot bersama” juga dinyalakan di sana."
           }
         }
       }
@@ -45087,6 +45011,7 @@
       }
     },
     "Каждая заметка — файл .md в этой папке; удалённые уходят в корзину.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -49268,16 +49193,10 @@
     },
     "Колокольчик в шапке панели выключает уведомления в Telegram, пока не нажмёте снова.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "A bell in the panel’s header turns Telegram notifications off until you press it again."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Дзвіночок у шапці панелі вимикає сповіщення в Telegram, доки не натиснете знову."
+            "value": "جرس في رأس اللوحة يوقف إشعارات Telegram إلى أن تضغطه من جديد."
           }
         },
         "de": {
@@ -49286,10 +49205,10 @@
             "value": "Eine Glocke in der Kopfzeile des Panels schaltet Telegram-Mitteilungen aus, bis Sie sie erneut drücken."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Une cloche dans l’en-tête du panneau coupe les notifications Telegram jusqu’à ce que vous appuyiez de nouveau."
+            "value": "A bell in the panel’s header turns Telegram notifications off until you press it again."
           }
         },
         "es": {
@@ -49298,22 +49217,22 @@
             "value": "Una campana en la cabecera del panel desactiva las notificaciones de Telegram hasta que la pulses de nuevo."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une cloche dans l’en-tête du panneau coupe les notifications Telegram jusqu’à ce que vous appuyiez de nouveau."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lonceng di header panel mematikan notifikasi Telegram sampai Anda menekannya lagi."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Una campanella nell’intestazione del pannello disattiva le notifiche di Telegram finché non la premi di nuovo."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Um sino no cabeçalho do painel desativa as notificações do Telegram até você pressioná-lo de novo."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dzwonek w nagłówku panelu wyłącza powiadomienia w Telegramie, dopóki nie naciśniesz go ponownie."
           }
         },
         "ja": {
@@ -49328,16 +49247,22 @@
             "value": "패널 헤더의 종 아이콘으로 다시 누를 때까지 Telegram 알림을 끌 수 있습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "جرس في رأس اللوحة يوقف إشعارات Telegram إلى أن تضغطه من جديد."
+            "value": "Dzwonek w nagłówku panelu wyłącza powiadomienia w Telegramie, dopóki nie naciśniesz go ponownie."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lonceng di header panel mematikan notifikasi Telegram sampai Anda menekannya lagi."
+            "value": "Um sino no cabeçalho do painel desativa as notificações do Telegram até você pressioná-lo de novo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дзвіночок у шапці панелі вимикає сповіщення в Telegram, доки не натиснете знову."
           }
         }
       }
@@ -56123,6 +56048,82 @@
         }
       }
     },
+    "Модуль «Telegram». «Общий бот» подключается одной кнопкой: «Подключить Telegram», затем «Start» в чате — создавать ничего не нужно. «Свой бот» — токен из @BotFather, без сервера AI Hub Bar между вами. Меню в самом боте: /menu — лимиты, сессии, отчёты, очистка. Что дублировать — чипом «Telegram» на странице модуля.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Telegram module. The shared bot connects with one button: “Connect Telegram”, then “Start” in the chat — nothing to create. Your own bot takes a token from @BotFather, with no AI Hub Bar server in between. The menu is in the bot itself: /menu — limits, sessions, reports, cleanup. What to duplicate is set by the “Telegram” chip on a module's page."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Модуль «Telegram». Спільний бот підключається однією кнопкою: «Підключити Telegram», потім «Start» у чаті — створювати нічого не треба. Свій бот — токен із @BotFather, без сервера AI Hub Bar між вами. Меню в самому боті: /menu — ліміти, сесії, звіти, очищення. Що дублювати — чипом «Telegram» на сторінці модуля."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Modul „Telegram“. Der gemeinsame Bot wird mit einer Taste verbunden: „Telegram verbinden“, dann „Start“ im Chat – nichts muss angelegt werden. Der eigene Bot braucht ein Token von @BotFather, ohne Server von AI Hub Bar dazwischen. Das Menü ist im Bot selbst: /menu – Limits, Sitzungen, Berichte, Aufräumen. Was dupliziert wird, bestimmt der Chip „Telegram“ auf der Seite des Moduls."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le module « Telegram ». Le bot partagé se connecte avec un seul bouton : « Connecter Telegram », puis « Start » dans la conversation — rien à créer. Votre propre bot utilise un jeton de @BotFather, sans serveur AI Hub Bar entre vous. Le menu est dans le bot : /menu — limites, sessions, rapports, nettoyage. Ce qui est dupliqué se règle avec la pastille « Telegram » sur la page du module."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El módulo «Telegram». El bot compartido se conecta con un botón: «Conectar Telegram» y luego «Start» en el chat; no hay que crear nada. El bot propio usa un token de @BotFather, sin servidor de AI Hub Bar por medio. El menú está en el propio bot: /menu — límites, sesiones, informes, limpieza. Qué duplicar se elige con la etiqueta «Telegram» en la página del módulo."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il modulo «Telegram». Il bot condiviso si collega con un pulsante: «Collega Telegram», poi «Start» nella chat — non c’è nulla da creare. Il bot personale usa un token di @BotFather, senza server di AI Hub Bar in mezzo. Il menu è nel bot stesso: /menu — limiti, sessioni, report, pulizia. Cosa duplicare si sceglie con il chip «Telegram» nella pagina del modulo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O módulo “Telegram”. O bot compartilhado se conecta com um botão: “Conectar Telegram” e depois “Start” no chat — não é preciso criar nada. O bot próprio usa um token do @BotFather, sem servidor do AI Hub Bar no meio. O menu fica no próprio bot: /menu — limites, sessões, relatórios, limpeza. O que duplicar é definido pelo chip “Telegram” na página do módulo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moduł „Telegram”. Wspólny bot łączy się jednym przyciskiem: „Połącz Telegram”, potem „Start” w czacie — niczego nie trzeba tworzyć. Własny bot to token z @BotFather, bez serwera AI Hub Bar pomiędzy. Menu jest w samym bocie: /menu — limity, sesje, raporty, czyszczenie. Co dublować, ustawia chip „Telegram” na stronie modułu."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「Telegram」モジュール。共有ボットはボタンひとつで接続できます。「Telegram を接続」を押し、チャットで「Start」を押すだけで、何も作る必要はありません。自分のボットは @BotFather のトークンを使い、AI Hub Bar のサーバーを介しません。メニューはボットの中にあります: /menu — リミット、セッション、レポート、クリーンアップ。何を送るかは各モジュールのページの「Telegram」チップで決めます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘Telegram’ 모듈. 공용 봇은 버튼 하나로 연결됩니다. ‘Telegram 연결’을 누른 뒤 채팅에서 ‘Start’를 누르면 되고, 만들 것은 없습니다. 내 봇은 @BotFather의 토큰을 쓰며 AI Hub Bar 서버를 거치지 않습니다. 메뉴는 봇 안에 있습니다: /menu — 한도, 세션, 보고서, 정리. 무엇을 함께 보낼지는 모듈 페이지의 ‘Telegram’ 칩으로 정합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وحدة «Telegram». البوت المشترك يُربط بزر واحد: «ربط Telegram» ثم «Start» في المحادثة — لا حاجة لإنشاء شيء. بوتك الخاص يستخدم رمزًا من ‎@BotFather‏ دون خادم AI Hub Bar بينكما. القائمة داخل البوت نفسه: ‎/menu‏ — الحدود، الجلسات، التقارير، التنظيف. ما يُرسل أيضًا إلى Telegram يُحدَّد بشارة «Telegram» في صفحة الوحدة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modul “Telegram”. Bot bersama terhubung dengan satu tombol: “Hubungkan Telegram”, lalu “Start” di obrolan — tidak perlu membuat apa pun. Bot sendiri memakai token dari @BotFather, tanpa server AI Hub Bar di antaranya. Menunya ada di bot itu sendiri: /menu — batas, sesi, laporan, pembersihan. Apa yang diduplikasi diatur dengan chip “Telegram” di halaman modul."
+          }
+        }
+      }
+    },
     "Модуль выключен: не работает в фоне, не виден в панели и строке меню, не присылает уведомлений. Настройки и место в профилях сохранены.": {
       "localizations": {
         "ar": {
@@ -57570,6 +57571,7 @@
       }
     },
     "Наберите название в поиске, выберите проект — Claude запустится с этим текстом. Подстановки: {проект}, {ветка}.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -71440,16 +71442,10 @@
     },
     "Одну задачу можно дать Claude и Codex сразу: окно сравнения покажет оба ответа и изменённые файлы, а выбранный вариант вливается в вашу ветку.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "One task can go to Claude and Codex at once: the comparison window shows both answers and the changed files, and the version you choose is merged into your branch."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Одну задачу можна дати Claude і Codex одразу: вікно порівняння покаже обидві відповіді та змінені файли, а вибраний варіант вливається у вашу гілку."
+            "value": "يمكن إعطاء المهمة نفسها لـ Claude و Codex معًا: نافذة المقارنة تعرض الإجابتين والملفات المتغيّرة، والنسخة التي تختارها تُدمج في فرعك."
           }
         },
         "de": {
@@ -71458,10 +71454,10 @@
             "value": "Eine Aufgabe kann gleichzeitig an Claude und Codex gehen: Das Vergleichsfenster zeigt beide Antworten und die geänderten Dateien, und die gewählte Variante wird in Ihren Branch gemergt."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Une même tâche peut être confiée à Claude et à Codex en même temps : la fenêtre de comparaison montre les deux réponses et les fichiers modifiés, et la version choisie est fusionnée dans votre branche."
+            "value": "One task can go to Claude and Codex at once: the comparison window shows both answers and the changed files, and the version you choose is merged into your branch."
           }
         },
         "es": {
@@ -71470,22 +71466,22 @@
             "value": "Una misma tarea puede darse a Claude y a Codex a la vez: la ventana de comparación muestra ambas respuestas y los archivos cambiados, y la variante elegida se fusiona en tu rama."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une même tâche peut être confiée à Claude et à Codex en même temps : la fenêtre de comparaison montre les deux réponses et les fichiers modifiés, et la version choisie est fusionnée dans votre branche."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satu tugas bisa diberikan ke Claude dan Codex sekaligus: jendela perbandingan menampilkan kedua jawaban dan file yang berubah, dan varian yang dipilih digabung ke branch Anda."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "La stessa attività può andare a Claude e a Codex insieme: la finestra di confronto mostra entrambe le risposte e i file modificati, e la variante scelta viene unita al tuo ramo."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma mesma tarefa pode ir para o Claude e o Codex de uma vez: a janela de comparação mostra as duas respostas e os arquivos alterados, e a variante escolhida é mesclada no seu branch."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jedno zadanie można dać Claude i Codex jednocześnie: okno porównania pokaże obie odpowiedzi i zmienione pliki, a wybrany wariant zostaje scalony z twoją gałęzią."
           }
         },
         "ja": {
@@ -71500,16 +71496,22 @@
             "value": "하나의 작업을 Claude와 Codex에 동시에 맡길 수 있습니다. 비교 창에 두 답변과 변경된 파일이 표시되고, 고른 결과는 내 브랜치에 병합됩니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "يمكن إعطاء المهمة نفسها لـ Claude و Codex معًا: نافذة المقارنة تعرض الإجابتين والملفات المتغيّرة، والنسخة التي تختارها تُدمج في فرعك."
+            "value": "Jedno zadanie można dać Claude i Codex jednocześnie: okno porównania pokaże obie odpowiedzi i zmienione pliki, a wybrany wariant zostaje scalony z twoją gałęzią."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Satu tugas bisa diberikan ke Claude dan Codex sekaligus: jendela perbandingan menampilkan kedua jawaban dan file yang berubah, dan varian yang dipilih digabung ke branch Anda."
+            "value": "Uma mesma tarefa pode ir para o Claude e o Codex de uma vez: a janela de comparação mostra as duas respostas e os arquivos alterados, e a variante escolhida é mesclada no seu branch."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Одну задачу можна дати Claude і Codex одразу: вікно порівняння покаже обидві відповіді та змінені файли, а вибраний варіант вливається у вашу гілку."
           }
         }
       }
@@ -79199,6 +79201,7 @@
       }
     },
     "Оценка по журналам Claude Code на этом компьютере: токены без чтения кэша. Лимиты считает сама Anthropic, и чаты на claude.ai сюда не попадают.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -91366,6 +91369,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Прив’язати чат"
+          }
+        }
+      }
+    },
+    "Приложение в боте": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The app inside the bot"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Застосунок у боті"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die App im Bot"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’app dans le bot"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La app dentro del bot"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’app nel bot"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O app dentro do bot"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikacja w bocie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ボット内のアプリ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "봇 안의 앱"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التطبيق داخل البوت"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikasi di dalam bot"
           }
         }
       }
@@ -115041,6 +115120,7 @@
       }
     },
     "Только один компьютер читает сообщения бота; уведомления присылают все": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -116259,16 +116339,10 @@
     },
     "У готовой фоновой задачи в меню есть «Проверить в Codex», а у остановленной по лимиту — «Передать Codex».": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "A finished background task has “Review in Codex” in its menu, and one stopped by the limit has “Hand Over to Codex”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У готової фонової задачі в меню є «Перевірити в Codex», а в зупиненої через ліміт — «Передати Codex»."
+            "value": "في قائمة المهمة المنتهية في الخلفية «مراجعة في Codex»، وفي المهمة المتوقفة بسبب الحد «تسليم إلى Codex»."
           }
         },
         "de": {
@@ -116277,10 +116351,10 @@
             "value": "Eine fertige Hintergrundaufgabe hat im Menü „In Codex prüfen“, eine am Limit angehaltene „An Codex übergeben“."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Une tâche d’arrière-plan terminée propose « Relire dans Codex » dans son menu, et une tâche arrêtée par la limite « Confier à Codex »."
+            "value": "A finished background task has “Review in Codex” in its menu, and one stopped by the limit has “Hand Over to Codex”."
           }
         },
         "es": {
@@ -116289,22 +116363,22 @@
             "value": "Una tarea en segundo plano terminada tiene «Revisar en Codex» en su menú, y una detenida por el límite, «Pasar a Codex»."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une tâche d’arrière-plan terminée propose « Relire dans Codex » dans son menu, et une tâche arrêtée par la limite « Confier à Codex »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tugas latar belakang yang selesai punya “Tinjau di Codex” di menunya, dan yang terhenti karena batas punya “Serahkan ke Codex”."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Un’attività in background conclusa ha «Rivedi in Codex» nel menu, e una fermata dal limite ha «Passa a Codex»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma tarefa em segundo plano concluída tem “Revisar no Codex” no menu, e uma parada pelo limite tem “Passar para Codex”."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gotowe zadanie w tle ma w menu „Sprawdź w Codex”, a zatrzymane przez limit — „Przekaż do Codex”."
           }
         },
         "ja": {
@@ -116319,16 +116393,22 @@
             "value": "끝난 백그라운드 작업의 메뉴에는 “Codex에서 검토”가, 한도로 멈춘 작업에는 “Codex에 넘기기”가 있습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "في قائمة المهمة المنتهية في الخلفية «مراجعة في Codex»، وفي المهمة المتوقفة بسبب الحد «تسليم إلى Codex»."
+            "value": "Gotowe zadanie w tle ma w menu „Sprawdź w Codex”, a zatrzymane przez limit — „Przekaż do Codex”."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tugas latar belakang yang selesai punya “Tinjau di Codex” di menunya, dan yang terhenti karena batas punya “Serahkan ke Codex”."
+            "value": "Uma tarefa em segundo plano concluída tem “Revisar no Codex” no menu, e uma parada pelo limite tem “Passar para Codex”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У готової фонової задачі в меню є «Перевірити в Codex», а в зупиненої через ліміт — «Передати Codex»."
           }
         }
       }
@@ -116633,6 +116713,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "У тижня видно, швидше чи повільніше за рівну витрату ви витрачаєте ліміт: позначка на смузі та рядок під нею."
+          }
+        }
+      }
+    },
+    "У общего бота кнопка меню открывает приложение прямо в Telegram: лимиты, сессии с «Разрешить» и «Отклонить», задачи, отчёты и настройки уведомлений.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The shared bot's menu button opens an app right in Telegram: limits, sessions with “Allow” and “Deny”, tasks, reports and notification settings."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У спільного бота кнопка меню відкриває застосунок просто в Telegram: ліміти, сесії з «Дозволити» й «Відхилити», задачі, звіти та налаштування сповіщень."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Menütaste des gemeinsamen Bots öffnet eine App direkt in Telegram: Limits, Sitzungen mit „Erlauben“ und „Ablehnen“, Aufgaben, Berichte und Mitteilungseinstellungen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le bouton de menu du bot partagé ouvre une app directement dans Telegram : limites, sessions avec « Autoriser » et « Refuser », tâches, rapports et réglages des notifications."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El botón de menú del bot compartido abre una app dentro de Telegram: límites, sesiones con «Permitir» y «Rechazar», tareas, informes y ajustes de notificaciones."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il pulsante del menu del bot condiviso apre un’app direttamente in Telegram: limiti, sessioni con «Consenti» e «Rifiuta», attività, report e impostazioni delle notifiche."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O botão de menu do bot compartilhado abre um app dentro do Telegram: limites, sessões com “Permitir” e “Recusar”, tarefas, relatórios e ajustes de notificações."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przycisk menu wspólnego bota otwiera aplikację bezpośrednio w Telegramie: limity, sesje z „Zezwól” i „Odrzuć”, zadania, raporty i ustawienia powiadomień."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "共有ボットのメニューボタンで、Telegram の中にアプリが開きます。リミット、「許可」と「拒否」付きのセッション、タスク、レポート、通知の設定を使えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "공용 봇의 메뉴 버튼은 Telegram 안에서 바로 앱을 엽니다. 한도, ‘허용’과 ‘거부’가 있는 세션, 작업, 보고서, 알림 설정을 쓸 수 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زر القائمة في البوت المشترك يفتح تطبيقًا داخل Telegram مباشرة: الحدود، والجلسات مع «سماح» و«رفض»، والمهام، والتقارير، وإعدادات الإشعارات."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tombol menu bot bersama membuka aplikasi langsung di Telegram: batas, sesi dengan “Izinkan” dan “Tolak”, tugas, laporan, dan pengaturan notifikasi."
           }
         }
       }
@@ -127763,6 +127919,7 @@
       }
     },
     "Этот компьютер отвечает боту": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
