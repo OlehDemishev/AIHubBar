@@ -212,7 +212,7 @@ pub fn merge_branch(program: &Path, s: &Strings, run: &Run, target: &str) -> Res
     if !git(program, project, &["status", "--porcelain", "--untracked-files=no"], 20)?.trim().is_empty() {
         return Err(s.t("В папке проекта есть незакоммиченные изменения — сначала закоммитьте или уберите их.").to_owned());
     }
-    if git(program, project, &["-c", "user.useConfigOnly=false", "merge", "--no-ff", "--no-edit", branch], 120).is_err() {
+    if git(program, project, &["merge", "--no-ff", "--no-edit", branch], 120).is_err() {
         let _ = git(program, project, &["merge", "--abort"], 30);
         return Err(s.format("Слияние остановилось на конфликтах и отменено: влейте ветку %@ вручную.", &[branch]));
     }
@@ -311,6 +311,9 @@ mod tests {
             assert!(command::run(command, Duration::from_secs(30)).is_some_and(|out| out.ok()), "git {args:?}");
         };
         sh(&project, &["init", "-q", "-b", "main"]);
+        // The merge commit needs a name: CI runners have none of their own.
+        sh(&project, &["config", "user.name", "T"]);
+        sh(&project, &["config", "user.email", "t@example.com"]);
         std::fs::write(project.join("a.txt"), "one\n").unwrap();
         sh(&project, &["add", "."]);
         sh(&project, &["commit", "-q", "-m", "start"]);
