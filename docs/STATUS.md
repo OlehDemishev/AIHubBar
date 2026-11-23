@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — copied files in «История буфера», and «Не запоминать из приложений» as the person's own list (branch `feat/desktop-clipboard-files`; files copied and put back seen live, the list in Settings not)
 - 2026-11-23: Windows — «Ширина» and «Плотность строк» of the panel in Settings → «Основные» (branch `feat/desktop-panel-shape`; a wide, spacious panel seen live). The warning above 90 % of the session, not seen before, was seen with it
 - 2026-11-23: Windows — «Изменения: файлов: N +… −…» under a session or background run, with the list of files (branch `feat/desktop-session-changes`; seen live)
 - 2026-11-23: Windows — «Передать Codex» on a Claude run that is paused or ended badly, and «Проверить в Codex / Claude Code» on a finished run (branch `feat/desktop-handover-review`; a review by Codex seen live, a handover not)
@@ -194,6 +195,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: files in the clipboard history, own excluded programs (branch `feat/desktop-clipboard-files`)
+
+Done: on Oleh's «Давай дальше» (by the plan, without asking, until 9:30). «История буфера» now keeps copied files too, as the Mac does (`kind: files`, the paths one a line): files copied in Explorer are an entry shown by their names — «README.md, Cargo.toml» — with its own icon, and a click puts them back on the clipboard as files, to paste in Explorer (`CF_HDROP`, read with `DragQueryFileW`, written as a `DROPFILES` block). Settings → «Модули» → «История буфера» → «Не запоминать из приложений»: the number opens the list, «Убрать» takes a program out, «Добавить…» picks programs by their `.exe`, «По умолчанию» brings the nine password managers back; until changed the list is those nine, as before. `core/src/clipboard.rs`, `app/src/clipboard.rs`, `ui/panel.html`, `ui/settings.html`; the setting is `clipboard_excluded_apps`. On Linux only texts are kept, as before. All texts are the Mac's.
+Checked: `python scripts/strings.py --check` (812 texts), `cargo test --workspace` on Windows (188; new: files as an entry, their names, the Mac's file with a files entry read whole, the `DROPFILES` bytes; the excluded list — small letters, once each, the person's own list replacing the default, an emptied list). Live on the laptop, a build from the branch with the module switched on in `settings.json`: two files put on the clipboard (`Set-Clipboard -Path`) came up as «README.md, Cargo.toml» above a copied text; a click on the text, then on the files, moved each to the top, and `Get-Clipboard -Format FileDropList` then gave both paths. The settings were put back after; the laptop's clipboard holds those two files.
+Left: not seen — «Не запоминать из приложений» in Settings (the list, «Добавить…», «Убрать», «По умолчанию»), a copy skipped because an added program was in front, files copied in Explorer itself and pasted there after a click, files kept across a restart. Seen in Russian only.
 
 ## 2026-11-23 — Windows: the panel's width and row density (branch `feat/desktop-panel-shape`)
 

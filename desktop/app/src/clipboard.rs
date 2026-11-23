@@ -82,17 +82,30 @@ impl Clipboard {
             return true;
         }
         state.sequence = sequence;
-        let Ok(text) = app.clipboard().read_text() else { return true };
-        if sequence.is_none() && state.text.as_deref() == Some(text.as_str()) {
+        // Copied files first: Explorer puts their paths on the clipboard as a text too in some programs.
+        let files = clipboard::read_files();
+        let text = match &files {
+            Some(_) => String::new(),
+            None => match app.clipboard().read_text() {
+                Ok(text) => text,
+                Err(_) => return true,
+            },
+        };
+        if files.is_none() && sequence.is_none() && state.text.as_deref() == Some(text.as_str()) {
             return true;
         }
         state.text = sequence.is_none().then(|| text.clone());
         let front = clipboard::front_app();
-        if !clipboard::should_record(clipboard::marked_hidden(), front.as_deref()) {
+        let excluded = clipboard::excluded_apps(app.state::<AppState>().settings.lock().unwrap().clipboard_excluded_apps.as_deref());
+        if !clipboard::should_record(clipboard::marked_hidden(), front.as_deref(), &excluded) {
             return true;
         }
         let before = state.items.first().map(|item| item.text.clone());
-        state.items = clipboard::adding(ClipItem::text(&text, front, Utc::now()), &state.items, limit);
+        let item = match &files {
+            Some(paths) => ClipItem::files(paths, front, Utc::now()),
+            None => ClipItem::text(&text, front, Utc::now()),
+        };
+        state.items = clipboard::adding(item, &state.items, limit);
         if state.items.first().map(|item| &item.text) != before.as_ref() {
             self.keep(&state, remember);
             drop(state);
@@ -118,6 +131,8 @@ pub struct ClipRow {
     ago: String,
     /// «Скопировать · Code.exe».
     hint: String,
+    /// Copied files, shown by their names.
+    files: bool,
 }
 
 #[derive(Serialize)]
@@ -142,7 +157,8 @@ fn view(app: &AppHandle, query: &str) -> ClipboardView {
                 .into_iter()
                 .map(|item| ClipRow {
                     id: item.id.clone(),
-                    text: clipboard::one_line(&item.text),
+                    text: item.shown_text(),
+                    files: item.is_files(),
                     pinned: item.pinned,
                     ago: claudepult_core::projects::ago(&texts, item.date, now),
                     hint: match &item.source_app {
@@ -167,7 +183,13 @@ pub fn clipboard_view(app: AppHandle, query: String) -> ClipboardView {
 pub fn clipboard_copy(app: AppHandle, id: String, query: String) -> Result<ClipboardView, String> {
     let clipboard = app.state::<Clipboard>();
     let item = clipboard.state.lock().unwrap().items.iter().find(|item| item.id == id).cloned().ok_or("no such entry")?;
-    app.clipboard().write_text(item.text.clone()).map_err(|error| error.to_string())?;
+    if item.is_files() {
+        if !clipboard::write_files(&item.paths()) {
+            return Err("the clipboard is busy".into());
+        }
+    } else {
+        app.clipboard().write_text(item.text.clone()).map_err(|error| error.to_string())?;
+    }
     let (_, limit, remember) = options(&app);
     {
         let mut state = clipboard.state.lock().unwrap();
@@ -211,13 +233,68 @@ pub struct ClipboardSettings {
     limit: u32,
     limits: [u32; 4],
     remember: bool,
+    /// «Не запоминать из приложений»: the programs' files.
+    excluded: Vec<String>,
 }
 
 #[tauri::command]
 pub fn clipboard_settings(app: AppHandle) -> ClipboardSettings {
     let state = app.state::<AppState>();
     let settings = state.settings.lock().unwrap();
-    ClipboardSettings { on: settings.module_on(KIND), limit: settings.clipboard_limit, limits: clipboard::LIMITS, remember: settings.clipboard_remember }
+    ClipboardSettings {
+        on: settings.module_on(KIND),
+        limit: settings.clipboard_limit,
+        limits: clipboard::LIMITS,
+        remember: settings.clipboard_remember,
+        excluded: clipboard::excluded_apps(settings.clipboard_excluded_apps.as_deref()),
+    }
+}
+
+/// «Добавить…»: programs by their `.exe`; nothing copied while one of them is in front is recorded.
+#[tauri::command]
+pub async fn add_clipboard_excluded(app: AppHandle) -> ClipboardSettings {
+    use tauri_plugin_dialog::DialogExt;
+    let mut dialog = app.dialog().file();
+    if cfg!(windows) {
+        dialog = dialog.add_filter("exe", &["exe"]);
+        if let Some(programs) = std::env::var_os("ProgramFiles") {
+            dialog = dialog.set_directory(programs);
+        }
+    }
+    let (sender, receiver) = std::sync::mpsc::channel();
+    dialog.pick_files(move |files| {
+        let _ = sender.send(files);
+    });
+    let picked: Vec<String> = tauri::async_runtime::spawn_blocking(move || receiver.recv().ok().flatten())
+        .await
+        .ok()
+        .flatten()
+        .unwrap_or_default()
+        .into_iter()
+        .filter_map(|file| file.into_path().ok())
+        .filter_map(|path| path.file_name().map(|name| name.to_string_lossy().into_owned()))
+        .collect();
+    if !picked.is_empty() {
+        save(&app, |settings| {
+            let mut apps = clipboard::excluded_apps(settings.clipboard_excluded_apps.as_deref());
+            apps.extend(picked);
+            settings.clipboard_excluded_apps = Some(clipboard::excluded_apps(Some(&apps)));
+        });
+    }
+    clipboard_settings(app)
+}
+
+/// «Убрать» on one program (`reset` false), or «По умолчанию»: the password managers again.
+#[tauri::command]
+pub fn remove_clipboard_excluded(app: AppHandle, name: String, reset: bool) -> ClipboardSettings {
+    save(&app, |settings| {
+        settings.clipboard_excluded_apps = if reset {
+            None
+        } else {
+            Some(clipboard::excluded_apps(settings.clipboard_excluded_apps.as_deref()).into_iter().filter(|app| *app != name).collect())
+        };
+    });
+    clipboard_settings(app)
 }
 
 /// «Хранить последних» and «Помнить после перезапуска»; switched off, the file goes.

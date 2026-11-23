@@ -15,7 +15,7 @@ pub const SHOWN: usize = 8;
 /// A longer text is not a thing to keep a history of.
 pub const MAX_BYTES: usize = 1_000_000;
 
-/// The Mac's `ClipItem`, field for field; only texts are recorded here.
+/// The Mac's `ClipItem`, field for field: a copied text, or copied files as their paths, one a line.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ClipItem {
@@ -46,6 +46,8 @@ mod stamp {
     }
 }
 
+pub const FILES: &str = "files";
+
 fn text_kind() -> String {
     "text".into()
 }
@@ -54,14 +56,135 @@ impl ClipItem {
     pub fn text(text: &str, source_app: Option<String>, now: DateTime<Utc>) -> ClipItem {
         ClipItem { id: crate::runs::new_id(), kind: text_kind(), text: text.to_owned(), date: now, pinned: false, source_app }
     }
+
+    /// Copied files (the Mac's `kind: files`): their paths, one a line.
+    pub fn files(paths: &[String], source_app: Option<String>, now: DateTime<Utc>) -> ClipItem {
+        ClipItem { id: crate::runs::new_id(), kind: FILES.into(), text: paths.join("\n"), date: now, pinned: false, source_app }
+    }
+
+    pub fn is_files(&self) -> bool {
+        self.kind == FILES
+    }
+
+    /// The paths of copied files.
+    pub fn paths(&self) -> Vec<String> {
+        self.text.lines().filter(|line| !line.is_empty()).map(str::to_owned).collect()
+    }
+
+    /// What the list shows: a text as one line, files by their names — «report.pdf, photo.png».
+    pub fn shown_text(&self) -> String {
+        if !self.is_files() {
+            return one_line(&self.text);
+        }
+        let names: Vec<String> = self.paths().iter().map(|path| path.trim_end_matches(['/', '\\']).rsplit(['/', '\\']).next().unwrap_or(path).to_owned()).collect();
+        one_line(&names.join(", "))
+    }
 }
 
 /// Password managers, by the program's file: nothing copied while one is in front is recorded.
 pub const EXCLUDED_APPS: [&str; 9] = ["1password.exe", "bitwarden.exe", "keepassxc.exe", "keepass.exe", "lastpass.exe", "dashlane.exe", "enpass.exe", "keeperpasswordmanager.exe", "protonpass.exe"];
 
-/// `hidden` — the copy is marked as not for clipboard history; `front` — the file of the program in front.
-pub fn should_record(hidden: bool, front: Option<&str>) -> bool {
-    !hidden && !front.is_some_and(|exe| EXCLUDED_APPS.contains(&exe.to_lowercase().as_str()))
+/// `hidden` — the copy is marked as not for clipboard history; `front` — the file of the program in front;
+/// `excluded` — «Не запоминать из приложений», programs' files in small letters.
+pub fn should_record(hidden: bool, front: Option<&str>, excluded: &[String]) -> bool {
+    !hidden && !front.is_some_and(|exe| excluded.contains(&exe.to_lowercase()))
+}
+
+/// «Не запоминать из приложений» as kept: what was chosen, else the password managers.
+pub fn excluded_apps(saved: Option<&[String]>) -> Vec<String> {
+    match saved {
+        Some(list) => {
+            let mut apps: Vec<String> = list.iter().map(|app| app.trim().to_lowercase()).filter(|app| !app.is_empty()).collect();
+            apps.sort();
+            apps.dedup();
+            apps
+        }
+        None => EXCLUDED_APPS.iter().map(|app| (*app).to_owned()).collect(),
+    }
+}
+
+/// The clipboard's own form of copied files (`CF_HDROP`): a 20-byte `DROPFILES` header, then the paths in UTF-16,
+/// each ended by a zero, and one more zero after the last.
+pub fn drop_files_bytes(paths: &[String]) -> Vec<u8> {
+    // pFiles = 20, pt = (0, 0), fNC = 0, fWide = 1.
+    let mut bytes: Vec<u8> = [20u32, 0, 0, 0, 1].iter().flat_map(|value| value.to_le_bytes()).collect();
+    for path in paths {
+        bytes.extend(path.encode_utf16().chain([0]).flat_map(u16::to_le_bytes));
+    }
+    bytes.extend(0u16.to_le_bytes());
+    bytes
+}
+
+/// Copied files on the clipboard, if that is what was copied; None for a text or anything else.
+#[cfg(windows)]
+pub fn read_files() -> Option<Vec<String>> {
+    use windows_sys::Win32::System::DataExchange::{CloseClipboard, GetClipboardData, IsClipboardFormatAvailable, OpenClipboard};
+    use windows_sys::Win32::UI::Shell::DragQueryFileW;
+    unsafe {
+        if IsClipboardFormatAvailable(CF_HDROP) == 0 || OpenClipboard(std::ptr::null_mut()) == 0 {
+            return None;
+        }
+        let drop = GetClipboardData(CF_HDROP);
+        let mut paths = Vec::new();
+        if !drop.is_null() {
+            let count = DragQueryFileW(drop as _, u32::MAX, std::ptr::null_mut(), 0);
+            for index in 0..count {
+                let length = DragQueryFileW(drop as _, index, std::ptr::null_mut(), 0) as usize;
+                let mut buffer = vec![0u16; length + 1];
+                let written = DragQueryFileW(drop as _, index, buffer.as_mut_ptr(), buffer.len() as u32) as usize;
+                paths.push(String::from_utf16_lossy(&buffer[..written.min(length)]));
+            }
+        }
+        CloseClipboard();
+        (!paths.is_empty()).then_some(paths)
+    }
+}
+
+#[cfg(not(windows))]
+pub fn read_files() -> Option<Vec<String>> {
+    None
+}
+
+#[cfg(windows)]
+const CF_HDROP: u32 = 15;
+
+/// Puts the files on the clipboard, as Explorer's «Копировать» does. False when the clipboard could not be taken.
+#[cfg(windows)]
+pub fn write_files(paths: &[String]) -> bool {
+    use windows_sys::Win32::Foundation::GlobalFree;
+    use windows_sys::Win32::System::DataExchange::{CloseClipboard, EmptyClipboard, OpenClipboard, SetClipboardData};
+    use windows_sys::Win32::System::Memory::{GlobalAlloc, GlobalLock, GlobalUnlock, GMEM_MOVEABLE};
+    let bytes = drop_files_bytes(paths);
+    unsafe {
+        let memory = GlobalAlloc(GMEM_MOVEABLE, bytes.len());
+        if memory.is_null() {
+            return false;
+        }
+        let target = GlobalLock(memory);
+        if target.is_null() {
+            GlobalFree(memory);
+            return false;
+        }
+        std::ptr::copy_nonoverlapping(bytes.as_ptr(), target.cast::<u8>(), bytes.len());
+        GlobalUnlock(memory);
+        if OpenClipboard(std::ptr::null_mut()) == 0 {
+            GlobalFree(memory);
+            return false;
+        }
+        EmptyClipboard();
+        // The clipboard owns the memory once it has taken it.
+        let taken = !SetClipboardData(CF_HDROP, memory as _).is_null();
+        if !taken {
+            GlobalFree(memory);
+        }
+        CloseClipboard();
+        taken
+    }
+}
+
+#[cfg(not(windows))]
+pub fn write_files(_paths: &[String]) -> bool {
+    false
 }
 
 /// A new copy goes on top; the same text again moves up instead of repeating, keeping its pin; pinned entries stay,
@@ -105,7 +228,7 @@ pub fn one_line(text: &str) -> String {
 
 /// The kept list from `clipboard.json`; a file that can't be read is an empty history.
 pub fn parse(text: &str) -> Vec<ClipItem> {
-    serde_json::from_str::<Vec<serde_json::Value>>(text).unwrap_or_default().into_iter().filter_map(|value| serde_json::from_value::<ClipItem>(value).ok()).filter(|item| item.kind == "text").collect()
+    serde_json::from_str::<Vec<serde_json::Value>>(text).unwrap_or_default().into_iter().filter_map(|value| serde_json::from_value::<ClipItem>(value).ok()).filter(|item| item.kind == "text" || item.kind == FILES).collect()
 }
 
 /// A number that changes with every copy; None where the system has none (the text itself is compared then).
@@ -170,15 +293,41 @@ pub fn front_app() -> Option<String> {
 mod tests {
     use super::*;
 
+    #[test]
+    fn copied_files() {
+        let paths = vec!["C:\\Users\\Олег\\Отчёт 1.pdf".to_owned(), "D:\\photo.png".to_owned()];
+        let item = ClipItem::files(&paths, Some("explorer.exe".into()), at(1));
+        assert!(item.is_files() && item.paths() == paths);
+        assert_eq!(item.shown_text(), "Отчёт 1.pdf, photo.png");
+        assert_eq!(ClipItem::text("two\nlines", None, at(1)).shown_text(), "two ⏎ lines");
+        // The Mac's file with a files entry is read whole now.
+        let kept = parse(&serde_json::to_string(&vec![item.clone()]).unwrap());
+        assert_eq!(kept, [item.clone()]);
+        // The same files copied again move up; a text with the same characters is another entry.
+        let same_as_text = ClipItem::text(&item.text, None, at(2));
+        assert_eq!(adding(same_as_text, &[item.clone()], 20).len(), 2);
+        assert_eq!(adding(ClipItem::files(&paths, None, at(3)), &[item], 20).len(), 1);
+
+        let bytes = drop_files_bytes(&["C:\\a.txt".to_owned(), "Я".to_owned()]);
+        assert_eq!(&bytes[..20], [20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], "the header: where the list starts, and that it is wide");
+        let wide: Vec<u16> = bytes[20..].chunks(2).map(|pair| u16::from_le_bytes([pair[0], pair[1]])).collect();
+        assert_eq!(String::from_utf16(&wide).unwrap(), "C:\\a.txt\0Я\0\0");
+    }
+
     fn at(minute: u32) -> DateTime<Utc> {
         DateTime::parse_from_rfc3339(&format!("2026-11-23T10:{minute:02}:00Z")).unwrap().with_timezone(&Utc)
     }
 
     #[test]
     fn what_is_recorded() {
-        assert!(should_record(false, None) && should_record(false, Some("Code.exe")));
-        assert!(!should_record(true, Some("Code.exe")), "marked as hidden");
-        assert!(!should_record(false, Some("1Password.exe")) && !should_record(false, Some("KeePassXC.exe")), "a password manager in front");
+        let managers = excluded_apps(None);
+        assert!(should_record(false, None, &managers) && should_record(false, Some("Code.exe"), &managers));
+        assert!(!should_record(true, Some("Code.exe"), &managers), "marked as hidden");
+        assert!(!should_record(false, Some("1Password.exe"), &managers) && !should_record(false, Some("KeePassXC.exe"), &managers), "a password manager in front");
+        let own = excluded_apps(Some(&[" Telegram.exe ".into(), "telegram.exe".into(), String::new(), "Code.exe".into()]));
+        assert_eq!(own, ["code.exe", "telegram.exe"], "small letters, once each");
+        assert!(!should_record(false, Some("CODE.EXE"), &own) && should_record(false, Some("1Password.exe"), &own), "the person's own list replaces the default");
+        assert!(excluded_apps(Some(&[])).is_empty() && should_record(false, Some("1Password.exe"), &[]), "an emptied list excludes nothing");
     }
 
     #[test]
@@ -216,7 +365,7 @@ mod tests {
         assert!(text.contains(r#""sourceApp":"Code.exe""#) && text.contains(r#""kind":"text""#) && text.contains(r#""date":"2026-11-23T10:01:00Z""#), "{text}");
         assert_eq!(parse(&text), items);
         let mac = r#"[{"id":"a","kind":"files","text":"/a\n/b","date":"2026-11-23T10:00:00Z","pinned":false},{"id":"b","kind":"text","text":"t","date":"2026-11-23T10:00:00Z"},{"id":"c"}]"#;
-        assert_eq!(parse(mac).iter().map(|i| i.id.as_str()).collect::<Vec<_>>(), ["b"], "copied files and broken entries are left out");
+        assert_eq!(parse(mac).iter().map(|i| i.id.as_str()).collect::<Vec<_>>(), ["a", "b"], "copied files are kept, broken entries are left out");
         assert!(parse("not json").is_empty());
     }
 }

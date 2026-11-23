@@ -63,6 +63,8 @@ pub struct Settings {
     /// «История буфера»: how many copies are kept, and whether they outlive a restart (in `clipboard.json`).
     pub clipboard_limit: u32,
     pub clipboard_remember: bool,
+    /// «Не запоминать из приложений»: programs' files; None — the password managers (`clipboard::EXCLUDED_APPS`).
+    pub clipboard_excluded_apps: Option<Vec<String>>,
     pub notes_selected: Option<String>,
     pub resource_disk_below_gb: u64,
     /// «Быстрые команды»: the library (the Mac's `[QuickCommand]`); None — the starting examples, until edited.
@@ -119,6 +121,7 @@ impl Default for Settings {
             notes_folder: None,
             clipboard_limit: crate::clipboard::DEFAULT_LIMIT,
             clipboard_remember: false,
+            clipboard_excluded_apps: None,
             notes_selected: None,
             resource_disk_below_gb: 20,
             quick_commands: None,
@@ -189,6 +192,7 @@ impl Settings {
             telegram_requests: value.get("telegram_requests").and_then(Value::as_bool).unwrap_or(false),
             clipboard_limit: value.get("clipboard_limit").and_then(Value::as_u64).map(|n| n as u32).filter(|n| crate::clipboard::LIMITS.contains(n)).unwrap_or(crate::clipboard::DEFAULT_LIMIT),
             clipboard_remember: value.get("clipboard_remember").and_then(Value::as_bool).unwrap_or(false),
+            clipboard_excluded_apps: value.get("clipboard_excluded_apps").and_then(Value::as_array).map(|list| list.iter().filter_map(Value::as_str).map(str::to_owned).collect()),
             notes_folder: value.get("notes_folder").and_then(Value::as_str).map(str::to_owned).filter(|f| !f.trim().is_empty()),
             notes_selected: value.get("notes_selected").and_then(Value::as_str).map(str::to_owned),
             telegram_chat: value.get("telegram_chat").and_then(Value::as_str).map(str::to_owned).filter(|c| !c.is_empty()),
