@@ -258,6 +258,8 @@ struct UiTexts {
     chosen: Option<String>,
     languages: Vec<LanguageItem>,
     show_tray_hint: bool,
+    /// «Размер текста»: every page is scaled by this.
+    text_scale: f64,
 }
 
 #[derive(Serialize)]
@@ -275,11 +277,61 @@ fn ui_texts(app: AppHandle) -> UiTexts {
         rtl: i18n::is_rtl(lang),
         strings: serde_json::from_str(strings_json(lang)).unwrap_or_default(),
         version: env!("CARGO_PKG_VERSION"),
-        chosen: settings.language,
+        chosen: settings.language.clone(),
         languages: i18n::LANGUAGES.iter().map(|code| LanguageItem { code, name: i18n::native_name(code) }).collect(),
         // Windows 11 hides new tray icons under «^».
         show_tray_hint: cfg!(target_os = "windows") && !settings.tray_hint_seen,
+        text_scale: settings.text_size().1,
     }
+}
+
+#[derive(Serialize)]
+struct Choice {
+    id: &'static str,
+    title: String,
+}
+
+#[derive(Serialize)]
+struct AppearanceView {
+    theme: &'static str,
+    themes: Vec<Choice>,
+    text_size: &'static str,
+    text_sizes: Vec<Choice>,
+}
+
+/// The theme of every window: the system's, or the chosen one.
+fn apply_theme(app: &AppHandle) {
+    let theme = match app.state::<AppState>().settings.lock().unwrap().theme() {
+        "light" => Some(tauri::Theme::Light),
+        "dark" => Some(tauri::Theme::Dark),
+        _ => None,
+    };
+    app.set_theme(theme);
+}
+
+#[tauri::command]
+fn appearance_view(app: AppHandle) -> AppearanceView {
+    let texts = strings(&app);
+    let settings = app.state::<AppState>().settings.lock().unwrap().clone();
+    let choice = |id: &'static str, title: &str| Choice { id, title: title.to_owned() };
+    AppearanceView {
+        theme: settings.theme(),
+        themes: vec![choice("system", texts.t("Как в системе")), choice("light", texts.t("Светлая")), choice("dark", texts.t("Тёмная"))],
+        text_size: settings.text_size().0,
+        text_sizes: vec![choice("small", texts.t("Мелкий")), choice("normal", texts.t("Обычный")), choice("large", texts.t("Крупный")), choice("extraLarge", texts.t("Очень крупный"))],
+    }
+}
+
+/// «Тема» and «Размер текста»: every window follows at once.
+#[tauri::command]
+fn set_appearance(app: AppHandle, theme: String, text_size: String) -> AppearanceView {
+    save(&app, |settings| settings.set_appearance(&theme, &text_size));
+    apply_theme(&app);
+    let scale = app.state::<AppState>().settings.lock().unwrap().text_size().1;
+    for window in app.webview_windows().values() {
+        let _ = window.eval(format!("document.documentElement.style.zoom = {scale}"));
+    }
+    appearance_view(app)
 }
 
 #[tauri::command]
@@ -437,7 +489,7 @@ fn main() {
             resources::resources_view, resources::open_task_manager, resources::resource_settings, resources::set_resource_alerts,
             quick_commands::quick_commands_view, quick_commands::run_quick_command, quick_commands::quick_commands_library,
             quick_commands::set_quick_commands, quick_commands::new_quick_command, clipboard::clipboard_view, clipboard::clipboard_copy, clipboard::clipboard_pin, clipboard::clipboard_remove, clipboard::clipboard_clear,
-            clipboard::clipboard_settings, clipboard::set_clipboard_options, search::panel_search, search::saved_prompts_view, search::set_saved_prompts, search::add_saved_prompt, search::prompt_projects,
+            clipboard::clipboard_settings, clipboard::set_clipboard_options, appearance_view, set_appearance, search::panel_search, search::saved_prompts_view, search::set_saved_prompts, search::add_saved_prompt, search::prompt_projects,
             search::fill_saved_prompt, notes::notes_view, notes::notes_select, notes::notes_create, notes::notes_save, notes::notes_trash, notes::notes_open,
             notes::notes_settings, notes::choose_notes_folder, notes::open_notes_folder, toggles::toggles_view, toggles::perform_toggle,
             toggles::quick_toggle_settings, toggles::set_quick_toggles, hub::hub_view, hub::refresh_hub, hub::hub_settings,
@@ -460,6 +512,7 @@ fn main() {
             handle.state::<Runs>().start(handle.clone());
             services::Agents::start(&handle);
             handle.state::<calendar::Calendar>().start(handle.clone());
+            apply_theme(&handle);
             handle.state::<keep_awake::KeepAwake>().start(handle.clone());
             handle.state::<clipboard::Clipboard>().start(handle.clone());
             handle.state::<resources::Resources>().start(handle.clone());

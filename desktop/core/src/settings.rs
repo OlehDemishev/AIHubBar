@@ -334,6 +334,9 @@ impl Settings {
 
 // MARK: - Modules: the Mac's `installed` and `off` lists, so `.claudepult` files carry them both ways
 
+pub const THEMES: [&str; 3] = ["system", "light", "dark"];
+pub const TEXT_SIZES: [(&str, f64); 4] = [("small", 0.9), ("normal", 1.0), ("large", 1.15), ("extraLarge", 1.3)];
+
 /// The stage 6 modules this version has, as the Mac's `ModuleKind` names them.
 pub const MODULES: [&str; 7] = ["resources", "keepAwake", "quickCommands", "toggles", "quickPrompt", "notes", "clipboard"];
 
@@ -422,6 +425,31 @@ impl Settings {
         values.sort_unstable();
         values.dedup();
         if values.is_empty() { DEFAULT_LIMIT_THRESHOLDS.to_vec() } else { values }
+    }
+
+    /// «Тема»: «system», «light» or «dark» (the Mac's `PanelTheme`, kept where its profiles keep it).
+    pub fn theme(&self) -> &'static str {
+        let saved = self.mac_settings.get("appearance").and_then(|a| a.get("theme")).and_then(Value::as_str);
+        THEMES.into_iter().find(|theme| Some(*theme) == saved).unwrap_or(THEMES[0])
+    }
+
+    /// «Размер текста»: the Mac's `PanelTextSize` and its scale.
+    pub fn text_size(&self) -> (&'static str, f64) {
+        let saved = self.mac_settings.get("appearance").and_then(|a| a.get("textSize")).and_then(Value::as_str);
+        TEXT_SIZES.into_iter().find(|(size, _)| Some(*size) == saved).unwrap_or(TEXT_SIZES[1])
+    }
+
+    /// Values that are not a theme or a size change nothing.
+    pub fn set_appearance(&mut self, theme: &str, text_size: &str) {
+        let appearance = self.mac_settings.entry("appearance").or_insert_with(|| Value::Object(Map::new()));
+        if let Some(appearance) = appearance.as_object_mut() {
+            if THEMES.contains(&theme) {
+                appearance.insert("theme".into(), Value::String(theme.to_owned()));
+            }
+            if TEXT_SIZES.iter().any(|(size, _)| *size == text_size) {
+                appearance.insert("textSize".into(), Value::String(text_size.to_owned()));
+            }
+        }
     }
 
     /// Nothing valid in `values` keeps what was there.
@@ -553,6 +581,17 @@ mod tests {
         assert_eq!((resources.resource_alerts, resources.resource_disk_below_gb), (false, 20));
         assert_eq!(parse_thresholds("95, 50;80 % 80, 0, 101, x"), [50, 80, 95]);
         assert!(parse_thresholds("ноль").is_empty());
+        let mut look = Settings::default();
+        assert_eq!((look.theme(), look.text_size()), ("system", ("normal", 1.0)));
+        look.set_appearance("dark", "extraLarge");
+        assert_eq!((look.theme(), look.text_size()), ("dark", ("extraLarge", 1.3)));
+        look.set_appearance("pink", "huge");
+        assert_eq!((look.theme(), look.text_size().0), ("dark", "extraLarge"), "not a theme, not a size");
+        let from_mac = Settings::from_json(r#"{"mac_settings": {"appearance": {"theme": "light", "textSize": "small", "width": "wide"}}}"#);
+        assert_eq!((from_mac.theme(), from_mac.text_size()), ("light", ("small", 0.9)));
+        let mut kept = from_mac.clone();
+        kept.set_appearance("system", "large");
+        assert_eq!(kept.mac_settings["appearance"]["width"], "wide", "the Mac's other appearance settings stay");
         let mut thresholds = Settings::default();
         assert_eq!(thresholds.limit_thresholds(), DEFAULT_LIMIT_THRESHOLDS);
         thresholds.set_limit_thresholds(&[90, 70, 70, 300]);

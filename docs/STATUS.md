@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — «Тема» and «Размер текста» in Settings → «Основные» (branch `feat/desktop-appearance`; a dark theme with large text seen live)
 - 2026-11-23: Windows — the «История буфера» module: copied texts, search, pin, back to the clipboard in a click (branch `feat/desktop-clipboard`; seen live; its Settings card not seen)
 - 2026-11-23: Mac — SPEC-content stage 5 is ready in PR 534 (`feat/calendar-ics-word-goals`): the calendar as an `.ics` file and «Цель по словам» of a folder profile; **held until 0.12.0 is out**; the panel line and the file seen live, the windows not
 - 2026-11-23: Windows — «Свои промпты»: kept in Settings, found by the panel's search, started in a chosen project (branch `feat/desktop-saved-prompts`; the two search steps seen live, the start and the Settings card not)
@@ -183,6 +184,11 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-23 — Windows: theme and text size (branch `feat/desktop-appearance`)
+
+Done: on Oleh's «Продолжай, пока не упрешься в текущую версию на маке». The Mac's `PanelTheme` and `PanelTextSize`: Settings → «Основные» → «Тема» («Как в системе», «Светлая», «Тёмная») and «Размер текста» («Мелкий» 0.9, «Обычный», «Крупный» 1.15, «Очень крупный» 1.3). The theme is set for every window of the app (its title bar too), the text size scales every page whole. Kept where the Mac's profiles keep them (`mac_settings.appearance.theme` / `.textSize`), so a `.claudepult` file carries them both ways; the Mac's other appearance settings in that record stay untouched. `core/src/settings.rs`, `app/src/main.rs`, `ui/app.js`, `ui/settings.html`. All texts are the Mac's.
+Checked: `python scripts/strings.py --check` (723 texts), `cargo test --workspace` on Windows (the defaults, a wrong value changes nothing, the Mac's record read and its other fields kept). Live on the laptop, a build from the branch with «dark» and «large» written to `settings.json`: the Settings window opened dark with a dark title bar and larger text, the two lists showing «Тёмная» and «Крупный». The settings were put back after.
+Left: the panel's width does not grow with the text as on the Mac; width, density, background and the limits' look are not ported. Not seen: changing the two lists by hand (the windows following at once), the panel and the other windows in the dark theme, «Мелкий» and «Очень крупный», Linux. Seen in Russian only.
 ## 2026-11-23 — Mac: the help knows the shared Telegram bot; a correction to the 1.0 list (branch `fix/telegram-help`)
 
 Done: on Oleh's «дальше» the agent looked at the shared bot to prepare its deploy and found it deployed since 2026-11-03 (`TelegramRelay.defaultURL`, journal «shared Telegram bot deployed»), with the bot and the Mini App confirmed by Oleh on 2026-11-08. **The 1.0 list of 2026-11-21 was wrong about it:** «not in 1.0 — the Worker is not deployed» came from a stale row of `docs/specs/README.md`; the agent told Oleh the same twice on 2026-11-23. The row is corrected. Where the shared bot and the Mini App go in 1.0 — ready or «бета» — is Oleh's call again (Needs Oleh).
