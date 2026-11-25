@@ -1,6 +1,6 @@
 # Launch kit
 
-Drafts and the order of posts for getting AI Hub Bar its first users. Nothing here has been posted. Every post goes out from Oleh's own account.
+Drafts and the order of posts for getting AI Hub Bar its first users. Posted so far: the r/ClaudeAI megathread comment (2026-11-25). Every post goes out from Oleh's own account.
 
 Text in `[brackets]` needs Oleh's own words: it is a personal detail nobody else can vouch for.
 
