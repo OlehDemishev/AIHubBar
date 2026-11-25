@@ -184,6 +184,7 @@
         <span class="word-goal-bar" aria-hidden="true"><span></span></span>
       </div>
       <div id="project-rows"></div>
+      <div class="batch-bar" id="batch-bar" hidden></div>
       <p class="secondary" id="projects-message" hidden></p>
       <div class="new-project" id="new-project" hidden>
         <button class="small" id="new-project-open" data-t="Новый проект"></button>
@@ -1590,11 +1591,129 @@ ${command.hotKey}` : command.value;
       message.textContent = String(error);
     }
 
+    // «Выбрать» (the Mac's BatchBar): the checked projects, a command of the profile and when — «Сейчас», «На ночь»,
+    // «После сброса лимита». Below it, the batches that wait, work or are done.
+    const batch = { selecting: false, chosen: new Set(), command: null, service: null, text: "", cancelling: null };
+    function closeBatch() {
+      Object.assign(batch, { selecting: false, command: null, text: "" });
+      batch.chosen.clear();
+      showProjects();
+    }
+    function batchBar(view) {
+      const bar = document.getElementById("batch-bar");
+      const focused = document.activeElement?.id === "batch-text";
+      const parts = [];
+      const services = view.batchServices;
+      const service = services.find((s) => s.id === (batch.service ?? view.defaultService)) ?? services[0];
+      if (batch.selecting) {
+        const all = batch.chosen.size === view.rows.length;
+        const head = element("div", "batch-head");
+        const toggle = element("button", "link", all ? t("Снять все") : t("Все"));
+        toggle.onclick = () => { if (all) batch.chosen.clear(); else view.rows.forEach((r) => batch.chosen.add(r.path)); showProjects(); };
+        head.append(element("strong", "secondary", t("Выбрано проектов: %lld", batch.chosen.size)), toggle, element("span", "spacer"));
+        if (service && services.length > 1) {
+          const menu = element("select", "small");
+          menu.title = t("Каким сервисом выполнять");
+          menu.append(...services.map((s) => Object.assign(element("option", "", s.name), { value: s.id, selected: s.id === service.id })));
+          menu.onchange = () => { batch.service = menu.value; showProjects(); };
+          head.append(menu);
+        }
+        const cancel = element("button", "small", t("Отмена"));
+        cancel.onclick = closeBatch;
+        head.append(cancel);
+        parts.push(head);
+        if (!services.length) {
+          parts.push(element("p", "secondary note", t("Пакет работает только в фоне: нужен Claude Code с запуском в фоне или модель по API.")));
+        } else if (!view.batchCommands.length) {
+          parts.push(element("p", "secondary note", t("У профиля нет команд: добавьте их в Настройки → «Профили».")));
+        } else {
+          const chips = element("div", "batch-commands");
+          chips.append(...view.batchCommands.map((c) => {
+            const chip = element("button", "small" + (batch.command === c.id ? " selected" : ""), c.title);
+            chip.title = c.hint;
+            chip.setAttribute("aria-pressed", String(batch.command === c.id));
+            chip.onclick = () => { batch.command = batch.command === c.id ? null : c.id; showProjects(); };
+            return chip;
+          }));
+          parts.push(chips);
+          const command = view.batchCommands.find((c) => c.id === batch.command);
+          const canStart = () => !!command && !!service && batch.chosen.size > 0 && (!command.asks || batch.text.trim() !== "");
+          let startButtons = [];
+          if (command?.asks) {
+            const field = Object.assign(element("input", "small"), { type: "text", id: "batch-text", placeholder: command.asks, value: batch.text });
+            field.title = t("Спрашивается один раз на весь пакет");
+            field.oninput = () => { batch.text = field.value; startButtons.forEach((b) => { b.disabled = !canStart(); }); };
+            parts.push(field);
+          }
+          const when = element("div", "batch-when");
+          startButtons = [["now", "Сейчас", "По одному проекту за раз, начиная сейчас"], ["night", "На ночь", "Начнётся в час ночного запуска из настроек; утром одна сводка"]]
+            .concat(service?.id === "claude-code" ? [["afterReset", "После сброса лимита", "Начнётся через две минуты после сброса лимита сессии"]] : [])
+            .map(([key, title, hint]) => {
+              const button = element("button", "small", t(title));
+              button.title = t(hint);
+              button.disabled = !canStart();
+              button.onclick = async () => {
+                try {
+                  await invoke("batch_start", { projects: view.rows.filter((r) => batch.chosen.has(r.path)).map((r) => r.path), command: batch.command, service: service.id, text: command.asks ? batch.text : null, when: key });
+                  closeBatch();
+                } catch (error) { console.error(error); }
+              };
+              return button;
+            });
+          when.append(...startButtons);
+          parts.push(when, element("p", "secondary note", t("Проекты идут по очереди, не параллельно. У лимита пакет ждёт сброса; в конце придёт одна сводка.")));
+        }
+      } else if (view.rows.length > 1) {
+        const open = element("button", "link batch-open", "☑ " + t("Выбрать"));
+        open.title = t("Выполнить одну команду в нескольких проектах — по очереди, сейчас или ночью");
+        open.onclick = () => { batch.selecting = true; showProjects(); };
+        parts.push(open);
+      }
+      for (const row of view.batches) {
+        const line = element("div", "batch-row " + row.state);
+        line.append(element("span", "mark", { done: "✓", failed: "⚠", running: "◌", waiting: "◷" }[row.state]));
+        line.append(Object.assign(element("span", "text", row.text), { title: row.hint }), element("span", "spacer"));
+        const why = t("Проекты, до которых очередь не дошла, не будут обработаны. Тот, что выполняется сейчас, закончит работу.");
+        if (batch.cancelling === row.id && row.canCancel) {
+          const question = element("span", "secondary", t("Отменить пакет?"));
+          question.title = why;
+          const yes = element("button", "small", t("Отменить пакет"));
+          yes.onclick = () => { batch.cancelling = null; invoke("batch_cancel", { id: row.id }); };
+          const no = element("button", "small", t("Отмена"));
+          no.onclick = () => { batch.cancelling = null; showProjects(); };
+          line.append(question, yes, no);
+        } else if (row.state === "done" || row.state === "failed") {
+          const dismiss = element("button", "link", t("Убрать"));
+          dismiss.onclick = () => invoke("batch_dismiss", { id: row.id });
+          line.append(dismiss);
+        } else if (row.canCancel) {
+          const cancel = element("button", "link", t("Отменить"));
+          cancel.title = why;
+          cancel.onclick = () => { batch.cancelling = row.id; showProjects(); };
+          line.append(cancel);
+        }
+        parts.push(line);
+      }
+      bar.replaceChildren(...parts);
+      bar.hidden = parts.length === 0;
+      if (focused) document.getElementById("batch-text")?.focus();
+    }
+
     // Folder projects (a profile with «папки»): stage chip and metrics; opened — stages, files, the card.
     function folderRows(view) {
       return view.rows.map((row) => {
         const item = element("div", "project folder");
         item.dataset.search = row.path;
+        if (batch.selecting) {
+          // «Выбрать» is on: the row is a checkbox for the batch, not a card to open.
+          const label = element("label", "project-summary batch-pick");
+          const box = Object.assign(element("input"), { type: "checkbox", checked: batch.chosen.has(row.path) });
+          box.onchange = () => { if (box.checked) batch.chosen.add(row.path); else batch.chosen.delete(row.path); showProjects(); };
+          label.append(box, element("span", "name", row.name));
+          if (row.stage) label.append(element("span", "spacer"), stageChip(row.stage, row.stageIndex, view.stages.length));
+          item.append(label);
+          return item;
+        }
         const open = expanded.has(row.path);
         const summary = element("button", "project-summary");
         summary.setAttribute("aria-expanded", String(open));
@@ -1696,11 +1815,13 @@ ${command.hotKey}` : command.value;
       }
       if (view.folders) {
         rows.replaceChildren(...folderRows(view.folders));
+        batchBar(view.folders);
         const message = document.getElementById("projects-message");
         message.hidden = !view.message;
         message.textContent = view.message ?? "";
         return;
       }
+      document.getElementById("batch-bar").hidden = true;
       rows.replaceChildren(...view.rows.map((row) => {
         const item = element("div", "project");
         item.dataset.search = row.path;

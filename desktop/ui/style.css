@@ -136,6 +136,21 @@ body.pair-window { margin: 0; padding: 14px 16px; display: flex; flex-direction:
 .local-server .icon-button { font-size: 12px; padding: 0 4px; }
 .local-server .danger { color: #d70015; }
 /* «Цель по словам» above a folder profile's projects. */
+/* «Выбрать»: a batch over the checked folder projects, and the batches below the list. */
+.batch-bar { display: flex; flex-direction: column; gap: 5px; font-size: 12px; padding: 4px 0 2px; }
+.batch-head, .batch-when, .batch-row, .batch-commands { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.batch-head .spacer, .batch-row .spacer { flex: 1; }
+.batch-head { flex-wrap: nowrap; }
+.batch-head select { max-width: 110px; }
+.batch-head strong { white-space: nowrap; }
+.batch-commands button.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+.batch-bar .note { margin: 0; font-size: 11px; }
+.batch-bar input[type=text] { width: 100%; box-sizing: border-box; }
+.batch-row .text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.batch-row.done .mark { color: #30d158; }
+.batch-row.failed .mark { color: #ff9f0a; }
+.batch-row.waiting .mark, .batch-row.running .mark { color: var(--secondary); }
+.batch-pick { display: flex; align-items: center; gap: 8px; cursor: pointer; }
 .word-goal { display: flex; align-items: center; gap: 6px; font-size: 12px; padding: 2px 0 6px; }
 .word-goal .mark { color: var(--secondary); }
 .word-goal.reached .mark { color: #30d158; }
