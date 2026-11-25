@@ -14,6 +14,7 @@ pub mod claude_config;
 pub mod clipboard;
 pub mod command;
 pub mod commands;
+pub mod crash;
 pub mod docx;
 pub mod feedback;
 pub mod folders;

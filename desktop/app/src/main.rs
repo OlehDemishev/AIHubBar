@@ -15,6 +15,7 @@ mod commands;
 mod accounts;
 mod help;
 mod pair_compare;
+mod crash;
 mod history;
 mod local_servers;
 mod hub;
@@ -500,6 +501,8 @@ fn quit(app: AppHandle) {
 }
 
 fn main() {
+    // A panic of the app leaves a report the next start offers to send (the Mac's crash report).
+    claudepult_core::crash::install(crash::dir(), env!("CARGO_PKG_VERSION"));
     // A first start: nothing saved yet, so the assistant makes the first profile (the Mac's empty start).
     let first_start = !paths::settings_file().exists();
     let app = tauri::Builder::default()
@@ -568,7 +571,7 @@ fn main() {
             claude_config::claude_config_open, claude_config::set_mcp_server, claude_config::set_agent_skill, claude_config::set_claude_plugin,
             changes::open_changed, projects::launch_both, runs::hand_over_run, runs::review_run, queue::resume_run_now, queue::run_guard, queue::set_run_guard, queue::queue_launch, queue::queued_view, queue::cancel_queued, queue::night_hour, queue::set_night_hour,
             pair_compare::open_pair_compare, pair_compare::pair_view, pair_compare::pair_file_diff, pair_compare::pair_between_diff,
-            pair_compare::pair_action, pair_compare::pair_open_folder, help::open_help, help::help_view, help::open_feedback, accounts::claude_accounts, accounts::add_claude_account, accounts::rename_claude_account,
+            pair_compare::pair_action, pair_compare::pair_open_folder, help::open_help, help::help_view, crash::crash_reports_asked, crash::set_crash_reports_asked, help::open_feedback, accounts::claude_accounts, accounts::add_claude_account, accounts::rename_claude_account,
             accounts::remove_claude_account, accounts::sign_in_claude_account, accounts::refresh_claude_accounts, history::open_history, history::day_summary_settings, history::set_day_summary, history::send_day_summary, history::history_view, history::set_plan_price, history::export_history,
             updates::updates_view, updates::set_updates_daily, updates::check_updates, updates::install_update,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
@@ -611,6 +614,8 @@ fn main() {
             handle.state::<resources::Resources>().start(handle.clone());
             handle.state::<hub::Hub>().start(handle.clone());
             history::start_day_summary(handle.clone());
+            let for_crash = handle.clone();
+            std::thread::spawn(move || crash::check_at_start(&for_crash));
             handle.state::<accounts::Accounts>().start(handle.clone());
             command_hot_keys::sync(&handle);
             updates::watch(handle.clone());
