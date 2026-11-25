@@ -5,6 +5,7 @@
 **Updated:** 2026-11-25
 
 **Now:**
+- 2026-11-25: Windows 0.1.12 published as an unsigned pre-release (tag `desktop-v0.1.12`) on Oleh's «Да, выпускай»: files in the quick prompt, «Версии», batch tasks, the crash report; installed on the laptop by the agent
 - 2026-11-25: Windows — batch tasks: «Выбрать» under the folder projects runs one command of the profile over the checked projects one after another, «Сейчас», «На ночь» or «После сброса лимита», with one summary at the end (branch `feat/desktop-batch`; seen live with a stand-in compatible server)
 - 2026-11-25: Windows — «Версии» of folder projects: kept every 10 or 30 minutes when the texts changed and before every AI run, the «Версии» window compares a file of a version with the file now and puts a file or the whole version back, saving what is there first (branch `feat/desktop-versions`; seen live on a scratch «Тексты» profile)
 - 2026-11-25: Windows — the crash report: a panic of the app leaves a report, and the next start offers «Сообщить на GitHub…» with the bug form filled and the report shown in File Explorer (branch `feat/desktop-crash-report`; the question and both answers seen live with a test report)
@@ -218,6 +219,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-25 — Windows 0.1.12 released (branch `chore/desktop-0.1.12-note`)
+
+Done: on Oleh's «Да, выпускай». The four Mac features built since 0.1.11 (PR 599 files in the quick prompt, 600 the crash report, 601 «Версии», 602 batch tasks). The version set to 0.1.12 with the «Что нового» card's five lines and their 12 translations (PR 606; the lines of 0.1.11 left the catalog), the tag `desktop-v0.1.12` on that PR's merge commit, the release published as a pre-release and not «latest»: https://github.com/OlehDemishev/AIHubBar/releases/tag/desktop-v0.1.12. The laptop's copy was updated by the agent: the release's installer run silently over 0.1.11; the profile and settings were kept.
+Checked: CI green on PR 606; `desktop-release.yml` green (it installs and uninstalls the installer) and the manifest workflow green; `latest.json` at `desktop-updates` says 0.1.12. On the laptop the installer exited 0, `AIHubBar.exe` and `claudepult --version` say 0.1.12, the app runs.
+Left: the installed 0.1.12 was not opened and looked at by the agent. Not tried by hand before the release (also in the notes' «Known»): a batch with Claude Code, «После сброса лимита», a real crash report. Unsigned, SmartScreen warns. On the Mac's list still missing here: tasks from the Telegram chat, the shared bot and its Mini App.
 
 ## 2026-11-25 — Mac: pull request to awesome-mac (branch `chore/status-awesome-mac-pr`)
 
