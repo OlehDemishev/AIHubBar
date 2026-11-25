@@ -157,11 +157,77 @@ https://olehdemishev.github.io/AIHubBar/
 
 ## Lists
 
-Check each list's contribution rules first, as they can change. Candidates:
+Each list's rules were read on 2026-11-25 from its repository; they change, so look again on the day. Nothing is submitted yet. One list at a time, a few days apart.
 
-- `hesreallyhim/awesome-claude-code`
-- `jaywcjlove/awesome-mac`
-- `serhii-londar/open-source-mac-os-apps`
+| Order | List | How | Can go now? |
+|---|---|---|---|
+| 1 | `jaywcjlove/awesome-mac` (119k stars) | A pull request to four README files | Yes: no stars are asked for |
+| 2 | `hesreallyhim/awesome-claude-code` (59k stars) | A web form, filled by a person | Yes by the rule (14 days of active development), but the maintainer says plainly that a project with no users is unlikely to be taken |
+| 3 | `serhii-londar/open-source-mac-os-apps` (52k stars) | A pull request to `applications.json` | No: its checklist asks for at least 5 stars |
+
+### 1. awesome-mac
+
+Rules (`docs/CONTRIBUTING.md`): one pull request per app; the entry goes in alphabetical order into the fitting section; one sentence; the same entry in `README.md`, `README-zh.md`, `README-ja.md` and `README-ko.md`; a useful title for the pull request. AI-assisted pull requests are welcome if they follow the same rules.
+
+Section «AI Tools», between «Agenttrace» and «Airbag». A similar app, «Agent Monitor», is already listed under «Developer Utilities», so the entry says what is different: several services' limits in one place and answering permission requests.
+
+```markdown
+* [AI Hub Bar](https://olehdemishev.github.io/AIHubBar/) - Open-source menu bar app that shows the usage limits of Claude, Codex, Copilot, Gemini CLI and Cursor, lists every running agent session, and answers their permission requests from a notification. [![Open-Source Software][OSS Icon]](https://github.com/OlehDemishev/AIHubBar) ![Freeware][Freeware Icon]
+```
+
+Pull request title: `Add AI Hub Bar to AI Tools`. The three translated files get the same line in their own language, written to match the neighbouring entries of that file.
+
+The agent can open this pull request from Oleh's GitHub account on his word (a fork appears in his account).
+
+### 2. awesome-claude-code
+
+Rules (`CONTRIBUTING.md`): only through the web form, **by a person** — a submission made with `gh` or by an agent risks a temporary block; no pull requests; one resource at a time; the description is a description, not a pitch, one line, no emojis, no «you». The project must be 14 days old with active development (ours: first commit 2026-10-29) or have 100 stars.
+
+Form: https://github.com/hesreallyhim/awesome-claude-code/issues/new?template=recommend-resource.yml
+
+| Field | Value |
+|---|---|
+| Title | `[Resource]: AI Hub Bar` |
+| Display Name | `AI Hub Bar` |
+| Category | `Observability & Monitoring > Session Monitors` |
+| Link | `https://github.com/OlehDemishev/AIHubBar` |
+| Author Name | `Oleh Demishev` |
+| Author Link | `https://github.com/OlehDemishev` |
+
+Description:
+
+```text
+Native macOS menu bar app that lists every Claude Code session on the Mac with its current tool call, answers permission requests from a notification, the panel or Telegram, and shows the 5-hour and weekly limits with a forecast from the current pace. Sessions are tracked by a hook that writes small status files and prints nothing. MIT, no account.
+```
+
+Checklist: tick the first five boxes only after really doing what they say (open the list, look through «Session Monitors» and «Usage & Cost» for a resource that does the same). **Leave the last box unticked** — it is a trap for people who tick everything. One box says «This resource is specific to Claude Code»: the sessions, the hook and the permission requests are; the limits of other services are an extra, and it is honest to say so in a comment if asked.
+
+### 3. open-source-mac-os-apps
+
+Rules (`CONTRIBUTING.md`, `PULL_REQUEST_TEMPLATE.md`): one pull request per app; edit `applications.json`, not the README; the description ends with a full stop; the checklist has «The repository has at least 5 stars». Wait for five stars.
+
+```json
+{
+    "short_description": "Menu bar app for AI limits and agent sessions: Claude, Codex, Copilot, Gemini CLI and Cursor in one panel, with permission requests answered from a notification.",
+    "categories": [
+        "ai",
+        "menubar",
+        "development"
+    ],
+    "repo_url": "https://github.com/OlehDemishev/AIHubBar",
+    "title": "AI Hub Bar",
+    "icon_url": "https://raw.githubusercontent.com/OlehDemishev/AIHubBar/main/AIHubBar/Resources/Assets.xcassets/AppIcon.appiconset/icon_128x128.png",
+    "screenshots": [
+        "https://raw.githubusercontent.com/OlehDemishev/AIHubBar/main/docs/images/hero.png"
+    ],
+    "official_site": "https://olehdemishev.github.io/AIHubBar/",
+    "languages": [
+        "swift"
+    ]
+}
+```
+
+Pull request body, by their template: Project URL, Category `ai, menubar, development`, the description above, and the checklist with every box ticked once the stars are there.
 
 ## Homebrew
 
