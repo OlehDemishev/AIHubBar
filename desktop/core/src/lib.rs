@@ -8,6 +8,7 @@ pub mod ai;
 pub mod assistant;
 pub mod approvals;
 pub mod calendar;
+pub mod calendar_ics;
 pub mod claude_accounts;
 pub mod claude_config;
 pub mod clipboard;
@@ -48,6 +49,7 @@ pub mod token_usage;
 pub mod toggles;
 pub mod tray_icon;
 pub mod usage;
+pub mod word_goal;
 pub mod whats_new;
 
 /// The name people see. The programs are `AIHubBar` and `claudepult`; data folders keep the old name `ClaudePult`, as on the Mac.

@@ -179,6 +179,10 @@
     </section>
     <section class="card projects">
       <h2 data-t="Проекты"></h2>
+      <div class="word-goal" id="word-goal" hidden>
+        <span class="mark" aria-hidden="true"></span><span class="secondary text"></span><span class="secondary streak"></span>
+        <span class="word-goal-bar" aria-hidden="true"><span></span></span>
+      </div>
       <div id="project-rows"></div>
       <p class="secondary" id="projects-message" hidden></p>
       <div class="new-project" id="new-project" hidden>
@@ -1629,6 +1633,17 @@ ${command.hotKey}` : command.value;
         : view.rows.map((row) => ({ id: row.path, name: row.name, detail: row.branch ?? "" }));
       const rows = document.getElementById("project-rows");
       newProject.hidden = !view.folders?.canCreate;
+      // «Цель по словам» of a folder profile: today's words against the goal, and the days in a row.
+      const goal = view.folders?.wordGoal;
+      const goalLine = document.getElementById("word-goal");
+      goalLine.hidden = !goal;
+      if (goal) {
+        goalLine.classList.toggle("reached", goal.reached);
+        goalLine.querySelector(".mark").textContent = goal.reached ? "✓" : "✎";
+        goalLine.querySelector(".text").textContent = goal.text;
+        goalLine.querySelector(".streak").textContent = goal.streak ?? "";
+        goalLine.querySelector(".word-goal-bar span").style.width = `${Math.round(goal.fraction * 100)}%`;
+      }
       if (view.folders) {
         rows.replaceChildren(...folderRows(view.folders));
         const message = document.getElementById("projects-message");

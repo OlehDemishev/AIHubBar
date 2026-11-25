@@ -15,6 +15,8 @@ chrono.workspace = true
 httpdate = "1"
 ureq = "3"
 regex = "1"
+# The .ics export's event ids, as the Mac makes them; already built for Tauri.
+sha2 = "0.10"
 unicode-segmentation = "1"
 # Unzips a .docx for its word count; already built for Tauri, so nothing new is downloaded.
 miniz_oxide = { version = "0.8", features = ["with-alloc"] }

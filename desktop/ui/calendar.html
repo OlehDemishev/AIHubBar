@@ -18,6 +18,7 @@
       <button id="scope-week" data-t="Неделя"></button>
     </span>
     <button id="reread" data-t-title="Перечитать файлы" aria-label="↻">↻</button>
+    <button id="export" data-t-title="Экспорт в .ics… — файл с датами для Outlook, Google Calendar и других" aria-label="Export">⇪</button>
   </header>
   <p class="secondary calendar-off" id="inactive" data-t="Календарь включается у профиля с проектами-папками: Настройки → «Профили» → «Календарь»." hidden></p>
   <div class="weekdays" id="weekdays"></div>
@@ -206,6 +207,12 @@
     document.getElementById("scope-week").onclick = () => { scope = "week"; remember("calendar-scope", scope); render(); };
     document.getElementById("current-only").onchange = (event) => { currentOnly = event.target.checked; remember("calendar-current-only", String(currentOnly)); load(); };
     document.getElementById("reread").onclick = async () => { await invoke("reread_calendar"); await load(); };
+    // «Экспорт в .ics…»: the dates under the filter, every month, to a file the person picks.
+    document.getElementById("export").onclick = async () => {
+      const error = document.getElementById("error");
+      try { await invoke("export_calendar", { currentOnly }); error.hidden = true; }
+      catch (problem) { error.textContent = String(problem); error.hidden = false; }
+    };
     window.__TAURI__.event.listen("calendar-changed", load);
     await load();
   </script>

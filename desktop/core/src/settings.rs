@@ -60,6 +60,10 @@ pub struct Settings {
     pub telegram_answers: bool,
     /// «Запросы разрешений в этот бот» (the Mac's `telegramApprovals`).
     pub telegram_requests: bool,
+    /// «Итог дня в Telegram» and its hour (the Mac's `daySummary`, `daySummaryHour`), when it was sent last (seconds).
+    pub day_summary: bool,
+    pub day_summary_hour: u32,
+    pub day_summary_sent: Option<i64>,
     /// «Заметки»: the folder of the notes (None — `notes::default_folder`) and the note shown last.
     pub notes_folder: Option<String>,
     /// «История буфера»: how many copies are kept, and whether they outlive a restart (in `clipboard.json`).
@@ -123,6 +127,9 @@ impl Default for Settings {
             telegram_off: Vec::new(),
             telegram_answers: false,
             telegram_requests: false,
+            day_summary: false,
+            day_summary_hour: 21,
+            day_summary_sent: None,
             notes_folder: None,
             clipboard_limit: crate::clipboard::DEFAULT_LIMIT,
             clipboard_remember: false,
@@ -197,6 +204,9 @@ impl Settings {
             renew_claude_login: value.get("renew_claude_login").and_then(Value::as_bool).unwrap_or(defaults.renew_claude_login),
             telegram_answers: value.get("telegram_answers").and_then(Value::as_bool).unwrap_or(false),
             telegram_requests: value.get("telegram_requests").and_then(Value::as_bool).unwrap_or(false),
+            day_summary: value.get("day_summary").and_then(Value::as_bool).unwrap_or(false),
+            day_summary_hour: value.get("day_summary_hour").and_then(Value::as_u64).filter(|hour| *hour < 24).map_or(21, |hour| hour as u32),
+            day_summary_sent: value.get("day_summary_sent").and_then(Value::as_i64),
             clipboard_limit: value.get("clipboard_limit").and_then(Value::as_u64).map(|n| n as u32).filter(|n| crate::clipboard::LIMITS.contains(n)).unwrap_or(crate::clipboard::DEFAULT_LIMIT),
             clipboard_remember: value.get("clipboard_remember").and_then(Value::as_bool).unwrap_or(false),
             clipboard_excluded_apps: value.get("clipboard_excluded_apps").and_then(Value::as_array).map(|list| list.iter().filter_map(Value::as_str).map(str::to_owned).collect()),
