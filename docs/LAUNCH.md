@@ -177,7 +177,7 @@ Section «AI Tools», between «Agenttrace» and «Airbag». A similar app, «Ag
 
 Pull request title: `Add AI Hub Bar to AI Tools`. The three translated files get the same line in their own language, written to match the neighbouring entries of that file.
 
-The agent can open this pull request from Oleh's GitHub account on his word (a fork appears in his account).
+Sent 2026-11-25: https://github.com/jaywcjlove/awesome-mac/pull/5063 (from the fork `OlehDemishev/awesome-mac`, branch `add-ai-hub-bar`; five README files, Portuguese too).
 
 ### 2. awesome-claude-code
 
