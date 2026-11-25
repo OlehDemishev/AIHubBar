@@ -158270,386 +158270,6 @@
         }
       }
     },
-    "Две задачи пары Claude и Codex можно сравнить в одном окне и оставить лучший вариант.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يمكن مقارنة مهمتي زوج Claude وCodex في نافذة واحدة والإبقاء على أفضل نتيجة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die zwei Aufgaben eines Paars aus Claude und Codex lassen sich in einem Fenster vergleichen und die bessere Variante behalten."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The two tasks of a Claude and Codex pair can be compared in one window, keeping the better variant."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Las dos tareas de un par Claude y Codex se pueden comparar en una ventana y quedarse con la mejor variante."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les deux tâches d’une paire Claude et Codex se comparent dans une seule fenêtre, pour garder la meilleure variante."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dua tugas pasangan Claude dan Codex bisa dibandingkan dalam satu jendela dan varian terbaik disimpan."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le due attività di una coppia Claude e Codex si possono confrontare in una finestra e tenere la variante migliore."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude と Codex のペアの 2 つのタスクを 1 つのウインドウで比べ、良いほうを残せます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude와 Codex 짝의 두 작업을 한 창에서 비교하고 더 나은 쪽을 남길 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dwa zadania pary Claude i Codex można porównać w jednym oknie i zostawić lepszy wariant."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "As duas tarefas de um par Claude e Codex podem ser comparadas em uma janela, ficando com a melhor variante."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Два завдання пари Claude і Codex можна порівняти в одному вікні й залишити кращий варіант."
-          }
-        }
-      }
-    },
-    "Итог дня приходит в Telegram и начинается с того, что ждёт вас.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يصل ملخص اليوم إلى Telegram ويبدأ بما ينتظرك."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Tageszusammenfassung kommt in Telegram an und beginnt mit dem, was auf Sie wartet."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The day’s summary comes to Telegram and begins with what is waiting for you."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El resumen del día llega a Telegram y empieza por lo que te espera."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le bilan du jour arrive dans Telegram et commence par ce qui vous attend."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ringkasan hari ini dikirim ke Telegram dan dimulai dengan hal yang menunggu Anda."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il riepilogo del giorno arriva su Telegram e comincia da ciò che ti aspetta."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 日のまとめが Telegram に届き、あなたを待っているものから始まります。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "하루 요약이 Telegram으로 오며, 당신을 기다리는 일부터 시작합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Podsumowanie dnia przychodzi na Telegram i zaczyna się od tego, co na Ciebie czeka."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O resumo do dia chega no Telegram e começa pelo que está esperando por você."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Підсумок дня надходить у Telegram і починається з того, що чекає на вас."
-          }
-        }
-      }
-    },
-    "Если агент застрял или ходит по кругу, придёт уведомление.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إذا علق الوكيل أو دار في حلقة، يصلك إشعار."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hängt ein Agent fest oder dreht sich im Kreis, kommt eine Mitteilung."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "If an agent gets stuck or goes round in circles, a notification comes."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Si un agente se atasca o da vueltas en círculo, llega una notificación."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Si un agent est bloqué ou tourne en rond, une notification arrive."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jika agen macet atau berputar-putar, notifikasi akan datang."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Se un agente si blocca o gira in tondo, arriva una notifica."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "エージェントが止まったり同じことを繰り返したりすると、通知が届きます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "에이전트가 멈추거나 같은 일을 반복하면 알림이 옵니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jeśli agent utknie albo chodzi w kółko, przyjdzie powiadomienie."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Se um agente travar ou ficar andando em círculos, chega uma notificação."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Якщо агент застряг або ходить по колу, надійде сповіщення."
-          }
-        }
-      }
-    },
-    "Календарь выгружается в .ics, у профиля для текстов есть цель по словам, а в проекте видны локальные серверы.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يُصدَّر التقويم إلى .ics، ولملف تعريف النصوص هدف من الكلمات، وتظهر الخوادم المحلية في المشروع."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der Kalender lässt sich als .ics exportieren, ein Textprofil hat ein Wortziel, und im Projekt sind lokale Server zu sehen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The calendar exports to .ics, a writing profile has a word goal, and a project shows its local servers."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El calendario se exporta a .ics, el perfil de textos tiene un objetivo de palabras y el proyecto muestra sus servidores locales."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le calendrier s’exporte en .ics, un profil de textes a un objectif de mots, et un projet affiche ses serveurs locaux."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kalender bisa diekspor ke .ics, profil tulisan punya target kata, dan proyek menampilkan server lokalnya."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il calendario si esporta in .ics, un profilo di testi ha un obiettivo di parole e il progetto mostra i suoi server locali."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "カレンダーを .ics に書き出せ、文章のプロファイルには単語数の目標があり、プロジェクトにはローカルサーバーが表示されます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "캘린더를 .ics로 내보낼 수 있고, 글쓰기 프로필에는 단어 목표가 있으며, 프로젝트에 로컬 서버가 보입니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kalendarz eksportuje się do .ics, profil tekstów ma cel słów, a w projekcie widać lokalne serwery."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O calendário é exportado para .ics, o perfil de textos tem uma meta de palavras e o projeto mostra seus servidores locais."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Календар вивантажується в .ics, у профілю для текстів є ціль за словами, а в проєкті видно локальні сервери."
-          }
-        }
-      }
-    },
-    "Лимиты показаны полосами, как на Mac; кольца — в Настройках → «Внешний вид». Блоки панели сворачиваются по клику на заголовок.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تظهر الحدود كأشرطة كما في Mac؛ والحلقات في الإعدادات ← «المظهر». تُطوى كتل اللوحة بالنقر على عنوانها."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Limits erscheinen als Balken wie auf dem Mac; Ringe in Einstellungen → „Darstellung“. Panelblöcke klappen per Klick auf ihre Überschrift ein."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limits are shown as bars, as on the Mac; rings are in Settings → “Appearance”. Panel blocks fold with a click on their heading."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los límites se muestran como barras, como en el Mac; los anillos están en Ajustes → «Apariencia». Los bloques del panel se pliegan al hacer clic en su título."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les limites s’affichent en barres, comme sur Mac ; les anneaux sont dans Réglages → « Apparence ». Les blocs du panneau se replient d’un clic sur leur titre."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Batas ditampilkan sebagai bilah, seperti di Mac; cincin ada di Pengaturan → “Tampilan”. Blok panel bisa dilipat dengan mengeklik judulnya."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I limiti sono mostrati come barre, come sul Mac; gli anelli sono in Impostazioni → «Aspetto». I blocchi del pannello si chiudono con un clic sul titolo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "制限は Mac と同じくバーで表示されます。リングは 設定 →「外観」で選べます。パネルのブロックは見出しをクリックすると折りたためます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "한도는 Mac처럼 막대로 표시되며, 링은 설정 → ‘모양’에서 고를 수 있습니다. 패널 블록은 제목을 클릭하면 접힙니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limity są pokazane jako paski, jak na Macu; pierścienie są w Ustawieniach → „Wygląd”. Bloki panelu zwijają się po kliknięciu nagłówka."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os limites aparecem como barras, como no Mac; os anéis ficam em Ajustes → “Aparência”. Os blocos do painel se recolhem com um clique no título."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ліміти показано смугами, як на Mac; кільця — у Налаштуваннях → «Вигляд». Блоки панелі згортаються кліком на заголовок."
-          }
-        }
-      }
-    },
     "Сбой %@. Можно сообщить о нём на GitHub: откроется форма с описанием сбоя, версией и системой — перед отправкой видно всё, что уходит. Полный отчёт откроется в Проводнике, его можно перетащить в форму.": {
       "localizations": {
         "ar": {
@@ -158722,6 +158342,386 @@
           "stringUnit": {
             "state": "translated",
             "value": "Збій %@. Можна повідомити про нього на GitHub: відкриється форма з описом збою, версією і системою — перед надсиланням видно все, що буде надіслано. Повний звіт з’явиться у Провіднику, його можна перетягнути у форму."
+          }
+        }
+      }
+    },
+    "Файлы и снимки экрана можно перетащить в окно быстрого запроса — агент получит их пути.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن سحب الملفات ولقطات الشاشة إلى نافذة الطلب السريع، وسيحصل الوكيل على مساراتها."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dateien und Bildschirmfotos lassen sich ins Fenster der Schnellanfrage ziehen – der Agent bekommt ihre Pfade."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Files and screenshots can be dragged into the quick prompt window — the agent gets their paths."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puedes arrastrar archivos y capturas de pantalla a la ventana de la petición rápida: el agente recibirá sus rutas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichiers et captures d’écran se glissent dans la fenêtre de la requête rapide : l’agent reçoit leurs chemins."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File dan tangkapan layar bisa diseret ke jendela permintaan cepat — agen akan menerima jalurnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File e schermate si possono trascinare nella finestra della richiesta rapida: l’agente riceve i loro percorsi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルやスクリーンショットをクイックリクエストのウインドウにドラッグすると、エージェントにそのパスが渡ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일과 스크린샷을 빠른 요청 창으로 끌어 놓으면 에이전트가 그 경로를 받습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pliki i zrzuty ekranu można przeciągnąć do okna szybkiego zapytania — agent dostanie ich ścieżki."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arquivos e capturas de tela podem ser arrastados para a janela do pedido rápido — o agente recebe os caminhos deles."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файли та знімки екрана можна перетягнути у вікно швидкого запиту — агент отримає їхні шляхи."
+          }
+        }
+      }
+    },
+    "Модуль «Версии» сохраняет тексты проектов в папках: прежний вариант можно посмотреть и вернуть.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تحفظ وحدة «الإصدارات» نصوص مشاريع المجلدات: يمكن عرض النسخة السابقة واستعادتها."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Modul „Versionen“ sichert die Texte der Ordnerprojekte: Eine frühere Fassung lässt sich ansehen und zurückholen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The «Versions» module keeps the texts of folder projects: an earlier variant can be viewed and brought back."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El módulo «Versiones» guarda los textos de los proyectos de carpeta: puedes ver una variante anterior y recuperarla."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le module « Versions » garde les textes des projets de dossier : une variante antérieure se consulte et se restaure."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modul «Versi» menyimpan teks proyek folder: varian sebelumnya bisa dilihat dan dikembalikan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il modulo «Versioni» conserva i testi dei progetti in cartella: una variante precedente si può vedere e ripristinare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「バージョン」モジュールはフォルダープロジェクトの文章を保存します。以前のものを見て、元に戻せます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘버전’ 모듈이 폴더 프로젝트의 글을 저장합니다. 이전 버전을 보고 되돌릴 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moduł „Wersje” zachowuje teksty projektów w folderach: wcześniejszy wariant można obejrzeć i przywrócić."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O módulo «Versões» guarda os textos dos projetos de pasta: uma variante anterior pode ser vista e recuperada."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Модуль «Версії» зберігає тексти проєктів у папках: попередній варіант можна переглянути й повернути."
+          }
+        }
+      }
+    },
+    "Одну команду профиля можно запустить на нескольких проектах сразу: сейчас, на ночь или после сброса лимита.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن تشغيل أمر واحد من ملف التعريف على عدة مشاريع معًا: الآن، أو ليلًا، أو بعد إعادة تعيين الحد."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Befehl des Profils lässt sich auf mehreren Projekten auf einmal starten: jetzt, über Nacht oder nach dem Zurücksetzen des Limits."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One command of a profile can run over several projects at once: now, overnight or after the limit resets."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un comando del perfil se puede lanzar en varios proyectos a la vez: ahora, por la noche o tras reiniciarse el límite."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une commande du profil se lance sur plusieurs projets à la fois : maintenant, pour la nuit ou après la réinitialisation de la limite."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satu perintah profil bisa dijalankan di beberapa proyek sekaligus: sekarang, malam hari, atau setelah batas direset."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un comando del profilo si può avviare su più progetti insieme: ora, di notte o dopo il reset del limite."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルの 1 つのコマンドを複数のプロジェクトでまとめて実行できます。今すぐ、夜間、または制限のリセット後に。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필의 명령 하나를 여러 프로젝트에서 한꺼번에 실행할 수 있습니다. 지금, 밤에, 또는 한도 초기화 후에."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jedno polecenie profilu można uruchomić na kilku projektach naraz: teraz, na noc albo po zresetowaniu limitu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um comando do perfil pode ser executado em vários projetos de uma vez: agora, à noite ou depois que o limite for redefinido."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Одну команду профілю можна запустити на кількох проєктах одразу: зараз, на ніч або після скидання ліміту."
+          }
+        }
+      }
+    },
+    "Такой пакет идёт по одному проекту и в конце присылает одну сводку — в уведомлении и в Telegram.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعمل هذه الدفعة مشروعًا تلو الآخر، وترسل في النهاية ملخصًا واحدًا في إشعار وفي Telegram."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "So ein Stapel läuft Projekt für Projekt und schickt am Ende eine Zusammenfassung – als Mitteilung und in Telegram."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Such a batch goes one project at a time and sends one summary at the end — in a notification and in Telegram."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un lote así avanza proyecto a proyecto y al final envía un único resumen, en una notificación y en Telegram."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un tel lot avance projet par projet et envoie un seul bilan à la fin, en notification et dans Telegram."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batch seperti ini berjalan satu proyek demi satu proyek dan di akhir mengirim satu ringkasan — lewat notifikasi dan Telegram."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un lotto così procede un progetto alla volta e alla fine invia un unico riepilogo, in una notifica e su Telegram."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このバッチはプロジェクトを 1 つずつ進め、最後に通知と Telegram でまとめを 1 つ送ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이런 일괄 작업은 프로젝트를 하나씩 진행하고, 끝나면 알림과 Telegram으로 요약 하나를 보냅니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taka partia idzie projekt po projekcie i na końcu wysyła jedno podsumowanie — w powiadomieniu i na Telegramie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um lote assim vai um projeto por vez e, no fim, envia um único resumo — numa notificação e no Telegram."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Такий пакет іде по одному проєкту й наприкінці надсилає одне зведення — у сповіщенні та в Telegram."
+          }
+        }
+      }
+    },
+    "Если приложение закрылось с ошибкой, при следующем запуске отчёт можно отправить на GitHub.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إذا أُغلق التطبيق بسبب خطأ، يمكن إرسال التقرير إلى GitHub عند التشغيل التالي."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wurde die App mit einem Fehler beendet, lässt sich der Bericht beim nächsten Start an GitHub senden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If the app closed with an error, the report can be sent to GitHub at the next start."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si la app se cerró por un error, al abrirla de nuevo puedes enviar el informe a GitHub."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si l’app s’est fermée sur une erreur, le rapport peut être envoyé sur GitHub au prochain démarrage."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jika aplikasi tertutup karena galat, laporannya bisa dikirim ke GitHub saat dijalankan lagi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se l’app si è chiusa per un errore, al prossimo avvio puoi inviare il rapporto su GitHub."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリがエラーで終了した場合、次の起動時にレポートを GitHub に送れます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱이 오류로 종료되었다면 다음 실행 때 보고서를 GitHub에 보낼 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeśli aplikacja zamknęła się z błędem, przy następnym uruchomieniu raport można wysłać na GitHub."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se o app fechou com um erro, o relatório pode ser enviado ao GitHub na próxima abertura."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Якщо застосунок закрився з помилкою, під час наступного запуску звіт можна надіслати на GitHub."
           }
         }
       }
