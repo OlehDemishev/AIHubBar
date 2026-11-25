@@ -8,6 +8,8 @@ Text in `[brackets]` needs Oleh's own words: it is a personal detail nobody else
 
 0 stars, 50 DMG downloads in total, 6 unique repository visitors in two weeks.
 
+2026-11-25, before the first post (0.13.0 is out): 0 stars, 115 DMG downloads in total, 13 unique repository visitors in two weeks. Oleh chose r/ClaudeAI as the first place.
+
 Developer ID and notarization are done, from 0.7.2 on, so nothing about signing holds back r/macapps, Show HN or Homebrew.
 
 The demo is in the README and on the site (`site/demo.mp4`, `docs/images/demo.gif`): limits, a session waiting, Allow in the panel. The notification's own button is in the Mac's language, so a shot of Allow on the banner takes a Mac in English. Attach `site/demo.mp4` to posts.
@@ -43,7 +45,7 @@ The subreddit's rules, read 2026-11-08 (Oleh pasted them):
 - **Posts on the feed need karma over 100.** Below that, use the comment version in the project showcase megathread ([list of megathreads](https://www.reddit.com/r/ClaudeAI/comments/1s7fepn/rclaudeai_list_of_ongoing_megathreads/)).
 - Choose the flair closest to the post: «Built with Claude» if it is offered. Upvote manipulation is an immediate permanent ban.
 
-Attach `site/demo.mp4`. The numbers below are from git on 2026-11-08.
+Attach `site/demo.mp4`. The numbers below are from git on 2026-11-25 (the Mac app only, without the Windows version).
 
 ### As a post
 
@@ -57,12 +59,14 @@ I built this because I needed to always see my limits and what each session was 
 - which project and session used the limit
 - every Claude Code session on the Mac, with what it is doing right now ("running npm test")
 - permission requests you can Allow or Deny from a notification, the panel or Telegram
+- a notice when a session has gone quiet for 20 minutes or keeps running the same command
+- background tasks that pause near the limit and go on after the reset
 
 It also picks up Codex, Copilot, Gemini CLI, Cursor and OpenRouter if you use them.
 
 **How Claude helped**
 
-Claude Code built all of it in about ten days: 376 commits, every one co-authored by Claude, across 320 pull requests. That's about 36,000 lines of SwiftUI and 527 tests.
+Claude Code built all of it in about four weeks: some 720 commits co-authored by Claude, across almost 600 pull requests. That's about 42,000 lines of Swift and over 740 tests.
 
 The way of working mattered more than any prompt. For anything big, Claude wrote a short spec and I answered its questions. Then one task, one branch, one PR. Claude ran the tests for each change and kept a status file, so the next session could pick up where the last one stopped. A separate agent translated the interface into 13 languages. For the interface, Claude drove the running app through Accessibility and read screenshots of it.
 
@@ -87,7 +91,7 @@ What would you want from it that isn't there?
 
 I needed to always see my limits and what each session was working on, and to stay in control of both. It shows your 5-hour and weekly limits with a forecast from your pace and every session with what it is doing right now, and you can Allow or Deny permission requests from a notification, the panel or Telegram.
 
-Claude Code built it in about ten days: 376 commits and 320 pull requests, with a short spec for anything big, one branch per task, and a status file so each session could pick up from the last. The limits come from an undocumented Anthropic endpoint, so they can break if it changes.
+Claude Code built it in about four weeks: some 720 commits and almost 600 pull requests, with a short spec for anything big, one branch per task, and a status file so each session could pick up from the last. The limits come from an undocumented Anthropic endpoint, so they can break if it changes.
 
 https://github.com/OlehDemishev/AIHubBar
 
