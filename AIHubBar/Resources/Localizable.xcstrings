@@ -158346,382 +158346,230 @@
         }
       }
     },
-    "Файлы и снимки экрана можно перетащить в окно быстрого запроса — агент получит их пути.": {
+    "После команды над проектом в папке кнопка «Что изменилось» открывает «Версии» на варианте до неё.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "يمكن سحب الملفات ولقطات الشاشة إلى نافذة الطلب السريع، وسيحصل الوكيل على مساراتها."
+            "value": "بعد تنفيذ أمر على مشروع مجلد، يفتح زر «ما الذي تغيّر» نافذة «الإصدارات» على النسخة السابقة له."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dateien und Bildschirmfotos lassen sich ins Fenster der Schnellanfrage ziehen – der Agent bekommt ihre Pfade."
+            "value": "Nach einem Befehl auf einem Ordnerprojekt öffnet die Taste „Was hat sich geändert“ die „Versionen“ auf der Fassung davor."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Files and screenshots can be dragged into the quick prompt window — the agent gets their paths."
+            "value": "After a command on a folder project, the «What changed» button opens «Versions» on the variant before it."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Puedes arrastrar archivos y capturas de pantalla a la ventana de la petición rápida: el agente recibirá sus rutas."
+            "value": "Tras un comando sobre un proyecto de carpeta, el botón «Qué cambió» abre «Versiones» en la variante anterior."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fichiers et captures d’écran se glissent dans la fenêtre de la requête rapide : l’agent reçoit leurs chemins."
+            "value": "Après une commande sur un projet de dossier, le bouton « Ce qui a changé » ouvre « Versions » sur la variante d’avant."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "File dan tangkapan layar bisa diseret ke jendela permintaan cepat — agen akan menerima jalurnya."
+            "value": "Setelah perintah pada proyek folder, tombol «Apa yang berubah» membuka «Versi» pada varian sebelumnya."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "File e schermate si possono trascinare nella finestra della richiesta rapida: l’agente riceve i loro percorsi."
+            "value": "Dopo un comando su un progetto in cartella, il pulsante «Cosa è cambiato» apre «Versioni» sulla variante precedente."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ファイルやスクリーンショットをクイックリクエストのウインドウにドラッグすると、エージェントにそのパスが渡ります。"
+            "value": "フォルダープロジェクトでコマンドを実行したあと、「変更点」ボタンで実行前の「バージョン」を開けます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "파일과 스크린샷을 빠른 요청 창으로 끌어 놓으면 에이전트가 그 경로를 받습니다."
+            "value": "폴더 프로젝트에서 명령을 실행한 뒤 ‘변경 사항’ 버튼을 누르면 실행 전 버전으로 ‘버전’이 열립니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pliki i zrzuty ekranu można przeciągnąć do okna szybkiego zapytania — agent dostanie ich ścieżki."
+            "value": "Po poleceniu na projekcie w folderze przycisk „Co się zmieniło” otwiera „Wersje” na wariancie sprzed niego."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Arquivos e capturas de tela podem ser arrastados para a janela do pedido rápido — o agente recebe os caminhos deles."
+            "value": "Depois de um comando num projeto de pasta, o botão «O que mudou» abre «Versões» na variante anterior."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Файли та знімки екрана можна перетягнути у вікно швидкого запиту — агент отримає їхні шляхи."
+            "value": "Після команди над проєктом у папці кнопка «Що змінилося» відкриває «Версії» на варіанті до неї."
           }
         }
       }
     },
-    "Модуль «Версии» сохраняет тексты проектов в папках: прежний вариант можно посмотреть и вернуть.": {
+    "В окне «Версии» можно оставить только файлы с отличиями.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "تحفظ وحدة «الإصدارات» نصوص مشاريع المجلدات: يمكن عرض النسخة السابقة واستعادتها."
+            "value": "في نافذة «الإصدارات» يمكن إبقاء الملفات المختلفة فقط."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Das Modul „Versionen“ sichert die Texte der Ordnerprojekte: Eine frühere Fassung lässt sich ansehen und zurückholen."
+            "value": "Im Fenster „Versionen“ lassen sich nur die Dateien mit Unterschieden zeigen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The «Versions» module keeps the texts of folder projects: an earlier variant can be viewed and brought back."
+            "value": "The «Versions» window can show only the files that differ."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "El módulo «Versiones» guarda los textos de los proyectos de carpeta: puedes ver una variante anterior y recuperarla."
+            "value": "En la ventana «Versiones» puedes dejar solo los archivos con diferencias."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le module « Versions » garde les textes des projets de dossier : une variante antérieure se consulte et se restaure."
+            "value": "La fenêtre « Versions » peut n’afficher que les fichiers qui diffèrent."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Modul «Versi» menyimpan teks proyek folder: varian sebelumnya bisa dilihat dan dikembalikan."
+            "value": "Jendela «Versi» bisa menampilkan hanya file yang berbeda."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Il modulo «Versioni» conserva i testi dei progetti in cartella: una variante precedente si può vedere e ripristinare."
+            "value": "Nella finestra «Versioni» si possono lasciare solo i file con differenze."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "「バージョン」モジュールはフォルダープロジェクトの文章を保存します。以前のものを見て、元に戻せます。"
+            "value": "「バージョン」ウインドウでは、違いのあるファイルだけを表示できます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "‘버전’ 모듈이 폴더 프로젝트의 글을 저장합니다. 이전 버전을 보고 되돌릴 수 있습니다."
+            "value": "‘버전’ 창에서 차이가 있는 파일만 볼 수 있습니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Moduł „Wersje” zachowuje teksty projektów w folderach: wcześniejszy wariant można obejrzeć i przywrócić."
+            "value": "W oknie „Wersje” można zostawić tylko pliki z różnicami."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O módulo «Versões» guarda os textos dos projetos de pasta: uma variante anterior pode ser vista e recuperada."
+            "value": "Na janela «Versões» dá para mostrar só os arquivos com diferenças."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Модуль «Версії» зберігає тексти проєктів у папках: попередній варіант можна переглянути й повернути."
+            "value": "У вікні «Версії» можна залишити лише файли з відмінностями."
           }
         }
       }
     },
-    "Одну команду профиля можно запустить на нескольких проектах сразу: сейчас, на ночь или после сброса лимита.": {
+    "Под проектами в папках больше нет лишней строки про git-репозитории.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "يمكن تشغيل أمر واحد من ملف التعريف على عدة مشاريع معًا: الآن، أو ليلًا، أو بعد إعادة تعيين الحد."
+            "value": "لم يعد يظهر سطر زائد عن مستودعات git تحت مشاريع المجلدات."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ein Befehl des Profils lässt sich auf mehreren Projekten auf einmal starten: jetzt, über Nacht oder nach dem Zurücksetzen des Limits."
+            "value": "Unter Ordnerprojekten steht keine überflüssige Zeile mehr zu git-Repositorys."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "One command of a profile can run over several projects at once: now, overnight or after the limit resets."
+            "value": "Folder projects no longer show a stray line about git repositories."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Un comando del perfil se puede lanzar en varios proyectos a la vez: ahora, por la noche o tras reiniciarse el límite."
+            "value": "Bajo los proyectos de carpeta ya no aparece una línea de más sobre repositorios git."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Une commande du profil se lance sur plusieurs projets à la fois : maintenant, pour la nuit ou après la réinitialisation de la limite."
+            "value": "Sous les projets de dossier, plus de ligne superflue sur les dépôts git."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Satu perintah profil bisa dijalankan di beberapa proyek sekaligus: sekarang, malam hari, atau setelah batas direset."
+            "value": "Di bawah proyek folder tidak ada lagi baris berlebih tentang repositori git."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Un comando del profilo si può avviare su più progetti insieme: ora, di notte o dopo il reset del limite."
+            "value": "Sotto i progetti in cartella non c’è più una riga superflua sui repository git."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "プロファイルの 1 つのコマンドを複数のプロジェクトでまとめて実行できます。今すぐ、夜間、または制限のリセット後に。"
+            "value": "フォルダープロジェクトの下に git リポジトリについての不要な行が出なくなりました。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "프로필의 명령 하나를 여러 프로젝트에서 한꺼번에 실행할 수 있습니다. 지금, 밤에, 또는 한도 초기화 후에."
+            "value": "폴더 프로젝트 아래에 git 저장소에 관한 불필요한 줄이 더 이상 나오지 않습니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jedno polecenie profilu można uruchomić na kilku projektach naraz: teraz, na noc albo po zresetowaniu limitu."
+            "value": "Pod projektami w folderach nie ma już zbędnej linii o repozytoriach git."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Um comando do perfil pode ser executado em vários projetos de uma vez: agora, à noite ou depois que o limite for redefinido."
+            "value": "Os projetos de pasta não mostram mais uma linha sobrando sobre repositórios git."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Одну команду профілю можна запустити на кількох проєктах одразу: зараз, на ніч або після скидання ліміту."
-          }
-        }
-      }
-    },
-    "Такой пакет идёт по одному проекту и в конце присылает одну сводку — в уведомлении и в Telegram.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تعمل هذه الدفعة مشروعًا تلو الآخر، وترسل في النهاية ملخصًا واحدًا في إشعار وفي Telegram."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "So ein Stapel läuft Projekt für Projekt und schickt am Ende eine Zusammenfassung – als Mitteilung und in Telegram."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Such a batch goes one project at a time and sends one summary at the end — in a notification and in Telegram."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un lote así avanza proyecto a proyecto y al final envía un único resumen, en una notificación y en Telegram."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un tel lot avance projet par projet et envoie un seul bilan à la fin, en notification et dans Telegram."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Batch seperti ini berjalan satu proyek demi satu proyek dan di akhir mengirim satu ringkasan — lewat notifikasi dan Telegram."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un lotto così procede un progetto alla volta e alla fine invia un unico riepilogo, in una notifica e su Telegram."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このバッチはプロジェクトを 1 つずつ進め、最後に通知と Telegram でまとめを 1 つ送ります。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이런 일괄 작업은 프로젝트를 하나씩 진행하고, 끝나면 알림과 Telegram으로 요약 하나를 보냅니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Taka partia idzie projekt po projekcie i na końcu wysyła jedno podsumowanie — w powiadomieniu i na Telegramie."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Um lote assim vai um projeto por vez e, no fim, envia um único resumo — numa notificação e no Telegram."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Такий пакет іде по одному проєкту й наприкінці надсилає одне зведення — у сповіщенні та в Telegram."
-          }
-        }
-      }
-    },
-    "Если приложение закрылось с ошибкой, при следующем запуске отчёт можно отправить на GitHub.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إذا أُغلق التطبيق بسبب خطأ، يمكن إرسال التقرير إلى GitHub عند التشغيل التالي."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wurde die App mit einem Fehler beendet, lässt sich der Bericht beim nächsten Start an GitHub senden."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "If the app closed with an error, the report can be sent to GitHub at the next start."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Si la app se cerró por un error, al abrirla de nuevo puedes enviar el informe a GitHub."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Si l’app s’est fermée sur une erreur, le rapport peut être envoyé sur GitHub au prochain démarrage."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jika aplikasi tertutup karena galat, laporannya bisa dikirim ke GitHub saat dijalankan lagi."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Se l’app si è chiusa per un errore, al prossimo avvio puoi inviare il rapporto su GitHub."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "アプリがエラーで終了した場合、次の起動時にレポートを GitHub に送れます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "앱이 오류로 종료되었다면 다음 실행 때 보고서를 GitHub에 보낼 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jeśli aplikacja zamknęła się z błędem, przy następnym uruchomieniu raport można wysłać na GitHub."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Se o app fechou com um erro, o relatório pode ser enviado ao GitHub na próxima abertura."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Якщо застосунок закрився з помилкою, під час наступного запуску звіт можна надіслати на GitHub."
+            "value": "Під проєктами в папках більше немає зайвого рядка про git-репозиторії."
           }
         }
       }

@@ -5,15 +5,13 @@ use crate::i18n::Strings;
 
 /// Changes with a release that has something to say; a release without news keeps the old value and shows nothing.
 /// The Windows and Linux version has its own line of versions, so its own value and lines.
-pub const VERSION: &str = "0.1.12";
+pub const VERSION: &str = "0.1.13";
 
 pub fn items(s: &Strings) -> Vec<String> {
     [
-        s.t("Файлы и снимки экрана можно перетащить в окно быстрого запроса — агент получит их пути."),
-        s.t("Модуль «Версии» сохраняет тексты проектов в папках: прежний вариант можно посмотреть и вернуть."),
-        s.t("Одну команду профиля можно запустить на нескольких проектах сразу: сейчас, на ночь или после сброса лимита."),
-        s.t("Такой пакет идёт по одному проекту и в конце присылает одну сводку — в уведомлении и в Telegram."),
-        s.t("Если приложение закрылось с ошибкой, при следующем запуске отчёт можно отправить на GitHub."),
+        s.t("После команды над проектом в папке кнопка «Что изменилось» открывает «Версии» на варианте до неё."),
+        s.t("В окне «Версии» можно оставить только файлы с отличиями."),
+        s.t("Под проектами в папках больше нет лишней строки про git-репозитории."),
     ]
     .map(str::to_owned)
     .to_vec()
@@ -31,7 +29,7 @@ mod tests {
 
     #[test]
     fn who_sees_the_card() {
-        assert!(should_show(None, true) && should_show(Some("0.1.11"), true));
+        assert!(should_show(None, true) && should_show(Some("0.1.12"), true));
         assert!(!should_show(Some(VERSION), true), "closed once");
         assert!(!should_show(None, false), "a new person has nothing to compare with");
         let items = items(&Strings::default());
