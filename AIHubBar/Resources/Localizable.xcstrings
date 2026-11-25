@@ -158194,386 +158194,6 @@
         }
       }
     },
-    "Появилась справка: кнопка «?» вверху панели.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "أُضيفت المساعدة: الزر «?» أعلى اللوحة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Neu ist die Hilfe: die Taste „?“ oben im Panel."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "There is a Help window now: the “?” button at the top of the panel."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ya hay ayuda: el botón «?» en la parte superior del panel."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L’aide est arrivée : le bouton « ? » en haut du panneau."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kini ada Bantuan: tombol “?” di bagian atas panel."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "È arrivato l’aiuto: il pulsante «?» in cima al pannello."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ヘルプが加わりました。パネル上部の「?」ボタンから開けます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "도움말이 생겼습니다. 패널 위쪽의 ‘?’ 버튼으로 엽니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jest już pomoc: przycisk „?” u góry panelu."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agora há ajuda: o botão “?” no topo do painel."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "З’явилася довідка: кнопка «?» угорі панелі."
-          }
-        }
-      }
-    },
-    "В панели можно показать лимиты других аккаунтов Claude.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يمكن عرض حدود حسابات Claude الأخرى في اللوحة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das Panel kann die Limits weiterer Claude-Konten zeigen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The panel can show the limits of your other Claude accounts."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El panel puede mostrar los límites de tus otras cuentas de Claude."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le panneau peut afficher les limites de vos autres comptes Claude."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Panel dapat menampilkan batas akun Claude Anda yang lain."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il pannello può mostrare i limiti degli altri tuoi account Claude."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パネルにほかの Claude アカウントの制限を表示できます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "패널에 다른 Claude 계정의 한도를 표시할 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Panel może pokazywać limity innych kont Claude."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O painel pode mostrar os limites das suas outras contas do Claude."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У панелі можна показати ліміти інших акаунтів Claude."
-          }
-        }
-      }
-    },
-    "Настройки сервисов AI разложены по сервисам: Claude Code, Codex, Gemini, Copilot, Cursor.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إعدادات خدمات الذكاء الاصطناعي مرتبة حسب الخدمة: Claude Code وCodex وGemini وCopilot وCursor."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Einstellungen der KI-Dienste sind nach Dienst geordnet: Claude Code, Codex, Gemini, Copilot, Cursor."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The AI services’ settings are sorted by service: Claude Code, Codex, Gemini, Copilot, Cursor."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los ajustes de los servicios de IA están ordenados por servicio: Claude Code, Codex, Gemini, Copilot, Cursor."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les réglages des services d’IA sont rangés par service : Claude Code, Codex, Gemini, Copilot, Cursor."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pengaturan layanan AI dikelompokkan per layanan: Claude Code, Codex, Gemini, Copilot, Cursor."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le impostazioni dei servizi IA sono divise per servizio: Claude Code, Codex, Gemini, Copilot, Cursor."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AI サービスの設定をサービスごとに分けました：Claude Code、Codex、Gemini、Copilot、Cursor。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AI 서비스 설정을 서비스별로 나눴습니다: Claude Code, Codex, Gemini, Copilot, Cursor."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ustawienia usług AI są ułożone według usług: Claude Code, Codex, Gemini, Copilot, Cursor."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os ajustes dos serviços de IA estão organizados por serviço: Claude Code, Codex, Gemini, Copilot, Cursor."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Налаштування сервісів AI розкладено за сервісами: Claude Code, Codex, Gemini, Copilot, Cursor."
-          }
-        }
-      }
-    },
-    "Одну задачу можно дать сразу Claude и Codex — каждому в своём worktree.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يمكن إعطاء المهمة نفسها لـ Claude وCodex معًا — لكلٍّ منهما worktree خاص به."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eine Aufgabe kann an Claude und Codex zugleich gehen – jeder in seinem eigenen Worktree."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One task can go to Claude and Codex at once — each in its own worktree."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una misma tarea puede ir a Claude y a Codex a la vez, cada uno en su propio worktree."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une même tâche peut partir chez Claude et Codex à la fois — chacun dans son propre worktree."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Satu tugas bisa diberikan ke Claude dan Codex sekaligus — masing-masing di worktree sendiri."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una stessa attività può andare a Claude e a Codex insieme — ognuno nel proprio worktree."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 つのタスクを Claude と Codex に同時に渡せます。それぞれ専用の worktree で動きます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "한 작업을 Claude와 Codex에 동시에 맡길 수 있습니다. 각자 자기 worktree에서 실행됩니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jedno zadanie można dać naraz Claude’owi i Codexowi — każdemu w jego własnym worktree."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma mesma tarefa pode ir para o Claude e o Codex ao mesmo tempo — cada um no seu próprio worktree."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Одне завдання можна дати одразу Claude і Codex — кожному у своєму worktree."
-          }
-        }
-      }
-    },
-    "Идею или проблему можно отправить из Настроек: откроется форма на GitHub.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يمكن إرسال فكرة أو مشكلة من الإعدادات: يُفتح نموذج على GitHub."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eine Idee oder ein Problem lässt sich aus den Einstellungen melden: Auf GitHub öffnet sich ein Formular."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "An idea or a problem can be sent from Settings: a form opens on GitHub."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Puedes enviar una idea o un problema desde Ajustes: se abre un formulario en GitHub."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une idée ou un problème peut être envoyé depuis les Réglages : un formulaire s’ouvre sur GitHub."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ide atau masalah bisa dikirim dari Pengaturan: formulir terbuka di GitHub."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un’idea o un problema si possono inviare dalle Impostazioni: si apre un modulo su GitHub."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "アイデアや問題は設定から送れます。GitHub でフォームが開きます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "아이디어나 문제를 설정에서 보낼 수 있습니다. GitHub에서 양식이 열립니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pomysł albo problem można zgłosić z Ustawień: na GitHubie otworzy się formularz."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma ideia ou um problema pode ser enviado pelos Ajustes: um formulário abre no GitHub."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ідею або проблему можна надіслати з Налаштувань: відкриється форма на GitHub."
-          }
-        }
-      }
-    },
     "Экспорт в .ics… — файл с датами для Outlook, Google Calendar и других": {
       "localizations": {
         "ar": {
@@ -158646,6 +158266,386 @@
           "stringUnit": {
             "state": "translated",
             "value": "Експорт у .ics… — файл із датами для Outlook, Google Calendar та інших"
+          }
+        }
+      }
+    },
+    "Две задачи пары Claude и Codex можно сравнить в одном окне и оставить лучший вариант.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن مقارنة مهمتي زوج Claude وCodex في نافذة واحدة والإبقاء على أفضل نتيجة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die zwei Aufgaben eines Paars aus Claude und Codex lassen sich in einem Fenster vergleichen und die bessere Variante behalten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The two tasks of a Claude and Codex pair can be compared in one window, keeping the better variant."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las dos tareas de un par Claude y Codex se pueden comparar en una ventana y quedarse con la mejor variante."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux tâches d’une paire Claude et Codex se comparent dans une seule fenêtre, pour garder la meilleure variante."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dua tugas pasangan Claude dan Codex bisa dibandingkan dalam satu jendela dan varian terbaik disimpan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le due attività di una coppia Claude e Codex si possono confrontare in una finestra e tenere la variante migliore."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude と Codex のペアの 2 つのタスクを 1 つのウインドウで比べ、良いほうを残せます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude와 Codex 짝의 두 작업을 한 창에서 비교하고 더 나은 쪽을 남길 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dwa zadania pary Claude i Codex można porównać w jednym oknie i zostawić lepszy wariant."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As duas tarefas de um par Claude e Codex podem ser comparadas em uma janela, ficando com a melhor variante."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Два завдання пари Claude і Codex можна порівняти в одному вікні й залишити кращий варіант."
+          }
+        }
+      }
+    },
+    "Итог дня приходит в Telegram и начинается с того, что ждёт вас.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يصل ملخص اليوم إلى Telegram ويبدأ بما ينتظرك."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Tageszusammenfassung kommt in Telegram an und beginnt mit dem, was auf Sie wartet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The day’s summary comes to Telegram and begins with what is waiting for you."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El resumen del día llega a Telegram y empieza por lo que te espera."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le bilan du jour arrive dans Telegram et commence par ce qui vous attend."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ringkasan hari ini dikirim ke Telegram dan dimulai dengan hal yang menunggu Anda."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il riepilogo del giorno arriva su Telegram e comincia da ciò che ti aspetta."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 日のまとめが Telegram に届き、あなたを待っているものから始まります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "하루 요약이 Telegram으로 오며, 당신을 기다리는 일부터 시작합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podsumowanie dnia przychodzi na Telegram i zaczyna się od tego, co na Ciebie czeka."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O resumo do dia chega no Telegram e começa pelo que está esperando por você."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Підсумок дня надходить у Telegram і починається з того, що чекає на вас."
+          }
+        }
+      }
+    },
+    "Если агент застрял или ходит по кругу, придёт уведомление.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إذا علق الوكيل أو دار في حلقة، يصلك إشعار."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hängt ein Agent fest oder dreht sich im Kreis, kommt eine Mitteilung."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If an agent gets stuck or goes round in circles, a notification comes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si un agente se atasca o da vueltas en círculo, llega una notificación."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si un agent est bloqué ou tourne en rond, une notification arrive."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jika agen macet atau berputar-putar, notifikasi akan datang."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se un agente si blocca o gira in tondo, arriva una notifica."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エージェントが止まったり同じことを繰り返したりすると、通知が届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "에이전트가 멈추거나 같은 일을 반복하면 알림이 옵니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeśli agent utknie albo chodzi w kółko, przyjdzie powiadomienie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se um agente travar ou ficar andando em círculos, chega uma notificação."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Якщо агент застряг або ходить по колу, надійде сповіщення."
+          }
+        }
+      }
+    },
+    "Календарь выгружается в .ics, у профиля для текстов есть цель по словам, а в проекте видны локальные серверы.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُصدَّر التقويم إلى .ics، ولملف تعريف النصوص هدف من الكلمات، وتظهر الخوادم المحلية في المشروع."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Kalender lässt sich als .ics exportieren, ein Textprofil hat ein Wortziel, und im Projekt sind lokale Server zu sehen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The calendar exports to .ics, a writing profile has a word goal, and a project shows its local servers."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El calendario se exporta a .ics, el perfil de textos tiene un objetivo de palabras y el proyecto muestra sus servidores locales."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le calendrier s’exporte en .ics, un profil de textes a un objectif de mots, et un projet affiche ses serveurs locaux."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalender bisa diekspor ke .ics, profil tulisan punya target kata, dan proyek menampilkan server lokalnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il calendario si esporta in .ics, un profilo di testi ha un obiettivo di parole e il progetto mostra i suoi server locali."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カレンダーを .ics に書き出せ、文章のプロファイルには単語数の目標があり、プロジェクトにはローカルサーバーが表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "캘린더를 .ics로 내보낼 수 있고, 글쓰기 프로필에는 단어 목표가 있으며, 프로젝트에 로컬 서버가 보입니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalendarz eksportuje się do .ics, profil tekstów ma cel słów, a w projekcie widać lokalne serwery."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O calendário é exportado para .ics, o perfil de textos tem uma meta de palavras e o projeto mostra seus servidores locais."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Календар вивантажується в .ics, у профілю для текстів є ціль за словами, а в проєкті видно локальні сервери."
+          }
+        }
+      }
+    },
+    "Лимиты показаны полосами, как на Mac; кольца — в Настройках → «Внешний вид». Блоки панели сворачиваются по клику на заголовок.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تظهر الحدود كأشرطة كما في Mac؛ والحلقات في الإعدادات ← «المظهر». تُطوى كتل اللوحة بالنقر على عنوانها."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Limits erscheinen als Balken wie auf dem Mac; Ringe in Einstellungen → „Darstellung“. Panelblöcke klappen per Klick auf ihre Überschrift ein."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits are shown as bars, as on the Mac; rings are in Settings → “Appearance”. Panel blocks fold with a click on their heading."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los límites se muestran como barras, como en el Mac; los anillos están en Ajustes → «Apariencia». Los bloques del panel se pliegan al hacer clic en su título."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les limites s’affichent en barres, comme sur Mac ; les anneaux sont dans Réglages → « Apparence ». Les blocs du panneau se replient d’un clic sur leur titre."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas ditampilkan sebagai bilah, seperti di Mac; cincin ada di Pengaturan → “Tampilan”. Blok panel bisa dilipat dengan mengeklik judulnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I limiti sono mostrati come barre, come sul Mac; gli anelli sono in Impostazioni → «Aspetto». I blocchi del pannello si chiudono con un clic sul titolo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "制限は Mac と同じくバーで表示されます。リングは 設定 →「外観」で選べます。パネルのブロックは見出しをクリックすると折りたためます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한도는 Mac처럼 막대로 표시되며, 링은 설정 → ‘모양’에서 고를 수 있습니다. 패널 블록은 제목을 클릭하면 접힙니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limity są pokazane jako paski, jak na Macu; pierścienie są w Ustawieniach → „Wygląd”. Bloki panelu zwijają się po kliknięciu nagłówka."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os limites aparecem como barras, como no Mac; os anéis ficam em Ajustes → “Aparência”. Os blocos do painel se recolhem com um clique no título."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти показано смугами, як на Mac; кільця — у Налаштуваннях → «Вигляд». Блоки панелі згортаються кліком на заголовок."
           }
         }
       }
