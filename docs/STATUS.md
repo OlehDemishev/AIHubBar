@@ -167,12 +167,13 @@
 - from 0.12.0 still unseen with real agents: a real `codex` asking for a permission, handover, review, the pair's notification banner
 - 0.13.0 is out (2026-11-23, to everyone); the next release is not before Tuesday 2026-12-01 and only on Oleh's word; merged work waits in `main`. Unseen live from 0.13.0: notification banners themselves, the swap notification, the Shortcuts actions run, a dropped file and dictation in the quick prompt, local servers and «Версии» on Oleh's own profile
 - towards 1.0: what is in, what is «бета» and what is out is agreed (journal 2026-11-21; the shared Telegram bot and the Mini App are in as ready, 2026-11-23); the «бета» badges are in `main` (PR 529, PR 561); left — translations read by people, feedback from strangers (the island at the real notch on the Air is fine — Oleh, 2026-11-25)
-- promotion (docs/LAUNCH.md): r/ClaudeAI first (Oleh, 2026-11-25) — the draft is brought up to 0.13.0; Oleh posts it himself (a post needs karma over 100, else the megathread comment); then the lists, r/macapps, Show HN, Product Hunt, Homebrew
+- promotion (docs/LAUNCH.md): the r/ClaudeAI megathread comment is out (2026-11-25); next the lists, texts ready — awesome-mac (a pull request, on Oleh's word), awesome-claude-code (a web form, Oleh himself), open-source-mac-os-apps (after 5 stars); then r/macapps, Show HN, Product Hunt, Homebrew; Instagram — not now (Oleh asked 2026-11-25)
 - version 1.1: the iPhone app (Oleh, 2026-11-23: «приложение на версию 1.1») — not before 1.0 is out; the agent's offer for a first version: sessions, permission requests, limits and a Live Activity, the rest stays with the Telegram bot. Before any code agree with Oleh what it shows and how the data reaches the phone; the Apple side (App ID, signing, push keys) is his
 - batch tasks and «Версии», left to see live (a typed-text batch to its summary and the wait at a full limit were seen 2026-11-23 in an isolated copy): a model by API, the batch going on by itself after the reset, the summary as a banner and in Telegram, the «Что изменилось» button of a finished run
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
 **Needs Oleh:**
+- lists (docs/LAUNCH.md → Lists): say «отправляй» for the awesome-mac pull request; fill the awesome-claude-code form yourself with the ready values (a person must do it; leave the last checkbox unticked)
 - r/ClaudeAI: the megathread comment is posted (2026-11-25) — look in during the day and answer; send the agent any technical question; the full post needs karma over 100, which grows from useful answers in other people's threads
 - Windows laptop: update to 0.1.9 (Settings → «Основные» → «Обновления» → «Проверить сейчас», or wait a day) and look at the new Settings: the sidebar, «Что показывать» and a module's page with the back button, «Профили» and «Клавиши» (no control was changed there before the release); say what still looks unlike the Mac
 - Windows laptop, Telegram (0.1.7 is installed; nothing of it was tried with a real bot): 1) in @BotFather make a new bot — the Mac mini reads your present one; 2) Settings → «Telegram»: paste the token, «Привязать чат», «Start» in Telegram, «Проверить»; 3) start a small background task and see its result come to the chat; 4) «Этот компьютер отвечает боту» on, `/menu` in the chat — 🏠, then 🤖 and ⏳; 5) «Запросы разрешений в этот бот» on, start `claude --permission-mode default` in a project, ask it to create a file and answer ✅ from the phone. Say what did not work
@@ -217,6 +218,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-25 — Mac: submissions for three lists prepared (branch `chore/launch-lists`)
+
+Done: docs/LAUNCH.md → Lists: the rules of awesome-mac, awesome-claude-code and open-source-mac-os-apps as read today, the order, and a ready entry for each (a README line, the form's fields, a JSON record). Oleh set his photo as the Reddit avatar; Instagram is not worth it now.
+Checked: the rules and forms were read from the three repositories with `gh`; AI Hub Bar is in none of them; the icon and screenshot paths in the JSON exist in the repository. Nothing was submitted.
+Left: awesome-mac needs Oleh's word and the line in three more languages; awesome-claude-code only a person may submit; open-source-mac-os-apps waits for 5 stars (0 today).
 
 ## 2026-11-25 — Mac: the r/ClaudeAI megathread comment is posted (branch `chore/status-megathread-posted`)
 
