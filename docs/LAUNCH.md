@@ -10,6 +10,8 @@ Text in `[brackets]` needs Oleh's own words: it is a personal detail nobody else
 
 2026-11-25, before the first post (0.13.0 is out): 0 stars, 115 DMG downloads in total, 13 unique repository visitors in two weeks. Oleh chose r/ClaudeAI as the first place.
 
+The Reddit account `u/OlehDemishev` on 2026-11-25: karma 1, two weeks old, one post — about AI Hub Bar in r/OpenSourceAI, 16 days before. So r/ClaudeAI starts with the megathread comment; the full post waits for karma over 100, which comes from real answers in other threads.
+
 Developer ID and notarization are done, from 0.7.2 on, so nothing about signing holds back r/macapps, Show HN or Homebrew.
 
 The demo is in the README and on the site (`site/demo.mp4`, `docs/images/demo.gif`): limits, a session waiting, Allow in the panel. The notification's own button is in the Mac's language, so a shot of Allow on the banner takes a Mac in English. Attach `site/demo.mp4` to posts.

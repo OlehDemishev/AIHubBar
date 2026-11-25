@@ -173,7 +173,7 @@
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
 **Needs Oleh:**
-- r/ClaudeAI: say the Reddit account's karma (over 100 — a post, below — the megathread comment), fill nothing else: the text in docs/LAUNCH.md is ready; post it with `site/demo.mp4` and stay to answer comments that day
+- r/ClaudeAI: the account's karma is 1 (seen 2026-11-25), so post the short text from docs/LAUNCH.md «As a comment in the megathread» in the project showcase megathread and stay to answer that day; the full post needs karma over 100 — it grows from useful answers in other people's threads
 - Windows laptop: update to 0.1.9 (Settings → «Основные» → «Обновления» → «Проверить сейчас», or wait a day) and look at the new Settings: the sidebar, «Что показывать» and a module's page with the back button, «Профили» and «Клавиши» (no control was changed there before the release); say what still looks unlike the Mac
 - Windows laptop, Telegram (0.1.7 is installed; nothing of it was tried with a real bot): 1) in @BotFather make a new bot — the Mac mini reads your present one; 2) Settings → «Telegram»: paste the token, «Привязать чат», «Start» in Telegram, «Проверить»; 3) start a small background task and see its result come to the chat; 4) «Этот компьютер отвечает боту» on, `/menu` in the chat — 🏠, then 🤖 and ⏳; 5) «Запросы разрешений в этот бот» on, start `claude --permission-mode default` in a project, ask it to create a file and answer ✅ from the phone. Say what did not work
 - update to 0.12.0 (Settings → «Основные» → «Обновления»): does the update window show the list of changes; does the «Что нового» card show once with six lines; is the bell in the panel's header left of the gear, and does a press turn it orange; the «Telegram» tile in «Быстрые переключатели» if they are on
@@ -217,6 +217,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-25 — Mac: r/ClaudeAI starts with the megathread comment (branch `chore/launch-megathread-first`)
+
+Done: Oleh showed his Reddit profile: karma 1, the account is two weeks old, one post about AI Hub Bar in r/OpenSourceAI 16 days ago. docs/LAUNCH.md and the header say the megathread comment goes first and the full post waits for karma over 100.
+Checked: read from Oleh's screenshot; the agent's browser is not allowed to open Reddit.
+Left: nothing is posted yet; the megathread's link was not opened by the agent — Oleh finds the current project showcase thread from the list in docs/LAUNCH.md.
 
 ## 2026-11-25 — Windows: batch tasks (branch `feat/desktop-batch`)
 
