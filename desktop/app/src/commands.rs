@@ -171,8 +171,9 @@ struct Request {
     time_limit: u32,
 }
 
-/// Starts one command with one service; the result's name is chosen now, so it is never an existing file.
-fn start(app: &AppHandle, request: &Request, service: &Service, suffix: Option<&str>) {
+/// Starts one command with one service; the result's name is chosen now, so it is never an existing file. Returns the
+/// job and the result's file. `quiet`: no notification of its own (a batch sends one summary at the end).
+fn start(app: &AppHandle, request: &Request, service: &Service, suffix: Option<&str>, quiet: bool) -> (String, PathBuf) {
     let texts = strings(app);
     let language = language(app);
     let folder = &request.project.path;
@@ -192,6 +193,7 @@ fn start(app: &AppHandle, request: &Request, service: &Service, suffix: Option<&
             let prompt = commands::api_prompt(&task, context, file_text.as_deref(), language);
             let (app, jobs, provider, project) = (app.clone(), app.state::<Jobs>().inner().clone(), *provider, request.project.name.clone());
             app.state::<Jobs>().0.lock().unwrap().insert(0, job);
+            let (job_id, job_file) = (id.clone(), result_file.clone());
             std::thread::spawn(move || {
                 let texts = strings(&app);
                 let key = keys::read(provider.id);
@@ -203,7 +205,9 @@ fn start(app: &AppHandle, request: &Request, service: &Service, suffix: Option<&
                                 eprintln!("API spend not saved: {error}");
                             }
                             crate::services::warn_about_budget(&app);
-                            let _ = app.notification().builder().title(texts.format("Готово: %@", &[&title])).body(format!("{project} · {name}")).show();
+                            if !quiet {
+                                let _ = app.notification().builder().title(texts.format("Готово: %@", &[&title])).body(format!("{project} · {name}")).show();
+                            }
                             JobState::Done
                         }
                         Err(error) => JobState::Failed(texts.format("Не удалось записать %@: %@", &[&name, &error.to_string()])),
@@ -217,7 +221,7 @@ fn start(app: &AppHandle, request: &Request, service: &Service, suffix: Option<&
                 let _ = app.emit("projects-changed", ());
                 app.state::<Projects>().ask(false);
             });
-            return;
+            return (job_id, job_file);
         }
         // Other agents only in a terminal, as on the Mac (their «no actions» modes aren't checked live): the agent opens
         // in the folder and the task goes to the clipboard to paste.
@@ -269,7 +273,9 @@ fn start(app: &AppHandle, request: &Request, service: &Service, suffix: Option<&
                         pair: None,
                     };
                     match claudepult_core::runs::start(&paths::runs_dir(), &claude, &new) {
-                        Ok((run, child)) => {
+                        Ok((mut run, child)) => {
+                            // Already told: the runs' own banner and Telegram message are left out.
+                            run.notified = quiet;
                             let run_id = run.id.clone();
                             eprintln!("run {run_id} started: «{title}» ({permissions})");
                             app.state::<Runs>().add(app, run, child);
@@ -281,7 +287,9 @@ fn start(app: &AppHandle, request: &Request, service: &Service, suffix: Option<&
             };
         }
     }
+    let (job_id, job_file) = (job.id.clone(), job.result_file.clone());
     app.state::<Jobs>().0.lock().unwrap().insert(0, job);
+    (job_id, job_file)
 }
 
 fn request(app: &AppHandle, path: &str, command: &str, text: Option<&str>) -> Result<Request, String> {
@@ -295,6 +303,57 @@ fn request(app: &AppHandle, path: &str, command: &str, text: Option<&str>) -> Re
     Ok(Request { project, profile, template, context, time_limit: settings.background_time_limit_minutes })
 }
 
+/// A batch's next project: its command over the project as it is now (at night the main file may be another one),
+/// quietly. The job and the result's file.
+pub fn start_quietly(app: &AppHandle, project: FolderProject, profile: Profile, template: Command, text: Option<&str>, service: &Service) -> (String, PathBuf) {
+    let context = Context::new(&template, &project, &profile, text, chrono::Local::now());
+    let time_limit = app.state::<AppState>().settings.lock().unwrap().background_time_limit_minutes;
+    let request = Request { project, profile, template, context, time_limit };
+    let started = start(app, &request, service, None, true);
+    let _ = app.emit("projects-changed", ());
+    started
+}
+
+/// What became of a batch's run: its job, or after a restart its background run by the result's file.
+pub fn outcome(app: &AppHandle, job_id: Option<&str>, result_file: &str) -> claudepult_core::batch::Outcome {
+    use claudepult_core::batch::Outcome;
+    let texts = strings(app);
+    let runs = app.state::<Runs>().list();
+    let of_run = |run: &Run| {
+        if run.is_running() {
+            Outcome::Running
+        } else if run.state == RunState::Succeeded && Path::new(result_file).is_file() {
+            Outcome::Done
+        } else {
+            Outcome::Failed(crate::runs::outcome_text(&texts, run))
+        }
+    };
+    let job = job_id.and_then(|id| app.state::<Jobs>().0.lock().unwrap().iter().find(|j| j.id == id).cloned());
+    match job.map(|j| j.state) {
+        Some(JobState::Working) => Outcome::Running,
+        Some(JobState::Done) => Outcome::Done,
+        Some(JobState::Failed(message)) | Some(JobState::Terminal(message)) => Outcome::Failed(message),
+        Some(JobState::Background(id)) => runs.iter().find(|r| r.id == id).map_or(Outcome::Lost, of_run),
+        None => runs.iter().find(|r| r.result_file.as_deref() == Some(result_file)).map_or(Outcome::Lost, of_run),
+    }
+}
+
+/// Who can run a batch: only where a run needs nobody at the computer — Claude Code in the background (not in the
+/// terminal mode) and the models by API.
+pub fn batch_choices(app: &AppHandle, profile: &Profile) -> Vec<ServiceChoice> {
+    let terminal = profile.launch_mode.as_deref() == Some("terminal");
+    choices(app).into_iter().filter(|c| if c.id == "claude-code" { !terminal } else { c.id.starts_with("api:") }).collect()
+}
+
+/// The profile's own commands for a batch («Своя задача» is not one).
+pub fn batch_buttons(profile: &Profile, texts: &Strings) -> Vec<CommandButton> {
+    buttons(profile, texts).into_iter().filter(|b| b.id != commands::CUSTOM_TASK).collect()
+}
+
+pub fn choice_id(choice: &ServiceChoice) -> &str {
+    &choice.id
+}
+
 /// A command button (or its field's «Запустить») with the service chosen for the project; the command's own service
 /// wins, as on the Mac. A failure shows in the job's row.
 #[tauri::command]
@@ -302,7 +361,7 @@ pub fn run_folder_command(app: AppHandle, path: String, command: String, text: O
     let request = request(&app, &path, &command, text.as_deref())?;
     let chosen = request.template.service.clone().or(service).unwrap_or_else(|| default_service(&request.profile));
     let service = Service::parse(&chosen).unwrap_or(Service::ClaudeCode);
-    start(&app, &request, &service, None);
+    start(&app, &request, &service, None, false);
     let _ = app.emit("projects-changed", ());
     Ok(())
 }
@@ -317,7 +376,7 @@ pub fn compare_folder_command(app: AppHandle, path: String, command: String, tex
         return Err(strings(&app).t("Выберите 2–3 сервиса, затем команду.").to_owned());
     }
     for service in &chosen {
-        start(&app, &request, service, Some(&service.short_name(&config)));
+        start(&app, &request, service, Some(&service.short_name(&config)), false);
     }
     let _ = app.emit("projects-changed", ());
     Ok(())

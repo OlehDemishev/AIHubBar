@@ -333,6 +333,10 @@ pub struct FolderView {
     default_service: String,
     /// «Слов сегодня: 420 из 500», «Дней подряд: 3», how far, and whether the goal is reached; None without a goal.
     word_goal: Option<WordGoalLine>,
+    /// «Выбрать»: the profile's commands, who can run a batch, and the batches that wait, work or are done.
+    batch_commands: Vec<crate::commands::CommandButton>,
+    batch_services: Vec<crate::commands::ServiceChoice>,
+    batches: Vec<crate::batch::BatchRow>,
 }
 
 #[derive(Serialize)]
@@ -412,7 +416,13 @@ fn folder_view(app: &AppHandle, state: &State, texts: &Strings) -> Option<Folder
         fraction: (words as f64 / goal as f64).min(1.0),
         reached: words >= goal,
     });
-    Some(FolderView { rows, stages, can_create: matches!(profile.source(), claudepult_core::profiles::Source::Folders(_)), services: crate::commands::choices(app), default_service, word_goal })
+    Some(FolderView { rows, stages, can_create: matches!(profile.source(), claudepult_core::profiles::Source::Folders(_)), services: crate::commands::choices(app),
+        default_service,
+        word_goal,
+        batch_commands: crate::commands::batch_buttons(profile, texts),
+        batch_services: crate::commands::batch_choices(app, profile),
+        batches: app.state::<crate::batch::Batches>().rows(texts),
+    })
 }
 
 fn health_key(health: Health) -> &'static str {

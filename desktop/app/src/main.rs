@@ -7,6 +7,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod assistant;
+mod batch;
 mod calendar;
 mod changes;
 mod claude_config;
@@ -535,6 +536,7 @@ fn main() {
         .manage(search::SearchKey::default())
         .manage(claude_config::ClaudeConfig::default())
         .manage(queue::Queue::default())
+        .manage(batch::Batches::default())
         .manage(changes::ChangesStore::default())
         .manage(hub::Hub::default())
         .manage(accounts::Accounts::default())
@@ -546,6 +548,9 @@ fn main() {
         .manage(command_hot_keys::CommandHotKeys::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
         .invoke_handler(tauri::generate_handler![
+            batch::batch_start,
+            batch::batch_cancel,
+            batch::batch_dismiss,
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, take_settings_page, hide_panel, quit,
             limits::limits_view, limits::spend_view, limits::limit_thresholds, limits::set_limit_thresholds, limits::renew_claude_login, limits::set_renew_claude_login, limits::open_status_page, limits::refresh_limits,
             sessions::sessions_view, sessions::decide_request, sessions::resume_session, sessions::hooks_state, sessions::install_hooks,
@@ -603,6 +608,7 @@ fn main() {
             handle.state::<Projects>().start(handle.clone());
             handle.state::<Runs>().start(handle.clone());
             handle.state::<queue::Queue>().start(handle.clone());
+            handle.state::<batch::Batches>().start(handle.clone());
             services::Agents::start(&handle);
             handle.state::<calendar::Calendar>().start(handle.clone());
             apply_theme(&handle);
