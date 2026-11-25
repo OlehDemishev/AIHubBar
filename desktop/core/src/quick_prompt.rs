@@ -108,6 +108,31 @@ pub fn mode(agent: &str, last: Option<&str>, preferred: Option<&str>) -> &'stati
     [last, preferred].into_iter().flatten().find_map(|m| allowed.iter().find(|a| **a == m).copied()).unwrap_or(allowed[0])
 }
 
+/// How many files one request takes.
+pub const MAX_FILES: usize = 8;
+
+/// Files dropped on the window, joined to the ones already there: existing files only, each once, at most
+/// `MAX_FILES` (the Mac's `QuickPrompt.adding`).
+pub fn adding_files(dropped: &[String], files: &[String]) -> Vec<String> {
+    let mut result: Vec<String> = files.to_vec();
+    for path in dropped {
+        if std::path::Path::new(path).is_file() && !result.iter().any(|known| known.eq_ignore_ascii_case(path)) {
+            result.push(path.clone());
+        }
+    }
+    result.truncate(MAX_FILES);
+    result
+}
+
+/// The task with its files: their paths after the text, one per line, for the agent to open. The heading is English
+/// on purpose — it is read by the agent, in whatever language the task is (the Mac's `QuickPrompt.task`).
+pub fn task_with_files(text: &str, files: &[String]) -> String {
+    if files.is_empty() {
+        return text.to_owned();
+    }
+    format!("{}\n\nFiles:\n{}", text.trim(), files.join("\n"))
+}
+
 pub fn can_send(text: &str, project: Option<&str>) -> bool {
     project.is_some() && !text.trim().is_empty()
 }
@@ -155,6 +180,22 @@ mod tests {
         assert_eq!(mode("claude-code", Some("background"), Some("terminal")), "background", "the last one first");
         assert_eq!(mode("codex", None, None), "background");
         assert!(can_send(" x ", Some("p")) && !can_send("  ", Some("p")) && !can_send("x", None));
+        let dir = std::env::temp_dir().join(format!("claudepult-qp-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let file = |name: &str| {
+            let path = dir.join(name);
+            std::fs::write(&path, "x").unwrap();
+            path.to_string_lossy().into_owned()
+        };
+        let (a, b) = (file("a.png"), file("b.txt"));
+        let folder = dir.to_string_lossy().into_owned();
+        let files = adding_files(&[a.clone(), folder, a.clone(), "C:/nowhere/x.txt".into()], &[]);
+        assert_eq!(files, [a.clone()], "files only, each once, existing");
+        let many: Vec<String> = (0..12).map(|i| file(&format!("f{i}.txt"))).collect();
+        assert_eq!(adding_files(&many, &[b.clone()]).len(), MAX_FILES);
+        assert_eq!(task_with_files("  Fix it \n", &[a.clone(), b.clone()]), format!("Fix it\n\nFiles:\n{a}\n{b}"));
+        assert_eq!(task_with_files("Fix it", &[]), "Fix it");
+        let _ = std::fs::remove_dir_all(&dir);
         assert_eq!(HotKey::parse("controlShiftSpace").and_then(HotKey::accelerator), Some("Ctrl+Shift+Space"));
         assert_eq!(HotKey::Off.accelerator(), None);
         for key in HOT_KEYS {
