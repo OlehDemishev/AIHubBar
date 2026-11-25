@@ -15,6 +15,7 @@ pub mod claude_config;
 pub mod clipboard;
 pub mod command;
 pub mod commands;
+pub mod crash;
 pub mod docx;
 pub mod feedback;
 pub mod folders;
@@ -50,6 +51,7 @@ pub mod token_usage;
 pub mod toggles;
 pub mod tray_icon;
 pub mod usage;
+pub mod versions;
 pub mod word_goal;
 pub mod whats_new;
 

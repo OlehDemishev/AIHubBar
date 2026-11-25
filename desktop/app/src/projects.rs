@@ -183,6 +183,11 @@ impl Projects {
         state.projects.iter().map(|p| (p.name.clone(), p.path.clone())).chain(state.folders.iter().map(|p| (p.name.clone(), p.path.clone()))).collect()
     }
 
+    /// The current folder profile's projects, for «Версии».
+    pub(crate) fn folder_paths(&self) -> Vec<PathBuf> {
+        self.state.lock().unwrap().folders.iter().map(|p| p.path.clone()).collect()
+    }
+
     pub(crate) fn folder_project(&self, path: &Path) -> Option<FolderProject> {
         self.state.lock().unwrap().folders.iter().find(|p| p.path == path).cloned()
     }
@@ -337,6 +342,8 @@ pub struct FolderView {
     batch_commands: Vec<crate::commands::CommandButton>,
     batch_services: Vec<crate::commands::ServiceChoice>,
     batches: Vec<crate::batch::BatchRow>,
+    /// «Версии» is on: a project's details have the button.
+    versions: bool,
 }
 
 #[derive(Serialize)]
@@ -419,6 +426,7 @@ fn folder_view(app: &AppHandle, state: &State, texts: &Strings) -> Option<Folder
     Some(FolderView { rows, stages, can_create: matches!(profile.source(), claudepult_core::profiles::Source::Folders(_)), services: crate::commands::choices(app),
         default_service,
         word_goal,
+        versions: settings.module_on(crate::versions::KIND),
         batch_commands: crate::commands::batch_buttons(profile, texts),
         batch_services: crate::commands::batch_choices(app, profile),
         batches: app.state::<crate::batch::Batches>().rows(texts),
