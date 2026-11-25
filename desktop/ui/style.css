@@ -142,6 +142,12 @@ body.pair-window { margin: 0; padding: 14px 16px; display: flex; flex-direction:
 .word-goal-bar { flex: 0 0 90px; height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; margin-inline-start: auto; }
 .word-goal-bar span { display: block; height: 100%; background: var(--accent); }
 .word-goal.reached .word-goal-bar span { background: #30d158; }
+/* Files dropped on «Быстрый запрос». */
+.qp-files { display: flex; flex-direction: column; gap: 2px; font-size: 12px; }
+.qp-files .qp-drop { margin: 0; font-size: 11px; }
+.qp-file { display: flex; align-items: center; gap: 6px; }
+.qp-file span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.qp-file .icon-button { font-size: 11px; padding: 0 4px; }
 /* «Справка»: the Settings layout with topics in the sidebar. */
 .help-feedback { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin: 0; padding: 8px 8px 0; border-top: 1px solid var(--line); font-size: 12px; }
 .help-nav-glyph { flex: none; width: 18px; text-align: center; }
