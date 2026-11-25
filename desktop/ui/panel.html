@@ -1399,6 +1399,7 @@ ${command.hotKey}` : command.value;
       const actions = element("div", "actions");
       actions.append(action(t("Терминал"), () => invoke("open_project", { path: row.path, target: "terminal" })));
       actions.append(action(t("Папка"), () => invoke("open_project", { path: row.path, target: "folder" })));
+      if (view.versions) actions.append(action(t("Версии"), () => invoke("open_versions", { path: row.path })));
       if (row.github) actions.append(action("GitHub", () => invoke("open_link", { url: row.github })));
       box.append(actions);
       // A long «Stage» line would push the lists below out of sight: four lines, the whole text in the hint.

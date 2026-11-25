@@ -302,6 +302,8 @@ pub fn run_folder_command(app: AppHandle, path: String, command: String, text: O
     let request = request(&app, &path, &command, text.as_deref())?;
     let chosen = request.template.service.clone().or(service).unwrap_or_else(|| default_service(&request.profile));
     let service = Service::parse(&chosen).unwrap_or(Service::ClaudeCode);
+    // «Версии»: what is there before the run, so it can be put back.
+    crate::versions::before_run(&app, &request.project.path, &request.template.title);
     start(&app, &request, &service, None);
     let _ = app.emit("projects-changed", ());
     Ok(())
@@ -316,6 +318,7 @@ pub fn compare_folder_command(app: AppHandle, path: String, command: String, tex
     if chosen.len() < 2 {
         return Err(strings(&app).t("Выберите 2–3 сервиса, затем команду.").to_owned());
     }
+    crate::versions::before_run(&app, &request.project.path, &request.template.title);
     for service in &chosen {
         start(&app, &request, service, Some(&service.short_name(&config)));
     }

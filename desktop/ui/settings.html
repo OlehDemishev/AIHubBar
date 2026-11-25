@@ -195,6 +195,13 @@
             <input type="checkbox" class="switch" id="module-clipboard">
           </div>
           <div class="show-row">
+            <button class="show-open" data-open="module.versions">
+              <strong data-t="Версии"></strong>
+              <span class="secondary" data-t="Версии черновиков для проектов-папок: тексты и карточка проекта сохраняются перед каждым запуском AI и пока вы пишете. Хранятся в папке приложения, не в проекте, и никуда не отправляются."></span>
+            </button>
+            <input type="checkbox" class="switch" id="module-versions">
+          </div>
+          <div class="show-row">
             <button class="show-open" data-open="module.notes">
               <strong data-t="Заметки"></strong>
               <span class="secondary" data-t="Заметки в Markdown прямо в панели: вкладки, обычные файлы .md в папке, которую откроет любой редактор."></span>
@@ -278,6 +285,35 @@
             </span>
           </div>
           <div id="clipboard-excluded" hidden></div>
+        </section>
+      </div>
+
+      <div class="page" id="page-module.versions" data-switch="module-versions" role="tabpanel" hidden>
+        <section class="card" id="versions-options" hidden>
+          <div class="row">
+            <label for="versions-pace" data-t="Как часто сохранять"></label>
+            <select id="versions-pace"></select>
+          </div>
+          <div class="row">
+            <label for="versions-keep" data-t="Сколько хранить"></label>
+            <select id="versions-keep"></select>
+          </div>
+          <div class="row">
+            <label for="versions-size" data-t="Пропускать файлы больше"></label>
+            <select id="versions-size"></select>
+          </div>
+          <p class="secondary" data-t="Сохраняются тексты (.md, .txt, .rtf, .docx, .fountain) и карточка проекта; картинки, звук и видео — нет. Все версии за последние сутки, дальше по одной в день. Перед каждым запуском AI версия снимается всегда. У git-проектов версий нет: там есть git."></p>
+        </section>
+        <section class="card" id="versions-disk" hidden>
+          <div class="row">
+            <span data-t="На диске"></span>
+            <span>
+              <span class="secondary" id="versions-size-text"></span>
+              <button id="versions-open" data-t="Открыть папку"></button>
+              <button id="versions-clear" data-t="Очистить"></button>
+            </span>
+          </div>
+          <p class="secondary" data-t="Версии лежат в папке приложения, не в папке проекта. Версии проекта, папки которого больше нет, удаляются через месяц."></p>
         </section>
       </div>
 
@@ -1545,6 +1581,36 @@
     themeSelect.onchange = textSizeSelect.onchange = widthSelect.onchange = densitySelect.onchange = limitsStyleSelect.onchange = async () =>
       showAppearance(await invoke("set_appearance", { theme: themeSelect.value, textSize: textSizeSelect.value, width: widthSelect.value, density: densitySelect.value, limitsStyle: limitsStyleSelect.value }));
     invoke("appearance_view").then(showAppearance);
+
+    // «Версии»: on or off, how often, how long, the size limit; what lies on disk and «Очистить» asked twice.
+    const versionsModule = document.getElementById("module-versions");
+    const versionsPace = document.getElementById("versions-pace");
+    const versionsKeep = document.getElementById("versions-keep");
+    const versionsSize = document.getElementById("versions-size");
+    const versionsClear = document.getElementById("versions-clear");
+    function showVersionsSettings(view) {
+      versionsModule.checked = view.on;
+      document.getElementById("versions-options").hidden = document.getElementById("versions-disk").hidden = !view.on;
+      versionsPace.replaceChildren(...view.paces.map(([id, title]) => new Option(title, id, false, id === view.pace)));
+      versionsKeep.replaceChildren(...[30, 90].map((days) => new Option(t("Дней: %lld", days), String(days), false, days === view.keepDays)));
+      versionsSize.replaceChildren(...[5, 20, 100].map((mb) => new Option(t("%lld МБ", mb), String(mb), false, mb === view.sizeLimitMb)));
+      document.getElementById("versions-size-text").textContent = view.size;
+      versionsClear.disabled = view.empty;
+      versionsClear.textContent = t("Очистить");
+      delete versionsClear.dataset.asked;
+    }
+    versionsModule.onchange = async () => {
+      await invoke("set_module", { kind: "versions", on: versionsModule.checked });
+      showVersionsSettings(await invoke("versions_settings"));
+    };
+    versionsPace.onchange = versionsKeep.onchange = versionsSize.onchange = async () =>
+      showVersionsSettings(await invoke("set_versions_settings", { pace: versionsPace.value, keepDays: Number(versionsKeep.value), sizeLimitMb: Number(versionsSize.value) }));
+    document.getElementById("versions-open").onclick = () => invoke("open_versions_folder");
+    versionsClear.onclick = async () => {
+      if (!versionsClear.dataset.asked) { versionsClear.dataset.asked = "1"; versionsClear.textContent = t("Удалить все версии?"); versionsClear.title = t("Версии всех проектов будут удалены. Сами проекты не меняются. Отменить нельзя."); return; }
+      showVersionsSettings(await invoke("clear_versions"));
+    };
+    invoke("versions_settings").then(showVersionsSettings);
 
     // «Заметки»: on or off, and the folder of the notes.
     const notesModule = document.getElementById("module-notes");

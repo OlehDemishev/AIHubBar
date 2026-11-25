@@ -49,6 +49,7 @@ pub mod token_usage;
 pub mod toggles;
 pub mod tray_icon;
 pub mod usage;
+pub mod versions;
 pub mod word_goal;
 pub mod whats_new;
 

@@ -384,7 +384,7 @@ pub const PANEL_DENSITIES: [(&str, f64); 3] = [("compact", 0.5), ("normal", 1.0)
 pub const TEXT_SIZES: [(&str, f64); 4] = [("small", 0.9), ("normal", 1.0), ("large", 1.15), ("extraLarge", 1.3)];
 
 /// The stage 6 modules this version has, as the Mac's `ModuleKind` names them.
-pub const MODULES: [&str; 7] = ["resources", "keepAwake", "quickCommands", "toggles", "quickPrompt", "notes", "clipboard"];
+pub const MODULES: [&str; 8] = ["resources", "keepAwake", "quickCommands", "toggles", "quickPrompt", "notes", "clipboard", "versions"];
 
 impl Settings {
     fn kinds(&self, key: &str) -> Vec<String> {

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>AI Hub Bar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="versions-window">
+  <!-- The Mac's «Версии»: the project's versions on the left, a version's files in the middle, a file of it next to
+       the file as it is now on the right; putting back asks first, with the Mac's words. -->
+  <h1 id="versions-title"></h1>
+  <p class="secondary" id="versions-empty" data-t="У этого проекта пока нет версий. Они появляются перед запуском AI и когда тексты меняются." hidden></p>
+  <div class="versions-split" id="versions-split">
+    <div class="versions-list" id="versions-list" role="listbox"></div>
+    <div class="versions-files">
+      <div id="version-files"></div>
+      <p class="secondary" id="version-skipped" hidden></p>
+      <p class="version-actions">
+        <button id="restore-all" data-t="Вернуть всю версию"></button>
+      </p>
+    </div>
+    <div class="versions-compare">
+      <div class="compare-head"><span id="compare-old"></span><span data-t="Сейчас"></span></div>
+      <div class="compare-rows" id="compare-rows"></div>
+      <p class="secondary" id="compare-note" hidden></p>
+      <p class="version-actions">
+        <button id="open-file" data-t="Открыть файл" data-t-title="Открыть файл, как он есть сейчас" hidden></button>
+        <button id="restore-file" data-t="Вернуть этот файл" hidden></button>
+      </p>
+    </div>
+  </div>
+  <p id="versions-message" hidden></p>
+  <div class="pair-sheet" id="ask" hidden>
+    <div class="pair-sheet-box pair-ask" role="alertdialog" aria-modal="true">
+      <strong id="ask-title"></strong>
+      <p id="ask-text"></p>
+      <p class="pair-ask-buttons">
+        <button id="ask-cancel" data-t="Отмена"></button>
+        <button class="prominent" id="ask-yes" data-t="Вернуть"></button>
+      </p>
+    </div>
+  </div>
+  <script type="module">
+    import { loadTexts, invoke, t } from "./app.js";
+    await loadTexts();
+
+    const id = (name) => document.getElementById(name);
+    const element = (tag, className, text) => Object.assign(document.createElement(tag), { className: className ?? "", textContent: text ?? "" });
+    let view = { versions: [] };
+    let chosen = null;
+    let file = null;
+
+    function message(text, isError) {
+      id("versions-message").hidden = !text;
+      id("versions-message").className = isError ? "warning" : "secondary";
+      id("versions-message").textContent = text ?? "";
+    }
+
+    let asked = null;
+    function ask(title, text, action) {
+      asked = action;
+      id("ask-title").textContent = title;
+      id("ask-text").textContent = text;
+      id("ask").hidden = false;
+      id("ask-cancel").focus();
+    }
+    id("ask-cancel").onclick = () => { asked = null; id("ask").hidden = true; };
+    id("ask-yes").onclick = async () => { const action = asked; asked = null; id("ask").hidden = true; if (action) await action(); };
+    window.addEventListener("keydown", (event) => { if (event.key === "Escape" && !id("ask").hidden) id("ask-cancel").click(); });
+
+    async function restore(path) {
+      try {
+        message(await invoke("version_restore", { id: chosen, path }), false);
+        await load();
+      } catch (problem) { message(String(problem), true); }
+    }
+
+    async function showCompare() {
+      const rows = id("compare-rows");
+      const version = view.versions.find((v) => v.id === chosen);
+      const entry = version?.entries.find((e) => e.path === file);
+      id("open-file").hidden = !entry || entry.status === "missing";
+      id("restore-file").hidden = !entry || !entry.inVersion;
+      id("restore-file").disabled = entry?.status === "same";
+      if (!entry) { rows.replaceChildren(); id("compare-note").hidden = true; id("compare-old").textContent = ""; return; }
+      const compare = await invoke("version_compare", { id: chosen, path: file }).catch((problem) => ({ rows: [], note: String(problem), taken: "" }));
+      id("compare-old").textContent = compare.taken;
+      id("compare-note").hidden = !compare.note && !compare.cut;
+      id("compare-note").textContent = compare.note ?? t("Сравнивается начало файлов: строк %lld.", 3000);
+      rows.replaceChildren(...compare.rows.map(([old, now]) => {
+        const row = element("div", "compare-row" + (old !== now ? " changed" : ""));
+        row.append(element("span", old == null ? "gone" : "", old ?? ""), element("span", now == null ? "gone" : "", now ?? ""));
+        return row;
+      }));
+    }
+
+    function showFiles() {
+      const version = view.versions.find((v) => v.id === chosen);
+      id("version-files").replaceChildren(...(version?.entries ?? []).map((entry) => {
+        const row = element("button", "version-file " + entry.status + (entry.path === file ? " chosen" : ""), entry.title);
+        row.onclick = () => { file = entry.path; showFiles(); showCompare(); };
+        return row;
+      }));
+      id("version-skipped").hidden = !version?.skipped;
+      id("version-skipped").textContent = version?.skipped ?? "";
+      id("restore-all").disabled = !version || version.differing === 0;
+    }
+
+    function show() {
+      id("versions-title").textContent = view.project ? `${t("Версии")}: ${view.project}` : t("Версии");
+      id("versions-empty").hidden = view.versions.length > 0;
+      id("versions-split").hidden = view.versions.length === 0;
+      if (!view.versions.some((v) => v.id === chosen)) { chosen = view.versions[0]?.id ?? null; file = null; }
+      id("versions-list").replaceChildren(...view.versions.map((version) => {
+        const row = element("button", "version-row" + (version.id === chosen ? " chosen" : ""));
+        row.setAttribute("role", "option");
+        row.setAttribute("aria-selected", String(version.id === chosen));
+        row.append(element("strong", "", version.taken), element("span", "secondary", version.reason), element("span", "secondary", version.differs));
+        row.onclick = () => { chosen = version.id; file = null; show(); };
+        return row;
+      }));
+      const version = view.versions.find((v) => v.id === chosen);
+      if (version && !file) file = (version.entries.find((e) => e.status === "changed") ?? version.entries[0])?.path ?? null;
+      showFiles();
+      showCompare();
+    }
+
+    id("restore-file").onclick = async () => ask(t("Вернуть этот файл?"), await invoke("version_questions", { id: chosen, path: file }), () => restore(file));
+    id("restore-all").onclick = async () => ask(t("Вернуть всю версию?"), await invoke("version_questions", { id: chosen, path: null }), () => restore(null));
+    id("open-file").onclick = () => invoke("version_open_file", { path: file });
+
+    async function load() {
+      view = await invoke("versions_view");
+      show();
+    }
+    await load();
+    window.__TAURI__.event.listen("versions-changed", load);
+    window.addEventListener("focus", load);
+  </script>
+</body>
+</html>
