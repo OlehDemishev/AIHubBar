@@ -158573,6 +158573,82 @@
           }
         }
       }
+    },
+    "Занято %@: памяти давно не хватает, и подкачка занимает место на диске. Закройте тяжёлые приложения или перезагрузите компьютер.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المستخدَم %@: الذاكرة ناقصة منذ فترة، وملف المبادلة يأخذ مساحة من القرص. أغلق التطبيقات الثقيلة أو أعد تشغيل الكمبيوتر."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ belegt: Der Speicher ist schon länger knapp, und die Auslagerung belegt Platz auf dem Laufwerk. Schließen Sie schwere Apps oder starten Sie den Computer neu."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ in use: memory has been short for a while, and swap takes disk space. Close heavy apps or restart the computer."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ en uso: falta memoria desde hace rato y el intercambio ocupa espacio en disco. Cierra las apps pesadas o reinicia el equipo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ utilisés : la mémoire manque depuis un moment et le fichier d’échange occupe le disque. Fermez les apps lourdes ou redémarrez l’ordinateur."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terpakai %@: memori sudah lama kurang, dan swap memakan ruang disk. Tutup aplikasi berat atau mulai ulang komputer."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ in uso: la memoria scarseggia da tempo e lo swap occupa spazio su disco. Chiudi le app pesanti o riavvia il computer."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ を使用中：メモリ不足が続いており、スワップがディスクを圧迫しています。重いアプリを閉じるか、コンピューターを再起動してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 사용 중: 메모리 부족이 오래 이어져 스왑이 디스크 공간을 차지합니다. 무거운 앱을 닫거나 컴퓨터를 다시 시작하세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zajęte %@: pamięci brakuje od dłuższego czasu, a plik wymiany zajmuje miejsce na dysku. Zamknij ciężkie aplikacje lub uruchom komputer ponownie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ em uso: falta memória há algum tempo e o swap ocupa espaço em disco. Feche os apps pesados ou reinicie o computador."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зайнято %@: пам’яті давно бракує, і підкачка займає місце на диску. Закрийте важкі програми або перезавантажте комп’ютер."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

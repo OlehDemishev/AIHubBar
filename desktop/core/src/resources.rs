@@ -42,6 +42,9 @@ pub struct Snapshot {
     pub battery: Option<Battery>,
     /// Graphics load, when the system reports it.
     pub gpu: Option<f64>,
+    /// Bytes of swap in use: on Windows what the commit charge needs beyond the memory, so what the page file holds at
+    /// least; the page file lives on the system disk, so a large one also eats free space.
+    pub swap_used: u64,
 }
 
 impl Snapshot {
@@ -127,6 +130,7 @@ impl Sampler {
             network_out,
             battery: battery::read(),
             gpu,
+            swap_used: self.system.used_swap(),
         }
     }
 
@@ -271,6 +275,8 @@ pub fn battery_of(ac_line: u8, flag: u8, percent: u8, seconds: u32) -> Option<Ba
 pub enum Alert {
     Cpu,
     Memory,
+    /// Bytes of swap in use.
+    Swap(u64),
     /// Bytes free.
     Disk(u64),
     Battery(u8),
@@ -288,6 +294,11 @@ pub const CPU_CLEAR: f64 = 70.0;
 pub const CPU_SUSTAINED: Duration = Duration::from_secs(5 * 60);
 pub const BATTERY_LOW: u8 = 15;
 pub const BATTERY_CLEAR: u8 = 20;
+
+/// Swap worth a word: half of the memory, and not less than 4 GB (the Mac's `swapLimit`).
+pub fn swap_limit(memory_total: u64) -> u64 {
+    (memory_total / 2).max(4 << 30)
+}
 
 impl Alerts {
     pub fn evaluate(&mut self, snapshot: &Snapshot, disk_below_gb: u64, now: Instant) -> Vec<Alert> {
@@ -307,6 +318,8 @@ impl Alerts {
         let sustained = self.cpu_high_since.is_some_and(|since| now.duration_since(since) >= CPU_SUSTAINED);
         once("cpu", sustained, self.cpu_high_since.is_none(), Alert::Cpu);
         once("memory", snapshot.pressure == Pressure::Critical, snapshot.pressure == Pressure::Normal, Alert::Memory);
+        let swap = swap_limit(snapshot.memory_total);
+        once("swap", snapshot.swap_used >= swap, snapshot.swap_used.saturating_add(1 << 30) < swap, Alert::Swap(snapshot.swap_used));
         let limit = disk_below_gb * 1_000_000_000;
         once("disk", snapshot.disk_free > 0 && snapshot.disk_free < limit, snapshot.disk_free >= limit + 2_000_000_000, Alert::Disk(snapshot.disk_free));
         if let Some(battery) = &snapshot.battery {
@@ -335,7 +348,27 @@ mod tests {
             network_out: 0.0,
             battery: Some(Battery { percent: 80, charging: false, on_ac: false, minutes_left: Some(200) }),
             gpu: None,
+            swap_used: 0,
         }
+    }
+
+    #[test]
+    fn swap_once_until_it_shrinks() {
+        assert_eq!(swap_limit(16 << 30), 8 << 30, "half of the memory");
+        assert_eq!(swap_limit(4 << 30), 4 << 30, "not less than 4 GB");
+        let start = Instant::now();
+        let mut alerts = Alerts::default();
+        let mut big = snapshot();
+        big.swap_used = 7 << 30;
+        assert!(alerts.evaluate(&big, 20, start).is_empty(), "under half of 16 GB");
+        big.swap_used = 9 << 30;
+        assert_eq!(alerts.evaluate(&big, 20, start), [Alert::Swap(9 << 30)]);
+        big.swap_used = 15 << 29;
+        assert!(alerts.evaluate(&big, 20, start).is_empty(), "7.5 GB is not a GB under the limit: still the same event");
+        big.swap_used = 6 << 30;
+        alerts.evaluate(&big, 20, start);
+        big.swap_used = 9 << 30;
+        assert_eq!(alerts.evaluate(&big, 20, start), [Alert::Swap(9 << 30)], "again after it shrank");
     }
 
     #[test]
