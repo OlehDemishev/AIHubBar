@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-25: Windows 0.1.11 published as an unsigned pre-release (tag `desktop-v0.1.11`) on Oleh's «Выпускай»: the pair's comparison window, the day's summary in Telegram with «Ждёт вас», a stuck agent's notification, the calendar's .ics export, the word goal, local servers in a project, limits as bars and folding blocks; installed on the laptop by the agent
 - 2026-11-23: Windows — «Вид лимитов» (bars, the Mac's default, or rings) in Settings → «Внешний вид», and the panel's blocks fold by a click on their heading, remembered (branch `feat/desktop-limits-style`; seen live)
 - 2026-11-23: Windows — «Локальные серверы» in an open git project: what listens on a port from its folder or worktrees, «Открыть в браузере» and «Остановить процесс» asked twice (branch `feat/desktop-local-servers`; a scratch server seen and stopped live)
 - 2026-11-23: Windows — «Экспорт в .ics…» in the «Календарь» window: the dates under its filter as an iCalendar file for Outlook, Google Calendar and others; a newer export moves the events instead of doubling them (branch `feat/desktop-calendar-ics`; a file written live, with no dates in it)
@@ -213,6 +214,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-25 — Windows 0.1.11 released (branch `chore/desktop-0.1.11-note`)
+
+Done: on Oleh's «Выпускай», after «Надо догонять, давай догоняй» (2026-11-23). The seven Mac features built since 0.1.10 went in one by one with green CI (PR 589 the pair's comparison, 590 the day's summary and «Ждёт вас», 591 a stuck agent, 592 the calendar's .ics, 593 the word goal, 594 local servers, 595 limits as bars or rings and folding blocks); each was rebased on `main` before its merge, since every PR moves the top of this file. The version set to 0.1.11 with the «Что нового» card's five lines and their 12 translations (PR 596; the lines of 0.1.10 left the catalog), the tag `desktop-v0.1.11` on that PR's merge commit, the release published as a pre-release and not «latest»: https://github.com/OlehDemishev/AIHubBar/releases/tag/desktop-v0.1.11. The notes say that the limits now show as bars and where the rings are. The laptop's copy was updated by the agent: the release's installer run silently over 0.1.10; the profile and settings were kept.
+Checked: CI green on every PR above; `desktop-release.yml` green (it installs and uninstalls the installer) and the manifest workflow green; `latest.json` at `desktop-updates` says 0.1.11. On the laptop the installer exited 0, `AIHubBar.exe` and `claudepult --version` say 0.1.11, the app runs.
+Left: the installed 0.1.11 was not opened and looked at by the agent — the card, the bars and the new windows are for Oleh to see. Not tried by hand before the release (also in the notes' «Known»): a real day's summary in a bot, a real pair in the comparison window, an .ics file with dates in Outlook or Google Calendar. Unsigned, SmartScreen warns. On the Mac's list still missing here: tasks from the Telegram chat, the shared bot and its Mini App, «Версии», batch tasks, files and dictation in the quick prompt, the crash report.
 
 ## 2026-11-23 — Windows: limits as bars or rings, folding blocks (branch `feat/desktop-limits-style`)
 
