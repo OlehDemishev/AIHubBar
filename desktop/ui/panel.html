@@ -584,6 +584,7 @@
         showSessions();
       }));
       if (run.pullRequest) line.append(button("PR", () => invoke("open_link", { url: run.pullRequest })));
+      if (run.changes) line.append(Object.assign(button(t("Что изменилось"), () => invoke("open_versions", { path: run.changes[0], before: run.changes[1] })), { title: t("Тексты проекта до этой задачи и сейчас") }));
       const parts = [line];
       if (runErrors.has(run.id)) parts.push(element("div", "error", runErrors.get(run.id)));
       if (openLogs.has(run.id)) {
@@ -1575,6 +1576,7 @@ ${command.hotKey}` : command.value;
           const text = job.state === "running" ? t("выполняется…") : job.message ?? "";
           line.append(Object.assign(element("span", "secondary note", text), { title: text }));
         }
+        if (job.changes) line.append(Object.assign(action(t("Что изменилось"), () => invoke("open_versions", { path: row.path, before: job.changes })), { title: t("Тексты проекта до этой задачи и сейчас") }));
         parts.push(line);
       }
       if (row.jobs.some((job) => job.state !== "running")) {

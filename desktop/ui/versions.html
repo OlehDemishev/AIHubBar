@@ -13,6 +13,7 @@
   <div class="versions-split" id="versions-split">
     <div class="versions-list" id="versions-list" role="listbox"></div>
     <div class="versions-files">
+      <label class="versions-only"><input type="checkbox" id="changed-only"> <span data-t="Только отличия"></span></label>
       <div id="version-files"></div>
       <p class="secondary" id="version-skipped" hidden></p>
       <p class="version-actions">
@@ -49,6 +50,8 @@
     let view = { versions: [] };
     let chosen = null;
     let file = null;
+    // «Что изменилось» of a run picks the version before it once per opening, and shows only what differs.
+    let opened = null;
 
     function message(text, isError) {
       id("versions-message").hidden = !text;
@@ -96,7 +99,8 @@
 
     function showFiles() {
       const version = view.versions.find((v) => v.id === chosen);
-      id("version-files").replaceChildren(...(version?.entries ?? []).map((entry) => {
+      const only = id("changed-only").checked;
+      id("version-files").replaceChildren(...(version?.entries ?? []).filter((entry) => !only || entry.status !== "same").map((entry) => {
         const row = element("button", "version-file " + entry.status + (entry.path === file ? " chosen" : ""), entry.title);
         row.onclick = () => { file = entry.path; showFiles(); showCompare(); };
         return row;
@@ -110,6 +114,11 @@
       id("versions-title").textContent = view.project ? `${t("Версии")}: ${view.project}` : t("Версии");
       id("versions-empty").hidden = view.versions.length > 0;
       id("versions-split").hidden = view.versions.length === 0;
+      if (view.opened !== opened) {
+        opened = view.opened;
+        id("changed-only").checked = Boolean(view.before);
+        if (view.before) { chosen = view.before; file = null; }
+      }
       if (!view.versions.some((v) => v.id === chosen)) { chosen = view.versions[0]?.id ?? null; file = null; }
       id("versions-list").replaceChildren(...view.versions.map((version) => {
         const row = element("button", "version-row" + (version.id === chosen ? " chosen" : ""));
@@ -120,13 +129,15 @@
         return row;
       }));
       const version = view.versions.find((v) => v.id === chosen);
-      if (version && !file) file = (version.entries.find((e) => e.status === "changed") ?? version.entries[0])?.path ?? null;
+      const only = id("changed-only").checked;
+      if (version && !file) file = (version.entries.find((e) => e.status === "changed") ?? version.entries.find((e) => !only || e.status !== "same") ?? version.entries[0])?.path ?? null;
       showFiles();
       showCompare();
     }
 
     id("restore-file").onclick = async () => ask(t("Вернуть этот файл?"), await invoke("version_questions", { id: chosen, path: file }), () => restore(file));
     id("restore-all").onclick = async () => ask(t("Вернуть всю версию?"), await invoke("version_questions", { id: chosen, path: null }), () => restore(null));
+    id("changed-only").onchange = () => showFiles();
     id("open-file").onclick = () => invoke("version_open_file", { path: file });
 
     async function load() {

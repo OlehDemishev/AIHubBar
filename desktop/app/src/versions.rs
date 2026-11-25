@@ -71,8 +71,10 @@ fn settings(app: &AppHandle) -> (bool, VersionsSettings) {
 pub struct Keeper {
     last_sweep: Mutex<Option<DateTime<Utc>>>,
     last_cleanup: Mutex<Option<DateTime<Utc>>>,
-    /// The project the «Версии» window shows.
-    shown: Mutex<Option<PathBuf>>,
+    /// The project the «Версии» window shows; with «Что изменилось» of a run, when the run started.
+    shown: Mutex<Option<(PathBuf, Option<DateTime<Utc>>)>>,
+    /// Counts the openings, so the window picks the version before a run once per «Что изменилось».
+    opened: std::sync::atomic::AtomicU64,
 }
 
 /// The current folder profile's projects.
@@ -141,10 +143,20 @@ pub fn before_run(app: &AppHandle, project: &Path, title: &str) {
 
 // MARK: - The window
 
-/// «Версии» of a project in the panel: the window comes up on it.
+/// There is a version of the project taken before a run that started at `started`: «Что изменилось» has something
+/// to show (the Mac's `hasVersion(projectPath:before:)`), while the module works.
+pub fn has_before(app: &AppHandle, project: &Path, started: DateTime<Utc>) -> bool {
+    settings(app).0 && store().before(project, started).is_some()
+}
+
+/// «Версии» of a project in the panel: the window comes up on it. With `before` (a run's start, RFC 3339) it is «Что
+/// изменилось» of that run: the version taken before it, only the files that differ.
 #[tauri::command]
-pub fn open_versions(app: AppHandle, path: String) {
-    *app.state::<Keeper>().shown.lock().unwrap() = Some(PathBuf::from(path));
+pub fn open_versions(app: AppHandle, path: String, before: Option<String>) {
+    let before = before.and_then(|b| DateTime::parse_from_rfc3339(&b).ok()).map(|b| b.with_timezone(&Utc));
+    let keeper = app.state::<Keeper>();
+    *keeper.shown.lock().unwrap() = Some((PathBuf::from(path), before));
+    keeper.opened.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
     if let Some(panel) = app.get_webview_window("panel") {
         let _ = panel.hide();
     }
@@ -191,6 +203,9 @@ pub struct VersionsView {
     project: String,
     path: String,
     versions: Vec<VersionRow>,
+    /// «Что изменилось» of a run: the version to pick, once per `opened`.
+    before: Option<String>,
+    opened: u64,
 }
 
 fn when(date: DateTime<Utc>) -> String {
@@ -198,12 +213,15 @@ fn when(date: DateTime<Utc>) -> String {
 }
 
 fn shown(app: &AppHandle) -> Option<PathBuf> {
-    app.state::<Keeper>().shown.lock().unwrap().clone()
+    app.state::<Keeper>().shown.lock().unwrap().as_ref().map(|(path, _)| path.clone())
 }
 
 fn view(app: &AppHandle) -> VersionsView {
     let texts = strings(app);
     let Some(project) = shown(app) else { return VersionsView::default() };
+    let before = app.state::<Keeper>().shown.lock().unwrap().as_ref().and_then(|(_, before)| *before);
+    let before = before.and_then(|date| store().before(&project, date)).map(|v| v.id);
+    let opened = app.state::<Keeper>().opened.load(std::sync::atomic::Ordering::Relaxed);
     let (_, chosen) = settings(app);
     let current = Store::current(&project, chosen.size_limit());
     let rows = store()
@@ -240,7 +258,7 @@ fn view(app: &AppHandle) -> VersionsView {
             }
         })
         .collect();
-    VersionsView { project: project.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default(), path: project.to_string_lossy().into_owned(), versions: rows }
+    VersionsView { project: project.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default(), path: project.to_string_lossy().into_owned(), versions: rows, before, opened }
 }
 
 #[tauri::command]

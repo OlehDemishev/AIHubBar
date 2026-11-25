@@ -173,6 +173,7 @@ body.versions-window { margin: 0; padding: 14px 16px; display: flex; flex-direct
 .version-row.chosen, .version-file.chosen { background: color-mix(in srgb, var(--accent) 18%, transparent); }
 .version-file { border: none; background: none; text-align: start; padding: 3px 6px; border-radius: 5px; font: 12px ui-monospace, Consolas, monospace; color: inherit; overflow-wrap: anywhere; }
 .version-file.same { color: var(--secondary); }
+.versions-only { display: flex; align-items: center; gap: 6px; font-size: 12px; margin: 0 0 6px; }
 .version-file.added { color: #248a3d; }
 .version-file.missing { color: #ff9500; }
 .version-actions { display: flex; gap: 6px; justify-content: flex-end; margin: 6px 0 0; }

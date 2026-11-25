@@ -41,6 +41,8 @@ struct Job {
     service: String,
     result_file: PathBuf,
     state: JobState,
+    /// When it started: «Что изменилось» shows the project's version before it.
+    started: chrono::DateTime<chrono::Utc>,
 }
 
 /// What was started from the panel since the app started, newest first.
@@ -84,6 +86,8 @@ pub struct JobRow {
     message: Option<String>,
     /// The result's file name once it is there.
     result: Option<String>,
+    /// «Что изменилось»: the start (RFC 3339) of a finished command that has a version of its project before it.
+    changes: Option<String>,
 }
 
 /// The profile's commands and «Своя задача», as buttons.
@@ -134,10 +138,10 @@ pub fn needs_main_file(profile: &Profile) -> bool {
 pub fn rows(app: &AppHandle, project: &Path, texts: &Strings) -> Vec<JobRow> {
     let runs = app.state::<Runs>().list();
     let jobs = app.state::<Jobs>().0.lock().unwrap().clone();
-    jobs.iter().filter(|j| j.project == project).map(|job| row(job, &runs, texts)).collect()
+    jobs.iter().filter(|j| j.project == project).map(|job| row(app, job, &runs, texts)).collect()
 }
 
-fn row(job: &Job, runs: &[Run], texts: &Strings) -> JobRow {
+fn row(app: &AppHandle, job: &Job, runs: &[Run], texts: &Strings) -> JobRow {
     let file_name = job.result_file.file_name().map(|n| n.to_string_lossy().into_owned());
     let (state, message, result) = match &job.state {
         JobState::Working => ("running", None, None),
@@ -151,7 +155,8 @@ fn row(job: &Job, runs: &[Run], texts: &Strings) -> JobRow {
             None => ("failed", None, None),
         },
     };
-    JobRow { id: job.id.clone(), title: format!("{} · {}", job.title, job.service), state, message, result }
+    let changes = (state != "running" && crate::versions::has_before(app, &job.project, job.started)).then(|| job.started.to_rfc3339());
+    JobRow { id: job.id.clone(), title: format!("{} · {}", job.title, job.service), state, message, result, changes }
 }
 
 fn is_finished(job: &Job, runs: &[Run]) -> bool {
@@ -185,7 +190,7 @@ fn start(app: &AppHandle, request: &Request, service: &Service, suffix: Option<&
     let title = commands::run_title(&request.template.title, context.text.as_deref());
     let id = claudepult_core::runs::new_id();
     eprintln!("command «{}» → {} in {} → {name}", request.template.title, service.id(), folder.display());
-    let mut job = Job { id: id.clone(), project: folder.clone(), title: title.clone(), service: service.short_name(&services), result_file: result_file.clone(), state: JobState::Working };
+    let mut job = Job { id: id.clone(), project: folder.clone(), title: title.clone(), service: service.short_name(&services), result_file: result_file.clone(), state: JobState::Working, started: chrono::Utc::now() };
 
     match service {
         Service::Api(provider) => {
