@@ -5,6 +5,7 @@
 **Updated:** 2026-11-25
 
 **Now:**
+- 2026-11-26: Windows — the swap notification of «Ресурсы компьютера» («Подкачка сильно выросла»), as on the Mac since 0.13.0 (branch `feat/desktop-swap-alert`)
 - 2026-11-25: Windows 0.1.13 published as an unsigned pre-release (tag `desktop-v0.1.13`) on Oleh's «выпускай»: «Что изменилось» after a run, «Только отличия», the folder profile's git line gone; installed on the laptop by the agent
 - 2026-11-25: Windows — «Что изменилось» after a run: a finished command in a folder project's card, or a finished background run, opens «Версии» on the version taken before it with «Только отличия» on; the «git-репозиториев» line no longer shows under a folder profile (branch `fix/desktop-folder-git-note`)
 - 2026-11-25: Windows 0.1.12 published as an unsigned pre-release (tag `desktop-v0.1.12`) on Oleh's «Да, выпускай»: files in the quick prompt, «Версии», batch tasks, the crash report; installed on the laptop by the agent
@@ -221,6 +222,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-26 — Windows: the swap notification (branch `feat/desktop-swap-alert`)
+
+Done: on «Продолжай». The Mac's swap alert of `ResourceAlerts` (0.13.0): «Ресурсы компьютера» notifies once when swap in use reaches half of the memory, and not less than 4 GB, and again only after it fell a GB under that. The title is the Mac's «Подкачка сильно выросла»; the body is a Windows twin of the Mac's, which says «перезагрузите Mac» («…или перезагрузите компьютер.», 12 translations), with the size in whole GB. Swap is `sysinfo`'s: on Linux the swap in use; on Windows what the commit charge needs beyond the memory — the least the page file holds, which is the memory shortage the Mac's alert is about. The module's description in Settings is the Mac's newer one, with «подкачка больше половины памяти». `core/src/resources.rs`, `app/src/resources.rs`, `ui/settings.html`.
+Checked: `python scripts/strings.py --check` (1026 texts), `python scripts/strings-check.py`, `cargo test --workspace --no-fail-fast` (a new test: the limit, once per event, again after it shrank) — all green except `ipc_roundtrip`, which fails locally only while the installed app runs; `cargo build` without warnings.
+Left: not seen live — the laptop's page file holds 94 MB of 2.4 GB and the commit charge stays under its 16 GB, so the alert can't be brought on without filling the memory; the Settings line was not looked at on screen. On Windows the number is a lower bound of the page file's use, not its size on disk.
 
 ## 2026-11-25 — Windows 0.1.13 released (branch `chore/desktop-0.1.13-note`)
 
