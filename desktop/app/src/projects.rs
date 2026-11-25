@@ -183,6 +183,11 @@ impl Projects {
         state.projects.iter().map(|p| (p.name.clone(), p.path.clone())).chain(state.folders.iter().map(|p| (p.name.clone(), p.path.clone()))).collect()
     }
 
+    /// The current folder profile's projects, for «Версии».
+    pub(crate) fn folder_paths(&self) -> Vec<PathBuf> {
+        self.state.lock().unwrap().folders.iter().map(|p| p.path.clone()).collect()
+    }
+
     pub(crate) fn folder_project(&self, path: &Path) -> Option<FolderProject> {
         self.state.lock().unwrap().folders.iter().find(|p| p.path == path).cloned()
     }
@@ -333,6 +338,8 @@ pub struct FolderView {
     default_service: String,
     /// «Слов сегодня: 420 из 500», «Дней подряд: 3», how far, and whether the goal is reached; None without a goal.
     word_goal: Option<WordGoalLine>,
+    /// «Версии» is on: a project's details have the button.
+    versions: bool,
 }
 
 #[derive(Serialize)]
@@ -412,7 +419,7 @@ fn folder_view(app: &AppHandle, state: &State, texts: &Strings) -> Option<Folder
         fraction: (words as f64 / goal as f64).min(1.0),
         reached: words >= goal,
     });
-    Some(FolderView { rows, stages, can_create: matches!(profile.source(), claudepult_core::profiles::Source::Folders(_)), services: crate::commands::choices(app), default_service, word_goal })
+    Some(FolderView { rows, stages, can_create: matches!(profile.source(), claudepult_core::profiles::Source::Folders(_)), services: crate::commands::choices(app), default_service, word_goal, versions: settings.module_on(crate::versions::KIND) })
 }
 
 fn health_key(health: Health) -> &'static str {

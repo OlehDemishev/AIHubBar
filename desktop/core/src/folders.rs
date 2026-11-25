@@ -408,7 +408,7 @@ pub fn text_of(path: &Path) -> Option<String> {
 
 /// The visible text of an RTF file: control words, hidden groups (`{\*…}`, font and colour tables, pictures) and braces
 /// dropped; `\'hh` and `\uN` become a letter, which is all a word count needs.
-fn rtf_text(rtf: &str) -> String {
+pub fn rtf_text(rtf: &str) -> String {
     const HIDDEN: [&str; 8] = ["fonttbl", "colortbl", "stylesheet", "info", "pict", "header", "footer", "listtable"];
     let mut out = String::new();
     let mut skip_depth: Option<usize> = None;

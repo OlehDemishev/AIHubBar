@@ -6,8 +6,12 @@ use std::path::Path;
 
 /// A Word file's visible text; None when it isn't a readable `.docx`.
 pub fn text(path: &Path) -> Option<String> {
-    let bytes = std::fs::read(path).ok()?;
-    let xml = entry(&bytes, "word/document.xml")?;
+    text_of_bytes(&std::fs::read(path).ok()?)
+}
+
+/// The same from the file's bytes (a kept version's content).
+pub fn text_of_bytes(bytes: &[u8]) -> Option<String> {
+    let xml = entry(bytes, "word/document.xml")?;
     Some(xml_text(&String::from_utf8_lossy(&xml)))
 }
 

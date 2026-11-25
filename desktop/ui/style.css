@@ -148,6 +148,25 @@ body.pair-window { margin: 0; padding: 14px 16px; display: flex; flex-direction:
 .qp-file { display: flex; align-items: center; gap: 6px; }
 .qp-file span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .qp-file .icon-button { font-size: 11px; padding: 0 4px; }
+/* «Версии»: versions, a version's files, a file then and now. */
+body.versions-window { margin: 0; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; height: 100vh; box-sizing: border-box; }
+.versions-window h1 { font-size: 15px; margin: 0; }
+.versions-split { flex: 1; min-height: 0; display: grid; grid-template-columns: 200px 240px 1fr; gap: 10px; }
+.versions-list, .versions-files, .versions-compare { min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 2px; }
+.version-row { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; padding: 5px 8px; border: none; border-radius: 7px; background: none; text-align: start; font: inherit; color: inherit; }
+.version-row span { font-size: 11px; }
+.version-row.chosen, .version-file.chosen { background: color-mix(in srgb, var(--accent) 18%, transparent); }
+.version-file { border: none; background: none; text-align: start; padding: 3px 6px; border-radius: 5px; font: 12px ui-monospace, Consolas, monospace; color: inherit; overflow-wrap: anywhere; }
+.version-file.same { color: var(--secondary); }
+.version-file.added { color: #248a3d; }
+.version-file.missing { color: #ff9500; }
+.version-actions { display: flex; gap: 6px; justify-content: flex-end; margin: 6px 0 0; }
+.compare-head, .compare-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.compare-head { font-size: 11px; color: var(--secondary); font-weight: 600; }
+.compare-rows { flex: 1; min-height: 0; overflow-y: auto; font: 12px ui-monospace, Consolas, monospace; user-select: text; }
+.compare-row span { white-space: pre-wrap; overflow-wrap: anywhere; padding: 0 4px; }
+.compare-row.changed span { background: color-mix(in srgb, #ff9f0a 14%, transparent); }
+.compare-row span.gone { background: color-mix(in srgb, var(--line) 60%, transparent); }
 /* «Справка»: the Settings layout with topics in the sidebar. */
 .help-feedback { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin: 0; padding: 8px 8px 0; border-top: 1px solid var(--line); font-size: 12px; }
 .help-nav-glyph { flex: none; width: 18px; text-align: center; }
