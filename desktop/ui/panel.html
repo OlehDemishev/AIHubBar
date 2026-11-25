@@ -1354,6 +1354,45 @@ ${command.hotKey}` : command.value;
     }
 
     // A project's details, as the Mac row opens: actions first, then STATUS, attention, PRs, worktrees.
+    // «Локальные серверы»: what listens on a port from this project's folder or its worktrees; the stop asks twice.
+    const serversSeen = new Map();
+    function localServers(path) {
+      const box = element("div", "local-servers");
+      box.hidden = true;
+      let confirming = null;
+      const draw = (servers) => {
+        serversSeen.set(path, servers);
+        box.hidden = servers.length === 0;
+        box.replaceChildren(element("p", "secondary heading", t("Локальные серверы")), ...servers.map((server) => {
+          const line = element("div", "local-server");
+          const name = element("span", "secondary command", server.command);
+          name.title = server.folder;
+          line.append(element("span", "port", `:${server.port}`), name, element("span", "spacer"));
+          if (confirming === server.id) {
+            line.append(Object.assign(action(t("Остановить?"), async () => {
+              confirming = null;
+              draw(await invoke("stop_local_server", { project: path, pid: server.pid, port: server.port }).catch(() => []));
+            }), { className: "small danger" }));
+          } else {
+            const open = Object.assign(element("button", "icon-button", "↗"), { title: t("Открыть в браузере") });
+            open.setAttribute("aria-label", t("Открыть в браузере"));
+            open.onclick = () => invoke("open_local_server", { project: path, pid: server.pid, port: server.port });
+            const stop = Object.assign(element("button", "icon-button", "■"), { title: t("Остановить процесс") });
+            stop.setAttribute("aria-label", t("Остановить процесс"));
+            stop.onclick = () => {
+              confirming = server.id;
+              draw(servers);
+              setTimeout(() => { if (confirming === server.id) { confirming = null; draw(servers); } }, 4000);
+            };
+            line.append(open, stop);
+          }
+          return line;
+        }));
+      };
+      if (serversSeen.has(path)) draw(serversSeen.get(path));
+      invoke("project_servers", { path }).then(draw);
+      return box;
+    }
     function details(row) {
       const box = element("div", "details");
       box.append(claude(row));
@@ -1366,6 +1405,7 @@ ${command.hotKey}` : command.value;
       if (row.stage) box.append(Object.assign(inline(row.stage), { className: "stage", title: row.stage }));
       box.append(...bullets(t("Сейчас"), row.now), ...bullets(t("Дальше"), row.next), ...bullets(t("Нужно от вас"), row.needs, "needs"));
       if (row.statusNote) box.append(element("p", "secondary", row.statusNote));
+      box.append(localServers(row.path));
       for (const item of row.attention) {
         const line = element("div", `attention ${item.level}`);
         line.append(element("span", "mark", item.level === "high" ? "▲" : item.level === "mid" ? "●" : "ⓘ"), inline(item.text));

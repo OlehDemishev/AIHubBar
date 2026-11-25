@@ -221,6 +221,40 @@ pub struct DayInput {
     pub cost: Option<f64>,
     /// How many times a Claude limit reached 100 % today.
     pub hits: usize,
+    /// «Ждёт вас»: sessions that wait for an answer right now, «Проект: чего ждёт».
+    pub waiting: Vec<String>,
+    /// «Ждёт вас»: open pull requests with failed checks, «Проект #12: название».
+    pub failed_prs: Vec<String>,
+}
+
+impl DayInput {
+    /// Nothing happened today and nothing waits: no spend, no runs, no open question — nothing to send.
+    pub fn is_empty(&self) -> bool {
+        self.breakdown.projects.is_empty() && self.runs.is_empty() && self.waiting.is_empty() && self.failed_prs.is_empty()
+    }
+}
+
+/// «Итог дня» for Telegram: the title, then the lines, headings bold (the Mac's `DaySummary.html`).
+pub fn day_html(input: &DayInput, s: &Strings) -> String {
+    let escape = |text: &str| text.replace('&', "&amp;").replace('<', "&lt;").replace('>', "&gt;");
+    std::iter::once(format!("🗓 <b>{}</b>", escape(s.t("Итог дня"))))
+        .chain(day_lines(input, s).into_iter().map(|(text, heading)| if heading { format!("\n<b>{}</b>", escape(&text)) } else { escape(&text) }))
+        .collect::<Vec<_>>()
+        .join("\n")
+}
+
+/// Today's send time, or yesterday's while today's hour has not come (the Mac's `DaySummary.due`).
+pub fn day_due(hour: u32, now: chrono::DateTime<chrono::Local>) -> chrono::DateTime<chrono::Local> {
+    use chrono::TimeZone;
+    let today = now.date_naive().and_hms_opt(hour.min(23), 0, 0).and_then(|at| chrono::Local.from_local_datetime(&at).earliest()).unwrap_or(now);
+    if today > now { today - chrono::Duration::days(1) } else { today }
+}
+
+/// Whether the daily send is due: not sent since today's hour, and not more than three hours late — an app that was
+/// off through the evening sends no summary of yesterday in the morning.
+pub fn day_send_due(hour: u32, sent: Option<chrono::DateTime<Utc>>, now: chrono::DateTime<chrono::Local>) -> bool {
+    let due = day_due(hour, now);
+    sent.is_none_or(|sent| sent < due.with_timezone(&Utc)) && (now - due) < chrono::Duration::hours(3)
 }
 
 /// The lines and whether each is a heading.
@@ -236,6 +270,15 @@ pub fn day_lines(input: &DayInput, s: &Strings) -> Vec<(String, bool)> {
     }
     if input.hits > 0 {
         lines.push((s.format("Упирался в лимит: %lld", &[&input.hits.to_string()]), false));
+    }
+    if !input.waiting.is_empty() || !input.failed_prs.is_empty() {
+        lines.push((s.t("Ждёт вас").to_owned(), true));
+        lines.extend(input.waiting.iter().take(5).map(|line| (format!("✋ {line}"), false)));
+        lines.extend(input.failed_prs.iter().take(5).map(|line| (format!("❌ CI · {line}"), false)));
+        let more = input.waiting.len().saturating_sub(5) + input.failed_prs.len().saturating_sub(5);
+        if more > 0 {
+            lines.push((s.format("и ещё %lld", &[&more.to_string()]), false));
+        }
     }
     if !input.breakdown.projects.is_empty() {
         lines.push((s.t("По проектам").to_owned(), true));
@@ -587,6 +630,8 @@ mod tests {
             others: vec!["Codex — 30 дн 3 %".into()],
             cost: Some(12.345),
             hits: 2,
+            waiting: vec!["Shop: Нужно разрешение: Bash".into()],
+            failed_prs: vec!["Shop #12: Fix cart".into()],
         };
         let lines = day_lines(&input, &s);
         assert_eq!(
@@ -595,6 +640,9 @@ mod tests {
                 "Claude — Сессия: 42 %, Неделя: 30 %",
                 "По цене API, примерно: $12.35",
                 "Упирался в лимит: 2",
+                "# Ждёт вас",
+                "✋ Shop: Нужно разрешение: Bash",
+                "❌ CI · Shop #12: Fix cart",
                 "# По проектам",
                 "• shop — 80 % (1,2 млн)",
                 "• blog — 20 % (300 тыс.)",
@@ -607,7 +655,28 @@ mod tests {
             ]
         );
         assert!(day_lines(&DayInput::default(), &s).is_empty());
+        assert!(DayInput::default().is_empty() && !input.is_empty());
+        assert!(!DayInput { waiting: vec!["x".into()], ..DayInput::default() }.is_empty(), "a question waiting is worth a summary");
+        let many = DayInput { waiting: (0..7).map(|i| i.to_string()).collect(), ..DayInput::default() };
+        assert_eq!(day_lines(&many, &s).last().map(|l| l.0.as_str()), Some("и ещё 2"));
+        let html = day_html(&DayInput { waiting: vec!["<Shop> & co".into()], ..DayInput::default() }, &s);
+        assert_eq!(html, "🗓 <b>Итог дня</b>
+
+<b>Ждёт вас</b>
+✋ &lt;Shop&gt; &amp; co");
         assert_eq!(day_lines(&DayInput { cost: Some(0.004), week_percent: Some(5.0), ..DayInput::default() }, &s), [("Claude — Неделя: 5 %".to_owned(), false)]);
+    }
+
+    #[test]
+    fn when_the_day_summary_goes() {
+        use chrono::TimeZone;
+        let at = |day: u32, hour: u32, minute: u32| chrono::Local.with_ymd_and_hms(2026, 11, day, hour, minute, 0).unwrap();
+        assert_eq!(day_due(21, at(23, 22, 0)), at(23, 21, 0));
+        assert_eq!(day_due(21, at(23, 9, 0)), at(22, 21, 0), "before the hour: yesterday's");
+        assert!(day_send_due(21, None, at(23, 21, 5)));
+        assert!(!day_send_due(21, Some(at(23, 21, 5).with_timezone(&Utc)), at(23, 21, 30)), "sent today already");
+        assert!(day_send_due(21, Some(at(22, 21, 5).with_timezone(&Utc)), at(23, 21, 30)), "yesterday's was sent");
+        assert!(!day_send_due(21, None, at(24, 9, 0)), "off through the evening: no summary of yesterday in the morning");
     }
 
     #[test]

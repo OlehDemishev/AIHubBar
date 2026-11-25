@@ -16,6 +16,7 @@ mod accounts;
 mod help;
 mod pair_compare;
 mod history;
+mod local_servers;
 mod hub;
 mod keep_awake;
 mod notes;
@@ -556,7 +557,7 @@ fn main() {
             services::save_api_key, services::delete_api_key, services::set_api_model, services::set_compatible_server, services::open_key_page,
             services::agents_view, services::copy_install_command, projects::open_agent, calendar::upcoming_view,
             calendar::open_upcoming, calendar::reminder_hours, calendar::set_reminder_hours, calendar::set_profile_calendar,
-            calendar::open_calendar, calendar::calendar_view, calendar::reread_calendar, calendar::move_calendar_entry,
+            calendar::open_calendar, calendar::calendar_view, calendar::export_calendar, local_servers::project_servers, local_servers::open_local_server, local_servers::stop_local_server, calendar::reread_calendar, calendar::move_calendar_entry,
             calendar::add_calendar_date, assistant::open_assistant, assistant::assistant_start, assistant::assistant_look,
             assistant::assistant_choose_folder, assistant::assistant_apply_folder, assistant::assistant_finish,
             runs::stop_run, runs::run_log, projects::worktree_removal, launch_settings, set_launch_settings,
@@ -568,7 +569,7 @@ fn main() {
             changes::open_changed, projects::launch_both, runs::hand_over_run, runs::review_run, queue::resume_run_now, queue::run_guard, queue::set_run_guard, queue::queue_launch, queue::queued_view, queue::cancel_queued, queue::night_hour, queue::set_night_hour,
             pair_compare::open_pair_compare, pair_compare::pair_view, pair_compare::pair_file_diff, pair_compare::pair_between_diff,
             pair_compare::pair_action, pair_compare::pair_open_folder, help::open_help, help::help_view, help::open_feedback, accounts::claude_accounts, accounts::add_claude_account, accounts::rename_claude_account,
-            accounts::remove_claude_account, accounts::sign_in_claude_account, accounts::refresh_claude_accounts, history::open_history, history::history_view, history::set_plan_price, history::export_history,
+            accounts::remove_claude_account, accounts::sign_in_claude_account, accounts::refresh_claude_accounts, history::open_history, history::day_summary_settings, history::set_day_summary, history::send_day_summary, history::history_view, history::set_plan_price, history::export_history,
             updates::updates_view, updates::set_updates_daily, updates::check_updates, updates::install_update,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,
@@ -609,6 +610,7 @@ fn main() {
             handle.state::<clipboard::Clipboard>().start(handle.clone());
             handle.state::<resources::Resources>().start(handle.clone());
             handle.state::<hub::Hub>().start(handle.clone());
+            history::start_day_summary(handle.clone());
             handle.state::<accounts::Accounts>().start(handle.clone());
             command_hot_keys::sync(&handle);
             updates::watch(handle.clone());

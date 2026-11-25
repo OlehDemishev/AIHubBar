@@ -350,3 +350,25 @@ pub async fn add_calendar_date(app: AppHandle, profile: String, kind: String, da
     app.state::<crate::projects::Projects>().ask(false);
     Ok(())
 }
+
+/// «Экспорт в .ics…»: the dates the window shows under its filter, every month, in a file the person saves where they
+/// choose (the Mac's `exportICS`). True — written; false — the dialog was closed.
+#[tauri::command]
+pub async fn export_calendar(app: AppHandle, current_only: bool) -> Result<bool, String> {
+    use tauri_plugin_dialog::DialogExt;
+    let texts = strings(&app);
+    let settings = app.state::<AppState>().settings.lock().unwrap().clone();
+    let current = settings.current().map(|p| p.id.clone());
+    let entries: Vec<claudepult_core::calendar::Entry> =
+        app.state::<Calendar>().state.lock().unwrap().entries.iter().filter(|e| !current_only || Some(&e.profile_id) == current.as_ref()).cloned().collect();
+    let mut dialog = app.dialog().file().set_file_name("AI Hub Bar.ics").add_filter("iCalendar", &["ics"]);
+    if let Some(window) = app.get_webview_window("calendar") {
+        dialog = dialog.set_parent(&window);
+    }
+    let Some(path) = dialog.blocking_save_file().and_then(|f| f.into_path().ok()) else { return Ok(false) };
+    let text = claudepult_core::calendar_ics::text(&entries, chrono::Utc::now(), &texts);
+    let name = path.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
+    std::fs::write(&path, text).map_err(|error| texts.format("Не удалось записать %@: %@", &[&name, &error.to_string()]))?;
+    eprintln!("calendar exported: {} dates to {name}", entries.len());
+    Ok(true)
+}
