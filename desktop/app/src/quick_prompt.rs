@@ -164,7 +164,10 @@ pub struct SendReply {
 
 /// Sends the task (the Mac's `QuickPromptController.send`).
 #[tauri::command]
-pub async fn quick_prompt_send(app: AppHandle, text: String, project: String, agent: String, mode: String, allow_busy: bool) -> SendReply {
+pub async fn quick_prompt_send(app: AppHandle, text: String, project: String, agent: String, mode: String, allow_busy: bool, files: Option<Vec<String>>) -> SendReply {
+    // Files dropped on the window go with the task as their paths; only files that are still there.
+    let files = quick_prompt::adding_files(&files.unwrap_or_default(), &[]);
+    let text = if quick_prompt::can_send(&text, Some(&project)) { quick_prompt::task_with_files(&text, &files) } else { text };
     if !quick_prompt::can_send(&text, Some(&project)) {
         return SendReply::default();
     }

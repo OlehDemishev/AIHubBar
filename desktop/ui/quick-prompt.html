@@ -12,6 +12,7 @@
     <button class="icon-button" id="settings" data-t-title="Настройки быстрого запроса" aria-label="⚙">⚙</button>
   </header>
   <textarea id="task" rows="4" data-t-placeholder="Что сделать?"></textarea>
+  <div class="qp-files" id="files"></div>
   <p class="secondary" id="no-projects" data-t="Нет git-проектов: укажите папку с проектами в профиле — Настройки → «Профили»." hidden></p>
   <div class="quick-prompt-row">
     <label><span data-t="Проект"></span> <select id="project"></select></label>
@@ -41,6 +42,30 @@
     let start = null;
     let mode = "background";
     let sending = false;
+    // Files dropped on the window: their paths go to the agent with the task (the Mac's «Файлы и снимки экрана»).
+    let files = [];
+    function showFiles() {
+      const box = document.getElementById("files");
+      if (files.length === 0) {
+        box.replaceChildren(Object.assign(document.createElement("p"), { className: "secondary qp-drop", textContent: t("Файлы и снимки экрана можно перетащить в это окно — агент получит их пути.") }));
+        return;
+      }
+      box.replaceChildren(...files.map((path) => {
+        const row = document.createElement("div");
+        row.className = "qp-file";
+        const name = Object.assign(document.createElement("span"), { textContent: "📎 " + path.split(/[\\/]/).pop(), title: path });
+        const remove = Object.assign(document.createElement("button"), { className: "icon-button", textContent: "✕", title: t("Убрать файл") });
+        remove.setAttribute("aria-label", t("Убрать файл"));
+        remove.onclick = () => { files = files.filter((f) => f !== path); showFiles(); };
+        row.append(name, remove);
+        return row;
+      }));
+    }
+    window.__TAURI__.event.listen("tauri://drag-drop", (event) => {
+      const dropped = event.payload?.paths ?? [];
+      for (const path of dropped) if (!files.includes(path) && files.length < 8) files.push(path);
+      showFiles();
+    });
 
     const hints = {
       "claude-code": t("Фон — claude -p без окна, итог уведомлением; Терминал — новое окно, можно отвечать Claude"),
@@ -73,6 +98,8 @@
     async function reset() {
       start = await invoke("quick_prompt_start");
       task.value = "";
+      files = [];
+      showFiles();
       sending = false;
       answer(null);
       project.replaceChildren(...start.projects.map((p) => new Option(p.name, p.id)));
@@ -91,7 +118,7 @@
       sending = true;
       showSend();
       answer(null);
-      const reply = await invoke("quick_prompt_send", { text: task.value, project: project.value, agent: agent.value, mode, allowBusy });
+      const reply = await invoke("quick_prompt_send", { text: task.value, project: project.value, agent: agent.value, mode, allowBusy, files });
       sending = false;
       showSend();
       if (reply.close) {
