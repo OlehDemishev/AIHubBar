@@ -60,6 +60,9 @@ pub struct Settings {
     pub telegram_answers: bool,
     /// «Запросы разрешений в этот бот» (the Mac's `telegramApprovals`).
     pub telegram_requests: bool,
+    /// «После сбоя предлагать отправить отчёт» (the Mac's `askAfterCrash`) and when the reports were looked at last.
+    pub ask_after_crash: bool,
+    pub crash_checked_at: Option<i64>,
     /// «Итог дня в Telegram» and its hour (the Mac's `daySummary`, `daySummaryHour`), when it was sent last (seconds).
     pub day_summary: bool,
     pub day_summary_hour: u32,
@@ -127,6 +130,8 @@ impl Default for Settings {
             telegram_off: Vec::new(),
             telegram_answers: false,
             telegram_requests: false,
+            ask_after_crash: true,
+            crash_checked_at: None,
             day_summary: false,
             day_summary_hour: 21,
             day_summary_sent: None,
@@ -204,6 +209,8 @@ impl Settings {
             renew_claude_login: value.get("renew_claude_login").and_then(Value::as_bool).unwrap_or(defaults.renew_claude_login),
             telegram_answers: value.get("telegram_answers").and_then(Value::as_bool).unwrap_or(false),
             telegram_requests: value.get("telegram_requests").and_then(Value::as_bool).unwrap_or(false),
+            ask_after_crash: value.get("ask_after_crash").and_then(Value::as_bool).unwrap_or(true),
+            crash_checked_at: value.get("crash_checked_at").and_then(Value::as_i64),
             day_summary: value.get("day_summary").and_then(Value::as_bool).unwrap_or(false),
             day_summary_hour: value.get("day_summary_hour").and_then(Value::as_u64).filter(|hour| *hour < 24).map_or(21, |hour| hour as u32),
             day_summary_sent: value.get("day_summary_sent").and_then(Value::as_i64),

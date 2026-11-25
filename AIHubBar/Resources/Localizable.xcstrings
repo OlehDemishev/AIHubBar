@@ -158649,6 +158649,82 @@
           }
         }
       }
+    },
+    "Сбой %@. Можно сообщить о нём на GitHub: откроется форма с описанием сбоя, версией и системой — перед отправкой видно всё, что уходит. Полный отчёт откроется в Проводнике, его можно перетащить в форму.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعطل في %@. يمكنك الإبلاغ عنه على GitHub: يُفتح نموذج فيه وصف التعطل والإصدار والنظام — وترى كل شيء قبل الإرسال. يظهر التقرير الكامل في مستكشف الملفات، ويمكنك سحبه إلى النموذج."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Absturz am %@. Sie können ihn auf GitHub melden: Ein Formular mit der Absturzbeschreibung, Version und System öffnet sich — Sie sehen alles, bevor es abgeschickt wird. Der vollständige Bericht erscheint im Explorer; ziehen Sie ihn in das Formular."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crash on %@. You can report it on GitHub: a form opens with the crash details, version and system — you see everything before it goes. The full report appears in File Explorer; drag it into the form."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fallo del %@. Puedes informar en GitHub: se abre un formulario con la descripción del fallo, la versión y el sistema; ves todo antes de enviarlo. El informe completo aparece en el Explorador de archivos; arrástralo al formulario."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plantage du %@. Vous pouvez le signaler sur GitHub : un formulaire s’ouvre avec la description du plantage, la version et le système — vous voyez tout avant l’envoi. Le rapport complet apparaît dans l’Explorateur de fichiers ; faites-le glisser dans le formulaire."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crash pada %@. Anda dapat melaporkannya di GitHub: formulir terbuka dengan deskripsi crash, versi, dan sistem — Anda melihat semuanya sebelum dikirim. Laporan lengkap muncul di File Explorer; seret ke formulir."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arresto anomalo del %@. Puoi segnalarlo su GitHub: si apre un modulo con la descrizione dell’arresto, la versione e il sistema — vedi tutto prima dell’invio. Il rapporto completo compare in Esplora file; trascinalo nel modulo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ にクラッシュしました。GitHub で報告できます。クラッシュの内容、バージョン、システムが入ったフォームが開き、送信前にすべて確認できます。完全なレポートはエクスプローラーに表示されるので、フォームにドラッグしてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@에 충돌이 발생했습니다. GitHub에서 신고할 수 있습니다. 충돌 설명, 버전, 시스템이 들어간 양식이 열리며 보내기 전에 모든 내용을 확인할 수 있습니다. 전체 보고서는 파일 탐색기에 표시되니 양식으로 드래그하세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Awaria %@. Możesz ją zgłosić na GitHubie: otworzy się formularz z opisem awarii, wersją i systemem — przed wysłaniem widać wszystko, co zostanie wysłane. Pełny raport pojawi się w Eksploratorze plików, można go przeciągnąć do formularza."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Falha em %@. Você pode relatar no GitHub: abre um formulário com a descrição da falha, a versão e o sistema — você vê tudo antes do envio. O relatório completo aparece no Explorador de Arquivos; arraste-o para o formulário."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Збій %@. Можна повідомити про нього на GitHub: відкриється форма з описом збою, версією і системою — перед надсиланням видно все, що буде надіслано. Повний звіт з’явиться у Провіднику, його можна перетягнути у форму."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

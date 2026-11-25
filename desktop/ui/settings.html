@@ -79,6 +79,10 @@
               <button id="feedback-problem" data-t="Сообщить о проблеме…"></button>
             </span>
           </div>
+          <div class="row">
+            <label for="crash-ask" data-t="После сбоя предлагать отправить отчёт"></label>
+            <input type="checkbox" id="crash-ask">
+          </div>
           <p class="secondary" data-t="Откроется форма на GitHub, версия и система в ней уже заполнены. Сама программа ничего не отправляет: перед отправкой видно всё, что уходит. Нужен аккаунт GitHub."></p>
         </section>
         <h2 class="group" data-t="Перенос и обмен"></h2>
@@ -1281,6 +1285,9 @@
     // «Обратная связь»: the repository's forms on GitHub, opened in the browser.
     document.getElementById("feedback-idea").onclick = () => invoke("open_feedback", { kind: "idea" });
     document.getElementById("feedback-problem").onclick = () => invoke("open_feedback", { kind: "bug" });
+    const crashAsk = document.getElementById("crash-ask");
+    crashAsk.checked = await invoke("crash_reports_asked");
+    crashAsk.onchange = async () => { crashAsk.checked = await invoke("set_crash_reports_asked", { on: crashAsk.checked }); };
 
     // «Другие аккаунты Claude»: a name, the config folder, «Войти» in a terminal, and removing in two clicks.
     function showClaudeAccounts(view) {
