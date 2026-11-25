@@ -5,6 +5,7 @@
 **Updated:** 2026-11-23
 
 **Now:**
+- 2026-11-23: Windows — «Вид лимитов» (bars, the Mac's default, or rings) in Settings → «Внешний вид», and the panel's blocks fold by a click on their heading, remembered (branch `feat/desktop-limits-style`; seen live)
 - 2026-11-23: Windows — «Локальные серверы» in an open git project: what listens on a port from its folder or worktrees, «Открыть в браузере» and «Остановить процесс» asked twice (branch `feat/desktop-local-servers`; a scratch server seen and stopped live)
 - 2026-11-23: Windows — «Экспорт в .ics…» in the «Календарь» window: the dates under its filter as an iCalendar file for Outlook, Google Calendar and others; a newer export moves the events instead of doubling them (branch `feat/desktop-calendar-ics`; a file written live, with no dates in it)
 - 2026-11-23: Windows — «Итог дня в Telegram» once a day at a chosen hour, and «Ждёт вас» (sessions waiting for an answer, pull requests with failed checks) at the top of the day's lines in the history window and the summary (branch `feat/desktop-day-summary`; the settings seen live, a real send not — no bot on the laptop)
@@ -212,6 +213,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-23 — Windows: limits as bars or rings, folding blocks (branch `feat/desktop-limits-style`)
+
+Done: the last two Mac features of «Надо догонять» on the agreed list. «Вид лимитов» in Settings → «Внешний вид»: «Полосы» — a big number over a bar with the reset beside it, as the Mac draws the limits since its redesign — or «Кольца», what Windows drew so far. Bars are the default, as on the Mac (its `limitsStyle`, kept in the Mac's settings map so a `.claudepult` file carries it): the panel of an installed copy that updates changes from rings to bars until «Кольца» is chosen. The panel follows at once. A click (or Enter, Space) on a block's heading folds the block down to the heading — limits, sessions, resources, «Не спать», quick commands, clipboard, notes, toggles, «Ближайшее», projects — with a small arrow; the panel remembers the folded ones. `core/src/settings.rs`, `app/src/main.rs`, `app/src/limits.rs`, `ui/panel.html`, `ui/settings.html`, `ui/style.css`; all texts are the Mac's.
+Checked: `python scripts/strings.py --check`, `cargo test --workspace` on Windows. Live on the laptop, the build from the branch, driven through WebView2's debugging port (a temporary line, not in the commit): the limits came as bars («94 % Сессия (5 ч) … сброс через 2 ч 18 мин», «33 % Неделя»); a click on «Лимиты» left only the heading, `aria-expanded` false, and it stayed folded after the panel was reloaded; a second click opened it; Settings → «Внешний вид» → «Вид лимитов» «Кольца» brought the rings back in the panel at once. The settings file was put back and the installed app started again. Picture: `docs/images/limits-bars-windows.png`.
+Left: the Mac's other folding («Свернуть» / «Ещё» row at the panel's bottom) is not here. Bars as the default is a change Oleh sees after the next update. Seen in Russian, the light theme.
 
 ## 2026-11-23 — Windows: local servers in a project (branch `feat/desktop-local-servers`)
 

@@ -252,7 +252,21 @@ body.history-window { margin: 0; padding: 16px 20px; }
 /* Limits */
 h2 { font-size: 12px; font-weight: 600; color: var(--secondary); margin: 0 0 8px; text-transform: none; }
 /* Two rings stay side by side: a long reset text wraps inside its ring instead of pushing the second ring down. */
+/* A folded block keeps only its heading. */
+.card.collapsed > :not(.block-head) { display: none !important; }
+.card.collapsed .block-head, .card.collapsed h2.fold { margin-bottom: 0; }
+h2.fold { cursor: pointer; user-select: none; }
+h2.fold::before { content: "▾"; display: inline-block; width: 1em; color: var(--secondary); transition: transform .15s; }
+.card.collapsed h2.fold::before { transform: rotate(-90deg); }
+[dir="rtl"] .card.collapsed h2.fold::before { transform: rotate(90deg); }
 .rings { display: flex; gap: 12px; }
+.rings.bars { flex-direction: column; gap: 8px; }
+.limit-bar-head { display: flex; align-items: baseline; gap: 6px; }
+.limit-bar-head .value { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.limit-bar-head .spacer { flex: 1; }
+.limit-bar-head .reset { font-size: 11px; }
+.limit-bar .bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; margin-top: 3px; }
+.limit-bar .fill { display: block; height: 100%; border-radius: 3px; }
 .ring { display: flex; align-items: center; gap: 8px; flex: 1 1 0; min-width: 0; }
 .ring svg { flex: none; }
 .ring > div { min-width: 0; overflow-wrap: anywhere; }

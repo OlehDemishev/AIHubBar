@@ -264,7 +264,10 @@
         services = [...(claudeRings.length || claudeView.error ? [claude] : []), ...hubView.services.filter((service) => service !== main)];
         if (claudeView.forecast && claude.windows[0]) claude.windows[0].forecast = claudeView.forecast;
       }
-      document.getElementById("rings").replaceChildren(...rings.map(ring));
+      // «Вид лимитов»: a big number over a bar, as the Mac draws them since its redesign, or the rings.
+      const ringsBox = document.getElementById("rings");
+      ringsBox.classList.toggle("bars", claudeView.style === "bars");
+      ringsBox.replaceChildren(...rings.map(claudeView.style === "bars" ? bar : ring));
       const others = document.getElementById("others");
       others.replaceChildren(...(main ? [] : claudeView.others).map((other) => {
         const row = document.createElement("p");
@@ -341,6 +344,52 @@
       item.querySelector(".reset").textContent = view.reset ?? "";
       return item;
     }
+
+    function bar(view) {
+      const item = document.createElement("div");
+      item.className = "limit-bar";
+      item.innerHTML = `<div class="limit-bar-head"><span class="value"></span><span class="secondary title"></span><span class="spacer"></span><span class="secondary reset"></span></div><div class="bar"><span class="fill"></span></div>`;
+      item.querySelector(".value").textContent = view.percent;
+      item.querySelector(".value").style.color = view.color;
+      item.querySelector(".title").textContent = view.title;
+      item.querySelector(".reset").textContent = view.reset ?? "";
+      const fill = item.querySelector(".fill");
+      fill.style.width = `${Math.round(view.fraction * 100)}%`;
+      fill.style.background = view.color;
+      return item;
+    }
+
+    // A click on a block's heading folds the block, as on the Mac; the panel remembers which ones are folded.
+    (() => {
+      const key = "collapsedBlocks";
+      const read = () => { try { return new Set(JSON.parse(localStorage.getItem(key) ?? "[]")); } catch { return new Set(); } };
+      const folded = read();
+      const skip = ["search-results", "whats-new", "hint", "create-profile"];
+      for (const section of document.querySelectorAll("section.card")) {
+        const name = [...section.classList].find((c) => c !== "card");
+        const heading = section.querySelector("h2");
+        if (!name || skip.includes(name) || !heading) continue;
+        const head = heading.parentElement === section ? heading : heading.parentElement;
+        head.classList.add("block-head");
+        heading.classList.add("fold");
+        heading.tabIndex = 0;
+        heading.setAttribute("role", "button");
+        const apply = () => {
+          const closed = folded.has(name);
+          section.classList.toggle("collapsed", closed);
+          heading.setAttribute("aria-expanded", String(!closed));
+          heading.title = closed ? t("Развернуть") : t("Свернуть");
+        };
+        const toggle = () => {
+          if (folded.has(name)) folded.delete(name); else folded.add(name);
+          try { localStorage.setItem(key, JSON.stringify([...folded])); } catch { /* not remembered, still folded now */ }
+          apply();
+        };
+        heading.onclick = toggle;
+        heading.onkeydown = (event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); toggle(); } };
+        apply();
+      }
+    })();
 
     async function showLimits() {
       claudeView = await invoke("limits_view");

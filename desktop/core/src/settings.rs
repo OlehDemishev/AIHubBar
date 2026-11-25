@@ -497,6 +497,20 @@ impl Settings {
         PANEL_DENSITIES.into_iter().find(|(density, _)| Some(*density) == saved).unwrap_or(PANEL_DENSITIES[1])
     }
 
+    /// «Вид лимитов»: `bars` (the Mac's default since its redesign) or `rings`, kept where the Mac keeps it.
+    pub fn limits_style(&self) -> &'static str {
+        match self.mac_settings.get("limitsStyle").and_then(Value::as_str) {
+            Some("rings") => "rings",
+            _ => "bars",
+        }
+    }
+
+    pub fn set_limits_style(&mut self, style: &str) {
+        if ["bars", "rings"].contains(&style) {
+            self.mac_settings.insert("limitsStyle".into(), Value::String(style.to_owned()));
+        }
+    }
+
     /// Values that are not a width or a density change nothing.
     pub fn set_panel_shape(&mut self, width: &str, density: &str) {
         let appearance = self.mac_settings.entry("appearance").or_insert_with(|| Value::Object(Map::new()));

@@ -351,6 +351,8 @@ struct AppearanceView {
     widths: Vec<Choice>,
     density: &'static str,
     densities: Vec<Choice>,
+    limits_style: &'static str,
+    limits_styles: Vec<Choice>,
 }
 
 /// The theme of every window: the system's, or the chosen one.
@@ -376,6 +378,8 @@ fn appearance_view(app: AppHandle) -> AppearanceView {
         width: settings.panel_width().0,
         widths: vec![choice("narrow", texts.t("Узкая")), choice("normal", texts.t("Обычная")), choice("wide", texts.t("Широкая"))],
         density: settings.panel_density().0,
+        limits_style: settings.limits_style(),
+        limits_styles: vec![choice("bars", texts.t("Полосы")), choice("rings", texts.t("Кольца"))],
         densities: vec![choice("compact", texts.t("Плотно")), choice("normal", texts.t("Обычно")), choice("spacious", texts.t("Просторно"))],
     }
 }
@@ -390,11 +394,13 @@ fn size_panel(app: &AppHandle) {
 
 /// «Тема», «Размер текста», «Ширина» and «Плотность строк»: every window follows at once.
 #[tauri::command]
-fn set_appearance(app: AppHandle, theme: String, text_size: String, width: String, density: String) -> AppearanceView {
+fn set_appearance(app: AppHandle, theme: String, text_size: String, width: String, density: String, limits_style: String) -> AppearanceView {
     save(&app, |settings| {
         settings.set_appearance(&theme, &text_size);
         settings.set_panel_shape(&width, &density);
+        settings.set_limits_style(&limits_style);
     });
+    let _ = app.emit("limits-changed", ());
     apply_theme(&app);
     size_panel(&app);
     if let Some(panel) = app.get_webview_window("panel") {
