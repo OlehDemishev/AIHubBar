@@ -5,6 +5,7 @@
 **Updated:** 2026-11-25
 
 **Now:**
+- 2026-11-25: Windows — files and screenshots dropped on «Быстрый запрос» go to the agent as their paths with the task (branch `feat/desktop-quick-prompt-files`; the list seen live, a real drag from Explorer not)
 - 2026-11-25: Windows 0.1.11 published as an unsigned pre-release (tag `desktop-v0.1.11`) on Oleh's «Выпускай»: the pair's comparison window, the day's summary in Telegram with «Ждёт вас», a stuck agent's notification, the calendar's .ics export, the word goal, local servers in a project, limits as bars and folding blocks; installed on the laptop by the agent
 - 2026-11-23: Windows — «Вид лимитов» (bars, the Mac's default, or rings) in Settings → «Внешний вид», and the panel's blocks fold by a click on their heading, remembered (branch `feat/desktop-limits-style`; seen live)
 - 2026-11-23: Windows — «Локальные серверы» in an open git project: what listens on a port from its folder or worktrees, «Открыть в браузере» and «Остановить процесс» asked twice (branch `feat/desktop-local-servers`; a scratch server seen and stopped live)
@@ -213,6 +214,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-25 — Windows: files in the quick prompt (branch `feat/desktop-quick-prompt-files`)
+
+Done: on Oleh's «Продолжай догонять». The Mac's files of «Быстрый запрос»: files and screenshots dragged onto the window are listed under the task («📎 name», the whole path in the hint, «✕» «Убрать файл»), up to eight, each once; with none, the Mac's line «Файлы и снимки экрана можно перетащить в это окно — агент получит их пути.» When the task goes, their paths follow it under «Files:», one per line (English on purpose, as on the Mac: the agent reads it), for Claude Code, Codex and the agents opened in a terminal alike; only files that still exist are sent. A new request starts with no files. The Mac's dictation button is not ported: Windows has its own voice typing (Win+H) in any field. `core/src/quick_prompt.rs`, `app/src/quick_prompt.rs`, `ui/quick-prompt.html`; both texts are the Mac's.
+Checked: `python scripts/strings.py --check`, `cargo test --workspace` on Windows (the quick prompt's test now also covers adding files — existing ones only, once, at most eight — and the task with its files). Live on the laptop, the build from the branch, driven through WebView2's debugging port (a temporary line, not in the commit): the window showed the Mac's line; a drop event with two scratch files («screenshot 1.png», «заметки.txt») listed both with their names and paths; «✕» took one away; the send command took the `files` it is given. The quick prompt module and the settings were put back, the scratch files removed and the installed app started again.
+Left: a real drag from Explorer onto the window was not done (the agent can't drag between programs here); the drop event is the one Tauri sends for it. No agent was run with files: the joined task is covered by the test. Seen in Russian.
 
 ## 2026-11-25 — Mac: the r/ClaudeAI draft for 0.13.0; Oleh's answers (branch `chore/launch-claudeai-0.13`)
 
