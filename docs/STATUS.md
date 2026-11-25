@@ -5,6 +5,7 @@
 **Updated:** 2026-11-25
 
 **Now:**
+- 2026-11-25: Windows — «Что изменилось» after a run: a finished command in a folder project's card, or a finished background run, opens «Версии» on the version taken before it with «Только отличия» on; the «git-репозиториев» line no longer shows under a folder profile (branch `fix/desktop-folder-git-note`)
 - 2026-11-25: Windows 0.1.12 published as an unsigned pre-release (tag `desktop-v0.1.12`) on Oleh's «Да, выпускай»: files in the quick prompt, «Версии», batch tasks, the crash report; installed on the laptop by the agent
 - 2026-11-25: Windows — batch tasks: «Выбрать» under the folder projects runs one command of the profile over the checked projects one after another, «Сейчас», «На ночь» or «После сброса лимита», with one summary at the end (branch `feat/desktop-batch`; seen live with a stand-in compatible server)
 - 2026-11-25: Windows — «Версии» of folder projects: kept every 10 or 30 minutes when the texts changed and before every AI run, the «Версии» window compares a file of a version with the file now and puts a file or the whole version back, saving what is there first (branch `feat/desktop-versions`; seen live on a scratch «Тексты» profile)
@@ -219,6 +220,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-25 — Windows: «Что изменилось» after a run (branch `fix/desktop-folder-git-note`)
+
+Done: on «Продолжай». The Mac's «Что изменилось» (the result notification's button and the run log's button, `VersionsWindow` opened with `before:`). Windows' notifications have no buttons, so it is a button next to the result: under a finished command in an open folder project's card, and among a finished background run's controls («Журнал», «PR»), with the Mac's hint «Тексты проекта до этой задачи и сейчас». It shows while «Версии» is on and there is a version of the project taken before the run started (the Mac's `hasVersion(projectPath:before:)`). It opens «Версии» on that version (the newest taken no later than a second after the start) with «Только отличия» on — the Mac's toggle, now in the Windows window too, off when «Версии» is opened from the card; with it on, the first file shown is one that differs. A command remembers when it started. Also: a folder profile no longer shows «В папке проектов не найдено git-репозиториев.» under its projects (noticed with the batch tasks). `app/src/versions.rs`, `app/src/commands.rs`, `app/src/sessions.rs`, `app/src/projects.rs`, `ui/versions.html`, `ui/panel.html`, `ui/style.css`; all texts are the Mac's.
+Checked: `python scripts/strings.py --check` (1026 texts), `cargo test --workspace --no-fail-fast` — all green except `ipc_roundtrip`, which fails locally only while the installed app runs. Live on the laptop, the build from the branch driven through WebView2's debugging port (temporary lines, not in the commit), a temporary «Тексты» profile with three projects, «Версии» on, and a stand-in compatible server on 127.0.0.1: «Редактура» on «Кофе» → done with «редактура-2.md» and «Что изменилось» next to it → «Версии: Кофе» opened on «22:33 перед «Редактура»», «Только отличия» on, only «редактура-2.md — появился позже», «Ответ проверки.» on the right; unticked, all three files; «Версии» from the card opened with the toggle off. The panel showed no «git-репозиториев» line. The scratch profile, folder, server and their versions were removed, the settings file put back and the installed app started again. Picture: `docs/images/versions-changes-windows.png`.
+Left: the button on a background run's controls was not seen live (no Claude run; the same check and the same window). Seen in Russian.
 
 ## 2026-11-25 — Windows 0.1.12 released (branch `chore/desktop-0.1.12-note`)
 

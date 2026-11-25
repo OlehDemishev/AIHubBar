@@ -205,6 +205,8 @@ pub struct RunRow {
     /// «Сравнить с …»: the other service of its pair.
     compare: Option<&'static str>,
     pull_request: Option<String>,
+    /// «Что изменилось»: the project and the start (RFC 3339) of a finished run that has a version before it.
+    changes: Option<(String, String)>,
 }
 
 /// A Codex run's thread: saved when it ended, else from its log's first lines while it works.
@@ -296,7 +298,8 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
     let has_codex = app.state::<crate::services::Agents>().found().iter().any(|agent| agent.id == "codex");
     for run in &runs {
         let review = run.can_review(&runs).then(|| if run.reviewer_is_codex() { "Codex" } else { "Claude Code" }).filter(|reviewer| *reviewer != "Codex" || has_codex);
-        let row = RunRow { id: run.id.clone(), running: run.is_running(), paused: run.is_paused(), handover: has_codex && run.can_hand_over(), review, compare: claudepult_core::pair_compare::partner(run, &runs).map(Run::agent_title), pull_request: run.pull_request_url.clone() };
+        let row = RunRow { id: run.id.clone(), running: run.is_running(), paused: run.is_paused(), handover: has_codex && run.can_hand_over(), review, compare: claudepult_core::pair_compare::partner(run, &runs).map(Run::agent_title), pull_request: run.pull_request_url.clone(), changes: None };
+        let row = RunRow { changes: (!run.is_running() && crate::versions::has_before(&app, std::path::Path::new(&run.project_path), run.started_at)).then(|| (run.project_path.clone(), run.started_at.to_rfc3339())), ..row };
         // Codex's hook names its session by Codex's thread, not by the run.
         let thread = run.is_codex().then(|| codex_thread(run)).flatten();
         if let Some(existing) = rows.iter_mut().find(|r| r.id == run.id || thread.as_deref() == Some(r.id.as_str())) {

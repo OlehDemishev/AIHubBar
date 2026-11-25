@@ -556,7 +556,7 @@ pub fn projects_view(app: AppHandle) -> ProjectsView {
         }),
         Some(Problem::NoSource) => Some(texts.t("Проектов нет: у профиля нет папки с git-проектами.").to_owned()),
         Some(Problem::NoGit) => Some(texts.t("Не удалось прочитать репозитории").to_owned()),
-        None if state.updated.is_some() && state.projects.is_empty() => Some(texts.t("В папке проектов не найдено git-репозиториев.").to_owned()),
+        None if folder_rows.is_none() && state.updated.is_some() && state.projects.is_empty() =>Some(texts.t("В папке проектов не найдено git-репозиториев.").to_owned()),
         None => None,
     };
     let agents = crate::commands::agent_choices(&app);
