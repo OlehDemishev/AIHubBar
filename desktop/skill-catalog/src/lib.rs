@@ -5,9 +5,11 @@
 
 pub mod browse;
 pub mod local;
+pub mod manage;
 pub mod texts;
 
 pub use browse::{card, preview, search, Card, Filters, Preview, SearchResult, SkillRow};
+pub use manage::Env;
 pub use local::{discover, Found, Place, Roots};
 pub use rusqlite::Connection;
 
@@ -19,9 +21,9 @@ use std::path::Path;
 pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
 /// The file's layout; raised with every change, each step in `MIGRATIONS`.
-const SCHEMA_VERSION: i64 = 2;
+const SCHEMA_VERSION: i64 = 3;
 
-const MIGRATIONS: [&str; 2] = ["
+const MIGRATIONS: [&str; 3] = ["
 CREATE TABLE skills (
     id            INTEGER PRIMARY KEY,
     kind          TEXT NOT NULL DEFAULT 'skill',   -- skill | plugin
@@ -82,6 +84,35 @@ ALTER TABLE scan_results ADD COLUMN categories TEXT NOT NULL DEFAULT '';        
 ALTER TABLE scan_results ADD COLUMN counts TEXT NOT NULL DEFAULT '[0,0,0,0]';   -- critical, high, medium, low
 -- Results written before these columns are made again at the next refresh.
 DELETE FROM scan_results;
+", "
+-- Stage 5: what the catalog itself installed, and the journal of everything it did in an agent's folders.
+CREATE TABLE managed_installs (
+    install_path   TEXT PRIMARY KEY,
+    name           TEXT NOT NULL,
+    origin_kind    TEXT NOT NULL,          -- path: a folder on this computer; later a repository at a commit
+    origin         TEXT NOT NULL,
+    source_hash    TEXT NOT NULL,          -- the checked version the copy was made from
+    installed_hash TEXT NOT NULL,          -- what was written (the source without its links)
+    installed_at   TEXT NOT NULL,
+    notified_hash  TEXT                    -- the newer version the person was already told about
+);
+CREATE TABLE install_log (
+    id            INTEGER PRIMARY KEY,
+    at            TEXT NOT NULL,
+    action        TEXT NOT NULL,           -- install | update | remove | restore | on | off
+    name          TEXT NOT NULL,
+    agent         TEXT,
+    install_path  TEXT NOT NULL,
+    content_hash  TEXT,
+    verdict       TEXT,
+    risk_score    INTEGER,
+    acknowledged  INTEGER NOT NULL DEFAULT 0,   -- installed after reading the findings of a «review» or «dangerous» skill
+    origin        TEXT,
+    backup_path   TEXT,                    -- where what was there before is kept
+    link_target   TEXT,                    -- the removed thing was a link to this
+    managed_json  TEXT,                    -- the managed_installs row that went with a removed or replaced copy
+    restored_at   TEXT
+);
 "];
 
 fn migrate(db: &mut Connection) -> Result<()> {
@@ -122,13 +153,19 @@ pub fn now() -> String {
     chrono::Utc::now().to_rfc3339_opts(chrono::SecondsFormat::Secs, true)
 }
 
+/// Whether a skill of this source is a folder on this computer (`local`: found in an agent's folder; `folder`:
+/// one the person pointed at).
+pub(crate) fn on_disk(source: &str) -> bool {
+    matches!(source, "local" | "folder")
+}
+
 // MARK: - What a folder is
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-struct Described {
-    name: String,
-    description: String,
-    license: Option<String>,
+pub(crate) struct Described {
+    pub(crate) name: String,
+    pub(crate) description: String,
+    pub(crate) license: Option<String>,
 }
 
 fn text_of<'a>(files: &'a SkillFiles, path: &str) -> Option<std::borrow::Cow<'a, str>> {
@@ -136,7 +173,7 @@ fn text_of<'a>(files: &'a SkillFiles, path: &str) -> Option<std::borrow::Cow<'a,
 }
 
 /// The name, description and license a skill or plugin gives itself; the folder's name when it gives none.
-fn describe(files: &SkillFiles, folder: &Path, listed_name: Option<&str>) -> Described {
+pub(crate) fn describe(files: &SkillFiles, folder: &Path, listed_name: Option<&str>) -> Described {
     let fallback = listed_name.map(str::to_owned).unwrap_or_else(|| folder.file_name().unwrap_or_default().to_string_lossy().into_owned());
     if let Some(text) = text_of(files, "SKILL.md") {
         let meta = skill_scanner::frontmatter(&text);
@@ -178,7 +215,7 @@ pub struct Refreshed {
     pub failed: Vec<String>,
 }
 
-fn shown(path: &Path) -> String {
+pub(crate) fn shown(path: &Path) -> String {
     path.to_string_lossy().into_owned()
 }
 
@@ -243,10 +280,29 @@ pub fn refresh_installed(db: &mut Connection, roots: &Roots, now: &str) -> Resul
         stats.removed = transaction.execute(&format!("DELETE FROM skills WHERE source = 'local' AND id NOT IN ({})", list(&kept_skills)), [])?;
     }
     transaction.commit()?;
+    refresh_added(db, now)?;
     Ok(stats)
 }
 
-fn save_report(db: &Connection, skill: i64, commit_sha: Option<&str>, report: &Report, now: &str) -> Result<()> {
+/// The folders the person added follow what is on disk too: a changed one is checked again, a removed one leaves
+/// the catalog.
+fn refresh_added(db: &mut Connection, now: &str) -> Result<()> {
+    let added: Vec<(i64, String, String)> = db.prepare("SELECT id, path, content_hash FROM skills WHERE source = 'folder'")?.query_map([], |row| Ok((row.get(0)?, row.get(1)?, row.get(2)?)))?.collect::<rusqlite::Result<_>>()?;
+    for (id, path, hash) in added {
+        match skill_scanner::read_folder(Path::new(&path), skill_scanner::Limits::default()) {
+            Ok(files) if skill_scanner::content_hash(&files) == hash => {}
+            Ok(_) => {
+                manage::import_folder(db, Path::new(&path), now)?;
+            }
+            Err(_) => {
+                db.execute("DELETE FROM skills WHERE id = ?1", params![id])?;
+            }
+        }
+    }
+    Ok(())
+}
+
+pub(crate) fn save_report(db: &Connection, skill: i64, commit_sha: Option<&str>, report: &Report, now: &str) -> Result<()> {
     db.execute("DELETE FROM scan_results WHERE skill_id = ?1", params![skill])?;
     let mut categories: Vec<&str> = report.findings.iter().filter(|finding| finding.severity >= Severity::Low).map(|finding| finding.category.as_str()).collect();
     categories.sort_unstable();

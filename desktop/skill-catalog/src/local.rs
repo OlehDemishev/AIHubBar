@@ -159,15 +159,43 @@ fn claude_plugins(claude_dir: &Path) -> Vec<(String, PathBuf)> {
     found
 }
 
+/// The person's own skills folders, each with the agents that read it.
+pub fn user_skill_dirs(roots: &Roots) -> Vec<(PathBuf, Vec<&'static str>)> {
+    let home = &roots.home;
+    vec![
+        (roots.claude_dir.join("skills"), vec![CLAUDE, CURSOR]),
+        (roots.codex_dir.join("skills"), vec![CODEX, CURSOR]),
+        (home.join(".agents").join("skills"), vec![CODEX, CURSOR, GEMINI]),
+        (home.join(".cursor").join("skills"), vec![CURSOR]),
+        (home.join(".gemini").join("skills"), vec![GEMINI]),
+    ]
+}
+
+/// Where a skill is put for an agent: the folder that agent's documentation names first. The other agents that
+/// read the same folder come with it.
+pub fn install_dir(roots: &Roots, agent: &str) -> Option<(PathBuf, Vec<&'static str>)> {
+    let index = match agent {
+        CLAUDE => 0,
+        CODEX => 2,
+        CURSOR => 3,
+        GEMINI => 4,
+        _ => return None,
+    };
+    user_skill_dirs(roots).into_iter().nth(index)
+}
+
+/// The folder a switched-off skill is kept in, beside its skills folder.
+pub fn off_dir(skills_dir: &Path) -> PathBuf {
+    beside(skills_dir, OFF_SUFFIX)
+}
+
 /// Every skill and plugin the agents on this computer would load, each real folder once.
 pub fn discover(roots: &Roots) -> Vec<Found> {
     let mut all = Collector { by_folder: BTreeMap::new() };
     let home = &roots.home;
-    all.skills_folder(&roots.claude_dir.join("skills"), &[CLAUDE, CURSOR], "user", None);
-    all.skills_folder(&roots.codex_dir.join("skills"), &[CODEX, CURSOR], "user", None);
-    all.skills_folder(&home.join(".agents").join("skills"), &[CODEX, CURSOR, GEMINI], "user", None);
-    all.skills_folder(&home.join(".cursor").join("skills"), &[CURSOR], "user", None);
-    all.skills_folder(&home.join(".gemini").join("skills"), &[GEMINI], "user", None);
+    for (folder, agents) in user_skill_dirs(roots) {
+        all.skills_folder(&folder, &agents, "user", None);
+    }
 
     for (name, path) in claude_plugins(&roots.claude_dir) {
         if path.is_dir() {

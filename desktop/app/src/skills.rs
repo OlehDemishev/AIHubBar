@@ -5,7 +5,10 @@
 
 use claudepult_core::paths;
 use serde::Serialize;
-use skill_catalog::{Card, Connection, Filters, Preview, Refreshed, Roots, SearchResult};
+use skill_catalog::manage::{self, Done, FileDiff, LogRow, Plan, UpdateRow};
+use skill_catalog::{Card, Connection, Env, Filters, Preview, Refreshed, Roots, SearchResult};
+use tauri_plugin_dialog::DialogExt;
+use tauri_plugin_notification::NotificationExt;
 use tauri::{AppHandle, Manager};
 
 fn text(app: &AppHandle, key: &str) -> String {
@@ -109,4 +112,120 @@ pub async fn skills_preview(id: i64, file: String) -> Result<Option<Preview>, St
 pub async fn skills_show_folder(id: i64, place: usize) -> Result<(), String> {
     let path = with_catalog(move |db| Ok(skill_catalog::card(db, id)?.and_then(|card| card.places.get(place).map(|place| place.install_path.clone())))).await?.ok_or("no such place")?;
     crate::projects::open_with_system(std::ffi::OsStr::new(&path))
+}
+
+// MARK: - Installing, removing, updating (stage 5)
+
+/// Where what is taken out of an agent's folder is kept: beside the catalog's file.
+fn backups() -> std::path::PathBuf {
+    Roots::database(paths::skills_db()).with_file_name("backups")
+}
+
+/// The catalog's file and the place the work happens, for a step that may write into an agent's folder. Each such
+/// step checks for itself what it may touch (`skill_catalog::manage`); a path from the page is never trusted.
+async fn with_env<T: Send + 'static>(app: &AppHandle, work: impl FnOnce(&mut Connection, Env) -> skill_catalog::Result<T> + Send + 'static) -> Result<T, String> {
+    let roots = roots(app);
+    with_catalog(move |db| {
+        let (backups, now) = (backups(), skill_catalog::now());
+        work(db, Env { roots: &roots, backups: &backups, now: &now })
+    })
+    .await
+}
+
+/// «Add a folder…»: the person picks a folder with a skill; it is checked and listed, installed nowhere.
+#[tauri::command]
+pub async fn skills_add_folder(app: AppHandle) -> Result<Option<i64>, String> {
+    let mut dialog = app.dialog().file().set_title(text(&app, "action.addFolder").trim_end_matches('…'));
+    if let Some(window) = app.get_webview_window("skills") {
+        dialog = dialog.set_parent(&window);
+    }
+    let Some(folder) = dialog.blocking_pick_folder().and_then(|folder| folder.into_path().ok()) else { return Ok(None) };
+    with_catalog(move |db| Ok(Some(manage::import_folder(db, &folder, &skill_catalog::now())?))).await
+}
+
+#[tauri::command]
+pub async fn skills_forget(id: i64) -> Result<bool, String> {
+    with_catalog(move |db| manage::forget(db, id)).await
+}
+
+#[tauri::command]
+pub async fn skills_plan_install(app: AppHandle, id: i64, agent: String) -> Result<Plan, String> {
+    with_env(&app, move |db, env| manage::plan_install(db, env, id, &agent)).await
+}
+
+/// Installs what the person confirmed: the hash is the one their plan showed.
+#[tauri::command]
+pub async fn skills_install(app: AppHandle, id: i64, agent: String, content_hash: String, acknowledged: bool) -> Result<Done, String> {
+    let done = with_env(&app, move |db, env| manage::install(db, env, id, &agent, &content_hash, acknowledged)).await?;
+    eprintln!("skills: installed {}", done.install_path);
+    Ok(done)
+}
+
+#[tauri::command]
+pub async fn skills_remove(app: AppHandle, install_path: String) -> Result<Done, String> {
+    let done = with_env(&app, move |db, env| manage::remove(db, env, &install_path)).await?;
+    eprintln!("skills: removed {}", done.install_path);
+    Ok(done)
+}
+
+#[tauri::command]
+pub async fn skills_set_enabled(app: AppHandle, install_path: String, on: bool) -> Result<Done, String> {
+    with_env(&app, move |db, env| manage::set_enabled(db, env, &install_path, on)).await
+}
+
+#[tauri::command]
+pub async fn skills_journal() -> Result<Vec<LogRow>, String> {
+    with_catalog(|db| manage::journal(db, 200)).await
+}
+
+#[tauri::command]
+pub async fn skills_restore(app: AppHandle, journal_id: i64) -> Result<Done, String> {
+    with_env(&app, move |db, env| manage::restore(db, env, journal_id)).await
+}
+
+#[tauri::command]
+pub async fn skills_updates() -> Result<Vec<UpdateRow>, String> {
+    with_catalog(|db| manage::updates(db)).await
+}
+
+#[derive(Serialize)]
+pub struct UpdatePlan {
+    plan: Plan,
+    changes: Vec<FileDiff>,
+}
+
+/// What bringing the newer version in would do, with what it changes line by line.
+#[tauri::command]
+pub async fn skills_plan_update(app: AppHandle, install_path: String) -> Result<UpdatePlan, String> {
+    with_env(&app, move |db, env| Ok(UpdatePlan { plan: manage::plan_update(db, env, &install_path)?, changes: manage::diff(db, &install_path)? })).await
+}
+
+#[tauri::command]
+pub async fn skills_update(app: AppHandle, install_path: String, content_hash: String, acknowledged: bool) -> Result<Done, String> {
+    let done = with_env(&app, move |db, env| manage::update(db, env, &install_path, &content_hash, acknowledged)).await?;
+    eprintln!("skills: updated {}", done.install_path);
+    Ok(done)
+}
+
+/// A minute after the start and then every six hours: a notification for each installed skill whose source has a
+/// newer version the person was not told about yet. Nothing is updated by itself.
+pub fn start_update_watch(app: AppHandle) {
+    std::thread::spawn(move || {
+        std::thread::sleep(std::time::Duration::from_secs(60));
+        loop {
+            let fresh = skill_catalog::open(&Roots::database(paths::skills_db())).and_then(|db| manage::updates_to_announce(&db));
+            match fresh {
+                Ok(fresh) => {
+                    for update in fresh {
+                        let verdict = text(&app, &format!("verdict.{}", update.verdict));
+                        let title = text(&app, "notify.updateTitle").replace("%1", &update.name);
+                        let body = text(&app, "notify.updateBody").replace("%1", &verdict);
+                        let _ = app.notification().builder().title(title).body(body).show();
+                    }
+                }
+                Err(error) => eprintln!("skills: updates not checked: {error}"),
+            }
+            std::thread::sleep(std::time::Duration::from_secs(6 * 60 * 60));
+        }
+    });
 }

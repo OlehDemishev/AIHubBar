@@ -10,6 +10,7 @@
     <input type="search" id="search" autocomplete="off" spellcheck="false">
     <span class="segmented" id="verdicts" role="group"></span>
     <span class="spacer"></span>
+    <button class="link" id="updates" hidden></button>
     <button id="rescan"></button>
   </header>
   <div class="skills-toolbar">
@@ -17,9 +18,12 @@
     <select id="finding"></select>
     <select id="source" hidden></select>
     <label class="skills-check"><input type="checkbox" id="no-scripts"> <span id="no-scripts-label"></span></label>
+    <label class="skills-check" id="installed-box" hidden><input type="checkbox" id="installed"> <span id="installed-label"></span></label>
     <label class="skills-check" id="official-box" hidden><input type="checkbox" id="official"> <span id="official-label"></span></label>
     <span class="spacer"></span>
     <span class="secondary" id="status"></span>
+    <button id="add-folder"></button>
+    <button id="journal"></button>
   </div>
   <p class="error" id="error" hidden></p>
   <div class="skills-panes">
@@ -27,6 +31,7 @@
     <main id="card" class="skills-card"></main>
   </div>
   <footer class="secondary skills-note" id="disclaimer"></footer>
+  <div class="skills-dialog" id="dialog" hidden><div class="skills-dialog-box" id="dialog-box" role="dialog" aria-modal="true"></div></div>
 
   <script type="module">
     // The Skills Catalog's window. Everything a skill says about itself — its name, its description, its files,
@@ -62,12 +67,17 @@
     let card = null;
     let shownFile = null;   // { path, lines, marks, cut }
     let asked = 0;          // only the latest answer is shown
+    let updates = [];       // installed copies whose source has a newer version
+    let showJournal = false;
 
     id("search").placeholder = s("search.placeholder");
     id("rescan").textContent = s("action.rescan");
     id("disclaimer").textContent = s("disclaimer");
     id("no-scripts-label").textContent = s("filter.noScripts");
     id("official-label").textContent = s("filter.official");
+    id("installed-label").textContent = s("filter.installed");
+    id("add-folder").textContent = s("action.addFolder");
+    id("journal").textContent = s("action.journal");
     document.title = s("window.title");
 
     function options(select, first, values, label) {
@@ -95,9 +105,15 @@
       return home && path.startsWith(home) ? "~" + path.slice(home.length) : path;
     }
 
+    // A refusal comes as a short code; each has its own sentence.
+    function reason(error) {
+      const code = String(error);
+      return texts["error." + code] ? s("error." + code) : code;
+    }
+
     function fail(error) {
       id("error").hidden = false;
-      id("error").textContent = String(error);
+      id("error").textContent = reason(error);
     }
 
     function filters() {
@@ -109,7 +125,7 @@
         source: id("source").value || null,
         officialOnly: id("official").checked,
         noScripts: id("no-scripts").checked,
-        installedOnly: false,
+        installedOnly: id("installed").checked,
       };
     }
 
@@ -139,6 +155,7 @@
       if (row.kind === "plugin") title.append(el("span", "badge", s("row.plugin")));
       if (row.official) title.append(el("span", "badge ci-ok", s("card.official")));
       if (row.off) title.append(el("span", "badge dirty", s("row.off")));
+      if (!row.installed) title.append(el("span", "badge", s("row.notInstalled")));
       title.append(counts(row));
       node.append(title, el("span", "secondary skills-description", row.description));
       node.onclick = () => choose(row.id);
@@ -156,6 +173,7 @@
       options(id("source"), s("filter.anySource"), found.sources, sourceName);
       id("source").hidden = found.sources.length < 2;
       id("official-box").hidden = !found.anyOfficial;
+      id("installed-box").hidden = !found.anyNotInstalled && !id("installed").checked;
       const nodes = found.rows.map(rowNode);
       if (found.rows.length === 0) nodes.push(el("p", "secondary skills-empty", found.total === 0 && !id("search").value && !verdict ? s("empty.none") : s("empty.filter")));
       if (found.more) nodes.push(el("p", "secondary skills-empty", s("list.more", found.rows.length)));
@@ -226,6 +244,7 @@
 
     function renderCard() {
       const box = id("card");
+      if (showJournal) return;
       if (!card) {
         box.replaceChildren(el("p", "secondary skills-empty", found.rows.length ? s("card.pick") : ""));
         return;
@@ -268,8 +287,46 @@
           const show = el("button", "link", s("action.showFolder"));
           show.onclick = () => invoke("skills_show_folder", { id: row.id, place: index }).catch(fail);
           line.append(path, show);
+          // The person's own skills can be switched and removed; a project's and a plugin's are left alone. The
+          // same folder is listed once per agent that reads it: the buttons stand on its first line.
+          const first = card.places.findIndex((other) => other.installPath === place.installPath) === index;
+          if (place.scope === "user" && first) {
+            const toggle = el("button", "link", place.enabled ? s("action.switchOff") : s("action.switchOn"));
+            toggle.onclick = () => act(() => invoke("skills_set_enabled", { installPath: place.installPath, on: !place.enabled }));
+            const remove = el("button", "link", s("action.remove"));
+            remove.onclick = () => askRemove(place);
+            line.append(toggle, remove);
+          }
           nodes.push(line);
+          if (first && updates.some((update) => update.installPath === place.installPath)) {
+            const note = el("div", "skills-update");
+            const button = el("button", "small", s("action.update"));
+            button.onclick = () => planUpdate(place.installPath);
+            note.append(el("span", "", s("card.updateReady")), button);
+            nodes.push(note);
+          }
         });
+      }
+
+      // «Apply»: a checked skill goes to an agent that doesn't have it yet.
+      if (row.kind === "skill" && !card.missing && (row.source === "local" || row.source === "folder")) {
+        nodes.push(el("h2", "", s("card.install")));
+        const line = el("div", "skills-install");
+        for (const agent of AGENTS) {
+          if (row.agents.includes(agent)) {
+            line.append(el("span", "badge ci-ok", `${s("agent." + agent)} · ${s("card.has")}`));
+          } else {
+            const button = el("button", "small", `${s("agent." + agent)}: ${s("action.install")}`);
+            button.onclick = () => planInstall(row.id, agent);
+            line.append(button);
+          }
+        }
+        nodes.push(line);
+        if (row.source === "folder" && !row.installed) {
+          const forget = el("button", "link", s("action.forget"));
+          forget.onclick = () => act(() => invoke("skills_forget", { id: row.id }));
+          nodes.push(forget);
+        }
       }
 
       const readable = new Set(card.files.filter((file) => file.readable).map((file) => file.path));
@@ -306,6 +363,7 @@
     }
 
     async function choose(skill) {
+      showJournal = false;
       chosen = skill;
       card = null;
       shownFile = null;
@@ -326,6 +384,173 @@
       id("card").scrollTop = 0;
     }
 
+    // MARK: Changing what is installed
+
+    // A step that changed the agents' folders: everything is read again.
+    async function act(step) {
+      id("error").hidden = true;
+      try {
+        await step();
+      } catch (error) {
+        fail(error);
+      }
+      await refresh();
+    }
+
+    function closeDialog() {
+      id("dialog").hidden = true;
+      id("dialog-box").replaceChildren();
+    }
+
+    function diffNode(changes) {
+      const box = el("div", "skills-diff");
+      for (const change of changes) {
+        const head = el("div", "skills-preview-head");
+        head.append(el("span", "", change.path), el("span", "secondary", " · " + s("diff." + change.status)));
+        box.append(head);
+        if (change.notShown) { box.append(el("p", "secondary skills-diff-note", s("diff.notShown"))); continue; }
+        const lines = el("div", "skills-lines");
+        for (const line of change.lines) {
+          const kind = line.kind === "+" ? " added" : line.kind === "-" ? " removed" : "";
+          const node = el("div", "skills-line" + kind);
+          node.append(el("span", "skills-number", line.kind === " " ? "" : line.kind), el("span", "skills-text", line.text || " "));
+          lines.append(node);
+        }
+        box.append(lines);
+      }
+      return box;
+    }
+
+    // What the person confirms: where the copy goes, what the check found, and for an update what changes.
+    function showPlan(plan, changes, confirm) {
+      const box = id("dialog-box");
+      const nodes = [];
+      const head = el("div", "skills-card-head");
+      head.append(el("h1", "", plan.replaces ? s("plan.updateTitle", plan.name) : s("plan.installTitle", plan.name, s("agent." + plan.agent))), verdictBadge(plan.verdict), el("span", "secondary", s("detail.risk", plan.riskScore)));
+      nodes.push(head, el("p", "secondary", s("plan.target", short(plan.target))));
+      if (plan.alsoSeenBy.length) nodes.push(el("p", "secondary", s("plan.alsoSeen", plan.alsoSeenBy.map((agent) => s("agent." + agent)).join(", "))));
+      if (plan.replaces) nodes.push(el("p", "secondary", s("plan.replaces")));
+      if (plan.changed && !plan.replaces) nodes.push(el("p", "error", s("plan.changed")));
+      if (plan.leftOut.length) nodes.push(el("p", "secondary", s("plan.leftOut", plan.leftOut.join(", "))));
+      if (changes?.edited) nodes.push(el("p", "error", s("plan.edited")));
+      nodes.push(el("p", plan.verdict === "dangerous" ? "error" : "", s("plan." + plan.verdict)));
+      const scroll = el("div", "skills-dialog-scroll");
+      for (const severity of SEVERITIES) for (const item of plan.findings.filter((f) => f.severity === severity)) scroll.append(findingNode(item, false));
+      if (changes?.files.length) scroll.append(el("h2", "", s("plan.changes")), diffNode(changes.files));
+      if (scroll.children.length) nodes.push(scroll);
+
+      const buttons = el("div", "skills-dialog-buttons");
+      const error = el("span", "error");
+      const cancel = el("button", "", s("action.cancel"));
+      cancel.onclick = closeDialog;
+      const go = el("button", "prominent", plan.replaces ? s("plan.confirmUpdate") : s("plan.confirmInstall"));
+      let ack = null;
+      if (plan.blocked) {
+        nodes.push(el("p", "error", reason(plan.blocked)));
+        go.disabled = true;
+      } else if (plan.needsAck) {
+        // «Review» and «dangerous» are installed only after this box is ticked; the app checks it again.
+        const label = el("label", "skills-check");
+        ack = el("input");
+        ack.type = "checkbox";
+        label.append(ack, el("span", "", " " + s("plan.ack")));
+        nodes.push(label);
+        go.disabled = true;
+        ack.onchange = () => { go.disabled = !ack.checked; };
+      }
+      go.onclick = async () => {
+        go.disabled = true;
+        try {
+          await confirm(plan.contentHash, Boolean(ack?.checked));
+          closeDialog();
+          await refresh();
+        } catch (problem) {
+          error.textContent = reason(problem);
+          go.disabled = Boolean(ack) && !ack.checked;
+        }
+      };
+      buttons.append(error, el("span", "spacer"), cancel, go);
+      nodes.push(buttons);
+      box.replaceChildren(...nodes);
+      id("dialog").hidden = false;
+      cancel.focus();
+    }
+
+    async function planInstall(skill, agent) {
+      try {
+        const plan = await invoke("skills_plan_install", { id: skill, agent });
+        showPlan(plan, null, (contentHash, acknowledged) => invoke("skills_install", { id: plan.skillId, agent, contentHash, acknowledged }));
+      } catch (error) {
+        fail(error);
+      }
+    }
+
+    async function planUpdate(installPath) {
+      try {
+        const answer = await invoke("skills_plan_update", { installPath });
+        const edited = updates.find((update) => update.installPath === installPath)?.edited ?? false;
+        showPlan(answer.plan, { files: answer.changes, edited }, (contentHash, acknowledged) => invoke("skills_update", { installPath, contentHash, acknowledged }));
+      } catch (error) {
+        fail(error);
+      }
+    }
+
+    function askRemove(place) {
+      const box = id("dialog-box");
+      const buttons = el("div", "skills-dialog-buttons");
+      const cancel = el("button", "", s("action.cancel"));
+      cancel.onclick = closeDialog;
+      const go = el("button", "prominent", s("action.remove"));
+      go.onclick = () => { closeDialog(); act(() => invoke("skills_remove", { installPath: place.installPath })); };
+      buttons.append(el("span", "spacer"), cancel, go);
+      box.replaceChildren(el("p", "", s("card.removeAsk", card.row.name, short(place.installPath))), buttons);
+      id("dialog").hidden = false;
+      cancel.focus();
+    }
+
+    async function renderJournal() {
+      const box = id("card");
+      let rows = [];
+      try {
+        rows = await invoke("skills_journal");
+      } catch (error) {
+        fail(error);
+      }
+      const head = el("div", "skills-card-head");
+      head.append(el("h1", "", s("journal.title")));
+      if (card) {
+        const back = el("button", "link", s("action.back"));
+        back.onclick = () => { showJournal = false; renderCard(); };
+        head.append(back);
+      }
+      const nodes = [head];
+      if (rows.length === 0) nodes.push(el("p", "secondary", s("journal.empty")));
+      const time = new Intl.DateTimeFormat(lang, { dateStyle: "medium", timeStyle: "short" });
+      for (const row of rows) {
+        const line = el("div", "skills-log");
+        const what = el("div", "skills-log-what");
+        what.append(el("strong", "", `${s("journal." + row.action)}: ${row.name}`));
+        if (row.verdict) what.append(verdictBadge(row.verdict));
+        if (row.acknowledged) what.append(el("span", "badge dirty", s("journal.acknowledged")));
+        if (row.restored) what.append(el("span", "badge", s("journal.restored")));
+        if (row.canRestore) {
+          const restore = el("button", "small", s("action.restore"));
+          restore.onclick = () => act(async () => { await invoke("skills_restore", { journalId: row.id }); showJournal = true; });
+          what.append(el("span", "spacer"), restore);
+        }
+        const agents = (row.agent ?? "").split(", ").filter(Boolean).map((agent) => (texts["agent." + agent] ? s("agent." + agent) : agent)).join(", ");
+        line.append(what, el("span", "secondary", [time.format(new Date(row.at)), agents, short(row.installPath)].filter(Boolean).join(" · ")));
+        nodes.push(line);
+      }
+      box.replaceChildren(...nodes);
+      box.scrollTop = 0;
+    }
+
+    function renderUpdates() {
+      id("updates").hidden = updates.length === 0;
+      id("updates").textContent = s("updates.count", updates.length);
+    }
+
     async function refresh() {
       id("rescan").disabled = true;
       id("status").textContent = s("status.scanning");
@@ -337,17 +562,48 @@
       } catch (error) {
         fail(error);
       }
+      try {
+        updates = await invoke("skills_updates");
+      } catch (error) {
+        fail(error);
+      }
+      renderUpdates();
       id("status").textContent = "";
       id("rescan").disabled = false;
       const kept = chosen;
+      const journal = showJournal;
       chosen = null;
       await search();
       if (kept != null && found.rows.some((row) => row.id === kept)) await choose(kept);
+      if (journal) { showJournal = true; await renderJournal(); }
     }
+
+    id("journal").onclick = () => { showJournal = true; renderJournal(); };
+    id("add-folder").onclick = async () => {
+      id("error").hidden = true;
+      try {
+        const added = await invoke("skills_add_folder");
+        if (added == null) return;
+        await search();
+        await choose(added);
+      } catch (error) {
+        fail(error);
+      }
+    };
+    // The first installed copy with a newer version: its skill is shown, the «Update…» button is on its card.
+    id("updates").onclick = async () => {
+      const path = updates[0]?.installPath;
+      for (const row of found.rows) {
+        const candidate = await invoke("skills_card", { id: row.id });
+        if (candidate?.places.some((place) => place.installPath === path)) return choose(row.id);
+      }
+    };
+    id("dialog").onclick = (event) => { if (event.target === id("dialog")) closeDialog(); };
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !id("dialog").hidden) closeDialog(); });
 
     let typing = 0;
     id("search").oninput = () => { clearTimeout(typing); typing = setTimeout(search, 150); };
-    for (const name of ["agent", "finding", "source", "no-scripts", "official"]) id(name).onchange = search;
+    for (const name of ["agent", "finding", "source", "no-scripts", "official", "installed"]) id(name).onchange = search;
     id("rescan").onclick = refresh;
     await refresh();
   </script>
