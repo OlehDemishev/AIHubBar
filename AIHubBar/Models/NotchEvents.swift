@@ -58,6 +58,8 @@ enum NotchEventKind: String, Codable, CaseIterable, Sendable {
         case .calendar: self = .calendar
         case .resources: self = .resources
         case .commands: self = .commands
+        // The island has no row of its own for skills: they go with the commands, off by default there.
+        case .skills: self = .commands
         }
     }
 }

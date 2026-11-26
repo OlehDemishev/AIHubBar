@@ -24,12 +24,21 @@ final class SkillStore {
         var blocked: [SkillCatalog.Row] = []
         /// Copies the catalog installed whose source has a newer version.
         var updates: [SkillCatalog.Update] = []
+        /// Changes outside the catalog the person hasn't looked at.
+        var unseenChanges = 0
         /// Installed skills nobody used for 30 days.
         var unused = 0
         var total: Int { byVerdict.values.reduce(0, +) }
     }
 
     private(set) var summary = Summary()
+    /// A skill a notification asked to show: the panel opens its card and clears this.
+    var pendingSkill: Int?
+    /// The block's «Замечено вне каталога» asks the section to open on the journal.
+    var opensChanges = false
+    /// What the catalog may install and whom the person trusts (Settings → Скиллы).
+    private(set) var policy = SkillCatalog.Policy()
+    private(set) var trusted: [String] = []
     private(set) var lastUpdated: Date?
     private(set) var isRefreshing = false
     private(set) var failure: String?
@@ -83,23 +92,50 @@ final class SkillStore {
         isRefreshing = true
         defer { isRefreshing = false }
         let roots = roots(settings.projectsDirectory)
-        let result = await worker.run { catalog -> Result<Summary, Error> in
+        let result = await worker.run { catalog -> Result<(Summary, [SkillCatalog.Event], [SkillCatalog.Update], SkillCatalog.Policy, [String]), Error> in
             Result {
                 let refreshed = try catalog.refreshInstalled(roots)
                 try catalog.readUsage(roots, since: .now.addingTimeInterval(-30 * 86400))
                 AppLog.info("skills: \(refreshed.found) found, \(refreshed.scanned) checked, \(refreshed.removed) gone")
-                return try Self.summary(catalog)
+                return (try Self.summary(catalog), try catalog.eventsToAnnounce(), try catalog.updatesToAnnounce(), catalog.policy, try catalog.trustedAuthors())
             }
         }
         switch result {
-        case .success(let summary):
+        case .success(let (summary, events, updates, policy, trusted)):
             self.summary = summary
+            self.policy = policy
+            self.trusted = trusted
+            Self.announce(events, updates)
             failure = nil
         case .failure(let error):
             failure = String(describing: error)
             AppLog.error("skills: \(error)")
         }
         lastUpdated = .now
+    }
+
+    /// Notifications about skills: what appeared or changed outside the catalog, and newer versions of its copies.
+    private static func announce(_ events: [SkillCatalog.Event], _ updates: [SkillCatalog.Update]) {
+        // A first look after a big change (a new Mac, a restored backup) could bring dozens: one line then.
+        if events.count > 3 {
+            Notifier.post(id: "skills-many-\(events.last?.id ?? 0)", title: String(localized: "Скиллы изменились вне каталога: \(events.count)"),
+                          body: String(localized: "Посмотрите «Замечено вне каталога» в журнале раздела «Скиллы»."), target: .none)
+        } else {
+            for event in events {
+                let title = event.verdict == .dangerous
+                    ? String(localized: "Опасный скилл: \(event.name)")
+                    : event.event == "appeared" ? String(localized: "Новый скилл: \(event.name)") : String(localized: "Скилл изменился: \(event.name)")
+                let body = event.event == "appeared"
+                    ? String(localized: "Появился не через каталог. Оценка: \(event.verdict?.title ?? "—").")
+                    : String(localized: "Изменился не через каталог. Оценка: \(event.verdict?.title ?? "—").")
+                Notifier.post(id: "skills-event-\(event.id)", title: title, body: body, target: event.skillID.map { .skill(id: $0) } ?? .none)
+            }
+        }
+        for update in updates {
+            Notifier.post(id: "skills-update-\(update.toHash.prefix(12))", title: String(localized: "Новая версия скилла: \(update.name)"),
+                          body: String(localized: "Оценка новой версии: \(update.verdict.title). Посмотреть изменения и обновить можно в карточке."),
+                          target: update.skillID.map { .skill(id: $0) } ?? .none)
+        }
     }
 
     nonisolated private static func summary(_ catalog: SkillCatalog) throws -> Summary {
@@ -114,6 +150,7 @@ final class SkillStore {
                        mostUsed: try catalog.mostUsed(since: .now.addingTimeInterval(-7 * 86400), limit: 3),
                        blocked: installed.filter(\.isBlocked),
                        updates: try catalog.updates(),
+                       unseenChanges: try catalog.unseenEvents(),
                        unused: try catalog.unused(since: .now.addingTimeInterval(-30 * 86400)))
     }
 
@@ -276,6 +313,41 @@ final class SkillStore {
 
     func unblock(_ id: Int) async {
         _ = await act(changes: true) { catalog, _ in try catalog.unblock(id) }
+    }
+
+    // MARK: - Watching, the policy, trusted authors (SkillWatch)
+
+    func events() async -> [SkillCatalog.Event] {
+        await worker.run { (try? $0.events()) ?? [] }
+    }
+
+    func markEventsSeen() async {
+        await worker.run { try? $0.markEventsSeen() }
+        summary.unseenChanges = 0
+    }
+
+    func setPolicy(_ policy: SkillCatalog.Policy) async {
+        await worker.run { $0.policy = policy }
+        self.policy = policy
+        marksVersion += 1
+    }
+
+    func trust(_ author: String) async {
+        let list: [String] = await worker.run { catalog in
+            try? catalog.trust(author)
+            return (try? catalog.trustedAuthors()) ?? []
+        }
+        trusted = list
+        marksVersion += 1
+    }
+
+    func distrust(_ author: String) async {
+        let list: [String] = await worker.run { catalog in
+            try? catalog.distrust(author)
+            return (try? catalog.trustedAuthors()) ?? []
+        }
+        trusted = list
+        marksVersion += 1
     }
 
     func forget(_ id: Int) async {

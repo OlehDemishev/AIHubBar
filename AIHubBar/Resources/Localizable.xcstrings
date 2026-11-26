@@ -4749,6 +4749,82 @@
         }
       }
     },
+    "Автор указан в самом скилле и не проверен. Доверие только приглушает уведомления и не меняет оценку.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المؤلف مذكور في المهارة نفسها وغير موثّق. الثقة تخفّف الإشعارات فقط ولا تغيّر التقييم."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Autor steht im Skill selbst und ist nicht geprüft. Vertrauen dämpft nur Mitteilungen und ändert die Bewertung nicht."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The author is what the skill says about itself and isn’t verified. Trust only quiets notifications and doesn’t change the verdict."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El autor lo indica la propia skill y no está verificado. La confianza solo silencia avisos y no cambia la valoración."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’auteur est indiqué par le skill lui-même et n’est pas vérifié. La confiance ne fait qu’atténuer les notifications, sans changer le verdict."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penulis disebut oleh skill itu sendiri dan tidak diverifikasi. Kepercayaan hanya meredam notifikasi dan tidak mengubah penilaian."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’autore è indicato dalla skill stessa e non è verificato. La fiducia attenua solo le notifiche e non cambia il giudizio."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "作者はスキル自身が名乗っているもので、確認されていません。信頼は通知を控えめにするだけで、評価は変わりません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "작성자는 스킬이 스스로 밝힌 것으로 확인되지 않았습니다. 신뢰는 알림만 줄이며 평가는 바뀌지 않습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autora podaje sam skill i nie jest on sprawdzony. Zaufanie tylko wycisza powiadomienia i nie zmienia oceny."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O autor é indicado pela própria skill e não é verificado. A confiança só silencia notificações e não muda a avaliação."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Автора вказано в самому скілі, його не перевірено. Довіра лише приглушує сповіщення й не змінює оцінку."
+          }
+        }
+      }
+    },
     "Автор: %@": {
       "localizations": {
         "ar": {
@@ -5965,6 +6041,234 @@
         }
       }
     },
+    "Ваша политика не позволяет ставить опасные скиллы (Настройки → Скиллы).": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا تسمح سياستك بتثبيت المهارات الخطرة (الإعدادات ← المهارات)."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ihre Richtlinie erlaubt keine gefährlichen Skills (Einstellungen → Skills)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your policy doesn’t allow installing dangerous skills (Settings → Skills)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Su política no permite instalar skills peligrosas (Ajustes → Skills)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre politique n’autorise pas les skills dangereux (Réglages → Skills)."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kebijakan Anda tidak mengizinkan memasang skill berbahaya (Pengaturan → Skill)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tua politica non consente di installare skill pericolose (Impostazioni → Skill)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ポリシーにより危険なスキルはインストールできません（設定 → スキル）。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정책상 위험한 스킬은 설치할 수 없습니다(설정 → 스킬)."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Twoja polityka nie pozwala instalować niebezpiecznych skilli (Ustawienia → Skille)."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua política não permite instalar skills perigosas (Ajustes → Skills)."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваша політика не дозволяє встановлювати небезпечні скіли (Налаштування → Скіли)."
+          }
+        }
+      }
+    },
+    "Ваша политика разрешает ставить скиллы только доверенных авторов (Настройки → Скиллы).": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تسمح سياستك بتثبيت مهارات المؤلفين الموثوقين فقط (الإعدادات ← المهارات)."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ihre Richtlinie erlaubt nur Skills vertrauenswürdiger Autoren (Einstellungen → Skills)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your policy allows installing skills from trusted authors only (Settings → Skills)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Su política solo permite skills de autores de confianza (Ajustes → Skills)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre politique n’autorise que les skills d’auteurs de confiance (Réglages → Skills)."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kebijakan Anda hanya mengizinkan skill dari penulis tepercaya (Pengaturan → Skill)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tua politica consente solo skill di autori fidati (Impostazioni → Skill)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ポリシーにより、信頼する作者のスキルだけをインストールできます（設定 → スキル）。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정책상 신뢰하는 작성자의 스킬만 설치할 수 있습니다(설정 → 스킬)."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Twoja polityka pozwala instalować tylko skille zaufanych autorów (Ustawienia → Skille)."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua política só permite skills de autores confiáveis (Ajustes → Skills)."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваша політика дозволяє встановлювати скіли лише довірених авторів (Налаштування → Скіли)."
+          }
+        }
+      }
+    },
+    "Ваша политика разрешает ставить только безопасные скиллы (Настройки → Скиллы).": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تسمح سياستك بتثبيت المهارات الآمنة فقط (الإعدادات ← المهارات)."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ihre Richtlinie erlaubt nur sichere Skills (Einstellungen → Skills)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your policy allows installing safe skills only (Settings → Skills)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Su política solo permite skills seguras (Ajustes → Skills)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre politique n’autorise que les skills sûrs (Réglages → Skills)."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kebijakan Anda hanya mengizinkan skill yang aman (Pengaturan → Skill)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tua politica consente solo skill sicure (Impostazioni → Skill)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ポリシーにより、安全なスキルだけをインストールできます（設定 → スキル）。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정책상 안전한 스킬만 설치할 수 있습니다(설정 → 스킬)."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Twoja polityka pozwala instalować tylko bezpieczne skille (Ustawienia → Skille)."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua política só permite skills seguras (Ajustes → Skills)."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваша політика дозволяє встановлювати лише безпечні скіли (Налаштування → Скіли)."
+          }
+        }
+      }
+    },
     "Включены": {
       "localizations": {
         "ar": {
@@ -6493,6 +6797,386 @@
           "stringUnit": {
             "state": "translated",
             "value": "Додати папку зі скілом…"
+          }
+        }
+      }
+    },
+    "Доверенные авторы": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مؤلفون موثوقون"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vertrauenswürdige Autoren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trusted authors"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autores de confianza"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auteurs de confiance"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penulis tepercaya"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autori fidati"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "信頼する作者"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "신뢰하는 작성자"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaufani autorzy"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autores confiáveis"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Довірені автори"
+          }
+        }
+      }
+    },
+    "Доверенный": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "موثوق"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vertraut"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trusted"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De confianza"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De confiance"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tepercaya"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fidato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "信頼済み"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "신뢰함"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaufany"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confiável"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Довірений"
+          }
+        }
+      }
+    },
+    "Доверенный автор": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مؤلف موثوق"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vertrauenswürdiger Autor"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trusted author"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autor de confianza"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auteur de confiance"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penulis tepercaya"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autore fidato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "信頼する作者"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "신뢰하는 작성자"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaufany autor"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autor confiável"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Довірений автор"
+          }
+        }
+      }
+    },
+    "Доверенный автор или владелец на GitHub": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مؤلف موثوق أو مالك على GitHub"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vertrauenswürdiger Autor oder GitHub-Besitzer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trusted author or GitHub owner"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autor de confianza o propietario en GitHub"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auteur de confiance ou propriétaire GitHub"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penulis tepercaya atau pemilik di GitHub"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autore fidato o proprietario su GitHub"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "信頼する作者または GitHub の所有者"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "신뢰하는 작성자 또는 GitHub 소유자"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaufany autor lub właściciel na GitHubie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autor confiável ou dono no GitHub"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Довірений автор або власник на GitHub"
+          }
+        }
+      }
+    },
+    "Доверять «%@»": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الثقة بـ «%@»"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@“ vertrauen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trust “%@”"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confiar en «%@»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faire confiance à « %@ »"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Percayai “%@”"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fidati di «%@»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」を信頼"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” 신뢰"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ufaj „%@”"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confiar em “%@”"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Довіряти «%@»"
           }
         }
       }
@@ -7029,6 +7713,158 @@
         }
       }
     },
+    "Замечено вне каталога": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رُصد خارج الكتالوج"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Außerhalb des Katalogs bemerkt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seen outside the catalog"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detectado fuera del catálogo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repéré hors du catalogue"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terlihat di luar katalog"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notato fuori dal catalogo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カタログ外で検出"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카탈로그 밖에서 감지됨"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zauważone poza katalogiem"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visto fora do catálogo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Помічено поза каталогом"
+          }
+        }
+      }
+    },
+    "Замечено вне каталога: %lld": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رُصد خارج الكتالوج: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Außerhalb des Katalogs bemerkt: %lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seen outside the catalog: %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detectado fuera del catálogo: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repéré hors du catalogue : %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terlihat di luar katalog: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notato fuori dal catalogo: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カタログ外で検出：%lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카탈로그 밖에서 감지됨: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zauważone poza katalogiem: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visto fora do catálogo: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Помічено поза каталогом: %lld"
+          }
+        }
+      }
+    },
     "Запускались за 30 дней": {
       "localizations": {
         "ar": {
@@ -7181,6 +8017,158 @@
         }
       }
     },
+    "Изменился": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تغيّرت"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geändert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Changed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambió"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifié"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berubah"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modificata"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "변경됨"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zmienił się"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mudou"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Змінився"
+          }
+        }
+      }
+    },
+    "Изменился не через каталог. Оценка: %@.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تغيّرت خارج الكتالوج. التقييم: %@."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Außerhalb des Katalogs geändert. Bewertung: %@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Changed outside the catalog. Verdict: %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambió fuera del catálogo. Valoración: %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifié hors du catalogue. Verdict : %@."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berubah di luar katalog. Penilaian: %@."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modificata fuori dal catalogo. Giudizio: %@."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カタログ外で変更されました。評価：%@。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카탈로그 밖에서 변경되었습니다. 평가: %@."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zmienił się poza katalogiem. Ocena: %@."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mudou fora do catálogo. Avaliação: %@."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Змінився не через каталог. Оцінка: %@."
+          }
+        }
+      }
+    },
     "Использование": {
       "localizations": {
         "ar": {
@@ -7329,6 +8317,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Джерело: %@"
+          }
+        }
+      }
+    },
+    "Исчез": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختفت"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verschwunden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gone"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desapareció"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disparu"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hilang"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scomparsa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "消えた"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "사라짐"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zniknął"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sumiu"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зник"
           }
         }
       }
@@ -7557,6 +8621,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Каталог не встановить і не оновить його. Він досі встановлений — вимкніть або приберіть його нижче."
+          }
+        }
+      }
+    },
+    "Кроме опасных": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما عدا الخطرة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Außer gefährlichen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All but dangerous"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salvo las peligrosas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sauf les dangereux"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kecuali yang berbahaya"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tranne le pericolose"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "危険なもの以外"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위험한 스킬 제외"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oprócz niebezpiecznych"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exceto as perigosas"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Крім небезпечних"
           }
         }
       }
@@ -8017,6 +9157,82 @@
         }
       }
     },
+    "Любые, «Проверить» и «Опасно» — после подтверждения": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أي مهارة؛ «للمراجعة» و«خطرة» بعد التأكيد"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle; „Prüfen“ und „Gefährlich“ nach Bestätigung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Any; “Review” and “Dangerous” after confirmation"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cualquiera; «Revisar» y «Peligrosa» tras confirmar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous ; « À vérifier » et « Dangereux » après confirmation"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semua; “Periksa” dan “Berbahaya” setelah konfirmasi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qualsiasi; «Da controllare» e «Pericolosa» dopo conferma"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべて（「要確認」「危険」は確認後）"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모두(“확인 필요”와 “위험”은 확인 후)"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dowolne; „Do sprawdzenia” i „Niebezpieczne” po potwierdzeniu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qualquer; “Verificar” e “Perigosa” após confirmação"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Будь-які, «Перевірити» й «Небезпечно» — після підтвердження"
+          }
+        }
+      }
+    },
     "Нажмите раз — может, ещё раз — не может.": {
       "localizations": {
         "ar": {
@@ -8089,6 +9305,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Натисніть раз — може, ще раз — не може."
+          }
+        }
+      }
+    },
+    "Нажмите, чтобы больше не доверять «%@»": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انقر لإيقاف الثقة بـ «%@»"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klicken, um „%@“ nicht mehr zu vertrauen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click to stop trusting “%@”"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haga clic para dejar de confiar en «%@»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cliquez pour ne plus faire confiance à « %@ »"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klik untuk berhenti memercayai “%@”"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fai clic per non fidarti più di «%@»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クリックすると「%@」の信頼を解除します"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "클릭하면 “%@” 신뢰를 해제합니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kliknij, by przestać ufać „%@”"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clique para deixar de confiar em “%@”"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Натисніть, щоб більше не довіряти «%@»"
           }
         }
       }
@@ -8777,6 +10069,82 @@
         }
       }
     },
+    "Новая версия скилла: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إصدار جديد من المهارة: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neue Skill-Version: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New skill version: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nueva versión de la skill: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelle version du skill : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi baru skill: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuova versione della skill: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキルの新しいバージョン：%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스킬 새 버전: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowa wersja skilla: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nova versão da skill: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нова версія скіла: %@"
+          }
+        }
+      }
+    },
     "Новая версия: %@": {
       "localizations": {
         "ar": {
@@ -9157,6 +10525,82 @@
         }
       }
     },
+    "Новый скилл: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مهارة جديدة: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neuer Skill: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New skill: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nueva skill: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveau skill : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill baru: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuova skill: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいスキル：%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 스킬: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowy skill: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nova skill: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Новий скіл: %@"
+          }
+        }
+      }
+    },
     "Обновить «%@»": {
       "localizations": {
         "ar": {
@@ -9385,6 +10829,82 @@
         }
       }
     },
+    "Опасный скилл: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مهارة خطرة: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gefährlicher Skill: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dangerous skill: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill peligrosa: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill dangereux : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill berbahaya: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill pericolosa: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "危険なスキル：%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위험한 스킬: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niebezpieczny skill: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill perigosa: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Небезпечний скіл: %@"
+          }
+        }
+      }
+    },
     "Откроется страница новой задачи с текстом жалобы — отправите её вы сами": {
       "localizations": {
         "ar": {
@@ -9533,6 +11053,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Відкриється форма на GitHub AI Hub Bar — надішлете її ви самі"
+          }
+        }
+      }
+    },
+    "Оценка новой версии: %@. Посмотреть изменения и обновить можно в карточке.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تقييم الإصدار الجديد: %@. اطّلع على التغييرات وحدّث من بطاقتها."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bewertung der neuen Version: %@. Änderungen ansehen und aktualisieren können Sie in der Karte."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The new version’s verdict: %@. See the changes and update from its card."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valoración de la versión nueva: %@. Vea los cambios y actualice desde su ficha."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verdict de la nouvelle version : %@. Voyez les changements et mettez à jour depuis sa fiche."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penilaian versi baru: %@. Lihat perubahan dan perbarui dari kartunya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giudizio della nuova versione: %@. Vedi le modifiche e aggiorna dalla scheda."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいバージョンの評価：%@。変更の確認と更新はカードから行えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 버전 평가: %@. 변경 사항 확인과 업데이트는 카드에서 할 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocena nowej wersji: %@. Zmiany i aktualizacja — w karcie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avaliação da nova versão: %@. Veja as mudanças e atualize pelo cartão."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оцінка нової версії: %@. Переглянути зміни й оновити можна в картці."
           }
         }
       }
@@ -10145,6 +11741,234 @@
         }
       }
     },
+    "Пока ничего: скиллы появлялись и менялись только через каталог.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا شيء بعد: لم تظهر المهارات أو تتغيّر إلا عبر الكتالوج."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch nichts: Skills kamen und änderten sich nur über den Katalog."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing yet: skills appeared and changed only through the catalog."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada aún: las skills solo aparecieron y cambiaron a través del catálogo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien pour l’instant : les skills n’ont été ajoutés et modifiés que via le catalogue."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada: skill hanya muncul dan berubah lewat katalog."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ancora niente: le skill sono comparse e cambiate solo tramite il catalogo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まだありません。スキルの追加や変更はカタログ経由だけでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아직 없음: 스킬은 카탈로그를 통해서만 추가되고 변경되었습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na razie nic: skille pojawiały się i zmieniały tylko przez katalog."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada ainda: as skills só apareceram e mudaram pelo catálogo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поки нічого: скіли з’являлися й змінювалися лише через каталог."
+          }
+        }
+      }
+    },
+    "Политика действует на установку и обновление из каталога; скиллы, которые ставят сами агенты, она не трогает — о них приходит уведомление. Автора скилл указывает о себе сам, это не проверено: доверие только приглушает уведомления об изменениях и разрешает установку при «только от доверенных», оценку оно не меняет.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تنطبق السياسة على التثبيت والتحديث من الكتالوج، ولا تمسّ المهارات التي يثبّتها الوكلاء بأنفسهم — يصلك عنها إشعار. تذكر المهارة مؤلفها بنفسها وهذا غير موثّق: الثقة تخفّف إشعارات التغييرات فقط وتسمح بالتثبيت عند «من الموثوقين فقط»، ولا تغيّر التقييم."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Richtlinie gilt für Installation und Aktualisierung aus dem Katalog; Skills, die Agenten selbst installieren, berührt sie nicht – dazu kommt eine Mitteilung. Den Autor nennt der Skill selbst, das ist nicht geprüft: Vertrauen dämpft nur Mitteilungen über Änderungen und erlaubt die Installation bei „nur vertrauenswürdige“, die Bewertung ändert es nicht."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The policy applies to installing and updating from the catalog; it doesn’t touch skills the agents install themselves — you get a notification about those. A skill names its author itself, and that isn’t verified: trust only quiets notifications about changes and allows installing under “trusted authors only”; it doesn’t change the verdict."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La política se aplica a instalar y actualizar desde el catálogo; no toca las skills que instalan los propios agentes: de esas llega un aviso. El autor lo indica la propia skill y no está verificado: la confianza solo silencia los avisos de cambios y permite instalar con «solo de confianza»; no cambia la valoración."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La politique s’applique à l’installation et à la mise à jour depuis le catalogue ; elle ne touche pas aux skills que les agents installent eux-mêmes — une notification vous en informe. Le skill indique lui-même son auteur, sans vérification : la confiance atténue seulement les notifications de changement et autorise l’installation avec « auteurs de confiance uniquement » ; elle ne change pas le verdict."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kebijakan berlaku untuk pemasangan dan pembaruan dari katalog; skill yang dipasang agen sendiri tidak disentuh — Anda mendapat notifikasi tentangnya. Skill menyebut penulisnya sendiri dan itu tidak diverifikasi: kepercayaan hanya meredam notifikasi perubahan dan mengizinkan pemasangan saat “hanya penulis tepercaya”; penilaian tidak berubah."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La politica vale per installazione e aggiornamento dal catalogo; non tocca le skill installate dagli agenti stessi: per quelle arriva una notifica. L’autore lo indica la skill stessa e non è verificato: la fiducia attenua solo le notifiche sulle modifiche e consente l’installazione con «solo autori fidati»; il giudizio non cambia."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ポリシーはカタログからのインストールと更新に適用されます。エージェントが自分でインストールしたスキルには影響せず、それについては通知が届きます。作者はスキル自身が名乗るもので確認されていません。信頼は変更の通知を控えめにし、「信頼する作者のみ」のときにインストールを許可するだけで、評価は変わりません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정책은 카탈로그에서의 설치와 업데이트에 적용됩니다. 에이전트가 직접 설치한 스킬은 건드리지 않으며 그에 대해서는 알림이 옵니다. 작성자는 스킬이 스스로 밝힌 것이라 확인되지 않았습니다. 신뢰는 변경 알림을 줄이고 “신뢰하는 작성자만”일 때 설치를 허용할 뿐 평가는 바꾸지 않습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polityka dotyczy instalacji i aktualizacji z katalogu; nie rusza skilli instalowanych przez same agenty — o nich przychodzi powiadomienie. Autora skill podaje sam o sobie i nie jest to sprawdzone: zaufanie tylko wycisza powiadomienia o zmianach i pozwala instalować przy „tylko zaufani”, oceny nie zmienia."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A política vale para instalar e atualizar pelo catálogo; não mexe nas skills que os próprios agentes instalam — sobre elas chega uma notificação. A skill indica o próprio autor, e isso não é verificado: a confiança só silencia notificações de mudança e permite instalar com “só confiáveis”; não muda a avaliação."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Політика діє на встановлення й оновлення з каталогу; скіли, які встановлюють самі агенти, вона не чіпає — про них приходить сповіщення. Автора скіл вказує про себе сам, це не перевірено: довіра лише приглушує сповіщення про зміни й дозволяє встановлення при «лише від довірених», оцінку вона не змінює."
+          }
+        }
+      }
+    },
+    "Посмотрите «Замечено вне каталога» в журнале раздела «Скиллы».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اطّلع على «رُصد خارج الكتالوج» في سجل قسم «المهارات»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sehen Sie unter „Außerhalb des Katalogs bemerkt“ im Protokoll des Bereichs „Skills“ nach."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See “Seen outside the catalog” in the journal of the Skills section."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vea «Detectado fuera del catálogo» en el registro de la sección Skills."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consultez « Repéré hors du catalogue » dans le journal de la section Skills."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lihat “Terlihat di luar katalog” di jurnal bagian Skill."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guarda «Notato fuori dal catalogo» nel registro della sezione Skill."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「スキル」セクションの履歴にある「カタログ外で検出」をご覧ください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“스킬” 섹션 기록의 “카탈로그 밖에서 감지됨”을 확인하세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zobacz „Zauważone poza katalogiem” w dzienniku sekcji „Skille”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Veja “Visto fora do catálogo” no registro da seção Skills."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перегляньте «Помічено поза каталогом» у журналі розділу «Скіли»."
+          }
+        }
+      }
+    },
     "Похож на вредоносный": {
       "localizations": {
         "ar": {
@@ -10293,6 +12117,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Чому (необов’язково)"
+          }
+        }
+      }
+    },
+    "Появился": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ظهرت"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neu"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appeared"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apareció"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apparu"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muncul"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparsa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追加"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새로 생김"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pojawił się"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apareceu"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З’явився"
+          }
+        }
+      }
+    },
+    "Появился не через каталог. Оценка: %@.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ظهرت خارج الكتالوج. التقييم: %@."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Außerhalb des Katalogs hinzugekommen. Bewertung: %@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appeared outside the catalog. Verdict: %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apareció fuera del catálogo. Valoración: %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apparu hors du catalogue. Verdict : %@."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muncul di luar katalog. Penilaian: %@."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparsa fuori dal catalogo. Giudizio: %@."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カタログ外で追加されました。評価：%@。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카탈로그 밖에서 추가되었습니다. 평가: %@."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pojawił się poza katalogiem. Ocena: %@."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apareceu fora do catálogo. Avaliação: %@."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З’явився не через каталог. Оцінка: %@."
           }
         }
       }
@@ -10829,6 +12805,82 @@
         }
       }
     },
+    "Скилл изменился: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تغيّرت مهارة: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill geändert: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill changed: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill cambiada: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill modifié : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill berubah: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill modificata: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキルが変更されました：%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스킬 변경됨: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill się zmienił: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill alterada: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скіл змінився: %@"
+          }
+        }
+      }
+    },
     "Скилл не указывает свой репозиторий на GitHub": {
       "localizations": {
         "ar": {
@@ -10977,6 +13029,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Скіл завеликий: перевірено не всі його файли."
+          }
+        }
+      }
+    },
+    "Скиллы изменились вне каталога: %lld": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مهارات تغيّرت خارج الكتالوج: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills außerhalb des Katalogs geändert: %lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills changed outside the catalog: %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills cambiadas fuera del catálogo: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills modifiés hors du catalogue : %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill yang berubah di luar katalog: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill modificate fuori dal catalogo: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カタログ外で変更されたスキル：%lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카탈로그 밖에서 변경된 스킬: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skille zmienione poza katalogiem: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills alteradas fora do catálogo: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скіли змінилися поза каталогом: %lld"
+          }
+        }
+      }
+    },
+    "Скиллы: новые и изменённые вне каталога, новые версии": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المهارات: الجديدة والمعدّلة خارج الكتالوج، والإصدارات الجديدة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills: neu und geändert außerhalb des Katalogs, neue Versionen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills: new and changed outside the catalog, new versions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills: nuevas y cambiadas fuera del catálogo, versiones nuevas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills : nouveaux et modifiés hors du catalogue, nouvelles versions"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill: baru dan berubah di luar katalog, versi baru"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill: nuove e modificate fuori dal catalogo, nuove versioni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキル：カタログ外での追加と変更、新しいバージョン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스킬: 카탈로그 밖의 추가·변경, 새 버전"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skille: nowe i zmienione poza katalogiem, nowe wersje"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills: novas e alteradas fora do catálogo, novas versões"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скіли: нові й змінені поза каталогом, нові версії"
           }
         }
       }
@@ -11205,6 +13409,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Зняти блок"
+          }
+        }
+      }
+    },
+    "Сообщать о скиллах, появившихся или изменившихся вне каталога": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أخبرني بالمهارات التي تظهر أو تتغيّر خارج الكتالوج"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Über Skills informieren, die außerhalb des Katalogs hinzukommen oder sich ändern"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tell me about skills that appear or change outside the catalog"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avisar de skills que aparecen o cambian fuera del catálogo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signaler les skills apparus ou modifiés hors du catalogue"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beri tahu skill yang muncul atau berubah di luar katalog"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avvisa delle skill comparse o cambiate fuori dal catalogo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カタログ外で追加・変更されたスキルを知らせる"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카탈로그 밖에서 추가되거나 변경된 스킬 알리기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Powiadamiaj o skillach, które pojawiły się lub zmieniły poza katalogiem"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avisar sobre skills que aparecem ou mudam fora do catálogo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повідомляти про скіли, що з’явилися або змінилися поза каталогом"
           }
         }
       }
@@ -11513,6 +13793,82 @@
         }
       }
     },
+    "Ставить из каталога": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التثبيت من الكتالوج"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus dem Katalog installieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Install from the catalog"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instalar desde el catálogo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installer depuis le catalogue"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasang dari katalog"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installa dal catalogo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カタログからインストール"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카탈로그에서 설치"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instaluj z katalogu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instalar pelo catálogo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Встановлювати з каталогу"
+          }
+        }
+      }
+    },
     "Тип и состояние": {
       "localizations": {
         "ar": {
@@ -11589,6 +13945,82 @@
         }
       }
     },
+    "Только безопасные": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الآمنة فقط"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur sichere"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safe only"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo seguras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sûrs uniquement"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya yang aman"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo sicure"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安全なもののみ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "안전한 스킬만"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tylko bezpieczne"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Só seguras"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Лише безпечні"
+          }
+        }
+      }
+    },
     "Только для вас: зачем скилл, что проверили…": {
       "localizations": {
         "ar": {
@@ -11661,6 +14093,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Лише для вас: навіщо скіл, що перевірили…"
+          }
+        }
+      }
+    },
+    "Только от доверенных авторов": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "من المؤلفين الموثوقين فقط"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur von vertrauenswürdigen Autoren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trusted authors only"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo de autores de confianza"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auteurs de confiance uniquement"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya dari penulis tepercaya"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo da autori fidati"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "信頼する作者のみ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "신뢰하는 작성자만"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tylko od zaufanych autorów"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Só de autores confiáveis"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Лише від довірених авторів"
           }
         }
       }
@@ -12801,6 +15309,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Що зміниться"
+          }
+        }
+      }
+    },
+    "Что можно ставить": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما يُسمح بتثبيته"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was installiert werden darf"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What may be installed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qué se puede instalar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce qui peut être installé"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yang boleh dipasang"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosa si può installare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インストールしてよいもの"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설치 가능한 항목"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Co można instalować"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O que pode ser instalado"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що можна встановлювати"
           }
         }
       }

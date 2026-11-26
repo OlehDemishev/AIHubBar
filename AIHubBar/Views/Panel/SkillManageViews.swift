@@ -21,6 +21,9 @@ enum SkillRefusalText {
         case "already": String(localized: "Уже установлен для этого агента.")
         case "name": String(localized: "У скилла нет имени, годного для папки.")
         case "blocked": String(localized: "Скилл в вашем блок-листе: каталог его не ставит.")
+        case "policy-dangerous": String(localized: "Ваша политика не позволяет ставить опасные скиллы (Настройки → Скиллы).")
+        case "policy-review": String(localized: "Ваша политика разрешает ставить только безопасные скиллы (Настройки → Скиллы).")
+        case "policy-trusted": String(localized: "Ваша политика разрешает ставить скиллы только доверенных авторов (Настройки → Скиллы).")
         default: String(localized: "Не получилось: \(refusal.code)")
         }
     }
@@ -369,10 +372,18 @@ struct SkillDiffView: View {
 /// Everything the catalog did in the agents' folders, newest first, with «Вернуть» where it can be undone.
 struct SkillJournalView: View {
     @Environment(SkillStore.self) private var skills
+    var openSkill: (Int) -> Void = { _ in }
     @State private var rows: [SkillCatalog.LogRow] = []
     @State private var failure: String?
 
     var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            SkillChangesView(openSkill: openSkill)
+            journal
+        }
+    }
+
+    private var journal: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("Журнал").scaledFont(.caption, weight: .semibold).foregroundStyle(.secondary).textCase(.uppercase)
             if rows.isEmpty {
@@ -409,9 +420,95 @@ struct SkillJournalView: View {
         .task(id: skills.marksVersion) { rows = await skills.journal() }
     }
 
+
     static func line(_ row: SkillCatalog.LogRow) -> String {
         let when = ISO8601DateFormatter.flexible(row.at).map { $0.formatted(date: .abbreviated, time: .shortened) } ?? row.at
         let agents = (row.agent ?? "").split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }.map { SkillAgent(rawValue: $0)?.title ?? $0 }.joined(separator: ", ")
         return [when, agents, PathText.tilde(row.installPath)].filter { !$0.isEmpty }.joined(separator: " · ")
+    }
+}
+
+/// «Замечено вне каталога»: skills that appeared, changed or left without the catalog, newest first.
+struct SkillChangesView: View {
+    @Environment(SkillStore.self) private var skills
+    /// Opens a skill's card in the «Скиллы» section.
+    var openSkill: (Int) -> Void = { _ in }
+    @State private var events: [SkillCatalog.Event] = []
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Замечено вне каталога").scaledFont(.caption, weight: .semibold).foregroundStyle(.secondary).textCase(.uppercase)
+            if events.isEmpty {
+                Text("Пока ничего: скиллы появлялись и менялись только через каталог.").scaledFont(.caption).foregroundStyle(.secondary)
+            }
+            ForEach(events.prefix(30)) { event in
+                Button { if let id = event.skillID { openSkill(id) } } label: {
+                    HStack(alignment: .firstTextBaseline, spacing: 6) {
+                        Image(systemName: Self.symbol(event.event)).foregroundStyle(event.verdict == .dangerous ? Color.red : Color.secondary)
+                        VStack(alignment: .leading, spacing: 1) {
+                            HStack(spacing: 4) {
+                                Text(Self.title(event.event)).scaledFont(.caption, weight: event.seen ? .regular : .semibold)
+                                Text(verbatim: event.name).scaledFont(.caption)
+                                if let verdict = event.verdict { SkillVerdictBadge(verdict: verdict) }
+                                if event.isTrusted { Image(systemName: "checkmark.seal").scaledFont(.caption2).foregroundStyle(.secondary) }
+                            }
+                            Text(verbatim: ISO8601DateFormatter.flexible(event.at)?.formatted(date: .abbreviated, time: .shortened) ?? event.at)
+                                .scaledFont(.caption2).foregroundStyle(.secondary)
+                        }
+                        Spacer(minLength: 0)
+                    }
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .disabled(event.skillID == nil)
+            }
+        }
+        .task(id: skills.lastUpdated) {
+            events = await skills.events()
+            if events.contains(where: { !$0.seen }) { await skills.markEventsSeen() }
+        }
+    }
+
+    static func title(_ event: String) -> String {
+        switch event {
+        case "appeared": String(localized: "Появился")
+        case "changed": String(localized: "Изменился")
+        default: String(localized: "Исчез")
+        }
+    }
+
+    static func symbol(_ event: String) -> String {
+        switch event {
+        case "appeared": "plus.circle"
+        case "changed": "pencil.circle"
+        default: "minus.circle"
+        }
+    }
+}
+
+/// «Доверять автору»: trust quiets notifications about the author's skills and lets «только доверенные» install them.
+/// The author is what the skill says about itself, so the button says so.
+struct SkillTrustButton: View {
+    @Environment(SkillStore.self) private var skills
+    let row: SkillCatalog.Row
+
+    var body: some View {
+        if let author = SkillCatalog.authorToTrust(row) {
+            if row.isTrusted {
+                Button { Task { await skills.distrust(author) } } label: {
+                    Label("Доверенный", systemImage: "checkmark.seal.fill")
+                }
+                .help(String(localized: "Нажмите, чтобы больше не доверять «\(author)»"))
+                .buttonStyle(.borderless)
+                .scaledFont(.caption2)
+            } else {
+                Button { Task { await skills.trust(author) } } label: {
+                    Label("Доверять «\(author)»", systemImage: "checkmark.seal")
+                }
+                .help(String(localized: "Автор указан в самом скилле и не проверен. Доверие только приглушает уведомления и не меняет оценку."))
+                .buttonStyle(.borderless)
+                .scaledFont(.caption2)
+            }
+        }
     }
 }

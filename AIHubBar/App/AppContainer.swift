@@ -397,6 +397,10 @@ final class AppContainer {
                 case let .openWindow(id):
                     // The id comes from a notification or a widget link, stored as text.
                     if let window = WindowID(rawValue: id) { requests.openWindow(window) }
+                case let .openSkill(id):
+                    // The panel reads it when it opens and shows the skill's card.
+                    self.skills.pendingSkill = id
+                    PanelOpener.toggle()
                 case .nothing:
                     break
                 }

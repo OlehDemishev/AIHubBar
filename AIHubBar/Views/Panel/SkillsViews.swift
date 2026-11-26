@@ -247,6 +247,21 @@ struct SkillsBlockView: View {
                 .buttonStyle(.plain)
                 .help(String(localized: "Открыть скилл"))
             }
+            if summary.unseenChanges > 0 {
+                Button {
+                    skills.opensChanges = true
+                    openSection(nil)
+                } label: {
+                    HStack(spacing: 6) {
+                        Image(systemName: "eye").foregroundStyle(.orange)
+                        Text("Замечено вне каталога: \(summary.unseenChanges)").lineLimit(1)
+                        Spacer(minLength: 0)
+                    }
+                    .scaledFont(.caption)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+            }
             if !summary.updates.isEmpty {
                 Button { openSection(summary.updates.count == 1 ? summary.updates[0].skillID : nil) } label: {
                     HStack(spacing: 6) {
@@ -346,7 +361,10 @@ struct SkillsSectionView: View {
                     ProgressView().frame(maxWidth: .infinity)
                 }
             } else if showsJournal {
-                SkillJournalView()
+                SkillJournalView { id in
+                    showsJournal = false
+                    section = .skills(id)
+                }
             } else {
                 filtersBar
                 updatesList
@@ -359,6 +377,12 @@ struct SkillsSectionView: View {
         }
         .padding(10)
         .task(id: filters) { result = await skills.search(filters) }
+        .onAppear {
+            if skills.opensChanges {
+                skills.opensChanges = false
+                showsJournal = true
+            }
+        }
         .task(id: chosen) {
             card = nil
             isGone = false
@@ -592,6 +616,7 @@ private struct SkillRowView: View {
                         Text(verbatim: row.name).scaledFont(.callout, weight: .medium).lineLimit(1)
                         if row.kind == "plugin" { Text("плагин").scaledFont(.caption2).foregroundStyle(.secondary) }
                         if row.isOff { Text("выключен").scaledFont(.caption2).foregroundStyle(.orange) }
+                        if row.isTrusted { Image(systemName: "checkmark.seal").scaledFont(.caption2).foregroundStyle(.secondary).help(String(localized: "Доверенный автор")) }
                         if row.isBlocked { Text("в блок-листе").scaledFont(.caption2, weight: .semibold).foregroundStyle(.red) }
                         if row.reports > 0 { Image(systemName: "exclamationmark.bubble").scaledFont(.caption2).foregroundStyle(.orange).help(String(localized: "Есть ваша жалоба")) }
                         if !row.note.isEmpty {
@@ -707,6 +732,7 @@ private struct SkillFilterPanel: View {
                 SkillChip(title: String(localized: "С заметкой"), symbol: "note.text", isOn: filters.withNote) { filters.withNote.toggle() }
                 SkillChip(title: String(localized: "С жалобой"), symbol: "exclamationmark.bubble", isOn: filters.withReport) { filters.withReport.toggle() }
                 SkillChip(title: String(localized: "В блок-листе"), symbol: "nosign", isOn: filters.blockedOnly) { filters.blockedOnly.toggle() }
+                SkillChip(title: String(localized: "Доверенные авторы"), symbol: "checkmark.seal", isOn: filters.trustedOnly) { filters.trustedOnly.toggle() }
             }
             group("Использование") {
                 SkillChip(title: String(localized: "Запускались за 30 дней"), isOn: filters.usage == .used) { filters.usage = filters.usage == .used ? .any : .used }
@@ -861,7 +887,12 @@ struct SkillCardView: View {
                     Text(verbatim: card.row.description).scaledFont(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
                 }
                 if let about = Self.about(card.row) {
-                    Text(verbatim: about).scaledFont(.caption2).foregroundStyle(.secondary)
+                    HStack(spacing: 6) {
+                        Text(verbatim: about).scaledFont(.caption2).foregroundStyle(.secondary)
+                        SkillTrustButton(row: card.row)
+                    }
+                } else if SkillCatalog.authorToTrust(card.row) != nil {
+                    SkillTrustButton(row: card.row)
                 }
                 if card.isMissing {
                     Text("Папки нет или её не удаётся прочитать.").scaledFont(.caption).foregroundStyle(.red)
