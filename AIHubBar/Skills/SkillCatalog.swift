@@ -346,7 +346,8 @@ final class SkillCatalog {
             self.noScripts = noScripts
         }
 
-        /// How many of the filters beyond the search, the verdict and the order are set: for the filter button.
+        /// How many of the filters beyond the search, the verdict, «Избранное» and the order are set: for the filter
+        /// button. Those four have their own controls above the list.
         var activeCount: Int {
             var plain = self
             plain.query = ""
@@ -354,7 +355,7 @@ final class SkillCatalog {
             plain.sort = .risk
             let all: [Bool] = [
                 plain.minRisk > 0 || plain.maxRisk < 100, !agents.isEmpty, !scopes.isEmpty, kind != nil, !findings.isEmpty, !can.isEmpty, !cannot.isEmpty,
-                noScripts, state != .any, usage != .any, favoritesOnly, withNote, license != nil, author != nil, newWithinDays != nil,
+                noScripts, state != .any, usage != .any, withNote, license != nil, author != nil, newWithinDays != nil,
             ]
             return all.filter { $0 }.count
         }

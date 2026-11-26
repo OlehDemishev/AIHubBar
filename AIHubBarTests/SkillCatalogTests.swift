@@ -220,6 +220,8 @@ struct SkillCatalogTests {
         byName.sort = .newest
         #expect(try names(catalog, byName).first == "counter", "changed last")
         #expect(byName.activeCount == 0)
+        byName.favoritesOnly = true
+        #expect(byName.activeCount == 0, "«Избранное» has its own switch above the list")
         byName.can = [.mcp]
         byName.maxRisk = 50
         #expect(byName.activeCount == 2)

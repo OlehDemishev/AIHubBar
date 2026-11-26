@@ -389,9 +389,11 @@ struct SkillsSectionView: View {
                     }
                     .pickerStyle(.inline)
                 } label: {
-                    Label(filters.sort.title, systemImage: "arrow.up.arrow.down").scaledFont(.caption)
+                    Label(filters.sort.title, systemImage: "arrow.up.arrow.down")
                 }
                 .menuStyle(.borderlessButton)
+                .controlSize(.small)
+                .scaledFont(.caption)
                 .fixedSize()
                 .help(String(localized: "Порядок"))
                 Spacer(minLength: 4)
@@ -523,7 +525,8 @@ private struct SkillRowView: View {
             }
             .buttonStyle(.plain)
             SkillStarButton(id: row.id, isFavorite: row.isFavorite)
-                .opacity(row.isFavorite || hovered ? 1 : 0)
+                // Faint until the row is hovered, never hidden: VoiceOver and the keyboard must reach it.
+                .opacity(row.isFavorite || hovered ? 1 : 0.35)
         }
         .padding(.horizontal, 6)
         .padding(.vertical, 5)
@@ -652,9 +655,11 @@ private struct SkillFilterPanel: View {
                     }
                     .pickerStyle(.inline)
                 } label: {
-                    Text(Self.licenseTitle(filters.license)).scaledFont(.caption)
+                    Text(Self.licenseTitle(filters.license))
                 }
                 .menuStyle(.borderlessButton)
+                .controlSize(.small)
+                .scaledFont(.caption)
                 .fixedSize()
                 if !facets.authors.isEmpty {
                     Menu {
@@ -664,9 +669,11 @@ private struct SkillFilterPanel: View {
                         }
                         .pickerStyle(.inline)
                     } label: {
-                        Text(filters.author.map { String(localized: "Автор: \($0)") } ?? String(localized: "Любой автор")).scaledFont(.caption)
+                        Text(filters.author.map { String(localized: "Автор: \($0)") } ?? String(localized: "Любой автор"))
                     }
                     .menuStyle(.borderlessButton)
+                    .controlSize(.small)
+                    .scaledFont(.caption)
                     .fixedSize()
                 }
                 Spacer(minLength: 4)
@@ -676,6 +683,7 @@ private struct SkillFilterPanel: View {
                         plain.query = filters.query
                         plain.verdict = filters.verdict
                         plain.sort = filters.sort
+                        plain.favoritesOnly = filters.favoritesOnly
                         filters = plain
                     }
                     .buttonStyle(.borderless)
