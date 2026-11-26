@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 // «Скиллы» (docs/specs/SPEC-skills.md): what the module is, its Settings section and its «Панель сейчас» line.
@@ -37,6 +38,25 @@ private struct SkillsSketch: View {
 
 struct SkillsSettingsSection: View {
     @Environment(SkillStore.self) private var skills
+    /// What happened to the folder just added.
+    @State private var added: String?
+
+    /// A skill from a download or a colleague: it is checked and listed in the panel's «Скиллы», installed nowhere
+    /// until the person installs it from its card.
+    private func addFolder() {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.prompt = String(localized: "Проверить")
+        NSApp.activate()
+        guard panel.runModal() == .OK, let url = panel.url else { return }
+        Task {
+            switch await skills.importFolder(url) {
+            case .success: added = String(localized: "«\(url.lastPathComponent)» проверен и есть в списке скиллов в панели.")
+            case .failure(let refusal): added = SkillRefusalText.text(refusal)
+            }
+        }
+    }
 
     var body: some View {
         Section {
@@ -49,6 +69,9 @@ struct SkillsSettingsSection: View {
             }
             Button("Проверить заново", systemImage: "arrow.clockwise") { Task { await skills.refresh() } }
                 .disabled(skills.isRefreshing)
+            Button("Добавить папку со скиллом…", systemImage: "folder.badge.plus", action: addFolder)
+                .help(String(localized: "Папка только проверяется и появляется в списке; установить скилл можно из его карточки."))
+            if let added { Text(added).foregroundStyle(.secondary) }
         } header: {
             Text("Проверка скиллов")
         } footer: {

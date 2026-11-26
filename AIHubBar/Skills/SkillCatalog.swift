@@ -99,6 +99,8 @@ final class SkillCatalog {
             created_at  TEXT NOT NULL
         );
         """,
+        // Step 4: what the catalog installed itself, and the journal of every change in the agents' folders.
+        manageMigration,
     ]
 
     init(path: String) throws {
@@ -259,6 +261,14 @@ final class SkillCatalog {
                 try db.run("DELETE FROM installations WHERE id NOT IN (\(places)) AND skill_id IN (SELECT id FROM skills WHERE source = 'local')")
                 stats.removed = try db.run("DELETE FROM skills WHERE source = 'local' AND id NOT IN (\(skills))")
             }
+        }
+        // Added folders follow their folder: a changed one is checked again, a gone one leaves the catalog.
+        for (id, path, hash) in try db.query("SELECT id, path, content_hash FROM skills WHERE source = 'folder'", map: { ($0.int(0), $0.text(1), $0.text(2)) }) {
+            guard let files = try? SkillFolder.read(URL(fileURLWithPath: path)) else {
+                try db.run("DELETE FROM skills WHERE id = ?1", .int(Int64(id)))
+                continue
+            }
+            if files.contentHash != hash { try importFolder(URL(fileURLWithPath: path), now: now) }
         }
         return stats
     }

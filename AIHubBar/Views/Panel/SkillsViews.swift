@@ -230,6 +230,19 @@ struct SkillsBlockView: View {
                 .buttonStyle(.plain)
                 .help(String(localized: "Открыть скилл"))
             }
+            if !summary.updates.isEmpty {
+                Button { openSection(summary.updates.count == 1 ? summary.updates[0].skillID : nil) } label: {
+                    HStack(spacing: 6) {
+                        Image(systemName: "arrow.up.circle.fill").foregroundStyle(Color.accentColor)
+                        Text(summary.updates.count == 1 ? String(localized: "Новая версия: \(summary.updates[0].name)") : String(localized: "Новые версии: \(summary.updates.count)"))
+                            .lineLimit(1)
+                        Spacer(minLength: 0)
+                    }
+                    .scaledFont(.caption)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+            }
             if !collapsed {
                 if summary.total == 0 {
                     Text(skills.lastUpdated == nil ? "Ищу скиллы агентов…" : "Скиллов для Claude Code, Codex, Cursor и Gemini CLI не найдено.")
@@ -291,6 +304,7 @@ struct SkillsSectionView: View {
     @State private var facets = SkillCatalog.Facets()
     @State private var saved: [SkillCatalog.SavedFilter] = []
     @State private var showsFilters = false
+    @State private var showsJournal = false
     /// The name being typed for «Сохранить фильтр»; nil while the field is hidden.
     @State private var savingName: String?
 
@@ -308,8 +322,11 @@ struct SkillsSectionView: View {
                 } else {
                     ProgressView().frame(maxWidth: .infinity)
                 }
+            } else if showsJournal {
+                SkillJournalView()
             } else {
                 filtersBar
+                updatesList
                 list
             }
             Text("Проверка снижает риск, но не гарантирует безопасность. При проверке ничего из скилла не запускается.")
@@ -356,6 +373,14 @@ struct SkillsSectionView: View {
             Spacer(minLength: 4)
             Text("Скиллы").scaledFont(.callout, weight: .semibold)
             Spacer(minLength: 4)
+            if chosen == nil {
+                Button { showsJournal.toggle() } label: {
+                    Image(systemName: "clock.arrow.circlepath").foregroundStyle(showsJournal ? Color.accentColor : Color.primary)
+                }
+                .buttonStyle(.borderless)
+                .frame(width: 18, height: 18)
+                .help(String(localized: "Журнал изменений"))
+            }
             Button {
                 Task { await skills.refresh() }
             } label: {
@@ -469,6 +494,31 @@ struct SkillsSectionView: View {
                 .contentShape(Capsule())
         }
         .buttonStyle(.plain)
+    }
+
+    /// Copies the catalog installed whose source has a newer version: each opens its card, where the change is shown.
+    @ViewBuilder
+    private var updatesList: some View {
+        let updates = skills.summary.updates
+        if !updates.isEmpty {
+            VStack(alignment: .leading, spacing: 3) {
+                Text("Новые версии: \(updates.count)").scaledFont(.caption, weight: .semibold)
+                ForEach(updates) { update in
+                    Button { if let id = update.skillID { section = .skills(id) } } label: {
+                        HStack(spacing: 6) {
+                            Image(systemName: "arrow.up.circle.fill").foregroundStyle(Color.accentColor)
+                            Text(verbatim: update.name).scaledFont(.caption)
+                            SkillVerdictBadge(verdict: update.verdict)
+                            Spacer(minLength: 0)
+                        }
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(8)
+            .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(Color.accentColor.opacity(0.08)))
+        }
     }
 
     @ViewBuilder
@@ -782,7 +832,7 @@ struct SkillCardView: View {
             noteEditor
             capabilities(assessment)
             if !assessment.advice.isEmpty { advice(assessment) }
-            places
+            SkillManageBox(card: card)
             findings
             files
             if let preview { SkillPreviewView(preview: preview, focusLine: focusLine) }
@@ -900,31 +950,6 @@ struct SkillCardView: View {
             section("Что сделало бы безопаснее")
             ForEach(assessment.advice, id: \.self) { item in
                 Text(verbatim: "• " + item.text).scaledFont(.caption).fixedSize(horizontal: false, vertical: true)
-            }
-        }
-    }
-
-    @ViewBuilder
-    private var places: some View {
-        if !card.places.isEmpty {
-            VStack(alignment: .leading, spacing: 4) {
-                section("Где установлен")
-                ForEach(Array(card.places.enumerated()), id: \.offset) { _, place in
-                    HStack(spacing: 6) {
-                        Text(verbatim: place.agent.title).scaledFont(.caption, weight: .medium)
-                        Text(place.scope == "project" ? String(localized: "проект \(place.project ?? "")") : Self.scope(place.scope))
-                            .scaledFont(.caption2).foregroundStyle(.secondary)
-                        if !place.isEnabled { Text("выключен").scaledFont(.caption2).foregroundStyle(.orange) }
-                        Spacer(minLength: 4)
-                        Button {
-                            NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: place.installPath)])
-                        } label: {
-                            Image(systemName: "folder")
-                        }
-                        .buttonStyle(.borderless)
-                        .help(String(localized: "Показать в Finder"))
-                    }
-                }
             }
         }
     }
