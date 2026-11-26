@@ -43,13 +43,17 @@ scripts/release.sh 0.2.0 --publish  # the same, then the GitHub release v0.2.0 w
 
 ## Homebrew
 
-`Casks/ai-hub-bar.rb` makes this repository a tap: `brew tap olehdemishev/aihubbar https://github.com/OlehDemishev/AIHubBar`,
-then `brew install --cask ai-hub-bar`. Homebrew 7 refuses a cask from a tap it was not told to trust
-(«Refusing to load cask … from untrusted tap», seen 2026-11-10), so the person runs `brew trust olehdemishev/aihubbar`
-in between. The cask names one version and the checksum of its disk image, so after every
-release (not a beta) run `scripts/release-tools/update-cask.sh <version>` and commit the cask together with the
-STATUS entry that records the release. The app updates itself through Sparkle (`auto_updates true`), so a cask that
-lags a release behind still installs a working copy.
+People install from the tap `OlehDemishev/homebrew-tap` (a repository of its own since 2026-11-26, so the name is the
+short `olehdemishev/tap`): `brew tap olehdemishev/tap`, `brew trust olehdemishev/tap`, `brew install --cask ai-hub-bar`.
+Homebrew 7 refuses a cask from a tap it was not told to trust («Refusing to load cask … from untrusted tap», seen
+2026-11-10 and again 2026-11-26), so the `brew trust` line stays until the cask is in Homebrew's own repository.
+
+`Casks/ai-hub-bar.rb` here is the source: it names one version and the checksum of its disk image. After every release
+(not a beta) run `scripts/release-tools/update-cask.sh <version>`, commit the cask together with the STATUS entry that
+records the release, and once that is in `main` run `scripts/release-tools/publish-cask.sh`, which copies the file into
+the tap. The app updates itself through Sparkle (`auto_updates true`), so a cask that lags a release behind still
+installs a working copy. This repository still works as a tap too
+(`brew tap olehdemishev/aihubbar https://github.com/OlehDemishev/AIHubBar`), for those who set it up before.
 
 ## Release notes
 
