@@ -4597,6 +4597,310 @@
         }
       }
     },
+    "AI-проверен": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "راجعها الذكاء الاصطناعي"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Von AI geprüft"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI-reviewed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisada por IA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérifié par l’IA"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diperiksa AI"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificata dall’IA"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 確認済み"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 검토됨"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdzony przez AI"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificada por IA"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірено AI"
+          }
+        }
+      }
+    },
+    "AI-проверка": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مراجعة الذكاء الاصطناعي"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KI-Prüfung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI review"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisión con IA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérification par l’IA"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemeriksaan AI"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifica con IA"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI による確認"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 검토"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdzenie AI"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificação por IA"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірка AI"
+          }
+        }
+      }
+    },
+    "Claude не ответил за 10 минут.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يردّ Claude خلال 10 دقائق."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude hat in 10 Minuten nicht geantwortet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude didn’t answer within 10 minutes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude no respondió en 10 minutos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude n’a pas répondu en 10 minutes."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude tidak menjawab dalam 10 menit."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude non ha risposto entro 10 minuti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude が 10 分以内に応答しませんでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude가 10분 안에 응답하지 않았습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude nie odpowiedział w ciągu 10 minut."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Claude não respondeu em 10 minutos."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude не відповів за 10 хвилин."
+          }
+        }
+      }
+    },
+    "Claude читает скилл. Это может занять несколько минут.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يقرأ Claude المهارة. قد يستغرق ذلك بضع دقائق."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude liest den Skill. Das kann einige Minuten dauern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude is reading the skill. This can take a few minutes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude está leyendo la skill. Puede tardar unos minutos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude lit le skill. Cela peut prendre quelques minutes."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude sedang membaca skill. Ini bisa memakan beberapa menit."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude sta leggendo la skill. Può richiedere qualche minuto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude がスキルを読んでいます。数分かかることがあります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude가 스킬을 읽고 있습니다. 몇 분 걸릴 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude czyta skill. To może potrwać kilka minut."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Claude está lendo a skill. Isso pode levar alguns minutos."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude читає скіл. Це може тривати кілька хвилин."
+          }
+        }
+      }
+    },
     "«%@» проверен и есть в списке скиллов в панели.": {
       "localizations": {
         "ar": {
@@ -8625,6 +8929,82 @@
         }
       }
     },
+    "Ключ Anthropic не подошёл: проверьте его в Настройках → «Сервисы AI».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يعمل مفتاح Anthropic: تحقّق منه في الإعدادات ← «خدمات الذكاء الاصطناعي»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Anthropic-Schlüssel passt nicht: Prüfen Sie ihn unter Einstellungen → „KI-Dienste“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Anthropic key didn’t work: check it in Settings → AI Services."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La clave de Anthropic no funcionó: revísela en Ajustes → Servicios de IA."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La clé Anthropic ne fonctionne pas : vérifiez-la dans Réglages → Services IA."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunci Anthropic tidak berfungsi: periksa di Pengaturan → Layanan AI."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La chiave Anthropic non funziona: controllala in Impostazioni → Servizi IA."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anthropic のキーが使えませんでした。設定 →「AI サービス」で確認してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anthropic 키가 맞지 않습니다. 설정 → “AI 서비스”에서 확인하세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klucz Anthropic nie zadziałał: sprawdź go w Ustawieniach → „Usługi AI”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A chave da Anthropic não funcionou: confira em Ajustes → Serviços de IA."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ключ Anthropic не підійшов: перевірте його в Налаштуваннях → «Сервіси AI»."
+          }
+        }
+      }
+    },
     "Кроме опасных": {
       "localizations": {
         "ar": {
@@ -9229,6 +9609,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Будь-які, «Перевірити» й «Небезпечно» — після підтвердження"
+          }
+        }
+      }
+    },
+    "Модель видела не все файлы: часть не текст или не поместилась.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يرَ النموذج كل الملفات: بعضها ليس نصًا أو لم يتّسع."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Modell hat nicht alle Dateien gesehen: Einige sind kein Text oder passten nicht."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The model didn’t see every file: some aren’t text or didn’t fit."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El modelo no vio todos los archivos: algunos no son texto o no cupieron."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le modèle n’a pas vu tous les fichiers : certains ne sont pas du texte ou n’ont pas tenu."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model tidak melihat semua file: sebagian bukan teks atau tidak muat."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il modello non ha visto tutti i file: alcuni non sono testo o non ci stavano."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モデルはすべてのファイルを見ていません。テキストでないものや収まらなかったものがあります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델이 모든 파일을 보지는 못했습니다. 일부는 텍스트가 아니거나 들어가지 않았습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model nie widział wszystkich plików: część to nie tekst albo się nie zmieściła."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O modelo não viu todos os arquivos: alguns não são texto ou não couberam."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Модель бачила не всі файли: частина не текст або не вмістилася."
+          }
+        }
+      }
+    },
+    "Модель отказалась отвечать на этот скилл. Это само по себе повод присмотреться к нему.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رفض النموذج الإجابة عن هذه المهارة، وهذا وحده سبب للتدقيق فيها."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Modell hat die Antwort zu diesem Skill verweigert. Schon das ist ein Grund, genauer hinzusehen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The model refused to answer about this skill. That alone is a reason to look at it closely."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El modelo se negó a responder sobre esta skill. Eso ya es motivo para mirarla de cerca."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le modèle a refusé de répondre sur ce skill. C’est déjà une raison de l’examiner de près."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model menolak menjawab tentang skill ini. Itu saja sudah alasan untuk memeriksanya lebih teliti."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il modello si è rifiutato di rispondere su questa skill. Già questo è un motivo per guardarla da vicino."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モデルはこのスキルについて回答を拒否しました。それ自体がよく調べる理由になります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델이 이 스킬에 대한 답변을 거부했습니다. 그 자체로 자세히 살펴볼 이유입니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model odmówił odpowiedzi o tym skillu. Już to jest powodem, by mu się przyjrzeć."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O modelo se recusou a responder sobre esta skill. Isso já é motivo para olhá-la de perto."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Модель відмовилася відповідати про цей скіл. Це саме по собі привід придивитися до нього."
           }
         }
       }
@@ -9993,6 +10525,82 @@
         }
       }
     },
+    "Не удалось запустить Claude Code.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذّر تشغيل Claude Code."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code konnte nicht gestartet werden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t start Claude Code."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo iniciar Claude Code."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de lancer Claude Code."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak bisa menjalankan Claude Code."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile avviare Claude Code."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code を起動できませんでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code를 시작할 수 없습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się uruchomić Claude Code."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível iniciar o Claude Code."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не вдалося запустити Claude Code."
+          }
+        }
+      }
+    },
     "Не установлен": {
       "localizations": {
         "ar": {
@@ -10065,6 +10673,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Не встановлено"
+          }
+        }
+      }
+    },
+    "Нет связи с Anthropic API.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا اتصال بواجهة Anthropic البرمجية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Verbindung zur Anthropic API."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Can’t reach the Anthropic API."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay conexión con la API de Anthropic."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de joindre l’API Anthropic."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak bisa terhubung ke API Anthropic."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna connessione con l’API Anthropic."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anthropic API に接続できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anthropic API에 연결할 수 없습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak połączenia z API Anthropic."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem conexão com a API da Anthropic."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Немає зв’язку з Anthropic API."
           }
         }
       }
@@ -10601,6 +11285,82 @@
         }
       }
     },
+    "Нужен Claude Code на этом Mac или ключ Anthropic в Настройках → «Сервисы AI».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يلزم Claude Code على هذا الـ Mac أو مفتاح Anthropic في الإعدادات ← «خدمات الذكاء الاصطناعي»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dafür braucht es Claude Code auf diesem Mac oder einen Anthropic-Schlüssel unter Einstellungen → „KI-Dienste“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This needs Claude Code on this Mac or an Anthropic key in Settings → AI Services."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hace falta Claude Code en este Mac o una clave de Anthropic en Ajustes → Servicios de IA."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il faut Claude Code sur ce Mac ou une clé Anthropic dans Réglages → Services IA."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlu Claude Code di Mac ini atau kunci Anthropic di Pengaturan → Layanan AI."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serve Claude Code su questo Mac o una chiave Anthropic in Impostazioni → Servizi IA."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この Mac の Claude Code か、設定 →「AI サービス」の Anthropic キーが必要です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 Mac의 Claude Code나 설정 → “AI 서비스”의 Anthropic 키가 필요합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrzebny jest Claude Code na tym Macu lub klucz Anthropic w Ustawieniach → „Usługi AI”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É preciso o Claude Code neste Mac ou uma chave da Anthropic em Ajustes → Serviços de IA."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібен Claude Code на цьому Mac або ключ Anthropic у Налаштуваннях → «Сервіси AI»."
+          }
+        }
+      }
+    },
     "Обновить «%@»": {
       "localizations": {
         "ar": {
@@ -10901,6 +11661,310 @@
           "stringUnit": {
             "state": "translated",
             "value": "Небезпечний скіл: %@"
+          }
+        }
+      }
+    },
+    "Ответ модели не удалось прочитать, поэтому он считается «Проверить».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذّرت قراءة إجابة النموذج، لذا تُعدّ «للمراجعة»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Antwort des Modells war nicht lesbar und zählt daher als „Prüfen“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The model’s answer couldn’t be read, so it counts as “Review”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo leer la respuesta del modelo, así que cuenta como «Revisar»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La réponse du modèle est illisible : elle compte comme « À vérifier »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jawaban model tidak bisa dibaca, jadi dianggap “Periksa”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La risposta del modello non si è potuta leggere, quindi vale come «Da controllare»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モデルの回答を読めなかったため、「要確認」として扱います。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델의 답변을 읽을 수 없어 “확인 필요”로 간주합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się odczytać odpowiedzi modelu, więc liczy się jako „Do sprawdzenia”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível ler a resposta do modelo, então ela conta como “Verificar”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відповідь моделі не вдалося прочитати, тому вона вважається «Перевірити»."
+          }
+        }
+      }
+    },
+    "Ответ модели оборвался: он вышел слишком длинным.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انقطعت إجابة النموذج لأنها كانت طويلة جدًا."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Antwort des Modells brach ab: Sie war zu lang."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The model’s answer was cut off: it was too long."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La respuesta del modelo se cortó: era demasiado larga."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La réponse du modèle a été coupée : elle était trop longue."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jawaban model terpotong: terlalu panjang."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La risposta del modello si è interrotta: era troppo lunga."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モデルの回答が長すぎて途中で切れました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델의 답변이 너무 길어 잘렸습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odpowiedź modelu została ucięta: była za długa."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A resposta do modelo foi cortada: ficou longa demais."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відповідь моделі обірвалася: вона вийшла задовгою."
+          }
+        }
+      }
+    },
+    "Ответ модели — тоже недоверенный текст: он может только сделать оценку строже, но не мягче.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إجابة النموذج نص غير موثوق أيضًا: يمكنها أن تشدّد التقييم فقط، لا أن تخفّفه."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auch die Antwort des Modells ist nicht vertrauenswürdig: Sie kann die Bewertung nur verschärfen, nie abmildern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The model’s answer is untrusted text too: it can only make the verdict stricter, never softer."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La respuesta del modelo también es texto no fiable: solo puede endurecer la valoración, nunca suavizarla."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La réponse du modèle est aussi un texte non fiable : elle ne peut que durcir le verdict, jamais l’adoucir."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jawaban model juga teks yang tidak tepercaya: hanya bisa memperketat penilaian, tidak pernah melunakkannya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anche la risposta del modello è testo non fidato: può solo rendere il giudizio più severo, mai più morbido."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モデルの回答も信頼できないテキストです。評価を厳しくすることはあっても、甘くすることはありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델의 답변도 신뢰할 수 없는 텍스트입니다. 평가를 더 엄격하게만 할 수 있고 완화할 수는 없습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odpowiedź modelu to też niezaufany tekst: może tylko zaostrzyć ocenę, nigdy jej nie złagodzić."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A resposta do modelo também é texto não confiável: só pode deixar a avaliação mais rígida, nunca mais branda."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відповідь моделі — теж недовірений текст: вона може лише зробити оцінку суворішою, але не м’якшою."
+          }
+        }
+      }
+    },
+    "Ответ не удалось прочитать.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذّرت قراءة الإجابة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Antwort war nicht lesbar."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The answer couldn’t be read."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo leer la respuesta."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La réponse est illisible."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jawaban tidak bisa dibaca."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non è stato possibile leggere la risposta."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回答を読めませんでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "답변을 읽을 수 없습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się odczytać odpowiedzi."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível ler a resposta."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відповідь не вдалося прочитати."
           }
         }
       }
@@ -11893,6 +12957,82 @@
         }
       }
     },
+    "Попросить Claude проверить": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اطلب من Claude المراجعة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude um Prüfung bitten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask Claude to review"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pedir a Claude que la revise"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demander à Claude de vérifier"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minta Claude memeriksa"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiedi a Claude di verificarla"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude に確認を依頼"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude에게 검토 요청"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poproś Claude o sprawdzenie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pedir ao Claude para verificar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Попросити Claude перевірити"
+          }
+        }
+      }
+    },
     "Посмотрите «Замечено вне каталога» в журнале раздела «Скиллы».": {
       "localizations": {
         "ar": {
@@ -12801,6 +13941,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Скіл змінився після перевірки й перевірений знову — подивіться ще раз."
+          }
+        }
+      }
+    },
+    "Скилл изменился после проверки. Обновите список и попробуйте снова.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تغيّرت المهارة بعد فحصها. حدّث القائمة وحاول مجددًا."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Skill hat sich nach der Prüfung geändert. Aktualisieren Sie die Liste und versuchen Sie es erneut."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The skill changed after it was checked. Refresh the list and try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La skill cambió tras la comprobación. Actualice la lista e inténtelo de nuevo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le skill a changé après la vérification. Actualisez la liste et réessayez."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill berubah setelah diperiksa. Muat ulang daftar dan coba lagi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La skill è cambiata dopo il controllo. Aggiorna l’elenco e riprova."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "確認後にスキルが変わりました。一覧を更新してもう一度お試しください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확인 후 스킬이 바뀌었습니다. 목록을 새로 고친 뒤 다시 시도하세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill zmienił się po sprawdzeniu. Odśwież listę i spróbuj ponownie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A skill mudou depois da verificação. Atualize a lista e tente de novo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скіл змінився після перевірки. Оновіть список і спробуйте знову."
           }
         }
       }
@@ -15081,6 +16297,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Встановлену копію змінювали вручну: оновлення замінить ці правки (попередня копія залишиться в резервних)."
+          }
+        }
+      }
+    },
+    "Файлы скилла уйдут в Anthropic API с вашим ключом из Настроек → «Сервисы AI». Модель не получает никаких инструментов, из скилла ничего не запускается.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ستُرسل ملفات المهارة إلى واجهة Anthropic البرمجية بمفتاحك من الإعدادات ← «خدمات الذكاء الاصطناعي». لا يحصل النموذج على أي أدوات، ولا يُشغَّل شيء من المهارة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Dateien des Skills gehen mit Ihrem Schlüssel aus Einstellungen → „KI-Dienste“ an die Anthropic API. Das Modell bekommt keine Werkzeuge; aus dem Skill wird nichts ausgeführt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The skill’s files go to the Anthropic API with your key from Settings → AI Services. The model gets no tools; nothing from the skill is run."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los archivos de la skill irán a la API de Anthropic con su clave de Ajustes → Servicios de IA. El modelo no recibe herramientas; nada de la skill se ejecuta."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les fichiers du skill partent vers l’API Anthropic avec votre clé de Réglages → Services IA. Le modèle n’a aucun outil ; rien du skill n’est exécuté."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File skill dikirim ke API Anthropic dengan kunci Anda dari Pengaturan → Layanan AI. Model tidak mendapat alat apa pun; tidak ada isi skill yang dijalankan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I file della skill vanno all’API Anthropic con la tua chiave di Impostazioni → Servizi IA. Il modello non riceve strumenti; nulla della skill viene eseguito."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキルのファイルは、設定 →「AI サービス」のキーで Anthropic API に送られます。モデルにツールは与えられず、スキルの中身は何も実行されません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스킬 파일은 설정 → “AI 서비스”의 키로 Anthropic API에 전송됩니다. 모델은 어떤 도구도 받지 않으며 스킬의 어떤 것도 실행되지 않습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pliki skilla trafią do API Anthropic z Twoim kluczem z Ustawień → „Usługi AI”. Model nie dostaje żadnych narzędzi, nic ze skilla nie jest uruchamiane."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os arquivos da skill vão para a API da Anthropic com sua chave de Ajustes → Serviços de IA. O modelo não recebe ferramentas; nada da skill é executado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файли скіла підуть в Anthropic API з вашим ключем із Налаштувань → «Сервіси AI». Модель не отримує жодних інструментів, зі скіла нічого не запускається."
+          }
+        }
+      }
+    },
+    "Файлы скилла уйдут в Claude через Claude Code по вашей подписке — без инструментов, настроек и MCP. Из скилла ничего не запускается.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ستُرسل ملفات المهارة إلى Claude عبر Claude Code باشتراكك — دون أدوات أو إعدادات أو MCP. لا يُشغَّل شيء من المهارة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Dateien des Skills gehen über Claude Code mit Ihrem Abo an Claude – ohne Werkzeuge, Einstellungen und MCP. Aus dem Skill wird nichts ausgeführt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The skill’s files go to Claude through Claude Code on your subscription — with no tools, settings or MCP. Nothing from the skill is run."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los archivos de la skill irán a Claude a través de Claude Code con su suscripción, sin herramientas, ajustes ni MCP. Nada de la skill se ejecuta."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les fichiers du skill partent vers Claude via Claude Code avec votre abonnement — sans outils, réglages ni MCP. Rien du skill n’est exécuté."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File skill dikirim ke Claude lewat Claude Code dengan langganan Anda — tanpa alat, pengaturan, atau MCP. Tidak ada isi skill yang dijalankan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I file della skill vanno a Claude tramite Claude Code con il tuo abbonamento, senza strumenti, impostazioni né MCP. Nulla della skill viene eseguito."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキルのファイルは、あなたのサブスクリプションで Claude Code を通じて Claude に送られます。ツール・設定・MCP はなく、スキルの中身は何も実行されません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스킬 파일은 구독 중인 Claude Code를 통해 Claude로 전송됩니다. 도구·설정·MCP 없이 보내며 스킬의 어떤 것도 실행되지 않습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pliki skilla trafią do Claude przez Claude Code w ramach Twojej subskrypcji — bez narzędzi, ustawień i MCP. Nic ze skilla nie jest uruchamiane."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os arquivos da skill vão para o Claude pelo Claude Code com sua assinatura — sem ferramentas, ajustes nem MCP. Nada da skill é executado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файли скіла підуть у Claude через Claude Code за вашою підпискою — без інструментів, налаштувань і MCP. Зі скіла нічого не запускається."
           }
         }
       }

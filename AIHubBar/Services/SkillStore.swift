@@ -350,6 +350,63 @@ final class SkillStore {
         marksVersion += 1
     }
 
+    // MARK: - The AI review (SkillReview)
+
+    /// Tokens spent through the API go to the spend log (set by the app).
+    var recordSpend: (SpendRecord) -> Void = { _ in }
+    /// Skills being reviewed now: one request each at a time.
+    private(set) var reviewing: Set<Int> = []
+
+    /// The remembered review of a skill's content: in the interface language, else in any.
+    func review(of row: SkillCatalog.Row) async -> SkillReview.Result? {
+        let language = SkillReviewer.languageName
+        return await worker.run { catalog in
+            (try? catalog.cachedReview(contentHash: row.contentHash, language: language)) ?? (try? catalog.anyReview(contentHash: row.contentHash)) ?? nil
+        }
+    }
+
+    /// Asks a model about a skill: its files go to Claude Code (no tools) or the Anthropic API. Nothing of the skill is run.
+    func requestReview(_ id: Int) async -> Outcome<SkillReview.Result> {
+        guard !reviewing.contains(id) else { return .failure(.state) }
+        reviewing.insert(id)
+        defer { reviewing.remove(id) }
+        let language = SkillReviewer.languageName
+        let prepared: Outcome<(String, SkillReview.Request)> = await act(changes: false) { catalog, _ in
+            let (hash, request) = try catalog.reviewRequest(id, language: language)
+            return (hash, request)
+        }
+        guard case .success(let (hash, request)) = prepared else {
+            if case .failure(let refusal) = prepared { return .failure(refusal) }
+            return .failure(.missing)
+        }
+        guard let who = await SkillReviewer.who() else { return .failure(.init(code: "no-reviewer")) }
+        let model = SkillReviewer.defaultModel
+        let answer: Swift.Result<SkillReviewer.Answer, SkillCatalog.Refusal> = switch who {
+        case .claudeCode(let program):
+            await SkillReviewer.viaClaude(request, program: program, scratch: SessionFiles.supportDirectory.appending(path: "skills/review"), model: model)
+        case .api(let key):
+            await SkillReviewer.viaAPI(request, key: key, model: model)
+        }
+        let reply: SkillReviewer.Answer
+        switch answer {
+        case .success(let value): reply = value
+        case .failure(let refusal):
+            AppLog.error("skills: the AI review failed: \(refusal.code)")
+            return .failure(refusal)
+        }
+        if case .api = who {
+            recordSpend(SpendRecord(date: .now, provider: .anthropic, model: reply.model, inputTokens: reply.inputTokens, outputTokens: reply.outputTokens))
+        }
+        let parsed = SkillReview.parse(reply.text, request: request)
+        let result = SkillReview.Result(verdict: parsed.verdict, valid: parsed.valid, incomplete: request.incomplete, summary: parsed.summary, findings: parsed.findings,
+                                        model: reply.model, via: who.via, language: language, inputTokens: reply.inputTokens, outputTokens: reply.outputTokens,
+                                        reviewedAt: SkillCatalog.now())
+        AppLog.info("skills: AI review via \(who.via), \(reply.model): \(result.verdict.rawValue)\(result.valid ? "" : " (unreadable answer)")")
+        let saved: Outcome<Void> = await act(changes: true) { catalog, _ in try catalog.saveReview(result, contentHash: hash) }
+        if case .failure(let refusal) = saved { return .failure(refusal) }
+        return .success(result)
+    }
+
     func forget(_ id: Int) async {
         _ = await act(changes: true) { catalog, _ in try catalog.forget(id) }
     }
