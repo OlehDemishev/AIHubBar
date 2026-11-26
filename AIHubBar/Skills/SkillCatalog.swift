@@ -79,6 +79,26 @@ final class SkillCatalog {
             offset INTEGER NOT NULL
         );
         """,
+        """
+        ALTER TABLE skills ADD COLUMN author TEXT;
+        -- ',network,runsCode,': what the skill can do (`SkillAssessment`); NULL until worked out from the report.
+        ALTER TABLE scan_results ADD COLUMN capabilities TEXT;
+        -- A person's own marks, by kind and name: they stay when the skill is updated and its content changes.
+        CREATE TABLE skill_marks (
+            kind        TEXT NOT NULL,
+            name        TEXT NOT NULL,
+            favorite    INTEGER NOT NULL DEFAULT 0,
+            note        TEXT NOT NULL DEFAULT '',
+            updated_at  TEXT NOT NULL,
+            PRIMARY KEY (kind, name)
+        );
+        CREATE TABLE saved_filters (
+            id          INTEGER PRIMARY KEY,
+            name        TEXT NOT NULL,
+            filters     TEXT NOT NULL,                     -- `Filters` as JSON
+            created_at  TEXT NOT NULL
+        );
+        """,
     ]
 
     init(path: String) throws {
@@ -91,6 +111,25 @@ final class SkillCatalog {
                 db.userVersion = step + 1
             }
         }
+        try fillCapabilities()
+    }
+
+    /// Works out what each checked skill can do where it isn't known yet: after the layout's step 2.
+    private func fillCapabilities() throws {
+        let missing = try db.query("SELECT skill_id, report_json FROM scan_results WHERE capabilities IS NULL") { ($0.int(0), $0.text(1)) }
+        guard !missing.isEmpty else { return }
+        try db.transaction {
+            for (id, json) in missing {
+                guard let report = try? JSONDecoder().decode(SkillReport.self, from: Data(json.utf8)) else { continue }
+                try db.run("UPDATE scan_results SET capabilities = ?2 WHERE skill_id = ?1", .int(Int64(id)), .text(Self.capabilities(report)))
+            }
+        }
+    }
+
+    static func capabilities(_ report: SkillReport) -> String {
+        let assessment = SkillAssessment(report, llmVerdict: nil)
+        let present = SkillAssessment.Capability.allCases.filter { assessment.level($0) != .none }.map(\.rawValue)
+        return present.isEmpty ? "" : "," + present.joined(separator: ",") + ","
     }
 
     static func now() -> String { ISO8601DateFormatter().string(from: .now) }
@@ -101,6 +140,7 @@ final class SkillCatalog {
         var name: String
         var description: String
         var license: String?
+        var author: String?
     }
 
     /// The name, description and license a skill or plugin gives itself; the folder's name when it gives none.
@@ -112,14 +152,32 @@ final class SkillCatalog {
             // `description: >` puts the text on the following lines.
             var description = value("description") ?? ""
             if [">", "|", ">-", "|-"].contains(description) || description.isEmpty { description = foldedDescription(text) }
-            return Described(name: value("name") ?? fallback, description: description, license: value("license"))
+            return Described(name: value("name") ?? fallback, description: description, license: value("license"), author: value("author") ?? metadataAuthor(text))
         }
         for manifest in [".claude-plugin/plugin.json", "gemini-extension.json"] {
             guard let data = files.file(manifest)?.bytes, let root = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { continue }
             func value(_ key: String) -> String? { (root[key] as? String).flatMap { $0.isEmpty ? nil : $0 } }
-            return Described(name: listedName ?? value("name") ?? fallback, description: value("description") ?? "", license: value("license"))
+            let author = value("author") ?? ((root["author"] as? [String: Any])?["name"] as? String).flatMap { $0.isEmpty ? nil : $0 }
+            return Described(name: listedName ?? value("name") ?? fallback, description: value("description") ?? "", license: value("license"), author: author)
         }
-        return Described(name: fallback, description: "", license: nil)
+        return Described(name: fallback, description: "", license: nil, author: nil)
+    }
+
+    /// `metadata:` with an indented `author:` under it, as the Agent Skills standard puts extra fields.
+    private static func metadataAuthor(_ text: String) -> String? {
+        var inside = false
+        for line in SkillScanner.lines(text).dropFirst() {
+            if line.trimmingCharacters(in: .whitespaces) == "---" { break }
+            if line.hasPrefix("metadata:") { inside = true; continue }
+            guard inside else { continue }
+            guard line.hasPrefix(" ") || line.hasPrefix("\t") else { break }
+            let trimmed = line.trimmingCharacters(in: .whitespaces)
+            guard trimmed.hasPrefix("author:") else { continue }
+            var value = trimmed.dropFirst("author:".count).trimmingCharacters(in: .whitespaces)
+            if value.count >= 2, (value.hasPrefix("\"") && value.hasSuffix("\"")) || (value.hasPrefix("'") && value.hasSuffix("'")) { value = String(value.dropFirst().dropLast()) }
+            return value.isEmpty ? nil : value
+        }
+        return nil
     }
 
     private static func foldedDescription(_ text: String) -> String {
@@ -169,11 +227,13 @@ final class SkillCatalog {
                 let id: Int
                 if let known = try db.first("SELECT id FROM skills WHERE repo_url = '' AND path = ?1 AND content_hash = ?2", .text(entry.folder), .text(hash), map: { $0.int(0) }) {
                     id = known
-                    try db.run("UPDATE skills SET kind = ?2, name = ?3, description = ?4, license = ?5, agents = ?6 WHERE id = ?1",
-                               .int(Int64(id)), .text(entry.kind), .text(described.name), .text(described.description), .optional(described.license), .text(agentsJSON))
+                    try db.run("UPDATE skills SET kind = ?2, name = ?3, description = ?4, license = ?5, agents = ?6, author = ?7 WHERE id = ?1",
+                               .int(Int64(id)), .text(entry.kind), .text(described.name), .text(described.description), .optional(described.license), .text(agentsJSON),
+                               .optional(described.author))
                 } else {
-                    try db.run("INSERT INTO skills (kind, name, description, source, path, content_hash, license, agents, updated_at) VALUES (?1, ?2, ?3, 'local', ?4, ?5, ?6, ?7, ?8)",
-                               .text(entry.kind), .text(described.name), .text(described.description), .text(entry.folder), .text(hash), .optional(described.license), .text(agentsJSON), .text(now))
+                    try db.run("INSERT INTO skills (kind, name, description, source, path, content_hash, license, agents, updated_at, author) VALUES (?1, ?2, ?3, 'local', ?4, ?5, ?6, ?7, ?8, ?9)",
+                               .text(entry.kind), .text(described.name), .text(described.description), .text(entry.folder), .text(hash), .optional(described.license), .text(agentsJSON), .text(now),
+                               .optional(described.author))
                     id = db.lastInsertID
                 }
                 keptSkills.append(id)
@@ -207,11 +267,11 @@ final class SkillCatalog {
         let categories = Set(report.findings.filter { $0.severity >= .low }.map(\.category.rawValue)).sorted()
         let counts = Self.counts(report.findings)
         try db.run("""
-            INSERT OR REPLACE INTO scan_results (skill_id, scanner_version, risk_score, verdict, effective, has_scripts, categories, counts, report_json, scanned_at)
-            VALUES (?1, ?2, ?3, ?4, ?4, ?5, ?6, ?7, ?8, ?9)
+            INSERT OR REPLACE INTO scan_results (skill_id, scanner_version, risk_score, verdict, effective, has_scripts, categories, counts, report_json, scanned_at, capabilities)
+            VALUES (?1, ?2, ?3, ?4, ?4, ?5, ?6, ?7, ?8, ?9, ?10)
             """, .int(Int64(skill)), .int(Int64(report.scannerVersion)), .int(Int64(report.riskScore)), .text(report.verdict.rawValue), .bool(report.hasScripts),
                    .text(categories.isEmpty ? "" : "," + categories.joined(separator: ",") + ","), .text(counts.map(String.init).joined(separator: ",")),
-                   .text(String(decoding: try JSONEncoder().encode(report), as: UTF8.self)), .text(now))
+                   .text(String(decoding: try JSONEncoder().encode(report), as: UTF8.self)), .text(now), .text(Self.capabilities(report)))
     }
 
     /// How many findings of each severity, most serious first: critical, high, medium, low.
@@ -221,14 +281,138 @@ final class SkillCatalog {
 
     // MARK: - The list
 
-    struct Filters: Equatable, Sendable {
-        /// Words of the name and description.
+    /// Everything the list can be narrowed and ordered by. Saved as JSON (`saved_filters`): a field added later reads
+    /// as its default from an older saved filter.
+    struct Filters: Hashable, Codable, Sendable {
+        enum Sort: String, Codable, CaseIterable, Sendable {
+            /// The most dangerous first.
+            case risk
+            case name
+            /// The most used in 30 days first.
+            case mostUsed
+            /// Added or changed most recently first.
+            case newest
+        }
+
+        enum State: String, Codable, CaseIterable, Sendable {
+            case any
+            /// Switched on for at least one agent.
+            case on
+            /// Installed, but switched off everywhere.
+            case off
+        }
+
+        enum Usage: String, Codable, CaseIterable, Sendable {
+            case any
+            /// Used in the last 30 days.
+            case used
+            case unused
+        }
+
+        /// Words of the name and description, or of the person's note.
         var query = ""
         var verdict: SkillVerdict?
-        var agent: SkillAgent?
-        /// A kind of finding: skills that have one.
-        var finding: SkillCategory?
+        var minRisk = 0
+        var maxRisk = 100
+        /// Installed for any of these agents.
+        var agents: Set<SkillAgent> = []
+        /// Installed in any of these places: `user`, `project`, `plugin`, `extension`.
+        var scopes: Set<String> = []
+        /// `skill` or `plugin`.
+        var kind: String?
+        /// Has a finding of any of these kinds.
+        var findings: Set<SkillCategory> = []
+        /// Can do every one of these.
+        var can: Set<SkillAssessment.Capability> = []
+        /// Can do none of these.
+        var cannot: Set<SkillAssessment.Capability> = []
         var noScripts = false
+        var state = State.any
+        var usage = Usage.any
+        var favoritesOnly = false
+        var withNote = false
+        /// A license by name; an empty one means skills without a license.
+        var license: String?
+        var author: String?
+        /// Added or changed in the last days.
+        var newWithinDays: Int?
+        var sort = Sort.risk
+
+        init(query: String = "", verdict: SkillVerdict? = nil, agents: Set<SkillAgent> = [], findings: Set<SkillCategory> = [], noScripts: Bool = false) {
+            self.query = query
+            self.verdict = verdict
+            self.agents = agents
+            self.findings = findings
+            self.noScripts = noScripts
+        }
+
+        /// How many of the filters beyond the search, the verdict, «Избранное» and the order are set: for the filter
+        /// button. Those four have their own controls above the list.
+        var activeCount: Int {
+            var plain = self
+            plain.query = ""
+            plain.verdict = nil
+            plain.sort = .risk
+            let all: [Bool] = [
+                plain.minRisk > 0 || plain.maxRisk < 100, !agents.isEmpty, !scopes.isEmpty, kind != nil, !findings.isEmpty, !can.isEmpty, !cannot.isEmpty,
+                noScripts, state != .any, usage != .any, withNote, license != nil, author != nil, newWithinDays != nil,
+            ]
+            return all.filter { $0 }.count
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case query, verdict, minRisk, maxRisk, agents, scopes, kind, findings, can, cannot, noScripts, state, usage, favoritesOnly, withNote, license, author, newWithinDays, sort
+        }
+
+        init(from decoder: Decoder) throws {
+            let c = try decoder.container(keyedBy: CodingKeys.self)
+            // Values this version doesn't know (a newer verdict, agent or capability) are left out, not a failure.
+            func strings(_ key: CodingKeys) -> [String] { ((try? c.decodeIfPresent([String].self, forKey: key)) ?? nil) ?? [] }
+            func string(_ key: CodingKeys) -> String? { (try? c.decodeIfPresent(String.self, forKey: key)) ?? nil }
+            func int(_ key: CodingKeys) -> Int? { (try? c.decodeIfPresent(Int.self, forKey: key)) ?? nil }
+            query = string(.query) ?? ""
+            verdict = string(.verdict).flatMap(SkillVerdict.init)
+            minRisk = int(.minRisk) ?? 0
+            maxRisk = int(.maxRisk) ?? 100
+            agents = Set(strings(.agents).compactMap(SkillAgent.init))
+            scopes = Set(strings(.scopes))
+            kind = string(.kind)
+            findings = Set(strings(.findings).compactMap(SkillCategory.init))
+            can = Set(strings(.can).compactMap(SkillAssessment.Capability.init))
+            cannot = Set(strings(.cannot).compactMap(SkillAssessment.Capability.init))
+            noScripts = ((try? c.decodeIfPresent(Bool.self, forKey: .noScripts)) ?? nil) ?? false
+            state = string(.state).flatMap(State.init) ?? .any
+            usage = string(.usage).flatMap(Usage.init) ?? .any
+            favoritesOnly = ((try? c.decodeIfPresent(Bool.self, forKey: .favoritesOnly)) ?? nil) ?? false
+            withNote = ((try? c.decodeIfPresent(Bool.self, forKey: .withNote)) ?? nil) ?? false
+            license = string(.license)
+            author = string(.author)
+            newWithinDays = int(.newWithinDays)
+            sort = string(.sort).flatMap(Sort.init) ?? .risk
+        }
+
+        func encode(to encoder: Encoder) throws {
+            var c = encoder.container(keyedBy: CodingKeys.self)
+            try c.encode(query, forKey: .query)
+            try c.encodeIfPresent(verdict?.rawValue, forKey: .verdict)
+            try c.encode(minRisk, forKey: .minRisk)
+            try c.encode(maxRisk, forKey: .maxRisk)
+            try c.encode(agents.map(\.rawValue).sorted(), forKey: .agents)
+            try c.encode(scopes.sorted(), forKey: .scopes)
+            try c.encodeIfPresent(kind, forKey: .kind)
+            try c.encode(findings.map(\.rawValue).sorted(), forKey: .findings)
+            try c.encode(can.map(\.rawValue).sorted(), forKey: .can)
+            try c.encode(cannot.map(\.rawValue).sorted(), forKey: .cannot)
+            try c.encode(noScripts, forKey: .noScripts)
+            try c.encode(state.rawValue, forKey: .state)
+            try c.encode(usage.rawValue, forKey: .usage)
+            try c.encode(favoritesOnly, forKey: .favoritesOnly)
+            try c.encode(withNote, forKey: .withNote)
+            try c.encodeIfPresent(license, forKey: .license)
+            try c.encodeIfPresent(author, forKey: .author)
+            try c.encodeIfPresent(newWithinDays, forKey: .newWithinDays)
+            try c.encode(sort.rawValue, forKey: .sort)
+        }
     }
 
     struct Row: Identifiable, Equatable, Sendable {
@@ -240,6 +424,7 @@ final class SkillCatalog {
         var path: String
         var contentHash: String
         var license: String?
+        var author: String?
         var agents: [SkillAgent]
         var isInstalled: Bool
         /// Installed, but switched off everywhere.
@@ -250,6 +435,13 @@ final class SkillCatalog {
         var hasScripts: Bool
         /// Findings by severity: critical, high, medium, low.
         var counts: [Int]
+        var isFavorite: Bool
+        /// The person's own note; empty when there is none.
+        var note: String
+        /// Uses in the last 30 days.
+        var uses: Int
+        /// When this content was first seen.
+        var addedAt: String
     }
 
     struct Result: Equatable, Sendable {
@@ -270,25 +462,71 @@ final class SkillCatalog {
     /// The same content in several folders (copied into each agent's own) is one skill: the lowest id stands for all.
     private static let onePerContent = "s.id IN (SELECT min(id) FROM skills GROUP BY kind, content_hash)"
 
-    private func conditions(_ filters: Filters, withVerdict: Bool) -> (String, [SQLiteDB.Value]) {
+    private static func iso(_ date: Date) -> String { ISO8601DateFormatter().string(from: date) }
+
+    private func conditions(_ filters: Filters, withVerdict: Bool, now: Date) -> (String, [SQLiteDB.Value]) {
         var sql = [Self.onePerContent]
         var values: [SQLiteDB.Value] = []
         func bind(_ value: String) -> String {
             values.append(.text(value))
             return "?\(values.count)"
         }
+        func list(_ items: some Sequence<String>) -> String { items.sorted().map(bind).joined(separator: ", ") }
+        let installed = "EXISTS (SELECT 1 FROM installations i JOIN skills c ON c.id = i.skill_id WHERE c.content_hash = s.content_hash"
         let query = Self.ftsQuery(filters.query)
-        if !query.isEmpty { sql.append("s.content_hash IN (SELECT c.content_hash FROM skills c WHERE c.id IN (SELECT rowid FROM skills_fts WHERE skills_fts MATCH \(bind(query))))") }
-        if withVerdict, let verdict = filters.verdict { sql.append("r.effective = \(bind(verdict.rawValue))") }
-        if let agent = filters.agent {
-            sql.append("EXISTS (SELECT 1 FROM installations i JOIN skills c ON c.id = i.skill_id WHERE c.content_hash = s.content_hash AND i.agent = \(bind(agent.rawValue)))")
+        if !query.isEmpty {
+            let note = filters.query.trimmingCharacters(in: .whitespaces)
+            sql.append("""
+                (s.content_hash IN (SELECT c.content_hash FROM skills c WHERE c.id IN (SELECT rowid FROM skills_fts WHERE skills_fts MATCH \(bind(query))))
+                OR instr(lower(coalesce(m.note, '')), lower(\(bind(note)))) > 0)
+                """)
         }
-        if let finding = filters.finding { sql.append("r.categories LIKE \(bind("%,\(finding.rawValue),%"))") }
+        if withVerdict, let verdict = filters.verdict { sql.append("r.effective = \(bind(verdict.rawValue))") }
+        if filters.minRisk > 0 { sql.append("r.risk_score >= \(max(0, min(100, filters.minRisk)))") }
+        if filters.maxRisk < 100 { sql.append("r.risk_score <= \(max(0, min(100, filters.maxRisk)))") }
+        if !filters.agents.isEmpty { sql.append("\(installed) AND i.agent IN (\(list(filters.agents.map(\.rawValue)))))") }
+        if !filters.scopes.isEmpty { sql.append("\(installed) AND i.scope IN (\(list(filters.scopes))))") }
+        if let kind = filters.kind { sql.append("s.kind = \(bind(kind))") }
+        if !filters.findings.isEmpty {
+            sql.append("(" + filters.findings.map(\.rawValue).sorted().map { "r.categories LIKE \(bind("%,\($0),%"))" }.joined(separator: " OR ") + ")")
+        }
+        for capability in filters.can.map(\.rawValue).sorted() { sql.append("coalesce(r.capabilities, '') LIKE \(bind("%,\(capability),%"))") }
+        for capability in filters.cannot.map(\.rawValue).sorted() { sql.append("coalesce(r.capabilities, '') NOT LIKE \(bind("%,\(capability),%"))") }
         if filters.noScripts { sql.append("r.has_scripts = 0") }
+        switch filters.state {
+        case .any: break
+        case .on: sql.append("\(installed) AND i.enabled = 1)")
+        case .off: sql.append("\(installed)) AND NOT \(installed) AND i.enabled = 1)")
+        }
+        let since = Self.iso(now.addingTimeInterval(-30 * 86400))
+        switch filters.usage {
+        case .any: break
+        case .used: sql.append("EXISTS (SELECT 1 FROM skill_uses u WHERE u.name = s.name AND u.at >= \(bind(since)))")
+        case .unused: sql.append("NOT EXISTS (SELECT 1 FROM skill_uses u WHERE u.name = s.name AND u.at >= \(bind(since)))")
+        }
+        if filters.favoritesOnly { sql.append("coalesce(m.favorite, 0) = 1") }
+        if filters.withNote { sql.append("coalesce(m.note, '') <> ''") }
+        if let license = filters.license {
+            sql.append(license.isEmpty ? "coalesce(s.license, '') = ''" : "s.license = \(bind(license))")
+        }
+        if let author = filters.author { sql.append(author.isEmpty ? "coalesce(s.author, '') = ''" : "s.author = \(bind(author))") }
+        if let days = filters.newWithinDays { sql.append("s.updated_at >= \(bind(Self.iso(now.addingTimeInterval(-Double(max(days, 0)) * 86400))))") }
         return (sql.joined(separator: " AND "), values)
     }
 
-    private static let columns = "s.id, s.kind, s.name, s.description, s.source, s.path, s.content_hash, s.license, r.effective, r.verdict, r.risk_score, r.has_scripts, r.counts"
+    /// The columns of a `Row`; `since` is where the uses are counted from. The date is this file's own, never typed.
+    private static func columns(since: Date) -> String {
+        """
+        s.id, s.kind, s.name, s.description, s.source, s.path, s.content_hash, s.license, r.effective, r.verdict, r.risk_score, r.has_scripts, r.counts,
+        s.author, coalesce(m.favorite, 0), coalesce(m.note, ''), s.updated_at,
+        (SELECT count(*) FROM skill_uses u WHERE u.name = s.name AND u.at >= '\(iso(since))') AS uses
+        """
+    }
+
+    /// How many columns `columns` has: what a query adds comes after.
+    private static let columnCount: Int32 = 18
+
+    private static let from = "FROM skills s JOIN scan_results r ON r.skill_id = s.id LEFT JOIN skill_marks m ON m.kind = s.kind AND m.name = s.name"
 
     private func row(_ row: SQLiteDB.Row) throws -> Row {
         let hash = row.text(6)
@@ -296,25 +534,105 @@ final class SkillCatalog {
         var agents: [SkillAgent] = []
         for (agent, _) in places { if let value = SkillAgent(rawValue: agent), !agents.contains(value) { agents.append(value) } }
         return Row(id: row.int(0), kind: row.text(1), name: row.text(2), description: row.text(3), source: row.text(4), path: row.text(5), contentHash: hash,
-                   license: row.optionalText(7), agents: agents, isInstalled: !places.isEmpty, isOff: !places.isEmpty && places.allSatisfy { !$0.1 },
+                   license: row.optionalText(7), author: row.optionalText(13), agents: agents, isInstalled: !places.isEmpty, isOff: !places.isEmpty && places.allSatisfy { !$0.1 },
                    verdict: SkillVerdict(rawValue: row.text(8)) ?? .review, staticVerdict: SkillVerdict(rawValue: row.text(9)) ?? .review,
-                   riskScore: row.int(10), hasScripts: row.bool(11), counts: row.text(12).split(separator: ",").compactMap { Int($0) })
+                   riskScore: row.int(10), hasScripts: row.bool(11), counts: row.text(12).split(separator: ",").compactMap { Int($0) },
+                   isFavorite: row.bool(14), note: row.text(15), uses: row.int(17), addedAt: row.text(16))
     }
 
-    /// The skills that match, the most dangerous first, with the numbers for the verdict buttons.
-    func search(_ filters: Filters) throws -> Result {
-        let (wanted, values) = conditions(filters, withVerdict: true)
+    private static func order(_ sort: Filters.Sort) -> String {
+        let risk = "CASE r.effective WHEN 'dangerous' THEN 0 WHEN 'review' THEN 1 ELSE 2 END, r.risk_score DESC"
+        let name = "s.name COLLATE NOCASE, s.path"
+        return switch sort {
+        case .risk: "\(risk), \(name)"
+        case .name: name
+        case .mostUsed: "uses DESC, \(name)"
+        case .newest: "s.updated_at DESC, \(name)"
+        }
+    }
+
+    /// The skills that match in the chosen order, with the numbers for the verdict buttons.
+    func search(_ filters: Filters, now: Date = .now) throws -> Result {
+        let (wanted, values) = conditions(filters, withVerdict: true, now: now)
         let rows = try db.query("""
-            SELECT \(Self.columns) FROM skills s JOIN scan_results r ON r.skill_id = s.id WHERE \(wanted)
-            ORDER BY CASE r.effective WHEN 'dangerous' THEN 0 WHEN 'review' THEN 1 ELSE 2 END, r.risk_score DESC, s.name COLLATE NOCASE, s.path
-            LIMIT 500
+            SELECT \(Self.columns(since: now.addingTimeInterval(-30 * 86400))) \(Self.from) WHERE \(wanted)
+            ORDER BY \(Self.order(filters.sort)) LIMIT 500
             """, values, map: row)
-        let (anyVerdict, countValues) = conditions(filters, withVerdict: false)
+        let (anyVerdict, countValues) = conditions(filters, withVerdict: false, now: now)
         var byVerdict: [SkillVerdict: Int] = [:]
-        for (verdict, count) in try db.query("SELECT r.effective, count(*) FROM skills s JOIN scan_results r ON r.skill_id = s.id WHERE \(anyVerdict) GROUP BY r.effective", countValues, map: { ($0.text(0), $0.int(1)) }) {
+        for (verdict, count) in try db.query("SELECT r.effective, count(*) \(Self.from) WHERE \(anyVerdict) GROUP BY r.effective", countValues, map: { ($0.text(0), $0.int(1)) }) {
             byVerdict[SkillVerdict(rawValue: verdict) ?? .review, default: 0] += count
         }
         return Result(rows: rows, total: byVerdict.values.reduce(0, +), byVerdict: byVerdict)
+    }
+
+    /// What the filter's lists offer: the licenses, authors and places the catalog has.
+    struct Facets: Equatable, Sendable {
+        var licenses: [String] = []
+        var authors: [String] = []
+        var scopes: [String] = []
+        var hasUnlicensed = false
+    }
+
+    func facets() throws -> Facets {
+        let wanted = "FROM skills s WHERE \(Self.onePerContent)"
+        return Facets(licenses: try db.query("SELECT DISTINCT s.license \(wanted) AND coalesce(s.license, '') <> '' ORDER BY s.license COLLATE NOCASE") { $0.text(0) },
+                      authors: try db.query("SELECT DISTINCT s.author \(wanted) AND coalesce(s.author, '') <> '' ORDER BY s.author COLLATE NOCASE") { $0.text(0) },
+                      scopes: try db.query("SELECT DISTINCT scope FROM installations ORDER BY scope") { $0.text(0) },
+                      hasUnlicensed: try db.first("SELECT 1 \(wanted) AND coalesce(s.license, '') = '' LIMIT 1") { _ in true } ?? false)
+    }
+
+    // MARK: - The person's marks
+
+    /// Marks a skill as a favourite or not. Marks follow the skill's kind and name, so an update keeps them.
+    func setFavorite(_ id: Int, _ favorite: Bool, now: String = SkillCatalog.now()) throws {
+        try mark(id, now: now, set: "favorite = excluded.favorite", favorite: favorite, note: nil)
+    }
+
+    /// Keeps the person's note on a skill; an empty one removes it.
+    func setNote(_ id: Int, _ note: String, now: String = SkillCatalog.now()) throws {
+        let text = String(note.trimmingCharacters(in: .whitespacesAndNewlines).prefix(4000))
+        try mark(id, now: now, set: "note = excluded.note", favorite: nil, note: text)
+    }
+
+    private func mark(_ id: Int, now: String, set: String, favorite: Bool?, note: String?) throws {
+        guard let (kind, name) = try db.first("SELECT kind, name FROM skills WHERE id = ?1", .int(Int64(id)), map: { ($0.text(0), $0.text(1)) }) else { return }
+        try db.transaction {
+            try db.run("""
+                INSERT INTO skill_marks (kind, name, favorite, note, updated_at) VALUES (?1, ?2, ?3, ?4, ?5)
+                ON CONFLICT (kind, name) DO UPDATE SET \(set), updated_at = excluded.updated_at
+                """, .text(kind), .text(name), .bool(favorite ?? false), .text(note ?? ""), .text(now))
+            try db.run("DELETE FROM skill_marks WHERE kind = ?1 AND name = ?2 AND favorite = 0 AND note = ''", .text(kind), .text(name))
+        }
+    }
+
+    struct SavedFilter: Identifiable, Equatable, Sendable {
+        var id: Int
+        var name: String
+        var filters: Filters
+    }
+
+    func savedFilters() throws -> [SavedFilter] {
+        try db.query("SELECT id, name, filters FROM saved_filters ORDER BY name COLLATE NOCASE, id") { row in
+            SavedFilter(id: row.int(0), name: row.text(1), filters: (try? JSONDecoder().decode(Filters.self, from: Data(row.text(2).utf8))) ?? Filters())
+        }
+    }
+
+    /// Saves the filters under a name; a filter of the same name is replaced.
+    @discardableResult
+    func saveFilter(_ name: String, _ filters: Filters, now: String = SkillCatalog.now()) throws -> Int {
+        let title = String(name.trimmingCharacters(in: .whitespacesAndNewlines).prefix(80))
+        guard !title.isEmpty else { throw SQLiteDB.Failure(message: "a saved filter needs a name") }
+        let json = String(decoding: try JSONEncoder().encode(filters), as: UTF8.self)
+        return try db.transaction {
+            try db.run("DELETE FROM saved_filters WHERE name = ?1", .text(title))
+            try db.run("INSERT INTO saved_filters (name, filters, created_at) VALUES (?1, ?2, ?3)", .text(title), .text(json), .text(now))
+            return db.lastInsertID
+        }
+    }
+
+    func deleteFilter(_ id: Int) throws {
+        try db.run("DELETE FROM saved_filters WHERE id = ?1", .int(Int64(id)))
     }
 
     // MARK: - A skill's card
@@ -356,7 +674,9 @@ final class SkillCatalog {
     }
 
     func card(_ id: Int, now: Date = .now) throws -> Card? {
-        guard let (row, reportJSON, scannedAt) = try db.first("SELECT \(Self.columns), r.report_json, r.scanned_at FROM skills s JOIN scan_results r ON r.skill_id = s.id WHERE s.id = ?1", .int(Int64(id)), map: { (try self.row($0), $0.text(13), $0.text(14)) }) else { return nil }
+        guard let (row, reportJSON, scannedAt) = try db.first("""
+            SELECT \(Self.columns(since: now.addingTimeInterval(-30 * 86400))), r.report_json, r.scanned_at \(Self.from) WHERE s.id = ?1
+            """, .int(Int64(id)), map: { (try self.row($0), $0.text(Self.columnCount), $0.text(Self.columnCount + 1)) }) else { return nil }
         let report = try JSONDecoder().decode(SkillReport.self, from: Data(reportJSON.utf8))
         let places = try db.query("""
             SELECT i.agent, i.install_path, i.scope, i.project, i.enabled FROM installations i JOIN skills c ON c.id = i.skill_id

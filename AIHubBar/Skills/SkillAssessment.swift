@@ -4,7 +4,7 @@ import Foundation
 /// safer. Built from a `SkillReport` alone; the words for each part live in the string catalog.
 struct SkillAssessment: Equatable, Sendable {
     /// What a skill can do, in the terms a person thinks in.
-    enum Capability: String, CaseIterable, Sendable {
+    enum Capability: String, CaseIterable, Codable, Sendable {
         /// Reaches the internet.
         case network
         /// Sends data out (uploads, webhooks, paste sites).
