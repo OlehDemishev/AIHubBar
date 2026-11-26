@@ -16,6 +16,9 @@ struct StuckWatch {
 
     /// The row says «тихо» after 10 minutes; a notification waits twice as long.
     static let quietAfter: TimeInterval = 20 * 60
+    /// A session that waits for one long command — a build, a test run — is silent the whole time: the hook hears of
+    /// a tool call only when it ends. Such a session gets an hour before the notification.
+    static let quietWithCommandAfter: TimeInterval = 60 * 60
     /// The same command this many times among the last `loopWindow` tool calls.
     static let loopTimes = 5
     static let loopWindow = 12
@@ -37,7 +40,10 @@ struct StuckWatch {
         [session.lastToolAt, session.promptAt].compactMap { $0 }.reduce(session.updatedAt, max)
     }
 
-    mutating func evaluate(_ sessions: [(session: Session, state: Session.State)], now: Date = .now) -> [Alert] {
+    /// `isRunningCommand` says whether the session's agent has a command going that it started after the given
+    /// moment, its last sign of life. It is asked only about a session already quiet for `quietAfter`.
+    mutating func evaluate(_ sessions: [(session: Session, state: Session.State)], now: Date = .now,
+                           isRunningCommand: (Session, Date) -> Bool = { _, _ in false }) -> [Alert] {
         var alerts: [Alert] = []
         let present = Set(sessions.map(\.session.id))
         tracks = tracks.filter { present.contains($0.key) }
@@ -63,11 +69,13 @@ struct StuckWatch {
             guard state == .running else { continue }
             let last = Self.lastActivity(session)
             let quiet = now.timeIntervalSince(last)
-            if quiet >= Self.quietAfter, track.quietFiredFor != last {
-                track.quietFiredFor = last
-                if !isNew || quiet < Self.quietAfter + Self.replayWithin {
-                    alerts.append(Alert(sessionID: session.id, reason: .quiet(minutes: Int(quiet / 60))))
-                }
+            guard quiet >= Self.quietAfter, track.quietFiredFor != last else { continue }
+            let waitsForCommand = quiet < Self.quietWithCommandAfter && isRunningCommand(session, last)
+            let limit = waitsForCommand ? Self.quietWithCommandAfter : Self.quietAfter
+            guard quiet >= limit else { continue }
+            track.quietFiredFor = last
+            if !isNew || quiet < limit + Self.replayWithin {
+                alerts.append(Alert(sessionID: session.id, reason: .quiet(minutes: Int(quiet / 60))))
             }
         }
         return alerts

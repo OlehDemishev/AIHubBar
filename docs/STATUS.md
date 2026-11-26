@@ -5,6 +5,7 @@
 **Updated:** 2026-11-26
 
 **Now:**
+- 2026-11-26: Mac — a session waiting for one long command (a build, a test run) gets an hour, not 20 minutes, before «мог застрять» (branch `fix/stuck-long-command`); the first change in `main` for the release after 0.13.0
 - 2026-11-26: Windows 0.1.14 published as an unsigned pre-release (tag `desktop-v0.1.14`) on Oleh's «Выпускай»: the swap notification; installed on the laptop by the agent
 - 2026-11-26: Windows — the swap notification of «Ресурсы компьютера» («Подкачка сильно выросла»), as on the Mac since 0.13.0 (branch `feat/desktop-swap-alert`)
 - 2026-11-25: Windows 0.1.13 published as an unsigned pre-release (tag `desktop-v0.1.13`) on Oleh's «выпускай»: «Что изменилось» after a run, «Только отличия», the folder profile's git line gone; installed on the laptop by the agent
@@ -223,6 +224,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-26 — Mac: «мог застрять» waits an hour for one long command (branch `fix/stuck-long-command`)
+
+Done: the last item left from the 0.13.0 review. The hook hears of a tool call only when it ends, so a 25-minute build looked like a session doing nothing and got the notification. Now, when a session has been quiet for 20 minutes, `StuckWatch` asks whether the agent's process has a child that started after its last sign of life (`SessionStore.hasChildProcess`, `proc_listpids` by parent and the child's start time); if so, the notification waits until 60 minutes. Helpers kept from the session's start (MCP servers) are older and do not count. When the command ends and the agent stays silent, the usual 20 minutes apply. The text of the notification and «тихо N мин» in the row are unchanged, so no new strings.
+Checked: `scripts/check.sh` — all green (three new tests: an hour with a command going, back to 20 minutes once it ended, a real child process found by its start time).
+Left: not seen live — it needs a real session with a build longer than 20 minutes. A session without a known process id (an old hook) keeps the 20 minutes. The Windows version has the old behaviour. No release notes line yet: the next version has no notes file.
 
 ## 2026-11-26 — Mac: listed in awesome-mac, own Homebrew tap, r/macapps draft (branch `chore/homebrew-tap`)
 
