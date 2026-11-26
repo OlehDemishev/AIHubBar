@@ -24,6 +24,8 @@ final class SkillStore {
         var blocked: [SkillCatalog.Row] = []
         /// Copies the catalog installed whose source has a newer version.
         var updates: [SkillCatalog.Update] = []
+        /// Names an agent could load in two different versions.
+        var conflicts = 0
         /// Changes outside the catalog the person hasn't looked at.
         var unseenChanges = 0
         /// Installed skills nobody used for 30 days.
@@ -36,6 +38,8 @@ final class SkillStore {
     var pendingSkill: Int?
     /// The block's «Замечено вне каталога» asks the section to open on the journal.
     var opensChanges = false
+    /// The block asks the section to open on «Порядок» (conflicts, copies, unused, sets).
+    var opensOrder = false
     /// What the catalog may install and whom the person trusts (Settings → Скиллы).
     private(set) var policy = SkillCatalog.Policy()
     private(set) var trusted: [String] = []
@@ -150,6 +154,7 @@ final class SkillStore {
                        mostUsed: try catalog.mostUsed(since: .now.addingTimeInterval(-7 * 86400), limit: 3),
                        blocked: installed.filter(\.isBlocked),
                        updates: try catalog.updates(),
+                       conflicts: try catalog.conflicts().count,
                        unseenChanges: try catalog.unseenEvents(),
                        unused: try catalog.unused(since: .now.addingTimeInterval(-30 * 86400)))
     }
@@ -405,6 +410,54 @@ final class SkillStore {
         let saved: Outcome<Void> = await act(changes: true) { catalog, _ in try catalog.saveReview(result, contentHash: hash) }
         if case .failure(let refusal) = saved { return .failure(refusal) }
         return .success(result)
+    }
+
+    // MARK: - Order: conflicts, copies, unused skills, sets, export (SkillHousekeeping)
+
+    struct Order: Equatable, Sendable {
+        var conflicts: [SkillCatalog.Group] = []
+        var duplicates: [SkillCatalog.Group] = []
+        var unused: [SkillCatalog.Group] = []
+        var sets: [String: Int] = [:]
+    }
+
+    func order() async -> Order {
+        await worker.run { catalog in
+            Order(conflicts: (try? catalog.conflicts()) ?? [], duplicates: (try? catalog.duplicates()) ?? [],
+                  unused: (try? catalog.unusedSkills(since: .now.addingTimeInterval(-30 * 86400))) ?? [],
+                  sets: Dictionary(((try? catalog.sets()) ?? []).map { ($0.name, $0.members) }, uniquingKeysWith: { first, _ in first }))
+        }
+    }
+
+    func setsOf(_ row: SkillCatalog.Row) async -> [String] {
+        await worker.run { (try? $0.setsOf(kind: row.kind, name: row.name)) ?? [] }
+    }
+
+    func addToSet(_ set: String, skill id: Int) async {
+        _ = await act(changes: false) { catalog, place in try catalog.addToSet(set, skill: id, now: place.now) }
+        marksVersion += 1
+    }
+
+    func removeFromSet(_ set: String, skill id: Int) async {
+        _ = await act(changes: false) { catalog, _ in try catalog.removeFromSet(set, skill: id) }
+        marksVersion += 1
+    }
+
+    func deleteSet(_ set: String) async {
+        _ = await act(changes: false) { catalog, _ in try catalog.deleteSet(set) }
+        marksVersion += 1
+    }
+
+    func setEnabled(set: String, _ on: Bool) async -> Outcome<Int> {
+        await act(changes: true) { catalog, place in try catalog.setEnabled(set: set, on, place) }
+    }
+
+    func exportData() async -> Outcome<Data> {
+        await act(changes: false) { catalog, place in try SkillCatalog.exportData(catalog.export(now: place.now)) }
+    }
+
+    func compare(with data: Data) async -> Outcome<SkillCatalog.Comparison> {
+        await act(changes: false) { catalog, _ in try catalog.compare(with: SkillCatalog.readExport(data)) }
     }
 
     func forget(_ id: Int) async {
