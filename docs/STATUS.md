@@ -5,7 +5,7 @@
 **Updated:** 2026-11-26
 
 **Now:**
-- 2026-11-26: Windows/Linux — Skills Catalog, stage 1 of 6: a «Skills Catalog» window (tray menu, `claudepult --app-command skills`) lists every skill and plugin installed for Claude Code, Codex, Cursor and Gemini CLI with a safety verdict from the new `skill-scanner` crate (static checks only, a skill's files are never run); `claudepult skills list|scan` (branch `feat/skills-catalog-local`; the page seen in a browser with fixture data, the real window not opened)
+- 2026-11-26: Windows/Linux — Skills Catalog, stage 1 of 6: a «Skills Catalog» window (tray menu, `claudepult --app-command skills`) lists every skill and plugin installed for Claude Code, Codex, Cursor and Gemini CLI with a safety verdict from the new `skill-scanner` crate (static checks only, a skill's files are never run); `claudepult skills list|scan` (`feat/skills-catalog-local`, merged 2026-11-26, CI green on Windows and Linux; the page seen in a browser with fixture data, the real window not opened by the agent)
 - 2026-11-26: Mac — a session waiting for one long command (a build, a test run) gets an hour, not 20 minutes, before «мог застрять» (branch `fix/stuck-long-command`); the first change in `main` for the release after 0.13.0
 - 2026-11-26: Windows 0.1.14 published as an unsigned pre-release (tag `desktop-v0.1.14`) on Oleh's «Выпускай»: the swap notification; installed on the laptop by the agent
 - 2026-11-26: Windows — the swap notification of «Ресурсы компьютера» («Подкачка сильно выросла»), as on the Mac since 0.13.0 (branch `feat/desktop-swap-alert`)
