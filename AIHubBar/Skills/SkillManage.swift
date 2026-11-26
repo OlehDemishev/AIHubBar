@@ -100,9 +100,9 @@ extension SkillCatalog {
         return try db.transaction {
             // An older version of the same added folder gives way to the new one.
             try db.run("DELETE FROM skills WHERE source = 'folder' AND path = ?1", .text(path))
-            try db.run("INSERT INTO skills (kind, name, description, source, path, content_hash, license, agents, updated_at, author) VALUES (?1, ?2, ?3, 'folder', ?4, ?5, ?6, '[]', ?7, ?8)",
+            try db.run("INSERT INTO skills (kind, name, description, source, path, content_hash, license, agents, updated_at, author, homepage) VALUES (?1, ?2, ?3, 'folder', ?4, ?5, ?6, '[]', ?7, ?8, ?9)",
                        .text(isPlugin ? "plugin" : "skill"), .text(described.name), .text(described.description), .text(path), .text(hash),
-                       .optional(described.license), .text(now), .optional(described.author))
+                       .optional(described.license), .text(now), .optional(described.author), .optional(described.homepage))
             let id = db.lastInsertID
             try save(report, skill: id, now: now)
             return id
@@ -164,7 +164,7 @@ extension SkillCatalog {
         var needsAck: Bool { verdict != .safe }
         /// An update of an installed copy: what is there now is kept in the backups.
         var replaces: Bool
-        /// Why it can't be done: `plugin`, `no-skill-md`, `too-large`, `already`, `exists`, `name`.
+        /// Why it can't be done: `blocked`, `plugin`, `no-skill-md`, `too-large`, `already`, `exists`, `name`.
         var blocked: String?
     }
 
@@ -216,7 +216,10 @@ extension SkillCatalog {
         let target = skillsFolder.appending(path: name ?? "skill").standardizedFileURL
         let hasIt = try db.first("SELECT EXISTS (SELECT 1 FROM installations i JOIN skills c ON c.id = i.skill_id WHERE c.content_hash = ?1 AND i.agent = ?2)",
                                  .text(source.contentHash), .text(agent.rawValue), map: { $0.bool(0) }) ?? false
-        let blocked: String? = if source.kind != "skill" {
+        let isBlocked = try db.first("SELECT \(Self.isBlockedSQL) FROM skills s WHERE s.id = ?1", .int(Int64(source.id)), map: { $0.bool(0) }) ?? false
+        let blocked: String? = if isBlocked {
+            "blocked"
+        } else if source.kind != "skill" {
             "plugin"
         } else if files.file("SKILL.md") == nil {
             "no-skill-md"
@@ -660,7 +663,8 @@ extension SkillCatalog {
         let found = try installed(installPath, place)
         guard let row = try managed(installPath), let origin = Self.originFiles(row) else { throw Refusal.missing }
         let report = SkillScanner.scan(origin)
-        let blocked: String? = if origin.file("SKILL.md") == nil { "no-skill-md" } else if origin.truncated { "too-large" } else if report.contentHash == row.sourceHash { "already" } else { nil }
+        let newName = Self.describe(origin, folder: row.origin, listedName: nil).name
+        let blocked: String? = if try isBlocked(kind: "skill", name: newName, contentHash: report.contentHash) || isBlocked(kind: "skill", name: row.name, contentHash: report.contentHash) { "blocked" } else if origin.file("SKILL.md") == nil { "no-skill-md" } else if origin.truncated { "too-large" } else if report.contentHash == row.sourceHash { "already" } else { nil }
         let id = try db.first("SELECT skill_id FROM installations WHERE install_path = ?1 LIMIT 1", .text(installPath), map: { $0.int(0) }) ?? 0
         let agents = found.agents.compactMap(SkillAgent.init)
         return try plan(Source(id: id, kind: "skill", source: "local", path: row.origin, contentHash: report.contentHash), origin, report, changed: true,

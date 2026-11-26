@@ -101,6 +101,8 @@ final class SkillCatalog {
         """,
         // Step 4: what the catalog installed itself, and the journal of every change in the agents' folders.
         manageMigration,
+        // Step 5: complaints and the block list.
+        reportsMigration,
     ]
 
     init(path: String) throws {
@@ -143,6 +145,8 @@ final class SkillCatalog {
         var description: String
         var license: String?
         var author: String?
+        /// Where the skill says it lives: a repository or a home page.
+        var homepage: String?
     }
 
     /// The name, description and license a skill or plugin gives itself; the folder's name when it gives none.
@@ -154,19 +158,22 @@ final class SkillCatalog {
             // `description: >` puts the text on the following lines.
             var description = value("description") ?? ""
             if [">", "|", ">-", "|-"].contains(description) || description.isEmpty { description = foldedDescription(text) }
-            return Described(name: value("name") ?? fallback, description: description, license: value("license"), author: value("author") ?? metadataAuthor(text))
+            return Described(name: value("name") ?? fallback, description: description, license: value("license"), author: value("author") ?? metadata("author", text),
+                             homepage: value("homepage") ?? value("repository") ?? metadata("repository", text) ?? metadata("homepage", text))
         }
         for manifest in [".claude-plugin/plugin.json", "gemini-extension.json"] {
             guard let data = files.file(manifest)?.bytes, let root = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { continue }
             func value(_ key: String) -> String? { (root[key] as? String).flatMap { $0.isEmpty ? nil : $0 } }
             let author = value("author") ?? ((root["author"] as? [String: Any])?["name"] as? String).flatMap { $0.isEmpty ? nil : $0 }
-            return Described(name: listedName ?? value("name") ?? fallback, description: value("description") ?? "", license: value("license"), author: author)
+            let repository = value("repository") ?? ((root["repository"] as? [String: Any])?["url"] as? String).flatMap { $0.isEmpty ? nil : $0 }
+            return Described(name: listedName ?? value("name") ?? fallback, description: value("description") ?? "", license: value("license"), author: author,
+                             homepage: repository ?? value("homepage"))
         }
-        return Described(name: fallback, description: "", license: nil, author: nil)
+        return Described(name: fallback, description: "", license: nil, author: nil, homepage: nil)
     }
 
-    /// `metadata:` with an indented `author:` under it, as the Agent Skills standard puts extra fields.
-    private static func metadataAuthor(_ text: String) -> String? {
+    /// A field indented under `metadata:`, where the Agent Skills standard puts extra fields (`author`, `repository`).
+    private static func metadata(_ key: String, _ text: String) -> String? {
         var inside = false
         for line in SkillScanner.lines(text).dropFirst() {
             if line.trimmingCharacters(in: .whitespaces) == "---" { break }
@@ -174,8 +181,8 @@ final class SkillCatalog {
             guard inside else { continue }
             guard line.hasPrefix(" ") || line.hasPrefix("\t") else { break }
             let trimmed = line.trimmingCharacters(in: .whitespaces)
-            guard trimmed.hasPrefix("author:") else { continue }
-            var value = trimmed.dropFirst("author:".count).trimmingCharacters(in: .whitespaces)
+            guard trimmed.hasPrefix("\(key):") else { continue }
+            var value = trimmed.dropFirst(key.count + 1).trimmingCharacters(in: .whitespaces)
             if value.count >= 2, (value.hasPrefix("\"") && value.hasSuffix("\"")) || (value.hasPrefix("'") && value.hasSuffix("'")) { value = String(value.dropFirst().dropLast()) }
             return value.isEmpty ? nil : value
         }
@@ -229,13 +236,13 @@ final class SkillCatalog {
                 let id: Int
                 if let known = try db.first("SELECT id FROM skills WHERE repo_url = '' AND path = ?1 AND content_hash = ?2", .text(entry.folder), .text(hash), map: { $0.int(0) }) {
                     id = known
-                    try db.run("UPDATE skills SET kind = ?2, name = ?3, description = ?4, license = ?5, agents = ?6, author = ?7 WHERE id = ?1",
+                    try db.run("UPDATE skills SET kind = ?2, name = ?3, description = ?4, license = ?5, agents = ?6, author = ?7, homepage = ?8 WHERE id = ?1",
                                .int(Int64(id)), .text(entry.kind), .text(described.name), .text(described.description), .optional(described.license), .text(agentsJSON),
-                               .optional(described.author))
+                               .optional(described.author), .optional(described.homepage))
                 } else {
-                    try db.run("INSERT INTO skills (kind, name, description, source, path, content_hash, license, agents, updated_at, author) VALUES (?1, ?2, ?3, 'local', ?4, ?5, ?6, ?7, ?8, ?9)",
+                    try db.run("INSERT INTO skills (kind, name, description, source, path, content_hash, license, agents, updated_at, author, homepage) VALUES (?1, ?2, ?3, 'local', ?4, ?5, ?6, ?7, ?8, ?9, ?10)",
                                .text(entry.kind), .text(described.name), .text(described.description), .text(entry.folder), .text(hash), .optional(described.license), .text(agentsJSON), .text(now),
-                               .optional(described.author))
+                               .optional(described.author), .optional(described.homepage))
                     id = db.lastInsertID
                 }
                 keptSkills.append(id)
@@ -341,6 +348,10 @@ final class SkillCatalog {
         var usage = Usage.any
         var favoritesOnly = false
         var withNote = false
+        /// Only the skills on the block list.
+        var blockedOnly = false
+        /// Only the skills the person complained about.
+        var withReport = false
         /// A license by name; an empty one means skills without a license.
         var license: String?
         var author: String?
@@ -365,13 +376,13 @@ final class SkillCatalog {
             plain.sort = .risk
             let all: [Bool] = [
                 plain.minRisk > 0 || plain.maxRisk < 100, !agents.isEmpty, !scopes.isEmpty, kind != nil, !findings.isEmpty, !can.isEmpty, !cannot.isEmpty,
-                noScripts, state != .any, usage != .any, withNote, license != nil, author != nil, newWithinDays != nil,
+                noScripts, state != .any, usage != .any, withNote, blockedOnly, withReport, license != nil, author != nil, newWithinDays != nil,
             ]
             return all.filter { $0 }.count
         }
 
         private enum CodingKeys: String, CodingKey {
-            case query, verdict, minRisk, maxRisk, agents, scopes, kind, findings, can, cannot, noScripts, state, usage, favoritesOnly, withNote, license, author, newWithinDays, sort
+            case query, verdict, minRisk, maxRisk, agents, scopes, kind, findings, can, cannot, noScripts, state, usage, favoritesOnly, withNote, blockedOnly, withReport, license, author, newWithinDays, sort
         }
 
         init(from decoder: Decoder) throws {
@@ -395,6 +406,8 @@ final class SkillCatalog {
             usage = string(.usage).flatMap(Usage.init) ?? .any
             favoritesOnly = ((try? c.decodeIfPresent(Bool.self, forKey: .favoritesOnly)) ?? nil) ?? false
             withNote = ((try? c.decodeIfPresent(Bool.self, forKey: .withNote)) ?? nil) ?? false
+            blockedOnly = ((try? c.decodeIfPresent(Bool.self, forKey: .blockedOnly)) ?? nil) ?? false
+            withReport = ((try? c.decodeIfPresent(Bool.self, forKey: .withReport)) ?? nil) ?? false
             license = string(.license)
             author = string(.author)
             newWithinDays = int(.newWithinDays)
@@ -418,6 +431,8 @@ final class SkillCatalog {
             try c.encode(usage.rawValue, forKey: .usage)
             try c.encode(favoritesOnly, forKey: .favoritesOnly)
             try c.encode(withNote, forKey: .withNote)
+            try c.encode(blockedOnly, forKey: .blockedOnly)
+            try c.encode(withReport, forKey: .withReport)
             try c.encodeIfPresent(license, forKey: .license)
             try c.encodeIfPresent(author, forKey: .author)
             try c.encodeIfPresent(newWithinDays, forKey: .newWithinDays)
@@ -452,6 +467,12 @@ final class SkillCatalog {
         var uses: Int
         /// When this content was first seen.
         var addedAt: String
+        /// On the person's block list (this version or every version).
+        var isBlocked: Bool
+        /// Complaints the person kept about it, any version.
+        var reports: Int
+        /// Where it says it lives.
+        var homepage: String?
     }
 
     struct Result: Equatable, Sendable {
@@ -516,6 +537,8 @@ final class SkillCatalog {
         }
         if filters.favoritesOnly { sql.append("coalesce(m.favorite, 0) = 1") }
         if filters.withNote { sql.append("coalesce(m.note, '') <> ''") }
+        if filters.blockedOnly { sql.append(Self.isBlockedSQL) }
+        if filters.withReport { sql.append("EXISTS (SELECT 1 FROM skill_reports p WHERE p.kind = s.kind AND p.name = s.name)") }
         if let license = filters.license {
             sql.append(license.isEmpty ? "coalesce(s.license, '') = ''" : "s.license = \(bind(license))")
         }
@@ -529,12 +552,13 @@ final class SkillCatalog {
         """
         s.id, s.kind, s.name, s.description, s.source, s.path, s.content_hash, s.license, r.effective, r.verdict, r.risk_score, r.has_scripts, r.counts,
         s.author, coalesce(m.favorite, 0), coalesce(m.note, ''), s.updated_at,
-        (SELECT count(*) FROM skill_uses u WHERE u.name = s.name AND u.at >= '\(iso(since))') AS uses
+        (SELECT count(*) FROM skill_uses u WHERE u.name = s.name AND u.at >= '\(iso(since))') AS uses,
+        \(isBlockedSQL), (SELECT count(*) FROM skill_reports p WHERE p.kind = s.kind AND p.name = s.name), s.homepage
         """
     }
 
     /// How many columns `columns` has: what a query adds comes after.
-    private static let columnCount: Int32 = 18
+    private static let columnCount: Int32 = 21
 
     private static let from = "FROM skills s JOIN scan_results r ON r.skill_id = s.id LEFT JOIN skill_marks m ON m.kind = s.kind AND m.name = s.name"
 
@@ -547,7 +571,8 @@ final class SkillCatalog {
                    license: row.optionalText(7), author: row.optionalText(13), agents: agents, isInstalled: !places.isEmpty, isOff: !places.isEmpty && places.allSatisfy { !$0.1 },
                    verdict: SkillVerdict(rawValue: row.text(8)) ?? .review, staticVerdict: SkillVerdict(rawValue: row.text(9)) ?? .review,
                    riskScore: row.int(10), hasScripts: row.bool(11), counts: row.text(12).split(separator: ",").compactMap { Int($0) },
-                   isFavorite: row.bool(14), note: row.text(15), uses: row.int(17), addedAt: row.text(16))
+                   isFavorite: row.bool(14), note: row.text(15), uses: row.int(17), addedAt: row.text(16),
+                   isBlocked: row.bool(18), reports: row.int(19), homepage: row.optionalText(20))
     }
 
     private static func order(_ sort: Filters.Sort) -> String {

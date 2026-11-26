@@ -20,6 +20,8 @@ final class SkillStore {
         /// Dangerous skills, the most dangerous first, each with the rule that decided it.
         var dangerous: [Alert] = []
         var mostUsed: [SkillCatalog.Used] = []
+        /// Installed skills the person put on the block list.
+        var blocked: [SkillCatalog.Row] = []
         /// Copies the catalog installed whose source has a newer version.
         var updates: [SkillCatalog.Update] = []
         /// Installed skills nobody used for 30 days.
@@ -35,7 +37,7 @@ final class SkillStore {
     var isActive: () -> Bool = { true }
 
     /// Something in the block needs attention: a dangerous skill is installed.
-    var hasAlert: Bool { !summary.dangerous.isEmpty }
+    var hasAlert: Bool { !summary.dangerous.isEmpty || !summary.blocked.isEmpty }
 
     private let settings: AppSettings
     private let roots: @Sendable (String) -> SkillRoots
@@ -110,6 +112,7 @@ final class SkillStore {
         }
         return Summary(byVerdict: byVerdict, dangerous: dangerous,
                        mostUsed: try catalog.mostUsed(since: .now.addingTimeInterval(-7 * 86400), limit: 3),
+                       blocked: installed.filter(\.isBlocked),
                        updates: try catalog.updates(),
                        unused: try catalog.unused(since: .now.addingTimeInterval(-30 * 86400)))
     }
@@ -239,6 +242,40 @@ final class SkillStore {
     /// A folder the person chose: checked and listed, installed nowhere.
     func importFolder(_ folder: URL) async -> Outcome<Int> {
         await act(changes: true) { catalog, place in try catalog.importFolder(folder, now: place.now) }
+    }
+
+    // MARK: - Complaints and the block list (SkillReports)
+
+    func report(_ id: Int, reason: SkillCatalog.ReportReason, details: String) async -> Outcome<Int> {
+        let result: Outcome<Int> = await act(changes: false) { catalog, place in try catalog.report(id, reason: reason, details: details, now: place.now) }
+        marksVersion += 1
+        return result
+    }
+
+    func reports(of row: SkillCatalog.Row) async -> [SkillCatalog.Report] {
+        await worker.run { (try? $0.reports(kind: row.kind, name: row.name)) ?? [] }
+    }
+
+    func markSent(_ reportID: Int, to place: String) async {
+        _ = await act(changes: false) { catalog, _ in try catalog.markSent(reportID, to: place) }
+        marksVersion += 1
+    }
+
+    func deleteReport(_ reportID: Int) async {
+        _ = await act(changes: false) { catalog, _ in try catalog.deleteReport(reportID) }
+        marksVersion += 1
+    }
+
+    func blockOf(_ id: Int) async -> SkillCatalog.Block? {
+        await worker.run { try? $0.blockOf(id) }
+    }
+
+    func block(_ id: Int, everyVersion: Bool, reason: String) async {
+        _ = await act(changes: true) { catalog, place in try catalog.block(id, everyVersion: everyVersion, reason: reason, now: place.now) }
+    }
+
+    func unblock(_ id: Int) async {
+        _ = await act(changes: true) { catalog, _ in try catalog.unblock(id) }
     }
 
     func forget(_ id: Int) async {

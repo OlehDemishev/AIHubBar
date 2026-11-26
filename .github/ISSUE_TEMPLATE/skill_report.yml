@@ -1,0 +1,46 @@
+name: Skill report
+description: A skill or plugin that AI Hub Bar's Skills Catalog judged wrongly, or that looks harmful
+labels: [skills]
+body:
+  - type: markdown
+    attributes:
+      value: Sent from a skill's card in AI Hub Bar. Nothing was sent by the app itself — check the fields before you submit.
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      description: Its name and kind (skill or plugin).
+    validations:
+      required: true
+  - type: input
+    id: hash
+    attributes:
+      label: Content hash
+      description: SHA-256 of the skill's files, as the catalog shows it.
+  - type: input
+    id: verdict
+    attributes:
+      label: Catalog's verdict
+      placeholder: "review, risk 20 of 100: scripts-present, network-call"
+  - type: dropdown
+    id: reason
+    attributes:
+      label: Reason
+      options:
+        - Looks malicious
+        - Does something else than it says
+        - Doesn't work
+        - License or authorship
+        - The check was wrong (false alarm)
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What you saw. Remove anything private before submitting.
+  - type: input
+    id: version
+    attributes:
+      label: AI Hub Bar version

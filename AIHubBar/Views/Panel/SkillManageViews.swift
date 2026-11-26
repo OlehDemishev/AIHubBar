@@ -20,6 +20,7 @@ enum SkillRefusalText {
         case "too-large": String(localized: "Скилл слишком большой: проверены не все его файлы.")
         case "already": String(localized: "Уже установлен для этого агента.")
         case "name": String(localized: "У скилла нет имени, годного для папки.")
+        case "blocked": String(localized: "Скилл в вашем блок-листе: каталог его не ставит.")
         default: String(localized: "Не получилось: \(refusal.code)")
         }
     }
