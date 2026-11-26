@@ -18,6 +18,7 @@ are in each spec and in the journal: `docs/STATUS.md`, older months in `docs/sta
 | [SPEC-help.md](SPEC-help.md) | help in the app and on the site | done (#206) |
 | [SPEC-quick-prompt.md](SPEC-quick-prompt.md) | «Быстрый запрос»: a task to an agent from any app by a hot key | done (2026-11-03) |
 | [SPEC-telegram.md](SPEC-telegram.md) | «Telegram»: one bot with its own menu — reports, sessions, tasks, limits, settings; a shared bot through a Cloudflare Worker | agreed 2026-11-03; stage 1 done (#242, #244); stages 1–4 done (#242–#255), shared bot and Mini App (§10) built; the Worker deployed 2026-11-03, the bot and the Mini App confirmed by Oleh 2026-11-08 |
+| [SPEC-skills.md](SPEC-skills.md) | Skills Catalog: the common safety rules — findings, score, verdict, «why this verdict», what a skill can do, advice; the Mac app first (Swift) | rules and the Swift scanner 2026-11-26; the panel and the rest to come |
 | [SPEC-refactor.md](SPEC-refactor.md) | refactoring audit and plan | done (stages 0–8) |
 | [SPEC-windows.md](SPEC-windows.md) | Windows version (`desktop/`, Tauri 2) | resumed 2026-11-17 after stages 1–3 main parts; §11 maps every Mac feature; developed on a Windows PC (`desktop/WINDOWS-DEV.md`) |
 | [SPEC-linux.md](SPEC-linux.md) | Linux version (same code as Windows) | resumed with Windows |
