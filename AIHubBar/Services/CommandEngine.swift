@@ -226,7 +226,8 @@ final class CommandEngine {
         SpendSummary.of(spend, since: start, prices: settings.aiServices.prices)
     }
 
-    private func record(_ record: SpendRecord) {
+    /// Also for the Skills Catalog's AI review through the API.
+    func record(_ record: SpendRecord) {
         spend.append(record)
         let yearAgo = Date.now.addingTimeInterval(-400 * 86_400)
         spend.removeAll { $0.date < yearAgo }

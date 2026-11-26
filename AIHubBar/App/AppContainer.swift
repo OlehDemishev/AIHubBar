@@ -136,6 +136,7 @@ final class AppContainer {
         self.versionKeeper = versionKeeper
         engine.beforeRun = { [versionKeeper] path, title in versionKeeper.takeBeforeRun(projectPath: path, title: title) }
         engine.tracksVersions = { [versionKeeper] in versionKeeper.isActive() }
+        skills.recordSpend = { [engine] in engine.record($0) }
         runs.tracksVersions = { [versionKeeper] in versionKeeper.isActive() }
         let launcher = LaunchController(settings: settings, store: store, runs: runs, usage: usage)
         let telegramBot = TelegramBotController(settings: settings, sessions: sessions, runs: runs, usage: usage, approvals: telegramApprovals)

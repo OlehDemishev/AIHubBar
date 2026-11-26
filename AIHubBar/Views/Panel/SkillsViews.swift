@@ -733,6 +733,7 @@ private struct SkillFilterPanel: View {
                 SkillChip(title: String(localized: "С жалобой"), symbol: "exclamationmark.bubble", isOn: filters.withReport) { filters.withReport.toggle() }
                 SkillChip(title: String(localized: "В блок-листе"), symbol: "nosign", isOn: filters.blockedOnly) { filters.blockedOnly.toggle() }
                 SkillChip(title: String(localized: "Доверенные авторы"), symbol: "checkmark.seal", isOn: filters.trustedOnly) { filters.trustedOnly.toggle() }
+                SkillChip(title: String(localized: "AI-проверен"), symbol: "sparkles", isOn: filters.aiReviewed) { filters.aiReviewed.toggle() }
             }
             group("Использование") {
                 SkillChip(title: String(localized: "Запускались за 30 дней"), isOn: filters.usage == .used) { filters.usage = filters.usage == .used ? .any : .used }
@@ -902,6 +903,7 @@ struct SkillCardView: View {
             }
             SkillBlockBanner(card: card)
             why(assessment)
+            SkillAIReviewBox(card: card)
             noteEditor
             capabilities(assessment)
             if !assessment.advice.isEmpty { advice(assessment) }

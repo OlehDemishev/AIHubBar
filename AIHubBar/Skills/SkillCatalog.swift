@@ -105,6 +105,8 @@ final class SkillCatalog {
         reportsMigration,
         // Step 6: changes made outside the catalog, the install policy, trusted authors.
         watchMigration,
+        // Step 7: the AI review.
+        reviewMigration,
     ]
 
     init(path: String) throws {
@@ -296,6 +298,8 @@ final class SkillCatalog {
             """, .int(Int64(skill)), .int(Int64(report.scannerVersion)), .int(Int64(report.riskScore)), .text(report.verdict.rawValue), .bool(report.hasScripts),
                    .text(categories.isEmpty ? "" : "," + categories.joined(separator: ",") + ","), .text(counts.map(String.init).joined(separator: ",")),
                    .text(String(decoding: try JSONEncoder().encode(report), as: UTF8.self)), .text(now), .text(Self.capabilities(report)))
+        // A model's stricter verdict about this content stays when the content is checked again or found in a new place.
+        if try rememberedVerdict(contentHash: report.contentHash) != nil { try applyReview(contentHash: report.contentHash) }
     }
 
     /// How many findings of each severity, most serious first: critical, high, medium, low.
@@ -361,6 +365,8 @@ final class SkillCatalog {
         var withReport = false
         /// Only the skills of trusted authors.
         var trustedOnly = false
+        /// Only the skills a language model reviewed.
+        var aiReviewed = false
         /// A license by name; an empty one means skills without a license.
         var license: String?
         var author: String?
@@ -385,13 +391,13 @@ final class SkillCatalog {
             plain.sort = .risk
             let all: [Bool] = [
                 plain.minRisk > 0 || plain.maxRisk < 100, !agents.isEmpty, !scopes.isEmpty, kind != nil, !findings.isEmpty, !can.isEmpty, !cannot.isEmpty,
-                noScripts, state != .any, usage != .any, withNote, blockedOnly, withReport, trustedOnly, license != nil, author != nil, newWithinDays != nil,
+                noScripts, state != .any, usage != .any, withNote, blockedOnly, withReport, trustedOnly, aiReviewed, license != nil, author != nil, newWithinDays != nil,
             ]
             return all.filter { $0 }.count
         }
 
         private enum CodingKeys: String, CodingKey {
-            case query, verdict, minRisk, maxRisk, agents, scopes, kind, findings, can, cannot, noScripts, state, usage, favoritesOnly, withNote, blockedOnly, withReport, trustedOnly, license, author, newWithinDays, sort
+            case query, verdict, minRisk, maxRisk, agents, scopes, kind, findings, can, cannot, noScripts, state, usage, favoritesOnly, withNote, blockedOnly, withReport, trustedOnly, aiReviewed, license, author, newWithinDays, sort
         }
 
         init(from decoder: Decoder) throws {
@@ -418,6 +424,7 @@ final class SkillCatalog {
             blockedOnly = ((try? c.decodeIfPresent(Bool.self, forKey: .blockedOnly)) ?? nil) ?? false
             withReport = ((try? c.decodeIfPresent(Bool.self, forKey: .withReport)) ?? nil) ?? false
             trustedOnly = ((try? c.decodeIfPresent(Bool.self, forKey: .trustedOnly)) ?? nil) ?? false
+            aiReviewed = ((try? c.decodeIfPresent(Bool.self, forKey: .aiReviewed)) ?? nil) ?? false
             license = string(.license)
             author = string(.author)
             newWithinDays = int(.newWithinDays)
@@ -444,6 +451,7 @@ final class SkillCatalog {
             try c.encode(blockedOnly, forKey: .blockedOnly)
             try c.encode(withReport, forKey: .withReport)
             try c.encode(trustedOnly, forKey: .trustedOnly)
+            try c.encode(aiReviewed, forKey: .aiReviewed)
             try c.encodeIfPresent(license, forKey: .license)
             try c.encodeIfPresent(author, forKey: .author)
             try c.encodeIfPresent(newWithinDays, forKey: .newWithinDays)
@@ -552,6 +560,7 @@ final class SkillCatalog {
         if filters.withNote { sql.append("coalesce(m.note, '') <> ''") }
         if filters.blockedOnly { sql.append(Self.isBlockedSQL) }
         if filters.trustedOnly { sql.append(Self.trustedSQL) }
+        if filters.aiReviewed { sql.append("EXISTS (SELECT 1 FROM llm_reviews l WHERE l.content_hash = s.content_hash)") }
         if filters.withReport { sql.append("EXISTS (SELECT 1 FROM skill_reports p WHERE p.kind = s.kind AND p.name = s.name)") }
         if let license = filters.license {
             sql.append(license.isEmpty ? "coalesce(s.license, '') = ''" : "s.license = \(bind(license))")
