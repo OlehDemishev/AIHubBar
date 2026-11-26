@@ -162,7 +162,7 @@ struct SkillManageBox: View {
                     .controlSize(.small)
                     .disabled(busy)
             }
-            Text("Источник: \(PathText.tilde(update.origin))").scaledFont(.caption2).foregroundStyle(.secondary).lineLimit(1).truncationMode(.middle)
+            Text(verbatim: String(localized: "Источник: \(PathText.tilde(update.origin))")).scaledFont(.caption2).foregroundStyle(.secondary).lineLimit(1).truncationMode(.middle)
             if update.edited {
                 Text("Установленную копию меняли вручную: обновление заменит эти правки (прежняя копия останется в резервных).")
                     .scaledFont(.caption2).foregroundStyle(.orange).fixedSize(horizontal: false, vertical: true)
@@ -252,7 +252,7 @@ struct SkillPlanView: View {
                 Text("и ещё \(plan.findings.count - 5)").scaledFont(.caption2).foregroundStyle(.secondary)
             }
             if !plan.leftOut.isEmpty {
-                Text("Не копируются (ссылки и папки зависимостей): \(plan.leftOut.joined(separator: ", "))")
+                Text(verbatim: String(localized: "Не копируются (ссылки и папки зависимостей): \(plan.leftOut.joined(separator: ", "))"))
                     .scaledFont(.caption2).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
             if let blocked = plan.blocked {
@@ -503,7 +503,7 @@ struct SkillTrustButton: View {
                 .scaledFont(.caption2)
             } else {
                 Button { Task { await skills.trust(author) } } label: {
-                    Label("Доверять «\(author)»", systemImage: "checkmark.seal")
+                    Label { Text(verbatim: String(localized: "Доверять «\(author)»")) } icon: { Image(systemName: "checkmark.seal") }
                 }
                 .help(String(localized: "Автор указан в самом скилле и не проверен. Доверие только приглушает уведомления и не меняет оценку."))
                 .buttonStyle(.borderless)

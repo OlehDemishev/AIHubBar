@@ -543,7 +543,7 @@ struct SkillsSectionView: View {
             if let set = filters.set {
                 HStack(spacing: 4) {
                     Image(systemName: "square.stack")
-                    Text("Набор: \(set)")
+                    Text(verbatim: String(localized: "Набор: \(set)"))
                     Button { filters.set = nil } label: { Image(systemName: "xmark.circle.fill") }.buttonStyle(.borderless)
                 }
                 .scaledFont(.caption)
