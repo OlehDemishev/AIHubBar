@@ -126,7 +126,7 @@ enum PanelBackground: String, CaseIterable, Sendable {
 
 /// Blocks of the panel that can be hidden.
 enum PanelBlock: String, CaseIterable, Identifiable, Sendable {
-    case limits, sessions, calendar, projects, commands, resources, keepAwake, quickCommands, toggles, clipboard, notes
+    case limits, sessions, calendar, projects, commands, resources, keepAwake, quickCommands, toggles, clipboard, notes, skills
 
     /// The module a block from before profiles stands for — for reading old settings and files.
     var module: ModuleKind? {
@@ -136,7 +136,7 @@ enum PanelBlock: String, CaseIterable, Identifiable, Sendable {
         case .calendar: .upcoming
         case .projects: .projects
         case .commands: .reports
-        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes: nil
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .skills: nil
         }
     }
 
@@ -155,6 +155,7 @@ enum PanelBlock: String, CaseIterable, Identifiable, Sendable {
         case .toggles: String(localized: "Быстрые переключатели")
         case .clipboard: String(localized: "История буфера")
         case .notes: String(localized: "Заметки")
+        case .skills: String(localized: "Скиллы")
         }
     }
 }

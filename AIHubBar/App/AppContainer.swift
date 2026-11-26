@@ -18,6 +18,7 @@ extension LayoutSwitcher: ModuleService {}
 extension VersionKeeper: ModuleService {}
 extension QuickPromptController: ModuleService {}
 extension TelegramBotController: ModuleService {}
+extension SkillStore: ModuleService {}
 
 /// «Claude is working», counted one way for the menu bar, the widget and «Не спать».
 @MainActor
@@ -72,6 +73,7 @@ final class AppContainer {
     let versionKeeper: VersionKeeper
     let batches: BatchRunner
     let calendar: CalendarStore
+    let skills: SkillStore
 
     init() {
         // «Панель» edits the current profile after a start; «Профили» points it at another one for a while.
@@ -91,6 +93,7 @@ final class AppContainer {
         self.folders = folders
         let calendar = CalendarStore(settings: settings, modes: modes)
         self.calendar = calendar
+        skills = SkillStore(settings: settings)
         let store = ProjectStore(settings: settings)
         self.settings = settings
         self.store = store
@@ -161,6 +164,7 @@ final class AppContainer {
             (.notes, notesStore), (.notch, notchIsland), (.layout, layoutSwitcher), (.quickPrompt, quickPrompt),
             (.versions, versionKeeper),
             (.telegram, telegramBot),
+            (.skills, skills),
         ]
         for (kind, service) in moduleServices {
             service.isActive = { [modes] in modes.isOn(kind) }
@@ -362,6 +366,7 @@ final class AppContainer {
                 }
             }
             calendar.start()
+            skills.start()
             if live {
                 launcher.start()
                 batches.start()
@@ -505,5 +510,6 @@ private struct AppEnvironment: ViewModifier {
             .environment(app.engine)
             .environment(app.batches)
             .environment(app.calendar)
+            .environment(app.skills)
     }
 }

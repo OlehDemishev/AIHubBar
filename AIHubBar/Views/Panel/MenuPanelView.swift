@@ -25,6 +25,7 @@ struct MenuPanelView: View {
     @Environment(AIServiceStore.self) private var services
     @Environment(LaunchController.self) private var launcher
     @Environment(LayoutSwitcher.self) private var layoutSwitcher
+    @Environment(SkillStore.self) private var skills
 
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
@@ -33,6 +34,8 @@ struct MenuPanelView: View {
     /// The panel draws its own glass instead of the system background.
     @State private var drawsGlass = false
     @State private var query = ""
+    /// A section in place of the blocks (the Skills Catalog); nil — the blocks.
+    @State private var section: PanelSection?
     @State private var searchSelection = 0
     /// A project picked in the search: scrolled to when the blocks are back.
     @State private var scrollTarget: String?
@@ -76,7 +79,7 @@ struct MenuPanelView: View {
                 header
                     .revealed(isShown, step: 0, reduceMotion: calm)
 
-                PanelSearchField(query: $query, focused: $searchFocused, onCancel: { PanelOpener.close() }, onMove: moveSelection) {
+                PanelSearchField(query: $query, focused: $searchFocused, onCancel: { if section != nil { section = nil } else { PanelOpener.close() } }, onMove: moveSelection) {
                     let results = searchResults
                     if results.indices.contains(searchSelection) { activate(results[searchSelection]) }
                 }
@@ -97,7 +100,18 @@ struct MenuPanelView: View {
                 }
             }
 
-            if !query.isEmpty {
+            if query.isEmpty, section != nil {
+                ScrollView {
+                    SkillsSectionView(section: $section)
+                        .panelCard()
+                        .panelGlassGroup()
+                        .padding(.top, Self.scrollFade)
+                }
+                .scrollBounceBehavior(.basedOnSize)
+                .frame(maxHeight: blocksMaxHeight)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 8)
+            } else if !query.isEmpty {
                 PanelSearchResults(results: searchResults, selected: searchSelection, activate: activate)
                     .panelCard()
                     .panelGlassGroup()
@@ -159,6 +173,7 @@ struct MenuPanelView: View {
             store.refreshIfStale()
             folders.refreshIfStale()
             calendar.refreshIfStale()
+            if modes.isOn(.skills) { skills.refreshIfStale() }
             sessions.reload()
             hooks.refresh()
             notifications.refresh()
@@ -173,6 +188,7 @@ struct MenuPanelView: View {
         .onDisappear {
             isShown = false
             query = ""
+            section = nil
             monitor.isPanelOpen = false
             StatusItemTooltip.panelIsOpen = false
         }
@@ -414,6 +430,20 @@ struct MenuPanelView: View {
             .help(muted ? String(localized: "Включить уведомления в Telegram") : String(localized: "Выключить уведомления в Telegram — пока не включите снова"))
             .accessibilityLabel(muted ? String(localized: "Включить уведомления в Telegram") : String(localized: "Выключить уведомления в Telegram"))
         }
+        // «Скиллы» opens the Skills Catalog in this same panel (Oleh, 2026-11-26); a dot while a dangerous skill is installed.
+        if modes.isOn(.skills) {
+            Button {
+                withAnimation(calm ? nil : .snappy(duration: 0.2)) { section = section == nil ? .skills(nil) : nil }
+            } label: {
+                Image(systemName: "puzzlepiece.extension")
+                    .symbolVariant(section == nil ? .none : .fill)
+                    .overlay(alignment: .topTrailing) {
+                        if skills.hasAlert { Circle().fill(.red).frame(width: 6, height: 6).offset(x: 2, y: -2) }
+                    }
+            }
+            .help(skills.hasAlert ? String(localized: "Скиллы — есть опасные") : String(localized: "Скиллы"))
+            .accessibilityLabel(skills.hasAlert ? String(localized: "Скиллы — есть опасные") : String(localized: "Скиллы"))
+        }
         // Settings, help and quit were three menu-like rows at the bottom; as icons they no longer outweigh the content.
         Button { openSettings() } label: { Label("Настройки… (⌘,)", systemImage: "gearshape").labelStyle(.iconOnly) }
         .help("Настройки… (⌘,)")
@@ -621,6 +651,10 @@ struct MenuPanelView: View {
             CommandsView()
                 .panelCard()
                 .revealed(isShown, step: 2, reduceMotion: calm)
+        case .skills:
+            SkillsBlockView(openSection: { id in withAnimation(calm ? nil : .snappy(duration: 0.2)) { section = .skills(id) } })
+                .panelCard()
+                .revealed(isShown, step: 1, reduceMotion: calm)
         case .notch, .layout, .quickPrompt, .telegram, .versions:
             EmptyView()
         }

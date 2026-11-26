@@ -123,7 +123,7 @@ struct AssistantDraft: Equatable, Sendable {
     /// modules in beta testing.
     /// «Остров у чёлки» only on a Mac with a notch.
     @MainActor static var offeredModules: [ModuleKind] {
-        [.limits, .sessions, .projects, .upcoming, .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .versions]
+        [.limits, .sessions, .skills, .projects, .upcoming, .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .versions]
             + (NotchGeometry.macHasNotch ? [.notch] : [])
             + [ModuleKind.layout, .quickPrompt, .telegram].filter { !$0.isBeta }
     }
@@ -134,7 +134,7 @@ struct AssistantDraft: Equatable, Sendable {
         case .projects: hasProjects
         case .upcoming: mode.calendar != .off && mode.source.isFolders
         case .reports: mode.commonCommands == .dailyReport
-        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout, .quickPrompt, .telegram, .versions: extraModules.contains(kind)
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout, .quickPrompt, .telegram, .versions, .skills: extraModules.contains(kind)
         }
     }
 
@@ -165,7 +165,7 @@ struct AssistantDraft: Equatable, Sendable {
             }
         case .reports:
             mode.commonCommands = on ? .dailyReport : .none
-        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout, .quickPrompt, .telegram, .versions:
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout, .quickPrompt, .telegram, .versions, .skills:
             extraModules.removeAll { $0 == kind }
             if on { extraModules.append(kind) }
         }
