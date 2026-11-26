@@ -5,6 +5,7 @@
 **Updated:** 2026-11-26
 
 **Now:**
+- 2026-11-26: Mac — 0.14.0-beta.2 being prepared on Oleh's «Сделай вторую бету»: 0.14.0-beta.1 plus the layout's Secure Input pause (#644); the notes got a line (branch `chore/release-0.14.0-beta.2`)
 - 2026-11-26: Mac — «Раскладка» says when it is paused by Secure Input and which app holds it: a lock beside the language in the menu bar, two lines in its menu, a row in Settings — merged as PR #644 on Oleh's «Да, вливай», not in a build yet (0.14.0-beta.1 doesn't have it); found while asking why it «не всегда работает» — Claude.app (pid 1128) held Secure Input all evening, so no word was fixed after 19:06
 - 2026-11-26: Mac — **0.14.0-beta.1 published** to beta testers on Oleh's «Да, вливай и выпускай» (the Skills Catalog, the stuck-notification fix; build 1529, signed and notarized; https://github.com/OlehDemishev/AIHubBar/releases/tag/v0.14.0-beta.1). Next: Oleh updates his copy through Sparkle (Settings → General → «Бета-версии» on), uses it a day, then 0.14.0 for everyone on Tuesday on his word
 - 2026-11-26: Mac — Skills Catalog: the pass over `~/Projects/SECURITY-CHECKLIST.md` is done — `docs/SECURITY-AUDIT.md` (table of all 40 items, self-attack as tests); fixed: skill-provided values in four localized texts now shown verbatim, a 20 MB limit on the «Сверить» file, `.gitignore` rules for secrets, Sparkle's public key in `.gitleaksignore` — merged as PR #640 on Oleh's «Да, вливай»; the catalog is ready for a release on Oleh's word
