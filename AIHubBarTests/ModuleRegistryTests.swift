@@ -15,7 +15,7 @@ struct ModuleRegistryTests {
 
     /// The sidebar keeps the order it had before the registry.
     @Test func sidebarOrder() {
-        #expect(ModuleGroup.ai.modules == [.limits, .sessions, .quickPrompt, .telegram])
+        #expect(ModuleGroup.ai.modules == [.limits, .sessions, .skills, .quickPrompt, .telegram])
         #expect(ModuleGroup.work.modules == [.upcoming, .projects, .reports, .quickCommands, .notes, .clipboard, .versions])
         #expect(ModuleGroup.mac.modules == [.resources, .keepAwake, .toggles, .layout, .notch])
     }

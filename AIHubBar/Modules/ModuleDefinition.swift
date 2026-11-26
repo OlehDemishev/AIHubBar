@@ -82,7 +82,7 @@ enum BringIn: Sendable {
 extension ModuleDefinition {
     /// Every module, in Settings sidebar order within its section.
     static let all: [ModuleDefinition] = [
-        .limits, .sessions, .quickPrompt, .telegram,
+        .limits, .sessions, .skills, .quickPrompt, .telegram,
         .upcoming, .projects, .reports, .quickCommands, .notes, .clipboard, .versions,
         .resources, .keepAwake, .toggles, .layout, .notch,
     ]
@@ -105,6 +105,7 @@ extension ModuleDefinition {
         case .quickPrompt: .quickPrompt
         case .telegram: .telegram
         case .versions: .versions
+        case .skills: .skills
         }
     }
 }

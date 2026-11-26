@@ -28,6 +28,7 @@ struct ModuleUI {
         case .quickPrompt: .quickPrompt
         case .telegram: .telegram
         case .versions: .versions
+        case .skills: .skills
         }
     }
 }
