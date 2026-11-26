@@ -5,6 +5,7 @@
 **Updated:** 2026-11-26
 
 **Now:**
+- 2026-11-26: Mac — «Раскладка» says when it is paused by Secure Input and which app holds it: a lock beside the language in the menu bar, two lines in its menu, a row in Settings (branch `fix/layout-secure-input`); found while asking why it «не всегда работает» — Claude.app (pid 1128) held Secure Input all evening, so no word was fixed after 19:06
 - 2026-11-26: Mac — **0.14.0-beta.1 published** to beta testers on Oleh's «Да, вливай и выпускай» (the Skills Catalog, the stuck-notification fix; build 1529, signed and notarized; https://github.com/OlehDemishev/AIHubBar/releases/tag/v0.14.0-beta.1). Next: Oleh updates his copy through Sparkle (Settings → General → «Бета-версии» on), uses it a day, then 0.14.0 for everyone on Tuesday on his word
 - 2026-11-26: Mac — Skills Catalog: the pass over `~/Projects/SECURITY-CHECKLIST.md` is done — `docs/SECURITY-AUDIT.md` (table of all 40 items, self-attack as tests); fixed: skill-provided values in four localized texts now shown verbatim, a 20 MB limit on the «Сверить» file, `.gitignore` rules for secrets, Sparkle's public key in `.gitleaksignore` — merged as PR #640 on Oleh's «Да, вливай»; the catalog is ready for a release on Oleh's word
 - 2026-11-26: Mac — Skills Catalog, step 8 (the last of the plan): «Порядок» in the section — name conflicts (different contents of one name switched on for one agent), copies (one content in several real folders), skills not used for 30 days with «Выключить» each or all, named sets (from the card; show, switch all on or off, delete); «Конфликты имён» in the block; «Экспорт с хешами» and «Сверить с экспортом» in Settings → Скиллы — merged as PR #638 on Oleh's «Да, вливай» (seen live in an isolated copy); all 8 steps of the plan are in `main`
@@ -242,6 +243,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-26 — Mac: «Раскладка» shows a Secure Input pause (branch `fix/layout-secure-input`)
+
+Done: Oleh asked why the layout fixes don't always work. The log had no fix after 19:06 although the words («dkbdfq» → «вливай», «Cltkfq ,tnf htkbp» → «Сделай бета релиз») read as Russian in macOS's dictionaries; Secure Input was on, held by Claude.app (`kCGSSessionSecureInputPID` = 1128). While any app holds it, macOS hides keys from every event tap, and «Раскладка» also forgets words on purpose (`IsSecureEventInputEnabled`). It can't be turned off from outside. Now `SecureInput` (LayoutSwitcher.swift) reads the holder from `CGSessionCopyCurrentDictionary()` (no permission needed) every 2 s with the existing `sync`; while it is on the language in the menu bar fades with a lock, the tooltip and the menu say «Раскладка на паузе: защищённый ввод включило приложение «Claude»» and what usually helps, Settings → Раскладка shows the same with why; the log notes the pause and its end. 5 new texts in 13 languages.
+Checked: `scripts/check.sh` — all checks passed, incl. `SecureInputTests`; the same detection run live printed «IsSecureEventInputEnabled: true pid: 1128 app: Claude». Not seen: the menu bar item itself in the new state (the installed app is 0.13; a copy has no Accessibility for its own tap).
+Left: Oleh sees it in the next build.
 
 ## 2026-11-26 — Mac: 0.14.0-beta.1 published
 

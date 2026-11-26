@@ -44,6 +44,16 @@ struct LayoutSection: View {
                         .foregroundStyle(.orange)
                 }
             }
+            if let secure = switcher.secureInput {
+                VStack(alignment: .leading, spacing: 3) {
+                    Label { Text(verbatim: secure.title) } icon: { Image(systemName: "lock.fill") }
+                        .foregroundStyle(.orange)
+                    Text(verbatim: secure.hint + " " + String(localized: "Пока защищённый ввод включён, macOS скрывает нажатия клавиш от всех программ, и исправлять нечего."))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
             IconRow("Раскладки", systemImage: "keyboard", value: switcher.layouts.isEmpty ? String(localized: "нет подходящих") : switcher.layouts.map(\.name).joined(separator: ", "))
             Toggle("Исправлять раскладку сам", systemImage: "wand.and.stars", isOn: $settings.layout.auto)
             Toggle("Не исправлять в терминалах", systemImage: "terminal", isOn: $settings.layout.skipTerminals)
