@@ -6269,6 +6269,82 @@
         }
       }
     },
+    "В окно «Быстрого запроса» можно перетащить файлы и снимки экрана — агент получит их пути вместе с задачей. Кнопка с микрофоном включает диктовку macOS в поле задачи.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drag files and screenshots into the Quick Prompt window — the agent gets their paths with the task. The microphone button starts macOS Dictation in the task field."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У вікно «Швидкого запиту» можна перетягнути файли та знімки екрана — агент отримає їхні шляхи разом із завданням. Кнопка з мікрофоном вмикає диктування macOS у полі завдання."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dateien und Bildschirmfotos lassen sich in das Fenster des Schnellauftrags ziehen – der Agent erhält ihre Pfade mit der Aufgabe. Die Mikrofontaste startet das macOS-Diktat im Aufgabenfeld."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glissez des fichiers et des captures d’écran dans la fenêtre de la Requête rapide : l’agent reçoit leurs chemins avec la tâche. Le bouton micro lance la dictée de macOS dans le champ de la tâche."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrastra archivos y capturas de pantalla a la ventana de la Petición rápida: el agente recibe sus rutas junto con la tarea. El botón del micrófono inicia el dictado de macOS en el campo de la tarea."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trascina file e istantanee nella finestra della Richiesta rapida: l’agente riceve i loro percorsi insieme all’attività. Il pulsante con il microfono avvia la dettatura di macOS nel campo dell’attività."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arraste arquivos e capturas de tela para a janela do Pedido rápido — o agente recebe os caminhos junto com a tarefa. O botão do microfone inicia o ditado do macOS no campo da tarefa."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do okna Szybkiego zapytania można przeciągnąć pliki i zrzuty ekranu — agent dostanie ich ścieżki razem z zadaniem. Przycisk z mikrofonem włącza dyktowanie macOS w polu zadania."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クイックプロンプトのウインドウにファイルやスクリーンショットをドラッグすると、エージェントにタスクと一緒にそのパスが渡されます。マイクのボタンは、タスク欄で macOS の音声入力を開始します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빠른 요청 윈도우로 파일과 스크린샷을 드래그하면 에이전트가 작업과 함께 해당 경로를 받습니다. 마이크 버튼은 작업 필드에서 macOS 받아쓰기를 시작합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن سحب الملفات ولقطات الشاشة إلى نافذة الطلب السريع — يحصل الوكيل على مساراتها مع المهمة. زر الميكروفون يشغّل إملاء macOS في حقل المهمة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seret file dan tangkapan layar ke jendela Permintaan cepat — agen menerima path-nya bersama tugas. Tombol mikrofon memulai Dikte macOS di kolom tugas."
+          }
+        }
+      }
+    },
     "В папке агента уже есть папка с таким именем. Её не тронули.": {
       "localizations": {
         "ar": {
@@ -8621,6 +8697,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Скарга збережеться лише на цьому Mac. Надіслати її автору або в AI Hub Bar можна потім — на GitHub, де ви самі вирішите, чи надсилати."
+          }
+        }
+      }
+    },
+    "Жалобы, блок-лист, политика установки, AI-проверка по кнопке и уведомления о скиллах, изменённых не через каталог.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شكاوى وقائمة حظر وسياسة تثبيت ومراجعة بالذكاء الاصطناعي عند الطلب وإشعارات بالمهارات المعدّلة خارج الكتالوج."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beschwerden, Sperrliste, Installationsrichtlinie, KI-Prüfung per Knopfdruck und Mitteilungen über Skills, die außerhalb des Katalogs geändert wurden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complaints, a block list, an install policy, an AI review on request, and notifications about skills changed outside the catalog."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quejas, lista de bloqueo, política de instalación, revisión con IA a petición y avisos de skills cambiadas fuera del catálogo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signalements, liste de blocage, politique d’installation, vérification par l’IA sur demande et notifications pour les skills modifiés hors du catalogue."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laporan, daftar blokir, kebijakan pemasangan, pemeriksaan AI sesuai permintaan, dan notifikasi skill yang berubah di luar katalog."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segnalazioni, lista di blocco, politica di installazione, verifica con IA su richiesta e notifiche per le skill cambiate fuori dal catalogo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "報告、ブロックリスト、インストールのポリシー、ボタンひとつの AI 確認、カタログ外で変わったスキルの通知。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "신고, 차단 목록, 설치 정책, 버튼 한 번으로 하는 AI 검토, 카탈로그 밖에서 바뀐 스킬 알림."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skargi, lista blokad, polityka instalacji, sprawdzenie AI na żądanie i powiadomienia o skillach zmienionych poza katalogiem."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclamações, lista de bloqueio, política de instalação, verificação por IA sob demanda e notificações de skills alteradas fora do catálogo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скарги, блок-лист, політика встановлення, перевірка AI за кнопкою та сповіщення про скіли, змінені не через каталог."
           }
         }
       }
@@ -13033,6 +13185,82 @@
         }
       }
     },
+    "Новый модуль «Скиллы»: все скиллы и плагины Claude Code, Codex, Cursor и Gemini CLI с проверкой безопасности и объяснением оценки. Включите его в Настройках → «Что показывать».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وحدة جديدة «المهارات»: كل مهارات وإضافات Claude Code وCodex وCursor وGemini CLI مع فحص الأمان وشرح التقييم. فعّلها من الإعدادات ← «ما يُعرض»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neues Modul „Skills“: alle Skills und Plugins von Claude Code, Codex, Cursor und Gemini CLI mit Sicherheitsprüfung und Begründung der Bewertung. Einschalten unter Einstellungen → „Was anzeigen“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A new module, Skills: every skill and plugin of Claude Code, Codex, Cursor and Gemini CLI, checked for safety, with the reasons for each verdict. Switch it on in Settings → What to Show."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuevo módulo «Skills»: todas las skills y plugins de Claude Code, Codex, Cursor y Gemini CLI con revisión de seguridad y la explicación de cada valoración. Actívelo en Ajustes → Qué mostrar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveau module « Skills » : tous les skills et plugins de Claude Code, Codex, Cursor et Gemini CLI, vérifiés pour la sécurité, avec l’explication du verdict. Activez-le dans Réglages → Ce qu’il faut afficher."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modul baru “Skill”: semua skill dan plugin Claude Code, Codex, Cursor, dan Gemini CLI dengan pemeriksaan keamanan dan alasan penilaiannya. Aktifkan di Pengaturan → Yang ditampilkan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuovo modulo «Skill»: tutte le skill e i plugin di Claude Code, Codex, Cursor e Gemini CLI con controllo di sicurezza e spiegazione del giudizio. Attivalo in Impostazioni → Cosa mostrare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいモジュール「スキル」：Claude Code、Codex、Cursor、Gemini CLI のすべてのスキルとプラグインを安全性チェックと評価の理由つきで表示します。設定 →「表示する項目」でオンにしてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 모듈 “스킬”: Claude Code, Codex, Cursor, Gemini CLI의 모든 스킬과 플러그인을 안전성 검사와 평가 이유와 함께 보여 줍니다. 설정 → “표시할 항목”에서 켜세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowy moduł „Skille”: wszystkie skille i wtyczki Claude Code, Codex, Cursor i Gemini CLI ze sprawdzeniem bezpieczeństwa i wyjaśnieniem oceny. Włącz go w Ustawieniach → „Co pokazywać”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novo módulo “Skills”: todas as skills e plugins do Claude Code, Codex, Cursor e Gemini CLI com verificação de segurança e explicação da avaliação. Ative em Ajustes → O que mostrar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Новий модуль «Скіли»: усі скіли й плагіни Claude Code, Codex, Cursor і Gemini CLI з перевіркою безпеки та поясненням оцінки. Увімкніть його в Налаштуваннях → «Що показувати»."
+          }
+        }
+      }
+    },
     "Новый набор…": {
       "localizations": {
         "ar": {
@@ -16453,6 +16681,82 @@
         }
       }
     },
+    "Скилл можно поставить другому агенту, выключить, убрать и вернуть из журнала, а новую версию — сравнить построчно перед обновлением.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن تثبيت المهارة لوكيل آخر وإيقافها وإزالتها واستعادتها من السجل، ومقارنة الإصدار الجديد سطرًا بسطر قبل التحديث."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Skill lässt sich für einen anderen Agenten installieren, ausschalten, entfernen und über das Protokoll zurückholen; eine neue Version vor dem Update zeilenweise vergleichen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A skill can be installed for another agent, switched off, removed and put back from the journal; a newer version can be compared line by line before updating."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una skill se puede instalar para otro agente, desactivar, quitar y recuperar desde el registro; una versión nueva se compara línea a línea antes de actualizar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un skill peut être installé pour un autre agent, désactivé, retiré et restauré depuis le journal ; une nouvelle version se compare ligne à ligne avant la mise à jour."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill bisa dipasang untuk agen lain, dimatikan, dihapus, dan dikembalikan dari jurnal; versi baru bisa dibandingkan baris per baris sebelum diperbarui."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una skill si può installare per un altro agente, disattivare, rimuovere e ripristinare dal registro; una nuova versione si confronta riga per riga prima di aggiornare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキルは別のエージェントにインストールしたり、オフにしたり、取り外して履歴から戻したりでき、新しいバージョンは更新前に行ごとに比較できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스킬을 다른 에이전트에 설치하고, 끄고, 제거한 뒤 기록에서 되돌릴 수 있으며, 새 버전은 업데이트 전에 줄 단위로 비교할 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill można zainstalować innemu agentowi, wyłączyć, usunąć i przywrócić z dziennika, a nową wersję porównać wiersz po wierszu przed aktualizacją."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma skill pode ser instalada para outro agente, desativada, removida e restaurada pelo registro; uma versão nova pode ser comparada linha a linha antes de atualizar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скіл можна встановити іншому агенту, вимкнути, прибрати й повернути з журналу, а нову версію — порівняти порядково перед оновленням."
+          }
+        }
+      }
+    },
     "Скилл не указывает свой репозиторий на GitHub": {
       "localizations": {
         "ar": {
@@ -18197,6 +18501,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Прибрати з папки агента"
+          }
+        }
+      }
+    },
+    "Уведомление «агент мог застрять» не приходит, пока сессия ждёт одну долгую команду: на неё даётся час.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يعد إشعار «ربما علِق الوكيل» يصل ما دامت الجلسة تنتظر أمرًا طويلًا واحدًا: يُمنح ساعة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Mitteilung „Agent hängt womöglich“ kommt nicht mehr, solange eine Sitzung auf einen langen Befehl wartet: Er bekommt eine Stunde."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “agent may be stuck” notification no longer comes while a session waits for one long command: it gets an hour."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El aviso «el agente puede estar atascado» ya no llega mientras una sesión espera un comando largo: tiene una hora."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La notification « l’agent est peut-être bloqué » ne vient plus pendant qu’une session attend une longue commande : elle a une heure."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifikasi “agen mungkin macet” tidak datang selama sesi menunggu satu perintah panjang: diberi waktu satu jam."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La notifica «l’agente potrebbe essere bloccato» non arriva più mentre una sessione attende un comando lungo: ha un’ora."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションが長いコマンドを待っている間は「エージェントが止まっているかも」の通知は来ません。1 時間待ちます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션이 긴 명령 하나를 기다리는 동안에는 “에이전트가 멈췄을 수 있음” 알림이 오지 않습니다. 한 시간을 줍니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Powiadomienie „agent mógł utknąć” nie przychodzi, gdy sesja czeka na jedno długie polecenie: dostaje godzinę."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A notificação “o agente pode estar travado” não chega enquanto a sessão espera um comando longo: ele tem uma hora."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сповіщення «агент міг застрягти» не приходить, поки сесія чекає на одну довгу команду: на неї дається година."
           }
         }
       }
@@ -31455,82 +31835,6 @@
         }
       }
     },
-    "«Выбрать» под списком проектов-папок запускает одну команду в нескольких проектах по очереди: сейчас, ночью или после сброса лимита.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "“Choose” under the list of folder projects runs one command in several projects, one after another: now, at night or after the limit resets."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«Вибрати» під списком проєктів-папок запускає одну команду в кількох проєктах по черзі: зараз, уночі або після скидання ліміту."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "„Wählen“ unter der Liste der Ordnerprojekte führt einen Befehl nacheinander in mehreren Projekten aus: jetzt, nachts oder nach dem Zurücksetzen des Limits."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "« Choisir », sous la liste des projets-dossiers, lance une même commande dans plusieurs projets à la suite : maintenant, la nuit ou après la remise à zéro de la limite."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«Elegir», bajo la lista de proyectos-carpeta, ejecuta un mismo comando en varios proyectos, uno tras otro: ahora, por la noche o cuando se restablezca el límite."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "“Scegli”, sotto l’elenco dei progetti-cartella, esegue un comando in più progetti, uno dopo l’altro: ora, di notte o dopo l’azzeramento del limite."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "“Escolher”, abaixo da lista de projetos-pasta, roda um comando em vários projetos, um após o outro: agora, à noite ou depois que o limite zerar."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "„Wybierz” pod listą projektów-folderów uruchamia jedno polecenie w kilku projektach po kolei: teraz, w nocy albo po zresetowaniu limitu."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "フォルダプロジェクトの一覧の下にある「選択」で、1 つのコマンドを複数のプロジェクトで順番に実行できます。今すぐ、夜間、または上限のリセット後に。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "폴더 프로젝트 목록 아래의 ‘선택’으로 하나의 명령을 여러 프로젝트에서 차례로 실행합니다. 지금, 밤에, 또는 한도 재설정 후에."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«اختيار» تحت قائمة مشاريع المجلدات يشغّل أمرًا واحدًا في عدة مشاريع بالتتابع: الآن، أو ليلًا، أو بعد إعادة ضبط الحد."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "“Pilih” di bawah daftar proyek folder menjalankan satu perintah di beberapa proyek secara bergiliran: sekarang, malam hari, atau setelah batas direset."
-          }
-        }
-      }
-    },
     "«Выбрать» под списком проектов: отметьте проекты, команду профиля и когда запустить — «Сейчас», «На ночь» или «После сброса лимита». Проекты идут по очереди в фоне (Claude Code или модель по API), у лимита пакет ждёт сброса, в конце приходит одна сводка.": {
       "localizations": {
         "en": {
@@ -38682,158 +38986,6 @@
         }
       }
     },
-    "В окно «Быстрого запроса» можно перетащить файлы и снимки экрана — агент получит их пути вместе с задачей. Кнопка с микрофоном включает диктовку macOS в поле задачи.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Drag files and screenshots into the Quick Prompt window — the agent gets their paths with the task. The microphone button starts macOS Dictation in the task field."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У вікно «Швидкого запиту» можна перетягнути файли та знімки екрана — агент отримає їхні шляхи разом із завданням. Кнопка з мікрофоном вмикає диктування macOS у полі завдання."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dateien und Bildschirmfotos lassen sich in das Fenster des Schnellauftrags ziehen – der Agent erhält ihre Pfade mit der Aufgabe. Die Mikrofontaste startet das macOS-Diktat im Aufgabenfeld."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Glissez des fichiers et des captures d’écran dans la fenêtre de la Requête rapide : l’agent reçoit leurs chemins avec la tâche. Le bouton micro lance la dictée de macOS dans le champ de la tâche."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arrastra archivos y capturas de pantalla a la ventana de la Petición rápida: el agente recibe sus rutas junto con la tarea. El botón del micrófono inicia el dictado de macOS en el campo de la tarea."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trascina file e istantanee nella finestra della Richiesta rapida: l’agente riceve i loro percorsi insieme all’attività. Il pulsante con il microfono avvia la dettatura di macOS nel campo dell’attività."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arraste arquivos e capturas de tela para a janela do Pedido rápido — o agente recebe os caminhos junto com a tarefa. O botão do microfone inicia o ditado do macOS no campo da tarefa."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Do okna Szybkiego zapytania można przeciągnąć pliki i zrzuty ekranu — agent dostanie ich ścieżki razem z zadaniem. Przycisk z mikrofonem włącza dyktowanie macOS w polu zadania."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "クイックプロンプトのウインドウにファイルやスクリーンショットをドラッグすると、エージェントにタスクと一緒にそのパスが渡されます。マイクのボタンは、タスク欄で macOS の音声入力を開始します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "빠른 요청 윈도우로 파일과 스크린샷을 드래그하면 에이전트가 작업과 함께 해당 경로를 받습니다. 마이크 버튼은 작업 필드에서 macOS 받아쓰기를 시작합니다."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يمكن سحب الملفات ولقطات الشاشة إلى نافذة الطلب السريع — يحصل الوكيل على مساراتها مع المهمة. زر الميكروفون يشغّل إملاء macOS في حقل المهمة."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seret file dan tangkapan layar ke jendela Permintaan cepat — agen menerima path-nya bersama tugas. Tombol mikrofon memulai Dikte macOS di kolom tugas."
-          }
-        }
-      }
-    },
-    "В окно «Быстрого запроса» можно перетащить файлы, а кнопка с микрофоном включает диктовку.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Drag files into the Quick Prompt window, and the microphone button starts dictation."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У вікно «Швидкого запиту» можна перетягнути файли, а кнопка з мікрофоном вмикає диктування."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "In das Fenster des Schnellauftrags lassen sich Dateien ziehen, und die Mikrofontaste startet das Diktat."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Glissez des fichiers dans la fenêtre de la Requête rapide ; le bouton micro lance la dictée."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arrastra archivos a la ventana de la Petición rápida; el botón del micrófono inicia el dictado."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trascina i file nella finestra della Richiesta rapida; il pulsante con il microfono avvia la dettatura."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arraste arquivos para a janela do Pedido rápido; o botão do microfone inicia o ditado."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Do okna Szybkiego zapytania można przeciągnąć pliki, a przycisk z mikrofonem włącza dyktowanie."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "クイックプロンプトのウインドウにファイルをドラッグできます。マイクのボタンで音声入力が始まります。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "빠른 요청 윈도우로 파일을 드래그할 수 있고, 마이크 버튼으로 받아쓰기를 시작합니다."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يمكن سحب الملفات إلى نافذة الطلب السريع، وزر الميكروفون يشغّل الإملاء."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seret file ke jendela Permintaan cepat, dan tombol mikrofon memulai dikte."
-          }
-        }
-      }
-    },
     "В папке варианта есть незакоммиченные изменения — папка и ветка оставлены.": {
       "localizations": {
         "ar": {
@@ -39748,82 +39900,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Proyek yang dibentangkan menampilkan apa yang mendengarkan port dari foldernya: port dan programnya. Dari sana Anda bisa membuka alamatnya di browser atau menghentikan prosesnya — tombolnya bertanya sekali lagi."
-          }
-        }
-      }
-    },
-    "В развёрнутом проекте видны локальные серверы из его папки: порт, программа, кнопки «открыть» и «остановить».": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "An expanded project shows the local servers running from its folder: the port, the program, and buttons to open and to stop."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У розгорнутому проєкті видно локальні сервери з його папки: порт, програма, кнопки «відкрити» та «зупинити»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein aufgeklapptes Projekt zeigt die lokalen Server aus seinem Ordner: Port, Programm, Tasten zum Öffnen und Beenden."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un projet déplié montre les serveurs locaux lancés depuis son dossier : le port, le programme, des boutons pour ouvrir et arrêter."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un proyecto desplegado muestra los servidores locales de su carpeta: el puerto, el programa y botones para abrir y detener."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un progetto espanso mostra i server locali avviati dalla sua cartella: la porta, il programma, i pulsanti per aprire e fermare."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Um projeto expandido mostra os servidores locais da pasta dele: a porta, o programa e botões para abrir e parar."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rozwinięty projekt pokazuje lokalne serwery z jego folderu: port, program, przyciski otwarcia i zatrzymania."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "展開したプロジェクトに、そのフォルダから動いているローカルサーバが表示されます：ポート、プログラム、開くボタンと停止ボタン。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "펼친 프로젝트에 그 폴더에서 실행 중인 로컬 서버가 표시됩니다: 포트, 프로그램, 열기와 중지 버튼."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "المشروع الموسَّع يعرض الخوادم المحلية العاملة من مجلده: المنفذ، البرنامج، وزرّا الفتح والإيقاف."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Proyek yang dibentangkan menampilkan server lokal dari foldernya: port, program, serta tombol buka dan hentikan."
           }
         }
       }
@@ -70560,82 +70636,6 @@
         }
       }
     },
-    "Календарь выгружается в файл .ics, а у профиля для текстов появилась цель по словам на день.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The calendar exports to an .ics file, and a profile for texts can have a daily word goal."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Календар вивантажується у файл .ics, а в профілю для текстів з’явилася ціль за словами на день."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der Kalender lässt sich als .ics-Datei exportieren, und ein Profil für Texte kann ein tägliches Wortziel haben."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le calendrier s’exporte dans un fichier .ics, et un profil pour les textes peut avoir un objectif de mots par jour."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El calendario se exporta a un archivo .ics, y un perfil para textos puede tener un objetivo diario de palabras."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il calendario si esporta in un file .ics, e un profilo per i testi può avere un obiettivo giornaliero di parole."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O calendário é exportado para um arquivo .ics, e um perfil para textos pode ter uma meta diária de palavras."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kalendarz można wyeksportować do pliku .ics, a profil do tekstów może mieć dzienny cel słów."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "カレンダーを .ics ファイルに書き出せます。テキスト用のプロファイルには 1 日の語数目標を設定できます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "캘린더를 .ics 파일로 내보낼 수 있고, 텍스트용 프로필에 하루 단어 목표를 둘 수 있습니다."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يمكن تصدير التقويم إلى ملف ‎.ics، وصار لملف تعريف النصوص هدف يومي لعدد الكلمات."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kalender bisa diekspor ke file .ics, dan profil untuk teks bisa memiliki target kata harian."
-          }
-        }
-      }
-    },
     "Календарь: дедлайны и публикации": {
       "localizations": {
         "ar": {
@@ -96292,82 +96292,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Нові збірки раніше за всіх. Може працювати з помилками; вимкніть — залишитеся на цій версії до наступного звичайного випуску."
-          }
-        }
-      }
-    },
-    "Новый модуль «Версии»: тексты проекта-папки сохраняются перед каждым запуском AI — прежний вариант можно сравнить с текущим и вернуть.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A new module, “Versions”: a folder project's texts are saved before every AI run — an earlier draft can be compared with the current one and brought back."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Новий модуль «Версії»: тексти проєкту-папки зберігаються перед кожним запуском AI — попередній варіант можна порівняти з поточним і повернути."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Neues Modul „Versionen“: Die Texte eines Ordnerprojekts werden vor jedem KI-Lauf gesichert – eine frühere Fassung lässt sich mit der aktuellen vergleichen und zurückholen."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nouveau module « Versions » : les textes d’un projet-dossier sont enregistrés avant chaque lancement de l’IA — une version antérieure peut être comparée à l’actuelle et rétablie."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nuevo módulo «Versiones»: los textos de un proyecto-carpeta se guardan antes de cada ejecución de IA; una versión anterior puede compararse con la actual y recuperarse."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nuovo modulo “Versioni”: i testi di un progetto-cartella vengono salvati prima di ogni avvio dell’IA: una versione precedente si può confrontare con quella attuale e ripristinare."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Novo módulo “Versões”: os textos de um projeto-pasta são salvos antes de cada execução de IA — uma versão anterior pode ser comparada com a atual e restaurada."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nowy moduł „Wersje”: teksty projektu-folderu są zapisywane przed każdym uruchomieniem AI — wcześniejszą wersję można porównać z bieżącą i przywrócić."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "新しいモジュール「バージョン」：フォルダプロジェクトのテキストは AI を実行する前に毎回保存されます。以前の版を現在のものと比較して、元に戻せます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "새 모듈 ‘버전’: 폴더 프로젝트의 텍스트가 AI를 실행할 때마다 먼저 저장됩니다. 이전 버전을 현재와 비교하고 되돌릴 수 있습니다."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "وحدة جديدة «النسخ»: نصوص مشروع المجلد تُحفظ قبل كل تشغيل للذكاء الاصطناعي — يمكن مقارنة نسخة سابقة بالحالية واستعادتها."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modul baru “Versi”: teks proyek folder disimpan sebelum setiap AI dijalankan — versi sebelumnya bisa dibandingkan dengan yang sekarang dan dikembalikan."
           }
         }
       }
