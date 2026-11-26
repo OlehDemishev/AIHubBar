@@ -254,7 +254,11 @@ extension SkillCatalog {
         return result
     }
 
+    /// An export of even thousands of skills stays far below this; a bigger file is not one.
+    static let exportLimit = 20 * 1024 * 1024
+
     static func readExport(_ data: Data) throws -> Export {
+        guard data.count <= exportLimit else { throw Refusal(code: "format") }
         let export = try JSONDecoder().decode(Export.self, from: data)
         guard export.format == "aihubbar-skills" else { throw Refusal(code: "format") }
         return export

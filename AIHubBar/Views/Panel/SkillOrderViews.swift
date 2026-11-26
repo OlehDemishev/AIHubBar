@@ -262,7 +262,13 @@ struct SkillsExportSection: View {
         panel.allowedContentTypes = [.json]
         panel.canChooseDirectories = false
         NSApp.activate()
-        guard panel.runModal() == .OK, let url = panel.url, let data = try? Data(contentsOf: url) else { return }
+        guard panel.runModal() == .OK, let url = panel.url else { return }
+        // A file far bigger than any export is not read into memory at all.
+        let size = (try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize) ?? 0
+        guard size <= SkillCatalog.exportLimit, let data = try? Data(contentsOf: url) else {
+            result = String(localized: "Это не файл экспорта скиллов AI Hub Bar.")
+            return
+        }
         Task {
             switch await skills.compare(with: data) {
             case .success(let comparison): result = Self.describe(comparison)

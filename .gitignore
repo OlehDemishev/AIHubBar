@@ -25,3 +25,13 @@ desktop/app/binaries/
 relay/**/.wrangler/
 relay/**/node_modules/
 relay/**/.dev.vars
+
+# Secrets: never in the repository (~/Projects/SECURITY-CHECKLIST.md, item 25)
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.p8
+*.key
+*.mobileprovision
