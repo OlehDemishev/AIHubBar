@@ -10,6 +10,8 @@ enum Feedback {
     enum Template: String {
         case bug = "bug_report.yml"
         case idea = "feature_request.yml"
+        /// A complaint about a skill from the Skills Catalog.
+        case skill = "skill_report.yml"
     }
 
     /// GitHub fills an issue form's fields from query items named by the fields' ids. Too long a link is refused

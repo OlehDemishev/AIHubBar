@@ -212,6 +212,23 @@ struct SkillsBlockView: View {
                 }
             }
             // An alert stays in sight even when the block is folded.
+            ForEach(summary.blocked.prefix(3)) { row in
+                Button { openSection(row.id) } label: {
+                    HStack(spacing: 6) {
+                        Image(systemName: "nosign")
+                        Text(verbatim: row.name).fontWeight(.semibold)
+                        Text("в блок-листе, но установлен").lineLimit(1)
+                        Spacer(minLength: 0)
+                    }
+                    .scaledFont(.caption)
+                    .foregroundStyle(.red)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 5)
+                    .background(RoundedRectangle(cornerRadius: 7, style: .continuous).fill(Color.red.opacity(0.1)))
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+            }
             ForEach(summary.dangerous.prefix(3)) { alert in
                 Button { openSection(alert.row.id) } label: {
                     HStack(spacing: 6) {
@@ -575,6 +592,8 @@ private struct SkillRowView: View {
                         Text(verbatim: row.name).scaledFont(.callout, weight: .medium).lineLimit(1)
                         if row.kind == "plugin" { Text("плагин").scaledFont(.caption2).foregroundStyle(.secondary) }
                         if row.isOff { Text("выключен").scaledFont(.caption2).foregroundStyle(.orange) }
+                        if row.isBlocked { Text("в блок-листе").scaledFont(.caption2, weight: .semibold).foregroundStyle(.red) }
+                        if row.reports > 0 { Image(systemName: "exclamationmark.bubble").scaledFont(.caption2).foregroundStyle(.orange).help(String(localized: "Есть ваша жалоба")) }
                         if !row.note.isEmpty {
                             Image(systemName: "note.text").scaledFont(.caption2).foregroundStyle(.secondary).help(Text(verbatim: row.note))
                         }
@@ -686,6 +705,8 @@ private struct SkillFilterPanel: View {
                 SkillChip(title: String(localized: "Выключены"), isOn: filters.state == .off) { filters.state = filters.state == .off ? .any : .off }
                 SkillChip(title: String(localized: "Без скриптов"), isOn: filters.noScripts) { filters.noScripts.toggle() }
                 SkillChip(title: String(localized: "С заметкой"), symbol: "note.text", isOn: filters.withNote) { filters.withNote.toggle() }
+                SkillChip(title: String(localized: "С жалобой"), symbol: "exclamationmark.bubble", isOn: filters.withReport) { filters.withReport.toggle() }
+                SkillChip(title: String(localized: "В блок-листе"), symbol: "nosign", isOn: filters.blockedOnly) { filters.blockedOnly.toggle() }
             }
             group("Использование") {
                 SkillChip(title: String(localized: "Запускались за 30 дней"), isOn: filters.usage == .used) { filters.usage = filters.usage == .used ? .any : .used }
@@ -848,11 +869,13 @@ struct SkillCardView: View {
                     Text("Папка изменилась после проверки. Вердикт относится к прежней версии.").scaledFont(.caption).foregroundStyle(.orange)
                 }
             }
+            SkillBlockBanner(card: card)
             why(assessment)
             noteEditor
             capabilities(assessment)
             if !assessment.advice.isEmpty { advice(assessment) }
             SkillManageBox(card: card)
+            SkillReportBox(card: card)
             findings
             files
             if let preview { SkillPreviewView(preview: preview, focusLine: focusLine) }

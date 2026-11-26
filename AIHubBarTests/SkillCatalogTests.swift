@@ -180,7 +180,7 @@ struct SkillCatalogTests {
         // As a file of layout 1 had it: nothing known about what the skills can do.
         try SkillCatalog(path: file).db.execute("UPDATE scan_results SET capabilities = NULL")
         let again = try SkillCatalog(path: file)
-        #expect(again.db.userVersion == 3)
+        #expect(again.db.userVersion == 4)
         #expect(try names(again, { var f = SkillCatalog.Filters(); f.can = [.network]; return f }()) == ["fetcher"])
     }
 
