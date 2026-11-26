@@ -5,6 +5,7 @@
 **Updated:** 2026-11-25
 
 **Now:**
+- 2026-11-26: Windows 0.1.14 published as an unsigned pre-release (tag `desktop-v0.1.14`) on Oleh's «Выпускай»: the swap notification; installed on the laptop by the agent
 - 2026-11-26: Windows — the swap notification of «Ресурсы компьютера» («Подкачка сильно выросла»), as on the Mac since 0.13.0 (branch `feat/desktop-swap-alert`)
 - 2026-11-25: Windows 0.1.13 published as an unsigned pre-release (tag `desktop-v0.1.13`) on Oleh's «выпускай»: «Что изменилось» after a run, «Только отличия», the folder profile's git line gone; installed on the laptop by the agent
 - 2026-11-25: Windows — «Что изменилось» after a run: a finished command in a folder project's card, or a finished background run, opens «Версии» on the version taken before it with «Только отличия» on; the «git-репозиториев» line no longer shows under a folder profile (branch `fix/desktop-folder-git-note`)
@@ -222,6 +223,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-26 — Windows 0.1.14 released (branch `chore/desktop-0.1.14-note`)
+
+Done: on Oleh's «Выпускай». Since 0.1.13: the swap notification of «Ресурсы компьютера» (PR 612). The version set to 0.1.14 (PR 613); the «Что нового» card stays on 0.1.13 — one small change, no new card (a release without news keeps the old value). The tag `desktop-v0.1.14` on that PR's merge commit, the release published as a pre-release and not «latest»: https://github.com/OlehDemishev/AIHubBar/releases/tag/desktop-v0.1.14. The laptop's copy was updated by the agent: the release's installer run silently over 0.1.13; the profile and settings were kept.
+Checked: CI green on PR 613; `desktop-release.yml` green (it installs and uninstalls the installer) and the manifest workflow green; `latest.json` at `desktop-updates` says 0.1.14. On the laptop the installer exited 0, `AIHubBar.exe` and `claudepult --version` say 0.1.14, the app runs.
+Left: the installed 0.1.14 was not opened and looked at by the agent; the swap notification not seen live (also in the notes' «Known»). Unsigned, SmartScreen warns. Telegram chat tasks and the shared bot wait for a real bot tried on the laptop — Oleh: «Пока не надо» (2026-11-26).
 
 ## 2026-11-26 — Windows: the swap notification (branch `feat/desktop-swap-alert`)
 
