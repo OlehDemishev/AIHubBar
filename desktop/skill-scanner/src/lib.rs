@@ -11,7 +11,7 @@ pub mod rules;
 mod structured;
 pub mod text;
 
-pub use files::{classify, content_hash, read_folder, FileEntry, Kind, Limits, SkillFiles};
+pub use files::{classify, content_hash, content_hash_without_links, file_digest, read_folder, FileEntry, Kind, Limits, SkillFiles};
 pub use rules::{info_of, RuleInfo, Severity, RULES};
 
 use regex::Regex;
@@ -327,7 +327,7 @@ fn frontmatter_end(text: &str) -> usize {
     0
 }
 
-fn valid_name(name: &str) -> bool {
+pub fn valid_name(name: &str) -> bool {
     !name.is_empty() && name.chars().count() <= 64 && name.chars().all(|c| c.is_ascii_lowercase() || c.is_ascii_digit() || c == '-') && !name.starts_with('-') && !name.ends_with('-') && !name.contains("--")
 }
 

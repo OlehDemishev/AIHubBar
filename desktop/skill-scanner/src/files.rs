@@ -172,6 +172,22 @@ pub fn content_hash(files: &SkillFiles) -> String {
     hex(&hasher.finalize())
 }
 
+/// The hash of what an installed copy holds: the same, with the links left out (a link is never installed).
+pub fn content_hash_without_links(files: &SkillFiles) -> String {
+    let mut hasher = Sha256::new();
+    for file in files.files.iter().filter(|file| file.symlink.is_none()) {
+        hasher.update(file.path.as_bytes());
+        hasher.update([0u8]);
+        hasher.update(file.digest);
+    }
+    hex(&hasher.finalize())
+}
+
+/// SHA-256 of a file on disk, read in pieces.
+pub fn file_digest(path: &Path) -> io::Result<[u8; 32]> {
+    digest_of(path)
+}
+
 // MARK: - What a file is
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

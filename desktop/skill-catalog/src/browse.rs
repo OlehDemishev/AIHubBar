@@ -66,6 +66,8 @@ pub struct SearchResult {
     /// Every source in the catalog, for the filter.
     pub sources: Vec<String>,
     pub any_official: bool,
+    /// The catalog has skills that are not installed (a folder that was added, later the network).
+    pub any_not_installed: bool,
 }
 
 const LIMIT: usize = 300;
@@ -171,7 +173,8 @@ pub fn search(db: &Connection, filters: &Filters) -> Result<SearchResult> {
     }
     let sources: Vec<String> = db.prepare("SELECT DISTINCT source FROM skills ORDER BY source")?.query_map([], |row| row.get(0))?.collect::<rusqlite::Result<_>>()?;
     let any_official: bool = db.query_row("SELECT EXISTS (SELECT 1 FROM skills WHERE official = 1)", [], |row| row.get(0))?;
-    Ok(SearchResult { rows, more, total: by_verdict.iter().sum(), by_verdict, sources, any_official })
+    let any_not_installed: bool = db.query_row("SELECT EXISTS (SELECT 1 FROM skills s WHERE NOT EXISTS (SELECT 1 FROM installations i JOIN skills c ON c.id = i.skill_id WHERE c.content_hash = s.content_hash))", [], |row| row.get(0))?;
+    Ok(SearchResult { rows, more, total: by_verdict.iter().sum(), by_verdict, sources, any_official, any_not_installed })
 }
 
 // MARK: - A skill's card
@@ -209,7 +212,7 @@ pub struct Card {
 
 /// A local skill's files, read again from its folder. A skill from the network has none on disk yet.
 fn files_of(row: &SkillRow) -> Option<skill_scanner::SkillFiles> {
-    if row.source != "local" {
+    if !crate::on_disk(&row.source) {
         return None;
     }
     skill_scanner::read_folder(Path::new(&row.path), skill_scanner::Limits::default()).ok()
@@ -245,7 +248,7 @@ pub fn card(db: &Connection, id: i64) -> Result<Option<Card>> {
         })
         .collect();
     let changed = on_disk.as_ref().is_some_and(|files| skill_scanner::content_hash(files) != row.content_hash);
-    let missing = row.source == "local" && on_disk.is_none();
+    let missing = crate::on_disk(&row.source) && on_disk.is_none();
     Ok(Some(Card { row, places, findings: report.findings, languages: report.languages, total_bytes: report.total_bytes, scanned_at, scanner_version, files, changed, missing }))
 }
 

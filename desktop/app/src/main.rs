@@ -583,7 +583,7 @@ fn main() {
             pair_compare::open_pair_compare, pair_compare::pair_view, pair_compare::pair_file_diff, pair_compare::pair_between_diff,
             pair_compare::pair_action, pair_compare::pair_open_folder, help::open_help, help::help_view, crash::crash_reports_asked, crash::set_crash_reports_asked, versions::open_versions, versions::versions_view, versions::version_compare, versions::version_restore,
             versions::version_questions, versions::version_open_file, versions::versions_settings, versions::set_versions_settings, versions::clear_versions, versions::open_versions_folder, help::open_feedback, accounts::claude_accounts, accounts::add_claude_account, accounts::rename_claude_account,
-            accounts::remove_claude_account, accounts::sign_in_claude_account, accounts::refresh_claude_accounts, skills::open_skills, skills::skills_texts, skills::skills_refresh, skills::skills_search, skills::skills_card, skills::skills_preview, skills::skills_show_folder, history::open_history, history::day_summary_settings, history::set_day_summary, history::send_day_summary, history::history_view, history::set_plan_price, history::export_history,
+            accounts::remove_claude_account, accounts::sign_in_claude_account, accounts::refresh_claude_accounts, skills::open_skills, skills::skills_texts, skills::skills_refresh, skills::skills_search, skills::skills_card, skills::skills_preview, skills::skills_show_folder, skills::skills_add_folder, skills::skills_forget, skills::skills_plan_install, skills::skills_install, skills::skills_remove, skills::skills_set_enabled, skills::skills_journal, skills::skills_restore, skills::skills_updates, skills::skills_plan_update, skills::skills_update, history::open_history, history::day_summary_settings, history::set_day_summary, history::send_day_summary, history::history_view, history::set_plan_price, history::export_history,
             updates::updates_view, updates::set_updates_daily, updates::check_updates, updates::install_update,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,
@@ -626,6 +626,7 @@ fn main() {
             handle.state::<resources::Resources>().start(handle.clone());
             handle.state::<hub::Hub>().start(handle.clone());
             history::start_day_summary(handle.clone());
+            skills::start_update_watch(handle.clone());
             versions::Keeper::start(handle.clone());
             let for_crash = handle.clone();
             std::thread::spawn(move || crash::check_at_start(&for_crash));

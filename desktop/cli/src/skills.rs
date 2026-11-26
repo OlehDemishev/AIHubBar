@@ -92,6 +92,43 @@ fn list(json: bool, verbose: bool) -> ExitCode {
     ExitCode::SUCCESS
 }
 
+/// What the window's commands answer, for trying the page outside the app. It can install and remove, so it only
+/// works on a made-up home (`AIHUBBAR_SKILLS_HOME`), never on the person's real folders.
+fn call(command: &str, args: &serde_json::Value) -> skill_catalog::Result<serde_json::Value> {
+    use skill_catalog::manage;
+    if std::env::var("AIHUBBAR_SKILLS_HOME").map_or(true, |home| home.trim().is_empty()) {
+        return Err("`skills call` needs AIHUBBAR_SKILLS_HOME: it is for a test home only".into());
+    }
+    let roots = roots();
+    let database = Roots::database(paths::skills_db());
+    let backups = database.with_file_name("backups");
+    let now = skill_catalog::now();
+    let env = skill_catalog::Env { roots: &roots, backups: &backups, now: &now };
+    let mut db = skill_catalog::open(&database)?;
+    let text = |key: &str| args.get(key).and_then(|value| value.as_str()).unwrap_or_default().to_owned();
+    let number = |key: &str| args.get(key).and_then(|value| value.as_i64()).unwrap_or_default();
+    let flag = |key: &str| args.get(key).and_then(|value| value.as_bool()).unwrap_or_default();
+    Ok(match command {
+        "skills_texts" => serde_json::Value::Object(skill_catalog::texts::texts(&text("lang"))),
+        "skills_refresh" => serde_json::json!({ "refreshed": skill_catalog::refresh_installed(&mut db, &roots, &now)?, "home": roots.home }),
+        "skills_search" => serde_json::to_value(skill_catalog::search(&db, &serde_json::from_value(args.get("filters").cloned().unwrap_or_default())?)?)?,
+        "skills_card" => serde_json::to_value(skill_catalog::card(&db, number("id"))?)?,
+        "skills_preview" => serde_json::to_value(skill_catalog::preview(&db, number("id"), &text("file"))?)?,
+        "skills_add_folder" => serde_json::to_value(manage::import_folder(&mut db, Path::new(&text("path")), &now)?)?,
+        "skills_forget" => serde_json::to_value(manage::forget(&db, number("id"))?)?,
+        "skills_plan_install" => serde_json::to_value(manage::plan_install(&mut db, env, number("id"), &text("agent"))?)?,
+        "skills_install" => serde_json::to_value(manage::install(&mut db, env, number("id"), &text("agent"), &text("contentHash"), flag("acknowledged"))?)?,
+        "skills_remove" => serde_json::to_value(manage::remove(&mut db, env, &text("installPath"))?)?,
+        "skills_set_enabled" => serde_json::to_value(manage::set_enabled(&mut db, env, &text("installPath"), flag("on"))?)?,
+        "skills_journal" => serde_json::to_value(manage::journal(&db, 200)?)?,
+        "skills_restore" => serde_json::to_value(manage::restore(&mut db, env, number("journalId"))?)?,
+        "skills_updates" => serde_json::to_value(manage::updates(&db)?)?,
+        "skills_plan_update" => serde_json::json!({ "plan": manage::plan_update(&db, env, &text("installPath"))?, "changes": manage::diff(&db, &text("installPath"))? }),
+        "skills_update" => serde_json::to_value(manage::update(&mut db, env, &text("installPath"), &text("contentHash"), flag("acknowledged"))?)?,
+        _ => return Err(format!("no such command: {command}").into()),
+    })
+}
+
 pub fn run(args: &[String]) -> ExitCode {
     let json = args.iter().any(|arg| arg == "--json");
     let verbose = args.iter().any(|arg| arg == "--findings");
@@ -100,13 +137,15 @@ pub fn run(args: &[String]) -> ExitCode {
         [command] if command.as_str() == "list" => list(json, verbose),
         [command, folder] if command.as_str() == "scan" => scan(Path::new(folder.as_str()), json),
         // What the window asks the catalog, as JSON: a search by words, a skill's card, one of its files.
-        [command, rest @ ..] if matches!(command.as_str(), "search" | "card" | "file") => {
+        [command, rest @ ..] if matches!(command.as_str(), "search" | "card" | "file" | "journal" | "updates") => {
             let answer = (|| -> skill_catalog::Result<serde_json::Value> {
                 let db = skill_catalog::open(&Roots::database(paths::skills_db()))?;
                 let id = || rest.first().and_then(|id| id.parse::<i64>().ok()).ok_or("an id is needed");
                 Ok(match command.as_str() {
                     "search" => serde_json::to_value(skill_catalog::search(&db, &skill_catalog::Filters { query: rest.iter().map(|word| word.as_str()).collect::<Vec<_>>().join(" "), ..Default::default() })?)?,
                     "card" => serde_json::to_value(skill_catalog::card(&db, id()?)?)?,
+                    "journal" => serde_json::to_value(skill_catalog::manage::journal(&db, 200)?)?,
+                    "updates" => serde_json::to_value(skill_catalog::manage::updates(&db)?)?,
                     _ => serde_json::to_value(skill_catalog::preview(&db, id()?, rest.get(1).map(|file| file.as_str()).unwrap_or_default())?)?,
                 })
             })();
@@ -121,13 +160,26 @@ pub fn run(args: &[String]) -> ExitCode {
                 }
             }
         }
+        [command, name, rest @ ..] if command.as_str() == "call" => {
+            let args = rest.first().and_then(|json| serde_json::from_str(json).ok()).unwrap_or(serde_json::Value::Null);
+            match call(name, &args) {
+                Ok(value) => {
+                    println!("{value}");
+                    ExitCode::SUCCESS
+                }
+                Err(error) => {
+                    eprintln!("{error}");
+                    ExitCode::FAILURE
+                }
+            }
+        }
         // The window's texts for a language, as the app hands them to the page.
         [command, language] if command.as_str() == "texts" => {
             println!("{}", serde_json::to_string_pretty(&skill_catalog::texts::texts(language)).unwrap_or_default());
             ExitCode::SUCCESS
         }
         _ => {
-            eprintln!("Usage:\n  claudepult skills list [--json] [--findings]\n  claudepult skills scan <folder> [--json]\n  claudepult skills search [words]\n  claudepult skills card <id>\n  claudepult skills file <id> <path>");
+            eprintln!("Usage:\n  claudepult skills list [--json] [--findings]\n  claudepult skills scan <folder> [--json]\n  claudepult skills search [words]\n  claudepult skills card <id>\n  claudepult skills file <id> <path>\n  claudepult skills journal\n  claudepult skills updates");
             ExitCode::from(2)
         }
     }
