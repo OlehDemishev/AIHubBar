@@ -5,7 +5,7 @@
 **Updated:** 2026-11-26
 
 **Now:**
-- 2026-11-26: Mac — 0.14.0-beta.1 (the Skills Catalog) being prepared on Oleh's word: notes, «Что нового», demo (branch `chore/release-0.14.0-beta.1`)
+- 2026-11-26: Mac — **0.14.0-beta.1 published** to beta testers on Oleh's «Да, вливай и выпускай» (the Skills Catalog, the stuck-notification fix; build 1529, signed and notarized; https://github.com/OlehDemishev/AIHubBar/releases/tag/v0.14.0-beta.1). Next: Oleh updates his copy through Sparkle (Settings → General → «Бета-версии» on), uses it a day, then 0.14.0 for everyone on Tuesday on his word
 - 2026-11-26: Mac — Skills Catalog: the pass over `~/Projects/SECURITY-CHECKLIST.md` is done — `docs/SECURITY-AUDIT.md` (table of all 40 items, self-attack as tests); fixed: skill-provided values in four localized texts now shown verbatim, a 20 MB limit on the «Сверить» file, `.gitignore` rules for secrets, Sparkle's public key in `.gitleaksignore` — merged as PR #640 on Oleh's «Да, вливай»; the catalog is ready for a release on Oleh's word
 - 2026-11-26: Mac — Skills Catalog, step 8 (the last of the plan): «Порядок» in the section — name conflicts (different contents of one name switched on for one agent), copies (one content in several real folders), skills not used for 30 days with «Выключить» each or all, named sets (from the card; show, switch all on or off, delete); «Конфликты имён» in the block; «Экспорт с хешами» and «Сверить с экспортом» in Settings → Скиллы — merged as PR #638 on Oleh's «Да, вливай» (seen live in an isolated copy); all 8 steps of the plan are in `main`
 - 2026-11-26: Mac — Skills Catalog, step 7: the AI review. «Попросить Claude проверить» on a skill's card sends its files as marked, untrusted data to Claude Code without tools, settings or MCP (`claude -p`), or — without Claude Code — to the Anthropic API with the key from «Сервисы AI»; the answer is read strictly, remembered by content hash and language, and can only make the verdict stricter; filter chip «AI-проверен» — merged as PR #636 on Oleh's «вливай» (seen live with one real request)
@@ -194,6 +194,7 @@
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
 **Needs Oleh:**
+- 0.14.0-beta.1: update through Sparkle with «Бета-версии» on, switch on «Скиллы» in «Что показывать», use it a day; then say whether 0.14.0 goes out on Tuesday
 - Skills Catalog on the Mac: in a Debug build switch on «Скиллы» in Settings → «Что показывать» (it is not added to profiles by itself), open the panel and say what to change in the block and the section
 - Skills Catalog, desktop/ (paused): say what to change in the window (it runs on the Mac from `.claude/worktrees/skills-catalog/desktop/target/debug/AIHubBar`; menu bar icon → «Каталог скиллов…»); on the Windows laptop check the same and that Defender is quiet about the build; say whether stages 3–4 are wanted in full
 - lists (docs/LAUNCH.md → Lists): fill the awesome-claude-code form yourself with the ready values (a person must do it; leave the last checkbox unticked); awesome-mac is done
@@ -241,6 +242,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-26 — Mac: 0.14.0-beta.1 published
+
+Done: PR #642 merged; `scripts/release.sh 0.14.0-beta.1 --publish` from a clean `main`: all checks passed, build 1529, signed with the Developer ID, the app and the disk image notarized and stapled, GitHub pre-release `v0.14.0-beta.1` with the .dmg and its appcast; the beta channel's feed now offers 0.14.0-beta.1 (build 1529) to beta testers and 0.13.0 (1361) as the release.
+Checked: the release page lists both files and is a pre-release; `releases/download/beta/appcast.xml` carries 0.14.0-beta.1 with `<sparkle:channel>beta</sparkle:channel>`.
+Left: Oleh's day with the beta; the Homebrew cask stays at 0.13.0 (betas don't touch it).
 
 ## 2026-11-26 — Mac: 0.14.0-beta.1 prepared (branch `chore/release-0.14.0-beta.1`)
 
