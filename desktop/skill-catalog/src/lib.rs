@@ -6,6 +6,8 @@
 pub mod browse;
 pub mod local;
 pub mod manage;
+pub mod review;
+pub mod reviewer;
 pub mod texts;
 
 pub use browse::{card, preview, search, Card, Filters, Preview, SearchResult, SkillRow};
@@ -21,9 +23,9 @@ use std::path::Path;
 pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
 /// The file's layout; raised with every change, each step in `MIGRATIONS`.
-const SCHEMA_VERSION: i64 = 3;
+const SCHEMA_VERSION: i64 = 4;
 
-const MIGRATIONS: [&str; 3] = ["
+const MIGRATIONS: [&str; 4] = ["
 CREATE TABLE skills (
     id            INTEGER PRIMARY KEY,
     kind          TEXT NOT NULL DEFAULT 'skill',   -- skill | plugin
@@ -113,6 +115,20 @@ CREATE TABLE install_log (
     managed_json  TEXT,                    -- the managed_installs row that went with a removed or replaced copy
     restored_at   TEXT
 );
+", "
+-- Stage 6: what a language model said about a skill, remembered by content so it is never asked twice.
+CREATE TABLE llm_reviews (
+    content_hash   TEXT NOT NULL,
+    language       TEXT NOT NULL,          -- the language of the explanation
+    prompt_version INTEGER NOT NULL,       -- the instructions the reviewer had
+    verdict        TEXT NOT NULL,          -- safe | review | dangerous; review when the answer could not be read
+    review_json    TEXT NOT NULL,
+    reviewed_at    TEXT NOT NULL,
+    PRIMARY KEY (content_hash, language, prompt_version)
+);
+-- The verdict the list shows: the static one, or the model's when that is stricter.
+ALTER TABLE scan_results ADD COLUMN effective TEXT NOT NULL DEFAULT 'review';
+UPDATE scan_results SET effective = verdict;
 "];
 
 fn migrate(db: &mut Connection) -> Result<()> {
@@ -309,9 +325,11 @@ pub(crate) fn save_report(db: &Connection, skill: i64, commit_sha: Option<&str>,
     categories.dedup();
     let categories = if categories.is_empty() { String::new() } else { format!(",{},", categories.join(",")) };
     db.execute(
-        "INSERT INTO scan_results (skill_id, commit_sha, scanner_version, risk_score, verdict, findings_json, scanned_at, has_scripts, categories, counts) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)",
+        "INSERT INTO scan_results (skill_id, commit_sha, scanner_version, risk_score, verdict, findings_json, scanned_at, has_scripts, categories, counts, effective) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?5)",
         params![skill, commit_sha, report.scanner_version, report.risk_score, report.verdict.as_str(), serde_json::to_string(report)?, now, report.has_scripts, categories, serde_json::to_string(&counts(&report.findings))?],
     )?;
+    // A language model's stricter verdict about this very content, if there is one, still stands.
+    review::apply(db, &report.content_hash)?;
     Ok(())
 }
 
@@ -368,10 +386,10 @@ pub fn installed(db: &Connection, query: Option<&str>) -> Result<Vec<InstalledRo
         None => None,
     };
     let mut statement = db.prepare(
-        "SELECT s.id, s.kind, s.name, s.description, s.path, s.content_hash, s.license, r.verdict, r.risk_score, r.scanned_at, r.scanner_version, r.findings_json
+        "SELECT s.id, s.kind, s.name, s.description, s.path, s.content_hash, s.license, r.effective, r.risk_score, r.scanned_at, r.scanner_version, r.findings_json
          FROM skills s JOIN scan_results r ON r.skill_id = s.id
          WHERE EXISTS (SELECT 1 FROM installations i WHERE i.skill_id = s.id)
-         ORDER BY CASE r.verdict WHEN 'dangerous' THEN 0 WHEN 'review' THEN 1 ELSE 2 END, r.risk_score DESC, s.name COLLATE NOCASE, s.path",
+         ORDER BY CASE r.effective WHEN 'dangerous' THEN 0 WHEN 'review' THEN 1 ELSE 2 END, r.risk_score DESC, s.name COLLATE NOCASE, s.path",
     )?;
     let mut places = db.prepare("SELECT agent, install_path, scope, project, enabled FROM installations WHERE skill_id = ?1 ORDER BY agent, install_path")?;
     let mut rows = Vec::new();

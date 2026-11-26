@@ -47,7 +47,12 @@ pub struct SkillRow {
     pub installed: bool,
     /// Installed, but switched off everywhere.
     pub off: bool,
+    /// The verdict to go by: the static check's, or a language model's when that is stricter.
     pub verdict: String,
+    /// What the static check alone says.
+    pub static_verdict: String,
+    /// What a language model said, when it was asked.
+    pub llm_verdict: Option<String>,
     pub risk_score: u8,
     pub has_scripts: bool,
     /// Findings by severity: critical, high, medium, low.
@@ -88,7 +93,7 @@ fn conditions(filters: &Filters, with_verdict: bool) -> (String, Vec<Value>) {
         sql.push(format!("s.id IN (SELECT rowid FROM skills_fts WHERE skills_fts MATCH {})", bind(&query)));
     }
     if let Some(verdict) = filters.verdict.as_deref().filter(|_| with_verdict) {
-        sql.push(format!("r.verdict = {}", bind(verdict)));
+        sql.push(format!("r.effective = {}", bind(verdict)));
     }
     if let Some(agent) = &filters.agent {
         let place = bind(agent);
@@ -113,7 +118,9 @@ fn conditions(filters: &Filters, with_verdict: bool) -> (String, Vec<Value>) {
     (sql.join(" AND "), values)
 }
 
-const COLUMNS: &str = "s.id, s.kind, s.name, s.description, s.source, s.repo_url, s.path, s.commit_sha, s.content_hash, s.license, s.official, s.category, s.stars, s.installs, s.agents, r.verdict, r.risk_score, r.has_scripts, r.counts";
+/// The verdict shown is `effective`: the static one, or a language model's when that is stricter.
+const COLUMNS: &str = "s.id, s.kind, s.name, s.description, s.source, s.repo_url, s.path, s.commit_sha, s.content_hash, s.license, s.official, s.category, s.stars, s.installs, s.agents, r.effective, r.risk_score, r.has_scripts, r.counts, r.verdict, \
+    (SELECT l.verdict FROM llm_reviews l WHERE l.content_hash = s.content_hash ORDER BY CASE l.verdict WHEN 'dangerous' THEN 0 WHEN 'review' THEN 1 ELSE 2 END LIMIT 1)";
 
 fn row_of(db: &Connection, row: &rusqlite::Row) -> rusqlite::Result<SkillRow> {
     let content_hash: String = row.get(8)?;
@@ -141,6 +148,8 @@ fn row_of(db: &Connection, row: &rusqlite::Row) -> rusqlite::Result<SkillRow> {
         installed: !places.is_empty(),
         off: !places.is_empty() && places.iter().all(|(_, enabled)| !enabled),
         verdict: row.get(15)?,
+        static_verdict: row.get(19)?,
+        llm_verdict: row.get(20)?,
         risk_score: row.get(16)?,
         has_scripts: row.get(17)?,
         counts: serde_json::from_str(&row.get::<_, String>(18)?).unwrap_or_default(),
@@ -152,7 +161,7 @@ pub fn search(db: &Connection, filters: &Filters) -> Result<SearchResult> {
     let (wanted, values) = conditions(filters, true);
     let mut statement = db.prepare(&format!(
         "SELECT {COLUMNS} FROM skills s JOIN scan_results r ON r.skill_id = s.id WHERE {wanted}
-         ORDER BY CASE r.verdict WHEN 'dangerous' THEN 0 WHEN 'review' THEN 1 ELSE 2 END, r.risk_score DESC, s.name COLLATE NOCASE, s.path LIMIT {}",
+         ORDER BY CASE r.effective WHEN 'dangerous' THEN 0 WHEN 'review' THEN 1 ELSE 2 END, r.risk_score DESC, s.name COLLATE NOCASE, s.path LIMIT {}",
         LIMIT + 1
     ))?;
     let mut rows: Vec<SkillRow> = statement.query_map(rusqlite::params_from_iter(values), |row| row_of(db, row))?.collect::<rusqlite::Result<_>>()?;
@@ -162,7 +171,7 @@ pub fn search(db: &Connection, filters: &Filters) -> Result<SearchResult> {
     // The buttons show what each verdict would give with the other filters as they are.
     let (any_verdict, values) = conditions(filters, false);
     let mut by_verdict = [0usize; 3];
-    let mut statement = db.prepare(&format!("SELECT r.verdict, count(*) FROM skills s JOIN scan_results r ON r.skill_id = s.id WHERE {any_verdict} GROUP BY r.verdict"))?;
+    let mut statement = db.prepare(&format!("SELECT r.effective, count(*) FROM skills s JOIN scan_results r ON r.skill_id = s.id WHERE {any_verdict} GROUP BY r.effective"))?;
     for found in statement.query_map(rusqlite::params_from_iter(values), |row| Ok((row.get::<_, String>(0)?, row.get::<_, usize>(1)?)))? {
         let (verdict, count) = found?;
         match verdict.as_str() {
@@ -229,7 +238,7 @@ fn file_kind(file: &skill_scanner::FileEntry) -> (&'static str, bool) {
 pub fn card(db: &Connection, id: i64) -> Result<Option<Card>> {
     let found = db
         .query_row(&format!("SELECT {COLUMNS}, r.findings_json, r.scanned_at, r.scanner_version FROM skills s JOIN scan_results r ON r.skill_id = s.id WHERE s.id = ?1"), params![id], |row| {
-            Ok((row_of(db, row)?, row.get::<_, String>(19)?, row.get::<_, String>(20)?, row.get::<_, u32>(21)?))
+            Ok((row_of(db, row)?, row.get::<_, String>(21)?, row.get::<_, String>(22)?, row.get::<_, u32>(23)?))
         })
         .optional()?;
     let Some((row, report, scanned_at, scanner_version)) = found else { return Ok(None) };

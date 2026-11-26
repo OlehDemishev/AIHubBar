@@ -19,7 +19,7 @@ fn names(group: &str) -> Vec<String> {
 }
 
 /// The fixture, the rule that must fire, and the verdict.
-const BAD: [(&str, &str, Verdict); 14] = [
+const BAD: [(&str, &str, Verdict); 15] = [
     ("exfil-curl", "exfil-combo", Verdict::Dangerous),
     ("base64-payload", "decode-exec", Verdict::Dangerous),
     ("zero-width-injection", "pi-hidden-text", Verdict::Dangerous),
@@ -32,6 +32,8 @@ const BAD: [(&str, &str, Verdict); 14] = [
     ("agent-permissions", "agent-config", Verdict::Dangerous),
     ("mcp-remote", "mcp-remote-code", Verdict::Dangerous),
     ("webhook-exfil", "exfil-endpoint", Verdict::Dangerous),
+    // Orders for the agent and for whoever reviews the skill, in plain words: found by the static check too.
+    ("reviewer-bait", "pi-exfil", Verdict::Dangerous),
     ("destructive", "rm-rf-home", Verdict::Dangerous),
     // One typo in a package name is a suspicion, not proof: the finding is there, the verdict stays «review».
     ("typosquat", "typosquat", Verdict::Review),

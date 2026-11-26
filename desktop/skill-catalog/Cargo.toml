@@ -12,3 +12,5 @@ serde_json.workspace = true
 chrono.workspace = true
 # SQLite built into the program (no system library on Windows), with FTS5 for the search.
 rusqlite = { version = "0.37", features = ["bundled"] }
+# The Anthropic API for the optional LLM review; already built for claudepult-core.
+ureq = "3"

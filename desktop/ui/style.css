@@ -768,6 +768,8 @@ button.skills-file:hover { background: var(--line); border: none; }
 .skills-log { display: flex; flex-direction: column; gap: 2px; padding: 6px 0; border-top: 1px solid var(--line); }
 .skills-log-what { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .skills-log-what .spacer { flex: 1; }
+.skills-llm { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.skills-llm-result { display: flex; flex-direction: column; gap: 6px; width: 100%; padding: 8px 10px; border: 1px dashed var(--line); border-radius: 6px; }
 .skills-note { flex: none; }
 .severity-critical { --sev: #d70015; }
 .severity-high { --sev: #c93400; }
