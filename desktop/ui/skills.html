@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AI Hub Bar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="skills-window">
+  <header class="skills-toolbar">
+    <input type="search" id="search" autocomplete="off" spellcheck="false">
+    <span class="segmented" id="verdicts" role="group"></span>
+    <select id="agent"></select>
+    <span class="spacer"></span>
+    <button id="rescan"></button>
+  </header>
+  <p class="secondary" id="summary"></p>
+  <main id="list" class="skills-list"></main>
+  <p class="secondary" id="empty" hidden></p>
+  <p class="error" id="error" hidden></p>
+  <footer class="secondary skills-note" id="disclaimer"></footer>
+
+  <script type="module">
+    // The Skills Catalog's window. Everything a skill says about itself — its name, description, the lines the
+    // scanner quotes — is untrusted text: it only ever goes in through `textContent`, never as markup.
+    import { loadTexts, invoke } from "./app.js";
+    const ui = await loadTexts();
+    const texts = await invoke("skills_texts");
+    const lang = ui.lang || "en";
+
+    // The module's own texts (ui/skills-i18n): a key, with %1, %2 replaced in order.
+    function s(key, ...args) {
+      return (texts[key] ?? key).replace(/%(\d)/g, (_, n) => args[Number(n) - 1] ?? "");
+    }
+
+    const id = (name) => document.getElementById(name);
+    function el(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    }
+
+    const VERDICTS = ["dangerous", "review", "safe"];
+    const VERDICT_CLASS = { dangerous: "ci-fail", review: "ci-pending", safe: "ci-ok" };
+    const SEVERITIES = ["critical", "high", "medium", "low", "info"];
+    const AGENTS = ["claude", "codex", "cursor", "gemini"];
+
+    let rows = [];
+    let home = "";
+    let verdict = "all";
+    let agent = "";
+    const open = new Set();
+
+    id("search").placeholder = s("search.placeholder");
+    id("rescan").textContent = s("action.rescan");
+    id("disclaimer").textContent = s("disclaimer");
+    document.title = s("window.title");
+    for (const value of ["", ...AGENTS]) {
+      const option = el("option", "", value ? s("agent." + value) : s("filter.anyAgent"));
+      option.value = value;
+      id("agent").append(option);
+    }
+
+    function size(bytes) {
+      const units = ["B", "KB", "MB"];
+      let value = bytes, unit = 0;
+      while (value >= 1024 && unit < units.length - 1) { value /= 1024; unit++; }
+      return `${unit ? value.toFixed(1) : value} ${units[unit]}`;
+    }
+
+    // A path under the home folder as `~/…`.
+    function short(path) {
+      return home && path.startsWith(home) ? "~" + path.slice(home.length) : path;
+    }
+
+    function matches(row) {
+      if (verdict !== "all" && row.verdict !== verdict) return false;
+      if (agent && !row.agents.includes(agent)) return false;
+      const words = id("search").value.toLowerCase().split(/\s+/).filter(Boolean);
+      const hay = `${row.name} ${row.description}`.toLowerCase();
+      return words.every((word) => hay.includes(word));
+    }
+
+    function verdictBadge(row) {
+      const badge = el("span", `badge ${VERDICT_CLASS[row.verdict] ?? "ci-pending"}`, s("verdict." + row.verdict));
+      badge.title = s(`verdict.${row.verdict}.hint`);
+      return badge;
+    }
+
+    function finding(found) {
+      const item = el("div", `skills-finding severity-${found.severity}`);
+      const head = el("div", "skills-finding-head");
+      head.append(el("span", "skills-severity", s("severity." + found.severity)), el("strong", "", s(`rule.${found.rule}.title`)));
+      if (found.file) head.append(el("span", "secondary skills-where", found.line ? `${found.file} · ${s("detail.line", found.line)}` : found.file));
+      item.append(head, el("p", "secondary", s(`rule.${found.rule}.why`)));
+      if (found.excerpt) item.append(el("pre", "skills-excerpt", found.excerpt));
+      return item;
+    }
+
+    function detail(row) {
+      const box = el("div", "skills-detail");
+      box.append(el("p", "", s(`verdict.${row.verdict}.hint`)));
+      const facts = [
+        s("detail.risk", row.riskScore),
+        s("detail.files", row.fileCount, size(row.totalBytes)),
+        row.hasScripts ? s("detail.scripts", row.languages.join(", ") || "binary") : s("detail.noScripts"),
+        row.license ? s("detail.license", row.license) : s("detail.noLicense"),
+        s("detail.checked", new Intl.DateTimeFormat(lang, { dateStyle: "medium", timeStyle: "short" }).format(new Date(row.scannedAt)), row.scannerVersion),
+      ];
+      box.append(el("p", "secondary", facts.join(" · ")));
+
+      box.append(el("h2", "", s("detail.where")));
+      row.places.forEach((place, index) => {
+        const line = el("div", "skills-place");
+        const scope = place.scope === "project" ? s("scope.project", place.project ?? "") : s("scope." + place.scope);
+        line.append(el("span", "badge", s("agent." + place.agent)), el("span", "secondary", scope));
+        if (!place.enabled) line.append(el("span", "badge dirty", s("row.off")));
+        const path = el("span", "skills-path", short(place.installPath));
+        path.title = place.installPath;
+        const show = el("button", "link", s("action.showFolder"));
+        show.onclick = (event) => { event.stopPropagation(); invoke("skills_show_folder", { id: row.id, place: index }).catch(fail); };
+        line.append(path, show);
+        box.append(line);
+      });
+
+      box.append(el("h2", "", s("detail.findings")));
+      if (row.findings.length === 0) box.append(el("p", "secondary", s("detail.noFindings")));
+      for (const severity of SEVERITIES) for (const found of row.findings.filter((f) => f.severity === severity)) box.append(finding(found));
+      return box;
+    }
+
+    function rowNode(row) {
+      const node = el("section", "skills-row");
+      const head = el("button", "skills-row-head");
+      head.setAttribute("aria-expanded", String(open.has(row.id)));
+      const title = el("span", "skills-title");
+      title.append(verdictBadge(row), el("strong", "", row.name));
+      if (row.kind === "plugin") title.append(el("span", "badge", s("row.plugin")));
+      if (row.places.every((place) => !place.enabled)) title.append(el("span", "badge dirty", s("row.off")));
+      const agents = el("span", "skills-agents");
+      for (const name of row.agents) agents.append(el("span", "badge", s("agent." + name)));
+      const marks = el("span", "skills-counts");
+      row.counts.forEach((count, index) => { if (count) marks.append(el("span", `skills-count severity-${SEVERITIES[index]}`, String(count))); });
+      for (const mark of marks.children) mark.title = s("severity." + mark.className.split("severity-")[1]);
+      title.append(agents, marks);
+      head.append(title, el("span", "secondary skills-description", row.description));
+      head.onclick = () => { open.has(row.id) ? open.delete(row.id) : open.add(row.id); render(); };
+      node.append(head);
+      if (open.has(row.id)) node.append(detail(row));
+      return node;
+    }
+
+    function render() {
+      const count = (name) => rows.filter((row) => row.verdict === name).length;
+      id("verdicts").replaceChildren(...["all", ...VERDICTS].map((name) => {
+        const button = el("button", verdict === name ? "chosen" : "", name === "all" ? `${s("filter.all")} ${rows.length}` : `${s("verdict." + name)} ${count(name)}`);
+        button.onclick = () => { verdict = name; render(); };
+        return button;
+      }));
+      id("summary").textContent = s("summary", rows.length, count("dangerous"), count("review"), count("safe"));
+      const shown = rows.filter(matches);
+      id("list").replaceChildren(...shown.map(rowNode));
+      id("empty").hidden = shown.length > 0;
+      id("empty").textContent = rows.length === 0 ? s("empty.none") : s("empty.filter");
+    }
+
+    function fail(error) {
+      id("error").hidden = false;
+      id("error").textContent = String(error);
+    }
+
+    async function load() {
+      id("rescan").disabled = true;
+      id("summary").textContent = s("status.scanning");
+      id("error").hidden = true;
+      try {
+        const view = await invoke("skills_view");
+        rows = view.rows;
+        home = view.home.replace(/[\\/]+$/, "");
+        if (view.refreshed.failed.length) fail(view.refreshed.failed.map((line) => s("error.read", line)).join("\n"));
+        render();
+      } catch (error) {
+        fail(error);
+        id("summary").textContent = "";
+      }
+      id("rescan").disabled = false;
+    }
+
+    id("search").oninput = render;
+    id("agent").onchange = () => { agent = id("agent").value; render(); };
+    id("rescan").onclick = load;
+    await load();
+  </script>
+</body>
+</html>

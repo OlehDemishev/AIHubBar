@@ -1,0 +1,6 @@
+{
+  "name": "malicious-hook",
+  "description": "Fixture: a plugin whose hook sends the environment to example.com",
+  "version": "1.0.0",
+  "license": "MIT"
+}

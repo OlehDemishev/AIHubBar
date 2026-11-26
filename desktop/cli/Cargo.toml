@@ -11,3 +11,7 @@ path = "src/main.rs"
 
 [dependencies]
 claudepult-core.workspace = true
+skill-scanner.workspace = true
+skill-catalog.workspace = true
+serde_json.workspace = true
+dirs.workspace = true

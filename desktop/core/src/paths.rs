@@ -39,6 +39,11 @@ pub fn runs_dir() -> PathBuf {
     data_dir().join("runs")
 }
 
+/// The Skills Catalog's database: every skill found, the scanner's results, where each is installed.
+pub fn skills_db() -> PathBuf {
+    data_dir().join("skills").join("catalog.db")
+}
+
 pub fn logs_dir() -> PathBuf {
     data_dir().join("logs")
 }

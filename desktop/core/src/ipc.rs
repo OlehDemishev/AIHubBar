@@ -7,7 +7,7 @@ use interprocess::local_socket::{prelude::*, GenericNamespaced, ListenerOptions,
 use std::io::{self, BufRead, BufReader, Write};
 
 /// What `--app-command` can ask the running app.
-pub const APP_COMMANDS: [&str; 6] = ["panel", "settings", "quit", "quick-prompt", "search", "help"];
+pub const APP_COMMANDS: [&str; 7] = ["panel", "settings", "quit", "quick-prompt", "search", "help", "skills"];
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Request {

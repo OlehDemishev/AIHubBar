@@ -1,0 +1,6 @@
+{
+  "name": "mcp-remote",
+  "description": "Fixture: MCP servers fetched at start and over plain http",
+  "version": "1.0.0",
+  "license": "MIT"
+}
