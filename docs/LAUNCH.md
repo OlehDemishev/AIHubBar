@@ -1,6 +1,6 @@
 # Launch kit
 
-Drafts and the order of posts for getting AI Hub Bar its first users. Posted so far: the r/ClaudeAI megathread comment (2026-11-25). Every post goes out from Oleh's own account.
+Drafts and the order of posts for getting AI Hub Bar its first users. Posted so far: the r/ClaudeAI megathread comment (2026-11-25); listed in awesome-mac (2026-11-26). Every post goes out from Oleh's own account.
 
 Text in `[brackets]` needs Oleh's own words: it is a personal detail nobody else can vouch for.
 
@@ -26,7 +26,7 @@ The demo is in the README and on the site (`site/demo.mp4`, `docs/images/demo.gi
 | 4 | r/macapps post | A notarized release |
 | 5 | Show HN | A notarized release |
 | 6 | Product Hunt | Show HN done, demo ready |
-| 7 | Homebrew | Own tap first, official cask once the project is notable |
+| 7 | Homebrew | Own tap done 2026-11-26 (`OlehDemishev/homebrew-tap`); the official cask once the project is notable |
 
 One post every few days, so each round of feedback can be fixed before the next. On the day of a post, stay and answer comments. Never ask for votes or stars from friends: HN forbids it.
 
@@ -99,21 +99,50 @@ https://github.com/OlehDemishev/AIHubBar
 
 ## r/macapps
 
-**Title:** AI Hub Bar: a native menu bar app for AI limits and agent sessions, plus small Mac tools (free, open source)
+Brought up to 0.13.0 on 2026-11-26. The subreddit's rules were **not read** by the agent (Reddit is closed to it): before posting, Oleh reads the sidebar and the pinned post — whether a developer's own post needs a flair or a fixed form, a minimum karma or account age, and what it asks about apps written with AI. The text below says the AI part plainly, because that question comes first there.
 
-[One sentence: why you made it.]
+Attach `site/demo.mp4`. Answer the first comments within the hour.
 
-It started as a way to watch Claude limits and Claude Code sessions, and grew into a modular menu bar panel. You turn on only what you need:
+**Title:** AI Hub Bar: a menu bar app for AI limits and coding-agent sessions (free, open source, native SwiftUI)
 
-- AI limits and agent sessions, with Allow / Deny from a notification
-- a live island around the notch
-- keyboard layout fix: a word typed in the wrong layout fixes itself
-- clipboard history, notes, keep awake, quick commands and toggles, Mac resources
-- a Telegram bot for alerts on your phone
+[One sentence in your own words: why you made it.]
 
-SwiftUI, macOS 14+, 13 languages, MIT, no account, no analytics.
+AI Hub Bar sits in the menu bar and shows how much is left of your AI limits and what your coding agents are doing right now. It's free and open source (MIT), with no paid tier, no account and no analytics.
 
-https://github.com/OlehDemishev/AIHubBar
+**What it does**
+
+- usage limits of Claude, Codex, Copilot, Gemini CLI and Cursor, with the reset time and a forecast from your pace
+- every agent session running on the Mac, with what it is doing right now
+- Allow / Deny for an agent's permission request from a notification, the panel or Telegram
+- a notice when a session has gone quiet for 20 minutes or keeps running the same command
+- an island around the notch for the session that needs you
+- Shortcuts actions and a desktop widget
+
+It is modular: the panel shows only the blocks you turn on. Besides the AI ones there are small Mac tools — clipboard history, notes, keep awake, quick commands, Mac resources (with a warning when swap grows), and a fix for a word typed in the wrong keyboard layout.
+
+**Details**
+
+- native SwiftUI, macOS 14 or later, Apple Silicon and Intel
+- signed with a Developer ID and notarized by Apple; updates itself (Sparkle)
+- 13 interface languages; the translations nobody has proofread yet are marked "beta"
+- install: the DMG from GitHub, or Homebrew:
+
+```
+brew tap olehdemishev/tap
+brew trust olehdemishev/tap
+brew install --cask ai-hub-bar
+```
+
+**What to know before you install**
+
+- I'm one developer and the code was written with Claude Code, about four weeks of work, with over 740 tests. The source is open, so you can read it or build it yourself.
+- The Claude limits come from an undocumented Anthropic endpoint, so that part can break if it changes. The app reads Claude Code's sign-in from the Keychain on each refresh and never stores it.
+- Session rows need a small hook in the agent's settings. It only writes status files on the Mac, and one button in Settings takes it out.
+- The services other than Claude are checked less and are marked "beta".
+
+GitHub: https://github.com/OlehDemishev/AIHubBar
+
+What would you want from it that isn't there?
 
 ## Show HN
 
@@ -157,7 +186,7 @@ https://olehdemishev.github.io/AIHubBar/
 
 ## Lists
 
-Each list's rules were read on 2026-11-25 from its repository; they change, so look again on the day. Nothing is submitted yet. One list at a time, a few days apart.
+Each list's rules were read on 2026-11-25 from its repository; they change, so look again on the day. awesome-mac is in (2026-11-26), the other two are not submitted. One list at a time, a few days apart.
 
 | Order | List | How | Can go now? |
 |---|---|---|---|
@@ -177,7 +206,7 @@ Section «AI Tools», between «Agenttrace» and «Airbag». A similar app, «Ag
 
 Pull request title: `Add AI Hub Bar to AI Tools`. The three translated files get the same line in their own language, written to match the neighbouring entries of that file.
 
-Sent 2026-11-25: https://github.com/jaywcjlove/awesome-mac/pull/5063 (from the fork `OlehDemishev/awesome-mac`, branch `add-ai-hub-bar`; five README files, Portuguese too).
+**Merged 2026-11-26** (the next morning, without comments): AI Hub Bar is in the «AI Tools» section. Sent 2026-11-25: https://github.com/jaywcjlove/awesome-mac/pull/5063 (from the fork `OlehDemishev/awesome-mac`, branch `add-ai-hub-bar`; five README files, Portuguese too).
 
 ### 2. awesome-claude-code
 
@@ -231,4 +260,6 @@ Pull request body, by their template: Project URL, Category `ai, menubar, develo
 
 ## Homebrew
 
-The official cask needs notability, and repositories this new with no stars are rejected. So the order is: a cask in an own tap (`OlehDemishev/homebrew-tap`, `brew install --cask olehdemishev/tap/ai-hub-bar`), then the official cask once the project has the numbers.
+Own tap since 2026-11-26: https://github.com/OlehDemishev/homebrew-tap, so the install is `brew tap olehdemishev/tap`, `brew trust olehdemishev/tap`, `brew install --cask ai-hub-bar`. Homebrew 7 asks for the `brew trust` line for every tap outside its own, so it is still three lines — what the tap gives is a short name that looks like every other tap, and a page of its own. How it is kept in step with releases is in `docs/RELEASE.md`.
+
+The official cask (one line, no trust step) needs notability, and repositories this new with no stars are rejected. Try it once the project has the numbers.
