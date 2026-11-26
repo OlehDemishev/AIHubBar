@@ -99,13 +99,35 @@ pub fn run(args: &[String]) -> ExitCode {
     match plain.as_slice() {
         [command] if command.as_str() == "list" => list(json, verbose),
         [command, folder] if command.as_str() == "scan" => scan(Path::new(folder.as_str()), json),
+        // What the window asks the catalog, as JSON: a search by words, a skill's card, one of its files.
+        [command, rest @ ..] if matches!(command.as_str(), "search" | "card" | "file") => {
+            let answer = (|| -> skill_catalog::Result<serde_json::Value> {
+                let db = skill_catalog::open(&Roots::database(paths::skills_db()))?;
+                let id = || rest.first().and_then(|id| id.parse::<i64>().ok()).ok_or("an id is needed");
+                Ok(match command.as_str() {
+                    "search" => serde_json::to_value(skill_catalog::search(&db, &skill_catalog::Filters { query: rest.iter().map(|word| word.as_str()).collect::<Vec<_>>().join(" "), ..Default::default() })?)?,
+                    "card" => serde_json::to_value(skill_catalog::card(&db, id()?)?)?,
+                    _ => serde_json::to_value(skill_catalog::preview(&db, id()?, rest.get(1).map(|file| file.as_str()).unwrap_or_default())?)?,
+                })
+            })();
+            match answer {
+                Ok(value) => {
+                    println!("{}", serde_json::to_string_pretty(&value).unwrap_or_default());
+                    ExitCode::SUCCESS
+                }
+                Err(error) => {
+                    eprintln!("error: {error}");
+                    ExitCode::FAILURE
+                }
+            }
+        }
         // The window's texts for a language, as the app hands them to the page.
         [command, language] if command.as_str() == "texts" => {
             println!("{}", serde_json::to_string_pretty(&skill_catalog::texts::texts(language)).unwrap_or_default());
             ExitCode::SUCCESS
         }
         _ => {
-            eprintln!("Usage:\n  claudepult skills list [--json] [--findings]\n  claudepult skills scan <folder> [--json]");
+            eprintln!("Usage:\n  claudepult skills list [--json] [--findings]\n  claudepult skills scan <folder> [--json]\n  claudepult skills search [words]\n  claudepult skills card <id>\n  claudepult skills file <id> <path>");
             ExitCode::from(2)
         }
     }

@@ -193,6 +193,27 @@ pub enum Kind {
     OtherText,
 }
 
+impl Kind {
+    /// A short name for lists: `doc`, `script`, `config`, `program`, `archive`, `media`, `binary`, `text`.
+    pub fn name(self) -> &'static str {
+        match self {
+            Kind::Doc => "doc",
+            Kind::Script(_) => "script",
+            Kind::Config => "config",
+            Kind::Executable => "program",
+            Kind::Archive => "archive",
+            Kind::Media => "media",
+            Kind::UnknownBinary => "binary",
+            Kind::OtherText => "text",
+        }
+    }
+
+    /// Whether the file can be shown as text.
+    pub fn is_text(self) -> bool {
+        matches!(self, Kind::Doc | Kind::Script(_) | Kind::Config | Kind::OtherText)
+    }
+}
+
 fn extension(path: &str) -> String {
     let name = path.rsplit('/').next().unwrap_or(path);
     match name.rsplit_once('.') {
