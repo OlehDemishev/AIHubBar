@@ -5,6 +5,7 @@
 **Updated:** 2026-11-26
 
 **Now:**
+- 2026-11-26: Mac — 0.14.0-beta.1 (the Skills Catalog) being prepared on Oleh's word: notes, «Что нового», demo (branch `chore/release-0.14.0-beta.1`)
 - 2026-11-26: Mac — Skills Catalog: the pass over `~/Projects/SECURITY-CHECKLIST.md` is done — `docs/SECURITY-AUDIT.md` (table of all 40 items, self-attack as tests); fixed: skill-provided values in four localized texts now shown verbatim, a 20 MB limit on the «Сверить» file, `.gitignore` rules for secrets, Sparkle's public key in `.gitleaksignore` — merged as PR #640 on Oleh's «Да, вливай»; the catalog is ready for a release on Oleh's word
 - 2026-11-26: Mac — Skills Catalog, step 8 (the last of the plan): «Порядок» in the section — name conflicts (different contents of one name switched on for one agent), copies (one content in several real folders), skills not used for 30 days with «Выключить» each or all, named sets (from the card; show, switch all on or off, delete); «Конфликты имён» in the block; «Экспорт с хешами» and «Сверить с экспортом» in Settings → Скиллы — merged as PR #638 on Oleh's «Да, вливай» (seen live in an isolated copy); all 8 steps of the plan are in `main`
 - 2026-11-26: Mac — Skills Catalog, step 7: the AI review. «Попросить Claude проверить» on a skill's card sends its files as marked, untrusted data to Claude Code without tools, settings or MCP (`claude -p`), or — without Claude Code — to the Anthropic API with the key from «Сервисы AI»; the answer is read strictly, remembered by content hash and language, and can only make the verdict stricter; filter chip «AI-проверен» — merged as PR #636 on Oleh's «вливай» (seen live with one real request)
@@ -240,6 +241,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-26 — Mac: 0.14.0-beta.1 prepared (branch `chore/release-0.14.0-beta.1`)
+
+Done: on Oleh's «Сделай бета релиз». A beta, not a release, by docs/RELEASE.md «What goes to beta first»: the Skills Catalog adds a module, a panel section and a header button. `docs/release-notes/0.14.0.md` (the beta takes the notes of the version it leads to); «Что нового» set to 0.14 with four lines (the catalog, install and undo, complaints/policy/AI review/watching, the stuck-notification fix); `DemoData.version` 0.14 — the demo copy now writes four harmless sample skills into its own home (two safe, one to review, one dangerous, example.com only), switches the module on and reads them. What else is in `main` since 0.13.0 for the Mac: the stuck-notification fix (#616); the rest are the Windows app and the launch notes.
+Checked: `scripts/check.sh` — all checks passed.
+Left: merge, then `scripts/release.sh 0.14.0-beta.1 --publish` from a clean `main`.
 
 ## 2026-11-26 — Mac: Skills Catalog, the security checklist pass (branch `chore/skills-security-audit`)
 

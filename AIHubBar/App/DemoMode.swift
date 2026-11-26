@@ -49,6 +49,8 @@ enum DemoMode {
             return
         }
         modes.addFromAssistant(template.makeMode(folder: DemoData.projectsDirectory))
+        // 0.14: the Skills Catalog, on the sample skills below.
+        modes.setOn(.skills, true)
     }
 
     /// Puts the sample data into the stores. They are not started in the copy, so it stays as shown.
@@ -62,6 +64,8 @@ enum DemoMode {
         app.runs.runs = data.runs
         if let report = data.report { app.store.showDemo(report) }
         writeFiles(data)
+        // The catalog reads the sample skills the copy's home now holds; the agents' logs there are empty.
+        Task { await app.skills.refresh() }
         if let window = windowToOpen { app.requests.openWindow(window) }
         AppLog.info("Demo: scene «\(scene.rawValue)», \(data.sessions.count) sessions, \(data.runs.count) runs, \(data.hubLimits.count) other services")
     }
@@ -71,6 +75,11 @@ enum DemoMode {
         let home = FileManager.default.homeDirectoryForCurrentUser
         if let identity = data.claudeIdentity {
             try? identity.write(to: home.appending(path: ".claude.json"), options: .atomic)
+        }
+        for (path, text) in DemoData.skills {
+            let file = home.appending(path: path)
+            try? FileManager.default.createDirectory(at: file.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try? Data(text.utf8).write(to: file, options: .atomic)
         }
         try? FileManager.default.createDirectory(at: BackgroundRun.runsDirectory, withIntermediateDirectories: true)
         for run in data.runs {

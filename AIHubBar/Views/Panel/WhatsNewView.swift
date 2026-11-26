@@ -6,15 +6,13 @@ import SwiftUI
 /// `docs/release-notes/` and goes to the release page and Sparkle's window (scripts/release.sh).
 enum WhatsNew {
     /// Changes with a release that has something to say; a release without news keeps the old value and shows nothing.
-    static let version = "0.13"
+    static let version = "0.14"
 
     static var items: [String] {
-        [String(localized: "Новый модуль «Версии»: тексты проекта-папки сохраняются перед каждым запуском AI — прежний вариант можно сравнить с текущим и вернуть."),
-         String(localized: "«Выбрать» под списком проектов-папок запускает одну команду в нескольких проектах по очереди: сейчас, ночью или после сброса лимита."),
-         String(localized: "Придёт уведомление, если агент 20 минут ничего не делает или раз за разом запускает одну и ту же команду."),
-         String(localized: "В развёрнутом проекте видны локальные серверы из его папки: порт, программа, кнопки «открыть» и «остановить»."),
-         String(localized: "В окно «Быстрого запроса» можно перетащить файлы, а кнопка с микрофоном включает диктовку."),
-         String(localized: "Календарь выгружается в файл .ics, а у профиля для текстов появилась цель по словам на день.")]
+        [String(localized: "Новый модуль «Скиллы»: все скиллы и плагины Claude Code, Codex, Cursor и Gemini CLI с проверкой безопасности и объяснением оценки. Включите его в Настройках → «Что показывать»."),
+         String(localized: "Скилл можно поставить другому агенту, выключить, убрать и вернуть из журнала, а новую версию — сравнить построчно перед обновлением."),
+         String(localized: "Жалобы, блок-лист, политика установки, AI-проверка по кнопке и уведомления о скиллах, изменённых не через каталог."),
+         String(localized: "Уведомление «агент мог застрять» не приходит, пока сессия ждёт одну долгую команду: на неё даётся час.")]
     }
 
     /// Shown to whoever already had a profile and has not seen this version's card. A new person has nothing to compare
