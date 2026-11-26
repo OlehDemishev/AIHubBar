@@ -168,20 +168,24 @@ fn worth_reading(report: &Report) -> Vec<Finding> {
     report.findings.iter().filter(|finding| finding.severity >= Severity::Low).cloned().collect()
 }
 
-fn plan_of(source: &Source, files: &SkillFiles, report: &Report, changed: bool, agent: &str, target: &Path, also: Vec<&str>, replaces: bool, blocked: Option<&str>) -> Plan {
+#[allow(clippy::too_many_arguments)]
+fn plan_of(db: &Connection, source: &Source, files: &SkillFiles, report: &Report, changed: bool, agent: &str, target: &Path, also: Vec<&str>, replaces: bool, blocked: Option<&str>) -> Plan {
+    // A language model's stricter verdict about this content counts here too: it asks for the acknowledgement.
+    let llm = crate::review::remembered_verdict(db, &report.content_hash).ok().flatten();
+    let verdict = crate::review::stricter(report.verdict.as_str(), llm.as_deref());
     Plan {
         skill_id: source.id,
         name: target.file_name().unwrap_or_default().to_string_lossy().into_owned(),
         agent: agent.to_owned(),
         target: shown(target),
         also_seen_by: also.into_iter().filter(|other| *other != agent).map(str::to_owned).collect(),
-        verdict: report.verdict.as_str().to_owned(),
+        needs_ack: verdict != "safe",
+        verdict,
         risk_score: report.risk_score,
         content_hash: report.content_hash.clone(),
         changed,
         findings: worth_reading(report),
         left_out: left_out(files),
-        needs_ack: report.verdict != skill_scanner::Verdict::Safe,
         replaces,
         blocked: blocked.map(str::to_owned),
     }
@@ -209,7 +213,7 @@ pub fn plan_install(db: &mut Connection, env: Env, id: i64, agent: &str) -> Resu
     } else {
         None
     };
-    Ok(plan_of(&source, &files, &report, changed, agent, &target, readers, false, blocked))
+    Ok(plan_of(db, &source, &files, &report, changed, agent, &target, readers, false, blocked))
 }
 
 // MARK: - Writing a copy
@@ -789,7 +793,7 @@ pub fn plan_update(db: &Connection, env: Env, install_path: &str) -> Result<Plan
     let id: i64 = db.query_row("SELECT skill_id FROM installations WHERE install_path = ?1 LIMIT 1", params![install_path], |r| r.get(0)).optional()?.unwrap_or_default();
     let source = Source { id, kind: "skill".into(), source: "local".into(), path: row.origin.clone(), content_hash: report.content_hash.clone() };
     let agent = place.agents.first().cloned().unwrap_or_default();
-    Ok(plan_of(&source, &origin, &report, true, &agent, &place.path, place.agents.iter().map(String::as_str).collect(), true, blocked))
+    Ok(plan_of(db, &source, &origin, &report, true, &agent, &place.path, place.agents.iter().map(String::as_str).collect(), true, blocked))
 }
 
 /// Replaces an installed copy with the newer version of its source. The copy that was there goes to the backups
@@ -965,6 +969,20 @@ mod tests {
         world.install(dangerous, "gemini", &plan.content_hash, true).unwrap();
         let log = journal(&world.db, 10).unwrap();
         assert_eq!((log[0].verdict.as_deref(), log[0].risk_score, log[0].acknowledged), (Some("dangerous"), Some(100), true), "the journal keeps that it was installed knowingly");
+    }
+
+    #[test]
+    fn a_models_stricter_verdict_asks_for_the_acknowledgement_too() {
+        let mut world = World::new("manage-llm");
+        let id = world.add("notes");
+        let plan = world.plan(id, "claude");
+        assert!(!plan.needs_ack);
+        let said = crate::review::LlmReview { verdict: "dangerous".into(), valid: true, incomplete: false, summary: "s".into(), findings: Vec::new(), model: "m".into(), via: "api".into(), language: "en".into(), input_tokens: 0, output_tokens: 0, reviewed_at: NOW.into() };
+        crate::review::save(&world.db, &plan.content_hash, &said).unwrap();
+        let plan = world.plan(id, "claude");
+        assert_eq!((plan.verdict.as_str(), plan.needs_ack), ("dangerous", true));
+        assert_eq!(world.install(id, "claude", &plan.content_hash, false).unwrap_err(), "confirmation");
+        world.install(id, "claude", &plan.content_hash, true).unwrap();
     }
 
     #[test]

@@ -125,6 +125,27 @@ fn call(command: &str, args: &serde_json::Value) -> skill_catalog::Result<serde_
         "skills_updates" => serde_json::to_value(manage::updates(&db)?)?,
         "skills_plan_update" => serde_json::json!({ "plan": manage::plan_update(&db, env, &text("installPath"))?, "changes": manage::diff(&db, &text("installPath"))? }),
         "skills_update" => serde_json::to_value(manage::update(&mut db, env, &text("installPath"), &text("contentHash"), flag("acknowledged"))?)?,
+        // The review goes through Claude Code only here, never through a key.
+        "skills_review_state" => {
+            let (hash, request) = skill_catalog::review::prepare(&db, number("id"), "Russian")?.ok_or("missing")?;
+            serde_json::json!({ "review": skill_catalog::review::cached(&db, &hash, "ru")?, "via": claudepult_core::command::find("claude").map(|_| "claude-code"), "tokens": (request.system.len() + request.user.len()) / 4, "incomplete": request.incomplete })
+        }
+        "skills_review" => {
+            use skill_catalog::review;
+            let program = claudepult_core::command::find("claude").ok_or("no-reviewer")?;
+            let (hash, request) = review::prepare(&db, number("id"), "Russian")?.ok_or("missing")?;
+            if !flag("again") {
+                if let Some(known) = review::cached(&db, &hash, "ru")? {
+                    return Ok(serde_json::to_value(known)?);
+                }
+            }
+            let scratch = database.with_file_name("review-scratch");
+            let answer = skill_catalog::reviewer::via_claude(&request, &program, &scratch, skill_catalog::reviewer::DEFAULT_MODEL)?;
+            let (verdict, valid, summary, findings) = review::parse_answer(&answer.text, &request);
+            let result = review::LlmReview { verdict, valid, incomplete: request.incomplete, summary, findings, model: answer.model, via: "claude-code".into(), language: "ru".into(), input_tokens: answer.input_tokens, output_tokens: answer.output_tokens, reviewed_at: now.clone() };
+            review::save(&db, &hash, &result)?;
+            serde_json::to_value(result)?
+        }
         _ => return Err(format!("no such command: {command}").into()),
     })
 }

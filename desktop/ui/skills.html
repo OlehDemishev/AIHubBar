@@ -257,6 +257,8 @@
       if (row.official) head.append(el("span", "badge ci-ok", s("card.official")));
       if (row.off) head.append(el("span", "badge dirty", s("row.off")));
       nodes.push(head, el("p", "secondary", s(`verdict.${row.verdict}.hint`)));
+      // A language model made it stricter: the static check's own word stays visible.
+      if (row.staticVerdict !== row.verdict) nodes.push(el("p", "secondary", `${s("llm.said", s("verdict." + row.llmVerdict))} · ${s("llm.static", s("verdict." + row.staticVerdict))}`));
       if (row.description) nodes.push(el("p", "skills-about", row.description));
       if (card.missing) nodes.push(el("p", "error", s("card.missing")));
       else if (card.changed) nodes.push(el("p", "error", s("card.changed")));
@@ -334,6 +336,14 @@
       if (card.findings.length === 0) nodes.push(el("p", "secondary", s("detail.noFindings")));
       for (const severity of SEVERITIES) for (const item of card.findings.filter((f) => f.severity === severity)) nodes.push(findingNode(item, readable.has(item.file)));
 
+      // The AI review: filled in when its state comes back.
+      if (!card.missing && (row.source === "local" || row.source === "folder")) {
+        nodes.push(el("h2", "", s("llm.title")));
+        const llm = el("div", "skills-llm");
+        llm.id = "llm";
+        nodes.push(llm);
+      }
+
       if (card.files.length) {
         nodes.push(el("h2", "", s("card.files")));
         const list = el("div", "skills-files");
@@ -348,6 +358,99 @@
       }
       if (shownFile) nodes.push(previewNode());
       box.replaceChildren(...nodes);
+      fillReview(row.id);
+    }
+
+    // MARK: The AI review
+
+    let reviewing = null;   // the skill being reviewed now
+    let reviewError = null;
+
+    function reviewNode(review) {
+      const box = el("div", "skills-llm-result");
+      const head = el("div", "skills-card-head");
+      head.append(el("strong", "", s("llm.said", "")), verdictBadge(review.verdict));
+      box.append(head);
+      if (!review.valid) box.append(el("p", "error", s("llm.invalid")));
+      if (review.summary) box.append(el("p", "skills-about", review.summary));
+      for (const severity of SEVERITIES) {
+        for (const item of review.findings.filter((f) => f.severity === severity)) {
+          const node = el("div", `skills-finding severity-${item.severity}`);
+          const line = el("div", "skills-finding-head");
+          line.append(el("span", "skills-severity", s("severity." + item.severity)), el("strong", "", item.title));
+          if (item.file) {
+            const where = el("button", "link skills-where", item.line ? `${item.file} · ${s("detail.line", item.line)}` : item.file);
+            where.onclick = () => showFile(item.file, item.line);
+            line.append(where);
+          }
+          node.append(line, el("p", "secondary", item.explanation));
+          box.append(node);
+        }
+      }
+      if (review.incomplete) box.append(el("p", "secondary", s("llm.incomplete")));
+      const when = new Intl.DateTimeFormat(lang, { dateStyle: "medium", timeStyle: "short" }).format(new Date(review.reviewedAt));
+      box.append(el("p", "secondary", s("llm.by", review.model, s("llm.via." + review.via), when)), el("p", "secondary", s("llm.untrusted")));
+      return box;
+    }
+
+    async function fillReview(skill) {
+      const box = id("llm");
+      if (!box) return;
+      if (reviewing === skill) {
+        box.replaceChildren(el("p", "secondary", s("llm.running")));
+        return;
+      }
+      let state;
+      try {
+        state = await invoke("skills_review_state", { id: skill });
+      } catch (error) {
+        box.replaceChildren(el("p", "error", reason(error)));
+        return;
+      }
+      if (card?.row.id !== skill || !id("llm")) return;
+      const nodes = [];
+      if (reviewError?.skill === skill) nodes.push(el("p", "error", reason(reviewError.error)));
+      if (state.review) nodes.push(reviewNode(state.review));
+      else nodes.push(el("p", "secondary", s("llm.about")));
+      if (!state.via) {
+        nodes.push(el("p", "secondary", s("llm.none")));
+      } else {
+        const button = el("button", "small", state.review ? s("llm.askAgain") : s("llm.ask"));
+        button.onclick = () => askReview(skill, state, Boolean(state.review));
+        nodes.push(button);
+      }
+      id("llm").replaceChildren(...nodes);
+    }
+
+    // Nothing is sent before the person sees what goes where and says so.
+    function askReview(skill, state, again) {
+      const box = id("dialog-box");
+      const buttons = el("div", "skills-dialog-buttons");
+      const cancel = el("button", "", s("action.cancel"));
+      cancel.onclick = closeDialog;
+      const go = el("button", "prominent", s("llm.confirm"));
+      go.onclick = async () => {
+        closeDialog();
+        reviewing = skill;
+        reviewError = null;
+        fillReview(skill);
+        try {
+          await invoke("skills_review", { id: skill, again });
+        } catch (error) {
+          reviewError = { skill, error };
+        }
+        reviewing = null;
+        // The verdict in the list may be stricter now.
+        await search();
+        if (chosen === skill) await choose(skill);
+      };
+      buttons.append(el("span", "spacer"), cancel, go);
+      const nodes = [el("h1", "", s("llm.title")), el("p", "", s("llm.about")), el("p", "secondary", s("llm.cost", state.tokens.toLocaleString(lang), s("llm.via." + state.via)))];
+      if (state.incomplete) nodes.push(el("p", "secondary", s("llm.incomplete")));
+      nodes.push(buttons);
+      box.replaceChildren(...nodes);
+      id("dialog").hidden = false;
+      cancel.focus();
     }
 
     async function showFile(path, line) {

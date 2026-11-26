@@ -20,7 +20,7 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::sync::OnceLock;
 
 /// Raised whenever the rules or the scoring change: stored results of an older version are checked again.
-pub const SCANNER_VERSION: u32 = 1;
+pub const SCANNER_VERSION: u32 = 2;
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Finding {

@@ -229,3 +229,108 @@ pub fn start_update_watch(app: AppHandle) {
         }
     });
 }
+
+// MARK: - The LLM review (stage 6)
+
+/// The interface language's English name, for the reviewer's explanations.
+fn language_name(code: &str) -> &'static str {
+    match code {
+        "ru" => "Russian",
+        "uk" => "Ukrainian",
+        "de" => "German",
+        "fr" => "French",
+        "es" => "Spanish",
+        "pt-BR" => "Brazilian Portuguese",
+        "it" => "Italian",
+        "pl" => "Polish",
+        "ja" => "Japanese",
+        "ko" => "Korean",
+        "id" => "Indonesian",
+        "ar" => "Arabic",
+        _ => "English",
+    }
+}
+
+/// Who reviews: Claude Code when it is installed (the person's subscription, no key), else the Anthropic API with
+/// the key kept in Settings → «Сервисы AI».
+enum Reviewer {
+    ClaudeCode(std::path::PathBuf),
+    Api(String),
+}
+
+impl Reviewer {
+    fn find() -> Option<Reviewer> {
+        if let Some(program) = claudepult_core::command::find("claude") {
+            return Some(Reviewer::ClaudeCode(program));
+        }
+        claudepult_core::keys::read("anthropic").filter(|key| !key.trim().is_empty()).map(Reviewer::Api)
+    }
+
+    fn via(&self) -> &'static str {
+        match self {
+            Reviewer::ClaudeCode(_) => "claude-code",
+            Reviewer::Api(_) => "api",
+        }
+    }
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ReviewState {
+    review: Option<skill_catalog::review::LlmReview>,
+    /// `claude-code`, `api`, or none when nothing can review.
+    via: Option<&'static str>,
+    /// About how many tokens of the skill would be sent.
+    tokens: usize,
+    incomplete: bool,
+}
+
+/// What the card shows: the remembered review in the interface language, and what asking would send.
+#[tauri::command]
+pub async fn skills_review_state(app: AppHandle, id: i64) -> Result<ReviewState, String> {
+    let language = crate::language(&app);
+    let via = Reviewer::find().map(|reviewer| reviewer.via());
+    with_catalog(move |db| {
+        let Some((hash, request)) = skill_catalog::review::prepare(db, id, language_name(language))? else { return Err("missing".into()) };
+        Ok(ReviewState { review: skill_catalog::review::cached(db, &hash, language)?, via, tokens: (request.system.len() + request.user.len()) / 4, incomplete: request.incomplete })
+    })
+    .await
+}
+
+/// Asks the model, reads its answer strictly, remembers it by content. A review of the same content in the same
+/// language is never asked for twice unless `again`.
+#[tauri::command]
+pub async fn skills_review(app: AppHandle, id: i64, again: bool) -> Result<skill_catalog::review::LlmReview, String> {
+    use skill_catalog::review;
+    let language = crate::language(&app).to_owned();
+    let reviewer = Reviewer::find().ok_or("no-reviewer")?;
+    let scratch = Roots::database(paths::skills_db()).with_file_name("review-scratch");
+    let spend = crate::services::spend_path();
+    with_catalog(move |db| {
+        let (hash, request) = review::prepare(db, id, language_name(&language))?.ok_or("missing")?;
+        if !again {
+            if let Some(known) = review::cached(db, &hash, &language)? {
+                return Ok(known);
+            }
+        }
+        let model = skill_catalog::reviewer::DEFAULT_MODEL;
+        let answer = match &reviewer {
+            Reviewer::ClaudeCode(program) => skill_catalog::reviewer::via_claude(&request, program, &scratch, model),
+            Reviewer::Api(key) => skill_catalog::reviewer::via_api(&request, key, model),
+        }
+        .map_err(|reason| -> Box<dyn std::error::Error + Send + Sync> { reason.into() })?;
+        // What the API costs goes where the app counts API spend; Claude Code's is the subscription's.
+        if let Reviewer::Api(_) = reviewer {
+            let record = claudepult_core::ai::SpendRecord { date: chrono::Utc::now(), provider: "anthropic".into(), model: answer.model.clone(), input_tokens: answer.input_tokens, output_tokens: answer.output_tokens };
+            if let Err(error) = claudepult_core::ai::record_spend(&spend, record) {
+                eprintln!("API spend not saved: {error}");
+            }
+        }
+        let (verdict, valid, summary, findings) = review::parse_answer(&answer.text, &request);
+        let result = review::LlmReview { verdict, valid, incomplete: request.incomplete, summary, findings, model: answer.model, via: reviewer.via().into(), language: language.clone(), input_tokens: answer.input_tokens, output_tokens: answer.output_tokens, reviewed_at: skill_catalog::now() };
+        review::save(db, &hash, &result)?;
+        eprintln!("skills: reviewed {id} by {}: {}{}", result.via, result.verdict, if result.valid { "" } else { " (unreadable answer)" });
+        Ok(result)
+    })
+    .await
+}
