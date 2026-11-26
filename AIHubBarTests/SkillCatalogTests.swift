@@ -90,10 +90,10 @@ struct SkillCatalogTests {
         #expect(try names(catalog, .init(query: "release")) == ["deploy"])
         #expect(try names(catalog, .init(query: "the weath")) == ["sleeper"], "every word, the last one unfinished")
         #expect(try names(catalog, .init(verdict: .review)) == ["counter", "deploy"])
-        #expect(try names(catalog, .init(agent: .gemini)) == ["syncer", "notes"])
-        #expect(try names(catalog, .init(agent: .codex)) == ["notes"])
-        #expect(try names(catalog, .init(finding: .secrets)) == ["syncer"])
-        #expect(try names(catalog, .init(finding: .injection)) == ["sleeper"])
+        #expect(try names(catalog, .init(agents: [.gemini])) == ["syncer", "notes"])
+        #expect(try names(catalog, .init(agents: [.codex])) == ["notes"])
+        #expect(try names(catalog, .init(findings: [.secrets])) == ["syncer"])
+        #expect(try names(catalog, .init(findings: [.injection])) == ["sleeper"])
         #expect(try names(catalog, .init(noScripts: true)) == ["sleeper", "deploy", "notes"])
         let counted = try catalog.search(.init(verdict: .safe, noScripts: true))
         #expect(counted.rows.count == 1 && counted.total == 3, "the verdict buttons count with the other filters on")
@@ -170,11 +170,119 @@ struct SkillCatalogTests {
         #expect(try catalog.readUsage(home.roots, since: since) == 1)
     }
 
-    @Test func aStageOneFileIsOpenedAgain() throws {
+    @Test func aCatalogFileIsOpenedAgainAndWhatASkillCanDoIsFilledIn() throws {
+        let home = Home()
+        home.skill(".claude/skills", "notes")
+        home.write(".claude/skills/fetcher/SKILL.md", "---\nname: fetcher\ndescription: Fetches.\n---\nRun `curl -s https://example.com/data`.\n")
         let file = FileManager.default.temporaryDirectory.appending(path: "catalog-\(UUID().uuidString).db").path
         defer { try? FileManager.default.removeItem(atPath: file) }
-        _ = try SkillCatalog(path: file)
+        try SkillCatalog(path: file).refreshInstalled(home.roots)
+        // As a file of layout 1 had it: nothing known about what the skills can do.
+        try SkillCatalog(path: file).db.execute("UPDATE scan_results SET capabilities = NULL")
         let again = try SkillCatalog(path: file)
-        #expect(again.db.userVersion == 1)
+        #expect(again.db.userVersion == 2)
+        #expect(try names(again, { var f = SkillCatalog.Filters(); f.can = [.network]; return f }()) == ["fetcher"])
+    }
+
+    @Test func theFullFilterAndTheOrder() throws {
+        let (home, catalog) = try catalog()
+        home.write(".claude/skills/counter/SKILL.md", "---\nname: counter\ndescription: Counts words.\nmetadata:\n  author: \"Ann Example\"\n---\n# counter\n")
+        try catalog.refreshInstalled(home.roots, now: "2026-11-26T13:00:00Z")
+        func with(_ change: (inout SkillCatalog.Filters) -> Void) throws -> [String] {
+            var filters = SkillCatalog.Filters()
+            change(&filters)
+            return try names(catalog, filters)
+        }
+        let risky = try with { $0.minRisk = 60 }
+        #expect(risky.contains("syncer") && !risky.contains("notes") && !risky.contains("deploy"))
+        #expect(try with { $0.maxRisk = 19 }.allSatisfy { $0 != "syncer" })
+        #expect(try with { $0.scopes = ["project"] } == ["deploy"])
+        #expect(try with { $0.state = .off } == ["sleeper"])
+        #expect(!(try with { $0.state = .on }).contains("sleeper"))
+        #expect(try with { $0.kind = "plugin" }.isEmpty)
+        let network = try with { $0.can = [.network] }
+        #expect(network.contains("syncer") && !network.contains("notes"))
+        #expect(!(try with { $0.cannot = [.network] }).contains("syncer"))
+        #expect(Set(try with { $0.findings = [.secrets, .injection] }) == ["syncer", "sleeper"], "any of the kinds")
+        #expect(try with { $0.license = "" } == ["counter"], "the new SKILL.md has no license")
+        #expect(try with { $0.author = "Ann Example" } == ["counter"], "the author under metadata")
+        let facets = try catalog.facets()
+        #expect(facets.authors == ["Ann Example"] && facets.hasUnlicensed && facets.scopes == ["project", "user"])
+        let now = ISO8601DateFormatter().date(from: "2026-11-26T13:30:00Z")!
+        var recent = SkillCatalog.Filters()
+        recent.newWithinDays = 0
+        #expect(try catalog.search(recent, now: now).rows.isEmpty)
+        recent.newWithinDays = 1
+        #expect(try catalog.search(recent, now: now).rows.count == 5)
+        var byName = SkillCatalog.Filters()
+        byName.sort = .name
+        #expect(try names(catalog, byName) == ["counter", "deploy", "notes", "sleeper", "syncer"])
+        byName.sort = .newest
+        #expect(try names(catalog, byName).first == "counter", "changed last")
+        #expect(byName.activeCount == 0)
+        byName.can = [.mcp]
+        byName.maxRisk = 50
+        #expect(byName.activeCount == 2)
+    }
+
+    @Test func usesFilterAndOrder() throws {
+        let (home, catalog) = try catalog()
+        let now = ISO8601DateFormatter().string(from: .now)
+        let call = #"{"type":"assistant","timestamp":"\#(now)","message":{"content":[{"type":"tool_use","name":"Skill","input":{"skill":"deploy"}}]}}"#
+        home.write(".claude/projects/p/one.jsonl", call + "\n" + call.replacingOccurrences(of: "Z\"", with: ".1Z\"") + "\n")
+        try catalog.readUsage(home.roots, since: .now.addingTimeInterval(-86400))
+        var filters = SkillCatalog.Filters()
+        filters.usage = .used
+        #expect(try catalog.search(filters).rows.map { "\($0.name) \($0.uses)" } == ["deploy 2"])
+        filters.usage = .unused
+        #expect(!(try names(catalog, filters)).contains("deploy"))
+        filters.usage = .any
+        filters.sort = .mostUsed
+        #expect(try names(catalog, filters).first == "deploy")
+    }
+
+    @Test func favouritesAndNotesFollowTheSkillThroughAnUpdate() throws {
+        let (home, catalog) = try catalog()
+        let id = try #require(try catalog.search(.init(query: "counter")).rows.first?.id)
+        try catalog.setFavorite(id, true)
+        try catalog.setNote(id, "  Checked the script on 26 Nov.  ")
+        var favourites = SkillCatalog.Filters()
+        favourites.favoritesOnly = true
+        #expect(try catalog.search(favourites).rows.map { "\($0.name) \($0.note)" } == ["counter Checked the script on 26 Nov."])
+        #expect(try names(catalog, .init(query: "script on 26")) == ["counter"], "the note is searched too")
+        // An update changes the content and the id; the marks stay with the name.
+        home.write(".claude/skills/counter/scripts/count.py", "print(2)\n")
+        try catalog.refreshInstalled(home.roots)
+        let updated = try #require(try catalog.search(favourites).rows.first)
+        #expect(updated.id != id && updated.isFavorite)
+        #expect(try catalog.card(updated.id)?.row.note == "Checked the script on 26 Nov.")
+        try catalog.setFavorite(updated.id, false)
+        var noted = SkillCatalog.Filters()
+        noted.withNote = true
+        #expect(try names(catalog, noted) == ["counter"])
+        #expect(try catalog.search(favourites).rows.isEmpty)
+        try catalog.setNote(updated.id, "   ")
+        #expect(try catalog.db.first("SELECT count(*) FROM skill_marks") { $0.int(0) } == 0, "nothing left to keep")
+    }
+
+    @Test func savedFiltersComeBackAsTheyWere() throws {
+        let (_, catalog) = try catalog()
+        var filters = SkillCatalog.Filters(query: "ship", verdict: .review, agents: [.claude, .cursor])
+        filters.can = [.network]
+        filters.cannot = [.hooks]
+        filters.license = ""
+        filters.sort = .newest
+        try catalog.saveFilter("Release", filters)
+        try catalog.saveFilter("Release", .init(verdict: .dangerous))
+        try catalog.saveFilter(" Network ", filters)
+        let saved = try catalog.savedFilters()
+        #expect(saved.map(\.name) == ["Network", "Release"], "a name is saved once")
+        #expect(saved[0].filters == filters && saved[1].filters == .init(verdict: .dangerous))
+        #expect(throws: (any Error).self) { try catalog.saveFilter("  ", filters) }
+        try catalog.deleteFilter(saved[0].id)
+        #expect(try catalog.savedFilters().map(\.name) == ["Release"])
+        // A filter saved by a newer version: what this one doesn't know is left out.
+        let newer = try JSONDecoder().decode(SkillCatalog.Filters.self, from: Data(#"{"verdict":"unknown","agents":["claude","zed"],"can":["teleport","mcp"],"future":1}"#.utf8))
+        #expect(newer.verdict == nil && newer.agents == [.claude] && newer.can == [.mcp] && newer.sort == .risk && newer.maxRisk == 100)
     }
 }

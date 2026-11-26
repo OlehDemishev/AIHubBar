@@ -125,6 +125,45 @@ final class SkillStore {
         await worker.run { try? $0.preview(id, file: file) }
     }
 
+    func facets() async -> SkillCatalog.Facets {
+        await worker.run { (try? $0.facets()) ?? SkillCatalog.Facets() }
+    }
+
+    /// Bumped when a mark or a saved filter changes: the section reads its list again.
+    private(set) var marksVersion = 0
+
+    func setFavorite(_ id: Int, _ favorite: Bool) async {
+        await worker.run { catalog in
+            do { try catalog.setFavorite(id, favorite) } catch { AppLog.error("skills: favourite: \(error)") }
+        }
+        marksVersion += 1
+    }
+
+    func setNote(_ id: Int, _ note: String) async {
+        await worker.run { catalog in
+            do { try catalog.setNote(id, note) } catch { AppLog.error("skills: note: \(error)") }
+        }
+        marksVersion += 1
+    }
+
+    func savedFilters() async -> [SkillCatalog.SavedFilter] {
+        await worker.run { (try? $0.savedFilters()) ?? [] }
+    }
+
+    func saveFilter(_ name: String, _ filters: SkillCatalog.Filters) async {
+        await worker.run { catalog in
+            do { try catalog.saveFilter(name, filters) } catch { AppLog.error("skills: saving a filter: \(error)") }
+        }
+        marksVersion += 1
+    }
+
+    func deleteFilter(_ id: Int) async {
+        await worker.run { catalog in
+            do { try catalog.deleteFilter(id) } catch { AppLog.error("skills: deleting a filter: \(error)") }
+        }
+        marksVersion += 1
+    }
+
     /// The catalog's file, opened on first use and used from one queue.
     final class Worker: @unchecked Sendable {
         private let queue = DispatchQueue(label: "com.demishev.claudepult.skills", qos: .utility)

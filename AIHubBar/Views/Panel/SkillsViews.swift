@@ -288,6 +288,11 @@ struct SkillsSectionView: View {
     @State private var filters = SkillCatalog.Filters()
     @State private var result = SkillCatalog.Result()
     @State private var card: SkillCatalog.Card?
+    @State private var facets = SkillCatalog.Facets()
+    @State private var saved: [SkillCatalog.SavedFilter] = []
+    @State private var showsFilters = false
+    /// The name being typed for «Сохранить фильтр»; nil while the field is hidden.
+    @State private var savingName: String?
 
     private var chosen: Int? {
         if case .skills(let id) = section { return id }
@@ -318,11 +323,19 @@ struct SkillsSectionView: View {
             card = nil
             if let chosen { card = await skills.card(chosen) }
         }
-        .onChange(of: skills.lastUpdated) {
-            Task {
-                result = await skills.search(filters)
-                if let chosen { card = await skills.card(chosen) }
-            }
+        .task(id: skills.lastUpdated) {
+            facets = await skills.facets()
+            saved = await skills.savedFilters()
+        }
+        .onChange(of: skills.lastUpdated) { reload() }
+        .onChange(of: skills.marksVersion) { reload() }
+    }
+
+    private func reload() {
+        Task {
+            result = await skills.search(filters)
+            saved = await skills.savedFilters()
+            if let chosen { card = await skills.card(chosen) }
         }
     }
 
@@ -357,7 +370,7 @@ struct SkillsSectionView: View {
 
     private var filtersBar: some View {
         VStack(alignment: .leading, spacing: 6) {
-            TextField("Поиск по названию и описанию", text: $filters.query)
+            TextField("Поиск по названию, описанию и заметке", text: $filters.query)
                 .textFieldStyle(.roundedBorder)
             HStack(spacing: 4) {
                 verdictChip(nil, title: String(localized: "Все \(result.total)"))
@@ -365,25 +378,82 @@ struct SkillsSectionView: View {
                     verdictChip(verdict, title: "\(verdict.title) \(result.byVerdict[verdict] ?? 0)")
                 }
                 Spacer(minLength: 0)
+            }
+            HStack(spacing: 8) {
+                SkillChip(title: String(localized: "Избранное"), symbol: filters.favoritesOnly ? "star.fill" : "star", isOn: filters.favoritesOnly) {
+                    filters.favoritesOnly.toggle()
+                }
                 Menu {
-                    Picker("Агент", selection: $filters.agent) {
-                        Text("Любой агент").tag(SkillAgent?.none)
-                        ForEach(SkillAgent.allCases, id: \.self) { Text(verbatim: $0.title).tag(SkillAgent?.some($0)) }
+                    Picker("Порядок", selection: $filters.sort) {
+                        ForEach(SkillCatalog.Filters.Sort.allCases, id: \.self) { Text($0.title).tag($0) }
                     }
-                    Picker("Находки", selection: $filters.finding) {
-                        Text("Любые находки").tag(SkillCategory?.none)
-                        ForEach(SkillCategory.allCases.filter { $0 != .metadata }, id: \.self) { Text($0.title).tag(SkillCategory?.some($0)) }
-                    }
-                    Toggle("Без скриптов", isOn: $filters.noScripts)
+                    .pickerStyle(.inline)
                 } label: {
-                    Image(systemName: filters.agent == nil && filters.finding == nil && !filters.noScripts ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
+                    Label(filters.sort.title, systemImage: "arrow.up.arrow.down").scaledFont(.caption)
                 }
                 .menuStyle(.borderlessButton)
-                .menuIndicator(.hidden)
                 .fixedSize()
-                .help(String(localized: "Фильтры"))
+                .help(String(localized: "Порядок"))
+                Spacer(minLength: 4)
+                savedMenu
+                Button { withAnimation(.snappy(duration: 0.2)) { showsFilters.toggle() } } label: {
+                    HStack(spacing: 3) {
+                        Image(systemName: filters.activeCount > 0 ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
+                        Text("Фильтры")
+                        if filters.activeCount > 0 { Text(verbatim: "\(filters.activeCount)").monospacedDigit().fontWeight(.semibold) }
+                    }
+                    .scaledFont(.caption)
+                    .foregroundStyle(filters.activeCount > 0 || showsFilters ? Color.accentColor : Color.primary)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
             }
+            if let name = savingName {
+                HStack(spacing: 6) {
+                    TextField("Название фильтра", text: Binding(get: { name }, set: { savingName = $0 }))
+                        .textFieldStyle(.roundedBorder)
+                        .onSubmit(saveCurrent)
+                    Button("Сохранить", action: saveCurrent).disabled(name.trimmingCharacters(in: .whitespaces).isEmpty)
+                    Button("Отмена") { savingName = nil }
+                }
+                .scaledFont(.caption)
+            }
+            if showsFilters { SkillFilterPanel(filters: $filters, facets: facets) }
         }
+    }
+
+    private var savedMenu: some View {
+        Menu {
+            if saved.isEmpty {
+                Text("Сохранённых фильтров пока нет")
+            } else {
+                ForEach(saved) { item in
+                    Button { filters = item.filters } label: { Text(verbatim: item.name) }
+                }
+            }
+            Divider()
+            Button("Сохранить текущий фильтр…") { savingName = "" }
+            if !saved.isEmpty {
+                Menu("Удалить") {
+                    ForEach(saved) { item in
+                        Button { Task { await skills.deleteFilter(item.id) } } label: { Text(verbatim: item.name) }
+                    }
+                }
+            }
+        } label: {
+            Image(systemName: "bookmark")
+        }
+        .menuStyle(.borderlessButton)
+        .menuIndicator(.hidden)
+        .fixedSize()
+        .help(String(localized: "Сохранённые фильтры"))
+    }
+
+    private func saveCurrent() {
+        guard let name = savingName?.trimmingCharacters(in: .whitespaces), !name.isEmpty else { return }
+        savingName = nil
+        let current = filters
+        Task { await skills.saveFilter(name, current) }
     }
 
     private func verdictChip(_ verdict: SkillVerdict?, title: String) -> some View {
@@ -410,8 +480,7 @@ struct SkillsSectionView: View {
         } else {
             VStack(alignment: .leading, spacing: 2) {
                 ForEach(result.rows) { row in
-                    Button { section = .skills(row.id) } label: { SkillRowView(row: row) }
-                        .buttonStyle(.plain)
+                    SkillRowView(row: row, showsUses: filters.sort == .mostUsed) { section = .skills(row.id) }
                 }
             }
         }
@@ -419,31 +488,249 @@ struct SkillsSectionView: View {
 }
 
 private struct SkillRowView: View {
+    @Environment(SkillStore.self) private var skills
     let row: SkillCatalog.Row
+    var showsUses = false
+    let open: () -> Void
     @State private var hovered = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            HStack(spacing: 6) {
-                SkillVerdictBadge(verdict: row.verdict)
-                Text(verbatim: row.name).scaledFont(.callout, weight: .medium).lineLimit(1)
-                if row.kind == "plugin" { Text("плагин").scaledFont(.caption2).foregroundStyle(.secondary) }
-                if row.isOff { Text("выключен").scaledFont(.caption2).foregroundStyle(.orange) }
-                Spacer(minLength: 4)
-                SkillCounts(counts: row.counts)
+        HStack(alignment: .top, spacing: 4) {
+            Button(action: open) {
+                VStack(alignment: .leading, spacing: 2) {
+                    HStack(spacing: 6) {
+                        SkillVerdictBadge(verdict: row.verdict)
+                        Text(verbatim: row.name).scaledFont(.callout, weight: .medium).lineLimit(1)
+                        if row.kind == "plugin" { Text("плагин").scaledFont(.caption2).foregroundStyle(.secondary) }
+                        if row.isOff { Text("выключен").scaledFont(.caption2).foregroundStyle(.orange) }
+                        if !row.note.isEmpty {
+                            Image(systemName: "note.text").scaledFont(.caption2).foregroundStyle(.secondary).help(Text(verbatim: row.note))
+                        }
+                        Spacer(minLength: 4)
+                        if showsUses, row.uses > 0 {
+                            Text("запусков: \(row.uses)").scaledFont(.caption2).foregroundStyle(.secondary)
+                        }
+                        SkillCounts(counts: row.counts)
+                    }
+                    if !row.description.isEmpty {
+                        Text(verbatim: row.description)
+                            .scaledFont(.caption)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                    }
+                }
+                .contentShape(Rectangle())
             }
-            if !row.description.isEmpty {
-                Text(verbatim: row.description)
-                    .scaledFont(.caption)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-            }
+            .buttonStyle(.plain)
+            SkillStarButton(id: row.id, isFavorite: row.isFavorite)
+                .opacity(row.isFavorite || hovered ? 1 : 0)
         }
         .padding(.horizontal, 6)
         .padding(.vertical, 5)
         .background(RoundedRectangle(cornerRadius: 7, style: .continuous).fill(hovered ? Color.primary.opacity(0.06) : .clear))
-        .contentShape(Rectangle())
         .onHover { hovered = $0 }
+    }
+}
+
+/// The star that adds a skill to the favourites or takes it out.
+private struct SkillStarButton: View {
+    @Environment(SkillStore.self) private var skills
+    let id: Int
+    let isFavorite: Bool
+
+    var body: some View {
+        Button { Task { await skills.setFavorite(id, !isFavorite) } } label: {
+            Image(systemName: isFavorite ? "star.fill" : "star")
+                .foregroundStyle(isFavorite ? Color.yellow : Color.secondary)
+                .frame(width: 18, height: 18)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .help(isFavorite ? String(localized: "Убрать из избранного") : String(localized: "В избранное"))
+    }
+}
+
+/// A small switch in the filters: a word with an optional icon, highlighted while on.
+private struct SkillChip: View {
+    let title: String
+    var symbol: String?
+    var isOn: Bool
+    /// Shown struck through in red: «не может».
+    var isExcluded = false
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 3) {
+                if let symbol { Image(systemName: symbol) }
+                Text(verbatim: title).strikethrough(isExcluded)
+            }
+            .scaledFont(.caption2, weight: isOn || isExcluded ? .semibold : .regular)
+            .foregroundStyle(isExcluded ? Color.red : isOn ? Color.accentColor : Color.primary)
+            .padding(.horizontal, 7)
+            .padding(.vertical, 2)
+            .background(Capsule().fill(isExcluded ? Color.red.opacity(0.12) : isOn ? Color.accentColor.opacity(0.18) : Color.primary.opacity(0.06)))
+            .contentShape(Capsule())
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+/// Every filter the catalog knows, in groups of chips.
+private struct SkillFilterPanel: View {
+    @Binding var filters: SkillCatalog.Filters
+    let facets: SkillCatalog.Facets
+
+    /// The risk bands offered, matching the verdict thresholds' feel: low, middling, high.
+    private static let riskBands: [(Int, Int)] = [(0, 100), (0, 19), (20, 59), (60, 100)]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 7) {
+            group("Риск") {
+                ForEach(Array(Self.riskBands.enumerated()), id: \.offset) { _, band in
+                    SkillChip(title: Self.riskTitle(band), isOn: filters.minRisk == band.0 && filters.maxRisk == band.1) {
+                        filters.minRisk = band.0
+                        filters.maxRisk = band.1
+                    }
+                }
+            }
+            group("Агент") {
+                ForEach(SkillAgent.allCases, id: \.self) { agent in
+                    SkillChip(title: agent.title, isOn: filters.agents.contains(agent)) { filters.agents.toggle(agent) }
+                }
+            }
+            if facets.scopes.count > 1 {
+                group("Где установлен") {
+                    ForEach(facets.scopes, id: \.self) { scope in
+                        SkillChip(title: Self.scopeTitle(scope), isOn: filters.scopes.contains(scope)) { filters.scopes.toggle(scope) }
+                    }
+                }
+            }
+            group("Тип и состояние") {
+                SkillChip(title: String(localized: "Скиллы"), isOn: filters.kind == "skill") { filters.kind = filters.kind == "skill" ? nil : "skill" }
+                SkillChip(title: String(localized: "Плагины"), isOn: filters.kind == "plugin") { filters.kind = filters.kind == "plugin" ? nil : "plugin" }
+                SkillChip(title: String(localized: "Включены"), isOn: filters.state == .on) { filters.state = filters.state == .on ? .any : .on }
+                SkillChip(title: String(localized: "Выключены"), isOn: filters.state == .off) { filters.state = filters.state == .off ? .any : .off }
+                SkillChip(title: String(localized: "Без скриптов"), isOn: filters.noScripts) { filters.noScripts.toggle() }
+                SkillChip(title: String(localized: "С заметкой"), symbol: "note.text", isOn: filters.withNote) { filters.withNote.toggle() }
+            }
+            group("Использование") {
+                SkillChip(title: String(localized: "Запускались за 30 дней"), isOn: filters.usage == .used) { filters.usage = filters.usage == .used ? .any : .used }
+                SkillChip(title: String(localized: "Не запускались 30 дней"), isOn: filters.usage == .unused) { filters.usage = filters.usage == .unused ? .any : .unused }
+                SkillChip(title: String(localized: "Новые за 7 дней"), isOn: filters.newWithinDays == 7) { filters.newWithinDays = filters.newWithinDays == 7 ? nil : 7 }
+                SkillChip(title: String(localized: "Новые за 30 дней"), isOn: filters.newWithinDays == 30) { filters.newWithinDays = filters.newWithinDays == 30 ? nil : 30 }
+            }
+            group("Находки") {
+                ForEach(SkillCategory.allCases.filter { $0 != .metadata }, id: \.self) { category in
+                    SkillChip(title: category.title, isOn: filters.findings.contains(category)) { filters.findings.toggle(category) }
+                }
+            }
+            VStack(alignment: .leading, spacing: 3) {
+                group("Что может скилл") {
+                    ForEach(SkillAssessment.Capability.allCases, id: \.self) { capability in
+                        SkillChip(title: capability.title, symbol: capability.symbol, isOn: filters.can.contains(capability), isExcluded: filters.cannot.contains(capability)) {
+                            // Off → can → can't → off.
+                            if filters.can.contains(capability) {
+                                filters.can.remove(capability)
+                                filters.cannot.insert(capability)
+                            } else if filters.cannot.contains(capability) {
+                                filters.cannot.remove(capability)
+                            } else {
+                                filters.can.insert(capability)
+                            }
+                        }
+                    }
+                }
+                Text("Нажмите раз — может, ещё раз — не может.").scaledFont(.caption2).foregroundStyle(.secondary)
+            }
+            HStack(spacing: 10) {
+                Menu {
+                    Picker("Лицензия", selection: $filters.license) {
+                        Text("Любая лицензия").tag(String?.none)
+                        if facets.hasUnlicensed { Text("Без лицензии").tag(String?.some("")) }
+                        ForEach(facets.licenses, id: \.self) { Text(verbatim: $0).tag(String?.some($0)) }
+                    }
+                    .pickerStyle(.inline)
+                } label: {
+                    Text(Self.licenseTitle(filters.license)).scaledFont(.caption)
+                }
+                .menuStyle(.borderlessButton)
+                .fixedSize()
+                if !facets.authors.isEmpty {
+                    Menu {
+                        Picker("Автор", selection: $filters.author) {
+                            Text("Любой автор").tag(String?.none)
+                            ForEach(facets.authors, id: \.self) { Text(verbatim: $0).tag(String?.some($0)) }
+                        }
+                        .pickerStyle(.inline)
+                    } label: {
+                        Text(filters.author.map { String(localized: "Автор: \($0)") } ?? String(localized: "Любой автор")).scaledFont(.caption)
+                    }
+                    .menuStyle(.borderlessButton)
+                    .fixedSize()
+                }
+                Spacer(minLength: 4)
+                if filters.activeCount > 0 {
+                    Button("Сбросить") {
+                        var plain = SkillCatalog.Filters()
+                        plain.query = filters.query
+                        plain.verdict = filters.verdict
+                        plain.sort = filters.sort
+                        filters = plain
+                    }
+                    .buttonStyle(.borderless)
+                    .scaledFont(.caption)
+                }
+            }
+        }
+        .padding(8)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(Color.primary.opacity(0.04)))
+    }
+
+    private func group(_ title: LocalizedStringKey, @ViewBuilder _ chips: () -> some View) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(title).scaledFont(.caption2, weight: .semibold).foregroundStyle(.secondary)
+            FlowRow(spacing: 4) { chips() }
+        }
+    }
+
+    static func riskTitle(_ band: (Int, Int)) -> String {
+        switch band {
+        case (0, 100): String(localized: "Любой")
+        case (0, _): String(localized: "до \(band.1 + 1)")
+        case (_, 100): String(localized: "от \(band.0)")
+        default: String(localized: "\(band.0)–\(band.1)")
+        }
+    }
+
+    static func scopeTitle(_ scope: String) -> String {
+        scope == "project" ? String(localized: "в проекте") : SkillCardView.scope(scope)
+    }
+
+    static func licenseTitle(_ license: String?) -> String {
+        switch license {
+        case nil: String(localized: "Любая лицензия")
+        case ""?: String(localized: "Без лицензии")
+        case let name?: String(localized: "Лицензия: \(name)")
+        }
+    }
+}
+
+extension SkillCatalog.Filters.Sort {
+    var title: String {
+        switch self {
+        case .risk: String(localized: "Сначала опасные")
+        case .name: String(localized: "По названию")
+        case .mostUsed: String(localized: "Чаще запускаемые")
+        case .newest: String(localized: "Новые и изменённые")
+        }
+    }
+}
+
+extension Set {
+    mutating func toggle(_ member: Element) {
+        if contains(member) { remove(member) } else { insert(member) }
     }
 }
 
@@ -456,6 +743,9 @@ struct SkillCardView: View {
     /// The line a finding pointed at: the preview scrolls to it.
     @State private var focusLine: Int?
     @State private var showsAllFindings = false
+    @State private var note = ""
+    /// The note as last saved: typing is saved a moment after it stops.
+    @State private var savedNote = ""
 
     var body: some View {
         let assessment = card.assessment
@@ -464,11 +754,15 @@ struct SkillCardView: View {
                 HStack(spacing: 6) {
                     Text(verbatim: card.row.name).scaledFont(.headline).lineLimit(2)
                     SkillVerdictBadge(verdict: assessment.verdict)
+                    SkillStarButton(id: card.row.id, isFavorite: card.row.isFavorite)
                     Spacer(minLength: 0)
                     Text("Риск \(assessment.riskScore) из 100").scaledFont(.caption).foregroundStyle(.secondary)
                 }
                 if !card.row.description.isEmpty {
                     Text(verbatim: card.row.description).scaledFont(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                }
+                if let about = Self.about(card.row) {
+                    Text(verbatim: about).scaledFont(.caption2).foregroundStyle(.secondary)
                 }
                 if card.isMissing {
                     Text("Папки нет или её не удаётся прочитать.").scaledFont(.caption).foregroundStyle(.red)
@@ -477,6 +771,7 @@ struct SkillCardView: View {
                 }
             }
             why(assessment)
+            noteEditor
             capabilities(assessment)
             if !assessment.advice.isEmpty { advice(assessment) }
             places
@@ -485,9 +780,42 @@ struct SkillCardView: View {
             if let preview { SkillPreviewView(preview: preview, focusLine: focusLine) }
         }
         .task(id: card.row.id) {
+            note = card.row.note
+            savedNote = card.row.note
             preview = nil
             if card.files.contains(where: { $0.path == "SKILL.md" && $0.isReadable }) { preview = await skills.preview(card.row.id, file: "SKILL.md") }
         }
+    }
+
+    /// Who made it and under which license, when the skill says.
+    static func about(_ row: SkillCatalog.Row) -> String? {
+        let parts = [row.author.map { String(localized: "Автор: \($0)") }, row.license.map { String(localized: "Лицензия: \($0)") }].compactMap { $0 }
+        return parts.isEmpty ? nil : parts.joined(separator: " · ")
+    }
+
+    private var noteEditor: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            section("Заметка")
+            TextField("Только для вас: зачем скилл, что проверили…", text: $note, axis: .vertical)
+                .textFieldStyle(.roundedBorder)
+                .lineLimit(1...6)
+                .scaledFont(.caption)
+                .onSubmit { saveNote() }
+        }
+        .task(id: note) {
+            guard note != savedNote else { return }
+            try? await Task.sleep(for: .milliseconds(800))
+            guard !Task.isCancelled else { return }
+            saveNote()
+        }
+        .onDisappear { saveNote() }
+    }
+
+    private func saveNote() {
+        guard note != savedNote else { return }
+        savedNote = note
+        let (id, text) = (card.row.id, note)
+        Task { await skills.setNote(id, text) }
     }
 
     private func section(_ title: LocalizedStringKey) -> some View {
