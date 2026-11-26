@@ -18,6 +18,9 @@ final class LayoutSwitcher {
     private(set) var currentID: String?
     /// «ghbdtn → привет», for the menu and Settings; in memory only.
     private(set) var lastChange: String?
+    /// Some app turned on Secure Input (a password field, a terminal's password prompt): macOS then hides every key from
+    /// every other program, so nothing can be fixed until it is off. Nil while it is off.
+    private(set) var secureInput: SecureInput?
 
     @ObservationIgnored private let settings: AppSettings
     @ObservationIgnored private var sources: [String: TISInputSource] = [:]
@@ -94,6 +97,12 @@ final class LayoutSwitcher {
         let granted = tap != nil
         if granted != trusted {
             trusted = granted
+            updateStatusItem()
+        }
+        let secure = on ? SecureInput.now() : nil
+        if secure != secureInput {
+            secureInput = secure
+            AppLog.info(secure.map { "Layout: paused, Secure Input is on (\($0.appName ?? "an unknown app"))" } ?? "Layout: Secure Input is off again")
             updateStatusItem()
         }
         if on, settings.layout.menuBarIcon { showStatusItem() } else { hideStatusItem() }
@@ -453,10 +462,15 @@ final class LayoutSwitcher {
         guard let button = statusItem?.button else { return }
         let badge = current?.badge ?? KeyboardLayouts.currentLanguage().map(LayoutWords.badge) ?? "—"
         button.attributedTitle = NSAttributedString(string: badge, attributes: [.font: NSFont.systemFont(ofSize: 12, weight: .semibold)])
-        // Without Accessibility nothing is fixed: the language shows faded until access is given.
-        button.appearsDisabled = !trusted
-        button.toolTip = String(localized: "Раскладка: \(KeyboardLayouts.currentName() ?? badge)")
-        button.setAccessibilityLabel(String(localized: "Раскладка: \(KeyboardLayouts.currentName() ?? badge)"))
+        // Without Accessibility, or while another app holds Secure Input, nothing is fixed: the language shows faded,
+        // with a lock for Secure Input.
+        button.appearsDisabled = !trusted || secureInput != nil
+        button.image = secureInput == nil ? nil : NSImage(systemSymbolName: "lock.fill", accessibilityDescription: nil)?
+            .withSymbolConfiguration(.init(pointSize: 9, weight: .semibold))
+        button.imagePosition = .imageLeading
+        let name = String(localized: "Раскладка: \(KeyboardLayouts.currentName() ?? badge)")
+        button.toolTip = secureInput.map { "\(name)\n\($0.title)" } ?? name
+        button.setAccessibilityLabel(secureInput.map { "\(name). \($0.title)" } ?? name)
     }
 
     /// The language blinks when «Раскладка» switches the layout.
@@ -482,6 +496,13 @@ final class LayoutSwitcher {
             let item = NSMenuItem(title: String(localized: "Последнее: \(lastChange)"), action: nil, keyEquivalent: "")
             item.isEnabled = false
             menu.addItem(item)
+        }
+        if let secureInput {
+            for line in [secureInput.title, secureInput.hint] {
+                let item = NSMenuItem(title: line, action: nil, keyEquivalent: "")
+                item.isEnabled = false
+                menu.addItem(item)
+            }
         }
         menu.addItem(.separator())
         if !trusted {
@@ -554,5 +575,37 @@ private struct PasteboardSnapshot {
         }
         restored.first?.setString("", forType: Self.transient)
         if !restored.isEmpty { pasteboard.writeObjects(restored) }
+    }
+}
+
+/// Secure Input (`EnableSecureEventInput`): an app turns it on for a password field, and while it is on macOS hides the
+/// keys from every event tap. The app that holds it is in the session's dictionary as `kCGSSessionSecureInputPID`; no
+/// permission is needed to read it. «Раскладка» can't turn it off, only say who holds it.
+struct SecureInput: Equatable, Sendable {
+    /// The app that holds it, when it can be named.
+    var appName: String?
+
+    /// The state now: nil while Secure Input is off.
+    @MainActor
+    static func now() -> SecureInput? {
+        let session = CGSessionCopyCurrentDictionary() as? [String: Any]
+        return of(isOn: IsSecureEventInputEnabled(), session: session) { NSRunningApplication(processIdentifier: $0)?.localizedName }
+    }
+
+    /// The state from what macOS reports, with how a process id is named (for tests).
+    static func of(isOn: Bool, session: [String: Any]?, name: (pid_t) -> String?) -> SecureInput? {
+        let pid = (session?["kCGSSessionSecureInputPID"] as? NSNumber)?.int32Value ?? 0
+        guard isOn || pid > 0 else { return nil }
+        return SecureInput(appName: pid > 0 ? name(pid) : nil)
+    }
+
+    var title: String {
+        appName.map { String(localized: "Раскладка на паузе: защищённый ввод включило приложение «\($0)»") }
+            ?? String(localized: "Раскладка на паузе: включён защищённый ввод")
+    }
+
+    var hint: String {
+        appName.map { String(localized: "Обычно помогает перейти в другое приложение и обратно или перезапустить «\($0)».") }
+            ?? String(localized: "Обычно помогает перейти в другое приложение и обратно.")
     }
 }

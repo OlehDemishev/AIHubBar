@@ -13717,6 +13717,158 @@
         }
       }
     },
+    "Обычно помогает перейти в другое приложение и обратно или перезапустить «%@».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عادةً ما يفيد الانتقال إلى تطبيق آخر والعودة، أو إعادة تشغيل «%@»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meist hilft es, in eine andere App und zurück zu wechseln oder „%@“ neu zu starten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switching to another app and back, or restarting “%@”, usually helps."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suele ayudar cambiar a otra app y volver, o reiniciar «%@»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En général, passer à une autre app puis revenir, ou relancer « %@ », suffit."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biasanya membantu jika beralih ke app lain lalu kembali, atau memulai ulang “%@”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di solito aiuta passare a un’altra app e tornare, oppure riavviare «%@»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "別のアプリに切り替えて戻るか、「%@」を再起動すると、たいてい直ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보통 다른 앱으로 갔다가 돌아오거나 “%@”을(를) 다시 시작하면 해결됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwykle pomaga przejść do innej aplikacji i z powrotem albo uruchomić ponownie „%@”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geralmente ajuda ir para outro app e voltar, ou reiniciar “%@”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зазвичай допомагає перейти в інший застосунок і назад або перезапустити «%@»."
+          }
+        }
+      }
+    },
+    "Обычно помогает перейти в другое приложение и обратно.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عادةً ما يفيد الانتقال إلى تطبيق آخر والعودة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meist hilft es, in eine andere App und zurück zu wechseln."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switching to another app and back usually helps."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suele ayudar cambiar a otra app y volver."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En général, passer à une autre app puis revenir suffit."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biasanya membantu jika beralih ke app lain lalu kembali."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di solito aiuta passare a un’altra app e tornare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "別のアプリに切り替えて戻ると、たいてい直ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보통 다른 앱으로 갔다가 돌아오면 해결됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwykle pomaga przejść do innej aplikacji i z powrotem."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geralmente ajuda ir para outro app e voltar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зазвичай допомагає перейти в інший застосунок і назад."
+          }
+        }
+      }
+    },
     "Один и тот же скилл лежит в нескольких папках: каждую копию придётся обновлять отдельно.": {
       "localizations": {
         "ar": {
@@ -15085,6 +15237,82 @@
         }
       }
     },
+    "Пока защищённый ввод включён, macOS скрывает нажатия клавиш от всех программ, и исправлять нечего.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما دام الإدخال الآمن مفعّلًا، يُخفي macOS ضغطات المفاتيح عن كل البرامج، فلا يوجد ما يُصحَّح."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solange die sichere Eingabe aktiv ist, verbirgt macOS Tastendrücke vor allen Programmen – es gibt nichts zu korrigieren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "While Secure Input is on, macOS hides keystrokes from every program, so there is nothing to fix."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mientras la entrada segura está activada, macOS oculta las pulsaciones a todos los programas y no hay nada que corregir."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tant que la saisie sécurisée est active, macOS cache les frappes à tous les programmes : il n’y a rien à corriger."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selama Input Aman aktif, macOS menyembunyikan ketikan dari semua program, jadi tidak ada yang bisa diperbaiki."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finché l’inserimento protetto è attivo, macOS nasconde i tasti premuti a tutti i programmi e non c’è niente da correggere."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セキュア入力がオンの間、macOS はすべてのプログラムからキー入力を隠すため、修正するものがありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보안 입력이 켜져 있는 동안 macOS는 모든 프로그램에서 키 입력을 숨기므로 고칠 것이 없습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dopóki bezpieczne wprowadzanie jest włączone, macOS ukrywa naciśnięcia klawiszy przed wszystkimi programami i nie ma czego poprawiać."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enquanto a entrada segura está ativa, o macOS esconde as teclas de todos os programas e não há o que corrigir."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поки захищене введення ввімкнене, macOS приховує натискання клавіш від усіх програм, і виправляти нічого."
+          }
+        }
+      }
+    },
     "Пока ничего: скиллы появлялись и менялись только через каталог.": {
       "localizations": {
         "ar": {
@@ -16069,6 +16297,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Різні скіли під однією назвою увімкнено для одного агента: він може взяти будь-який із них."
+          }
+        }
+      }
+    },
+    "Раскладка на паузе: включён защищённый ввод": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التخطيط متوقف مؤقتًا: الإدخال الآمن مفعّل"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tastaturlayout pausiert: Sichere Eingabe ist aktiv"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout is paused: Secure Input is on"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distribución en pausa: la entrada segura está activada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disposition en pause : la saisie sécurisée est active"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tata letak dijeda: Input Aman aktif"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout in pausa: l’inserimento protetto è attivo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レイアウトは一時停止中：セキュア入力がオンです"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "레이아웃 일시 중지: 보안 입력이 켜져 있음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Układ wstrzymany: włączone jest bezpieczne wprowadzanie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout em pausa: a entrada segura está ativa"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Розкладка на паузі: увімкнено захищене введення"
+          }
+        }
+      }
+    },
+    "Раскладка на паузе: защищённый ввод включило приложение «%@»": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التخطيط متوقف مؤقتًا: فعّل التطبيق «%@» الإدخال الآمن"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tastaturlayout pausiert: „%@“ hat die sichere Eingabe aktiviert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout is paused: “%@” turned on Secure Input"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distribución en pausa: «%@» activó la entrada segura"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disposition en pause : « %@ » a activé la saisie sécurisée"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tata letak dijeda: “%@” menyalakan Input Aman"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout in pausa: «%@» ha attivato l’inserimento protetto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レイアウトは一時停止中：「%@」がセキュア入力をオンにしました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "레이아웃 일시 중지: “%@”이(가) 보안 입력을 켰음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Układ wstrzymany: „%@” włączyła bezpieczne wprowadzanie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout em pausa: “%@” ativou a entrada segura"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Розкладка на паузі: захищене введення ввімкнув застосунок «%@»"
           }
         }
       }
