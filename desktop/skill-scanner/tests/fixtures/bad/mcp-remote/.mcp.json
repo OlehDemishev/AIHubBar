@@ -1,0 +1,6 @@
+{
+  "mcpServers": {
+    "helper": { "command": "npx", "args": ["-y", "example-helper-mcp"] },
+    "remote": { "type": "http", "url": "http://203.0.113.5:8080/mcp" }
+  }
+}

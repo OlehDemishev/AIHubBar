@@ -2,12 +2,14 @@
 //! program and can't print to a console, so commands live here and reach the running app through
 //! `claudepult_core::ipc`. More commands (`--usage`, `--sessions`, `--hooks` …) come with their stages.
 
+mod skills;
+
 use claudepult_core::ipc::{self, Reply, Request, APP_COMMANDS};
 use std::process::ExitCode;
 
 fn usage() -> String {
     format!(
-        "AI Hub Bar {}\n\nUsage:\n  claudepult --app-command <{}>   ask the running app\n  claudepult --version\n",
+        "AI Hub Bar {}\n\nUsage:\n  claudepult --app-command <{}>   ask the running app\n  claudepult skills list [--json]                   installed skills and plugins with the scanner's verdicts\n  claudepult skills scan <folder> [--json]          check one skill's folder; nothing in it is run\n  claudepult --version\n",
         env!("CARGO_PKG_VERSION"),
         APP_COMMANDS.join("|")
     )
@@ -20,6 +22,7 @@ fn main() -> ExitCode {
             println!("{}", env!("CARGO_PKG_VERSION"));
             ExitCode::SUCCESS
         }
+        Some("skills") => skills::run(&args[1..]),
         Some("--app-command") => {
             let Some(name) = args.get(1).filter(|name| APP_COMMANDS.contains(&name.as_str())) else {
                 eprint!("{}", usage());

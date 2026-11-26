@@ -3,7 +3,7 @@
 # app  — the tray app; cli — `claudepult`, the console program that talks to the running app.
 [workspace]
 resolver = "2"
-members = ["core", "app", "cli", "hook"]
+members = ["core", "app", "cli", "hook", "skill-scanner", "skill-catalog"]
 
 [workspace.package]
 version = "0.1.14"
@@ -13,6 +13,8 @@ repository = "https://github.com/OlehDemishev/AIHubBar"
 
 [workspace.dependencies]
 claudepult-core = { path = "core" }
+skill-scanner = { path = "skill-scanner" }
+skill-catalog = { path = "skill-catalog" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 dirs = "6"
