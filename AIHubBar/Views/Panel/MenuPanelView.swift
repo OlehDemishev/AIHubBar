@@ -174,6 +174,11 @@ struct MenuPanelView: View {
             folders.refreshIfStale()
             calendar.refreshIfStale()
             if modes.isOn(.skills) { skills.refreshIfStale() }
+            // A click on a skill's notification opens the panel at its card.
+            if let id = skills.pendingSkill {
+                skills.pendingSkill = nil
+                section = .skills(id)
+            }
             sessions.reload()
             hooks.refresh()
             notifications.refresh()

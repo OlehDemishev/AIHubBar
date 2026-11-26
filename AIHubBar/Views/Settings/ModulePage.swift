@@ -346,6 +346,7 @@ extension NotificationKind {
         case .calendar: "calendar"
         case .resources: "cpu"
         case .commands: "terminal"
+        case .skills: "puzzlepiece.extension"
         }
     }
 }

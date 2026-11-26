@@ -103,6 +103,8 @@ final class SkillCatalog {
         manageMigration,
         // Step 5: complaints and the block list.
         reportsMigration,
+        // Step 6: changes made outside the catalog, the install policy, trusted authors.
+        watchMigration,
     ]
 
     init(path: String) throws {
@@ -217,7 +219,10 @@ final class SkillCatalog {
     /// Finds every installed skill and plugin, checks the new and changed ones, forgets the ones that are gone. A
     /// folder whose content didn't change keeps its result, unless the scanner's rules are newer.
     @discardableResult
-    func refreshInstalled(_ roots: SkillRoots, now: String = SkillCatalog.now()) throws -> Refreshed {
+    func refreshInstalled(_ roots: SkillRoots, now: String = SkillCatalog.now(), byCatalog: Bool = false) throws -> Refreshed {
+        let before = try installedContents()
+        let wasEmpty = try db.first("SELECT count(*) FROM skills WHERE source = 'local'", map: { $0.int(0) }) == 0
+            && db.first("SELECT count(*) FROM skill_events", map: { $0.int(0) }) == 0
         let found = SkillDiscovery.discover(roots)
         var stats = Refreshed(found: found.count)
         // Reading and checking happen before the transaction: the file stays free for readers meanwhile.
@@ -277,6 +282,8 @@ final class SkillCatalog {
             }
             if files.contentHash != hash { try importFolder(URL(fileURLWithPath: path), now: now) }
         }
+        // A folder that could not be read is not «gone»: changes are compared only after a clean look.
+        if stats.failed.isEmpty { try recordChanges(before: before, wasEmpty: wasEmpty, byCatalog: byCatalog, now: now) }
         return stats
     }
 
@@ -352,6 +359,8 @@ final class SkillCatalog {
         var blockedOnly = false
         /// Only the skills the person complained about.
         var withReport = false
+        /// Only the skills of trusted authors.
+        var trustedOnly = false
         /// A license by name; an empty one means skills without a license.
         var license: String?
         var author: String?
@@ -376,13 +385,13 @@ final class SkillCatalog {
             plain.sort = .risk
             let all: [Bool] = [
                 plain.minRisk > 0 || plain.maxRisk < 100, !agents.isEmpty, !scopes.isEmpty, kind != nil, !findings.isEmpty, !can.isEmpty, !cannot.isEmpty,
-                noScripts, state != .any, usage != .any, withNote, blockedOnly, withReport, license != nil, author != nil, newWithinDays != nil,
+                noScripts, state != .any, usage != .any, withNote, blockedOnly, withReport, trustedOnly, license != nil, author != nil, newWithinDays != nil,
             ]
             return all.filter { $0 }.count
         }
 
         private enum CodingKeys: String, CodingKey {
-            case query, verdict, minRisk, maxRisk, agents, scopes, kind, findings, can, cannot, noScripts, state, usage, favoritesOnly, withNote, blockedOnly, withReport, license, author, newWithinDays, sort
+            case query, verdict, minRisk, maxRisk, agents, scopes, kind, findings, can, cannot, noScripts, state, usage, favoritesOnly, withNote, blockedOnly, withReport, trustedOnly, license, author, newWithinDays, sort
         }
 
         init(from decoder: Decoder) throws {
@@ -408,6 +417,7 @@ final class SkillCatalog {
             withNote = ((try? c.decodeIfPresent(Bool.self, forKey: .withNote)) ?? nil) ?? false
             blockedOnly = ((try? c.decodeIfPresent(Bool.self, forKey: .blockedOnly)) ?? nil) ?? false
             withReport = ((try? c.decodeIfPresent(Bool.self, forKey: .withReport)) ?? nil) ?? false
+            trustedOnly = ((try? c.decodeIfPresent(Bool.self, forKey: .trustedOnly)) ?? nil) ?? false
             license = string(.license)
             author = string(.author)
             newWithinDays = int(.newWithinDays)
@@ -433,6 +443,7 @@ final class SkillCatalog {
             try c.encode(withNote, forKey: .withNote)
             try c.encode(blockedOnly, forKey: .blockedOnly)
             try c.encode(withReport, forKey: .withReport)
+            try c.encode(trustedOnly, forKey: .trustedOnly)
             try c.encodeIfPresent(license, forKey: .license)
             try c.encodeIfPresent(author, forKey: .author)
             try c.encodeIfPresent(newWithinDays, forKey: .newWithinDays)
@@ -473,6 +484,8 @@ final class SkillCatalog {
         var reports: Int
         /// Where it says it lives.
         var homepage: String?
+        /// Its author (or its GitHub owner) is on the person's trusted list.
+        var isTrusted: Bool
     }
 
     struct Result: Equatable, Sendable {
@@ -538,6 +551,7 @@ final class SkillCatalog {
         if filters.favoritesOnly { sql.append("coalesce(m.favorite, 0) = 1") }
         if filters.withNote { sql.append("coalesce(m.note, '') <> ''") }
         if filters.blockedOnly { sql.append(Self.isBlockedSQL) }
+        if filters.trustedOnly { sql.append(Self.trustedSQL) }
         if filters.withReport { sql.append("EXISTS (SELECT 1 FROM skill_reports p WHERE p.kind = s.kind AND p.name = s.name)") }
         if let license = filters.license {
             sql.append(license.isEmpty ? "coalesce(s.license, '') = ''" : "s.license = \(bind(license))")
@@ -553,12 +567,13 @@ final class SkillCatalog {
         s.id, s.kind, s.name, s.description, s.source, s.path, s.content_hash, s.license, r.effective, r.verdict, r.risk_score, r.has_scripts, r.counts,
         s.author, coalesce(m.favorite, 0), coalesce(m.note, ''), s.updated_at,
         (SELECT count(*) FROM skill_uses u WHERE u.name = s.name AND u.at >= '\(iso(since))') AS uses,
-        \(isBlockedSQL), (SELECT count(*) FROM skill_reports p WHERE p.kind = s.kind AND p.name = s.name), s.homepage
+        \(isBlockedSQL), (SELECT count(*) FROM skill_reports p WHERE p.kind = s.kind AND p.name = s.name), s.homepage,
+        \(trustedSQL)
         """
     }
 
     /// How many columns `columns` has: what a query adds comes after.
-    private static let columnCount: Int32 = 21
+    private static let columnCount: Int32 = 22
 
     private static let from = "FROM skills s JOIN scan_results r ON r.skill_id = s.id LEFT JOIN skill_marks m ON m.kind = s.kind AND m.name = s.name"
 
@@ -572,7 +587,7 @@ final class SkillCatalog {
                    verdict: SkillVerdict(rawValue: row.text(8)) ?? .review, staticVerdict: SkillVerdict(rawValue: row.text(9)) ?? .review,
                    riskScore: row.int(10), hasScripts: row.bool(11), counts: row.text(12).split(separator: ",").compactMap { Int($0) },
                    isFavorite: row.bool(14), note: row.text(15), uses: row.int(17), addedAt: row.text(16),
-                   isBlocked: row.bool(18), reports: row.int(19), homepage: row.optionalText(20))
+                   isBlocked: row.bool(18), reports: row.int(19), homepage: row.optionalText(20), isTrusted: row.bool(21))
     }
 
     private static func order(_ sort: Filters.Sort) -> String {

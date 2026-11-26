@@ -20,6 +20,8 @@ enum NotificationTarget: Equatable, Sendable {
     case link(URL)
     /// A permission Claude asked for: «Разрешить» / «Отклонить» right on the banner.
     case approval(sessionID: String, requestID: String)
+    /// A skill of the Skills Catalog → the panel, at its card.
+    case skill(id: Int)
     case none
 
     var userInfo: [String: String] {
@@ -32,6 +34,7 @@ enum NotificationTarget: Equatable, Sendable {
         case let .window(id): ["target": "window", "id": id]
         case let .approval(sessionID, requestID): ["target": "approval", "id": sessionID, "request": requestID]
         case let .link(url): ["target": "link", "url": url.absoluteString]
+        case let .skill(id): ["target": "skill", "id": String(id)]
         case .none: [:]
         }
     }
@@ -48,6 +51,7 @@ enum NotificationTarget: Equatable, Sendable {
         case "link" where URL(string: value("url"))?.scheme == "https": self = .link(URL(string: value("url"))!)
         case "approval" where !value("id").isEmpty && !value("request").isEmpty:
             self = .approval(sessionID: value("id"), requestID: value("request"))
+        case "skill" where Int(value("id")) != nil: self = .skill(id: Int(value("id"))!)
         default: self = .none
         }
     }
@@ -59,7 +63,7 @@ enum NotificationTarget: Equatable, Sendable {
         case .approval: NotificationAction.approvalCategory
         case let .run(_, pullRequest): pullRequest == nil ? NotificationAction.runCategory : NotificationAction.runWithPRCategory
         case .result: NotificationAction.resultCategory
-        case .file, .window, .link, .none: nil
+        case .file, .window, .link, .skill, .none: nil
         }
     }
 }
@@ -95,6 +99,8 @@ enum NotificationAction {
         case openWindow(id: String)
         /// «Версии» on the project, at its state before `before`.
         case openChanges(projectPath: String, before: Date)
+        /// The panel, at a skill's card.
+        case openSkill(id: Int)
         case nothing
     }
 
@@ -115,6 +121,8 @@ enum NotificationAction {
             return .openWindow(id: id)
         case let .link(url):
             return .openURL(url)
+        case let .skill(id):
+            return .openSkill(id: id)
         case let .approval(sessionID, requestID):
             if action == allow { return .decide(requestID: requestID, allow: true) }
             if action == deny { return .decide(requestID: requestID, allow: false) }
@@ -280,7 +288,7 @@ final class NotificationRouter: NSObject, UNUserNotificationCenterDelegate, @unc
 
 /// Kinds of notifications, for Settings → Основные → «Какие уведомления и как часто».
 enum NotificationKind: String, CaseIterable, Identifiable, Sendable {
-    case waiting, context, stuck, background, limits, pullRequests, calendar, resources, commands
+    case waiting, context, stuck, background, limits, pullRequests, calendar, resources, commands, skills
 
     var id: String { rawValue }
 
@@ -295,6 +303,7 @@ enum NotificationKind: String, CaseIterable, Identifiable, Sendable {
         case .calendar: String(localized: "Календарь: дедлайны и публикации")
         case .resources: String(localized: "Ресурсы Mac: процессор, память, диск, батарея")
         case .commands: String(localized: "Команды: отчёты, проверки, быстрые команды")
+        case .skills: String(localized: "Скиллы: новые и изменённые вне каталога, новые версии")
         }
     }
 
@@ -306,7 +315,7 @@ enum NotificationKind: String, CaseIterable, Identifiable, Sendable {
             ("waiting-", .waiting), ("context-", .context), ("stuck-", .stuck), ("run-", .background), ("night-summary", .background),
             ("limit-", .limits), ("week-forecast", .limits), ("hub-", .limits), ("spendWarned-", .limits),
             ("pr-", .pullRequests), ("calendar-", .calendar), ("resources-", .resources),
-            ("command-", .commands), ("quick-", .commands),
+            ("command-", .commands), ("quick-", .commands), ("skills-", .skills),
         ]
         guard let kind = prefixes.first(where: { id.hasPrefix($0.0) })?.1 else { return nil }
         self = kind

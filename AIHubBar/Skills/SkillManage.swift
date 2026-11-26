@@ -234,7 +234,9 @@ extension SkillCatalog {
         } else {
             nil
         }
-        return try plan(source, files, report, changed: changed, agent: agent, target: target, readers: readers, replaces: false, blocked: blocked)
+        var result = try plan(source, files, report, changed: changed, agent: agent, target: target, readers: readers, replaces: false, blocked: blocked)
+        if result.blocked == nil { result.blocked = try policyRefusal(verdict: result.verdict, skillID: source.id) }
+        return result
     }
 
     // MARK: - Writing a copy
@@ -410,7 +412,7 @@ extension SkillCatalog {
                                 installedHash: files.contentHashWithoutLinks, installedAt: place.now))
         let journalID = try log(place, Entry(action: "install", name: plan.name, agent: agent.rawValue, installPath: plan.target, report: report,
                                              acknowledged: plan.needsAck && acknowledged, origin: source.path))
-        try refreshInstalled(place.roots, now: place.now)
+        try refreshInstalled(place.roots, now: place.now, byCatalog: true)
         return Done(installPath: plan.target, journalID: journalID)
     }
 
@@ -461,7 +463,7 @@ extension SkillCatalog {
             journalID = try log(place, Entry(action: "remove", name: found.name, agent: agents, installPath: installPath, backup: backup, managed: was))
         }
         try db.run("DELETE FROM managed_installs WHERE install_path = ?1", .text(installPath))
-        try refreshInstalled(place.roots, now: place.now)
+        try refreshInstalled(place.roots, now: place.now, byCatalog: true)
         return Done(installPath: installPath, journalID: journalID)
     }
 
@@ -482,7 +484,7 @@ extension SkillCatalog {
         try FileManager.default.moveItem(at: found.path, to: target)
         try db.run("UPDATE managed_installs SET install_path = ?2 WHERE install_path = ?1", .text(installPath), .text(target.path))
         let journalID = try log(place, Entry(action: on ? "on" : "off", name: found.name, agent: found.agents.joined(separator: ", "), installPath: target.path))
-        try refreshInstalled(place.roots, now: place.now)
+        try refreshInstalled(place.roots, now: place.now, byCatalog: true)
         return Done(installPath: target.path, journalID: journalID)
     }
 
@@ -525,7 +527,7 @@ extension SkillCatalog {
         if let before { try saveManaged(before) }
         try db.run("UPDATE install_log SET restored_at = ?2 WHERE id = ?1", .int(Int64(journalID)), .text(place.now))
         let newID = try log(place, Entry(action: "restore", name: name, agent: agent, installPath: installPath, backup: kept, managed: nowManaged))
-        try refreshInstalled(place.roots, now: place.now)
+        try refreshInstalled(place.roots, now: place.now, byCatalog: true)
         return Done(installPath: installPath, journalID: newID)
     }
 
@@ -667,8 +669,10 @@ extension SkillCatalog {
         let blocked: String? = if try isBlocked(kind: "skill", name: newName, contentHash: report.contentHash) || isBlocked(kind: "skill", name: row.name, contentHash: report.contentHash) { "blocked" } else if origin.file("SKILL.md") == nil { "no-skill-md" } else if origin.truncated { "too-large" } else if report.contentHash == row.sourceHash { "already" } else { nil }
         let id = try db.first("SELECT skill_id FROM installations WHERE install_path = ?1 LIMIT 1", .text(installPath), map: { $0.int(0) }) ?? 0
         let agents = found.agents.compactMap(SkillAgent.init)
-        return try plan(Source(id: id, kind: "skill", source: "local", path: row.origin, contentHash: report.contentHash), origin, report, changed: true,
-                        agent: agents.first, target: found.path, readers: agents, replaces: true, blocked: blocked)
+        var result = try plan(Source(id: id, kind: "skill", source: "local", path: row.origin, contentHash: report.contentHash), origin, report, changed: true,
+                              agent: agents.first, target: found.path, readers: agents, replaces: true, blocked: blocked)
+        if result.blocked == nil { result.blocked = try policyRefusal(verdict: result.verdict, skillID: id) }
+        return result
     }
 
     /// Replaces an installed copy with the newer version of its source. The copy that was there goes to the backups
@@ -703,7 +707,7 @@ extension SkillCatalog {
         try saveManaged(row)
         let journalID = try log(place, Entry(action: "update", name: plan.name, agent: plan.agent?.rawValue, installPath: installPath, report: report,
                                              acknowledged: plan.needsAck && acknowledged, origin: was.origin, backup: backup, managed: was))
-        try refreshInstalled(place.roots, now: place.now)
+        try refreshInstalled(place.roots, now: place.now, byCatalog: true)
         return Done(installPath: installPath, journalID: journalID)
     }
 }
