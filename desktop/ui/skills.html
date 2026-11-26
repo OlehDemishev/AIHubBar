@@ -9,19 +9,28 @@
   <header class="skills-toolbar">
     <input type="search" id="search" autocomplete="off" spellcheck="false">
     <span class="segmented" id="verdicts" role="group"></span>
-    <select id="agent"></select>
     <span class="spacer"></span>
     <button id="rescan"></button>
   </header>
-  <p class="secondary" id="summary"></p>
-  <main id="list" class="skills-list"></main>
-  <p class="secondary" id="empty" hidden></p>
+  <div class="skills-toolbar">
+    <select id="agent"></select>
+    <select id="finding"></select>
+    <select id="source" hidden></select>
+    <label class="skills-check"><input type="checkbox" id="no-scripts"> <span id="no-scripts-label"></span></label>
+    <label class="skills-check" id="official-box" hidden><input type="checkbox" id="official"> <span id="official-label"></span></label>
+    <span class="spacer"></span>
+    <span class="secondary" id="status"></span>
+  </div>
   <p class="error" id="error" hidden></p>
+  <div class="skills-panes">
+    <nav id="list" class="skills-list"></nav>
+    <main id="card" class="skills-card"></main>
+  </div>
   <footer class="secondary skills-note" id="disclaimer"></footer>
 
   <script type="module">
-    // The Skills Catalog's window. Everything a skill says about itself — its name, description, the lines the
-    // scanner quotes — is untrusted text: it only ever goes in through `textContent`, never as markup.
+    // The Skills Catalog's window. Everything a skill says about itself — its name, its description, its files,
+    // the lines the scanner quotes — is untrusted text: it only ever goes in through `textContent`, never as markup.
     import { loadTexts, invoke } from "./app.js";
     const ui = await loadTexts();
     const texts = await invoke("skills_texts");
@@ -44,22 +53,35 @@
     const VERDICT_CLASS = { dangerous: "ci-fail", review: "ci-pending", safe: "ci-ok" };
     const SEVERITIES = ["critical", "high", "medium", "low", "info"];
     const AGENTS = ["claude", "codex", "cursor", "gemini"];
+    const FINDINGS = ["scripts", "network", "execution", "secrets", "system", "dependencies", "obfuscation", "injection", "plugin"];
 
-    let rows = [];
     let home = "";
-    let verdict = "all";
-    let agent = "";
-    const open = new Set();
+    let found = { rows: [], total: 0, byVerdict: [0, 0, 0], sources: [], anyOfficial: false, more: false };
+    let verdict = null;
+    let chosen = null;      // the id of the skill whose card is shown
+    let card = null;
+    let shownFile = null;   // { path, lines, marks, cut }
+    let asked = 0;          // only the latest answer is shown
 
     id("search").placeholder = s("search.placeholder");
     id("rescan").textContent = s("action.rescan");
     id("disclaimer").textContent = s("disclaimer");
+    id("no-scripts-label").textContent = s("filter.noScripts");
+    id("official-label").textContent = s("filter.official");
     document.title = s("window.title");
-    for (const value of ["", ...AGENTS]) {
-      const option = el("option", "", value ? s("agent." + value) : s("filter.anyAgent"));
-      option.value = value;
-      id("agent").append(option);
+
+    function options(select, first, values, label) {
+      const kept = select.value;
+      select.replaceChildren(...[["", first], ...values.map((value) => [value, label(value)])].map(([value, text]) => {
+        const option = el("option", "", text);
+        option.value = value;
+        return option;
+      }));
+      select.value = values.includes(kept) ? kept : "";
     }
+    const sourceName = (source) => (texts["source." + source] ? s("source." + source) : source);
+    options(id("agent"), s("filter.anyAgent"), AGENTS, (agent) => s("agent." + agent));
+    options(id("finding"), s("filter.anyFinding"), FINDINGS, (category) => s("category." + category));
 
     function size(bytes) {
       const units = ["B", "KB", "MB"];
@@ -73,123 +95,261 @@
       return home && path.startsWith(home) ? "~" + path.slice(home.length) : path;
     }
 
-    function matches(row) {
-      if (verdict !== "all" && row.verdict !== verdict) return false;
-      if (agent && !row.agents.includes(agent)) return false;
-      const words = id("search").value.toLowerCase().split(/\s+/).filter(Boolean);
-      const hay = `${row.name} ${row.description}`.toLowerCase();
-      return words.every((word) => hay.includes(word));
-    }
-
-    function verdictBadge(row) {
-      const badge = el("span", `badge ${VERDICT_CLASS[row.verdict] ?? "ci-pending"}`, s("verdict." + row.verdict));
-      badge.title = s(`verdict.${row.verdict}.hint`);
-      return badge;
-    }
-
-    function finding(found) {
-      const item = el("div", `skills-finding severity-${found.severity}`);
-      const head = el("div", "skills-finding-head");
-      head.append(el("span", "skills-severity", s("severity." + found.severity)), el("strong", "", s(`rule.${found.rule}.title`)));
-      if (found.file) head.append(el("span", "secondary skills-where", found.line ? `${found.file} · ${s("detail.line", found.line)}` : found.file));
-      item.append(head, el("p", "secondary", s(`rule.${found.rule}.why`)));
-      if (found.excerpt) item.append(el("pre", "skills-excerpt", found.excerpt));
-      return item;
-    }
-
-    function detail(row) {
-      const box = el("div", "skills-detail");
-      box.append(el("p", "", s(`verdict.${row.verdict}.hint`)));
-      const facts = [
-        s("detail.risk", row.riskScore),
-        s("detail.files", row.fileCount, size(row.totalBytes)),
-        row.hasScripts ? s("detail.scripts", row.languages.join(", ") || "binary") : s("detail.noScripts"),
-        row.license ? s("detail.license", row.license) : s("detail.noLicense"),
-        s("detail.checked", new Intl.DateTimeFormat(lang, { dateStyle: "medium", timeStyle: "short" }).format(new Date(row.scannedAt)), row.scannerVersion),
-      ];
-      box.append(el("p", "secondary", facts.join(" · ")));
-
-      box.append(el("h2", "", s("detail.where")));
-      row.places.forEach((place, index) => {
-        const line = el("div", "skills-place");
-        const scope = place.scope === "project" ? s("scope.project", place.project ?? "") : s("scope." + place.scope);
-        line.append(el("span", "badge", s("agent." + place.agent)), el("span", "secondary", scope));
-        if (!place.enabled) line.append(el("span", "badge dirty", s("row.off")));
-        const path = el("span", "skills-path", short(place.installPath));
-        path.title = place.installPath;
-        const show = el("button", "link", s("action.showFolder"));
-        show.onclick = (event) => { event.stopPropagation(); invoke("skills_show_folder", { id: row.id, place: index }).catch(fail); };
-        line.append(path, show);
-        box.append(line);
-      });
-
-      box.append(el("h2", "", s("detail.findings")));
-      if (row.findings.length === 0) box.append(el("p", "secondary", s("detail.noFindings")));
-      for (const severity of SEVERITIES) for (const found of row.findings.filter((f) => f.severity === severity)) box.append(finding(found));
-      return box;
-    }
-
-    function rowNode(row) {
-      const node = el("section", "skills-row");
-      const head = el("button", "skills-row-head");
-      head.setAttribute("aria-expanded", String(open.has(row.id)));
-      const title = el("span", "skills-title");
-      title.append(verdictBadge(row), el("strong", "", row.name));
-      if (row.kind === "plugin") title.append(el("span", "badge", s("row.plugin")));
-      if (row.places.every((place) => !place.enabled)) title.append(el("span", "badge dirty", s("row.off")));
-      const agents = el("span", "skills-agents");
-      for (const name of row.agents) agents.append(el("span", "badge", s("agent." + name)));
-      const marks = el("span", "skills-counts");
-      row.counts.forEach((count, index) => { if (count) marks.append(el("span", `skills-count severity-${SEVERITIES[index]}`, String(count))); });
-      for (const mark of marks.children) mark.title = s("severity." + mark.className.split("severity-")[1]);
-      title.append(agents, marks);
-      head.append(title, el("span", "secondary skills-description", row.description));
-      head.onclick = () => { open.has(row.id) ? open.delete(row.id) : open.add(row.id); render(); };
-      node.append(head);
-      if (open.has(row.id)) node.append(detail(row));
-      return node;
-    }
-
-    function render() {
-      const count = (name) => rows.filter((row) => row.verdict === name).length;
-      id("verdicts").replaceChildren(...["all", ...VERDICTS].map((name) => {
-        const button = el("button", verdict === name ? "chosen" : "", name === "all" ? `${s("filter.all")} ${rows.length}` : `${s("verdict." + name)} ${count(name)}`);
-        button.onclick = () => { verdict = name; render(); };
-        return button;
-      }));
-      id("summary").textContent = s("summary", rows.length, count("dangerous"), count("review"), count("safe"));
-      const shown = rows.filter(matches);
-      id("list").replaceChildren(...shown.map(rowNode));
-      id("empty").hidden = shown.length > 0;
-      id("empty").textContent = rows.length === 0 ? s("empty.none") : s("empty.filter");
-    }
-
     function fail(error) {
       id("error").hidden = false;
       id("error").textContent = String(error);
     }
 
-    async function load() {
-      id("rescan").disabled = true;
-      id("summary").textContent = s("status.scanning");
-      id("error").hidden = true;
-      try {
-        const view = await invoke("skills_view");
-        rows = view.rows;
-        home = view.home.replace(/[\\/]+$/, "");
-        if (view.refreshed.failed.length) fail(view.refreshed.failed.map((line) => s("error.read", line)).join("\n"));
-        render();
-      } catch (error) {
-        fail(error);
-        id("summary").textContent = "";
-      }
-      id("rescan").disabled = false;
+    function filters() {
+      return {
+        query: id("search").value,
+        verdict,
+        agent: id("agent").value || null,
+        finding: id("finding").value || null,
+        source: id("source").value || null,
+        officialOnly: id("official").checked,
+        noScripts: id("no-scripts").checked,
+        installedOnly: false,
+      };
     }
 
-    id("search").oninput = render;
-    id("agent").onchange = () => { agent = id("agent").value; render(); };
-    id("rescan").onclick = load;
-    await load();
+    function verdictBadge(name) {
+      const badge = el("span", `badge ${VERDICT_CLASS[name] ?? "ci-pending"}`, s("verdict." + name));
+      badge.title = s(`verdict.${name}.hint`);
+      return badge;
+    }
+
+    function counts(row) {
+      const marks = el("span", "skills-counts");
+      row.counts.forEach((count, index) => {
+        if (!count) return;
+        const mark = el("span", `skills-count severity-${SEVERITIES[index]}`, String(count));
+        mark.title = s("severity." + SEVERITIES[index]);
+        marks.append(mark);
+      });
+      return marks;
+    }
+
+    // MARK: The list
+
+    function rowNode(row) {
+      const node = el("button", "skills-row" + (row.id === chosen ? " chosen" : ""));
+      const title = el("span", "skills-title");
+      title.append(verdictBadge(row.verdict), el("strong", "", row.name));
+      if (row.kind === "plugin") title.append(el("span", "badge", s("row.plugin")));
+      if (row.official) title.append(el("span", "badge ci-ok", s("card.official")));
+      if (row.off) title.append(el("span", "badge dirty", s("row.off")));
+      title.append(counts(row));
+      node.append(title, el("span", "secondary skills-description", row.description));
+      node.onclick = () => choose(row.id);
+      return node;
+    }
+
+    function renderList() {
+      const [dangerous, review, safe] = found.byVerdict;
+      const numbers = { dangerous, review, safe };
+      id("verdicts").replaceChildren(...[null, ...VERDICTS].map((name) => {
+        const button = el("button", verdict === name ? "chosen" : "", name ? `${s("verdict." + name)} ${numbers[name]}` : `${s("filter.all")} ${found.total}`);
+        button.onclick = () => { verdict = name; search(); };
+        return button;
+      }));
+      options(id("source"), s("filter.anySource"), found.sources, sourceName);
+      id("source").hidden = found.sources.length < 2;
+      id("official-box").hidden = !found.anyOfficial;
+      const nodes = found.rows.map(rowNode);
+      if (found.rows.length === 0) nodes.push(el("p", "secondary skills-empty", found.total === 0 && !id("search").value && !verdict ? s("empty.none") : s("empty.filter")));
+      if (found.more) nodes.push(el("p", "secondary skills-empty", s("list.more", found.rows.length)));
+      id("list").replaceChildren(...nodes);
+    }
+
+    async function search() {
+      const mine = ++asked;
+      try {
+        const answer = await invoke("skills_search", { filters: filters() });
+        if (mine !== asked) return;
+        found = answer;
+        renderList();
+        // The card follows the list: the chosen skill while it is there, else the first one.
+        if (!found.rows.some((row) => row.id === chosen)) await choose(found.rows[0]?.id ?? null);
+      } catch (error) {
+        fail(error);
+      }
+    }
+
+    // MARK: The card
+
+    function fact(label, value) {
+      const row = el("div", "skills-fact");
+      row.append(el("span", "secondary", label));
+      if (typeof value === "string") row.append(el("span", "", value));
+      else row.append(value);
+      return row;
+    }
+
+    function findingNode(item, readable) {
+      const node = el("div", `skills-finding severity-${item.severity}`);
+      const head = el("div", "skills-finding-head");
+      head.append(el("span", "skills-severity", s("severity." + item.severity)), el("strong", "", s(`rule.${item.rule}.title`)));
+      if (item.file) {
+        const where = item.line ? `${item.file} · ${s("detail.line", item.line)}` : item.file;
+        if (readable) {
+          const link = el("button", "link skills-where", where);
+          link.onclick = () => showFile(item.file, item.line);
+          head.append(link);
+        } else {
+          head.append(el("span", "secondary skills-where", where));
+        }
+      }
+      node.append(head, el("p", "secondary", s(`rule.${item.rule}.why`)));
+      if (item.excerpt) node.append(el("pre", "skills-excerpt", item.excerpt));
+      return node;
+    }
+
+    function previewNode() {
+      const box = el("div", "skills-preview");
+      box.id = "preview";
+      box.append(el("div", "skills-preview-head", shownFile.path));
+      const lines = el("div", "skills-lines");
+      const marks = new Map(shownFile.marks.map((mark) => [mark.line, mark]));
+      shownFile.lines.forEach((text, index) => {
+        const mark = marks.get(index + 1);
+        const line = el("div", "skills-line" + (mark ? ` marked severity-${mark.severity}` : ""));
+        if (mark) line.title = s(`rule.${mark.rule}.title`);
+        line.dataset.line = String(index + 1);
+        line.append(el("span", "skills-number", String(index + 1)), el("span", "skills-text", text || " "));
+        lines.append(line);
+      });
+      box.append(lines);
+      if (shownFile.cut) box.append(el("p", "secondary", s("card.cut")));
+      return box;
+    }
+
+    function renderCard() {
+      const box = id("card");
+      if (!card) {
+        box.replaceChildren(el("p", "secondary skills-empty", found.rows.length ? s("card.pick") : ""));
+        return;
+      }
+      const row = card.row;
+      const nodes = [];
+      const head = el("div", "skills-card-head");
+      head.append(el("h1", "", row.name), verdictBadge(row.verdict), el("span", "secondary", s("detail.risk", row.riskScore)));
+      if (row.kind === "plugin") head.append(el("span", "badge", s("row.plugin")));
+      if (row.official) head.append(el("span", "badge ci-ok", s("card.official")));
+      if (row.off) head.append(el("span", "badge dirty", s("row.off")));
+      nodes.push(head, el("p", "secondary", s(`verdict.${row.verdict}.hint`)));
+      if (row.description) nodes.push(el("p", "skills-about", row.description));
+      if (card.missing) nodes.push(el("p", "error", s("card.missing")));
+      else if (card.changed) nodes.push(el("p", "error", s("card.changed")));
+
+      const facts = el("div", "skills-facts");
+      const agents = el("span", "skills-agents");
+      for (const agent of row.agents) agents.append(el("span", "badge", s("agent." + agent)));
+      facts.append(
+        fact(s("card.source"), row.repoUrl ? `${sourceName(row.source)} · ${row.repoUrl}` : sourceName(row.source)),
+        fact(s("card.licenseLabel"), row.license || s("card.none")),
+        fact(s("card.agents"), agents),
+        fact(s("card.scriptsLabel"), row.hasScripts ? card.languages.join(", ") || s("kind.program") : s("card.none")),
+        fact(s("card.size"), s("card.filesCount", card.files.length || "—", size(card.totalBytes))),
+        fact(s("card.checkedLabel"), s("card.rules", new Intl.DateTimeFormat(lang, { dateStyle: "medium", timeStyle: "short" }).format(new Date(card.scannedAt)), card.scannerVersion)),
+      );
+      if (row.stars != null) facts.append(fact(s("card.stars"), String(row.stars)));
+      nodes.push(facts);
+
+      if (card.places.length) {
+        nodes.push(el("h2", "", s("detail.where")));
+        card.places.forEach((place, index) => {
+          const line = el("div", "skills-place");
+          const scope = place.scope === "project" ? s("scope.project", place.project ?? "") : s("scope." + place.scope);
+          line.append(el("span", "badge", s("agent." + place.agent)), el("span", "secondary", scope));
+          if (!place.enabled) line.append(el("span", "badge dirty", s("row.off")));
+          const path = el("span", "skills-path", short(place.installPath));
+          path.title = place.installPath;
+          const show = el("button", "link", s("action.showFolder"));
+          show.onclick = () => invoke("skills_show_folder", { id: row.id, place: index }).catch(fail);
+          line.append(path, show);
+          nodes.push(line);
+        });
+      }
+
+      const readable = new Set(card.files.filter((file) => file.readable).map((file) => file.path));
+      nodes.push(el("h2", "", s("detail.findings")));
+      if (card.findings.length === 0) nodes.push(el("p", "secondary", s("detail.noFindings")));
+      for (const severity of SEVERITIES) for (const item of card.findings.filter((f) => f.severity === severity)) nodes.push(findingNode(item, readable.has(item.file)));
+
+      if (card.files.length) {
+        nodes.push(el("h2", "", s("card.files")));
+        const list = el("div", "skills-files");
+        for (const file of card.files) {
+          const line = el(file.readable ? "button" : "div", "skills-file" + (shownFile?.path === file.path ? " chosen" : ""));
+          line.append(el("span", "skills-file-name", file.path), el("span", "secondary", s("kind." + file.kind)), el("span", "secondary", size(file.size)));
+          if (file.findings) line.append(el("span", "skills-count severity-high", String(file.findings)));
+          if (file.readable) line.onclick = () => showFile(file.path, 0);
+          list.append(line);
+        }
+        nodes.push(list);
+      }
+      if (shownFile) nodes.push(previewNode());
+      box.replaceChildren(...nodes);
+    }
+
+    async function showFile(path, line) {
+      if (!card) return;
+      try {
+        if (shownFile?.path !== path) shownFile = await invoke("skills_preview", { id: card.row.id, file: path });
+        renderCard();
+        const target = line ? id("card").querySelector(`[data-line="${Number(line)}"]`) : id("preview");
+        target?.scrollIntoView({ block: line ? "center" : "nearest" });
+      } catch (error) {
+        fail(error);
+      }
+    }
+
+    async function choose(skill) {
+      chosen = skill;
+      card = null;
+      shownFile = null;
+      for (const node of id("list").querySelectorAll(".skills-row")) node.classList.remove("chosen");
+      if (skill != null) {
+        try {
+          card = await invoke("skills_card", { id: skill });
+          if (chosen !== skill) return;
+          // SKILL.md is what the agent reads first: its text is under the card from the start.
+          const first = card?.files.find((file) => file.path === "SKILL.md" && file.readable);
+          if (first) shownFile = await invoke("skills_preview", { id: skill, file: first.path });
+        } catch (error) {
+          fail(error);
+        }
+      }
+      renderList();
+      renderCard();
+      id("card").scrollTop = 0;
+    }
+
+    async function refresh() {
+      id("rescan").disabled = true;
+      id("status").textContent = s("status.scanning");
+      id("error").hidden = true;
+      try {
+        const view = await invoke("skills_refresh");
+        home = view.home.replace(/[\\/]+$/, "");
+        if (view.refreshed.failed.length) fail(view.refreshed.failed.map((line) => s("error.read", line)).join("\n"));
+      } catch (error) {
+        fail(error);
+      }
+      id("status").textContent = "";
+      id("rescan").disabled = false;
+      const kept = chosen;
+      chosen = null;
+      await search();
+      if (kept != null && found.rows.some((row) => row.id === kept)) await choose(kept);
+    }
+
+    let typing = 0;
+    id("search").oninput = () => { clearTimeout(typing); typing = setTimeout(search, 150); };
+    for (const name of ["agent", "finding", "source", "no-scripts", "official"]) id(name).onchange = search;
+    id("rescan").onclick = refresh;
+    await refresh();
   </script>
 </body>
 </html>

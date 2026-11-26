@@ -89,6 +89,23 @@ pub fn hidden_report(text: &str) -> HiddenReport {
     report
 }
 
+/// A whole line for showing to a person: the invisible characters spelled out, nothing cut.
+pub fn visible(line: &str) -> String {
+    let mut shown = String::with_capacity(line.len());
+    let mut previous = None;
+    for c in line.chars() {
+        if hidden(c, previous).is_some() {
+            shown.push_str(&format!("<U+{:04X}>", c as u32));
+        } else if c.is_control() && c != '\t' {
+            shown.push(' ');
+        } else {
+            shown.push(c);
+        }
+        previous = Some(c);
+    }
+    shown
+}
+
 /// A line for showing to a person: short, on one line, with the invisible characters spelled out.
 pub fn excerpt(text: &str) -> String {
     let mut shown = String::new();

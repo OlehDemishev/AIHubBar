@@ -3,9 +3,11 @@
 //!
 //! Reading a skill never runs it (`skill_scanner`), and nothing here writes into an agent's folders.
 
+pub mod browse;
 pub mod local;
 pub mod texts;
 
+pub use browse::{card, preview, search, Card, Filters, Preview, SearchResult, SkillRow};
 pub use local::{discover, Found, Place, Roots};
 pub use rusqlite::Connection;
 
@@ -17,9 +19,9 @@ use std::path::Path;
 pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
 /// The file's layout; raised with every change, each step in `MIGRATIONS`.
-const SCHEMA_VERSION: i64 = 1;
+const SCHEMA_VERSION: i64 = 2;
 
-const MIGRATIONS: [&str; 1] = ["
+const MIGRATIONS: [&str; 2] = ["
 CREATE TABLE skills (
     id            INTEGER PRIMARY KEY,
     kind          TEXT NOT NULL DEFAULT 'skill',   -- skill | plugin
@@ -71,6 +73,15 @@ CREATE TRIGGER skills_au AFTER UPDATE ON skills BEGIN
     INSERT INTO skills_fts(skills_fts, rowid, name, description) VALUES ('delete', old.id, old.name, old.description);
     INSERT INTO skills_fts(rowid, name, description) VALUES (new.id, new.name, new.description);
 END;
+", "
+-- Stage 2: what the list filters by is kept in columns, so that a search doesn't open every report.
+ALTER TABLE skills ADD COLUMN official INTEGER NOT NULL DEFAULT 0;   -- from a verified author (the network stages set it)
+ALTER TABLE skills ADD COLUMN category TEXT;                         -- a topic, when a source gives one
+ALTER TABLE scan_results ADD COLUMN has_scripts INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE scan_results ADD COLUMN categories TEXT NOT NULL DEFAULT '';        -- ',network,secrets,': findings worth reading
+ALTER TABLE scan_results ADD COLUMN counts TEXT NOT NULL DEFAULT '[0,0,0,0]';   -- critical, high, medium, low
+-- Results written before these columns are made again at the next refresh.
+DELETE FROM scan_results;
 "];
 
 fn migrate(db: &mut Connection) -> Result<()> {
@@ -237,9 +248,13 @@ pub fn refresh_installed(db: &mut Connection, roots: &Roots, now: &str) -> Resul
 
 fn save_report(db: &Connection, skill: i64, commit_sha: Option<&str>, report: &Report, now: &str) -> Result<()> {
     db.execute("DELETE FROM scan_results WHERE skill_id = ?1", params![skill])?;
+    let mut categories: Vec<&str> = report.findings.iter().filter(|finding| finding.severity >= Severity::Low).map(|finding| finding.category.as_str()).collect();
+    categories.sort_unstable();
+    categories.dedup();
+    let categories = if categories.is_empty() { String::new() } else { format!(",{},", categories.join(",")) };
     db.execute(
-        "INSERT INTO scan_results (skill_id, commit_sha, scanner_version, risk_score, verdict, findings_json, scanned_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)",
-        params![skill, commit_sha, report.scanner_version, report.risk_score, report.verdict.as_str(), serde_json::to_string(report)?, now],
+        "INSERT INTO scan_results (skill_id, commit_sha, scanner_version, risk_score, verdict, findings_json, scanned_at, has_scripts, categories, counts) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)",
+        params![skill, commit_sha, report.scanner_version, report.risk_score, report.verdict.as_str(), serde_json::to_string(report)?, now, report.has_scripts, categories, serde_json::to_string(&counts(&report.findings))?],
     )?;
     Ok(())
 }
@@ -281,7 +296,7 @@ pub struct InstalledRow {
     pub findings: Vec<Finding>,
 }
 
-fn counts(findings: &[Finding]) -> [usize; 4] {
+pub(crate) fn counts(findings: &[Finding]) -> [usize; 4] {
     let of = |severity: Severity| findings.iter().filter(|f| f.severity == severity).count();
     [of(Severity::Critical), of(Severity::High), of(Severity::Medium), of(Severity::Low)]
 }
@@ -388,6 +403,23 @@ mod tests {
         db.execute("INSERT INTO skills (name, description, source, path, content_hash, updated_at) VALUES ('pdf-forms', 'Fills PDF forms', 'local', '/a', 'h', ?1)", params![NOW]).unwrap();
         let found: i64 = db.query_row("SELECT count(*) FROM skills_fts WHERE skills_fts MATCH ?1", params![fts_query("pdf fo")], |row| row.get(0)).unwrap();
         assert_eq!(found, 1);
+    }
+
+    #[test]
+    fn a_file_of_stage_one_is_upgraded_and_checked_again() {
+        let home = home();
+        let mut db = Connection::open_in_memory().unwrap();
+        db.execute_batch(MIGRATIONS[0]).unwrap();
+        db.pragma_update(None, "user_version", 1).unwrap();
+        db.execute("INSERT INTO skills (name, source, path, content_hash, updated_at) VALUES ('old', 'local', '/gone', 'h', ?1)", params![NOW]).unwrap();
+        db.execute("INSERT INTO scan_results (skill_id, scanner_version, risk_score, verdict, findings_json, scanned_at) VALUES (1, 1, 0, 'safe', '{}', ?1)", params![NOW]).unwrap();
+        migrate(&mut db).unwrap();
+        let stats = refresh_installed(&mut db, &Roots::under(&home.0), NOW).unwrap();
+        assert_eq!((stats.scanned, stats.removed), (3, 1));
+        let (scripts, categories, counts): (bool, String, String) = db.query_row("SELECT r.has_scripts, r.categories, r.counts FROM scan_results r JOIN skills s ON s.id = r.skill_id WHERE s.name = 'tables'", [], |row| Ok((row.get(0)?, row.get(1)?, row.get(2)?))).unwrap();
+        assert!(scripts);
+        assert_eq!(categories, ",execution,scripts,");
+        assert_eq!(counts, "[1,0,0,1]");
     }
 
     #[test]
