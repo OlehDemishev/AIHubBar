@@ -301,6 +301,10 @@ struct SkillsSectionView: View {
     @State private var filters = SkillCatalog.Filters()
     @State private var result = SkillCatalog.Result()
     @State private var card: SkillCatalog.Card?
+    /// The skill the card showed last: a change on disk or an install gives it a new id, and the card follows it.
+    @State private var lastShown: SkillCatalog.Row?
+    /// The chosen skill is no longer in the catalog.
+    @State private var isGone = false
     @State private var facets = SkillCatalog.Facets()
     @State private var saved: [SkillCatalog.SavedFilter] = []
     @State private var showsFilters = false
@@ -319,6 +323,8 @@ struct SkillsSectionView: View {
             if let chosen {
                 if let card, card.row.id == chosen {
                     SkillCardView(card: card)
+                } else if isGone {
+                    Text("Этого скилла больше нет: его убрали или он изменился.").scaledFont(.caption).foregroundStyle(.secondary)
                 } else {
                     ProgressView().frame(maxWidth: .infinity)
                 }
@@ -338,7 +344,8 @@ struct SkillsSectionView: View {
         .task(id: filters) { result = await skills.search(filters) }
         .task(id: chosen) {
             card = nil
-            if let chosen { card = await skills.card(chosen) }
+            isGone = false
+            if let chosen { await loadCard(chosen) }
         }
         .task(id: skills.lastUpdated) {
             facets = await skills.facets()
@@ -352,7 +359,20 @@ struct SkillsSectionView: View {
         Task {
             result = await skills.search(filters)
             saved = await skills.savedFilters()
-            if let chosen { card = await skills.card(chosen) }
+            if let chosen { await loadCard(chosen) }
+        }
+    }
+
+    private func loadCard(_ id: Int) async {
+        if let found = await skills.card(id) {
+            card = found
+            lastShown = found.row
+            isGone = false
+        } else if let last = lastShown, let next = await skills.locate(last), next != id {
+            section = .skills(next)
+        } else {
+            card = nil
+            isGone = true
         }
     }
 

@@ -128,6 +128,11 @@ final class SkillStore {
         await worker.run { try? $0.preview(id, file: file) }
     }
 
+    /// The entry that stands for a skill now: the same content, or else the same name.
+    func locate(_ row: SkillCatalog.Row) async -> Int? {
+        await worker.run { try? $0.locate(contentHash: row.contentHash, name: row.name, kind: row.kind) }
+    }
+
     func facets() async -> SkillCatalog.Facets {
         await worker.run { (try? $0.facets()) ?? SkillCatalog.Facets() }
     }

@@ -10373,6 +10373,82 @@
         }
       }
     },
+    "Этого скилла больше нет: его убрали или он изменился.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم تعد هذه المهارة موجودة: أُزيلت أو تغيّرت."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diesen Skill gibt es nicht mehr: Er wurde entfernt oder hat sich geändert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This skill is no longer here: it was removed or it changed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta skill ya no está: se quitó o cambió."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce skill n’existe plus : il a été retiré ou il a changé."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill ini sudah tidak ada: dihapus atau berubah."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questa skill non c’è più: è stata rimossa o è cambiata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このスキルはもうありません。取り外されたか、変更されました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 스킬은 더 이상 없습니다. 제거되었거나 바뀌었습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tego skilla już nie ma: usunięto go albo się zmienił."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta skill não existe mais: foi removida ou mudou."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Цього скіла більше немає: його прибрали або він змінився."
+          }
+        }
+      }
+    },
     "Эту папку читают и: %@": {
       "localizations": {
         "ar": {

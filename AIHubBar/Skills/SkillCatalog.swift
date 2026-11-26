@@ -576,6 +576,18 @@ final class SkillCatalog {
         return Result(rows: rows, total: byVerdict.values.reduce(0, +), byVerdict: byVerdict)
     }
 
+    /// The entry that stands for a skill whose id is gone (a change on disk, an install, an update): the one with the
+    /// same content, or else the installed one of the same kind and name.
+    func locate(contentHash: String, name: String, kind: String) throws -> Int? {
+        if let id = try db.first("SELECT min(id) FROM skills WHERE content_hash = ?1 AND kind = ?2", .text(contentHash), .text(kind), map: { $0.optionalInt(0) }) ?? nil {
+            return id
+        }
+        return try db.first("""
+            SELECT s.id FROM skills s WHERE s.kind = ?1 AND s.name = ?2
+            ORDER BY EXISTS (SELECT 1 FROM installations i WHERE i.skill_id = s.id) DESC, s.id LIMIT 1
+            """, .text(kind), .text(name), map: { $0.int(0) })
+    }
+
     /// What the filter's lists offer: the licenses, authors and places the catalog has.
     struct Facets: Equatable, Sendable {
         var licenses: [String] = []

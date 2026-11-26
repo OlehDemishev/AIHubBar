@@ -258,6 +258,10 @@ struct SkillManageTests {
         try world.catalog.restore(back.journalID, place)
         #expect(world.exists(".claude/skills/notes/scripts/run.sh"))
         #expect(try world.actions() == ["install", "update", "restore", "restore"])
+        // The card that showed the old version finds the new one.
+        let located = try #require(try world.catalog.locate(contentHash: "gone", name: "notes", kind: "skill"))
+        #expect(try world.catalog.card(located)?.row.name == "notes")
+        #expect(try world.catalog.locate(contentHash: "gone", name: "nothing", kind: "skill") == nil)
     }
 
     @Test func anUpdateSaysWhenTheCopyWasEditedByHand() throws {

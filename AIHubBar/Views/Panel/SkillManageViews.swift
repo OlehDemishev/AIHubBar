@@ -130,7 +130,7 @@ struct SkillManageBox: View {
                 .buttonStyle(.borderless)
                 .help(String(localized: "Показать в Finder"))
             }
-            if removing == place.installPath {
+            if removing == place.installPath, isFirstOfFolder {
                 HStack(spacing: 6) {
                     Text("Папка уйдёт в резервные копии каталога, вернуть её можно из журнала.")
                         .scaledFont(.caption2).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
