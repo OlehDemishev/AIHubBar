@@ -154,6 +154,22 @@ final class SessionStore {
         return Array(sessions.sorted { $0.updatedAt > $1.updatedAt }.prefix(SessionRules.resumableCount))
     }
 
+    /// True when `pid` has a child process that started after `date` and is still there: the agent is waiting for a
+    /// command it ran. Helpers the agent keeps from its start (MCP servers) are older than its last sign of life.
+    nonisolated static func hasChildProcess(of pid: Int32, startedAfter date: Date) -> Bool {
+        guard pid > 0 else { return false }
+        var children = [pid_t](repeating: 0, count: 256)
+        let bytes = proc_listpids(UInt32(PROC_PPID_ONLY), UInt32(pid), &children, Int32(children.count * MemoryLayout<pid_t>.size))
+        guard bytes > 0 else { return false }
+        let size = Int32(MemoryLayout<proc_bsdinfo>.size)
+        return children.prefix(Int(bytes) / MemoryLayout<pid_t>.size).contains { child in
+            var info = proc_bsdinfo()
+            guard child > 0, proc_pidinfo(child, PROC_PIDTBSDINFO, 0, &info, size) == size else { return false }
+            // The start is kept in whole seconds, the hook's time too: the same second counts as after.
+            return TimeInterval(info.pbi_start_tvsec) >= date.timeIntervalSince1970.rounded(.down)
+        }
+    }
+
     /// True when `pid` exists and is still an agent's executable — Claude Code, Copilot or Codex CLI (guards against PID reuse).
     nonisolated static func isClaudeProcessAlive(_ pid: Int32) -> Bool {
         guard pid > 0 else { return false }
@@ -240,7 +256,10 @@ final class SessionStore {
 
     /// Once per quiet stretch and once per repeated command.
     private func announceStuck(_ items: [Item]) {
-        for alert in stuck.evaluate(items.map { ($0.session, $0.state) }) {
+        let alerts = stuck.evaluate(items.map { ($0.session, $0.state) }) { session, last in
+            session.claudePID.map { Self.hasChildProcess(of: $0, startedAfter: last) } ?? false
+        }
+        for alert in alerts {
             guard let session = items.first(where: { $0.id == alert.sessionID })?.session else { continue }
             Notifier.post(id: "stuck-\(session.id)", title: StuckWatch.title(session), body: StuckWatch.body(alert.reason),
                           target: .session(id: session.id))

@@ -32,6 +32,44 @@ struct StuckWatchTests {
         #expect(watch.evaluate([(moved, .running)], now: later.addingTimeInterval(20 * 60)).count == 1)
     }
 
+    @Test func aLongCommandGetsAnHour() throws {
+        var watch = StuckWatch()
+        let s = try session(tool: "Edit", toolAt: start, updated: start)
+        var asked: [Date] = []
+        let building: (Session, Date) -> Bool = { _, last in asked.append(last); return true }
+        #expect(watch.evaluate([(s, .running)], now: start.addingTimeInterval(10 * 60), isRunningCommand: building).isEmpty)
+        #expect(asked.isEmpty)
+        #expect(watch.evaluate([(s, .running)], now: start.addingTimeInterval(25 * 60), isRunningCommand: building).isEmpty)
+        #expect(asked == [start])
+        #expect(watch.evaluate([(s, .running)], now: start.addingTimeInterval(59 * 60), isRunningCommand: building).isEmpty)
+        #expect(watch.evaluate([(s, .running)], now: start.addingTimeInterval(61 * 60), isRunningCommand: building)
+            == [StuckWatch.Alert(sessionID: "s", reason: .quiet(minutes: 61))])
+        #expect(watch.evaluate([(s, .running)], now: start.addingTimeInterval(90 * 60), isRunningCommand: building).isEmpty)
+    }
+
+    @Test func aCommandThatEndedIsQuietAgain() throws {
+        var watch = StuckWatch()
+        let s = try session(tool: "Edit", toolAt: start, updated: start)
+        #expect(watch.evaluate([(s, .running)], now: start.addingTimeInterval(25 * 60)) { _, _ in true }.isEmpty)
+        // The build is over, the agent still says nothing.
+        #expect(watch.evaluate([(s, .running)], now: start.addingTimeInterval(30 * 60)) { _, _ in false }
+            == [StuckWatch.Alert(sessionID: "s", reason: .quiet(minutes: 30))])
+    }
+
+    @Test func childProcessStartedAfter() throws {
+        let before = Date.now.addingTimeInterval(-2)
+        let me = ProcessInfo.processInfo.processIdentifier
+        let sleep = Process()
+        sleep.executableURL = URL(fileURLWithPath: "/bin/sleep")
+        sleep.arguments = ["30"]
+        try sleep.run()
+        defer { sleep.terminate() }
+        #expect(SessionStore.hasChildProcess(of: me, startedAfter: before))
+        #expect(!SessionStore.hasChildProcess(of: me, startedAfter: .now.addingTimeInterval(3600)))
+        #expect(!SessionStore.hasChildProcess(of: sleep.processIdentifier, startedAfter: before))
+        #expect(!SessionStore.hasChildProcess(of: 0, startedAfter: before))
+    }
+
     @Test func oldQuietIsNotReplayedAtStart() throws {
         var watch = StuckWatch()
         let s = try session(updated: start)
