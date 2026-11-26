@@ -107,6 +107,8 @@ final class SkillCatalog {
         watchMigration,
         // Step 7: the AI review.
         reviewMigration,
+        // Step 8: named sets.
+        housekeepingMigration,
     ]
 
     init(path: String) throws {
@@ -367,6 +369,8 @@ final class SkillCatalog {
         var trustedOnly = false
         /// Only the skills a language model reviewed.
         var aiReviewed = false
+        /// Only the skills of this set.
+        var set: String?
         /// A license by name; an empty one means skills without a license.
         var license: String?
         var author: String?
@@ -391,13 +395,13 @@ final class SkillCatalog {
             plain.sort = .risk
             let all: [Bool] = [
                 plain.minRisk > 0 || plain.maxRisk < 100, !agents.isEmpty, !scopes.isEmpty, kind != nil, !findings.isEmpty, !can.isEmpty, !cannot.isEmpty,
-                noScripts, state != .any, usage != .any, withNote, blockedOnly, withReport, trustedOnly, aiReviewed, license != nil, author != nil, newWithinDays != nil,
+                noScripts, state != .any, usage != .any, withNote, blockedOnly, withReport, trustedOnly, aiReviewed, set != nil, license != nil, author != nil, newWithinDays != nil,
             ]
             return all.filter { $0 }.count
         }
 
         private enum CodingKeys: String, CodingKey {
-            case query, verdict, minRisk, maxRisk, agents, scopes, kind, findings, can, cannot, noScripts, state, usage, favoritesOnly, withNote, blockedOnly, withReport, trustedOnly, aiReviewed, license, author, newWithinDays, sort
+            case query, verdict, minRisk, maxRisk, agents, scopes, kind, findings, can, cannot, noScripts, state, usage, favoritesOnly, withNote, blockedOnly, withReport, trustedOnly, aiReviewed, set, license, author, newWithinDays, sort
         }
 
         init(from decoder: Decoder) throws {
@@ -425,6 +429,7 @@ final class SkillCatalog {
             withReport = ((try? c.decodeIfPresent(Bool.self, forKey: .withReport)) ?? nil) ?? false
             trustedOnly = ((try? c.decodeIfPresent(Bool.self, forKey: .trustedOnly)) ?? nil) ?? false
             aiReviewed = ((try? c.decodeIfPresent(Bool.self, forKey: .aiReviewed)) ?? nil) ?? false
+            set = string(.set)
             license = string(.license)
             author = string(.author)
             newWithinDays = int(.newWithinDays)
@@ -452,6 +457,7 @@ final class SkillCatalog {
             try c.encode(withReport, forKey: .withReport)
             try c.encode(trustedOnly, forKey: .trustedOnly)
             try c.encode(aiReviewed, forKey: .aiReviewed)
+            try c.encodeIfPresent(set, forKey: .set)
             try c.encodeIfPresent(license, forKey: .license)
             try c.encodeIfPresent(author, forKey: .author)
             try c.encodeIfPresent(newWithinDays, forKey: .newWithinDays)
@@ -560,6 +566,9 @@ final class SkillCatalog {
         if filters.withNote { sql.append("coalesce(m.note, '') <> ''") }
         if filters.blockedOnly { sql.append(Self.isBlockedSQL) }
         if filters.trustedOnly { sql.append(Self.trustedSQL) }
+        if let set = filters.set {
+            sql.append("EXISTS (SELECT 1 FROM skill_set_members g WHERE g.set_name = \(bind(set)) COLLATE NOCASE AND g.kind = s.kind AND g.name = s.name)")
+        }
         if filters.aiReviewed { sql.append("EXISTS (SELECT 1 FROM llm_reviews l WHERE l.content_hash = s.content_hash)") }
         if filters.withReport { sql.append("EXISTS (SELECT 1 FROM skill_reports p WHERE p.kind = s.kind AND p.name = s.name)") }
         if let license = filters.license {

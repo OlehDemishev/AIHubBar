@@ -247,6 +247,21 @@ struct SkillsBlockView: View {
                 .buttonStyle(.plain)
                 .help(String(localized: "Открыть скилл"))
             }
+            if summary.conflicts > 0 {
+                Button {
+                    skills.opensOrder = true
+                    openSection(nil)
+                } label: {
+                    HStack(spacing: 6) {
+                        Image(systemName: "exclamationmark.2").foregroundStyle(.orange)
+                        Text("Конфликты имён: \(summary.conflicts)").lineLimit(1)
+                        Spacer(minLength: 0)
+                    }
+                    .scaledFont(.caption)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+            }
             if summary.unseenChanges > 0 {
                 Button {
                     skills.opensChanges = true
@@ -301,7 +316,10 @@ struct SkillsBlockView: View {
                             .buttonStyle(.plain)
                         }
                     }
-                    Button { openSection(nil) } label: {
+                    Button {
+                        if summary.unused > 0 { skills.opensOrder = true }
+                        openSection(nil)
+                    } label: {
                         HStack(spacing: 4) {
                             Text(summary.unused > 0 ? String(localized: "Не использовались 30 дней: \(summary.unused)") : String(localized: "Все скиллы"))
                             Image(systemName: "chevron.right").scaledFont(.caption2, weight: .semibold)
@@ -341,6 +359,7 @@ struct SkillsSectionView: View {
     @State private var saved: [SkillCatalog.SavedFilter] = []
     @State private var showsFilters = false
     @State private var showsJournal = false
+    @State private var showsOrder = false
     /// The name being typed for «Сохранить фильтр»; nil while the field is hidden.
     @State private var savingName: String?
 
@@ -360,6 +379,15 @@ struct SkillsSectionView: View {
                 } else {
                     ProgressView().frame(maxWidth: .infinity)
                 }
+            } else if showsOrder {
+                SkillOrderView(openSkill: { id in
+                    showsOrder = false
+                    section = .skills(id)
+                }, showSet: { name in
+                    showsOrder = false
+                    filters = SkillCatalog.Filters()
+                    filters.set = name
+                })
             } else if showsJournal {
                 SkillJournalView { id in
                     showsJournal = false
@@ -381,6 +409,10 @@ struct SkillsSectionView: View {
             if skills.opensChanges {
                 skills.opensChanges = false
                 showsJournal = true
+            }
+            if skills.opensOrder {
+                skills.opensOrder = false
+                showsOrder = true
             }
         }
         .task(id: chosen) {
@@ -435,7 +467,19 @@ struct SkillsSectionView: View {
             Text("Скиллы").scaledFont(.callout, weight: .semibold)
             Spacer(minLength: 4)
             if chosen == nil {
-                Button { showsJournal.toggle() } label: {
+                Button {
+                    showsOrder.toggle()
+                    if showsOrder { showsJournal = false }
+                } label: {
+                    Image(systemName: "checklist").foregroundStyle(showsOrder ? Color.accentColor : Color.primary)
+                }
+                .buttonStyle(.borderless)
+                .frame(width: 18, height: 18)
+                .help(String(localized: "Порядок: конфликты, копии, неиспользуемые, наборы"))
+                Button {
+                    showsJournal.toggle()
+                    if showsJournal { showsOrder = false }
+                } label: {
                     Image(systemName: "clock.arrow.circlepath").foregroundStyle(showsJournal ? Color.accentColor : Color.primary)
                 }
                 .buttonStyle(.borderless)
@@ -495,6 +539,15 @@ struct SkillsSectionView: View {
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
+            }
+            if let set = filters.set {
+                HStack(spacing: 4) {
+                    Image(systemName: "square.stack")
+                    Text("Набор: \(set)")
+                    Button { filters.set = nil } label: { Image(systemName: "xmark.circle.fill") }.buttonStyle(.borderless)
+                }
+                .scaledFont(.caption)
+                .foregroundStyle(Color.accentColor)
             }
             if let name = savingName {
                 HStack(spacing: 6) {
@@ -905,6 +958,7 @@ struct SkillCardView: View {
             why(assessment)
             SkillAIReviewBox(card: card)
             noteEditor
+            SkillSetsRow(card: card)
             capabilities(assessment)
             if !assessment.advice.isEmpty { advice(assessment) }
             SkillManageBox(card: card)
