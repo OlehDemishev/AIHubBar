@@ -44,6 +44,10 @@ struct BackgroundRun: Codable, Identifiable, Equatable, Sendable {
     /// The branch this variant's worktree was merged into from the comparison window; nil while it was not.
     var mergedInto: String? = nil
 
+    /// What the run used, read from the end of its log when it finished. Nil for a run that ended without a word, and
+    /// for runs finished before the app kept it — «Журнал» then reads it from the log.
+    var usage: RunUsage? = nil
+
     var agentTitle: String { agent == CodexExec.agent ? AgentKind.codex.title : AgentKind.claudeCode.title }
 
     var isPaused: Bool { state == .running && pausedAt != nil }
@@ -55,6 +59,35 @@ struct BackgroundRun: Codable, Identifiable, Equatable, Sendable {
     func deadline(now: Date = .now) -> Date {
         let paused = (pausedSeconds ?? 0) + (pausedAt.map { now.timeIntervalSince($0) } ?? 0)
         return startedAt.addingTimeInterval(TimeInterval(timeLimitMinutes * 60) + paused)
+    }
+}
+
+/// Tokens and cost of one background run, as its agent reports them at the end of its log.
+struct RunUsage: Codable, Equatable, Sendable {
+    var input = 0
+    var output = 0
+    var cacheRead = 0
+    var cacheWrite = 0
+    /// Dollars at API prices as the agent counted them itself (Claude Code's `total_cost_usd`). Codex names none.
+    var cost: Double?
+
+    /// As everywhere in the app: without cache reads, which dwarf the rest.
+    var tokens: Int { input + output + cacheWrite }
+    var isEmpty: Bool { tokens + cacheRead == 0 && cost == nil }
+
+    /// The agent's own figure, or these tokens at the person's price for that provider (`UsageDay.cost`).
+    func cost(at price: APIPrice?) -> Double? {
+        if let cost { return cost }
+        guard let price else { return nil }
+        return UsageDay(day: "", input: input, output: output, cacheWrite: cacheWrite, cacheRead: cacheRead).cost(price)
+    }
+
+    /// «1,2 млн токенов · ≈ 1,70 $ по ценам API». On a subscription nothing is charged: the sum says what the same
+    /// work costs through the API.
+    func line(price: APIPrice?) -> String {
+        let tokens = String(localized: "\(TokenBreakdown.tokensText(tokens)) токенов")
+        guard let cost = cost(at: price), cost > 0 else { return tokens }
+        return tokens + " · " + String(localized: "≈ \(ModelPriceRow.money(cost)) по ценам API")
     }
 }
 
@@ -91,6 +124,35 @@ enum StreamJSON {
         }
         return nil
     }
+
+    /// What the run used: the last `result` event's `modelUsage` summed over its models (the main one and the small
+    /// ones it calls) and `total_cost_usd` (seen in real logs of 2.1.3xx, 2026-11-27); `usage` alone where there is no
+    /// `modelUsage`. A `codex exec` log: `CodexExec.usage`. Nil for a run that ended without the event.
+    static func usage(fromLog text: String) -> RunUsage? {
+        if let codex = CodexExec.usage(fromLog: text) { return codex }
+        for line in text.split(separator: "\n").reversed() {
+            guard line.contains("\"result\""), let event = object(line), event["type"] as? String == "result" else { continue }
+            var usage = RunUsage()
+            let models = (event["modelUsage"] as? [String: Any] ?? [:]).values.compactMap { $0 as? [String: Any] }
+            for model in models {
+                usage.input += count(model["inputTokens"])
+                usage.output += count(model["outputTokens"])
+                usage.cacheRead += count(model["cacheReadInputTokens"])
+                usage.cacheWrite += count(model["cacheCreationInputTokens"])
+            }
+            if models.isEmpty, let total = event["usage"] as? [String: Any] {
+                usage.input = count(total["input_tokens"])
+                usage.output = count(total["output_tokens"])
+                usage.cacheRead = count(total["cache_read_input_tokens"])
+                usage.cacheWrite = count(total["cache_creation_input_tokens"])
+            }
+            usage.cost = (event["total_cost_usd"] as? NSNumber)?.doubleValue
+            return usage.isEmpty ? nil : usage
+        }
+        return nil
+    }
+
+    static func count(_ value: Any?) -> Int { max(0, (value as? NSNumber)?.intValue ?? 0) }
 
     /// Assistant text, tool calls and the result as readable entries; other events are skipped.
     static func entries(fromLog text: String) -> [Entry] {

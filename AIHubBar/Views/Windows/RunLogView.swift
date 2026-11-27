@@ -10,6 +10,9 @@ struct RunLogView: View {
     @State private var hasVersion = false
     @State private var entries: [StreamJSON.Entry] = []
     @State private var followsEnd = true
+    @Environment(AppSettings.self) private var settings
+    /// Read from the log for a run finished before the app kept its usage.
+    @State private var logUsage: RunUsage?
 
     private var run: BackgroundRun? { runs.selectedLogRunID.flatMap(runs.run(id:)) }
 
@@ -28,16 +31,19 @@ struct RunLogView: View {
         .frame(minWidth: 480, minHeight: 320)
         .task(id: runs.selectedLogRunID) {
             hasVersion = false
+            logUsage = nil
             if let run, versions.isActive() { hasVersion = await versions.hasVersion(projectPath: run.projectPath, before: run.startedAt) }
         }
         .task(id: runs.selectedLogRunID) {
             while !Task.isCancelled {
                 if let run {
                     let url = run.logURL
-                    let parsed = await Task.detached(priority: .utility) {
-                        StreamJSON.entries(fromLog: (try? String(contentsOf: url, encoding: .utf8)) ?? "")
+                    let (parsed, usage) = await Task.detached(priority: .utility) {
+                        let text = (try? String(contentsOf: url, encoding: .utf8)) ?? ""
+                        return (StreamJSON.entries(fromLog: text), StreamJSON.usage(fromLog: text))
                     }.value
                     if parsed != entries { entries = parsed }
+                    if usage != logUsage { logUsage = usage }
                     if run.state.isFinished, !entries.isEmpty { break }
                 }
                 try? await Task.sleep(for: .seconds(2))
@@ -55,6 +61,13 @@ struct RunLogView: View {
                     Text(run.state.title).foregroundStyle(run.state.color)
                     Text(run.startedAt.formatted(date: .abbreviated, time: .shortened))
                     if let branch = run.worktreeBranch { Text(branch).monospaced() }
+                    if let usage = run.usage ?? logUsage {
+                        // Codex names no cost: the person's own OpenAI price, when there is one.
+                        let provider = run.agent == CodexExec.agent ? APIProvider.openai : .anthropic
+                        Text(verbatim: usage.line(price: settings.aiServices.prices[provider.rawValue]))
+                            .monospacedDigit()
+                            .help("Сколько токенов ушло на задачу и что тот же объём стоит через API. По подписке за задачу ничего не списывается.")
+                    }
                 }
                 .font(.caption)
                 .foregroundStyle(.secondary)
