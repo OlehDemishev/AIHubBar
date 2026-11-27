@@ -58,6 +58,23 @@ enum CodexExec {
         return nil
     }
 
+    /// The tokens of the run: `usage` of every `turn.completed` — `input_tokens` (cached ones included),
+    /// `cached_input_tokens`, `output_tokens`. Codex names no cost. Nil for a log without such an event.
+    static func usage(fromLog text: String) -> RunUsage? {
+        var sum: RunUsage?
+        for line in text.split(separator: "\n") where line.contains("\"turn.completed\"") {
+            guard let event = StreamJSON.object(line), event["type"] as? String == "turn.completed",
+                  let usage = event["usage"] as? [String: Any] else { continue }
+            var total = sum ?? RunUsage()
+            let cached = StreamJSON.count(usage["cached_input_tokens"])
+            total.input += max(0, StreamJSON.count(usage["input_tokens"]) - cached)
+            total.cacheRead += cached
+            total.output += StreamJSON.count(usage["output_tokens"])
+            sum = total
+        }
+        return sum.flatMap { $0.isEmpty ? nil : $0 }
+    }
+
     /// The turn's end: its last message as the result, or the error. Nil for a log that is not Codex's or has no end.
     static func outcome(fromLog text: String) -> StreamJSON.Outcome? {
         var message: String?

@@ -196140,6 +196140,386 @@
           }
         }
       }
+    },
+    "%@ токенов": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tokens"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ токенів"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Tokens"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ jetons"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tokens"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ token"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tokens"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tokenów"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@トークン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 토큰"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ رمز"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ token"
+          }
+        }
+      }
+    },
+    "≈ %@ по ценам API": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@ at API prices"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@ за цінами API"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@ zu API-Preisen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@ aux prix de l’API"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@ a precios de API"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@ ai prezzi API"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@ a preços de API"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@ po cenach API"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API価格で約%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API 가격으로 약 %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@ بأسعار API"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@ dengan harga API"
+          }
+        }
+      }
+    },
+    "Сколько токенов ушло на задачу и что тот же объём стоит через API. По подписке за задачу ничего не списывается.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How many tokens the task used and what the same amount costs through the API. On a subscription nothing is charged per task."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скільки токенів пішло на завдання і скільки той самий обсяг коштує через API. За підпискою за завдання нічого не списується."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wie viele Tokens die Aufgabe verbraucht hat und was dieselbe Menge über die API kostet. Im Abo wird pro Aufgabe nichts berechnet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combien de jetons la tâche a utilisés et ce que le même volume coûte via l’API. Avec un abonnement, rien n’est facturé par tâche."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuántos tokens usó la tarea y cuánto cuesta el mismo volumen a través de la API. Con una suscripción no se cobra nada por tarea."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quanti token ha usato l’attività e quanto costa lo stesso volume tramite API. Con un abbonamento non viene addebitato nulla per attività."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quantos tokens a tarefa usou e quanto custa o mesmo volume pela API. Na assinatura nada é cobrado por tarefa."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ile tokenów zużyło zadanie i ile ta sama ilość kosztuje przez API. W subskrypcji za zadanie nic nie jest pobierane."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タスクに使ったトークン数と、同じ量をAPI経由で使った場合の費用です。サブスクリプションではタスクごとの請求はありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "작업에 쓴 토큰 수와 같은 양을 API로 썼을 때의 비용입니다. 구독에서는 작업별로 청구되지 않습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عدد الرموز التي استهلكتها المهمة وكم يكلّف الحجم نفسه عبر API. في الاشتراك لا يُخصم شيء عن كل مهمة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berapa token yang dipakai tugas dan berapa biaya jumlah yang sama lewat API. Dengan langganan tidak ada tagihan per tugas."
+          }
+        }
+      }
+    },
+    "Расход задачи": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What a task used"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Витрата завдання"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbrauch einer Aufgabe"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consommation d’une tâche"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consumo de una tarea"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consumo di un’attività"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consumo de uma tarefa"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zużycie zadania"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タスクの使用量"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "작업 사용량"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استهلاك المهمة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemakaian tugas"
+          }
+        }
+      }
+    },
+    "В окне «Журнал» у фоновой задачи видно, сколько токенов на неё ушло и что тот же объём стоит через API: у Claude Code — его собственная оценка, у Codex — по вашей цене OpenAI из «Сервисов AI». По подписке за задачу ничего не списывается.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “Log” window of a background task shows how many tokens it used and what the same amount costs through the API: for Claude Code its own estimate, for Codex your OpenAI price from “AI Services”. On a subscription nothing is charged per task."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У вікні «Журнал» фонового завдання видно, скільки токенів на нього пішло і скільки той самий обсяг коштує через API: у Claude Code — його власна оцінка, у Codex — за вашою ціною OpenAI із «Сервісів AI». За підпискою за завдання нічого не списується."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Fenster „Protokoll“ einer Hintergrundaufgabe zeigt, wie viele Tokens sie verbraucht hat und was dieselbe Menge über die API kostet: bei Claude Code dessen eigene Schätzung, bei Codex Ihr OpenAI-Preis aus „AI-Dienste“. Im Abo wird pro Aufgabe nichts berechnet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fenêtre « Journal » d’une tâche en arrière-plan montre combien de jetons elle a utilisés et ce que le même volume coûte via l’API : pour Claude Code sa propre estimation, pour Codex votre prix OpenAI dans « Services IA ». Avec un abonnement, rien n’est facturé par tâche."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La ventana «Registro» de una tarea en segundo plano muestra cuántos tokens usó y cuánto cuesta el mismo volumen a través de la API: en Claude Code su propia estimación, en Codex su precio de OpenAI de «Servicios de IA». Con una suscripción no se cobra nada por tarea."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La finestra «Registro» di un’attività in background mostra quanti token ha usato e quanto costa lo stesso volume tramite API: per Claude Code la sua stima, per Codex il tuo prezzo OpenAI in «Servizi AI». Con un abbonamento non viene addebitato nulla per attività."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A janela “Registro” de uma tarefa em segundo plano mostra quantos tokens ela usou e quanto custa o mesmo volume pela API: no Claude Code a estimativa dele, no Codex seu preço da OpenAI em “Serviços de IA”. Na assinatura nada é cobrado por tarefa."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Okno „Dziennik” zadania w tle pokazuje, ile tokenów zużyło i ile ta sama ilość kosztuje przez API: dla Claude Code jego własny szacunek, dla Codex Twoja cena OpenAI z „Usług AI”. W subskrypcji za zadanie nic nie jest pobierane."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンドタスクの「ログ」ウインドウに、使ったトークン数と、同じ量をAPI経由で使った場合の費用が表示されます。Claude Codeは自身の見積もり、Codexは「AIサービス」で設定したOpenAIの価格で計算します。サブスクリプションではタスクごとの請求はありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 작업의 ‘로그’ 창에 사용한 토큰 수와 같은 양을 API로 썼을 때의 비용이 표시됩니다. Claude Code는 자체 추정값, Codex는 ‘AI 서비스’에 입력한 OpenAI 가격으로 계산합니다. 구독에서는 작업별로 청구되지 않습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نافذة «السجل» لمهمة في الخلفية تعرض عدد الرموز التي استهلكتها وكم يكلّف الحجم نفسه عبر API: في Claude Code تقديره هو، وفي Codex بسعر OpenAI الذي أدخلته في «خدمات AI». في الاشتراك لا يُخصم شيء عن كل مهمة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jendela “Log” tugas latar belakang menampilkan berapa token yang dipakai dan berapa biaya jumlah yang sama lewat API: untuk Claude Code perkiraannya sendiri, untuk Codex harga OpenAI Anda dari “Layanan AI”. Dengan langganan tidak ada tagihan per tugas."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

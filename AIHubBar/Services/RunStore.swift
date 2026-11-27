@@ -227,6 +227,7 @@ final class RunStore {
             run.state = outcome.map { $0.isError ? .failed : .succeeded } ?? .failed
         }
         run.finishedAt = .now
+        run.usage = StreamJSON.usage(fromLog: log)
         if run.threadID == nil { run.threadID = CodexExec.threadID(fromLog: log) }
         run.summary = StreamJSON.summary(outcome?.result) ?? (outcome == nil && run.state == .failed
             ? (run.agent == nil ? String(localized: "Claude завершился без результата — см. журнал")
