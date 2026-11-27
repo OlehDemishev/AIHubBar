@@ -1,6 +1,6 @@
 cask "ai-hub-bar" do
-  version "0.15.0"
-  sha256 "e1da9c77e1851d013af1a3d8608f415b7f43dd79dc77cf8f061a91adf4782399"
+  version "0.15.1"
+  sha256 "ee7a0f8ce5051de836b656a40be255b6ffea2a0a3d8f986a742dd4ced09d4508"
 
   url "https://github.com/OlehDemishev/AIHubBar/releases/download/v#{version}/AIHubBar-#{version}.dmg"
   name "AI Hub Bar"
