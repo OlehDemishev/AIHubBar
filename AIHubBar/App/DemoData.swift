@@ -18,7 +18,7 @@ struct DemoData {
     /// The release this data was last brought up to date for; the same value as `WhatsNew.version`, and a test keeps
     /// the two equal. A release with news changes `WhatsNew.version`, the test fails, and whoever makes the release
     /// adds what the new version should show here (docs/RELEASE.md → «Demo») before raising this.
-    static let version = "0.14"
+    static let version = "0.15"
 
     /// Sample skills for the «Скиллы» block and section (0.14), written into the copy's own home: two safe ones, one to
     /// review, one dangerous. Harmless by design: every address is example.com and nothing here does real work.
@@ -217,7 +217,7 @@ struct DemoData {
 
     static func runs(now: Date) -> [BackgroundRun] {
         func path(_ project: String) -> String { "\(projectsDirectory)/\(project)" }
-        return [
+        var runs: [BackgroundRun] = [
             BackgroundRun(
                 id: "demo-run-1", project: "atlas-api", projectPath: path("atlas-api"), folder: path("atlas-api"),
                 worktreeBranch: "chore/update-dependencies", commandTitle: "Task",
@@ -253,6 +253,11 @@ struct DemoData {
                 pullRequestURL: nil, notified: true, resultFile: nil, agent: CodexExec.agent, pair: "demo-pair-1"
             ),
         ]
+        // 0.15: what a finished task used — Claude Code names its own cost, Codex only its tokens.
+        runs[1].usage = RunUsage(input: 18_400, output: 9_200, cacheRead: 1_240_000, cacheWrite: 96_000, cost: 1.12)
+        runs[2].usage = RunUsage(input: 22_100, output: 11_800, cacheRead: 860_000, cacheWrite: 74_000, cost: 0.94)
+        runs[3].usage = RunUsage(input: 412_000, output: 14_600, cacheRead: 690_000)
+        return runs
     }
 
     static func log(of run: BackgroundRun) -> String {
