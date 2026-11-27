@@ -270,6 +270,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-27 — Release 0.15.1 prepared (branch `chore/release-0.15.1`)
+
+Done: on Oleh's «Выпусти 0,15,1»: `docs/release-notes/0.15.1.md` — the Claude account's synced skills in the catalog (#684). What's New stays 0.15 (a fix, no news), the demo too.
+Checked: since v0.15.0 the app's code changed only in #684 (`SkillDiscovery`, one label).
+Left: publishing.
+
 ## 2026-11-27 — Checked the installed 0.15.0; synced account skills (branch `fix/mac-skills-synced`)
 
 Done: on Oleh's «Зайди и проверь все функции» — the installed 0.15.0 driven through `--app-command` and accessibility. Works: the panel and What's New 0.15, the Skills section (14 skills), «Найти по смыслу с AI» (8 s, six browser skills), «Открытые источники» (911, filled by itself), Settings → Скиллы («Вход в GitHub», «Помощь модели»), «Сессии на других компьютерах» (beta) in Settings, «Экономика AI» with «Ваши 30 дней» counted, `AIHubBar --mcp` (limits match the panel). Found: Claude Code keeps the skills of the Claude account two levels down, `~/.claude/skills/synced/<id>/<skill>`, and the catalog never saw them (13 on this Mac, unchecked; built-in-browser had no verdict in the block). Fixed: `SkillDiscovery` lists them with the scope `synced` («из аккаунта Claude»), for Claude Code only; the card shows «Показать в Finder» but no switch or remove for that place. SPEC «Where skills are found»; 1 new string in 12 languages.
