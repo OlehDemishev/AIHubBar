@@ -64,6 +64,20 @@ struct SkillCatalogTests {
         #expect(named("1.0.0")?.listedName == "plug@market")
     }
 
+    @Test func theClaudeAccountsSyncedSkillsAreFoundAndLeftToTheSync() throws {
+        let home = Home()
+        let account = ".claude/skills/synced/4a2fd60c_2b14dc17"
+        home.skill(account, "pdf")
+        home.skill(account, "docx")
+        home.write("\(account)/manifest.json", #"{"lastUpdated": "2026-11-27", "skills": []}"#)
+        home.skill(".claude/skills", "mine")
+        let found = SkillDiscovery.discover(home.roots)
+        func named(_ name: String) -> FoundSkill? { found.first { ($0.folder as NSString).lastPathComponent == name } }
+        #expect(found.count == 3, "the account folder itself is not a skill")
+        #expect(named("pdf")?.places.map(\.scope) == ["synced"] && named("pdf")?.places.map(\.agent) == [.claude])
+        #expect(named("mine")?.places.first?.scope == "user")
+    }
+
     @Test func aSkillLinkedIntoTwoAgentsIsOneEntry() throws {
         let home = Home()
         home.skill(".agents/skills", "shared")

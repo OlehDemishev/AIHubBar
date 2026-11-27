@@ -5,6 +5,7 @@
 **Updated:** 2026-11-27
 
 **Now:**
+- 2026-11-27: Mac — Skills Catalog finds the skills of the person's Claude account (`~/.claude/skills/synced/<id>/…`, 13 on Oleh's Mac: pdf, docx, skill-creator…), found missing while checking the installed 0.15.0 (branch `fix/mac-skills-synced`) — PR open, waiting for Oleh's word
 - 2026-11-27: Mac — **0.15.0 published** to everyone on Oleh's «релиз» (out of the Tuesday schedule, on his word): everything merged since 0.14.0 — the Skills work (#656, #658, #662, #672, #677, #680), AI economics (#664), Stop All (#668), a task's cost (#670), sessions on other computers (#665, beta), the MCP server (#675), the notch's ears (#663); notes, What's New and the demo in #682; build 1623, signed and notarized, the beta channel moved too; https://github.com/OlehDemishev/AIHubBar/releases/tag/v0.15.0
 - 2026-11-27: Mac — Skills Catalog, three small ones: «Переводить описания сразу» (Settings → Скиллы → «Помощь модели»), a project's picks remembered for the same stack with «Подобрать заново», optional «Вход в GitHub» with the person's token (5,000 requests an hour, the token only to api.github.com) — merged as PR #680 on Oleh's «Да, вливай» (seen live in an isolated copy, sign-in with a real token not), not in a build yet
 - 2026-11-27: Mac — Skills Catalog: «Скиллы» in a project's card: the project's languages, tools and package names are read on this Mac and the person's model picks skills for it from the catalog and the open sources index, with a line on why — merged as PR #677 on Oleh's «Да, вливай» (seen live in an isolated copy), not in a build yet
@@ -268,6 +269,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-27 — Checked the installed 0.15.0; synced account skills (branch `fix/mac-skills-synced`)
+
+Done: on Oleh's «Зайди и проверь все функции» — the installed 0.15.0 driven through `--app-command` and accessibility. Works: the panel and What's New 0.15, the Skills section (14 skills), «Найти по смыслу с AI» (8 s, six browser skills), «Открытые источники» (911, filled by itself), Settings → Скиллы («Вход в GitHub», «Помощь модели»), «Сессии на других компьютерах» (beta) in Settings, «Экономика AI» with «Ваши 30 дней» counted, `AIHubBar --mcp` (limits match the panel). Found: Claude Code keeps the skills of the Claude account two levels down, `~/.claude/skills/synced/<id>/<skill>`, and the catalog never saw them (13 on this Mac, unchecked; built-in-browser had no verdict in the block). Fixed: `SkillDiscovery` lists them with the scope `synced` («из аккаунта Claude»), for Claude Code only; the card shows «Показать в Finder» but no switch or remove for that place. SPEC «Where skills are found»; 1 new string in 12 languages.
+Checked: `scripts/check.sh` green; a new test (the account folder is not a skill, its skills are `synced`, the person's own stay `user`); live in an isolated copy with a copy of the synced folder: the catalog grew to 58 with pdf, docx, skill-creator, built-in-browser («Безопасно»), the card's synced place without switch or remove.
+Left: not checked on the installed app — «Скиллы» in a project's card (the Projects block is off in Oleh's profile), a task's cost in «Журнал» (no background task since 2026-11-09), «Остановить все» (needs two running tasks), sessions over SSH (no machine), the ears at a real notch (Mac mini has none). dataviz, used in sessions, is built into Claude Code and has no folder: it stays without a verdict.
 
 ## 2026-11-27 — Release 0.15.0 published (branch `chore/release-0.15.0-published`)
 
