@@ -63,6 +63,10 @@ struct SessionsView: View {
     var resumable: [Session] = []
     @AppStorage(StorageKey.recentSessionsExpanded) private var showsResumable = false
     @Environment(LaunchController.self) private var launcher
+    @Environment(RunStore.self) private var runs
+    @Environment(BatchRunner.self) private var batches
+    /// «Остановить все» was pressed once and waits for the second click, as a row's own stop does.
+    @State private var confirmingStopAll = false
 
     private var waiting: Int { rows.filter { $0.state == .waiting }.count }
     /// Finished rows stay listed for a while and aren't counted.
@@ -85,6 +89,9 @@ struct SessionsView: View {
                         .scaledFont(.caption, weight: .medium)
                         .foregroundStyle(.orange)
                 }
+                Spacer(minLength: 0)
+                // One task has its own stop button in its row; this is for stopping several at once.
+                if runs.running.count >= 2 { stopAll }
             }
             .padding(.horizontal, 6)
             .padding(.vertical, 4)
@@ -128,6 +135,43 @@ struct SessionsView: View {
             }
         }
         .padding(4)
+    }
+}
+
+extension SessionsView {
+    /// The first click asks, the second stops — no dialog: a sheet over the menu bar panel closes it.
+    @ViewBuilder fileprivate var stopAll: some View {
+        Group {
+            if confirmingStopAll {
+                Button {
+                    confirmingStopAll = false
+                    batches.cancelAll()
+                    runs.stopAll()
+                } label: {
+                    Text("Остановить все?")
+                        .scaledFont(.caption, weight: .semibold)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 7)
+                        .padding(.vertical, 2)
+                        .background(Capsule().fill(Color.red))
+                }
+                .help("Нажмите ещё раз, чтобы остановить все фоновые задачи и пакеты. Запуски в очереди останутся.")
+            } else {
+                Button {
+                    withAnimation(panelCalm ? nil : .snappy(duration: 0.15)) { confirmingStopAll = true }
+                    Task {
+                        try? await Task.sleep(for: .seconds(4))
+                        withAnimation(panelCalm ? nil : .snappy(duration: 0.15)) { confirmingStopAll = false }
+                    }
+                } label: {
+                    Label("Остановить все фоновые задачи", systemImage: "stop.circle").labelStyle(.iconOnly)
+                }
+                .foregroundStyle(.red)
+                .help("Остановить все фоновые задачи")
+            }
+        }
+        .buttonStyle(.borderless)
+        .scaledFont(.callout)
     }
 }
 

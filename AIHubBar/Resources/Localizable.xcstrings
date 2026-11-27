@@ -195761,6 +195761,386 @@
         }
       }
     },
+    "Остановить все?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop all?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зупинити всі?"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle stoppen?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout arrêter ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Detener todas?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermare tutte?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parar todas?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatrzymać wszystkie?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべて停止しますか？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모두 중지할까요?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف الكل؟"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hentikan semua?"
+          }
+        }
+      }
+    },
+    "Остановить все фоновые задачи": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop all background tasks"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зупинити всі фонові завдання"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Hintergrundaufgaben stoppen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêter toutes les tâches en arrière-plan"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detener todas las tareas en segundo plano"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ferma tutte le attività in background"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parar todas as tarefas em segundo plano"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatrzymaj wszystkie zadania w tle"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてのバックグラウンドタスクを停止"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모든 백그라운드 작업 중지"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف كل المهام في الخلفية"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hentikan semua tugas latar belakang"
+          }
+        }
+      }
+    },
+    "Нажмите ещё раз, чтобы остановить все фоновые задачи и пакеты. Запуски в очереди останутся.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click again to stop all background tasks and batches. Queued launches stay."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Натисніть ще раз, щоб зупинити всі фонові завдання й пакети. Запуски в черзі залишаться."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klicken Sie erneut, um alle Hintergrundaufgaben und Stapel zu stoppen. Starts in der Warteschlange bleiben."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cliquez de nouveau pour arrêter toutes les tâches en arrière-plan et les lots. Les lancements en file d’attente restent."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haga clic otra vez para detener todas las tareas en segundo plano y los lotes. Los lanzamientos en cola se mantienen."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fai clic di nuovo per fermare tutte le attività in background e i lotti. Gli avvii in coda restano."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clique de novo para parar todas as tarefas em segundo plano e os lotes. Os lançamentos na fila permanecem."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kliknij ponownie, aby zatrzymać wszystkie zadania w tle i pakiety. Uruchomienia w kolejce zostaną."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "もう一度クリックすると、すべてのバックグラウンドタスクとバッチを停止します。キューに入っている起動は残ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 클릭하면 모든 백그라운드 작업과 배치를 중지합니다. 대기열의 실행은 그대로 남습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انقر مرة أخرى لإيقاف كل المهام في الخلفية والدُفعات. التشغيلات المنتظرة في القائمة تبقى."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klik lagi untuk menghentikan semua tugas latar belakang dan batch. Peluncuran dalam antrean tetap ada."
+          }
+        }
+      }
+    },
+    "Остановить все": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop All"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зупинити всі"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle stoppen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout arrêter"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detener todas"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ferma tutte"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parar todas"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatrzymaj wszystkie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべて停止"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모두 중지"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف الكل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hentikan semua"
+          }
+        }
+      }
+    },
+    "Когда фоновых задач две и больше, в заголовке блока появляется красная кнопка: первое нажатие спрашивает, второе останавливает все фоновые задачи и пакеты. Запуски в очереди остаются.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With two or more background tasks, a red button appears in the block's header: the first click asks, the second stops all background tasks and batches. Queued launches stay."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коли фонових завдань два й більше, у заголовку блоку з’являється червона кнопка: перше натискання питає, друге зупиняє всі фонові завдання й пакети. Запуски в черзі залишаються."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei zwei oder mehr Hintergrundaufgaben erscheint in der Kopfzeile des Blocks eine rote Taste: Der erste Klick fragt nach, der zweite stoppt alle Hintergrundaufgaben und Stapel. Starts in der Warteschlange bleiben."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec deux tâches en arrière-plan ou plus, un bouton rouge apparaît dans l’en-tête du bloc : le premier clic demande, le second arrête toutes les tâches en arrière-plan et les lots. Les lancements en file d’attente restent."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con dos o más tareas en segundo plano, aparece un botón rojo en el encabezado del bloque: el primer clic pregunta, el segundo detiene todas las tareas en segundo plano y los lotes. Los lanzamientos en cola se mantienen."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con due o più attività in background, nell’intestazione del blocco compare un pulsante rosso: il primo clic chiede, il secondo ferma tutte le attività in background e i lotti. Gli avvii in coda restano."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com duas ou mais tarefas em segundo plano, aparece um botão vermelho no cabeçalho do bloco: o primeiro clique pergunta, o segundo para todas as tarefas em segundo plano e os lotes. Os lançamentos na fila permanecem."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gdy zadań w tle jest dwa lub więcej, w nagłówku bloku pojawia się czerwony przycisk: pierwsze kliknięcie pyta, drugie zatrzymuje wszystkie zadania w tle i pakiety. Uruchomienia w kolejce zostają."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンドタスクが2つ以上あると、ブロックの見出しに赤いボタンが表示されます。1回目のクリックで確認し、2回目ですべてのバックグラウンドタスクとバッチを停止します。キューに入っている起動は残ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 작업이 둘 이상이면 블록 제목에 빨간 버튼이 나타납니다. 첫 클릭은 확인을 묻고, 두 번째 클릭은 모든 백그라운드 작업과 배치를 중지합니다. 대기열의 실행은 그대로 남습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عند وجود مهمتين أو أكثر في الخلفية يظهر زر أحمر في عنوان القسم: النقرة الأولى تسأل، والثانية توقف كل المهام في الخلفية والدُفعات. التشغيلات المنتظرة في القائمة تبقى."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dengan dua tugas latar belakang atau lebih, tombol merah muncul di judul blok: klik pertama bertanya, klik kedua menghentikan semua tugas latar belakang dan batch. Peluncuran dalam antrean tetap ada."
+          }
+        }
+      }
+    },
     "%@: отслеживание AI Hub Bar с того компьютера тоже снимается, если он на связи.": {
       "localizations": {
         "en": {

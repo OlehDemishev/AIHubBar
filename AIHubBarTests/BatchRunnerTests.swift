@@ -169,6 +169,27 @@ struct BatchRunnerTests {
         #expect(!bench.runner.batches.contains { $0.id == later.id })
     }
 
+    @Test func stopAllDropsWhatHasNotStartedInEveryBatch() async throws {
+        let bench = try Bench()
+        defer { bench.cleanUp() }
+        bench.gated = true
+        let projects = try ["Кофе", "Чай", "Какао"].map(bench.project)
+        bench.runner.add(bench.template, projects: projects, mode: bench.mode, service: .api(.openai), text: nil, when: .now)
+        bench.runner.nightStart = { _ in .distantFuture }
+        let later = try #require(bench.runner.add(bench.template, projects: projects, mode: bench.mode, service: .api(.openai), text: nil, when: .night))
+        await bench.run { bench.gate.count == 1 }
+
+        bench.runner.cancelAll()
+        #expect(bench.runner.batches.count == 1 && !bench.runner.batches.contains { $0.id == later.id }, "a batch that had not begun goes away whole")
+        #expect(bench.runner.batches[0].items.map(\.name) == ["Кофе"], "the one at work is left to the run store")
+        bench.gated = false
+        bench.gate.removeFirst().resume()
+        await bench.run { bench.runner.batches.first?.isFinished ?? true }
+        #expect(bench.prompts.count == 1, "nothing else started")
+        bench.runner.cancelAll()
+        #expect(bench.runner.batches.count == 1, "a finished batch stays until it is dismissed")
+    }
+
     @Test func theQueueSurvivesARestart() async throws {
         let bench = try Bench()
         defer { bench.cleanUp() }
