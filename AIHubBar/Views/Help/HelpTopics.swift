@@ -297,6 +297,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
                 HelpFact("--usage · --token-usage", String(localized: "Лимиты подписки; расход по проектам.")),
                 HelpFact("--services · --services limits", String(localized: "Найденные агенты и ключи; лимиты других AI.")),
                 HelpFact("--app-command help|settings|assistant|usage-history|economics|quick-prompt", String(localized: "Открыть окно в запущенном приложении.")),
+                HelpFact("--mcp", String(localized: "MCP-сервер только для чтения: агент сам спрашивает лимиты, сессии и фоновые задачи. Подключить к Claude Code: claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp (путь — где лежит приложение).")),
                 HelpFact(String(localized: "--export-settings <файл.claudepult>"), String(localized: "Сохранить все настройки в файл.")),
             ], monospaced: true)]
         }

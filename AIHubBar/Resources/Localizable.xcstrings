@@ -199180,6 +199180,82 @@
           }
         }
       }
+    },
+    "MCP-сервер только для чтения: агент сам спрашивает лимиты, сессии и фоновые задачи. Подключить к Claude Code: claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp (путь — где лежит приложение).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A read-only MCP server: an agent asks for limits, sessions and background tasks itself. Connect to Claude Code: claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp (the path is where the app is)."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MCP-сервер лише для читання: агент сам питає ліміти, сесії та фонові завдання. Підключити до Claude Code: claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp (шлях — де лежить застосунок)."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein MCP-Server nur zum Lesen: Ein Agent fragt Limits, Sitzungen und Hintergrundaufgaben selbst ab. Mit Claude Code verbinden: claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp (der Pfad ist der Ort der App)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un serveur MCP en lecture seule : un agent demande lui-même les limites, les sessions et les tâches en arrière-plan. Connexion à Claude Code : claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp (le chemin est l’emplacement de l’app)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un servidor MCP de solo lectura: un agente pregunta por sí mismo los límites, las sesiones y las tareas en segundo plano. Conectar a Claude Code: claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp (la ruta es donde está la app)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un server MCP di sola lettura: un agente chiede da sé limiti, sessioni e attività in background. Collega a Claude Code: claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp (il percorso è dove si trova l’app)."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um servidor MCP somente leitura: um agente pergunta por conta própria os limites, as sessões e as tarefas em segundo plano. Conectar ao Claude Code: claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp (o caminho é onde o app está)."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serwer MCP tylko do odczytu: agent sam pyta o limity, sesje i zadania w tle. Podłącz do Claude Code: claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp (ścieżka to miejsce, w którym jest aplikacja)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "読み取り専用のMCPサーバーです。エージェントが自分でリミット、セッション、バックグラウンドタスクを問い合わせます。Claude Codeへの接続: claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp（パスはアプリのある場所）。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "읽기 전용 MCP 서버입니다. 에이전트가 한도, 세션, 백그라운드 작업을 직접 조회합니다. Claude Code에 연결: claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp (경로는 앱이 있는 위치)."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خادم MCP للقراءة فقط: يسأل الوكيل بنفسه عن الحدود والجلسات والمهام في الخلفية. الربط مع Claude Code: claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp (المسار هو مكان التطبيق)."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Server MCP hanya-baca: agen sendiri menanyakan limit, sesi, dan tugas latar belakang. Hubungkan ke Claude Code: claude mcp add aihubbar -- \"/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar\" --mcp (jalurnya adalah lokasi aplikasi)."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
