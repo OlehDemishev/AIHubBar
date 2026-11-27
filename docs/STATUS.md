@@ -5,6 +5,7 @@
 **Updated:** 2026-11-27
 
 **Now:**
+- 2026-11-27: Mac — Skills scanner rules 4: a Slack/Discord/Telegram webhook with a placeholder for its secret (`T.../xxx`, `<token>`, `YOUR_…`) is no exfiltration endpoint; zxkane/aws-skills' `aws-agentic-ai` reads «review» 69 instead of «dangerous» 100 (branch `fix/scanner-doc-placeholders`)
 - 2026-11-27: Mac — **0.14.0 published** to everyone on Oleh's «Место освободил, пока смержи и выпусти релиз» (out of the Tuesday schedule, on his word): everything from betas 1–2 plus GitHub sources (#648), «Найти источники…» (#651), the «Скиллы» header chip (#650); notes and What's New updated in #654; the header chip and the card seen live in an isolated copy before; build 1555, signed and notarized, beta testers get it too; https://github.com/OlehDemishev/AIHubBar/releases/tag/v0.14.0
 - 2026-11-27: Mac — Skills Catalog: «Найти источники…» in Settings → Скиллы → «Источники» suggests repositories from five awesome lists and Anthropic's official plugin marketplace (911 found live) and searches GitHub by topic; one click adds one as a source — merged as PR #651 on Oleh's «Да, вливай» (seen live in an isolated copy), not in a build yet
 - 2026-11-27: Mac — the panel header's «Скиллы» is a chip with the word beside the profile chip, not a puzzle icon (Oleh: the icon alone said nothing) — merged as PR #650 on Oleh's «Да, вливай», not in a build yet; not seen live (no disk space for a local build), to look at before the next release
@@ -248,6 +249,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-27 — Mac: Skills scanner rules 4 — placeholder webhooks (branch `fix/scanner-doc-placeholders`)
+
+Done: the false alarm found while checking «Найти источники…». `SkillScanner.harmless` for `exfil-endpoint`: a Slack (`hooks.slack.com/services`), Discord (`/api/webhooks`) or Telegram (`api.telegram.org/bot`) address whose secret part, up to `?`/`#`, holds `...`, `…`, `xxx`, `your`, `<`, `placeholder`, `redacted` or `***` is a placeholder — nothing can be sent to it. Only these three: their secret is made by the service, so an attacker can't pick a «placeholder» one; ngrok and the like stay as they were. `scannerVersion` 4, so every skill is checked again. docs/specs/SPEC-skills.md «Rules 4»; the Rust scanner stays at 2.
+Checked: `scripts/check.sh` — all passed; new cases: three placeholders pass, a real token, one from a variable, one from an f-string template, a real token followed by `#...`, and `abc.ngrok.io/your` still fire; all 15 bad fixtures still caught (their `EXAMPLE` tokens are why `example` is not a placeholder word). On the real downloaded zxkane/aws-skills: aws-agentic-ai «review» 69 (was «dangerous» 100), the other four unchanged.
+Left: `agent-config` still weighs «high» for «add this to ~/.claude/settings.json» in a reference doc — kept on purpose: it is what an agent would do.
 
 ## 2026-11-27 — Mac: 0.14.0 released (branch `chore/release-0.14.0`)
 
