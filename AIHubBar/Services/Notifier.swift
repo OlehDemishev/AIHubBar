@@ -22,6 +22,9 @@ enum NotificationTarget: Equatable, Sendable {
     case approval(sessionID: String, requestID: String)
     /// A skill of the Skills Catalog → the panel, at its card.
     case skill(id: Int)
+    /// Claude's background runs paused by the limit guard: «Передать Codex» hands them all over, a click opens the
+    /// first one's log.
+    case paused(ids: [String])
     case none
 
     var userInfo: [String: String] {
@@ -35,6 +38,7 @@ enum NotificationTarget: Equatable, Sendable {
         case let .approval(sessionID, requestID): ["target": "approval", "id": sessionID, "request": requestID]
         case let .link(url): ["target": "link", "url": url.absoluteString]
         case let .skill(id): ["target": "skill", "id": String(id)]
+        case let .paused(ids): ["target": "paused", "id": ids.joined(separator: ",")]
         case .none: [:]
         }
     }
@@ -52,6 +56,7 @@ enum NotificationTarget: Equatable, Sendable {
         case "approval" where !value("id").isEmpty && !value("request").isEmpty:
             self = .approval(sessionID: value("id"), requestID: value("request"))
         case "skill" where Int(value("id")) != nil: self = .skill(id: Int(value("id"))!)
+        case "paused" where !value("id").isEmpty: self = .paused(ids: value("id").split(separator: ",").map(String.init))
         default: self = .none
         }
     }
@@ -63,6 +68,7 @@ enum NotificationTarget: Equatable, Sendable {
         case .approval: NotificationAction.approvalCategory
         case let .run(_, pullRequest): pullRequest == nil ? NotificationAction.runCategory : NotificationAction.runWithPRCategory
         case .result: NotificationAction.resultCategory
+        case .paused: NotificationAction.pausedCategory
         case .file, .window, .link, .skill, .none: nil
         }
     }
@@ -89,6 +95,8 @@ enum NotificationAction {
     static let runWithPRCategory = "run-pr"
     static let changes = "changes"
     static let resultCategory = "result"
+    static let handOver = "hand-over"
+    static let pausedCategory = "paused"
 
     enum Resolution: Equatable {
         case showSession(id: String)
@@ -101,6 +109,8 @@ enum NotificationAction {
         case openChanges(projectPath: String, before: Date)
         /// The panel, at a skill's card.
         case openSkill(id: Int)
+        /// «Передать Codex»: these paused Claude runs go on in Codex.
+        case handOver(ids: [String])
         case nothing
     }
 
@@ -123,6 +133,9 @@ enum NotificationAction {
             return .openURL(url)
         case let .skill(id):
             return .openSkill(id: id)
+        case let .paused(ids):
+            if action == handOver { return .handOver(ids: ids) }
+            return ids.first.map { .openRunLog(id: $0) } ?? .nothing
         case let .approval(sessionID, requestID):
             if action == allow { return .decide(requestID: requestID, allow: true) }
             if action == deny { return .decide(requestID: requestID, allow: false) }
@@ -140,12 +153,15 @@ enum NotificationAction {
         let allow = UNNotificationAction(identifier: allow, title: String(localized: "Разрешить"), options: [])
         let deny = UNNotificationAction(identifier: deny, title: String(localized: "Отклонить"), options: [.destructive])
         let changes = UNNotificationAction(identifier: changes, title: String(localized: "Что изменилось"), options: [.foreground])
+        // No `.foreground`: Codex starts in the background, as from the run's menu.
+        let handOver = UNNotificationAction(identifier: handOver, title: String(localized: "Передать \(AgentKind.codex.title)"), options: [])
         return [
             UNNotificationCategory(identifier: approvalCategory, actions: [allow, deny, show], intentIdentifiers: []),
             UNNotificationCategory(identifier: sessionCategory, actions: [show], intentIdentifiers: []),
             UNNotificationCategory(identifier: runCategory, actions: [log], intentIdentifiers: []),
             UNNotificationCategory(identifier: runWithPRCategory, actions: [pr, log], intentIdentifiers: []),
             UNNotificationCategory(identifier: resultCategory, actions: [changes], intentIdentifiers: []),
+            UNNotificationCategory(identifier: pausedCategory, actions: [handOver, log], intentIdentifiers: []),
         ]
     }
 }

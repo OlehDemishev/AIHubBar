@@ -237,6 +237,13 @@ final class LaunchController {
         launch(pending.command, target: pending.target, mode: .background, codexPath: path)
     }
 
+    /// «Передать Codex» on the limit guard's notification: every run it names that can still be handed over.
+    func handOver(ids: [String]) {
+        for id in ids {
+            if let run = runs.runs.first(where: { $0.id == id }), Handover.canHandOver(run) { handOver(run) }
+        }
+    }
+
     /// «Передать Codex» on a Claude run that is paused by the limit or ended badly: the run stops and Codex goes on
     /// in the same folder (the worktree included) with the same task and a word about the work already there.
     func handOver(_ run: BackgroundRun) {
@@ -389,7 +396,9 @@ final class LaunchController {
             let until = hold.resetsAt.map { String(localized: " Продолжу после сброса в \($0.formatted(date: .omitted, time: .shortened)).") } ?? ""
             let title = String(localized: "Фоновые задачи на паузе: \(name + hold.title) \(UsageText.percent(hold.utilization))")
             let body = paused.map { "\($0.project): \($0.commandTitle)" }.joined(separator: "\n") + until
-            Notifier.post(id: codex ? "run-guard-codex" : "run-guard", title: title, body: body)
+            // Claude's runs can go on in Codex: «Передать Codex» on the banner, when Codex is installed.
+            let handable = codex || codexPath() == nil ? [] : paused.filter(Handover.canHandOver).map(\.id)
+            Notifier.post(id: codex ? "run-guard-codex" : "run-guard", title: title, body: body, target: handable.isEmpty ? .none : .paused(ids: handable))
             sendToTelegram("⏸ <b>\(RunMessage.escape(title))</b>\n\(RunMessage.escape(body))")
         } else {
             let paused = runs.paused.filter(mine)

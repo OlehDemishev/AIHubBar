@@ -271,6 +271,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-27 — «Передать Codex» on the limit pause notification (branch `feat/pause-notification-codex`)
+
+Done: item (4) of the classmate's list, on Oleh's «Выполняй по порядку». When the limit guard pauses Claude's background runs and Codex is installed, the notification «Фоновые задачи на паузе» carries «Передать Codex» (hands every paused run that still can be handed over to Codex, in the same folder, as the run's menu does) and «Журнал»; a click opens the first run's log. New target `.paused(ids:)`, category `paused`, `LaunchController.handOver(ids:)`. Codex's own pauses and runs that can't be handed over get no button.
+Checked: `scripts/check.sh` green; `NotificationTests`: the target survives `userInfo`, its category, the button hands over, a click only opens the log.
+Left: not seen live — a real pause needs a Claude window near its limit with a background run going.
+
 ## 2026-11-27 — Release 0.15.1 published (branch `chore/release-0.15.1-published`)
 
 Done: `scripts/release.sh 0.15.1 --publish` from clean `main` (e68fa18): build 1631, the app and the disk image notarized and stapled, Sparkle signature, the GitHub release («latest»), the beta channel's appcast now 0.15.1 + 0.14.0-beta.2. `Casks/ai-hub-bar.rb` → 0.15.1.

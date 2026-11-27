@@ -10,6 +10,7 @@ struct NotificationTests {
         .run(id: "r2", pullRequest: nil),
         .file(path: "/P/_daily-report/reports/latest.html"),
         .window(id: "cleanup-output"),
+        .paused(ids: ["r1", "r2"]),
         .none,
     ])
     func userInfoRoundTrip(target: NotificationTarget) {
@@ -29,7 +30,8 @@ struct NotificationTests {
         #expect(NotificationTarget.run(id: "r", pullRequest: nil).category == NotificationAction.runCategory)
         #expect(NotificationTarget.file(path: "/x").category == nil)
         let ids = Set(NotificationAction.categories.map(\.identifier))
-        #expect(ids == [NotificationAction.sessionCategory, NotificationAction.runCategory, NotificationAction.runWithPRCategory, NotificationAction.approvalCategory, NotificationAction.resultCategory])
+        #expect(ids == [NotificationAction.sessionCategory, NotificationAction.runCategory, NotificationAction.runWithPRCategory, NotificationAction.approvalCategory, NotificationAction.resultCategory, NotificationAction.pausedCategory])
+        #expect(NotificationTarget.paused(ids: ["r"]).category == NotificationAction.pausedCategory)
     }
 
     @Test func clicksLeadToTheRightPlace() throws {
@@ -45,5 +47,7 @@ struct NotificationTests {
         #expect(NotificationAction.resolve(.file(path: "/a.html"), action: click) == .openFile(path: "/a.html"))
         #expect(NotificationAction.resolve(.window(id: "cleanup-output"), action: click) == .openWindow(id: "cleanup-output"))
         #expect(NotificationAction.resolve(.none, action: click) == .nothing)
+        #expect(NotificationAction.resolve(.paused(ids: ["a", "b"]), action: NotificationAction.handOver) == .handOver(ids: ["a", "b"]))
+        #expect(NotificationAction.resolve(.paused(ids: ["a", "b"]), action: click) == .openRunLog(id: "a"), "a click only opens the log")
     }
 }
