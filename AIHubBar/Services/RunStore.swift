@@ -127,6 +127,15 @@ final class RunStore {
         }
     }
 
+    /// «Остановить все»: every running background task gets what its own stop button does. Returns how many.
+    @discardableResult
+    func stopAll() -> Int {
+        let ids = running.map(\.id)
+        if !ids.isEmpty { AppLog.info("Background runs: stopping all \(ids.count)") }
+        ids.forEach { stop($0) }
+        return ids.count
+    }
+
     /// The limit guard: stops the process where it is (SIGSTOP), so the work isn't lost to a hit limit.
     func pause(_ id: String) {
         guard var run = run(id: id), run.state == .running, run.pausedAt == nil, let pid = run.pid, isOurs(run, pid: pid) else { return }
