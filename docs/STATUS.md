@@ -267,6 +267,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-27 — Skills: the pre-release look (branch `chore/skills-prerelease-check`)
+
+Done: nothing in the code; two open questions closed. `claude -p` with the review's flags does not read `~/.claude/CLAUDE.md` (a control with `--setting-sources user` does), written into `docs/specs/SPEC-skills.md` §4. The header's «Скиллы» chip seen in German («Skills»), Polish («Skille») and Arabic (mirrored): it fits beside the profile chip.
+Checked: an isolated copy in de, pl, en and ar; the Skills section (list, chips, «Новые версии», sources under rows) and a skill's card in English and Arabic — everything translated, Arabic mirrored, an English description under Arabic aligned to the right as it should be; «Перевести описания» does not show in English, where the descriptions already are.
+Left: the API path (Haiku with `output_config.format`, the review with a key) is still not tried live — no key on this Mac. In Arabic the chip «Hooks» stays in English and «line» after a file path is set in the monospaced font; both old, small.
+
 ## 2026-11-27 — Skills Catalog: skills for a project (branch `feat/mac-skills-for-project`)
 
 Done: `AIHubBar/Skills/SkillProjectStack.swift` reads a project folder — languages by file count, tools from files (Xcode, XcodeGen, Docker, GitHub Actions, Expo, Prisma…), up to 30 package names from ten kinds of manifests at the top and one level down; nothing but these names is sent. «Скиллы» in an open project's card (only with the Skills module on) opens the Skills section and runs the plain-words search's two requests for the project (`SkillAsk.projectWordsPrompt`); the results say «AI подобрал для проекта «…»» and what was seen in the folder. `SkillStore.ask` and `askForProject` share one pipeline. SPEC §4b updated; 5 new strings in 12 languages.

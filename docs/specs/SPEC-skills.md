@@ -75,6 +75,10 @@ Optional, on request, one skill at a time. The skill goes to Claude as untrusted
 for that one request; the answer must be one JSON object of a fixed shape, else it counts as «Review». A model's
 verdict can only make the static one **stricter**, never milder. Reviews are remembered by content hash.
 
+Checked 2026-11-27 (Claude Code 2.1.330): with `--setting-sources ""` the model does not see the person's
+`~/.claude/CLAUDE.md` — asked to quote any line of it, it saw none (about 1,000 input tokens); the same request with
+`--setting-sources user` quoted it (about 1,800). The empty working folder keeps a project's CLAUDE.md out too.
+
 ## 4a. Where to find sources (Mac, 2026-11-27)
 
 «Найти источники…» in Settings → Скиллы → «Источники» suggests GitHub repositories; it never adds, downloads or trusts
