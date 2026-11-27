@@ -1,6 +1,38 @@
 # Status
 
 <!-- summary:start -->
+**Stage:** Mac 0.15.1 published 2026-11-27 (build 1631; 0.15.0 the same day — Skills from plain words, for a project, open sources, translations, GitHub sign-in; AI economics, Stop All, a task's cost, sessions over SSH (beta), the MCP server). Releases once a week on Tuesday, on Oleh's word. Windows paused at desktop 0.1.14.
+**Updated:** 2026-11-27
+
+**Now:**
+- nothing in progress; merged, not in a build: «Передать Codex» on the limit pause notification (#688)
+
+**Next:**
+- time per task in «Экономика AI» — waits for Oleh's choice of the speed source
+- sessions over SSH, part 2 (starting agents there, Codex and Copilot hooks, context fill) — after part 1 is seen over a real connection
+- from the Herdr comparison, to agree with Oleh before code: one agent starting and prompting another from a command; the panel changed by files an agent edits (maybe never)
+- towards 1.0: translations read by people, feedback from strangers; promotion (docs/LAUNCH.md): awesome-claude-code, r/macapps, Show HN, Product Hunt
+- 1.1: the iPhone app, after 1.0 — first agree what it shows and how the data reaches the phone
+- Windows (paused): signing through SignPath, Telegram there untried
+
+**Needs Oleh:**
+- «Экономика AI»: look at the window; choose the speed source — your OpenRouter key in the app, or a letter to Artificial Analysis (the agent can draft it)
+- SSH: on the MacBook Air turn on «Удалённый вход», let the Mac mini in by key (`ssh-copy-id`, then one `ssh <air>` to accept the host key), then Settings → «Сессии агентов» → «Добавить компьютер»
+- MCP: `claude mcp add aihubbar -- "$HOME/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar" --mcp`, then ask an agent for limits and sessions
+- on the Air: the notch's ears over a full-screen video; after the next background task: its cost in «Журнал»; with two tasks running: «Остановить все»
+- promotion: the awesome-claude-code form (yourself), r/macapps' rules before posting
+- Windows: SignPath application, Telegram with a new bot, a copy of the updater key in the password manager
+- older open checks (0.7–0.14, Windows details) are listed in the journal entry «STATUS header tidied» below
+<!-- summary:end -->
+
+## 2026-11-27 — STATUS header tidied (branch `chore/status-header-tidy`)
+
+Done: on Oleh's «Выполняй по порядку» (plan: Economics' time per task — waits for his choice; «Передать Codex» on the pause notification — merged #688; SSH part 2 — waits for part 1 over a real connection; the Herdr items — to agree first). The header had grown to well over a hundred lines; it now says only what is current. Everything taken out of it is kept below as it was.
+Checked: nothing in the code.
+Left: the old header, word for word:
+
+<details><summary>The header before tidying</summary>
+
 **Stage:** Mac: 0.15.1 published 2026-11-27 on Oleh's «Выпусти 0,15,1» (the Claude account's synced skills in the catalog; build 1631, signed and notarized; Homebrew cask updated); 0.15.0 published the same day, a Friday evening, to everyone, on Oleh's «релиз» (Skills: plain-words search, skills for a project, open sources index, translations, GitHub sign-in; AI economics, Stop All, a task's cost, sessions on other computers (beta), the MCP server; build 1623, signed and notarized; Homebrew cask updated); 0.14.0 published the same day (Skills Catalog with GitHub sources); build 1555, signed and notarized; Homebrew cask updated); 0.13.0 published 2026-11-23, a Monday evening, to everyone, on Oleh's «Выпускай» (stuck-session and swap notifications, «Ждёт вас» in the summaries, Shortcuts actions, files and dictation in the quick prompt, local servers, batches, «Версии», calendar file and word goal, a cheaper running icon; build 1361, signed and notarized); 0.12.0 published the same day in the morning (Codex approvals, Codex in the background, handover, review by the other service, one task for two services, skills and plugins, day summary, does the plan pay off, Telegram off in one click, Antigravity waits; build 1234, signed and notarized); 0.11.0 published 2026-11-17 (the main service can be another one than Claude, Antigravity's quota, what's new card, week pace, release notes, Homebrew cask, translations read against the original, the help up to date); releases once a week on Tuesday since 2026-11-11; 0.10.2 published 2026-11-10 (the Settings sidebar can no longer stay collapsed); 0.10.1 the same day (the stop button asks, Arabic percents, projects stay in sight); 0.10.0 the same day (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): resumed 2026-11-17 on Oleh's word — started on the Mac, carried on on his Windows laptop
 **Updated:** 2026-11-27
 
@@ -269,7 +301,8 @@
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
-<!-- summary:end -->
+
+</details>
 
 ## 2026-11-27 — «Передать Codex» on the limit pause notification (branch `feat/pause-notification-codex`)
 
