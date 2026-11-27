@@ -14,6 +14,15 @@ follows it (`AIHubBar/Skills/`, Swift; the reference port in `desktop/skill-scan
 - **Limits**: 3,000 files, 64 MB, 2 MB per file. A larger file is hashed, not read, and that is a finding; bundled
   `node_modules` and virtual environments are not walked, and that is a finding too.
 
+## Rules 4 (Mac, 2026-11-27)
+
+Found on zxkane/aws-skills, from «Найти источники…»: `aws-agentic-ai` read «dangerous» (100) because its guide shows
+`SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/T.../B.../xxx"`. A Slack, Discord or Telegram webhook whose secret
+part (the path after the match, up to `?` or `#`) holds a placeholder — `...`, `…`, `xxx`, `your`, `<`,
+`placeholder`, `redacted`, `***` — is not an exfiltration endpoint: nothing can be sent to it. Only these three, because
+their secret is chosen by the service, not by an attacker; a real token, or one taken from a variable or a template, still
+counts. Desktop's Rust scanner stays at rules 2.
+
 ## Rules 3 (Mac, 2026-11-27)
 
 Found on anthropics/skills, the first real source: its document skills (docx, pptx, xlsx) and claude-api read «dangerous».
@@ -89,7 +98,7 @@ reading), GitHub code search (needs a token).
 
 ## 5. Versions and the shared contract
 
-- `SkillReport.scannerVersion` (2) rises with every change of rules or scoring; results of an older version are made
+- `SkillReport.scannerVersion` (2 in Rust, 4 in Swift) rises with every change of rules or scoring; results of an older version are made
   again.
 - The fixtures in `desktop/skill-scanner/tests/fixtures` — 15 bad, 5 clean, 2 for review, all harmless by design — and
   the per-rule test lines are the contract: the Swift and Rust scanners must give the same verdicts on them
