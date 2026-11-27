@@ -17,6 +17,17 @@ enum SkillGitHub {
         var description: String { reason }
     }
 
+    /// Hosts the app reads from. A redirect anywhere else is not followed.
+    static let hosts: Set<String> = ["api.github.com", "raw.githubusercontent.com", "github.com", "codeload.github.com", "objects.githubusercontent.com"]
+
+    final class StayOnGitHub: NSObject, URLSessionTaskDelegate, Sendable {
+        func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse,
+                        newRequest request: URLRequest) async -> URLRequest? {
+            guard request.url?.scheme == "https", let host = request.url?.host?.lowercased(), SkillGitHub.hosts.contains(host) else { return nil }
+            return request
+        }
+    }
+
     static let session: URLSession = {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.timeoutIntervalForRequest = 30
@@ -25,7 +36,7 @@ enum SkillGitHub {
             "X-GitHub-Api-Version": "2022-11-28",
             "User-Agent": "AIHubBar",
         ]
-        return URLSession(configuration: configuration)
+        return URLSession(configuration: configuration, delegate: StayOnGitHub(), delegateQueue: nil)
     }()
 
     static let fetch: Fetch = { url in
@@ -91,12 +102,14 @@ enum SkillGitHub {
         let files = commitFolder.appending(path: "files")
         let folder: URL
         if skill.folder.isEmpty {
-            folder = files.appending(path: "_root")
+            // Beside `files`, not in it: no folder of the repository can share its place.
+            folder = commitFolder.appending(path: "root")
         } else {
             guard let inner = inside(files, skill.folder) else { throw Failure(reason: "path") }
             folder = inner
         }
-        let marker = (skill.folder.isEmpty ? "_root" : skill.folder).addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? "skill"
+        // Every character but letters and digits is percent-encoded, so `-` names the root skill and nothing else.
+        let marker = skill.folder.isEmpty ? "-" : skill.folder.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? "skill"
         let done = commitFolder.appending(path: "done").appending(path: marker)
         if FileManager.default.fileExists(atPath: done.path) { return folder }
         try? FileManager.default.removeItem(at: folder)

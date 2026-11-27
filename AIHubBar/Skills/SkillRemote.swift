@@ -128,6 +128,8 @@ extension SkillCatalog {
 
     /// At most this many skills are taken from one repository.
     static let maxRemoteSkills = 300
+    /// At most this much is downloaded from one repository at one commit; the skills after it are not taken.
+    static let maxRemoteBytes = 256 * 1024 * 1024
 
     /// The skills in a tree: every folder with a SKILL.md, with the files under it. Folders the scanner doesn't walk
     /// (`node_modules`, `.git`) are left out, links are never downloaded, and each skill keeps to the scanner's limits.
@@ -137,13 +139,17 @@ extension SkillCatalog {
             .map { $0.path == "SKILL.md" ? "" : String($0.path.dropLast("/SKILL.md".count)) }
             .filter { folder in !folder.split(separator: "/").contains { ["node_modules", ".git", "__pycache__", ".venv", "venv"].contains(String($0)) } }
             .sorted()
-            .prefix(maxRemoteSkills)
-        return folders.map { folder in
+        // The Mac's disk ignores case: `Skill` and `skill` would land in one folder, so only the first is taken.
+        var seenFolders = Set<String>()
+        let unique = folders.filter { seenFolders.insert($0.lowercased()).inserted }.prefix(maxRemoteSkills)
+        var repoTotal = 0
+        return unique.compactMap { folder -> RemoteSkill? in
             let prefix = folder.isEmpty ? "" : folder + "/"
             var files: [TreeEntry] = []
             var leftOut: [String] = []
             var truncated = false
             var total = 0
+            var names = Set<String>()
             for entry in tree where entry.path.hasPrefix(prefix) && entry.path != folder {
                 let relative = String(entry.path.dropFirst(prefix.count))
                 let parts = relative.split(separator: "/").map(String.init)
@@ -155,7 +161,8 @@ extension SkillCatalog {
                     continue
                 }
                 guard entry.type == "blob" else { continue }
-                if entry.mode == "120000" {
+                if entry.mode == "120000" || !names.insert(relative.lowercased()).inserted {
+                    // A link is never downloaded; a second file differing only in case would overwrite the first.
                     leftOut.append(relative)
                     continue
                 }
@@ -166,6 +173,8 @@ extension SkillCatalog {
                 total += entry.size
                 files.append(TreeEntry(path: relative, type: entry.type, mode: entry.mode, size: entry.size))
             }
+            guard repoTotal + total <= maxRemoteBytes else { return nil }
+            repoTotal += total
             return RemoteSkill(folder: folder, files: files, leftOut: leftOut, truncated: truncated)
         }
     }

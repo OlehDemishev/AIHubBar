@@ -2,6 +2,45 @@
 
 Passes over `~/Projects/SECURITY-CHECKLIST.md`. Each pass says what it covered; the newest is on top.
 
+## 2026-11-27 — Skills Catalog: remote sources and finding them (branch `chore/skills-sources-security-audit`)
+
+**Scope.** What 0.14.0 added after the first pass: GitHub repositories as sources (`AIHubBar/Skills/SkillRemote.swift`, `AIHubBar/Services/SkillGitHub.swift`, PR #648), «Найти источники…» (`AIHubBar/Skills/SkillSourceFinder.swift`, PR #651), their parts of `SkillStore`, `SkillManage` and `SkillSourceViews.swift`, and scanner rules 4 (#656). The catalog now goes to the network by itself, so item 8 of the pass below («the only network call is api.anthropic.com») no longer holds; this pass replaces it.
+
+**The attacker, for this pass.** The owner of a repository the person added, the author of an awesome list or of a plugin in the marketplace, and anyone who can put a repository into GitHub's search results. Everything they control — the tree, file names and contents, `marketplace.json`, a list's Markdown, a repository's description — is untrusted. Nothing from a source is run; it only reaches an agent's folder through the same install as any skill: the plan, the check, the ticked box, the hash compared after writing.
+
+| # | Item | Status | Where / what |
+|---|---|---|---|
+| 1 | Secrets | OK | No token: public repositories only, without signing in. Nothing secret is sent to GitHub. |
+| 4 | Validation of input | **Fixed** | A repository name passes only GitHub's own characters (`GitHubRepo.parse`); the commit must be 40 hex digits; private repositories are refused. Every path from the tree goes through `SkillGitHub.inside` (no `..`, `.`, empty or absolute parts) before anything is fetched; links (`120000`) and submodules are never downloaded; each skill keeps to the scanner's limits, at most 300 skills a repository. **Fixed:** names that differ only in case (`Tool`/`tool`, `run.sh`/`RUN.sh`) shared one folder on the Mac's case-insensitive disk — now only the first is taken, the second is listed as left out; one repository could fill the disk (300 × 64 MB) — now 256 MB a commit at most (`maxRemoteBytes`); the root skill's folder `files/_root` and its marker could be taken by a repository folder named `_root` — now it lives beside `files` and its marker is `-`, which no encoded folder name can be. |
+| 6 | What a source's text can do in the interface | OK | Names, descriptions, repository descriptions, list texts are shown with `Text(verbatim:)`. A list's words lose links, HTML, control and invisible characters and are cut to 200 characters (`SkillSourceFinder.clean`). |
+| 8 | HTTPS | **Fixed** | Only `https://api.github.com` and `https://raw.githubusercontent.com`, fixed in code. **Fixed:** a redirect was followed to any host; now only to GitHub's own HTTPS hosts (`SkillGitHub.StayOnGitHub`). |
+| 10 | Rate limits | OK | Sources are checked by themselves at most twice a day (three API requests each); lists are read once in 12 hours from raw files, which the API limit doesn't count; the search runs only on a click. A refusal from GitHub is shown in words and leaves the old commit in place. |
+| 13 | Files (here: downloads and the install from them) | OK | Files are written only under `skills/remote/<owner>/<repo>/<sha>/`, 2 MB a file, mode 644 or 755 as in the tree; a folder is used again only with its «downloaded whole» marker. An install copies the checked bytes and compares their hash; a cache folder changed after the check is refused. An update from a newer commit is checked and shown line by line before it is installed. |
+| 18 | SSRF and open redirect | OK | The app never fetches an address a source or a list names: a candidate is only `owner/repo`, and adding it reads it through the fixed API. Marketplace `url` sources count only for `https://github.com/…`; `command`, `npm` and the rest are ignored. «Открыть на GitHub» opens only `https://github.com/<owner>/<repo>` built from a validated name, on a click. |
+| 19 | AI | OK | A remote skill goes to the AI review exactly as a local one (item 19 below). |
+| 21 | Logs | OK | Only `owner/repo`, the short commit, counts and refusal codes. |
+| 22 | Dependencies | н/п | None added (URLSession, Foundation). |
+| 38 | Privacy | OK | GitHub sees the Mac's address and which public repositories are read; the Settings footer says the skills come from GitHub. Nothing about the person or their skills is sent. |
+| 39 | Self-attack | OK | Below. |
+
+Trust and «official»: a repository is official only by its GitHub owner (`anthropics`, `openai`, `google-gemini`, `cursor`), which GitHub keeps unique, so this mark can't be claimed the way an `author` field can. It still lowers no verdict.
+
+**Self-attack** (each a test in `AIHubBarTests/SkillRemoteTests.swift` / `SkillSourceFinderTests.swift`):
+
+| Attempt (as a source's owner or a list's author) | Result | Test |
+|---|---|---|
+| Put `../../outside`, `/etc/evil`, `a//b` or `../../../../escape.sh` into the tree to write outside the cache | Refused before any request; nothing written | `aTreeCannotLeadADownloadOutOfTheCache` |
+| Ship `Tool` and `tool`, `run.sh` and `RUN.sh` to swap files in one folder | The second is left out and listed | `namesThatDifferOnlyInCaseDontShareAFolder` |
+| Name a folder `_root` or `root` to take the root skill's place | Three skills, three folders, each with its own text | `theRootSkillAndAFolderNamedLikeItStayApart` |
+| Fill the disk with ten 60 MB skills | 256 MB at most; the rest not taken | `oneRepositoryCantFillTheDisk` |
+| Redirect a request to another host, to plain HTTP or to `github.com.evil.example` | Not followed | `aRedirectAwayFromGitHubIsNotFollowed` |
+| Put HTML, `javascript:` links, invisible and bidi characters into a list's description | Plain short text | `whatAListSaysIsShownAsPlainShortText` |
+| Name a plugin source on another host or a `command` source | Ignored | `aMarketplaceGivesThePluginsRepositories` |
+| Smuggle another parameter into the search (`&q=evil`) | One encoded `q` | `listsAreReadFromRawFilesAndSearchAsksGitHubOnce` |
+| Mark a real webhook as a «placeholder» (`…#...`) | Still an exfiltration endpoint | `SkillScannerTests.whatOfficialSkillsSayIsNotAnAttack` |
+
+**Left / needs Oleh:** nothing blocking. These fixes are in `main` after merge, not in 0.14.0; a skill at a repository's root downloaded by 0.14.0 is fetched again once (its folder and marker moved).
+
 ## 2026-11-26 — the Skills Catalog on the Mac (branch `chore/skills-security-audit`)
 
 **Scope.** The Skills Catalog of the Mac app, steps 1–8 (PRs #625–#638): `AIHubBar/Skills/*`, `AIHubBar/Services/SkillStore.swift`, `AIHubBar/Views/Panel/Skill*Views.swift`, `AIHubBar/Modules/SkillsModule.swift`, plus the repository-wide items B24 and B25. The rest of AI Hub Bar was not re-audited in this pass.

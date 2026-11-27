@@ -150,4 +150,72 @@ struct SkillRemoteTests {
         try catalog.noteSourceFailed(id, error: "rate-limit")
         #expect(try catalog.sources().first?.error == "rate-limit")
     }
+
+    // MARK: - Self-attack: a source's owner tries to reach beyond the cache (docs/SECURITY-AUDIT.md, 2026-11-27)
+
+    @Test func aTreeCannotLeadADownloadOutOfTheCache() async throws {
+        let world = World()
+        let repo = try #require(SkillCatalog.GitHubRepo.parse("evil/repo"))
+        for (folder, file) in [("../../outside", "SKILL.md"), ("skills/x", "../../../../escape.sh"), ("skills/y", "/etc/evil"), ("a//b", "SKILL.md")] {
+            let skill = SkillCatalog.RemoteSkill(folder: folder, files: [.init(path: file, type: "blob", mode: "100644", size: 3)], leftOut: [], truncated: false)
+            await #expect(throws: SkillGitHub.Failure(reason: "path")) { try await SkillGitHub.download(skill, of: repo, sha: Self.sha1, into: world.cache, fetch: world.fetch) }
+        }
+        #expect(!FileManager.default.fileExists(atPath: world.home.appending(path: "outside").path))
+        #expect(!FileManager.default.fileExists(atPath: world.home.appending(path: "escape.sh").path))
+        #expect(world.asked.isEmpty, "nothing was fetched for a bad path")
+    }
+
+    @Test func namesThatDifferOnlyInCaseDontShareAFolder() {
+        let tree: [SkillCatalog.TreeEntry] = [
+            .init(path: "skills/Tool/SKILL.md", type: "blob", mode: "100644", size: 10),
+            .init(path: "skills/tool/SKILL.md", type: "blob", mode: "100644", size: 10),
+            .init(path: "skills/a/SKILL.md", type: "blob", mode: "100644", size: 10),
+            .init(path: "skills/a/run.sh", type: "blob", mode: "100755", size: 10),
+            .init(path: "skills/a/RUN.sh", type: "blob", mode: "100644", size: 10),
+        ]
+        let skills = SkillCatalog.remoteSkills(in: tree)
+        #expect(skills.map(\.folder) == ["skills/Tool", "skills/a"])
+        let a = skills[1]
+        #expect(a.files.map(\.path) == ["SKILL.md", "run.sh"])
+        #expect(a.leftOut == ["RUN.sh"])
+    }
+
+    @Test func theRootSkillAndAFolderNamedLikeItStayApart() async throws {
+        let world = World()
+        world.serve("o/rooted", sha: Self.sha1, files: [
+            "SKILL.md": "---\nname: top\ndescription: The root skill.\n---\nTop.\n",
+            "_root/SKILL.md": "---\nname: under\ndescription: A folder named _root.\n---\nUnder.\n",
+            "root/SKILL.md": "---\nname: other\ndescription: A folder named root.\n---\nOther.\n",
+        ])
+        let catalog = try SkillCatalog(path: ":memory:")
+        #expect(try await world.check(catalog, "o/rooted") == 3)
+        let paths = try catalog.remoteCacheFolders()
+        #expect(paths.count == 3, "\(paths)")
+        let texts = try paths.map { try String(contentsOf: URL(fileURLWithPath: $0).appending(path: "SKILL.md"), encoding: .utf8) }
+        #expect(Set(texts.map { $0.contains("name: top") }).count == 2 && texts.filter { $0.contains("name: top") }.count == 1)
+    }
+
+    @Test func oneRepositoryCantFillTheDisk() {
+        // Each skill keeps to the scanner's limits (2 MB a file, 64 MB in all): 30 files of 2 MB, ten such skills.
+        let tree: [SkillCatalog.TreeEntry] = (0..<10).flatMap { i -> [SkillCatalog.TreeEntry] in
+            [.init(path: "s\(i)/SKILL.md", type: "blob", mode: "100644", size: 100)]
+                + (0..<30).map { .init(path: "s\(i)/data\($0).bin", type: "blob", mode: "100644", size: 2 * 1024 * 1024) }
+        }
+        let skills = SkillCatalog.remoteSkills(in: tree)
+        let total = skills.reduce(0) { $0 + $1.files.reduce(0) { $0 + $1.size } }
+        #expect(total <= SkillCatalog.maxRemoteBytes)
+        #expect(skills.count == 4, "\(skills.count) skills of 60 MB fit in 256 MB")
+    }
+
+    @Test func aRedirectAwayFromGitHubIsNotFollowed() async throws {
+        let guardian = SkillGitHub.StayOnGitHub()
+        let session = URLSession.shared
+        let task = session.dataTask(with: URL(string: "https://api.github.com/repos/o/r")!)
+        let response = HTTPURLResponse(url: URL(string: "https://api.github.com/repos/o/r")!, statusCode: 302, httpVersion: nil, headerFields: nil)!
+        for (target, followed) in [("https://raw.githubusercontent.com/o/r/HEAD/README.md", true), ("https://evil.example/collect", false),
+                                   ("http://raw.githubusercontent.com/o/r/x", false), ("https://github.com.evil.example/x", false)] {
+            let next = await guardian.urlSession(session, task: task, willPerformHTTPRedirection: response, newRequest: URLRequest(url: URL(string: target)!))
+            #expect((next != nil) == followed, "\(target)")
+        }
+    }
 }

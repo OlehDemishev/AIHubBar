@@ -5,6 +5,7 @@
 **Updated:** 2026-11-27
 
 **Now:**
+- 2026-11-27: Mac — Skills Catalog: security pass over remote sources and «Найти источники…» (`docs/SECURITY-AUDIT.md`); fixed: case-only name clashes, a 256 MB cap a repository, the root skill's own folder, redirects only to GitHub (branch `chore/skills-sources-security-audit`)
 - 2026-11-27: Mac — Skills scanner rules 4: a Slack/Discord/Telegram webhook with a placeholder for its secret (`T.../xxx`, `<token>`, `YOUR_…`) is no exfiltration endpoint; zxkane/aws-skills' `aws-agentic-ai` reads «review» 69 instead of «dangerous» 100 — merged as PR #656 on Oleh's «Да, вливай», not in a build yet
 - 2026-11-27: Mac — **0.14.0 published** to everyone on Oleh's «Место освободил, пока смержи и выпусти релиз» (out of the Tuesday schedule, on his word): everything from betas 1–2 plus GitHub sources (#648), «Найти источники…» (#651), the «Скиллы» header chip (#650); notes and What's New updated in #654; the header chip and the card seen live in an isolated copy before; build 1555, signed and notarized, beta testers get it too; https://github.com/OlehDemishev/AIHubBar/releases/tag/v0.14.0
 - 2026-11-27: Mac — Skills Catalog: «Найти источники…» in Settings → Скиллы → «Источники» suggests repositories from five awesome lists and Anthropic's official plugin marketplace (911 found live) and searches GitHub by topic; one click adds one as a source — merged as PR #651 on Oleh's «Да, вливай» (seen live in an isolated copy), not in a build yet
@@ -249,6 +250,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-27 — Mac: Skills Catalog — security pass over remote sources (branch `chore/skills-sources-security-audit`)
+
+Done: `~/Projects/SECURITY-CHECKLIST.md` again for what 0.14.0 added (GitHub sources, «Найти источники…», rules 4): a new section on top of `docs/SECURITY-AUDIT.md` with the items that apply and a self-attack table. Fixed: names differing only in case (`Tool`/`tool`, `run.sh`/`RUN.sh`) no longer share a folder on the case-insensitive disk — the second is left out and listed; at most 256 MB a repository at one commit (`SkillCatalog.maxRemoteBytes`); the root skill lives in `<sha>/root` with marker `-`, so a folder named `_root` can't take its place; URLSession follows redirects only to GitHub's HTTPS hosts (`SkillGitHub.StayOnGitHub`).
+Checked: `scripts/check.sh` — all passed; five new tests in `SkillRemoteTests` (paths out of the cache refused before any request, case clashes, root vs `_root`/`root`, the disk cap, redirects to another host / plain HTTP / a look-alike host not followed).
+Left: not in a build yet; a root skill downloaded by 0.14.0 is fetched once more after the update.
 
 ## 2026-11-27 — Mac: Skills scanner rules 4 — placeholder webhooks (branch `fix/scanner-doc-placeholders`)
 
