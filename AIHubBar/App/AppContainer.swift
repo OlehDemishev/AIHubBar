@@ -44,6 +44,7 @@ final class AppContainer {
     let sessions: SessionStore
     let antigravityWaits: AntigravityWaitWatcher
     let telegramApprovals: TelegramApprovals
+    let remoteMachines: RemoteMachines
     let telegramBot: TelegramBotController
     let widgetStatus: WidgetStatusWriter
     let hooks: HookController
@@ -107,6 +108,9 @@ final class AppContainer {
         let antigravityWaits = AntigravityWaitWatcher()
         antigravityWaits.isActive = { [modes] in modes.isOn(.sessions) }
         self.antigravityWaits = antigravityWaits
+        let remoteMachines = RemoteMachines(settings: settings, sessions: sessions)
+        remoteMachines.isActive = { [modes] in modes.isOn(.sessions) }
+        self.remoteMachines = remoteMachines
         let telegramApprovals = TelegramApprovals(settings: settings, sessions: sessions)
         self.telegramApprovals = telegramApprovals
         let usage = UsageStore(settings: settings, sessions: sessions)
@@ -230,6 +234,7 @@ final class AppContainer {
             Task { await folders.refresh() }
             Task { await calendar.refresh() }
             hooks.refresh()
+            remoteMachines.sync()
         }
         AppDelegate.willTerminate = { keepAwake.releaseOnQuit() }
         GlobalHotKey.action = { QuickSearch.show() }
@@ -307,6 +312,7 @@ final class AppContainer {
                 followBetaUpdates()
                 Updates.start()
                 sessions.start()
+                remoteMachines.start()
                 antigravityWaits.start()
                 telegramApprovals.start()
                 widgetStatus.start { [keepAwake, widgetStatus] on in
@@ -487,6 +493,7 @@ private struct AppEnvironment: ViewModifier {
             .environment(app.sessions)
             .environment(app.notchIsland)
             .environment(app.telegramApprovals)
+            .environment(app.remoteMachines)
             .environment(app.telegramBot)
             .environment(app.hooks)
             .environment(app.runs)

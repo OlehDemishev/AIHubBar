@@ -259,7 +259,7 @@ final class NotchIsland {
             let duration = (session.promptAt ?? session.startedAt).map { DurationText.short(from: $0, to: session.updatedAt) }
             // The files come from git; the banner waits for them (a second at most, usually).
             Task { @MainActor [weak self] in
-                let changes = session.cwd.isEmpty ? nil : await SessionChangesStore.read(folder: session.cwd, since: session.startedAt)
+                let changes = session.cwd.isEmpty || session.machine != nil ? nil : await SessionChangesStore.read(folder: session.cwd, since: session.startedAt)
                 guard let self, !self.places.isEmpty else { return }
                 self.queue.push(event(NotchText.finishedBody(progress: session.progress, duration: duration, files: changes?.files.count)))
                 self.showNext()

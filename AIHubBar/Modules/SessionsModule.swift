@@ -27,6 +27,7 @@ extension ModuleUI {
         settings: {
             AnyView(Group {
                 SessionSection()
+                RemoteMachinesSection()
                 BackgroundRunsSection()
                 TelegramApprovalsSection()
             })

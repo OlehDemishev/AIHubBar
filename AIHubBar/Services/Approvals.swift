@@ -17,6 +17,8 @@ struct ApprovalRequest: Codable, Equatable, Identifiable, Sendable {
     var pid: Int32?
     /// The hook's `--agent`: `claude` (also when missing, from an older hook) or `codex`.
     var agent: String?
+    /// The other computer that asks (`RemoteMachine`); nil on this Mac. Not in the hook's file.
+    var machineID: String?
 
     enum CodingKeys: String, CodingKey { case id, sessionID = "session_id", project, tool, summary, created, pid, agent }
 
