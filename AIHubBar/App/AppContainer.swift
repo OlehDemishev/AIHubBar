@@ -409,6 +409,8 @@ final class AppContainer {
                     // The panel reads it when it opens and shows the skill's card.
                     self.skills.pendingSkill = id
                     PanelOpener.toggle()
+                case let .handOver(ids):
+                    launcher.handOver(ids: ids)
                 case .nothing:
                     break
                 }
