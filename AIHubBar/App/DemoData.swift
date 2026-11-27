@@ -6,6 +6,15 @@ import Foundation
 /// Texts are English and not translated: they stand in for a person's own content (project names, requests), which
 /// the app never translates either. Everything is counted from `now`, so the copy looks current whenever it starts.
 struct DemoData {
+    /// «Экономика AI» in the copy: a few made-up lines, since the copy downloads nothing. Not real prices.
+    static let modelPrices: [ModelPrice] = [
+        ModelPrice(provider: "anthropic", model: "claude-demo-large", name: "Claude Demo Large", input: 8, output: 40, cacheRead: 0.8, cacheWrite: 10, context: 1_000_000, released: "2026-11-01"),
+        ModelPrice(provider: "anthropic", model: "claude-demo-small", name: "Claude Demo Small", input: 1, output: 5, cacheRead: 0.1, cacheWrite: 1.25, context: 200_000, released: "2026-10-01"),
+        ModelPrice(provider: "openai", model: "gpt-demo", name: "GPT Demo", input: 2, output: 10, cacheRead: 0.2, context: 400_000, released: "2026-09-15"),
+        ModelPrice(provider: "google", model: "gemini-demo-flash", name: "Gemini Demo Flash", input: 0.3, output: 2.5, cacheRead: 0.03, context: 1_000_000, released: "2026-08-20"),
+        ModelPrice(provider: "deepseek", model: "deepseek-demo", name: "DeepSeek Demo", input: 0.28, output: 0.42, cacheRead: 0.028, context: 128_000, released: "2026-07-10"),
+    ]
+
     /// The release this data was last brought up to date for; the same value as `WhatsNew.version`, and a test keeps
     /// the two equal. A release with news changes `WhatsNew.version`, the test fails, and whoever makes the release
     /// adds what the new version should show here (docs/RELEASE.md → «Demo») before raising this.

@@ -34,6 +34,7 @@ Free, open source, no account. Nothing goes through a server of ours, except the
 - A **forecast** from your recent pace: "enough until the reset" or "lasts until ~16:40", and the same for the week.
 - **Usage by project** — which project and which session ate the limit today or this week.
 - **Usage history** — tokens by day for up to 90 days, CSV export, and a cost estimate at the price you enter.
+- **AI Economics** — the API models side by side: list prices, what one task would cost with each, and what your month of Claude Code would cost at their prices.
 - **Several Claude accounts**, each with its limits, and a note when Anthropic reports an outage.
 - Notifications at the thresholds you choose, for each service; near the limit, background runs pause and resume after the reset.
 
@@ -85,7 +86,7 @@ After that the app updates itself (Settings → General → Updates). The first 
 
 ## Privacy
 
-- No account, no analytics. AI Hub Bar talks to the AI services you use, to GitHub for updates and, when the limits fail, to Anthropic's public status page.
+- No account, no analytics. AI Hub Bar talks to the AI services you use, to GitHub for updates, to models.dev for the public price list when you open AI Economics and, when the limits fail, to Anthropic's public status page.
 - The one server of ours is the relay of the optional shared Telegram bot, on Cloudflare: it logs no message text and keeps only which chat belongs to which Mac. With a bot of your own, or without Telegram, nothing goes through it.
 - Your files go only to the service you run a command with.
 - API keys are kept in the macOS Keychain, never in logs or exported settings. Claude Code's sign-in is read from the Keychain on each refresh and never stored.

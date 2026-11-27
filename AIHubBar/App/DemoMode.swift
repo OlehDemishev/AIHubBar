@@ -60,6 +60,7 @@ enum DemoMode {
         app.usage.showDemo(snapshot: data.snapshot, history: data.history, week: data.week, days: data.days,
                            breakdowns: data.breakdowns)
         app.hub.showDemo(data.hubLimits)
+        app.modelPrices.showDemo(ModelPriceList(fetchedAt: .now, models: DemoData.modelPrices))
         app.sessions.showDemo(items: data.sessions, approvals: data.approvals)
         app.runs.runs = data.runs
         if let report = data.report { app.store.showDemo(report) }

@@ -193610,6 +193610,2156 @@
           }
         }
       }
+    },
+    "%lld–%lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld–%2$lld"
+          }
+        }
+      }
+    },
+    "«%@» — это %@ токенов ввода и %@ вывода. Оценка, а не замер.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "«%1$@» — это %2$@ токенов ввода и %3$@ вывода. Оценка, а не замер."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%1$@” is %2$@ input tokens and %3$@ output tokens. An estimate, not a measurement."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%1$@» — це %2$@ токенів вводу і %3$@ виводу. Оцінка, а не замір."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%1$@“ sind %2$@ Eingabe-Tokens und %3$@ Ausgabe-Tokens. Eine Schätzung, keine Messung."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %1$@ » : %2$@ jetons d’entrée et %3$@ de sortie. Une estimation, pas une mesure."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%1$@» son %2$@ tokens de entrada y %3$@ de salida. Una estimación, no una medición."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%1$@» sono %2$@ token di input e %3$@ di output. Una stima, non una misura."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%1$@” são %2$@ tokens de entrada e %3$@ de saída. Uma estimativa, não uma medição."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%1$@” to %2$@ tokenów wejścia i %3$@ wyjścia. Szacunek, nie pomiar."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%1$@」は入力%2$@トークン、出力%3$@トークンです。実測ではなく目安です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%1$@’은 입력 %2$@ 토큰, 출력 %3$@ 토큰입니다. 측정값이 아니라 추정값입니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%1$@» تعني %2$@ من رموز الإدخال و%3$@ من رموز الإخراج. تقدير لا قياس."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%1$@” adalah %2$@ token input dan %3$@ token output. Perkiraan, bukan pengukuran."
+          }
+        }
+      }
+    },
+    "«%@» — это %@ токенов нового ввода, %@ чтения кэша, %@ записи кэша и %@ вывода. Оценка, а не замер: агент перечитывает контекст на каждом шаге.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "«%1$@» — это %2$@ токенов нового ввода, %3$@ чтения кэша, %4$@ записи кэша и %5$@ вывода. Оценка, а не замер: агент перечитывает контекст на каждом шаге."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%1$@” is %2$@ tokens of new input, %3$@ of cache reads, %4$@ of cache writes and %5$@ of output. An estimate, not a measurement: an agent rereads its context at every step."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%1$@» — це %2$@ токенів нового вводу, %3$@ читання кешу, %4$@ запису кешу і %5$@ виводу. Оцінка, а не замір: агент перечитує контекст на кожному кроці."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%1$@“ sind %2$@ Tokens neue Eingabe, %3$@ Cache-Lesen, %4$@ Cache-Schreiben und %5$@ Ausgabe. Eine Schätzung, keine Messung: Ein Agent liest seinen Kontext bei jedem Schritt neu."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %1$@ » : %2$@ jetons de nouvelle entrée, %3$@ de lecture du cache, %4$@ d’écriture du cache et %5$@ de sortie. Une estimation, pas une mesure : un agent relit son contexte à chaque étape."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%1$@» son %2$@ tokens de entrada nueva, %3$@ de lectura de caché, %4$@ de escritura de caché y %5$@ de salida. Una estimación, no una medición: un agente relee su contexto en cada paso."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%1$@» sono %2$@ token di nuovo input, %3$@ di lettura della cache, %4$@ di scrittura della cache e %5$@ di output. Una stima, non una misura: un agente rilegge il contesto a ogni passo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%1$@” são %2$@ tokens de entrada nova, %3$@ de leitura de cache, %4$@ de gravação de cache e %5$@ de saída. Uma estimativa, não uma medição: um agente relê o contexto a cada passo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%1$@” to %2$@ tokenów nowego wejścia, %3$@ odczytu pamięci podręcznej, %4$@ zapisu pamięci podręcznej i %5$@ wyjścia. Szacunek, nie pomiar: agent czyta kontekst od nowa w każdym kroku."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%1$@」は新規入力%2$@トークン、キャッシュ読み取り%3$@、キャッシュ書き込み%4$@、出力%5$@です。実測ではなく目安です。エージェントは各ステップでコンテキストを読み直します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%1$@’은 새 입력 %2$@ 토큰, 캐시 읽기 %3$@, 캐시 쓰기 %4$@, 출력 %5$@입니다. 측정값이 아니라 추정값입니다. 에이전트는 단계마다 컨텍스트를 다시 읽습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%1$@» تعني %2$@ من رموز الإدخال الجديد، و%3$@ لقراءة الذاكرة المؤقتة، و%4$@ للكتابة فيها، و%5$@ للإخراج. تقدير لا قياس: الوكيل يعيد قراءة سياقه في كل خطوة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%1$@” adalah %2$@ token input baru, %3$@ pembacaan cache, %4$@ penulisan cache, dan %5$@ output. Perkiraan, bukan pengukuran: agen membaca ulang konteksnya di setiap langkah."
+          }
+        }
+      }
+    },
+    "«Ваши 30 дней» — ваши токены Claude Code за последние 30 дней по ценам каждой модели: сколько стоил бы тот же объём работы.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Your 30 days” is your Claude Code tokens of the last 30 days at each model's prices: what the same amount of work would cost."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Ваші 30 днів» — ваші токени Claude Code за останні 30 днів за цінами кожної моделі: скільки коштував би той самий обсяг роботи."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Ihre 30 Tage“ sind Ihre Claude-Code-Tokens der letzten 30 Tage zu den Preisen jedes Modells: was dieselbe Arbeitsmenge kosten würde."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Vos 30 jours » : vos jetons Claude Code des 30 derniers jours aux prix de chaque modèle, soit ce que coûterait le même volume de travail."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Sus 30 días» son sus tokens de Claude Code de los últimos 30 días a los precios de cada modelo: lo que costaría el mismo volumen de trabajo."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«I tuoi 30 giorni» sono i tuoi token di Claude Code degli ultimi 30 giorni ai prezzi di ciascun modello: quanto costerebbe la stessa mole di lavoro."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Seus 30 dias” são seus tokens do Claude Code dos últimos 30 dias aos preços de cada modelo: quanto custaria o mesmo volume de trabalho."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Twoje 30 dni” to Twoje tokeny Claude Code z ostatnich 30 dni po cenach każdego modelu: ile kosztowałaby ta sama ilość pracy."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「過去30日」は、過去30日間のClaude Codeのトークンを各モデルの価格で計算したものです。同じ作業量にかかる費用の目安になります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘내 30일’은 최근 30일간의 Claude Code 토큰을 각 모델의 가격으로 계산한 값입니다. 같은 작업량에 드는 비용을 보여 줍니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«أيامك الثلاثون» هي رموز Claude Code التي استخدمتها في آخر 30 يومًا بأسعار كل نموذج: كم كان سيكلّف حجم العمل نفسه."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“30 hari Anda” adalah token Claude Code Anda selama 30 hari terakhir dengan harga tiap model: berapa biaya untuk jumlah pekerjaan yang sama."
+          }
+        }
+      }
+    },
+    "Большая задача": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Large task"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Велике завдання"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Große Aufgabe"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grande tâche"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarea grande"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attività grande"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarefa grande"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duże zadanie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "大きなタスク"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "큰 작업"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مهمة كبيرة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tugas besar"
+          }
+        }
+      }
+    },
+    "Ваши 30 дней": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your 30 days"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваші 30 днів"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ihre 30 Tage"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos 30 jours"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sus 30 días"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I tuoi 30 giorni"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seus 30 dias"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Twoje 30 dni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "過去30日"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "내 30일"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أيامك الثلاثون"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 hari Anda"
+          }
+        }
+      }
+    },
+    "Ввод, $/млн": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Input, $/M"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ввід, $/млн"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eingabe, $/Mio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrée, $/M"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrada, $/M"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Input, $/M"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrada, $/M"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wejście, $/mln"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "入力 $/100万"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "입력 $/100만"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإدخال، $/مليون"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Input, $/juta"
+          }
+        }
+      }
+    },
+    "Вопрос": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Question"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Питання"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frage"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Question"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pregunta"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Domanda"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pergunta"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pytanie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "質問"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "질문"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سؤال"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pertanyaan"
+          }
+        }
+      }
+    },
+    "Все провайдеры": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All providers"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Усі провайдери"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Anbieter"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous les fournisseurs"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos los proveedores"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutti i provider"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos os provedores"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wszyscy dostawcy"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてのプロバイダ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모든 제공업체"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل المزوّدين"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semua penyedia"
+          }
+        }
+      }
+    },
+    "Вывод, $/млн": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Output, $/M"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вивід, $/млн"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausgabe, $/Mio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sortie, $/M"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salida, $/M"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Output, $/M"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saída, $/M"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyjście, $/mln"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "出力 $/100万"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "출력 $/100만"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإخراج، $/مليون"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Output, $/juta"
+          }
+        }
+      }
+    },
+    "Загружаю цены…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading prices…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Завантажую ціни…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preise werden geladen …"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chargement des prix…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargando precios…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carico i prezzi…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carregando preços…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pobieram ceny…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "価格を読み込み中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "가격을 불러오는 중…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ تحميل الأسعار…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memuat harga…"
+          }
+        }
+      }
+    },
+    "Задача агента": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agent task"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Завдання агента"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agentenaufgabe"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tâche d’agent"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarea de agente"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attività dell’agente"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarefa de agente"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadanie agenta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エージェントのタスク"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "에이전트 작업"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مهمة وكيل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tugas agen"
+          }
+        }
+      }
+    },
+    "Контекст": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Context"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Контекст"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontext"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contexte"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contexto"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contesto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contexto"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontekst"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コンテキスト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "컨텍스트"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السياق"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konteks"
+          }
+        }
+      }
+    },
+    "Обновить цены": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Update Prices"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оновити ціни"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preise aktualisieren"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualiser les prix"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualizar precios"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiorna prezzi"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizar preços"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odśwież ceny"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "価格を更新"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "가격 업데이트"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تحديث الأسعار"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perbarui harga"
+          }
+        }
+      }
+    },
+    "Окно со всеми моделями по API рядом: цена ввода и вывода, что стоила бы одна задача с каждой и сколько стоил бы ваш месяц в Claude Code по их ценам. Открывается из блока лимитов и из меню «Ещё». Цены — из открытого списка models.dev: он загружается, когда вы открываете окно, не чаще раза в день.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A window with all the API models side by side: input and output price, what one task would cost with each, and what your month of Claude Code would cost at their prices. It opens from the limits block and from the “More” menu. The prices come from the open models.dev list, which is downloaded when you open the window, at most once a day."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вікно з усіма моделями за API поруч: ціна вводу й виводу, скільки коштувало б одне завдання з кожною і скільки коштував би ваш місяць у Claude Code за їхніми цінами. Відкривається з блоку лімітів і з меню «Ще». Ціни — з відкритого списку models.dev: він завантажується, коли ви відкриваєте вікно, не частіше ніж раз на день."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Fenster mit allen API-Modellen nebeneinander: Eingabe- und Ausgabepreis, was eine Aufgabe mit jedem Modell kosten würde und was Ihr Monat in Claude Code zu deren Preisen kosten würde. Es öffnet sich aus dem Limits-Block und aus dem Menü „Mehr“. Die Preise stammen aus der offenen Liste models.dev, die beim Öffnen des Fensters geladen wird, höchstens einmal am Tag."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une fenêtre avec tous les modèles par API côte à côte : prix d’entrée et de sortie, ce que coûterait une tâche avec chacun, et ce que coûterait votre mois de Claude Code à leurs prix. Elle s’ouvre depuis le bloc des limites et depuis le menu « Plus ». Les prix viennent de la liste ouverte models.dev, téléchargée à l’ouverture de la fenêtre, au plus une fois par jour."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una ventana con todos los modelos por API lado a lado: precio de entrada y de salida, lo que costaría una tarea con cada uno y lo que costaría su mes de Claude Code a sus precios. Se abre desde el bloque de límites y desde el menú «Más». Los precios vienen de la lista abierta models.dev, que se descarga al abrir la ventana, como máximo una vez al día."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una finestra con tutti i modelli via API affiancati: prezzo di input e di output, quanto costerebbe un’attività con ciascuno e quanto costerebbe il tuo mese di Claude Code ai loro prezzi. Si apre dal blocco dei limiti e dal menu «Altro». I prezzi vengono dall’elenco aperto models.dev, scaricato quando apri la finestra, al massimo una volta al giorno."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma janela com todos os modelos por API lado a lado: preço de entrada e de saída, quanto custaria uma tarefa com cada um e quanto custaria seu mês de Claude Code aos preços deles. Abre pelo bloco de limites e pelo menu “Mais”. Os preços vêm da lista aberta models.dev, baixada quando você abre a janela, no máximo uma vez por dia."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Okno ze wszystkimi modelami przez API obok siebie: cena wejścia i wyjścia, ile kosztowałoby jedno zadanie z każdym z nich i ile kosztowałby Twój miesiąc w Claude Code po ich cenach. Otwiera się z bloku limitów i z menu „Więcej”. Ceny pochodzą z otwartej listy models.dev, pobieranej przy otwarciu okna, najwyżej raz dziennie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "APIで使えるすべてのモデルを並べて比較するウインドウです。入力と出力の価格、1つのタスクを各モデルで実行した場合の費用、Claude Codeの1か月分を各モデルの価格で計算した金額を表示します。リミットのブロックと「その他」メニューから開けます。価格は公開リストmodels.devのもので、ウインドウを開いたときに、多くても1日1回ダウンロードされます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API로 쓰는 모든 모델을 나란히 비교하는 창입니다. 입력·출력 가격, 작업 하나를 각 모델로 실행했을 때의 비용, Claude Code 한 달 사용량을 각 모델 가격으로 계산한 금액을 보여 줍니다. 한도 블록과 ‘더 보기’ 메뉴에서 열 수 있습니다. 가격은 공개 목록 models.dev에서 가져오며, 창을 열 때 하루에 한 번 이하로 내려받습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نافذة تعرض كل نماذج الـ API جنبًا إلى جنب: سعر الإدخال والإخراج، وكم ستكلّف مهمة واحدة مع كل نموذج، وكم سيكلّف شهرك في Claude Code بأسعارها. تُفتح من قسم الحدود ومن قائمة «المزيد». الأسعار من القائمة المفتوحة models.dev، وتُنزَّل عند فتح النافذة، مرة واحدة في اليوم على الأكثر."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jendela dengan semua model API berdampingan: harga input dan output, berapa biaya satu tugas dengan tiap model, dan berapa biaya sebulan Claude Code Anda dengan harga mereka. Dibuka dari blok limit dan dari menu “Lainnya”. Harga berasal dari daftar terbuka models.dev, yang diunduh saat Anda membuka jendela, paling banyak sekali sehari."
+          }
+        }
+      }
+    },
+    "Поиск модели": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search models"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пошук моделі"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell suchen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher un modèle"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar modelo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerca modello"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar modelo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szukaj modelu"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モデルを検索"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델 검색"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ابحث عن نموذج"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cari model"
+          }
+        }
+      }
+    },
+    "Провайдер": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Provider"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Провайдер"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anbieter"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fournisseur"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proveedor"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Provider"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Provedor"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dostawca"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロバイダ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "제공업체"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المزوّد"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penyedia"
+          }
+        }
+      }
+    },
+    "Проверьте соединение и нажмите «Обновить цены».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check the connection and click “Update Prices”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірте з’єднання й натисніть «Оновити ціни»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfen Sie die Verbindung und klicken Sie auf „Preise aktualisieren“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérifiez la connexion et cliquez sur « Actualiser les prix »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compruebe la conexión y haga clic en «Actualizar precios»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Controlla la connessione e fai clic su «Aggiorna prezzi»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifique a conexão e clique em “Atualizar preços”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdź połączenie i kliknij „Odśwież ceny”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "接続を確認して「価格を更新」をクリックしてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "연결을 확인하고 ‘가격 업데이트’를 클릭하세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تحقّق من الاتصال وانقر «تحديث الأسعار»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Periksa koneksi dan klik “Perbarui harga”."
+          }
+        }
+      }
+    },
+    "Размер задачи": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Task size"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Розмір завдання"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aufgabengröße"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taille de la tâche"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamaño de la tarea"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dimensione dell’attività"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamanho da tarefa"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rozmiar zadania"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タスクの規模"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "작업 크기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حجم المهمة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ukuran tugas"
+          }
+        }
+      }
+    },
+    "Список цен пришёл в незнакомом виде.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The price list came in an unknown format."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Список цін надійшов у незнайомому вигляді."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Preisliste kam in einem unbekannten Format."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La liste des prix est arrivée dans un format inconnu."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La lista de precios llegó en un formato desconocido."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’elenco dei prezzi è arrivato in un formato sconosciuto."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A lista de preços chegou em um formato desconhecido."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lista cen przyszła w nieznanym formacie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "価格リストが不明な形式で届きました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "가격 목록이 알 수 없는 형식으로 왔습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وصلت قائمة الأسعار بصيغة غير معروفة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daftar harga datang dalam format yang tidak dikenal."
+          }
+        }
+      }
+    },
+    "Цена задачи": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Task cost"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ціна завдання"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aufgabenpreis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coût de la tâche"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coste de la tarea"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Costo dell’attività"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Custo da tarefa"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koszt zadania"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タスクの費用"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "작업 비용"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تكلفة المهمة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biaya tugas"
+          }
+        }
+      }
+    },
+    "Цены моделей по API и что стоила бы одна задача с каждой": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API model prices and what one task would cost with each"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ціни моделей за API і скільки коштувало б одне завдання з кожною"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preise der API-Modelle und was eine Aufgabe mit jedem kosten würde"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prix des modèles par API et coût d’une tâche avec chacun"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Precios de los modelos por API y lo que costaría una tarea con cada uno"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prezzi dei modelli via API e quanto costerebbe un’attività con ciascuno"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preços dos modelos por API e quanto custaria uma tarefa com cada um"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ceny modeli przez API i koszt jednego zadania z każdym z nich"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "APIモデルの価格と、1つのタスクを各モデルで実行した場合の費用"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API 모델 가격과 작업 하나를 각 모델로 실행했을 때의 비용"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أسعار نماذج الـ API وكم ستكلّف مهمة واحدة مع كل نموذج"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harga model API dan biaya satu tugas dengan tiap model"
+          }
+        }
+      }
+    },
+    "Цены не загружены": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prices not loaded"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ціни не завантажено"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preise nicht geladen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prix non chargés"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Precios no cargados"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prezzi non caricati"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preços não carregados"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie pobrano cen"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "価格を読み込めませんでした"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "가격을 불러오지 못했습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم تُحمَّل الأسعار"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harga belum dimuat"
+          }
+        }
+      }
+    },
+    "Цены — из открытого списка models.dev, загружены %@. Это прейскурант прямого доступа к API провайдера: скидки, пакетный режим и наценка за длинный контекст не учтены.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prices come from the open models.dev list, downloaded %@. These are list prices for direct access to the provider's API: discounts, batch mode and long-context surcharges are not counted."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ціни — з відкритого списку models.dev, завантажені %@. Це прейскурант прямого доступу до API провайдера: знижки, пакетний режим і націнку за довгий контекст не враховано."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Preise stammen aus der offenen Liste models.dev, geladen %@. Es sind Listenpreise für den direkten Zugriff auf die API des Anbieters: Rabatte, Batch-Modus und Aufschläge für langen Kontext sind nicht berücksichtigt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les prix viennent de la liste ouverte models.dev, téléchargée %@. Ce sont les tarifs publics de l’accès direct à l’API du fournisseur : remises, mode par lots et majoration pour contexte long ne sont pas pris en compte."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los precios vienen de la lista abierta models.dev, descargada %@. Son precios de tarifa del acceso directo a la API del proveedor: no se cuentan descuentos, modo por lotes ni recargos por contexto largo."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I prezzi vengono dall’elenco aperto models.dev, scaricato %@. Sono prezzi di listino per l’accesso diretto all’API del provider: sconti, modalità batch e sovrapprezzi per il contesto lungo non sono considerati."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os preços vêm da lista aberta models.dev, baixada %@. São preços de tabela do acesso direto à API do provedor: descontos, modo em lote e acréscimo por contexto longo não são considerados."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ceny pochodzą z otwartej listy models.dev, pobranej %@. To cennik bezpośredniego dostępu do API dostawcy: rabaty, tryb wsadowy i dopłata za długi kontekst nie są uwzględnione."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "価格は公開リストmodels.devのもので、%@に取得しました。プロバイダのAPIに直接アクセスする場合の定価です。割引、バッチモード、長いコンテキストの追加料金は含みません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "가격은 공개 목록 models.dev에서 %@에 내려받았습니다. 제공업체 API에 직접 접근할 때의 정가이며, 할인, 배치 모드, 긴 컨텍스트 추가 요금은 반영하지 않았습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأسعار من القائمة المفتوحة models.dev، ونُزّلت %@. هذه أسعار القائمة للوصول المباشر إلى API المزوّد: لا تشمل الخصومات ولا وضع الدُفعات ولا الرسوم الإضافية للسياق الطويل."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harga berasal dari daftar terbuka models.dev, diunduh %@. Ini harga resmi untuk akses langsung ke API penyedia: diskon, mode batch, dan biaya tambahan konteks panjang tidak dihitung."
+          }
+        }
+      }
+    },
+    "Экономика AI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Economics"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Економіка AI"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI-Ökonomie"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Économie de l’IA"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Economía de la IA"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Economia dell’AI"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Economia da IA"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekonomia AI"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AIエコノミクス"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 경제성"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اقتصاديات AI"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekonomi AI"
+          }
+        }
+      }
+    },
+    "Экономика AI: цены моделей": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Economics: Model Prices"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Економіка AI: ціни моделей"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI-Ökonomie: Modellpreise"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Économie de l’IA : prix des modèles"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Economía de la IA: precios de los modelos"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Economia dell’AI: prezzi dei modelli"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Economia da IA: preços dos modelos"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekonomia AI: ceny modeli"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AIエコノミクス：モデルの価格"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 경제성: 모델 가격"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اقتصاديات AI: أسعار النماذج"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekonomi AI: harga model"
+          }
+        }
+      }
+    },
+    "Экономика AI…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Economics…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Економіка AI…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI-Ökonomie …"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Économie de l’IA…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Economía de la IA…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Economia dell’AI…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Economia da IA…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekonomia AI…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AIエコノミクス…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 경제성…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اقتصاديات AI…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekonomi AI…"
+          }
+        }
+      }
+    },
+    "Только за последний год": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last year only"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Лише за останній рік"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur letztes Jahr"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dernière année seulement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo el último año"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo ultimo anno"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Só do último ano"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tylko z ostatniego roku"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "過去1年のみ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최근 1년만"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آخر سنة فقط"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya setahun terakhir"
+          }
+        }
+      }
+    },
+    "Скрыть модели, выпущенные больше года назад": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide models released more than a year ago"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сховати моделі, випущені понад рік тому"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelle ausblenden, die vor über einem Jahr erschienen sind"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masquer les modèles sortis il y a plus d’un an"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocultar los modelos lanzados hace más de un año"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nascondi i modelli usciti più di un anno fa"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocultar modelos lançados há mais de um ano"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ukryj modele wydane ponad rok temu"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1年以上前に公開されたモデルを隠す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "출시된 지 1년이 넘은 모델 숨기기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إخفاء النماذج الصادرة قبل أكثر من سنة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sembunyikan model yang dirilis lebih dari setahun lalu"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

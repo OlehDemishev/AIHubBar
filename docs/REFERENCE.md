@@ -61,6 +61,8 @@ Data refreshes at launch, on panel open when older than 60 s, every 5 min (`--no
 
 **Week forecast:** under the limit rings, “the week runs out Sat 04:56 at this pace” (orange) or “the week lasts until it resets”, and small bars for each day of the current week window (today highlighted, hover for the day's share). The plan gives only the week's total; it is split over the days in the proportions of Claude Code's journals (the same weights as “Usage by project”), and the pace is the last 24 hours. One notification per week window when the pace says the week runs out before the reset.
 
+**AI Economics:** “AI Economics…” under “Usage by project”, or the panel's “More” menu, opens a table of the models behind an API: input and output price per million tokens, the context window, what one task would cost with each model (three sizes: a question, an agent's task, a large task — the assumed tokens are shown under the choice) and what your last 30 days of Claude Code tokens would cost at each model's prices. Sort by any column, filter by provider, search by name. The prices are list prices of the provider's own API from models.dev, an open list: it is downloaded when the window is opened, at most once a day, and kept in `model-prices.json`; nothing of yours goes with the request. Discounts, batch tiers and long-context surcharges are not counted. Your own spend elsewhere in the app is still counted with the price you enter.
+
 **Usage history:** “Usage History…” under “Usage by project” opens a window with Claude Code tokens by day for 7, 30 or 90 days, the totals, the busiest day and a CSV export. Days are kept for about a year in `usage-days.json`; the first run reads the last three months of journals once. A cost estimate appears once a price for Anthropic is entered in AI Services (prices are not shipped). It is an estimate from this Mac's journals: claude.ai chats are not in it.
 
 **Recently finished:** under the sessions, the last five finished Claude Code sessions whose folder still exists (session files are kept for 7 days). A click continues one with `claude --resume` in Terminal.
@@ -144,7 +146,7 @@ The app binary runs headless commands instead of the UI: `~/Applications/AI\\ Hu
 | `--claude … --print` · `--claude-path <path>` | print the command line · use another binary (e.g. `/bin/echo`) |
 | `--background-settings` | permission rules of background runs |
 | `--command report\|summary\|cleanup-check\|cleanup` | run a common command here and print its result |
-| `--app-command <command>\|help\|cleanup-output\|settings\|quick-prompt` | ask the running app to run a command or open a window (`quick-prompt`: the quick prompt window) |
+| `--app-command <command>\|help\|cleanup-output\|settings\|economics\|quick-prompt` | ask the running app to run a command or open a window (`quick-prompt`: the quick prompt window) |
 | `--hooks status\|install\|uninstall` | session hooks |
 | `--modes` · `--export-settings <file>` | list modes (* = current) · export all settings (import: open the file) |
 | `--notifications-status` · `--app-command test-notification` | notification permission · send a test notification |

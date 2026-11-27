@@ -446,6 +446,10 @@ struct MenuPanelView: View {
                 NSApp.activate()
                 openWindow(.claudeConfig)
             }
+            Button("Экономика AI: цены моделей", systemImage: "dollarsign.circle") {
+                NSApp.activate()
+                openWindow(.economics)
+            }
             Button("Справка", systemImage: "questionmark.circle") {
                 NSApp.activate()
                 openWindow(.help)

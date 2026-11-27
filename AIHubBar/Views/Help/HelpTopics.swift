@@ -212,6 +212,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
                 HelpFact(String(localized: "Агенты"), String(localized: "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar находит установленные (Настройки → «Сервисы AI») и открывает их в Терминале в папке проекта: «Открыть в…» в блоке Claude у проекта. Вход у каждого свой."), symbol: "terminal"),
                 HelpFact(String(localized: "Модели по API"), String(localized: "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral и любой сервер, совместимый с OpenAI (Ollama, LM Studio, OpenRouter). Ключ — только в связке ключей macOS; «Проверить» не тратит токены."), symbol: "key"),
                 HelpFact(String(localized: "Skills и плагины"), String(localized: "В окне «Claude Code» на вкладке «Skills и плагины»: skills Claude Code и Codex и плагины Claude Code — у каждого выключатель; hooks обоих — для просмотра."), symbol: "wand.and.stars"),
+                HelpFact(String(localized: "Экономика AI"), String(localized: "Окно со всеми моделями по API рядом: цена ввода и вывода, что стоила бы одна задача с каждой и сколько стоил бы ваш месяц в Claude Code по их ценам. Открывается из блока лимитов и из меню «Ещё». Цены — из открытого списка models.dev: он загружается, когда вы открываете окно, не чаще раза в день."), symbol: "dollarsign.circle"),
                 HelpFact(String(localized: "Сервис профиля"), String(localized: "Настройки → «Профили» → «Сервис по умолчанию»: им будут выполняться команды-шаблоны профиля."), symbol: "square.stack.3d.up"),
             ])]
         case .projects:
@@ -293,7 +294,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
                 HelpFact("--background-settings", String(localized: "Правила доступа фоновых задач.")),
                 HelpFact("--usage · --token-usage", String(localized: "Лимиты подписки; расход по проектам.")),
                 HelpFact("--services · --services limits", String(localized: "Найденные агенты и ключи; лимиты других AI.")),
-                HelpFact("--app-command help|settings|assistant|usage-history|quick-prompt", String(localized: "Открыть окно в запущенном приложении.")),
+                HelpFact("--app-command help|settings|assistant|usage-history|economics|quick-prompt", String(localized: "Открыть окно в запущенном приложении.")),
                 HelpFact(String(localized: "--export-settings <файл.claudepult>"), String(localized: "Сохранить все настройки в файл.")),
             ], monospaced: true)]
         }

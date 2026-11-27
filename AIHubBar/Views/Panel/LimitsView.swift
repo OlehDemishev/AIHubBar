@@ -209,6 +209,13 @@ struct LimitsView: View {
                 }
                 .buttonStyle(.link)
                 .scaledFont(.caption)
+                Button("Экономика AI…") {
+                    NSApp.activate()
+                    openWindow(.economics)
+                }
+                .buttonStyle(.link)
+                .scaledFont(.caption)
+                .help("Цены моделей по API и что стоила бы одна задача с каждой")
             }
         }
     }
