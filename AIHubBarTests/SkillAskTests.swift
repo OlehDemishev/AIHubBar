@@ -77,4 +77,38 @@ struct SkillAskTests {
         #expect(items.map(\.name) == ["b/sheets", "a/pdf"], "the most words first")
         #expect(items.first?.kind == .repo("b/sheets"))
     }
+
+    @Test func aProjectIsReadAsNamesOnly() throws {
+        let root = FileManager.default.temporaryDirectory.appending(path: "stack-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: root) }
+        func write(_ path: String, _ text: String = "x") throws {
+            let url = root.appending(path: path)
+            try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try text.write(to: url, atomically: true, encoding: .utf8)
+        }
+        for index in 0..<5 { try write("App/File\(index).swift") }
+        try write("scripts/tool.py")
+        try write("node_modules/big/index.js")
+        try write("node_modules/big/more.js")
+        try write("project.yml")
+        try write(".github/workflows/ci.yml")
+        try write("Package.swift", #".package(url: "https://github.com/sparkle-project/Sparkle.git", from: "2.0.0")"#)
+        try write("web/package.json", #"{"dependencies": {"next": "15", "react": "19"}, "devDependencies": {"vitest": "1"}}"#)
+        try write("desktop/Cargo.toml", "[package]\nname = \"x\"\n[dependencies]\nserde = \"1\"\ntauri = { version = \"2\" }\n[profile.release]\nlto = true\n")
+        try write("README.md", "SECRET project text that must not be sent")
+
+        let stack = SkillProjectStack.read(root)
+        #expect(stack.languages.first == "Swift")
+        #expect(!stack.languages.contains("JavaScript"), "node_modules is not walked")
+        #expect(stack.tools.contains("XcodeGen") && stack.tools.contains("GitHub Actions") && stack.tools.contains("Cargo") && stack.tools.contains("Node.js"))
+        #expect(stack.packages.contains("Sparkle") && stack.packages.contains("next") && stack.packages.contains("serde") && stack.packages.contains("tauri"))
+        #expect(!stack.packages.contains("lto"), "only dependency sections of a Cargo.toml")
+        #expect(!stack.summary().contains("SECRET"), "no file's text is sent")
+        #expect(stack.summary().count <= 440)
+        #expect(SkillProjectStack.read(root.appending(path: "missing")).isEmpty)
+
+        let prompt = SkillAsk.projectWordsPrompt(stack: stack.summary(), nonce: Self.nonce)
+        #expect(prompt.user.hasPrefix("<<<PROJECT \(Self.nonce)>>>\n") && prompt.user.split(separator: "\n").count == 3)
+        #expect(SkillAsk.projectQuestion("Languages: Swift.").hasSuffix("Languages: Swift."))
+    }
 }

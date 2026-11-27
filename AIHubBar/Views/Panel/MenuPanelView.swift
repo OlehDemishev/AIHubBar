@@ -198,6 +198,8 @@ struct MenuPanelView: View {
             StatusItemTooltip.panelIsOpen = false
         }
         .onChange(of: expanded) { snapshotIfEnabled() }
+        // «Скиллы» in a project's card: the Skills section opens and picks for that project.
+        .onChange(of: skills.pendingProject) { if skills.pendingProject != nil { section = .skills(nil) } }
         .onChange(of: store.lastUpdated) { snapshotIfEnabled() }
     }
 

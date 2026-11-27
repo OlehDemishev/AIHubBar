@@ -367,6 +367,11 @@ struct SkillsSectionView: View {
     /// What the person's model picked for the typed words (SkillAsk); nil for the ordinary search.
     @State private var askPicks: [SkillAsk.Pick]?
     @State private var askedQuestion = ""
+    /// Set when the picks are for a project («Скиллы для проекта»): its name and what was read from it.
+    @State private var askedProject: String?
+    /// The project being asked about now.
+    @State private var askingProject: String?
+    @State private var askedStack: SkillProjectStack?
     @State private var askFailure: String?
     /// Claude Code or an API key is there to ask: `claude-code`, `api` or nil.
     @State private var askAvailable: String?
@@ -412,7 +417,7 @@ struct SkillsSectionView: View {
             } else {
                 filtersBar
                 if let askPicks {
-                    SkillAskResultsView(question: askedQuestion, picks: askPicks, openSkill: { id in section = .skills(id) }, openRepo: { slug in
+                    SkillAskResultsView(question: askedQuestion, project: askedProject, stack: askedStack, picks: askPicks, openSkill: { id in section = .skills(id) }, openRepo: { slug in
                         indexQuery = slug
                         showsIndex = true
                     }, close: { self.askPicks = nil })
@@ -443,6 +448,14 @@ struct SkillsSectionView: View {
             result = await skills.search(filters)
             let words = filters.query.trimmingCharacters(in: .whitespaces)
             indexMatches = words.isEmpty ? 0 : await skills.index(query: words, limit: 1).matches
+        }
+        .task(id: skills.pendingProject) {
+            guard let project = skills.pendingProject else { return }
+            skills.pendingProject = nil
+            showsIndex = false
+            showsOrder = false
+            showsJournal = false
+            await askForProject(project)
         }
         .onAppear {
             if skills.opensChanges {
@@ -554,6 +567,24 @@ struct SkillsSectionView: View {
         switch await skills.ask(question) {
         case .success(let picks):
             askedQuestion = question
+            askedProject = nil
+            askedStack = nil
+            askPicks = picks
+        case .failure(let refusal):
+            if refusal != .state { askFailure = SkillAskText.failure(refusal) }
+        }
+    }
+
+    /// «Скиллы для проекта»: what the project is made of is read on this Mac, the model picks from the catalog and the index.
+    private func askForProject(_ project: ProjectRef) async {
+        askFailure = nil
+        askingProject = project.name
+        defer { askingProject = nil }
+        switch await skills.askForProject(project.path) {
+        case .success(let (stack, picks)):
+            askedQuestion = ""
+            askedProject = project.name
+            askedStack = stack
             askPicks = picks
         case .failure(let refusal):
             if refusal != .state { askFailure = SkillAskText.failure(refusal) }
@@ -565,12 +596,15 @@ struct SkillsSectionView: View {
             TextField("Поиск по названию, описанию и заметке", text: $filters.query)
                 .textFieldStyle(.roundedBorder)
                 .onSubmit { if askPicks != nil { Task { await ask() } } }
-            if !filters.query.trimmingCharacters(in: .whitespaces).isEmpty {
+            if !filters.query.trimmingCharacters(in: .whitespaces).isEmpty || askingProject != nil || askFailure != nil {
                 HStack(spacing: 6) {
-                    if skills.asking {
+                    if let askingProject {
+                        ProgressView().controlSize(.small)
+                        Text(verbatim: String(localized: "Подбираю скиллы для «\(askingProject)»…")).scaledFont(.caption2).foregroundStyle(.secondary)
+                    } else if skills.asking {
                         ProgressView().controlSize(.small)
                         Text("Спрашиваю модель…").scaledFont(.caption2).foregroundStyle(.secondary)
-                    } else {
+                    } else if !filters.query.trimmingCharacters(in: .whitespaces).isEmpty {
                         Button {
                             Task { await ask() }
                         } label: {

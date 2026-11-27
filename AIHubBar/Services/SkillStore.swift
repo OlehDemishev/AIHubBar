@@ -40,6 +40,8 @@ final class SkillStore {
     var opensChanges = false
     /// The block asks the section to open on «Порядок» (conflicts, copies, unused, sets).
     var opensOrder = false
+    /// A project whose skills the Skills section should pick when it opens: «Скиллы для проекта» (name, path).
+    var pendingProject: ProjectRef?
     /// What the catalog may install and whom the person trusts (Settings → Скиллы).
     private(set) var policy = SkillCatalog.Policy()
     private(set) var trusted: [String] = []
@@ -440,20 +442,37 @@ final class SkillStore {
     /// are searched here, the model picks the best of what was found. Two short requests; nothing is downloaded.
     func ask(_ question: String) async -> Outcome<[SkillAsk.Pick]> {
         let question = question.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !question.isEmpty, !asking else { return .failure(.state) }
+        guard !question.isEmpty else { return .failure(.state) }
+        // The person's own words count too: a skill named as they wrote it is found without the model.
+        let typed = question.components(separatedBy: CharacterSet.alphanumerics.inverted).filter { $0.count >= 3 }.prefix(6)
+        return await pick(question: question, wordsPrompt: SkillAsk.wordsPrompt(question: question, nonce: SkillReview.nonce()), extraWords: Array(typed))
+    }
+
+    /// «Скиллы для проекта»: the project's stack is read here (names only) and the model picks from the catalog and the
+    /// index what would help an agent work on it.
+    func askForProject(_ path: String) async -> Outcome<(SkillProjectStack, [SkillAsk.Pick])> {
+        let stack = await Task.detached(priority: .userInitiated) { SkillProjectStack.read(URL(fileURLWithPath: path)) }.value
+        guard !stack.isEmpty else { return .failure(.init(code: "empty-project")) }
+        let summary = stack.summary()
+        let result = await pick(question: SkillAsk.projectQuestion(summary), wordsPrompt: SkillAsk.projectWordsPrompt(stack: summary, nonce: SkillReview.nonce()),
+                                extraWords: stack.searchWords)
+        return result.map { (stack, $0) }
+    }
+
+    /// The two requests of a search: words from the model, a local search, the model's picks by number.
+    private func pick(question: String, wordsPrompt: SkillReviewer.Prompt, extraWords: [String]) async -> Outcome<[SkillAsk.Pick]> {
+        guard !asking else { return .failure(.state) }
         asking = true
         defer { asking = false }
         guard let who = await SkillReviewer.who() else { return .failure(.init(code: "no-reviewer")) }
-        let wordsAnswer = await SkillReviewer.ask(SkillAsk.wordsPrompt(question: question, nonce: SkillReview.nonce()), who: who, model: SkillAsk.model, scratch: askScratch)
+        let wordsAnswer = await SkillReviewer.ask(wordsPrompt, who: who, model: SkillAsk.model, scratch: askScratch)
         guard case .success(let first) = wordsAnswer else {
             if case .failure(let refusal) = wordsAnswer { AppLog.error("skills: plain-words search failed: \(refusal.code)"); return .failure(refusal) }
             return .failure(.missing)
         }
         spend(first, who)
         guard let words = SkillAsk.words(from: first.text) else { return .failure(.init(code: "unreadable")) }
-        // The person's own words count too: a skill named as they wrote it is found without the model.
-        let typed = question.components(separatedBy: CharacterSet.alphanumerics.inverted).filter { $0.count >= 3 }.prefix(6)
-        let all = words + typed.filter { word in !words.contains { $0.caseInsensitiveCompare(word) == .orderedSame } }
+        let all = words + extraWords.filter { word in !words.contains { $0.caseInsensitiveCompare(word) == .orderedSame } }
         let items: [SkillAsk.Item] = await worker.run { (try? $0.askCandidates(words: all)) ?? [] }
         AppLog.info("skills: plain-words search via \(who.via): \(words.count) words, \(items.count) candidates")
         guard !items.isEmpty else { return .success([]) }
@@ -740,4 +759,10 @@ final class SkillStore {
             }
         }
     }
+}
+
+/// A project as «Скиллы для проекта» needs it.
+struct ProjectRef: Equatable, Sendable {
+    var name: String
+    var path: String
 }

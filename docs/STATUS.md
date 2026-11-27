@@ -5,6 +5,7 @@
 **Updated:** 2026-11-27
 
 **Now:**
+- 2026-11-27: Mac — Skills Catalog: «Скиллы» in a project's card (branch `feat/mac-skills-for-project`): the project's languages, tools and package names are read on this Mac and the person's model picks skills for it from the catalog and the open sources index, with a line on why — PR open, waiting for Oleh's word
 - 2026-11-27: Mac — AI Hub Bar as an MCP server — merged as PR #675 on Oleh's «Да, вливай», not in a build yet: `AIHubBar --mcp`, read-only over stdio — tools `limits`, `sessions`, `background_tasks` read the app's files, ask no service and change nothing; tried by hand and with a real Claude Code (`--mcp-config`, one call of `limits`)
 - 2026-11-27: Mac — what a background task used — merged as PR #670 on Oleh's «Да, вливай», not in a build yet: «Журнал» shows the task's tokens and what the same work costs through the API — Claude Code's own `total_cost_usd`, for Codex the person's OpenAI price; kept in the run's file as `usage`; tests only, the window not seen live
 - 2026-11-27: Mac — Skills Catalog: the person's own model helps: «Найти по смыслу с AI» under the search turns plain words into search words, searches the catalog and the open sources index here and lets the model pick up to 10 with a line on why; «Перевести описания» (list, index, card) translates descriptions into the interface language, remembered by text hash; both through Claude Code without tools or the Anthropic API key, `claude-haiku-5-5` — merged as PR #672 on Oleh's «Да, вливай» (seen live in an isolated copy), not in a build yet
@@ -265,6 +266,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-27 — Skills Catalog: skills for a project (branch `feat/mac-skills-for-project`)
+
+Done: `AIHubBar/Skills/SkillProjectStack.swift` reads a project folder — languages by file count, tools from files (Xcode, XcodeGen, Docker, GitHub Actions, Expo, Prisma…), up to 30 package names from ten kinds of manifests at the top and one level down; nothing but these names is sent. «Скиллы» in an open project's card (only with the Skills module on) opens the Skills section and runs the plain-words search's two requests for the project (`SkillAsk.projectWordsPrompt`); the results say «AI подобрал для проекта «…»» and what was seen in the folder. `SkillStore.ask` and `askForProject` share one pipeline. SPEC §4b updated; 5 new strings in 12 languages.
+Checked: `scripts/check.sh` green; a new test reads a made-up project (Swift app, a Next.js part, a Cargo part, node_modules skipped, README not sent); seen live in an isolated copy on a made-up Next.js + Prisma + Stripe + Docker project: «Скиллы» in its card opened the section and in 6 s gave prisma/skills, stripe/ai, vercel-labs/agent-skills, webapp-testing and Playwright skills, each with a line on why, and «Что видно в папке» listed what was sent.
+Left: results are not remembered per project — every click asks the model again (two Haiku requests).
 
 ## 2026-11-27 — AI Hub Bar as an MCP server (branch `feat/mcp-server`)
 

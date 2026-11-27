@@ -106,6 +106,13 @@ Both go the AI review's way (§4): Claude Code with no tools, settings or MCP, o
   person's own words; the model then picks at most 10 of the 40 best matches, with one line on why. It never sees the
   whole catalog, and a pick is a number from the list it was given: it can't name or invent anything else. It is told
   that safety is not its to judge; the picks show the static verdict as before and the lines are marked as the model's.
+- **«Скиллы» in a project's card** (when the Skills module is on): the same two requests for a project instead of a
+  question. What the project is made of is read on this Mac (`SkillProjectStack`): up to five languages by file count
+  (four levels deep, at most 20,000 entries, no hidden folders, dependencies or build output), tools seen from files
+  (Xcode, XcodeGen, Docker, GitHub Actions, Expo…) and up to 30 package names from the manifests at the top and one
+  level down (`package.json`, `Package.swift`, `Podfile`, `requirements.txt`, `pyproject.toml`, `Cargo.toml`, `go.mod`,
+  `Gemfile`, `composer.json`, `pubspec.yaml`). Only these names go to the model, at most 440 characters; no file's text,
+  README included. The results say what was seen in the folder.
 - **«Перевести описания»** in the list, the index and a skill's card: descriptions that read as another language
   (`NLLanguageRecognizer`) go to the model, at most 40 at a time, and come back into the interface language. They are
   remembered in `llm_translations` by the text's SHA-256, the language and the prompt's version, so the same text is
