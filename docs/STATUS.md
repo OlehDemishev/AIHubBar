@@ -5,6 +5,7 @@
 **Updated:** 2026-11-27
 
 **Now:**
+- 2026-11-27: Mac — the panel header's «Скиллы» is a chip with the word beside the profile chip, not a puzzle icon (Oleh: the icon alone said nothing) — branch `fix/skills-header-chip`, PR open, waits for Oleh's merge; not seen live yet
 - 2026-11-27: Mac — Skills Catalog: GitHub repositories as sources (Settings → Скиллы → «Источники»; anthropics/skills suggested): skills downloaded at a commit into the app's cache, checked, listed with «owner/repo ★», installable, updated when the source moves on; filters «Откуда», «Официальные», «★ 100+/1000+»; scanner rules 3 after false alarms on anthropics/skills — merged as PR #648 on Oleh's «Да, вливай» (seen live in an isolated copy: download, Settings page, badges, filter, install from a source), not in a build yet
 - 2026-11-26: Mac — **0.14.0-beta.2 published** to beta testers on Oleh's «Сделай вторую бету»: beta 1 plus the layout's Secure Input pause (#644); build 1537, signed and notarized; https://github.com/OlehDemishev/AIHubBar/releases/tag/v0.14.0-beta.2
 - 2026-11-26: Mac — «Раскладка» says when it is paused by Secure Input and which app holds it: a lock beside the language in the menu bar, two lines in its menu, a row in Settings — merged as PR #644 on Oleh's «Да, вливай», not in a build yet (0.14.0-beta.1 doesn't have it); found while asking why it «не всегда работает» — Claude.app (pid 1128) held Secure Input all evening, so no word was fixed after 19:06
@@ -197,6 +198,7 @@
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
 **Needs Oleh:**
+- merge the PR of `fix/skills-header-chip` (the «Скиллы» chip in the panel header) after a look at it
 - 0.14.0-beta.2: update through Sparkle with «Бета-версии» on (beta 1 is replaced), switch on «Скиллы» in «Что показывать», use it a day; then say whether 0.14.0 goes out on Tuesday
 - Skills Catalog on the Mac: in a Debug build switch on «Скиллы» in Settings → «Что показывать» (it is not added to profiles by itself), open the panel and say what to change in the block and the section
 - Skills Catalog, desktop/ (paused): say what to change in the window (it runs on the Mac from `.claude/worktrees/skills-catalog/desktop/target/debug/AIHubBar`; menu bar icon → «Каталог скиллов…»); on the Windows laptop check the same and that Defender is quiet about the build; say whether stages 3–4 are wanted in full
@@ -245,6 +247,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-27 — Mac: «Скиллы» in the panel header is a chip with the word (branch `fix/skills-header-chip`)
+
+Done: Oleh sent a screenshot of the panel: the puzzle icon among the header's icons did not say what it opens. `MenuPanelView`: the icon button is gone from `headerButtons`; `skillsChip` stands after the profile chip — a capsule with the icon and «Скиллы», the same size and background as the profile chip, tinted with the accent colour while the catalog is open, the red dot for a dangerous skill kept. No new texts («Скиллы» was already in the catalog).
+Checked: `scripts/strings-check.py` — 0 problems. No local build: the disk had 1.5 GB free (swap 3 GB), so the build and the tests are left to the PR's «Mac tests».
+Left: not seen live — the chip's look, and whether the header still fits with a long account name or in a long language (the name is the one that truncates).
 
 ## 2026-11-27 — Mac: Skills Catalog — GitHub repositories as sources, scanner rules 3 (branch `feat/mac-skills-github`)
 

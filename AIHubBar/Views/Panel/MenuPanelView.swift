@@ -351,6 +351,7 @@ struct MenuPanelView: View {
                     .help(String(localized: "Тариф Claude"))
             }
             profileChip
+            skillsChip
             Spacer(minLength: 4)
             HStack(spacing: 8) { headerButtons }
                 .buttonStyle(.borderless)
@@ -435,20 +436,6 @@ struct MenuPanelView: View {
             .help(muted ? String(localized: "Включить уведомления в Telegram") : String(localized: "Выключить уведомления в Telegram — пока не включите снова"))
             .accessibilityLabel(muted ? String(localized: "Включить уведомления в Telegram") : String(localized: "Выключить уведомления в Telegram"))
         }
-        // «Скиллы» opens the Skills Catalog in this same panel (Oleh, 2026-11-26); a dot while a dangerous skill is installed.
-        if modes.isOn(.skills) {
-            Button {
-                withAnimation(calm ? nil : .snappy(duration: 0.2)) { section = section == nil ? .skills(nil) : nil }
-            } label: {
-                Image(systemName: "puzzlepiece.extension")
-                    .symbolVariant(section == nil ? .none : .fill)
-                    .overlay(alignment: .topTrailing) {
-                        if skills.hasAlert { Circle().fill(.red).frame(width: 6, height: 6).offset(x: 2, y: -2) }
-                    }
-            }
-            .help(skills.hasAlert ? String(localized: "Скиллы — есть опасные") : String(localized: "Скиллы"))
-            .accessibilityLabel(skills.hasAlert ? String(localized: "Скиллы — есть опасные") : String(localized: "Скиллы"))
-        }
         // Settings, help and quit were three menu-like rows at the bottom; as icons they no longer outweigh the content.
         Button { openSettings() } label: { Label("Настройки… (⌘,)", systemImage: "gearshape").labelStyle(.iconOnly) }
         .help("Настройки… (⌘,)")
@@ -478,6 +465,36 @@ struct MenuPanelView: View {
             .frame(width: 0, height: 0)
             .opacity(0)
             .accessibilityHidden(true)
+    }
+
+    /// «Скиллы» opens the Skills Catalog in this same panel (Oleh, 2026-11-26). A chip with the word, like the plan
+    /// and the profile beside it: the puzzle icon alone said nothing (Oleh, 2026-11-27). Tinted while the catalog is
+    /// open; a dot while a dangerous skill is installed.
+    @ViewBuilder
+    private var skillsChip: some View {
+        if modes.isOn(.skills) {
+            let open = section != nil
+            Button {
+                withAnimation(calm ? nil : .snappy(duration: 0.2)) { section = open ? nil : .skills(nil) }
+            } label: {
+                Label("Скиллы", systemImage: "puzzlepiece.extension")
+                    .symbolVariant(open ? .fill : .none)
+                    .scaledFont(.caption, weight: open ? .medium : .regular)
+                    .lineLimit(1)
+                    .fixedSize()
+                    .foregroundStyle(open ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(.primary))
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 2)
+                    .background(Capsule().fill(open ? Color.accentColor.opacity(0.16) : Color.primary.opacity(0.07)))
+                    .overlay(alignment: .topTrailing) {
+                        if skills.hasAlert { Circle().fill(.red).frame(width: 6, height: 6).offset(x: 1, y: -1) }
+                    }
+                    .contentShape(Capsule())
+            }
+            .buttonStyle(.plain)
+            .help(skills.hasAlert ? String(localized: "Скиллы — есть опасные") : String(localized: "Скиллы"))
+            .accessibilityLabel(skills.hasAlert ? String(localized: "Скиллы — есть опасные") : String(localized: "Скиллы"))
+        }
     }
 
     /// The current profile; with several enabled it is the switcher (it replaces the row of chips).
