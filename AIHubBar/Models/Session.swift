@@ -84,6 +84,8 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
     var promptAt: Date?
     /// Whose session: Claude Code, or Copilot / Codex CLI through the same hook (`CopilotHooks`, `CodexHooks`).
     var agent: AgentKind = .claudeCode
+    /// The other computer the session runs on (`RemoteMachine`); nil on this Mac. Not in the hook's file.
+    var machine: SessionMachine?
 
     enum CodingKeys: String, CodingKey {
         case cwd, project, state, event, message, tty, entrypoint, agent
@@ -167,6 +169,11 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
     /// Project name, or the last folder of `cwd` for sessions outside the projects folder.
     var displayProject: String {
         project ?? (cwd as NSString).lastPathComponent
+    }
+
+    /// «AIHubBar · сервер»: the project, with the computer for a session that is not on this Mac.
+    var placeTitle: String {
+        machine.map { "\(displayProject) · \($0.name)" } ?? displayProject
     }
 
     /// Worktree name when the session runs in `<project>/.claude/worktrees/<name>`.

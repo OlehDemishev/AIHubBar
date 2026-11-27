@@ -13,6 +13,8 @@ struct SessionRow: Identifiable, Equatable {
     var message: String?
     var session: Session?
     var run: BackgroundRun?
+    /// The other computer a session runs on (`Session.machine`); nil on this Mac.
+    var machine: String?
 
     /// Sessions from hooks, joined with background runs by id; runs without a session file (hooks off) are added.
     static func rows(sessions: [SessionStore.Item], runs: [BackgroundRun], now: Date = .now) -> [SessionRow] {
@@ -29,7 +31,7 @@ struct SessionRow: Identifiable, Equatable {
                 state: run.map { $0.state == .running ? item.state : $0.state.sessionState } ?? item.state,
                 context: item.context,
                 message: item.state == .waiting ? s.message : run?.summary,
-                session: s, run: run
+                session: s, run: run, machine: s.machine?.name
             )
         }
         let shown = Set(rows.map(\.id) + rows.compactMap { $0.run?.id })
@@ -301,7 +303,8 @@ private struct SessionRowView: View {
     /// «Разрешить» and «Отклонить» are live: the rows have stood still long enough to see what is under the pointer.
     @State private var requestArmed = false
 
-    private var folder: String? { row.session?.cwd ?? row.run?.folder }
+    /// A folder on this Mac: a remote session has none here, so no changed files are read for it.
+    private var folder: String? { row.session?.machine != nil ? nil : row.session?.cwd ?? row.run?.folder }
     private var changes: SessionChanges? {
         folder.flatMap { changesStore.changes(folder: $0, since: row.startedAt) }.flatMap { $0.isEmpty ? nil : $0 }
     }
@@ -339,6 +342,17 @@ private struct SessionRowView: View {
                         .foregroundStyle(.secondary)
                         .help(agent.title)
                         .accessibilityLabel(agent.title)
+                }
+                if let machine = row.machine {
+                    Label(machine, systemImage: "network")
+                        .scaledFont(.callout)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                        .frame(maxWidth: 96, alignment: .leading)
+                        .fixedSize(horizontal: true, vertical: false)
+                        .layoutPriority(0.5)
+                        .help("Сессия на другом компьютере, по SSH")
                 }
                 if let worktree = row.worktree {
                     Label(worktree, systemImage: "arrow.triangle.branch")

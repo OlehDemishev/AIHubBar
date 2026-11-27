@@ -162,6 +162,11 @@ final class AppSettings {
         didSet { defaults.setEncoded(claudeAccounts, forKey: Keys.claudeAccounts) }
     }
 
+    /// Other computers whose sessions the panel shows over SSH (`RemoteMachines`).
+    var remoteMachines: [RemoteMachine] {
+        didSet { defaults.setEncoded(remoteMachines, forKey: Keys.remoteMachines) }
+    }
+
     var quickCommands: [QuickCommand] {
         didSet { defaults.setEncoded(quickCommands, forKey: Keys.quickCommands) }
     }
@@ -409,6 +414,7 @@ final class AppSettings {
         notesFolder = defaults.string(forKey: Keys.notesFolder) ?? "~/Documents/ClaudePult Notes"
         quickCommands = defaults.decoded([QuickCommand].self, forKey: Keys.quickCommands) ?? QuickCommand.examples
         claudeAccounts = defaults.decoded([ClaudeAccount].self, forKey: Keys.claudeAccounts) ?? []
+        remoteMachines = defaults.decoded([RemoteMachine].self, forKey: Keys.remoteMachines) ?? []
         var toggles = defaults.stringArray(forKey: Keys.quickToggles)?.compactMap(QuickToggle.init(rawValue:)) ?? QuickToggle.allCases
         // The Telegram tile came later: a saved choice gets it once, and can drop it again.
         if !defaults.bool(forKey: Keys.telegramToggleAdded) {
@@ -488,6 +494,7 @@ final class AppSettings {
         static let notesFolder = "notesFolder"
         static let quickCommands = "quickCommands"
         static let claudeAccounts = "claudeAccounts"
+        static let remoteMachines = "remoteMachines"
         static let quickToggles = "quickToggles"
         static let telegramToggleAdded = "quickTogglesTelegramAdded"
         static let keepAwakeRules = "keepAwakeRules"
