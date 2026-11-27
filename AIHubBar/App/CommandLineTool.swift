@@ -15,6 +15,7 @@ import UserNotifications
 /// - `AIHubBar --app-command <command>|help|cleanup-output` (asks the running app)
 /// - `AIHubBar --usage`, `AIHubBar --usage-raw` (subscription limits; the token is never printed), `--token-usage`
 /// - `AIHubBar --notifications-status`
+/// - `AIHubBar --mcp` (a read-only MCP server over stdio: `HubMCP`)
 /// - `AIHubBar --modes`, `AIHubBar --export-settings <file.claudepult>` (import: open the file in Finder)
 /// - `AIHubBar --assistant-preview <file.png> [template|welcome] [--dark]` (the assistant's right side for a template, or
 ///   the map of the panel on its first screen; sample data)
@@ -328,6 +329,10 @@ enum CommandLineTool {
             CLICommand(["--background-settings"], needs: 0, usage: "--background-settings [code|filesOnly|filesAndWeb]") { arguments, index in
                 let profile = arguments.dropFirst(index + 1).first.flatMap(PermissionProfile.init(rawValue:)) ?? .code
                 print(BackgroundPermissions.settingsJSON(profile))
+                return 0
+            },
+            CLICommand(["--mcp"], needs: 0, usage: "--mcp  a read-only MCP server over stdio: limits, sessions, background tasks (for an agent to ask)") { _, _ in
+                HubMCP.serve()
                 return 0
             },
             CLICommand(["--sessions"], needs: 0, usage: "--sessions  Claude Code sessions on this Mac") { arguments, index in

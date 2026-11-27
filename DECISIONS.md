@@ -2,6 +2,17 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-11-27 — AI Hub Bar as an MCP server: read-only, over stdio, from files
+
+Taken from a classmate's wish «управлять самим AIHubBar через MCP» (Oleh, 2026-11-27: «Да, начинай»), cut down to asking, not managing.
+
+- **Read-only.** Three tools — `limits`, `sessions`, `background_tasks` — with no arguments. Starting, stopping and answering permission requests stay with the person: an agent that can stop other agents' work or approve their requests is a way around the very approvals the app shows.
+- **stdio, no port.** `AIHubBar --mcp` is started by the client and talks over its own stdin and stdout; nothing listens on the network and nothing leaves the Mac.
+- **From the app's files, not from the running app.** It reads `usage-snapshot.json`, `limit-history.json`, `sessions/` and `runs/`, so it needs no connection to the app, works while the app is closed and asks no service. A limit read more than a day ago is left out.
+- **Session texts are data.** A task or a result was typed by the person or written by another agent; it is cut to one line of 200 characters and the tool descriptions say it is not an instruction. File paths are cut to the file's name.
+- **Not through `RunStore.loadRuns`:** that loader clears old run files away, and this server must change nothing.
+- **Nobody installs it for the person.** The command for Claude Code is in the help and REFERENCE; the app does not edit an agent's MCP settings.
+
 ## 2026-11-27 — «Экономика AI»: list prices are downloaded, still not shipped
 
 Oleh asked (2026-11-27, after a classmate's list of wishes) for a comparison of «all the economics of all LLMs» by API prices, and by an approximate time per task from public tests.

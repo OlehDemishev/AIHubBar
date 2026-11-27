@@ -154,7 +154,26 @@ The app binary runs headless commands instead of the UI: `~/Applications/AI\\ Hu
 | `--notifications-status` · `--app-command test-notification` | notification permission · send a test notification |
 | `--readiness [file.png]` | what this Mac still needs (AI service, hooks, notifications, start at login); exit 1 while something is left |
 | `--usage` · `--usage-raw` · `--token-usage` | subscription limits (raw response; the token is never printed) · per-project breakdown |
+| `--mcp` | a read-only MCP server over stdio: limits, sessions, background tasks (below) |
 | `--sessions` · `--show-session <id>` | list sessions · bring a session's Terminal tab forward |
+
+### AI Hub Bar as an MCP server
+
+`AIHubBar --mcp` speaks MCP over stdin and stdout, so an agent can ask what the app knows before it starts something large. Connect it to Claude Code (the path is where the app is):
+
+```bash
+claude mcp add aihubbar -- "/Applications/AI Hub Bar.app/Contents/MacOS/AIHubBar" --mcp
+```
+
+Three tools, none takes arguments and none changes anything:
+
+| Tool | What it returns |
+|---|---|
+| `limits` | Claude's windows (5-hour session, week, per-model weeks) and the other services' windows read in the last day: percent used, reset time, when it was read |
+| `sessions` | the sessions the app tracks: project, agent, state, what it is doing now, how full its context is, the first prompt cut to 200 characters |
+| `background_tasks` | the last 30 background tasks: state, paused by the limit guard or not, start and end, tokens and cost at API prices, the result cut to 200 characters |
+
+It reads the files in `~/Library/Application Support/ClaudePult` and asks no service, so it answers with what the app last wrote, also while the app is closed. Nothing leaves the Mac. There is no tool to start, stop or answer anything. Texts taken from sessions and tasks are named as data in the tool descriptions: they were typed by you or written by another agent.
 
 ## Development
 
