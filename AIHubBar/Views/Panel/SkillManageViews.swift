@@ -162,7 +162,7 @@ struct SkillManageBox: View {
                     .controlSize(.small)
                     .disabled(busy)
             }
-            Text(verbatim: String(localized: "Источник: \(PathText.tilde(update.origin))")).scaledFont(.caption2).foregroundStyle(.secondary).lineLimit(1).truncationMode(.middle)
+            Text(verbatim: String(localized: "Источник: \(update.origin.hasPrefix("https://github.com/") ? String(update.origin.dropFirst("https://github.com/".count)).replacingOccurrences(of: "#", with: "/") : PathText.tilde(update.origin))")).scaledFont(.caption2).foregroundStyle(.secondary).lineLimit(1).truncationMode(.middle)
             if update.edited {
                 Text("Установленную копию меняли вручную: обновление заменит эти правки (прежняя копия останется в резервных).")
                     .scaledFont(.caption2).foregroundStyle(.orange).fixedSize(horizontal: false, vertical: true)

@@ -109,6 +109,8 @@ final class SkillCatalog {
         reviewMigration,
         // Step 8: named sets.
         housekeepingMigration,
+        // GitHub repositories as sources.
+        remoteMigration,
     ]
 
     init(path: String) throws {
@@ -371,6 +373,22 @@ final class SkillCatalog {
         var aiReviewed = false
         /// Only the skills of this set.
         var set: String?
+        /// Installed on this Mac, or offered by a source and not installed.
+        var origin = Origin.any
+        /// Only from the agents' makers' repositories.
+        var officialOnly = false
+        /// Only from repositories with at least this many stars.
+        var minStars: Int?
+        /// Only from this repository (`owner/repo`).
+        var sourceRepo: String?
+
+        enum Origin: String, Codable, CaseIterable, Sendable {
+            case any
+            /// Installed for some agent on this Mac.
+            case installed
+            /// From a source and not installed yet.
+            case available
+        }
         /// A license by name; an empty one means skills without a license.
         var license: String?
         var author: String?
@@ -395,13 +413,13 @@ final class SkillCatalog {
             plain.sort = .risk
             let all: [Bool] = [
                 plain.minRisk > 0 || plain.maxRisk < 100, !agents.isEmpty, !scopes.isEmpty, kind != nil, !findings.isEmpty, !can.isEmpty, !cannot.isEmpty,
-                noScripts, state != .any, usage != .any, withNote, blockedOnly, withReport, trustedOnly, aiReviewed, set != nil, license != nil, author != nil, newWithinDays != nil,
+                noScripts, state != .any, usage != .any, withNote, blockedOnly, withReport, trustedOnly, aiReviewed, set != nil, origin != .any, officialOnly, minStars != nil, sourceRepo != nil, license != nil, author != nil, newWithinDays != nil,
             ]
             return all.filter { $0 }.count
         }
 
         private enum CodingKeys: String, CodingKey {
-            case query, verdict, minRisk, maxRisk, agents, scopes, kind, findings, can, cannot, noScripts, state, usage, favoritesOnly, withNote, blockedOnly, withReport, trustedOnly, aiReviewed, set, license, author, newWithinDays, sort
+            case query, verdict, minRisk, maxRisk, agents, scopes, kind, findings, can, cannot, noScripts, state, usage, favoritesOnly, withNote, blockedOnly, withReport, trustedOnly, aiReviewed, set, origin, officialOnly, minStars, sourceRepo, license, author, newWithinDays, sort
         }
 
         init(from decoder: Decoder) throws {
@@ -430,6 +448,10 @@ final class SkillCatalog {
             trustedOnly = ((try? c.decodeIfPresent(Bool.self, forKey: .trustedOnly)) ?? nil) ?? false
             aiReviewed = ((try? c.decodeIfPresent(Bool.self, forKey: .aiReviewed)) ?? nil) ?? false
             set = string(.set)
+            origin = string(.origin).flatMap(Origin.init) ?? .any
+            officialOnly = ((try? c.decodeIfPresent(Bool.self, forKey: .officialOnly)) ?? nil) ?? false
+            minStars = int(.minStars)
+            sourceRepo = string(.sourceRepo)
             license = string(.license)
             author = string(.author)
             newWithinDays = int(.newWithinDays)
@@ -458,6 +480,10 @@ final class SkillCatalog {
             try c.encode(trustedOnly, forKey: .trustedOnly)
             try c.encode(aiReviewed, forKey: .aiReviewed)
             try c.encodeIfPresent(set, forKey: .set)
+            try c.encode(origin.rawValue, forKey: .origin)
+            try c.encode(officialOnly, forKey: .officialOnly)
+            try c.encodeIfPresent(minStars, forKey: .minStars)
+            try c.encodeIfPresent(sourceRepo, forKey: .sourceRepo)
             try c.encodeIfPresent(license, forKey: .license)
             try c.encodeIfPresent(author, forKey: .author)
             try c.encodeIfPresent(newWithinDays, forKey: .newWithinDays)
@@ -500,6 +526,15 @@ final class SkillCatalog {
         var homepage: String?
         /// Its author (or its GitHub owner) is on the person's trusted list.
         var isTrusted: Bool
+        /// A source's stars on GitHub; nil for a skill found on this Mac.
+        var stars: Int?
+        /// From a repository of an agent's maker (`officialOwners`).
+        var official: Bool
+        /// `https://github.com/owner/repo` for a skill from a source; empty otherwise.
+        var repoURL: String
+        /// The folder inside that repository.
+        var repoPath: String?
+        var commitSHA: String?
     }
 
     struct Result: Equatable, Sendable {
@@ -566,6 +601,14 @@ final class SkillCatalog {
         if filters.withNote { sql.append("coalesce(m.note, '') <> ''") }
         if filters.blockedOnly { sql.append(Self.isBlockedSQL) }
         if filters.trustedOnly { sql.append(Self.trustedSQL) }
+        switch filters.origin {
+        case .any: break
+        case .installed: sql.append("\(installed))")
+        case .available: sql.append("s.source = 'github' AND NOT \(installed))")
+        }
+        if filters.officialOnly { sql.append("s.official = 1") }
+        if let stars = filters.minStars { sql.append("coalesce(s.stars, 0) >= \(max(0, stars))") }
+        if let repo = filters.sourceRepo { sql.append("s.repo_url = \(bind("https://github.com/" + repo))") }
         if let set = filters.set {
             sql.append("EXISTS (SELECT 1 FROM skill_set_members g WHERE g.set_name = \(bind(set)) COLLATE NOCASE AND g.kind = s.kind AND g.name = s.name)")
         }
@@ -586,12 +629,12 @@ final class SkillCatalog {
         s.author, coalesce(m.favorite, 0), coalesce(m.note, ''), s.updated_at,
         (SELECT count(*) FROM skill_uses u WHERE u.name = s.name AND u.at >= '\(iso(since))') AS uses,
         \(isBlockedSQL), (SELECT count(*) FROM skill_reports p WHERE p.kind = s.kind AND p.name = s.name), s.homepage,
-        \(trustedSQL)
+        \(trustedSQL), s.stars, s.official, s.repo_url, s.repo_path, s.commit_sha
         """
     }
 
     /// How many columns `columns` has: what a query adds comes after.
-    private static let columnCount: Int32 = 22
+    private static let columnCount: Int32 = 27
 
     private static let from = "FROM skills s JOIN scan_results r ON r.skill_id = s.id LEFT JOIN skill_marks m ON m.kind = s.kind AND m.name = s.name"
 
@@ -605,7 +648,8 @@ final class SkillCatalog {
                    verdict: SkillVerdict(rawValue: row.text(8)) ?? .review, staticVerdict: SkillVerdict(rawValue: row.text(9)) ?? .review,
                    riskScore: row.int(10), hasScripts: row.bool(11), counts: row.text(12).split(separator: ",").compactMap { Int($0) },
                    isFavorite: row.bool(14), note: row.text(15), uses: row.int(17), addedAt: row.text(16),
-                   isBlocked: row.bool(18), reports: row.int(19), homepage: row.optionalText(20), isTrusted: row.bool(21))
+                   isBlocked: row.bool(18), reports: row.int(19), homepage: row.optionalText(20), isTrusted: row.bool(21),
+                   stars: row.optionalInt(22), official: row.bool(23), repoURL: row.text(24), repoPath: row.optionalText(25), commitSHA: row.optionalText(26))
     }
 
     private static func order(_ sort: Filters.Sort) -> String {
@@ -743,7 +787,7 @@ final class SkillCatalog {
     }
 
     private func filesOf(_ row: Row) -> SkillFiles? {
-        guard row.source == "local" || row.source == "folder" else { return nil }
+        guard Self.isReadable(row.source) else { return nil }
         return try? SkillFolder.read(URL(fileURLWithPath: row.path))
     }
 
@@ -771,7 +815,7 @@ final class SkillCatalog {
         }
         let llm = row.verdict > row.staticVerdict ? row.verdict : nil
         return Card(row: row, places: places, report: report, assessment: SkillAssessment(report, llmVerdict: llm), scannedAt: scannedAt, files: files,
-                    isChanged: onDisk.map { $0.contentHash != row.contentHash } ?? false, isMissing: (row.source == "local" || row.source == "folder") && onDisk == nil,
+                    isChanged: onDisk.map { $0.contentHash != row.contentHash } ?? false, isMissing: Self.isReadable(row.source) && onDisk == nil,
                     uses: try uses(of: row.name, since: now.addingTimeInterval(-30 * 86400)))
     }
 

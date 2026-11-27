@@ -29,7 +29,9 @@ enum SkillVerdict: String, Codable, Sendable, CaseIterable, Comparable {
 
 struct SkillReport: Equatable, Codable, Sendable {
     /// Raised whenever the rules or the scoring change: stored results of an older version are checked again.
-    static let scannerVersion = 2
+    /// 3: local sockets, a copy of the environment, `curl | sh` named in prose, comments in code (2026-11-27, after
+    /// false alarms on anthropics/skills). The Rust scanner in desktop/ stays at 2 until Windows work resumes.
+    static let scannerVersion = 3
 
     var scannerVersion = SkillReport.scannerVersion
     var contentHash: String
@@ -109,9 +111,43 @@ enum SkillScanner {
                 || slashes * 12 > text.utf8.count || !text.contains(where: \.isNumber) || !text.contains(where: \.isLowercase) || !text.contains(where: \.isUppercase)
         case "long-hex":
             return path.hasSuffix(".lock") || path.hasSuffix("-lock.json")
+        case "net-call":
+            // A Unix domain socket talks to a process on this Mac (LibreOffice, a local server), not to the network.
+            return line[match].lowercased().hasPrefix("socket.") && line.contains("AF_UNIX")
+        case "pipe-to-shell":
+            // «`curl | sh` lines» names the practice; a command has something between the tool and the pipe.
+            let text = line[match]
+            guard let bar = text.firstIndex(of: "|") else { return false }
+            let tool = text.prefix { !$0.isWhitespace && $0 != "|" }
+            return text[text.index(text.startIndex, offsetBy: tool.count)..<bar].trimmingCharacters(in: .whitespaces).isEmpty
+        case "pi-conceal":
+            let said = line[match].lowercased()
+            // «Do not tell the user they need to …» advises on wording; «never … without asking the user» means ask.
+            if rest.hasPrefix(" they ") || rest.hasPrefix(" to ") || rest.hasPrefix(" that they ") { return true }
+            if said.hasPrefix("without") {
+                let before = line[..<match.lowerBound].lowercased().suffix(60)
+                return ["never ", "don't ", "do not ", "not "].contains { before.contains($0) }
+            }
+            return false
+        case "pi-override":
+            // «if a new system prompt regresses» is about managing prompts, not a new one being set.
+            let said = line[match].lowercased()
+            if said.hasPrefix("new system prompt") || said.hasPrefix("new  system") {
+                let before = line[..<match.lowerBound].lowercased().suffix(12)
+                let announces = rest.hasPrefix(":") || rest.hasPrefix(" is") || rest.hasPrefix(" follows") || rest.hasPrefix(" below")
+                return !announces && (before.hasSuffix("a ") || before.hasSuffix("the ") || before.hasSuffix("each ") || before.hasSuffix("every "))
+            }
+            return false
         default:
             return false
         }
+    }
+
+    /// A line that is only a comment in a script: `#` (not a shebang), `//`, `/*`, `*`, `--`, `;`, `REM`.
+    static func isComment(_ line: String) -> Bool {
+        let trimmed = line.trimmingCharacters(in: .whitespaces)
+        if trimmed.hasPrefix("#!") { return false }
+        return ["#", "//", "/*", "*", "--", ";", "REM ", "rem "].contains { trimmed.hasPrefix($0) }
     }
 
     /// Whether the text at `start` opens right after a quotation mark.
@@ -160,6 +196,9 @@ enum SkillScanner {
                     .first { !harmless(rule.id, path: path, line: line, match: $0) }
                 guard let found else { continue }
                 var severity = isDoc && rule.inDocs == .lower ? rule.severity.lowered : rule.severity
+                // In a script a comment doesn't run: a path or a command written there to explain an attack weighs two
+                // steps less. Words aimed at the agent (`pi-…`) are read in comments too, so they keep their weight.
+                if !isDoc && !rule.id.hasPrefix("pi-") && isComment(line) { severity = severity.lowered.lowered }
                 // A phrase in quotes is talked about, not said: a skill that warns about «"ignore previous
                 // instructions"» is not an attack. It still counts, a step lower, so quotes are no way around the rule.
                 if rule.id.hasPrefix("pi-") && quoted(line, found.lowerBound) { severity = severity.lowered }
@@ -411,13 +450,20 @@ enum SkillScanner {
     /// A rule counts once at its worst severity; up to three more findings of the same rule add a fifth each. One
     /// critical finding, or two serious ones, is enough for «dangerous»; anything worth reading makes it «review».
     static func score(_ findings: [SkillFinding]) -> (Int, SkillVerdict) {
-        var byRule: [String: (SkillSeverity, Int)] = [:]
-        for finding in findings {
-            let entry = byRule[finding.rule] ?? (finding.severity, 0)
-            byRule[finding.rule] = (max(entry.0, finding.severity), entry.1 + 1)
+        // Each rule counts once at its worst finding; up to three more of its findings add a fifth of their own weight.
+        // Rules 3: everything is split by severity — what can't be an attack on its own (medium, low) adds 34 at most,
+        // so a long skill full of examples reads «review»; «dangerous» takes a critical finding or two serious ones.
+        var serious = 0
+        var minor = 0
+        func add(_ severity: SkillSeverity, _ weight: Int) {
+            if severity >= .high { serious += weight } else { minor += weight }
         }
-        let total = byRule.values.reduce(0) { sum, entry in sum + entry.0.weight + min(entry.1 - 1, 3) * entry.0.weight / 5 }
-        let risk = min(total, 100)
+        for (_, group) in Dictionary(grouping: findings, by: \.rule) {
+            let sorted = group.sorted { $0.severity > $1.severity }
+            add(sorted[0].severity, sorted[0].severity.weight)
+            for extra in sorted.dropFirst().prefix(3) { add(extra.severity, extra.severity.weight / 5) }
+        }
+        let risk = min(serious + min(minor, 34), 100)
         let critical = findings.contains { $0.severity == .critical }
         let verdict: SkillVerdict = critical || risk >= 70 ? .dangerous : risk >= 5 ? .review : .safe
         return (risk, verdict)

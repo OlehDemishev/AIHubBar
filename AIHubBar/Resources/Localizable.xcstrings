@@ -4901,6 +4901,82 @@
         }
       }
     },
+    "GitHub просит подождать: без входа можно 60 запросов в час.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يطلب GitHub الانتظار: بلا تسجيل دخول يُسمح بـ 60 طلبًا في الساعة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub bittet zu warten: Ohne Anmeldung sind 60 Anfragen pro Stunde erlaubt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub asks to wait: without signing in it allows 60 requests an hour."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub pide esperar: sin iniciar sesión permite 60 solicitudes por hora."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub demande de patienter : sans connexion, 60 requêtes par heure sont permises."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub meminta menunggu: tanpa masuk, hanya 60 permintaan per jam."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub chiede di aspettare: senza accesso consente 60 richieste all’ora."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub から待つよう求められました。サインインなしでは 1 時間に 60 リクエストまでです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub에서 기다려 달라고 합니다. 로그인하지 않으면 시간당 60회 요청할 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub prosi o chwilę: bez logowania można 60 zapytań na godzinę."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O GitHub pede para esperar: sem login, são 60 solicitações por hora."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub просить зачекати: без входу можна 60 запитів на годину."
+          }
+        }
+      }
+    },
     "«%@» проверен и есть в списке скиллов в панели.": {
       "localizations": {
         "ar": {
@@ -8549,6 +8625,82 @@
         }
       }
     },
+    "Ещё не проверен": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يُفحص بعد"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch nicht geprüft"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not checked yet"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún sin comprobar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas encore vérifié"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum diperiksa"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non ancora verificato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まだ確認していません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아직 확인 안 됨"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeszcze nie sprawdzony"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ainda não verificado"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ще не перевірено"
+          }
+        }
+      }
+    },
     "Жалоба и блок": {
       "localizations": {
         "ar": {
@@ -9229,6 +9381,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Запускались за 30 днів"
+          }
+        }
+      }
+    },
+    "Из источника на GitHub": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "من مصدر على GitHub"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus einer Quelle auf GitHub"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From a source on GitHub"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De una fuente en GitHub"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "D’une source sur GitHub"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dari sumber di GitHub"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Da una fonte su GitHub"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub のソースから"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub 소스에서"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ze źródła na GitHubie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De uma fonte no GitHub"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З джерела на GitHub"
+          }
+        }
+      }
+    },
+    "Из источников, не установленные": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "من المصادر، غير مثبتة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus Quellen, nicht installiert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From sources, not installed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De fuentes, sin instalar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des sources, non installés"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dari sumber, belum dipasang"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dalle fonti, non installate"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ソースから・未インストール"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "소스에서, 설치 안 됨"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ze źródeł, niezainstalowane"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das fontes, não instaladas"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Із джерел, не встановлені"
           }
         }
       }
@@ -12501,6 +12805,82 @@
         }
       }
     },
+    "Не удалось прочитать репозиторий.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذّرت قراءة المستودع."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Repository ließ sich nicht lesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t read the repository."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo leer el repositorio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de lire le dépôt."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak bisa membaca repositori."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile leggere il repository."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリを読み取れませんでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "저장소를 읽을 수 없습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się odczytać repozytorium."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível ler o repositório."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не вдалося прочитати репозиторій."
+          }
+        }
+      }
+    },
     "Не установлен": {
       "localizations": {
         "ar": {
@@ -12649,6 +13029,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Немає зв’язку з Anthropic API."
+          }
+        }
+      }
+    },
+    "Нет связи с GitHub.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا اتصال بـ GitHub."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Verbindung zu GitHub."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Can’t reach GitHub."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay conexión con GitHub."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de joindre GitHub."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak bisa terhubung ke GitHub."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna connessione con GitHub."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub に接続できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub에 연결할 수 없습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak połączenia z GitHubem."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem conexão com o GitHub."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Немає зв’язку з GitHub."
           }
         }
       }
@@ -13485,6 +13941,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Потрібен Claude Code на цьому Mac або ключ Anthropic у Налаштуваннях → «Сервіси AI»."
+          }
+        }
+      }
+    },
+    "Нужен репозиторий GitHub: owner/repo или его адрес.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يلزم مستودع على GitHub: owner/repo أو عنوانه."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nötig ist ein GitHub-Repository: owner/repo oder seine Adresse."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This needs a GitHub repository: owner/repo or its address."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hace falta un repositorio de GitHub: owner/repo o su dirección."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il faut un dépôt GitHub : owner/repo ou son adresse."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlu repositori GitHub: owner/repo atau alamatnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serve un repository GitHub: owner/repo o il suo indirizzo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub のリポジトリが必要です：owner/repo またはそのアドレス。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub 저장소가 필요합니다: owner/repo 또는 주소."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrzebne jest repozytorium GitHub: owner/repo lub jego adres."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É preciso um repositório do GitHub: owner/repo ou o endereço dele."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібен репозиторій GitHub: owner/repo або його адреса."
           }
         }
       }
@@ -14473,6 +15005,310 @@
           "stringUnit": {
             "state": "translated",
             "value": "Відкриється форма на GitHub AI Hub Bar — надішлете її ви самі"
+          }
+        }
+      }
+    },
+    "Открыть на GitHub": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح على GitHub"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf GitHub öffnen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open on GitHub"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir en GitHub"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir sur GitHub"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka di GitHub"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri su GitHub"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub で開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub에서 열기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz na GitHubie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir no GitHub"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити на GitHub"
+          }
+        }
+      }
+    },
+    "Откуда": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المصدر"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Herkunft"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where from"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Origen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Provenance"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asal"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Provenienza"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "入手元"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "출처"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skąd"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Origem"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Звідки"
+          }
+        }
+      }
+    },
+    "Официальные": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الرسمية"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offiziell"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Official"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oficiales"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Officiels"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resmi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ufficiali"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "公式"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "공식"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oficjalne"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oficiais"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Офіційні"
+          }
+        }
+      }
+    },
+    "Официальный: репозиторий разработчика агента": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رسمي: مستودع الجهة المطوّرة للوكيل"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offiziell: ein Repository des Agentenherstellers"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Official: a repository of the agent’s maker"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oficial: un repositorio del creador del agente"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Officiel : un dépôt de l’éditeur de l’agent"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resmi: repositori pembuat agen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ufficiale: un repository di chi sviluppa l’agente"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "公式：エージェントの開発元のリポジトリ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "공식: 에이전트 제작사의 저장소"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oficjalny: repozytorium twórcy agenta"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oficial: repositório de quem faz o agente"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Офіційний: репозиторій розробника агента"
           }
         }
       }
@@ -16073,6 +16909,82 @@
         }
       }
     },
+    "Проверить все": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فحص الكل"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check all"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprobar todo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout vérifier"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Periksa semua"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifica tutti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべて確認"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모두 확인"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdź wszystkie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificar todos"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірити всі"
+          }
+        }
+      }
+    },
     "Проверка ошиблась": {
       "localizations": {
         "ar": {
@@ -16221,6 +17133,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Зник %1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "Публичные репозитории GitHub со скиллами. Скиллы скачиваются в папку приложения на конкретном коммите и проверяются тем же сканером — ничего из них не запускается, в папки агентов они попадают, только если вы их установите. Источники проверяются дважды в день; без входа GitHub разрешает 60 запросов в час, одна проверка — три запроса.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مستودعات GitHub عامة تحوي مهارات. تُنزّل المهارات إلى مجلد التطبيق عند إيداع محدد وتُفحص بالماسح نفسه — لا يُشغَّل منها شيء، ولا تصل إلى مجلدات الوكلاء إلا إذا ثبّتها. تُفحص المصادر مرتين يوميًا؛ بلا تسجيل دخول يسمح GitHub بـ 60 طلبًا في الساعة، والفحص الواحد يستهلك ثلاثة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffentliche GitHub-Repositorys mit Skills. Die Skills werden an einem bestimmten Commit in den Ordner der App geladen und mit demselben Scanner geprüft – nichts daraus wird ausgeführt, und in die Agentenordner gelangen sie nur, wenn Sie sie installieren. Quellen werden zweimal täglich geprüft; ohne Anmeldung erlaubt GitHub 60 Anfragen pro Stunde, eine Prüfung braucht drei."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Public GitHub repositories with skills. Skills are downloaded into the app’s folder at a specific commit and checked by the same scanner — nothing in them is run, and they reach the agents’ folders only if you install them. Sources are checked twice a day; without signing in GitHub allows 60 requests an hour, and one check takes three."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repositorios públicos de GitHub con skills. Las skills se descargan en la carpeta de la app en un commit concreto y se comprueban con el mismo escáner: nada de ellas se ejecuta, y solo llegan a las carpetas de los agentes si usted las instala. Las fuentes se comprueban dos veces al día; sin iniciar sesión GitHub permite 60 solicitudes por hora y una comprobación usa tres."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des dépôts GitHub publics de skills. Les skills sont téléchargés dans le dossier de l’app à un commit précis et vérifiés par le même scanner — rien n’en est exécuté, et ils n’arrivent dans les dossiers des agents que si vous les installez. Les sources sont vérifiées deux fois par jour ; sans connexion, GitHub permet 60 requêtes par heure, une vérification en prend trois."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repositori GitHub publik berisi skill. Skill diunduh ke folder app pada commit tertentu dan diperiksa dengan pemindai yang sama — tidak ada yang dijalankan, dan baru masuk ke folder agen jika Anda memasangnya. Sumber diperiksa dua kali sehari; tanpa masuk GitHub mengizinkan 60 permintaan per jam, dan satu pemeriksaan memakai tiga."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repository GitHub pubblici con skill. Le skill vengono scaricate nella cartella dell’app a un commit preciso e controllate dallo stesso scanner: nulla viene eseguito, e arrivano nelle cartelle degli agenti solo se le installi. Le fonti vengono controllate due volte al giorno; senza accesso GitHub consente 60 richieste all’ora e un controllo ne usa tre."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキルを公開している GitHub リポジトリです。スキルは特定のコミットの内容がアプリのフォルダーにダウンロードされ、同じスキャナーで確認されます。中身は何も実行されず、インストールしたときだけエージェントのフォルダーに入ります。ソースは 1 日 2 回確認します。サインインなしの GitHub は 1 時間 60 リクエストまでで、1 回の確認に 3 リクエスト使います。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스킬이 있는 공개 GitHub 저장소입니다. 스킬은 특정 커밋 기준으로 앱 폴더에 내려받아 같은 스캐너로 확인하며, 그 안의 어떤 것도 실행되지 않고 설치할 때만 에이전트 폴더에 들어갑니다. 소스는 하루 두 번 확인합니다. 로그인하지 않으면 GitHub는 시간당 60회 요청을 허용하고, 한 번 확인에 3회가 듭니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Publiczne repozytoria GitHub ze skillami. Skille są pobierane do folderu aplikacji z konkretnego commita i sprawdzane tym samym skanerem — nic z nich nie jest uruchamiane, a do folderów agentów trafiają tylko wtedy, gdy je zainstalujesz. Źródła są sprawdzane dwa razy dziennie; bez logowania GitHub pozwala na 60 zapytań na godzinę, jedno sprawdzenie to trzy zapytania."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repositórios públicos do GitHub com skills. As skills são baixadas para a pasta do app em um commit específico e verificadas pelo mesmo scanner — nada delas é executado, e só chegam às pastas dos agentes se você as instalar. As fontes são verificadas duas vezes por dia; sem login o GitHub permite 60 solicitações por hora, e uma verificação usa três."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Публічні репозиторії GitHub зі скілами. Скіли завантажуються в папку застосунку на конкретному коміті й перевіряються тим самим сканером — нічого з них не запускається, у папки агентів вони потрапляють, лише якщо ви їх встановите. Джерела перевіряються двічі на день; без входу GitHub дозволяє 60 запитів на годину, одна перевірка — три запити."
           }
         }
       }
@@ -16449,6 +17437,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Розкладка на паузі: захищене введення ввімкнув застосунок «%@»"
+          }
+        }
+      }
+    },
+    "Репозиторий не найден или закрыт.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المستودع غير موجود أو خاص."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repository nicht gefunden oder privat."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The repository is not found or is private."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repositorio no encontrado o privado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépôt introuvable ou privé."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repositori tidak ditemukan atau privat."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repository non trovato o privato."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリが見つからないか、非公開です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "저장소를 찾을 수 없거나 비공개입니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie znaleziono repozytorium lub jest prywatne."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repositório não encontrado ou privado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Репозиторій не знайдено або він закритий."
           }
         }
       }
@@ -17285,6 +18349,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Скіл завеликий: перевірено не всі його файли."
+          }
+        }
+      }
+    },
+    "Скиллов: %lld · коммит %@ · %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المهارات: %1$lld · الإيداع %2$@ · %3$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills: %1$lld · Commit %2$@ · %3$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills: %1$lld · commit %2$@ · %3$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills: %1$lld · commit %2$@ · %3$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills : %1$lld · commit %2$@ · %3$@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill: %1$lld · commit %2$@ · %3$@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill: %1$lld · commit %2$@ · %3$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキル：%1$lld · コミット %2$@ · %3$@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스킬: %1$lld · 커밋 %2$@ · %3$@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skilli: %1$lld · commit %2$@ · %3$@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills: %1$lld · commit %2$@ · %3$@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скілів: %1$lld · коміт %2$@ · %3$@"
           }
         }
       }
@@ -18885,6 +20025,82 @@
         }
       }
     },
+    "Убрать источник: его скиллы уйдут из списка, установленные копии останутся": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة المصدر: تخرج مهاراته من القائمة وتبقى النسخ المثبتة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle entfernen: Ihre Skills verschwinden aus der Liste, installierte Kopien bleiben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove the source: its skills leave the list, installed copies stay"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar la fuente: sus skills salen de la lista, las copias instaladas se quedan"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer la source : ses skills quittent la liste, les copies installées restent"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus sumber: skill-nya keluar dari daftar, salinan terpasang tetap ada"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi la fonte: le sue skill escono dall’elenco, le copie installate restano"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ソースを外す：そのスキルは一覧から消えますが、インストール済みのコピーは残ります"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "소스 제거: 해당 스킬은 목록에서 빠지고 설치된 사본은 남습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń źródło: jego skille znikną z listy, zainstalowane kopie zostaną"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover a fonte: as skills saem da lista, as cópias instaladas ficam"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати джерело: його скіли зникнуть зі списку, встановлені копії залишаться"
+          }
+        }
+      }
+    },
     "Уведомление «агент мог застрять» не приходит, пока сессия ждёт одну долгую команду: на неё даётся час.": {
       "localizations": {
         "ar": {
@@ -19641,6 +20857,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Встановлену копію змінювали вручну: оновлення замінить ці правки (попередня копія залишиться в резервних)."
+          }
+        }
+      }
+    },
+    "Установленные": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المثبتة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installiert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instaladas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installés"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terpasang"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installate"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インストール済み"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설치됨"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zainstalowane"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instaladas"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Встановлені"
           }
         }
       }
@@ -175548,6 +176840,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "команда, наприклад: winget upgrade --all"
+          }
+        }
+      }
+    },
+    "коммит %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإيداع %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commit %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "commit %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "commit %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "commit %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "commit %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "commit %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コミット %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "커밋 %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "commit %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "commit %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "коміт %@"
           }
         }
       }
