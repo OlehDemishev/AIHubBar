@@ -5,6 +5,9 @@ import SwiftUI
 struct SkillAskResultsView: View {
     @Environment(SkillStore.self) private var skills
     let question: String
+    /// Set for «Скиллы для проекта»: the project's name and what was read from its folder.
+    var project: String?
+    var stack: SkillProjectStack?
     let picks: [SkillAsk.Pick]
     var openSkill: (Int) -> Void
     var openRepo: (String) -> Void
@@ -14,9 +17,14 @@ struct SkillAskResultsView: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 6) {
                 Image(systemName: "sparkles").foregroundStyle(Color.accentColor)
-                Text(verbatim: String(localized: "AI подобрал для «\(question)»")).scaledFont(.caption, weight: .semibold).lineLimit(2)
+                Text(verbatim: project.map { String(localized: "AI подобрал для проекта «\($0)»") } ?? String(localized: "AI подобрал для «\(question)»"))
+                    .scaledFont(.caption, weight: .semibold).lineLimit(2)
                 Spacer(minLength: 4)
                 Button("Обычный поиск", action: close).controlSize(.small).scaledFont(.caption)
+            }
+            if let stack, !stack.isEmpty {
+                Text(verbatim: String(localized: "Что видно в папке: \(Self.stackLine(stack))"))
+                    .scaledFont(.caption2).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
             SkillTranslateBar(texts: picks.map(\.item.description))
             if picks.isEmpty {
@@ -62,6 +70,15 @@ struct SkillAskResultsView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+    }
+
+    /// Languages and tools, then up to eight packages: what was sent, in short.
+    static func stackLine(_ stack: SkillProjectStack) -> String {
+        var parts = stack.languages + stack.tools
+        if !stack.packages.isEmpty {
+            parts.append(stack.packages.prefix(8).joined(separator: ", ") + (stack.packages.count > 8 ? "…" : ""))
+        }
+        return parts.joined(separator: ", ")
     }
 
     private func isRepo(_ pick: SkillAsk.Pick) -> Bool {
@@ -133,6 +150,7 @@ enum SkillAskText {
         switch refusal.code {
         case "refusal": String(localized: "Модель отказалась отвечать на этот запрос.")
         case "timeout": String(localized: "Модель не ответила вовремя.")
+        case "empty-project": String(localized: "В папке проекта не нашлось ни кода, ни файлов с зависимостями.")
         default: SkillAIReviewBox.text(refusal)
         }
     }

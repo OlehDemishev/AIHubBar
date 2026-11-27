@@ -199256,6 +199256,386 @@
           }
         }
       }
+    },
+    "Подобрать скиллы для этого проекта: языки, инструменты и названия пакетов уйдут в вашу модель, содержимое файлов — нет": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختيار مهارات لهذا المشروع: تُرسل اللغات والأدوات وأسماء الحزم إلى نموذجك، ولا يُرسل محتوى الملفات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills für dieses Projekt auswählen: Sprachen, Werkzeuge und Paketnamen gehen an Ihr Modell, Dateiinhalte nicht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick skills for this project: languages, tools and package names go to your model, file contents don't"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegir skills para este proyecto: los lenguajes, herramientas y nombres de paquetes van a tu modelo, el contenido de los archivos no"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir des skills pour ce projet : langages, outils et noms de paquets partent vers votre modèle, pas le contenu des fichiers"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilih skill untuk proyek ini: bahasa, alat, dan nama paket dikirim ke model Anda, isi file tidak"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli le skill per questo progetto: linguaggi, strumenti e nomi dei pacchetti vanno al tuo modello, il contenuto dei file no"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このプロジェクト向けのスキルを選ぶ: 言語・ツール・パッケージ名はあなたのモデルに送られますが、ファイルの内容は送られません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 프로젝트에 맞는 스킬 고르기: 언어, 도구, 패키지 이름은 내 모델로 전송되고 파일 내용은 전송되지 않습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dobierz skille do tego projektu: języki, narzędzia i nazwy pakietów trafią do Twojego modelu, zawartość plików nie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher skills para este projeto: linguagens, ferramentas e nomes de pacotes vão para o seu modelo, o conteúdo dos arquivos não"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дібрати скіли для цього проєкту: мови, інструменти й назви пакетів підуть у вашу модель, вміст файлів — ні"
+          }
+        }
+      }
+    },
+    "Подбираю скиллы для «%@»…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ اختيار مهارات لـ «%@»…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suche Skills für „%@“…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Picking skills for “%@”…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscando skills para «%@»…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choix des skills pour « %@ »…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memilih skill untuk “%@”…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scelgo le skill per «%@»…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」向けのスキルを選択中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@”에 맞는 스킬을 고르는 중…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dobieram skille dla „%@”…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolhendo skills para “%@”…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добираю скіли для «%@»…"
+          }
+        }
+      }
+    },
+    "AI подобрал для проекта «%@»": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختيار الذكاء الاصطناعي لمشروع «%@»"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Von AI ausgewählt für das Projekt „%@“"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI picks for the project “%@”"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegido por la IA para el proyecto «%@»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisi par l'IA pour le projet « %@ »"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilihan AI untuk proyek “%@”"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scelti dall'AI per il progetto «%@»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI がプロジェクト「%@」向けに選択"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI가 프로젝트 “%@”에 맞게 고름"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybrane przez AI dla projektu „%@”"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolhido pela IA para o projeto “%@”"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI дібрав для проєкту «%@»"
+          }
+        }
+      }
+    },
+    "Что видно в папке: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما يظهر في المجلد: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Ordner zu sehen: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seen in the folder: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo que se ve en la carpeta: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vu dans le dossier : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terlihat di folder: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visto nella cartella: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダで見つかったもの: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더에서 보이는 것: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widać w folderze: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visto na pasta: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що видно в теці: %@"
+          }
+        }
+      }
+    },
+    "В папке проекта не нашлось ни кода, ни файлов с зависимостями.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يُعثر في مجلد المشروع على شيفرة ولا على ملفات تبعيات."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Projektordner wurden weder Code noch Abhängigkeitsdateien gefunden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The project folder has no code and no dependency files."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En la carpeta del proyecto no hay código ni archivos de dependencias."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dossier du projet ne contient ni code ni fichiers de dépendances."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder proyek tidak berisi kode maupun file dependensi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nella cartella del progetto non ci sono né codice né file di dipendenze."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクトのフォルダにコードも依存関係ファイルも見つかりませんでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트 폴더에 코드도 의존성 파일도 없습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W folderze projektu nie ma ani kodu, ani plików zależności."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A pasta do projeto não tem código nem arquivos de dependências."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У теці проєкту немає ні коду, ні файлів залежностей."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

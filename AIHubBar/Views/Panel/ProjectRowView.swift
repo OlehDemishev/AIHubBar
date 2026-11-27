@@ -77,6 +77,8 @@ struct ProjectRowView: View {
 }
 
 private struct ProjectDetailsView: View {
+    @Environment(ProfileStore.self) private var modes
+    @Environment(SkillStore.self) private var skills
     let project: Project
     /// What listens on a port from this project's folder, read while the row is open.
     @State private var servers: [LocalServer] = []
@@ -107,6 +109,12 @@ private struct ProjectDetailsView: View {
                     ActionButton(title: "GitHub", systemImage: "safari") {
                         ProjectActions.open(github)
                     }
+                }
+                if modes.isOn(.skills) {
+                    ActionButton(title: String(localized: "Скиллы"), systemImage: "sparkles") {
+                        skills.pendingProject = ProjectRef(name: project.name, path: project.path)
+                    }
+                    .help(String(localized: "Подобрать скиллы для этого проекта: языки, инструменты и названия пакетов уйдут в вашу модель, содержимое файлов — нет"))
                 }
             }
 
