@@ -73,6 +73,18 @@ final class BatchRunner {
         save()
     }
 
+    /// «Остановить все»: no batch starts another project. The one at work is a background task and is stopped with
+    /// the others; a model by API finishes its answer.
+    func cancelAll() {
+        let before = batches
+        for index in batches.indices { batches[index].items.removeAll { $0.state == .waiting } }
+        batches.removeAll { $0.items.isEmpty }
+        if batches != before {
+            save()
+            AppLog.info("Batches: what had not started is dropped")
+        }
+    }
+
     /// «Убрать»: a finished batch leaves the list.
     func dismiss(_ id: String) {
         batches.removeAll { $0.id == id && $0.isFinished }

@@ -197,6 +197,14 @@ struct CommandEngineJobsTests {
 
     // MARK: A background run's state
 
+    @Test func stopAllSeesOnlyWhatIsStillRunning() throws {
+        let bench = try Bench()
+        bench.runs.runs = [bench.backgroundRun("a", .running), bench.backgroundRun("b", .succeeded), bench.backgroundRun("c", .running)]
+        #expect(bench.runs.running.map(\.id) == ["a", "c"])
+        bench.runs.runs = [bench.backgroundRun("b", .succeeded), bench.backgroundRun("d", .stopped)]
+        #expect(bench.runs.stopAll() == 0, "nothing running, nothing signalled")
+    }
+
     @Test func aRunThatSucceededWithItsFileIsDone() throws {
         let bench = try Bench()
         bench.runs.runs = [bench.backgroundRun("r", .succeeded)]
