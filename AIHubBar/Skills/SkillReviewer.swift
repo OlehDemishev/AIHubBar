@@ -36,18 +36,38 @@ enum SkillReviewer {
         ]
     }
 
-    /// The Messages API request body. Thinking stays as the model has it (adaptive); effort is high, since a missed
-    /// attack costs more than the tokens. On a refusal the API tries the fallback model in the same call.
-    static func apiBody(_ request: SkillReview.Request, model: String) -> [String: Any] {
-        [
-            "model": model,
-            "max_tokens": 16000,
-            "system": request.system,
-            "messages": [["role": "user", "content": request.user]],
-            "output_config": ["effort": "high", "format": ["type": "json_schema", "schema": schema]],
-            "fallbacks": "default",
-        ]
+    /// One request to a model: standing instructions, the data, and the answer's shape. A review is one; the plain-words
+    /// search and the translations (`SkillAsk`) are others.
+    struct Prompt: Equatable, Sendable {
+        var system: String
+        var user: String
+        /// The answer's JSON schema, serialized (a dictionary is not `Sendable`).
+        var schema: Data
+        var effort = "high"
+        var maxTokens = 16000
+        /// The API tries its fallback model on a refusal. Not for Haiku, which has none.
+        var fallbacks = true
     }
+
+    static func prompt(_ request: SkillReview.Request) -> Prompt {
+        Prompt(system: request.system, user: request.user, schema: (try? JSONSerialization.data(withJSONObject: schema)) ?? Data())
+    }
+
+    /// The Messages API request body. Thinking stays as the model has it (adaptive); a review's effort is high, since a
+    /// missed attack costs more than the tokens. On a refusal the API tries the fallback model in the same call.
+    static func apiBody(_ prompt: Prompt, model: String) -> [String: Any] {
+        var body: [String: Any] = [
+            "model": model,
+            "max_tokens": prompt.maxTokens,
+            "system": prompt.system,
+            "messages": [["role": "user", "content": prompt.user]],
+            "output_config": ["effort": prompt.effort, "format": ["type": "json_schema", "schema": (try? JSONSerialization.jsonObject(with: prompt.schema)) ?? [:]]],
+        ]
+        if prompt.fallbacks { body["fallbacks"] = "default" }
+        return body
+    }
+
+    static func apiBody(_ request: SkillReview.Request, model: String) -> [String: Any] { apiBody(prompt(request), model: model) }
 
     /// The text of an API answer, or a short reason. A refusal or an answer cut at the token limit is no answer.
     static func apiAnswer(_ body: Data, model: String) -> Swift.Result<Answer, SkillCatalog.Refusal> {
@@ -66,14 +86,18 @@ enum SkillReviewer {
 
     /// Asks the Anthropic API. The key is sent in its header and nowhere else, never logged.
     static func viaAPI(_ request: SkillReview.Request, key: String, model: String) async -> Swift.Result<Answer, SkillCatalog.Refusal> {
+        await viaAPI(prompt(request), key: key, model: model)
+    }
+
+    static func viaAPI(_ prompt: Prompt, key: String, model: String) async -> Swift.Result<Answer, SkillCatalog.Refusal> {
         var http = URLRequest(url: api, timeoutInterval: 600)
         http.httpMethod = "POST"
         http.setValue("application/json", forHTTPHeaderField: "Content-Type")
         http.setValue("AIHubBar", forHTTPHeaderField: "User-Agent")
         http.setValue(key, forHTTPHeaderField: "x-api-key")
         http.setValue("2026-10-21", forHTTPHeaderField: "anthropic-version")
-        http.setValue("server-side-fallback-2026-07-01", forHTTPHeaderField: "anthropic-beta")
-        http.httpBody = try? JSONSerialization.data(withJSONObject: apiBody(request, model: model))
+        if prompt.fallbacks { http.setValue("server-side-fallback-2026-07-01", forHTTPHeaderField: "anthropic-beta") }
+        http.httpBody = try? JSONSerialization.data(withJSONObject: apiBody(prompt, model: model))
         guard let (data, response) = try? await URLSession.shared.data(for: http), let status = (response as? HTTPURLResponse)?.statusCode else {
             return .failure(.init(code: "network"))
         }
@@ -113,6 +137,10 @@ enum SkillReviewer {
 
     /// Asks Claude Code. `scratch` is a folder of the app's own, emptied for each review.
     static func viaClaude(_ request: SkillReview.Request, program: String, scratch: URL, model: String) async -> Swift.Result<Answer, SkillCatalog.Refusal> {
+        await viaClaude(prompt(request), program: program, scratch: scratch, model: model)
+    }
+
+    static func viaClaude(_ prompt: Prompt, program: String, scratch: URL, model: String) async -> Swift.Result<Answer, SkillCatalog.Refusal> {
         let manager = FileManager.default
         try? manager.removeItem(at: scratch)
         defer { try? manager.removeItem(at: scratch) }
@@ -120,13 +148,13 @@ enum SkillReviewer {
         let systemFile = scratch.appending(path: "instructions.txt")
         do {
             try manager.createDirectory(at: folder, withIntermediateDirectories: true)
-            try request.system.write(to: systemFile, atomically: true, encoding: .utf8)
+            try prompt.system.write(to: systemFile, atomically: true, encoding: .utf8)
         } catch {
             return .failure(.init(code: error.localizedDescription))
         }
         do {
             let result = try await ProcessRunner.run(program, claudeArguments(systemFile: systemFile.path, model: model), currentDirectory: folder,
-                                                     input: Data(request.user.utf8), timeout: timeout)
+                                                     input: Data(prompt.user.utf8), timeout: timeout)
             return claudeAnswer(result.stdoutText, model: model)
         } catch ProcessError.timedOut {
             return .failure(.init(code: "timeout"))
@@ -149,6 +177,14 @@ enum SkillReviewer {
         }
     }
 
+    /// Sends a prompt the way `who` can: Claude Code in an empty folder of its own, or the API.
+    static func ask(_ prompt: Prompt, who: Who, model: String, scratch: URL) async -> Swift.Result<Answer, SkillCatalog.Refusal> {
+        switch who {
+        case .claudeCode(let program): await viaClaude(prompt, program: program, scratch: scratch, model: model)
+        case .api(let key): await viaAPI(prompt, key: key, model: model)
+        }
+    }
+
     static func who() async -> Who? {
         if let claude = AgentLocator.detect("claude") { return .claudeCode(claude) }
         if let key = await APIKeyStore.read(.anthropic), !key.trimmingCharacters(in: .whitespaces).isEmpty { return .api(key) }
@@ -163,7 +199,9 @@ enum SkillReviewer {
 
     /// The interface language's English name, for the reviewer's explanations: «Russian», «German».
     static var languageName: String {
-        let code = Bundle.main.preferredLocalizations.first ?? "en"
-        return Locale(identifier: "en").localizedString(forIdentifier: code) ?? "English"
+        Locale(identifier: "en").localizedString(forIdentifier: languageCode) ?? "English"
     }
+
+    /// The interface language's code: «ru», «pt-BR».
+    static var languageCode: String { Bundle.main.preferredLocalizations.first ?? "en" }
 }

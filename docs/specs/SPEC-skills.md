@@ -96,6 +96,27 @@ untrusted text: links, HTML, control and invisible characters are removed, descr
 shown verbatim. Left out on purpose: skills.sh (its API needs a Vercel token), skillsmp.com (its docs refuse automated
 reading), GitHub code search (needs a token).
 
+## 4b. The person's model: search in plain words and translation (Mac, 2026-11-27)
+
+Both go the AI review's way (§4): Claude Code with no tools, settings or MCP, or the Anthropic API with the person's key;
+`claude-haiku-5-5` at low effort, since a person waits for them (`AIHubBar/Skills/SkillAsk.swift`). Only on a click.
+
+- **«Найти по смыслу с AI»** under the search field. Two short requests: the model turns what the person wrote into at
+  most 12 search words (English first); the catalog and the open sources index are searched here with them and with the
+  person's own words; the model then picks at most 10 of the 40 best matches, with one line on why. It never sees the
+  whole catalog, and a pick is a number from the list it was given: it can't name or invent anything else. It is told
+  that safety is not its to judge; the picks show the static verdict as before and the lines are marked as the model's.
+- **«Перевести описания»** in the list, the index and a skill's card: descriptions that read as another language
+  (`NLLanguageRecognizer`) go to the model, at most 40 at a time, and come back into the interface language. They are
+  remembered in `llm_translations` by the text's SHA-256, the language and the prompt's version, so the same text is
+  asked once. «Оригиналы» shows the authors' texts; «Переведено AI» marks the rest.
+- **Untrusted both ways.** The question and every description go as one line each between markers carrying a word made
+  for that request, with invisible characters spelled out, and the model is told that orders inside are data. What
+  comes back is read strictly (one JSON object; unreadable is an error): picks only by number, each once; translations
+  only for texts that were sent, and one more than three times its original's length is dropped (a description can't
+  smuggle in a paragraph); control, invisible and bidirectional characters are removed and everything is one plain-text
+  line. Neither ever touches a verdict, a source or a file.
+
 ## 5. Versions and the shared contract
 
 - `SkillReport.scannerVersion` (2 in Rust, 4 in Swift) rises with every change of rules or scoring; results of an older version are made
