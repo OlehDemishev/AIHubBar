@@ -59,7 +59,7 @@ struct SkillsSourcesSection: View {
             HStack(spacing: 6) {
                 if source.official { Image(systemName: "checkmark.seal.fill").foregroundStyle(Color.accentColor).help(String(localized: "Официальный: репозиторий разработчика агента")) }
                 Text(verbatim: source.repo.slug).fontWeight(.medium)
-                if let stars = source.stars { Text(verbatim: "★ \(stars)").foregroundStyle(.secondary) }
+                if let stars = source.stars { Text(verbatim: "★ \(stars.formatted())").foregroundStyle(.secondary) }
                 Spacer()
                 if skills.checking.contains(source.id) {
                     ProgressView().controlSize(.small)
@@ -134,7 +134,7 @@ struct SkillOriginLine: View {
     static func text(_ row: SkillCatalog.Row, _ repo: SkillCatalog.GitHubRepo) -> String {
         var parts = [repo.slug + ((row.repoPath ?? "").isEmpty ? "" : "/" + (row.repoPath ?? ""))]
         if let sha = row.commitSHA { parts.append(String(localized: "коммит \(String(sha.prefix(7)))")) }
-        if let stars = row.stars { parts.append("★ \(stars)") }
+        if let stars = row.stars { parts.append("★ \(stars.formatted())") }
         return parts.joined(separator: " · ")
     }
 

@@ -416,7 +416,7 @@ extension SkillCatalog {
                                 origin: remote.map { "\($0.0)#\($0.1)" } ?? source.path, sourceHash: report.contentHash,
                                 installedHash: files.contentHashWithoutLinks, installedAt: place.now))
         let journalID = try log(place, Entry(action: "install", name: plan.name, agent: agent.rawValue, installPath: plan.target, report: report,
-                                             acknowledged: plan.needsAck && acknowledged, origin: source.path))
+                                             acknowledged: plan.needsAck && acknowledged, origin: remote.map { "\($0.0)#\($0.1)" } ?? source.path))
         try refreshInstalled(place.roots, now: place.now, byCatalog: true)
         return Done(installPath: plan.target, journalID: journalID)
     }
