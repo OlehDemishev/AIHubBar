@@ -5,6 +5,7 @@
 **Updated:** 2026-11-27
 
 **Now:**
+- 2026-11-27: Mac — Skills Catalog, three small ones (branch `feat/mac-skills-three`): «Переводить описания сразу» (Settings → Скиллы → «Помощь модели»), a project's picks remembered for the same stack with «Подобрать заново», optional «Вход в GitHub» with the person's token (5,000 requests an hour, the token only to api.github.com) — PR open, waiting for Oleh's word
 - 2026-11-27: Mac — Skills Catalog: «Скиллы» in a project's card: the project's languages, tools and package names are read on this Mac and the person's model picks skills for it from the catalog and the open sources index, with a line on why — merged as PR #677 on Oleh's «Да, вливай» (seen live in an isolated copy), not in a build yet
 - 2026-11-27: Mac — AI Hub Bar as an MCP server — merged as PR #675 on Oleh's «Да, вливай», not in a build yet: `AIHubBar --mcp`, read-only over stdio — tools `limits`, `sessions`, `background_tasks` read the app's files, ask no service and change nothing; tried by hand and with a real Claude Code (`--mcp-config`, one call of `limits`)
 - 2026-11-27: Mac — what a background task used — merged as PR #670 on Oleh's «Да, вливай», not in a build yet: «Журнал» shows the task's tokens and what the same work costs through the API — Claude Code's own `total_cost_usd`, for Codex the person's OpenAI price; kept in the run's file as `usage`; tests only, the window not seen live
@@ -266,6 +267,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-27 — Skills: auto-translation, remembered project picks, GitHub sign-in (branch `feat/mac-skills-three`)
+
+Done: «Переводить описания сразу» in a new «Помощь модели» section (off by default; `SkillTranslateBar` translates on its own once per set of texts, a failure waits for the button). A project's picks are kept in the new `llm_project_picks` table (layout 11) with the stack they were made for; the same stack shows them at once with «Подобрано …, проект с тех пор не изменился» and «Подобрать заново». «Вход в GitHub»: a token checked with `/rate_limit`, kept in the Keychain (`github-skills`), read once at start; `SkillGitHub.request` adds it only for https api.github.com and `SkillGitHub.redirect` drops it when a redirect leaves the API; «Выйти» deletes it. SPEC §4a/§4b; 15 new strings in 12 languages.
+Checked: `scripts/check.sh` green; seen live in an isolated copy: a second «Скиллы» on the same project showed the remembered picks at once (no request in the log) with «Подобрано 27 нояб., 20:47» and «Подобрать заново»; with the switch on, the picks' 8 descriptions were translated without a click; Settings → Скиллы shows «Вход в GitHub» and «Помощь модели» (the sources there were all at GitHub's 60-an-hour limit — what the token is for); tests: the token goes to the API only (not raw, not http, not a look-alike host, not along a redirect), remembered picks drop a skill that left the catalog and a changed stack is asked again.
+Left: sign-in with a real token not tried (no token here; Oleh can try it in Settings → Скиллы → «Вход в GitHub»).
 
 ## 2026-11-27 — Skills: the pre-release look (branch `chore/skills-prerelease-check`)
 

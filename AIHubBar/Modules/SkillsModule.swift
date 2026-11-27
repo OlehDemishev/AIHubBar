@@ -19,7 +19,7 @@ extension ModuleDefinition {
 
 extension ModuleUI {
     static let skills = ModuleUI(
-        settings: { AnyView(Group { SkillsSettingsSection(); SkillsSourcesSection(); SkillsPolicySection(); SkillsExportSection() }) },
+        settings: { AnyView(Group { SkillsSettingsSection(); SkillsSourcesSection(); SkillsGitHubSection(); SkillsAISection(); SkillsPolicySection(); SkillsExportSection() }) },
         sketch: { AnyView(SkillsSketch()) }
     )
 }

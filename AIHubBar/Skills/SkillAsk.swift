@@ -326,3 +326,49 @@ extension SkillCatalog {
         return order.sorted { (score[$0]!, -position[$0]!) > (score[$1]!, -position[$1]!) }.prefix(limit).compactMap { items[$0] }
     }
 }
+
+// MARK: - Remembered picks for a project
+
+extension SkillCatalog {
+    static let projectPicksMigration = """
+        -- What the person's model picked for a project («Скиллы для проекта»), with the stack it was asked about: the same
+        -- stack shows the same picks without asking again.
+        CREATE TABLE llm_project_picks (
+            path            TEXT PRIMARY KEY,
+            summary         TEXT NOT NULL,
+            picks_json      TEXT NOT NULL,
+            picked_at       TEXT NOT NULL
+        );
+        """
+
+    private struct StoredPick: Codable {
+        var id: String
+        var name: String
+        var description: String
+        var why: String
+    }
+
+    func saveProjectPicks(_ picks: [SkillAsk.Pick], path: String, summary: String, now: String = SkillCatalog.now()) throws {
+        let stored = picks.map { StoredPick(id: $0.item.id, name: $0.item.name, description: $0.item.description, why: $0.why) }
+        try db.run("INSERT OR REPLACE INTO llm_project_picks (path, summary, picks_json, picked_at) VALUES (?1, ?2, ?3, ?4)",
+                   .text(path), .text(summary), .text(String(decoding: try JSONEncoder().encode(stored), as: UTF8.self)), .text(now))
+    }
+
+    /// The remembered picks for a project, when they were made for this same stack. A skill that left the catalog is
+    /// dropped; the others show the catalog's verdict as it is now.
+    func projectPicks(path: String, summary: String) throws -> (picks: [SkillAsk.Pick], pickedAt: String)? {
+        guard let (json, at) = try db.first("SELECT picks_json, picked_at FROM llm_project_picks WHERE path = ?1 AND summary = ?2",
+                                            .text(path), .text(summary), map: { ($0.text(0), $0.text(1)) }),
+              let stored = try? JSONDecoder().decode([StoredPick].self, from: Data(json.utf8)) else { return nil }
+        var picks: [SkillAsk.Pick] = []
+        for item in stored {
+            if item.id.hasPrefix("skill:"), let id = Int(item.id.dropFirst(6)) {
+                guard let verdict = try db.first("SELECT r.effective FROM scan_results r WHERE r.skill_id = ?1", .int(Int64(id)), map: { SkillVerdict(rawValue: $0.text(0)) }) else { continue }
+                picks.append(.init(item: .init(kind: .skill(id), name: item.name, description: item.description, verdict: verdict), why: item.why))
+            } else if item.id.hasPrefix("repo:"), let repo = SkillCatalog.GitHubRepo.parse(String(item.id.dropFirst(5))) {
+                picks.append(.init(item: .init(kind: .repo(item.name.isEmpty ? repo.slug : item.name), name: item.name, description: item.description), why: item.why))
+            }
+        }
+        return (picks, at)
+    }
+}

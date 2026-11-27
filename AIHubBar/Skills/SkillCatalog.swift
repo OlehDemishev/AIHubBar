@@ -115,6 +115,8 @@ final class SkillCatalog {
         indexMigration,
         // Descriptions translated by the person's model (SkillAsk).
         translationsMigration,
+        // What the person's model picked for a project (SkillAsk).
+        projectPicksMigration,
     ]
 
     init(path: String) throws {

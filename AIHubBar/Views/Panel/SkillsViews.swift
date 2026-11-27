@@ -372,6 +372,9 @@ struct SkillsSectionView: View {
     /// The project being asked about now.
     @State private var askingProject: String?
     @State private var askedStack: SkillProjectStack?
+    @State private var askedProjectRef: ProjectRef?
+    @State private var askedAt: String?
+    @State private var askRemembered = false
     @State private var askFailure: String?
     /// Claude Code or an API key is there to ask: `claude-code`, `api` or nil.
     @State private var askAvailable: String?
@@ -417,7 +420,8 @@ struct SkillsSectionView: View {
             } else {
                 filtersBar
                 if let askPicks {
-                    SkillAskResultsView(question: askedQuestion, project: askedProject, stack: askedStack, picks: askPicks, openSkill: { id in section = .skills(id) }, openRepo: { slug in
+                    SkillAskResultsView(question: askedQuestion, project: askedProject, stack: askedStack, pickedAt: askedAt, remembered: askRemembered,
+                                        redo: askedProjectRef.map { project in { Task { await askForProject(project, fresh: true) } } }, picks: askPicks, openSkill: { id in section = .skills(id) }, openRepo: { slug in
                         indexQuery = slug
                         showsIndex = true
                     }, close: { self.askPicks = nil })
@@ -568,7 +572,9 @@ struct SkillsSectionView: View {
         case .success(let picks):
             askedQuestion = question
             askedProject = nil
+            askedProjectRef = nil
             askedStack = nil
+            askRemembered = false
             askPicks = picks
         case .failure(let refusal):
             if refusal != .state { askFailure = SkillAskText.failure(refusal) }
@@ -576,16 +582,19 @@ struct SkillsSectionView: View {
     }
 
     /// «Скиллы для проекта»: what the project is made of is read on this Mac, the model picks from the catalog and the index.
-    private func askForProject(_ project: ProjectRef) async {
+    private func askForProject(_ project: ProjectRef, fresh: Bool = false) async {
         askFailure = nil
         askingProject = project.name
         defer { askingProject = nil }
-        switch await skills.askForProject(project.path) {
-        case .success(let (stack, picks)):
+        switch await skills.askForProject(project.path, fresh: fresh) {
+        case .success(let result):
             askedQuestion = ""
             askedProject = project.name
-            askedStack = stack
-            askPicks = picks
+            askedProjectRef = project
+            askedStack = result.stack
+            askedAt = result.pickedAt
+            askRemembered = result.remembered
+            askPicks = result.picks
         case .failure(let refusal):
             if refusal != .state { askFailure = SkillAskText.failure(refusal) }
         }
