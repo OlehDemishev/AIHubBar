@@ -31,7 +31,7 @@ struct SkillReport: Equatable, Codable, Sendable {
     /// Raised whenever the rules or the scoring change: stored results of an older version are checked again.
     /// 3: local sockets, a copy of the environment, `curl | sh` named in prose, comments in code (2026-11-27, after
     /// false alarms on anthropics/skills). The Rust scanner in desktop/ stays at 2 until Windows work resumes.
-    static let scannerVersion = 3
+    static let scannerVersion = 4
 
     var scannerVersion = SkillReport.scannerVersion
     var contentHash: String
@@ -111,6 +111,13 @@ enum SkillScanner {
                 || slashes * 12 > text.utf8.count || !text.contains(where: \.isNumber) || !text.contains(where: \.isLowercase) || !text.contains(where: \.isUppercase)
         case "long-hex":
             return path.hasSuffix(".lock") || path.hasSuffix("-lock.json")
+        case "exfil-endpoint":
+            // «hooks.slack.com/services/T.../B.../xxx» in a guide is a placeholder: nothing can be sent to it. Only for
+            // the webhooks whose secret is the path after the match (an attacker can't choose it), and only up to `?`/`#`.
+            let said = line[match].lowercased()
+            guard ["hooks.slack.com/services", "/api/webhooks", "api.telegram.org/bot"].contains(where: { said.hasSuffix($0) }) else { return false }
+            let token = rest.prefix { !$0.isWhitespace && !"\"'`)>?#,;".contains($0) }
+            return ["...", "…", "xxx", "your", "<", "placeholder", "redacted", "***"].contains { token.contains($0) }
         case "net-call":
             // A Unix domain socket talks to a process on this Mac (LibreOffice, a local server), not to the network.
             return line[match].lowercased().hasPrefix("socket.") && line.contains("AF_UNIX")
