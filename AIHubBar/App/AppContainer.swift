@@ -55,6 +55,7 @@ final class AppContainer {
     let hub: HubLimitsStore
     let claudeAccounts: ClaudeAccountsStore
     let sessionChanges = SessionChangesStore()
+    let modelPrices = ModelPriceStore()
     let claudeConfig: ClaudeConfigStore
     let weeklySummary: WeeklySummarySender
     let monitor: SystemMonitor
@@ -523,5 +524,6 @@ private struct AppEnvironment: ViewModifier {
             .environment(app.batches)
             .environment(app.calendar)
             .environment(app.skills)
+            .environment(app.modelPrices)
     }
 }

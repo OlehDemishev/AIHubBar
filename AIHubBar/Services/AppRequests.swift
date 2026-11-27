@@ -14,7 +14,7 @@ final class AppRequests {
     nonisolated static let notificationName = Notification.Name("com.demishev.claudepult.app-command")
     /// `--app-command` names that open a window instead of running a command.
     static let windows: [String: WindowID] = {
-        var list: [WindowID] = [.help, .cleanupOutput, .settings, .assistant, .notchSetup, .usageHistory, .pairCompare, .versions]
+        var list: [WindowID] = [.help, .cleanupOutput, .settings, .assistant, .notchSetup, .usageHistory, .pairCompare, .versions, .economics]
         #if DEBUG
         list.append(.debugPanel)
         #endif

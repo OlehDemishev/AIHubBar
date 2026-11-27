@@ -229,3 +229,90 @@ extension SkillGitHub {
         }
     }
 }
+
+/// The index: every repository the open lists name, kept in the catalog file so it can be searched without the network
+/// and without downloading anything. A repository's files are fetched only when the person asks for it to be checked —
+/// then it becomes an ordinary source.
+extension SkillCatalog {
+    static let indexMigration = """
+        CREATE TABLE skill_index (
+            slug        TEXT PRIMARY KEY COLLATE NOCASE,   -- owner/repo
+            owner       TEXT NOT NULL,
+            repo        TEXT NOT NULL,
+            title       TEXT,
+            summary     TEXT,
+            lists       TEXT NOT NULL,                     -- the lists that name it, one per line
+            paths       TEXT NOT NULL,                     -- folders inside it the lists point at, one per line
+            position    INTEGER NOT NULL,                  -- most-named first
+            fetched_at  TEXT NOT NULL
+        );
+        """
+
+    struct IndexEntry: Identifiable, Equatable, Sendable {
+        var candidate: SkillSourceFinder.Candidate
+        var id: String { candidate.id }
+        /// Already a source: its skills are in the catalog.
+        var sourceID: Int?
+        /// Skills the catalog holds from it.
+        var skills: Int
+    }
+
+    struct IndexPage: Equatable, Sendable {
+        var entries: [IndexEntry] = []
+        /// All matches, of which `entries` are the first.
+        var matches = 0
+        /// Everything in the index.
+        var total = 0
+        var fetchedAt: String?
+    }
+
+    /// Replaces the index with what the lists say now. An empty answer (no list could be read) keeps the old one.
+    func replaceIndex(_ candidates: [SkillSourceFinder.Candidate], now: String = SkillCatalog.now()) throws {
+        guard !candidates.isEmpty else { return }
+        try db.transaction {
+            try db.run("DELETE FROM skill_index")
+            for (position, candidate) in candidates.prefix(SkillSourceFinder.maxCandidates * 2).enumerated() {
+                try db.run("""
+                    INSERT OR IGNORE INTO skill_index (slug, owner, repo, title, summary, lists, paths, position, fetched_at)
+                    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)
+                    """, .text(candidate.repo.slug), .text(candidate.repo.owner), .text(candidate.repo.repo), .optional(candidate.title),
+                           .optional(candidate.summary), .text(candidate.lists.joined(separator: "\n")), .text(candidate.paths.joined(separator: "\n")),
+                           .int(Int64(position)), .text(now))
+            }
+        }
+    }
+
+    /// When the index was last filled, or nil if never.
+    func indexFetchedAt() throws -> String? {
+        try db.first("SELECT max(fetched_at) FROM skill_index", map: { $0.optionalText(0) }) ?? nil
+    }
+
+    /// The index matching every word of `query` in its name, title, description or folders; most-named first.
+    func index(query: String = "", limit: Int = 100) throws -> IndexPage {
+        var conditions: [String] = []
+        var values: [SQLiteDB.Value] = []
+        for word in query.lowercased().split(whereSeparator: \.isWhitespace).prefix(8) {
+            let escaped = String(word).replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "%", with: "\\%").replacingOccurrences(of: "_", with: "\\_")
+            values.append(.text("%\(escaped)%"))
+            let n = values.count
+            conditions.append("(i.slug LIKE ?\(n) ESCAPE '\\' OR coalesce(i.title, '') LIKE ?\(n) ESCAPE '\\' OR coalesce(i.summary, '') LIKE ?\(n) ESCAPE '\\' OR i.paths LIKE ?\(n) ESCAPE '\\')")
+        }
+        let filter = conditions.isEmpty ? "" : "WHERE " + conditions.joined(separator: " AND ")
+        var page = IndexPage()
+        page.total = try db.first("SELECT count(*) FROM skill_index", map: { $0.int(0) }) ?? 0
+        page.matches = try db.query("SELECT count(*) FROM skill_index i \(filter)", values, map: { $0.int(0) }).first ?? 0
+        page.fetchedAt = try indexFetchedAt()
+        page.entries = try db.query("""
+            SELECT i.owner, i.repo, i.title, i.summary, i.lists, i.paths,
+                   (SELECT o.id FROM skill_sources o WHERE o.kind = 'github' AND lower(o.owner || '/' || o.repo) = lower(i.slug)),
+                   (SELECT count(*) FROM skills s WHERE s.source = 'github' AND lower(s.repo_url) = lower('https://github.com/' || i.slug))
+            FROM skill_index i \(filter) ORDER BY i.position LIMIT \(max(1, min(limit, 1000)))
+            """, values) { row in
+            let lines = { (text: String) in text.split(separator: "\n").map(String.init) }
+            return IndexEntry(candidate: SkillSourceFinder.Candidate(repo: GitHubRepo(owner: row.text(0), repo: row.text(1)), title: row.optionalText(2),
+                                                                     summary: row.optionalText(3), lists: lines(row.text(4)), paths: lines(row.text(5))),
+                              sourceID: row.optionalInt(6), skills: row.int(7))
+        }
+        return page
+    }
+}

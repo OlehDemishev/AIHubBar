@@ -360,6 +360,10 @@ struct SkillsSectionView: View {
     @State private var showsFilters = false
     @State private var showsJournal = false
     @State private var showsOrder = false
+    /// «Открытые источники»: the index of repositories the open lists name.
+    @State private var showsIndex = false
+    @State private var indexQuery = ""
+    @State private var indexMatches = 0
     /// The name being typed for «Сохранить фильтр»; nil while the field is hidden.
     @State private var savingName: String?
 
@@ -388,6 +392,12 @@ struct SkillsSectionView: View {
                     filters = SkillCatalog.Filters()
                     filters.set = name
                 })
+            } else if showsIndex {
+                SkillIndexView(query: $indexQuery) { slug in
+                    showsIndex = false
+                    filters = SkillCatalog.Filters()
+                    filters.sourceRepo = slug
+                }
             } else if showsJournal {
                 SkillJournalView { id in
                     showsJournal = false
@@ -397,6 +407,16 @@ struct SkillsSectionView: View {
                 filtersBar
                 updatesList
                 list
+                if !filters.query.trimmingCharacters(in: .whitespaces).isEmpty && indexMatches > 0 {
+                    Button {
+                        indexQuery = filters.query
+                        showsIndex = true
+                    } label: {
+                        Label(String(localized: "В открытых источниках ещё: \(indexMatches)"), systemImage: "globe")
+                            .scaledFont(.caption)
+                    }
+                    .buttonStyle(.borderless)
+                }
             }
             Text("Проверка снижает риск, но не гарантирует безопасность. При проверке ничего из скилла не запускается.")
                 .scaledFont(.caption2)
@@ -404,7 +424,11 @@ struct SkillsSectionView: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(10)
-        .task(id: filters) { result = await skills.search(filters) }
+        .task(id: filters) {
+            result = await skills.search(filters)
+            let words = filters.query.trimmingCharacters(in: .whitespaces)
+            indexMatches = words.isEmpty ? 0 : await skills.index(query: words, limit: 1).matches
+        }
         .onAppear {
             if skills.opensChanges {
                 skills.opensChanges = false
@@ -468,8 +492,17 @@ struct SkillsSectionView: View {
             Spacer(minLength: 4)
             if chosen == nil {
                 Button {
+                    showsIndex.toggle()
+                    if showsIndex { showsOrder = false; showsJournal = false }
+                } label: {
+                    Image(systemName: "globe").foregroundStyle(showsIndex ? Color.accentColor : Color.primary)
+                }
+                .buttonStyle(.borderless)
+                .frame(width: 18, height: 18)
+                .help(String(localized: "Открытые источники: репозитории из открытых списков"))
+                Button {
                     showsOrder.toggle()
-                    if showsOrder { showsJournal = false }
+                    if showsOrder { showsJournal = false; showsIndex = false }
                 } label: {
                     Image(systemName: "checklist").foregroundStyle(showsOrder ? Color.accentColor : Color.primary)
                 }
@@ -478,7 +511,7 @@ struct SkillsSectionView: View {
                 .help(String(localized: "Порядок: конфликты, копии, неиспользуемые, наборы"))
                 Button {
                     showsJournal.toggle()
-                    if showsJournal { showsOrder = false }
+                    if showsJournal { showsOrder = false; showsIndex = false }
                 } label: {
                     Image(systemName: "clock.arrow.circlepath").foregroundStyle(showsJournal ? Color.accentColor : Color.primary)
                 }
@@ -539,6 +572,15 @@ struct SkillsSectionView: View {
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
+            }
+            if let repo = filters.sourceRepo {
+                HStack(spacing: 4) {
+                    Image(systemName: "arrow.down.circle")
+                    Text(verbatim: String(localized: "Источник: \(repo)"))
+                    Button { filters.sourceRepo = nil } label: { Image(systemName: "xmark.circle.fill") }.buttonStyle(.borderless)
+                }
+                .scaledFont(.caption)
+                .foregroundStyle(Color.accentColor)
             }
             if let set = filters.set {
                 HStack(spacing: 4) {

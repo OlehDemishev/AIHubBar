@@ -113,7 +113,7 @@ enum CommandLineTool {
                 print("codex hooks: \(hooks.status()) (\(hooks.fileURL.path)); Codex runs them once trusted in /hooks")
                 return 0
             },
-            CLICommand(["--app-command"], needs: 1, usage: "--app-command <command>  ask the running app (help, settings, assistant, cleanup-output, notch-setup, usage-history, pair-compare, quick-prompt, test-notification, test-island, report, summary…)") { arguments, index in
+            CLICommand(["--app-command"], needs: 1, usage: "--app-command <command>  ask the running app (help, settings, assistant, cleanup-output, notch-setup, usage-history, economics, pair-compare, quick-prompt, test-notification, test-island, report, summary…)") { arguments, index in
                 let name = arguments[index + 1]
                 let known = Array(AppRequests.windows.keys) + AppRequests.actions + CommonCommand.allCases.map(\.cliName)
                 guard known.contains(name) else {

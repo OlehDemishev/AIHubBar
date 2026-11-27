@@ -74,6 +74,7 @@ final class NotchIsland {
     @ObservationIgnored private var monitors: [Any] = []
     @ObservationIgnored private var pending: Task<Void, Never>?
     @ObservationIgnored private var bannerTimer: Task<Void, Never>?
+    @ObservationIgnored private var settle: Task<Void, Never>?
     @ObservationIgnored private var screenObserver: NSObjectProtocol?
     @ObservationIgnored var clickGuard: NotchClickGuard?
     @ObservationIgnored private var shownBannerID: String?
@@ -111,10 +112,22 @@ final class NotchIsland {
         let workspace = NSWorkspace.shared.notificationCenter
         spaceObservers = [NSWorkspace.activeSpaceDidChangeNotification, NSWorkspace.didActivateApplicationNotification].map { name in
             workspace.addObserver(forName: name, object: nil, queue: .main) { [weak self] _ in
-                MainActor.assumeIsolated { self?.update() }
+                MainActor.assumeIsolated { self?.spaceChanged() }
             }
         }
         observe()
+    }
+
+    /// The windows are still moving when the notification comes (the menu bar leaves a full-screen desktop a moment
+    /// later), so one more look once they have settled.
+    private func spaceChanged() {
+        update()
+        settle?.cancel()
+        settle = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(1))
+            guard !Task.isCancelled else { return }
+            self?.update()
+        }
     }
 
     /// Re-runs `update` when the installed modules change, and follows requests and sessions.
@@ -142,7 +155,7 @@ final class NotchIsland {
             tearDown()
             return
         }
-        let new = geometries.map { NotchPlace(geometry: $0, isFullScreen: FullScreenDetector.isFullScreen(screen: $0.screen)) }
+        let new = geometries.map { NotchPlace(geometry: $0, isFullScreen: FullScreenDetector.isFullScreen(screen: $0.screen, notchHeight: $0.isPill ? 0 : $0.notch.height)) }
         if new.map(\.geometry) != places.map(\.geometry) {
             AppLog.info("Notch island at \(geometries.map { NSStringFromRect($0.notch) }.joined(separator: ", "))")
         }
@@ -186,6 +199,7 @@ final class NotchIsland {
         monitors = []
         pending?.cancel()
         bannerTimer?.cancel()
+        settle?.cancel()
         openIndex = nil
         dropTarget = nil
         dropped = nil

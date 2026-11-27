@@ -2,6 +2,17 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-11-27 — «Экономика AI»: list prices are downloaded, still not shipped
+
+Oleh asked (2026-11-27, after a classmate's list of wishes) for a comparison of «all the economics of all LLMs» by API prices, and by an approximate time per task from public tests.
+
+- **Prices: models.dev, downloaded, not bundled.** The rule of 2026-10-30 stays — prices are not shipped, they change. The window downloads `https://models.dev/api.json` (MIT, dollars per million tokens, updated daily, every provider the app has) when it is opened and the kept list is a day old; `model-prices.json` holds what the table needs. Looked at and not taken: OpenRouter's keyless model list (its terms forbid «copy any information», and it is a reseller's price list), LiteLLM's file (5 MB with every cloud's copy of each model), pydantic/genai-prices (priced Fable 5.2 as Fable 5 on that day).
+- **Only a provider's own API**, text models that take tools, not retired: the same model at a cloud is another price list, and the table is for choosing what to run a command or an agent on.
+- **The app's own spend is still counted with the person's price** (Settings → AI Services → «Другие»): a list price is not what a person with a discount or a batch tier pays. The window compares, it does not bill.
+- **«Цена задачи»** is three assumed token profiles (`TaskSize`), shown under the choice so the sum can be checked; «Ваши 30 дней» is the person's own Claude Code tokens at each model's prices.
+- **A new host.** models.dev is asked only while the window is open, at most once a day, with nothing of the person's in the request. README says so.
+- **Time per task is not in this step.** No public speed data may be embedded: Artificial Analysis needs a key and its terms forbid a table in another product without written consent; OpenRouter gives throughput and latency only with the person's key; Aider's and SWE-bench's files are open but a year old. The plan put to Oleh: speed from OpenRouter with the person's own key, time = first token + output ÷ speed; or his letter to Artificial Analysis.
+
 ## 2026-11-02 — Beta builds and «Раскладка» in beta testing
 
 Oleh asked for canary (beta) builds and for automatic layout switching to go to beta testing first.

@@ -293,6 +293,27 @@ struct NotchFullScreenAndKeysTests {
         #expect(FullScreenDetector.covers([sideFull], screen: side, mainHeight: 1080, ownPID: 7))
     }
 
+    /// A screen with a notch (the Air: 1470 × 956, 32 pt): a full-screen window, a video too, starts under the notch.
+    @Test func fullScreenUnderTheNotchIsToldFromZoomedByTheMenuBar() {
+        let air = CGRect(x: 0, y: 0, width: 1470, height: 956)
+        func covers(_ windows: [FullScreenDetector.Window], notch: CGFloat = 32) -> Bool {
+            FullScreenDetector.covers(windows, screen: air, mainHeight: 956, ownPID: 7, notchHeight: notch)
+        }
+        let video = FullScreenDetector.Window(bounds: CGRect(x: 0, y: 32, width: 1470, height: 924), layer: 0, pid: 42)
+        let underMenuBar = FullScreenDetector.Window(bounds: CGRect(x: 0, y: 37, width: 1470, height: 919), layer: 0, pid: 42)
+        let menuBar = FullScreenDetector.Window(bounds: CGRect(x: 0, y: 0, width: 1470, height: 37), layer: FullScreenDetector.menuBarLayer, pid: 1)
+        #expect(covers([video]))
+        #expect(covers([underMenuBar]), "the strip may be as tall as the menu bar")
+        #expect(!covers([underMenuBar, menuBar]), "zoomed with the Dock hidden: the menu bar is there")
+        #expect(!covers([video], notch: 0), "no notch: only the whole screen counts")
+        let aboveDock = FullScreenDetector.Window(bounds: CGRect(x: 0, y: 37, width: 1470, height: 849), layer: 0, pid: 42)
+        let half = FullScreenDetector.Window(bounds: CGRect(x: 0, y: 32, width: 735, height: 924), layer: 0, pid: 42)
+        let low = FullScreenDetector.Window(bounds: CGRect(x: 0, y: 120, width: 1470, height: 836), layer: 0, pid: 42)
+        let own = FullScreenDetector.Window(bounds: video.bounds, layer: 0, pid: 7)
+        #expect(!covers([aboveDock, half, low, own]), "not down to the bottom, not full width, too low, our own")
+        #expect(covers([FullScreenDetector.Window(bounds: air, layer: 0, pid: 42), menuBar]), "a game over the whole screen, as before")
+    }
+
     @Test func keysNeedOnlyTime() {
         let shown = Date(timeIntervalSince1970: 1_000_000)
         let guardian = NotchClickGuard(shownAt: shown, pointer: .zero)
