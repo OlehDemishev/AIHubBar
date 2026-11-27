@@ -81,6 +81,7 @@ final class SkillStore {
                 if self?.isActive() == true {
                     await self?.refresh()
                     self?.checkSourcesIfStale()
+                    self?.refreshIndexIfStale()
                 }
                 try? await Task.sleep(for: .seconds(30 * 60))
             }
@@ -565,8 +566,31 @@ final class SkillStore {
         }
         candidates = SkillSourceFinder.merge(groups)
         unreadLists = failed
-        if groups.count > 0 { candidatesAt = .now }
+        if groups.count > 0 {
+            candidatesAt = .now
+            let found = candidates
+            _ = await act(changes: false) { catalog, place in try catalog.replaceIndex(found, now: place.now) }
+            indexVersion += 1
+        }
         AppLog.info("skills: \(candidates.count) candidate sources from \(groups.count) lists, \(failed.count) unread")
+    }
+
+    /// Bumped when the index was filled again.
+    private(set) var indexVersion = 0
+
+    func index(query: String, limit: Int = 100) async -> SkillCatalog.IndexPage {
+        await worker.run { (try? $0.index(query: query, limit: limit)) ?? SkillCatalog.IndexPage() }
+    }
+
+    /// The index is read from the lists twice a day by itself: six files from raw.githubusercontent.com, which GitHub's
+    /// API limit doesn't count. Nothing of the repositories themselves is downloaded.
+    func refreshIndexIfStale() {
+        guard isActive(), !findingSources else { return }
+        Task {
+            let fetched: String? = await worker.run { (try? $0.indexFetchedAt()) ?? nil }
+            if let fetched, let date = ISO8601DateFormatter.flexible(fetched), Date.now.timeIntervalSince(date) < 12 * 3600 { return }
+            await findSources(force: true)
+        }
     }
 
     /// GitHub's repository search, only on a click: 10 searches a minute without a token.
