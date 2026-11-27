@@ -111,4 +111,35 @@ struct SkillSourceFinderTests {
         await #expect(throws: SkillGitHub.Failure(reason: "rate-limit")) { try await SkillGitHub.search(topic: "agent-skills", fetch: limited) }
         await #expect(throws: SkillGitHub.Failure(reason: "not-found")) { try await SkillGitHub.candidates(of: list, fetch: { _ in (Data(), 404) }) }
     }
+
+    @Test func theIndexIsSearchedWithoutTheNetworkAndKnowsWhatIsASource() throws {
+        let catalog = try SkillCatalog(path: ":memory:")
+        func candidate(_ slug: String, _ title: String?, _ summary: String?, paths: [String] = [], lists: [String] = ["l1"]) -> SkillSourceFinder.Candidate {
+            .init(repo: SkillCatalog.GitHubRepo.parse(slug)!, title: title, summary: summary, lists: lists, paths: paths)
+        }
+        try catalog.replaceIndex([
+            candidate("anthropics/skills", "docx", "Create Word documents", paths: ["skills/docx", "skills/pdf"], lists: ["l1", "l2"]),
+            candidate("a/pdf-tools", nil, "Merge PDF files"),
+            candidate("b/percent", nil, "100% offline_mode"),
+        ], now: "2026-11-27T12:00:00Z")
+        var page = try catalog.index()
+        #expect(page.total == 3 && page.matches == 3 && page.fetchedAt == "2026-11-27T12:00:00Z")
+        #expect(page.entries.map(\.candidate.repo.slug) == ["anthropics/skills", "a/pdf-tools", "b/percent"])
+        #expect(page.entries[0].candidate.paths == ["skills/docx", "skills/pdf"] && page.entries[0].candidate.lists == ["l1", "l2"])
+        #expect(try catalog.index(query: "PDF").entries.map(\.candidate.repo.slug) == ["anthropics/skills", "a/pdf-tools"], "folders count too")
+        #expect(try catalog.index(query: "merge pdf").matches == 1, "every word must match")
+        #expect(try catalog.index(query: "%").entries.map(\.candidate.repo.slug) == ["b/percent"], "a typed % is a character, not a wildcard")
+        #expect(try catalog.index(query: "_").entries.map(\.candidate.repo.slug) == ["b/percent"])
+        #expect(try catalog.index(query: "'; DROP TABLE skill_index; --").matches == 0)
+        #expect(try catalog.index(limit: 2).entries.count == 2)
+
+        let id = try catalog.addSource(try #require(SkillCatalog.GitHubRepo.parse("Anthropics/Skills")))
+        page = try catalog.index(query: "docx")
+        #expect(page.entries.first?.sourceID == id, "a source is matched whatever its case")
+
+        try catalog.replaceIndex([], now: "2026-11-28T12:00:00Z")
+        #expect(try catalog.index().total == 3, "no list could be read: the old index stays")
+        try catalog.replaceIndex([candidate("c/new", nil, nil)], now: "2026-11-28T12:00:00Z")
+        #expect(try catalog.index().entries.map(\.candidate.repo.slug) == ["c/new"])
+    }
 }

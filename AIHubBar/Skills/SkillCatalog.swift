@@ -111,6 +111,8 @@ final class SkillCatalog {
         housekeepingMigration,
         // GitHub repositories as sources.
         remoteMigration,
+        // The index of repositories the open lists name (SkillSourceFinder).
+        indexMigration,
     ]
 
     init(path: String) throws {

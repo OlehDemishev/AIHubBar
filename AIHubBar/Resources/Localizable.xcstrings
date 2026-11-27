@@ -192623,6 +192623,7 @@
         }
       }
     },
+<<<<<<< HEAD
     "%lld–%lld": {
       "localizations": {
         "ru": {
@@ -192651,11 +192652,20 @@
           "stringUnit": {
             "state": "translated",
             "value": "«%1$@» — це %2$@ токенів вводу і %3$@ виводу. Оцінка, а не замір."
+=======
+    "Поиск в открытых источниках": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البحث في المصادر المفتوحة"
+>>>>>>> origin/main
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "„%1$@“ sind %2$@ Eingabe-Tokens und %3$@ Ausgabe-Tokens. Eine Schätzung, keine Messung."
           }
         },
@@ -192721,11 +192731,15 @@
           "stringUnit": {
             "state": "new",
             "value": "«%1$@» — это %2$@ токенов нового ввода, %3$@ чтения кэша, %4$@ записи кэша и %5$@ вывода. Оценка, а не замер: агент перечитывает контекст на каждом шаге."
+=======
+            "value": "In offenen Quellen suchen"
+>>>>>>> origin/main
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "“%1$@” is %2$@ tokens of new input, %3$@ of cache reads, %4$@ of cache writes and %5$@ of output. An estimate, not a measurement: an agent rereads its context at every step."
           }
         },
@@ -192745,11 +192759,15 @@
           "stringUnit": {
             "state": "translated",
             "value": "« %1$@ » : %2$@ jetons de nouvelle entrée, %3$@ de lecture du cache, %4$@ d’écriture du cache et %5$@ de sortie. Une estimation, pas une mesure : un agent relit son contexte à chaque étape."
+=======
+            "value": "Search open sources"
+>>>>>>> origin/main
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "«%1$@» son %2$@ tokens de entrada nueva, %3$@ de lectura de caché, %4$@ de escritura de caché y %5$@ de salida. Una estimación, no una medición: un agente relee su contexto en cada paso."
           }
         },
@@ -192787,16 +192805,66 @@
           "stringUnit": {
             "state": "translated",
             "value": "«%1$@» تعني %2$@ من رموز الإدخال الجديد، و%3$@ لقراءة الذاكرة المؤقتة، و%4$@ للكتابة فيها، و%5$@ للإخراج. تقدير لا قياس: الوكيل يعيد قراءة سياقه في كل خطوة."
+=======
+            "value": "Buscar en fuentes abiertas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher dans les sources ouvertes"
+>>>>>>> origin/main
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "“%1$@” adalah %2$@ token input baru, %3$@ pembacaan cache, %4$@ penulisan cache, dan %5$@ output. Perkiraan, bukan pengukuran: agen membaca ulang konteksnya di setiap langkah."
+=======
+            "value": "Cari di sumber terbuka"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerca nelle fonti aperte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "公開ソースを検索"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "공개 소스에서 검색"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szukaj w otwartych źródłach"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pesquisar em fontes abertas"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пошук у відкритих джерелах"
+>>>>>>> origin/main
           }
         }
       }
     },
+<<<<<<< HEAD
     "«Ваши 30 дней» — ваши токены Claude Code за последние 30 дней по ценам каждой модели: сколько стоил бы тот же объём работы.": {
       "localizations": {
         "en": {
@@ -192809,11 +192877,20 @@
           "stringUnit": {
             "state": "translated",
             "value": "«Ваші 30 днів» — ваші токени Claude Code за останні 30 днів за цінами кожної моделі: скільки коштував би той самий обсяг роботи."
+=======
+    "Читаю списки…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ قراءة القوائم…"
+>>>>>>> origin/main
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "„Ihre 30 Tage“ sind Ihre Claude-Code-Tokens der letzten 30 Tage zu den Preisen jedes Modells: was dieselbe Arbeitsmenge kosten würde."
           }
         },
@@ -192821,11 +192898,21 @@
           "stringUnit": {
             "state": "translated",
             "value": "« Vos 30 jours » : vos jetons Claude Code des 30 derniers jours aux prix de chaque modèle, soit ce que coûterait le même volume de travail."
+=======
+            "value": "Listen werden gelesen…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reading the lists…"
+>>>>>>> origin/main
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "«Sus 30 días» son sus tokens de Claude Code de los últimos 30 días a los precios de cada modelo: lo que costaría el mismo volumen de trabajo."
           }
         },
@@ -192863,16 +192950,66 @@
           "stringUnit": {
             "state": "translated",
             "value": "«أيامك الثلاثون» هي رموز Claude Code التي استخدمتها في آخر 30 يومًا بأسعار كل نموذج: كم كان سيكلّف حجم العمل نفسه."
+=======
+            "value": "Leyendo las listas…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lecture des listes…"
+>>>>>>> origin/main
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "“30 hari Anda” adalah token Claude Code Anda selama 30 hari terakhir dengan harga tiap model: berapa biaya untuk jumlah pekerjaan yang sama."
+=======
+            "value": "Membaca daftar…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lettura delle liste…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リストを読み込み中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "목록을 읽는 중…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Czytam listy…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lendo as listas…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Читаю списки…"
+>>>>>>> origin/main
           }
         }
       }
     },
+<<<<<<< HEAD
     "Большая задача": {
       "localizations": {
         "en": {
@@ -192885,11 +193022,20 @@
           "stringUnit": {
             "state": "translated",
             "value": "Велике завдання"
+=======
+    "Индекс ещё не собран.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يُجمع الفهرس بعد."
+>>>>>>> origin/main
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Große Aufgabe"
           }
         },
@@ -192897,11 +193043,21 @@
           "stringUnit": {
             "state": "translated",
             "value": "Grande tâche"
+=======
+            "value": "Der Index ist noch nicht erstellt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The index hasn't been built yet."
+>>>>>>> origin/main
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Tarea grande"
           }
         },
@@ -192939,16 +193095,66 @@
           "stringUnit": {
             "state": "translated",
             "value": "مهمة كبيرة"
+=======
+            "value": "El índice aún no se ha creado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'index n'est pas encore constitué."
+>>>>>>> origin/main
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Tugas besar"
+=======
+            "value": "Indeks belum dibuat."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'indice non è ancora stato creato."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インデックスはまだ作成されていません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "색인이 아직 만들어지지 않았습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indeks nie jest jeszcze zbudowany."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O índice ainda não foi criado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Індекс ще не зібрано."
+>>>>>>> origin/main
           }
         }
       }
     },
+<<<<<<< HEAD
     "Ваши 30 дней": {
       "localizations": {
         "en": {
@@ -192961,11 +193167,20 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ваші 30 днів"
+=======
+    "Собрать": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إنشاء"
+>>>>>>> origin/main
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Ihre 30 Tage"
           }
         },
@@ -192973,11 +193188,21 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vos 30 jours"
+=======
+            "value": "Erstellen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build"
+>>>>>>> origin/main
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Sus 30 días"
           }
         },
@@ -193015,16 +193240,66 @@
           "stringUnit": {
             "state": "translated",
             "value": "أيامك الثلاثون"
+=======
+            "value": "Crear"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Constituer"
+>>>>>>> origin/main
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "30 hari Anda"
+=======
+            "value": "Buat"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "作成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "만들기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zbuduj"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Criar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зібрати"
+>>>>>>> origin/main
           }
         }
       }
     },
+<<<<<<< HEAD
     "Ввод, $/млн": {
       "localizations": {
         "en": {
@@ -193037,11 +193312,20 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ввід, $/млн"
+=======
+    "Показаны первые %lld из %lld: уточните поиск.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُعرض أول %1$lld من %2$lld: حدّد البحث أكثر."
+>>>>>>> origin/main
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Eingabe, $/Mio."
           }
         },
@@ -193049,11 +193333,21 @@
           "stringUnit": {
             "state": "translated",
             "value": "Entrée, $/M"
+=======
+            "value": "Die ersten %1$lld von %2$lld werden gezeigt: Suche eingrenzen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Showing the first %1$lld of %2$lld: narrow the search."
+>>>>>>> origin/main
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Entrada, $/M"
           }
         },
@@ -193091,16 +193385,66 @@
           "stringUnit": {
             "state": "translated",
             "value": "الإدخال، $/مليون"
+=======
+            "value": "Se muestran los primeros %1$lld de %2$lld: precisa la búsqueda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les %1$lld premiers sur %2$lld sont affichés : affinez la recherche."
+>>>>>>> origin/main
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Input, $/juta"
+=======
+            "value": "Menampilkan %1$lld pertama dari %2$lld: persempit pencarian."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrati i primi %1$lld di %2$lld: restringi la ricerca."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$lld 件中最初の %1$lld 件を表示: 検索を絞り込んでください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$lld개 중 처음 %1$lld개 표시: 검색을 좁혀 주세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokazano pierwsze %1$lld z %2$lld: zawęź wyszukiwanie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrando os primeiros %1$lld de %2$lld: refine a busca."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показано перші %1$lld з %2$lld: уточніть пошук."
+>>>>>>> origin/main
           }
         }
       }
     },
+<<<<<<< HEAD
     "Вопрос": {
       "localizations": {
         "en": {
@@ -193113,11 +193457,20 @@
           "stringUnit": {
             "state": "translated",
             "value": "Питання"
+=======
+    "Репозиториев в индексе: %lld. Это подсказки из открытых списков: файлы скачиваются и проверяются, только когда вы попросите.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المستودعات في الفهرس: %lld. هذه اقتراحات من قوائم مفتوحة: تُنزَّل الملفات وتُفحص فقط عندما تطلب ذلك."
+>>>>>>> origin/main
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Frage"
           }
         },
@@ -193125,11 +193478,21 @@
           "stringUnit": {
             "state": "translated",
             "value": "Question"
+=======
+            "value": "Repositorys im Index: %lld. Das sind Vorschläge aus offenen Listen: Dateien werden erst heruntergeladen und geprüft, wenn Sie es möchten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repositories in the index: %lld. These are suggestions from open lists: files are downloaded and checked only when you ask."
+>>>>>>> origin/main
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Pregunta"
           }
         },
@@ -193167,16 +193530,66 @@
           "stringUnit": {
             "state": "translated",
             "value": "سؤال"
+=======
+            "value": "Repositorios en el índice: %lld. Son sugerencias de listas abiertas: los archivos se descargan y revisan solo cuando lo pides."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépôts dans l'index : %lld. Ce sont des suggestions de listes ouvertes : les fichiers ne sont téléchargés et vérifiés que si vous le demandez."
+>>>>>>> origin/main
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Pertanyaan"
+=======
+            "value": "Repositori dalam indeks: %lld. Ini saran dari daftar terbuka: file diunduh dan diperiksa hanya saat Anda memintanya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repository nell'indice: %lld. Sono suggerimenti da liste aperte: i file vengono scaricati e controllati solo quando lo chiedi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インデックス内のリポジトリ: %lld。公開リストからの候補で、ファイルは依頼したときだけダウンロード・チェックされます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "색인의 저장소: %lld. 공개 목록에서 나온 제안이며, 요청할 때만 파일을 다운로드하고 검사합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repozytoria w indeksie: %lld. To podpowiedzi z otwartych list: pliki są pobierane i sprawdzane dopiero na Twoją prośbę."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repositórios no índice: %lld. São sugestões de listas abertas: os arquivos só são baixados e verificados quando você pedir."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Репозиторіїв в індексі: %lld. Це підказки з відкритих списків: файли завантажуються й перевіряються, лише коли ви попросите."
+>>>>>>> origin/main
           }
         }
       }
     },
+<<<<<<< HEAD
     "Все провайдеры": {
       "localizations": {
         "en": {
@@ -193189,11 +193602,20 @@
           "stringUnit": {
             "state": "translated",
             "value": "Усі провайдери"
+=======
+    "Обновлён %@.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حُدِّث %@."
+>>>>>>> origin/main
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Alle Anbieter"
           }
         },
@@ -193201,11 +193623,21 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tous les fournisseurs"
+=======
+            "value": "Aktualisiert %@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Updated %@."
+>>>>>>> origin/main
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Todos los proveedores"
           }
         },
@@ -193243,16 +193675,66 @@
           "stringUnit": {
             "state": "translated",
             "value": "كل المزوّدين"
+=======
+            "value": "Actualizado %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis à jour %@."
+>>>>>>> origin/main
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Semua penyedia"
+=======
+            "value": "Diperbarui %@."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiornato %@."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更新: %@。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트: %@."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaktualizowano %@."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizado %@."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оновлено %@."
+>>>>>>> origin/main
           }
         }
       }
     },
+<<<<<<< HEAD
     "Вывод, $/млн": {
       "localizations": {
         "en": {
@@ -193265,11 +193747,20 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вивід, $/млн"
+=======
+    "Скиллы: %lld": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المهارات: %lld"
+>>>>>>> origin/main
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Ausgabe, $/Mio."
           }
         },
@@ -193277,11 +193768,21 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sortie, $/M"
+=======
+            "value": "Skills: %lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills: %lld"
+>>>>>>> origin/main
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Salida, $/M"
           }
         },
@@ -193319,16 +193820,66 @@
           "stringUnit": {
             "state": "translated",
             "value": "الإخراج، $/مليون"
+=======
+            "value": "Skills: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills : %lld"
+>>>>>>> origin/main
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Output, $/juta"
+=======
+            "value": "Skill: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキル: %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스킬: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skille: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скіли: %lld"
+>>>>>>> origin/main
           }
         }
       }
     },
+<<<<<<< HEAD
     "Загружаю цены…": {
       "localizations": {
         "en": {
@@ -193341,11 +193892,20 @@
           "stringUnit": {
             "state": "translated",
             "value": "Завантажую ціни…"
+=======
+    "Показать скиллы этого источника": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض مهارات هذا المصدر"
+>>>>>>> origin/main
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Preise werden geladen …"
           }
         },
@@ -193353,11 +193913,21 @@
           "stringUnit": {
             "state": "translated",
             "value": "Chargement des prix…"
+=======
+            "value": "Skills dieser Quelle zeigen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show this source's skills"
+>>>>>>> origin/main
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Cargando precios…"
           }
         },
@@ -193395,16 +193965,66 @@
           "stringUnit": {
             "state": "translated",
             "value": "جارٍ تحميل الأسعار…"
+=======
+            "value": "Mostrar las skills de esta fuente"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les skills de cette source"
+>>>>>>> origin/main
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Memuat harga…"
+=======
+            "value": "Tampilkan skill dari sumber ini"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostra le skill di questa fonte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このソースのスキルを表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 소스의 스킬 보기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokaż skille tego źródła"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar as skills desta fonte"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показати скіли цього джерела"
+>>>>>>> origin/main
           }
         }
       }
     },
+<<<<<<< HEAD
     "Задача агента": {
       "localizations": {
         "en": {
@@ -193417,11 +194037,20 @@
           "stringUnit": {
             "state": "translated",
             "value": "Завдання агента"
+=======
+    "Скачать и проверить": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تنزيل وفحص"
+>>>>>>> origin/main
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Agentenaufgabe"
           }
         },
@@ -193429,11 +194058,21 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tâche d’agent"
+=======
+            "value": "Laden und prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download and check"
+>>>>>>> origin/main
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Tarea de agente"
           }
         },
@@ -193471,16 +194110,66 @@
           "stringUnit": {
             "state": "translated",
             "value": "مهمة وكيل"
+=======
+            "value": "Descargar y revisar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Télécharger et vérifier"
+>>>>>>> origin/main
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Tugas agen"
+=======
+            "value": "Unduh dan periksa"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scarica e controlla"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ダウンロードしてチェック"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드 후 검사"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pobierz i sprawdź"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baixar e verificar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Завантажити й перевірити"
+>>>>>>> origin/main
           }
         }
       }
     },
+<<<<<<< HEAD
     "Контекст": {
       "localizations": {
         "en": {
@@ -193493,11 +194182,20 @@
           "stringUnit": {
             "state": "translated",
             "value": "Контекст"
+=======
+    "Добавить репозиторий в источники: его скиллы скачаются в папку приложения и проверятся сканером": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إضافة المستودع إلى المصادر: ستُنزَّل مهاراته إلى مجلد التطبيق ويفحصها الماسح"
+>>>>>>> origin/main
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Kontext"
           }
         },
@@ -193505,11 +194203,21 @@
           "stringUnit": {
             "state": "translated",
             "value": "Contexte"
+=======
+            "value": "Repository zu den Quellen hinzufügen: Seine Skills werden in den Ordner der App geladen und vom Scanner geprüft"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add the repository to sources: its skills are downloaded into the app's folder and checked by the scanner"
+>>>>>>> origin/main
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Contexto"
           }
         },
@@ -193547,16 +194255,66 @@
           "stringUnit": {
             "state": "translated",
             "value": "السياق"
+=======
+            "value": "Añadir el repositorio a las fuentes: sus skills se descargan en la carpeta de la app y el escáner las revisa"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter le dépôt aux sources : ses skills sont téléchargés dans le dossier de l'app et vérifiés par l'analyseur"
+>>>>>>> origin/main
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Konteks"
+=======
+            "value": "Tambahkan repositori ke sumber: skill-nya diunduh ke folder aplikasi dan diperiksa pemindai"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi il repository alle fonti: le sue skill vengono scaricate nella cartella dell'app e controllate dallo scanner"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリをソースに追加: スキルはアプリのフォルダにダウンロードされ、スキャナーでチェックされます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "저장소를 소스에 추가: 스킬이 앱 폴더로 다운로드되고 스캐너가 검사합니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj repozytorium do źródeł: jego skille trafią do folderu aplikacji i zostaną sprawdzone skanerem"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar o repositório às fontes: as skills dele são baixadas para a pasta do app e verificadas pelo scanner"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Додати репозиторій до джерел: його скіли завантажаться в теку застосунку й перевіряться сканером"
+>>>>>>> origin/main
           }
         }
       }
     },
+<<<<<<< HEAD
     "Обновить цены": {
       "localizations": {
         "en": {
@@ -193569,11 +194327,20 @@
           "stringUnit": {
             "state": "translated",
             "value": "Оновити ціни"
+=======
+    "В открытых источниках ещё: %lld": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في المصادر المفتوحة أيضًا: %lld"
+>>>>>>> origin/main
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Preise aktualisieren"
           }
         },
@@ -193581,11 +194348,21 @@
           "stringUnit": {
             "state": "translated",
             "value": "Actualiser les prix"
+=======
+            "value": "In offenen Quellen noch: %lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More in open sources: %lld"
+>>>>>>> origin/main
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Actualizar precios"
           }
         },
@@ -193623,16 +194400,66 @@
           "stringUnit": {
             "state": "translated",
             "value": "تحديث الأسعار"
+=======
+            "value": "Más en fuentes abiertas: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encore dans les sources ouvertes : %lld"
+>>>>>>> origin/main
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Perbarui harga"
+=======
+            "value": "Lainnya di sumber terbuka: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altre nelle fonti aperte: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "公開ソースにさらに: %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "공개 소스에 더 있음: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Więcej w otwartych źródłach: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mais em fontes abertas: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ще у відкритих джерелах: %lld"
+>>>>>>> origin/main
           }
         }
       }
     },
+<<<<<<< HEAD
     "Окно со всеми моделями по API рядом: цена ввода и вывода, что стоила бы одна задача с каждой и сколько стоил бы ваш месяц в Claude Code по их ценам. Открывается из блока лимитов и из меню «Ещё». Цены — из открытого списка models.dev: он загружается, когда вы открываете окно, не чаще раза в день.": {
       "localizations": {
         "en": {
@@ -193645,11 +194472,20 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вікно з усіма моделями за API поруч: ціна вводу й виводу, скільки коштувало б одне завдання з кожною і скільки коштував би ваш місяць у Claude Code за їхніми цінами. Відкривається з блоку лімітів і з меню «Ще». Ціни — з відкритого списку models.dev: він завантажується, коли ви відкриваєте вікно, не частіше ніж раз на день."
+=======
+    "Открытые источники: репозитории из открытых списков": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المصادر المفتوحة: مستودعات من القوائم المفتوحة"
+>>>>>>> origin/main
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Ein Fenster mit allen API-Modellen nebeneinander: Eingabe- und Ausgabepreis, was eine Aufgabe mit jedem Modell kosten würde und was Ihr Monat in Claude Code zu deren Preisen kosten würde. Es öffnet sich aus dem Limits-Block und aus dem Menü „Mehr“. Die Preise stammen aus der offenen Liste models.dev, die beim Öffnen des Fensters geladen wird, höchstens einmal am Tag."
           }
         },
@@ -193657,11 +194493,21 @@
           "stringUnit": {
             "state": "translated",
             "value": "Une fenêtre avec tous les modèles par API côte à côte : prix d’entrée et de sortie, ce que coûterait une tâche avec chacun, et ce que coûterait votre mois de Claude Code à leurs prix. Elle s’ouvre depuis le bloc des limites et depuis le menu « Plus ». Les prix viennent de la liste ouverte models.dev, téléchargée à l’ouverture de la fenêtre, au plus une fois par jour."
+=======
+            "value": "Offene Quellen: Repositorys aus offenen Listen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open sources: repositories from open lists"
+>>>>>>> origin/main
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Una ventana con todos los modelos por API lado a lado: precio de entrada y de salida, lo que costaría una tarea con cada uno y lo que costaría su mes de Claude Code a sus precios. Se abre desde el bloque de límites y desde el menú «Más». Los precios vienen de la lista abierta models.dev, que se descarga al abrir la ventana, como máximo una vez al día."
           }
         },
@@ -193699,11 +194545,21 @@
           "stringUnit": {
             "state": "translated",
             "value": "نافذة تعرض كل نماذج الـ API جنبًا إلى جنب: سعر الإدخال والإخراج، وكم ستكلّف مهمة واحدة مع كل نموذج، وكم سيكلّف شهرك في Claude Code بأسعارها. تُفتح من قسم الحدود ومن قائمة «المزيد». الأسعار من القائمة المفتوحة models.dev، وتُنزَّل عند فتح النافذة، مرة واحدة في اليوم على الأكثر."
+=======
+            "value": "Fuentes abiertas: repositorios de listas abiertas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sources ouvertes : dépôts issus de listes ouvertes"
+>>>>>>> origin/main
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Jendela dengan semua model API berdampingan: harga input dan output, berapa biaya satu tugas dengan tiap model, dan berapa biaya sebulan Claude Code Anda dengan harga mereka. Dibuka dari blok limit dan dari menu “Lainnya”. Harga berasal dari daftar terbuka models.dev, yang diunduh saat Anda membuka jendela, paling banyak sekali sehari."
           }
         }
@@ -193715,11 +194571,45 @@
           "stringUnit": {
             "state": "translated",
             "value": "Search models"
+=======
+            "value": "Sumber terbuka: repositori dari daftar terbuka"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fonti aperte: repository dalle liste aperte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "公開ソース: 公開リストのリポジトリ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "공개 소스: 공개 목록의 저장소"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwarte źródła: repozytoria z otwartych list"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fontes abertas: repositórios de listas abertas"
+>>>>>>> origin/main
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
+<<<<<<< HEAD
             "value": "Пошук моделі"
           }
         },
@@ -194769,6 +195659,9 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sembunyikan model yang dirilis lebih dari setahun lalu"
+=======
+            "value": "Відкриті джерела: репозиторії з відкритих списків"
+>>>>>>> origin/main
           }
         }
       }
