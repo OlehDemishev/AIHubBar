@@ -26,6 +26,12 @@ final class SessionStore {
     var waitingCount: Int { items.filter { $0.state == .waiting }.count }
     var activeItems: [Item] { items }
 
+    /// Sessions and requests of other computers (`RemoteMachines`), as their last snapshots have them.
+    private var remoteEntries: [RemoteSnapshot.Entry] = []
+    private var remoteRequests: [ApprovalRequest] = []
+    /// Set by the app: sends an answer to the computer that asked.
+    var decideRemotely: (_ machineID: String, _ requestID: String, _ allow: Bool) -> Void = { _, _, _ in }
+
     private let directory: URL
     private let approvalsDirectory: URL
     private var watcher: DispatchSourceFileSystemObject?
@@ -71,11 +77,34 @@ final class SessionStore {
         Task {
             let (loaded, finished, requests) = await Task.detached(priority: .utility) {
                 (SessionStore.loadItems(from: directory, now: .now), SessionStore.loadResumable(from: directory, now: .now),
-                 ApprovalFiles.bySession(ApprovalFiles.requests()))
+                 ApprovalFiles.requests())
             }.value
             if finished != resumable { resumable = finished }
-            apply(loaded, requests: requests)
+            // Read after the wait: a snapshot that came meanwhile is not lost to an older one.
+            // A session of this Mac is asked for by this Mac only, whatever another computer reports.
+            let here = Set(loaded.map(\.id))
+            apply(Self.merged(local: loaded, remote: remoteEntries, now: .now),
+                  requests: ApprovalFiles.bySession(requests + remoteRequests.filter { !here.contains($0.sessionID) }))
         }
+    }
+
+    /// What the other computers show now (`RemoteMachines`); an empty list when none is connected.
+    func setRemote(entries: [RemoteSnapshot.Entry], requests: [ApprovalRequest]) {
+        guard entries != remoteEntries || requests != remoteRequests else { return }
+        remoteEntries = entries
+        remoteRequests = requests
+        reload()
+    }
+
+    /// This Mac's sessions with the other computers' ones, in the panel's order. A remote session is shown by the
+    /// same rules, with its process checked there; how full its context is stays unknown (its journal is not here).
+    nonisolated static func merged(local: [Item], remote: [RemoteSnapshot.Entry], now: Date) -> [Item] {
+        let known = Set(local.map(\.id))
+        let added = remote.filter { !known.contains($0.session.id) && SessionRules.isVisible($0.session, isAlive: $0.alive, now: now) }
+            .map { Item(session: $0.session, state: SessionRules.effectiveState($0.session, isAlive: $0.alive), context: nil) }
+        guard !added.isEmpty else { return local }
+        let all = Dictionary((local + added).map { ($0.id, $0) }) { first, _ in first }
+        return SessionRules.sorted((local + added).map { ($0.session, $0.state) }).compactMap { all[$0.session.id] }
     }
 
     private func apply(_ loaded: [Item], requests: [String: ApprovalRequest]) {
@@ -106,8 +135,13 @@ final class SessionStore {
             if let index = items.firstIndex(where: { $0.id == request.sessionID }) { items[index].state = .running }
             return
         }
-        guard ApprovalFiles.decide(requestID, allow: allow, in: approvalsDirectory) else { return }
-        if let request = approvals.values.first(where: { $0.id == requestID }) {
+        let asked = approvals.values.first { $0.id == requestID }
+        if let machineID = asked?.machineID {
+            decideRemotely(machineID, requestID, allow)
+        } else {
+            guard ApprovalFiles.decide(requestID, allow: allow, in: approvalsDirectory) else { return }
+        }
+        if let request = asked {
             approvals[request.sessionID] = nil
             UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["waiting-\(request.sessionID)"])
         }
@@ -247,7 +281,7 @@ final class SessionStore {
             contextNotified.insert(item.id)
             Notifier.post(
                 id: "context-\(item.id)",
-                title: String(localized: "Контекст почти заполнен — \(item.session.displayProject)"),
+                title: String(localized: "Контекст почти заполнен — \(item.session.placeTitle)"),
                 body: String(localized: "≈ \(Int(((item.context ?? 0) * 100).rounded())) %: скоро Claude сожмёт историю. Если задача большая — лучше начать новую сессию с кратким итогом."),
                 target: .session(id: item.id)
             )
@@ -256,7 +290,8 @@ final class SessionStore {
 
     /// Once per quiet stretch and once per repeated command.
     private func announceStuck(_ items: [Item]) {
-        let alerts = stuck.evaluate(items.map { ($0.session, $0.state) }) { session, last in
+        // Only this Mac's sessions: whether a remote agent waits for its own command cannot be seen from here.
+        let alerts = stuck.evaluate(items.filter { $0.session.machine == nil }.map { ($0.session, $0.state) }) { session, last in
             session.claudePID.map { Self.hasChildProcess(of: $0, startedAfter: last) } ?? false
         }
         for alert in alerts {
@@ -271,7 +306,7 @@ final class SessionStore {
             Notifier.post(
                 id: "waiting-\(session.id)",
                 title: request.agent == "codex" ? "\(request.asksTitle) — \(session.displayProject)"
-                    : String(localized: "Claude просит разрешение — \(session.displayProject)"),
+                    : String(localized: "Claude просит разрешение — \(session.placeTitle)"),
                 body: request.text,
                 target: .approval(sessionID: session.id, requestID: request.id)
             )
@@ -279,8 +314,8 @@ final class SessionStore {
         }
         Notifier.post(
             id: "waiting-\(session.id)",
-            title: session.agent == .claudeCode ? String(localized: "Claude ждёт ответа — \(session.displayProject)")
-                : String(localized: "\(session.agentName) ждёт ответа — \(session.displayProject)"),
+            title: session.agent == .claudeCode ? String(localized: "Claude ждёт ответа — \(session.placeTitle)")
+                : String(localized: "\(session.agentName) ждёт ответа — \(session.placeTitle)"),
             body: session.message ?? session.task ?? String(localized: "Нужно ваше решение."),
             target: .session(id: session.id)
         )
@@ -293,6 +328,10 @@ final class SessionStore {
 enum SessionActions {
     /// A finished Claude Code session goes on in Terminal, in its own folder.
     static func resume(_ session: Session, claudePath: String) {
+        if let machine = session.machine {
+            openRemotely(session, on: machine, run: "claude --resume \(SSHCommand.quote(session.id))")
+            return
+        }
         let commandLine = ShellQuote.claudeResumeCommandLine(folder: session.cwd, claude: ClaudeLocator.resolve(configured: claudePath), sessionID: session.id)
         Task {
             do {
@@ -308,6 +347,10 @@ enum SessionActions {
     /// lives in Claude too, so Claude comes forward rather than Finder. Otherwise (or if the tab is gone): the folder.
     static func show(_ session: Session) {
         AppLog.info("Show session \(session.id) (\(session.entrypoint ?? "-"))")
+        if let machine = session.machine {
+            openRemotely(session, on: machine, run: nil)
+            return
+        }
         Task {
             if session.isInTerminalApp, let tty = session.tty, await focusTerminalTab(tty: tty) {
                 return
@@ -324,6 +367,19 @@ enum SessionActions {
                 return
             }
             ProjectActions.openInFinder(session.cwd)
+        }
+    }
+
+    /// A session on another computer has no window here: Terminal opens `ssh` in its folder — with `claude --resume`
+    /// for a finished one. A running one keeps its own terminal there; this is a second shell beside it.
+    private static func openRemotely(_ session: Session, on machine: SessionMachine, run command: String?) {
+        let commandLine = SSHCommand.terminalCommandLine(host: machine.host, folder: session.cwd, run: command)
+        Task {
+            do {
+                try await TerminalLauncher.run(commandLine)
+            } catch {
+                AppLog.error("Open remote session \(session.id): \(error.localizedDescription)")
+            }
         }
     }
 

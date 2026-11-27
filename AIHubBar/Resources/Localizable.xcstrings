@@ -196140,6 +196140,1374 @@
           }
         }
       }
+    },
+    "%@: отслеживание AI Hub Bar с того компьютера тоже снимается, если он на связи.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: AI Hub Bar's tracking is also removed from that computer, if it can be reached."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: відстеження AI Hub Bar з того комп'ютера теж знімається, якщо він на зв'язку."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: Die Verfolgung von AI Hub Bar wird auch von diesem Computer entfernt, wenn er erreichbar ist."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : le suivi d'AI Hub Bar est aussi retiré de cet ordinateur, s'il est joignable."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: el seguimiento de AI Hub Bar también se quita de ese ordenador, si está accesible."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: il tracciamento di AI Hub Bar viene rimosso anche da quel computer, se è raggiungibile."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: o rastreamento do AI Hub Bar também é removido daquele computador, se ele estiver acessível."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: śledzenie AI Hub Bar zostanie też usunięte z tamtego komputera, jeśli jest osiągalny."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: 接続できる場合は、そのコンピュータからも AI Hub Bar の追跡を削除します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: 연결할 수 있으면 그 컴퓨터에서도 AI Hub Bar 추적을 제거합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: يُزال تتبّع AI Hub Bar من ذلك الحاسوب أيضًا إن كان متصلًا."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: pelacakan AI Hub Bar juga dihapus dari komputer itu, jika dapat dijangkau."
+          }
+        }
+      }
+    },
+    "Claude Code там не найден: сессии появятся, когда он будет установлен.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code was not found there: sessions will appear once it is installed."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code там не знайдено: сесії з'являться, коли його буде встановлено."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code wurde dort nicht gefunden: Sitzungen erscheinen, sobald es installiert ist."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code est introuvable sur cet ordinateur : les sessions apparaîtront une fois qu'il sera installé."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró Claude Code allí: las sesiones aparecerán cuando esté instalado."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code non è stato trovato lì: le sessioni appariranno quando sarà installato."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Claude Code não foi encontrado lá: as sessões aparecerão quando ele for instalado."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie znaleziono tam Claude Code: sesje pojawią się, gdy zostanie zainstalowany."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "そのコンピュータに Claude Code が見つかりません。インストールするとセッションが表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그 컴퓨터에서 Claude Code를 찾지 못했습니다. 설치하면 세션이 나타납니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يُعثر على Claude Code هناك: ستظهر الجلسات بعد تثبيته."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code tidak ditemukan di sana: sesi akan muncul setelah dipasang."
+          }
+        }
+      }
+    },
+    "Адрес для ssh": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Address for ssh"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Адреса для ssh"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adresse für ssh"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adresse pour ssh"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dirección para ssh"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indirizzo per ssh"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Endereço para ssh"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adres dla ssh"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ssh の接続先"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ssh 주소"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عنوان ssh"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alamat untuk ssh"
+          }
+        }
+      }
+    },
+    "В адресе могут быть буквы, цифры, точка и дефис, без пробелов: host или user@host.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The address may have letters, digits, a dot and a hyphen, no spaces: host or user@host."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В адресі можуть бути літери, цифри, крапка й дефіс, без пробілів: host або user@host."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Adresse darf Buchstaben, Ziffern, Punkt und Bindestrich enthalten, keine Leerzeichen: host oder user@host."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'adresse peut contenir des lettres, des chiffres, un point et un tiret, sans espace : host ou user@host."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La dirección puede tener letras, cifras, punto y guion, sin espacios: host o user@host."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'indirizzo può contenere lettere, cifre, punto e trattino, senza spazi: host o user@host."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O endereço pode ter letras, dígitos, ponto e hífen, sem espaços: host ou user@host."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adres może zawierać litery, cyfry, kropkę i łącznik, bez spacji: host lub user@host."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "接続先に使えるのは英数字、ピリオド、ハイフンです(空白は不可):host または user@host。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주소에는 영문자, 숫자, 마침표, 하이픈을 쓸 수 있고 공백은 안 됩니다: host 또는 user@host."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن أن يحتوي العنوان على حروف وأرقام ونقطة وشرطة، بلا مسافات: host أو user@host."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alamat boleh berisi huruf, angka, titik, dan tanda hubung, tanpa spasi: host atau user@host."
+          }
+        }
+      }
+    },
+    "Добавить компьютер": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Computer"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Додати комп'ютер"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Computer hinzufügen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter un ordinateur"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir ordenador"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi computer"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar computador"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj komputer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コンピュータを追加"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "컴퓨터 추가"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إضافة حاسوب"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tambah komputer"
+          }
+        }
+      }
+    },
+    "Другой Mac, сервер или виртуальная машина на Linux, куда этот Mac входит по SSH по ключу, без пароля: имя из ~/.ssh/config или user@host. «Установить» кладёт туда отслеживание AI Hub Bar (записи в ~/.claude/settings.json, с резервной копией рядом) и маленький скрипт; там нужен python3. Сессии Claude Code с того компьютера появятся в панели, с «Разрешить» и «Отклонить».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Another Mac, a server or a Linux virtual machine this Mac signs in to over SSH with a key, without a password: a name from ~/.ssh/config or user@host. “Install” puts AI Hub Bar's tracking there (entries in ~/.claude/settings.json, with a backup beside it) and a small script; python3 is needed there. Claude Code sessions from that computer will appear in the panel, with “Allow” and “Deny”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Інший Mac, сервер або віртуальна машина на Linux, куди цей Mac входить по SSH за ключем, без пароля: ім'я з ~/.ssh/config або user@host. «Установити» кладе туди відстеження AI Hub Bar (записи в ~/.claude/settings.json, з резервною копією поруч) і маленький скрипт; там потрібен python3. Сесії Claude Code з того комп'ютера з'являться в панелі, з «Дозволити» та «Відхилити»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein anderer Mac, ein Server oder eine virtuelle Linux-Maschine, bei der sich dieser Mac per SSH mit einem Schlüssel anmeldet, ohne Passwort: ein Name aus ~/.ssh/config oder user@host. „Installieren“ legt dort die Verfolgung von AI Hub Bar ab (Einträge in ~/.claude/settings.json, mit einer Sicherungskopie daneben) und ein kleines Skript; dort wird python3 benötigt. Claude-Code-Sitzungen von diesem Computer erscheinen im Panel, mit „Erlauben“ und „Ablehnen“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un autre Mac, un serveur ou une machine virtuelle Linux auquel ce Mac se connecte en SSH avec une clé, sans mot de passe : un nom de ~/.ssh/config ou user@host. « Installer » y place le suivi d'AI Hub Bar (entrées dans ~/.claude/settings.json, avec une copie de sauvegarde à côté) et un petit script ; python3 y est nécessaire. Les sessions Claude Code de cet ordinateur apparaîtront dans le panneau, avec « Autoriser » et « Refuser »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otro Mac, un servidor o una máquina virtual Linux en la que este Mac entra por SSH con una clave, sin contraseña: un nombre de ~/.ssh/config o user@host. «Instalar» coloca allí el seguimiento de AI Hub Bar (entradas en ~/.claude/settings.json, con una copia de seguridad al lado) y un pequeño script; allí hace falta python3. Las sesiones de Claude Code de ese ordenador aparecerán en el panel, con «Permitir» y «Rechazar»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un altro Mac, un server o una macchina virtuale Linux a cui questo Mac accede via SSH con una chiave, senza password: un nome da ~/.ssh/config o user@host. «Installa» vi mette il tracciamento di AI Hub Bar (voci in ~/.claude/settings.json, con una copia di backup accanto) e un piccolo script; lì serve python3. Le sessioni di Claude Code di quel computer appariranno nel pannello, con «Consenti» e «Rifiuta»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outro Mac, um servidor ou uma máquina virtual Linux em que este Mac entra por SSH com uma chave, sem senha: um nome de ~/.ssh/config ou user@host. “Instalar” coloca lá o rastreamento do AI Hub Bar (entradas em ~/.claude/settings.json, com uma cópia de segurança ao lado) e um pequeno script; lá é preciso ter python3. As sessões do Claude Code daquele computador aparecerão no painel, com “Permitir” e “Recusar”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inny Mac, serwer lub maszyna wirtualna z Linuksem, do której ten Mac loguje się przez SSH kluczem, bez hasła: nazwa z ~/.ssh/config albo user@host. „Zainstaluj” umieszcza tam śledzenie AI Hub Bar (wpisy w ~/.claude/settings.json, z kopią zapasową obok) i mały skrypt; potrzebny jest tam python3. Sesje Claude Code z tamtego komputera pojawią się w panelu, z „Zezwól” i „Odrzuć”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この Mac がパスワードなしの鍵で SSH 接続できる別の Mac、サーバー、または Linux の仮想マシン:~/.ssh/config の名前か user@host。「インストール」はそこに AI Hub Bar の追跡(~/.claude/settings.json への追記、バックアップを隣に保存)と小さなスクリプトを置きます。そこには python3 が必要です。そのコンピュータの Claude Code セッションが「許可」と「拒否」付きでパネルに表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 Mac이 암호 없이 키로 SSH 접속하는 다른 Mac, 서버 또는 Linux 가상 머신: ~/.ssh/config의 이름이나 user@host. ‘설치’는 그곳에 AI Hub Bar 추적(~/.claude/settings.json 항목, 옆에 백업 저장)과 작은 스크립트를 둡니다. 그곳에 python3가 필요합니다. 그 컴퓨터의 Claude Code 세션이 ‘허용’ 및 ‘거부’와 함께 패널에 나타납니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac آخر أو خادم أو آلة افتراضية بنظام Linux يدخل إليها هذا الـ Mac عبر SSH بمفتاح ودون كلمة مرور: اسم من ~/.ssh/config أو user@host. «تثبيت» يضع هناك تتبّع AI Hub Bar (إدخالات في ~/.claude/settings.json مع نسخة احتياطية بجانبها) وسكربتًا صغيرًا؛ ويلزم وجود python3 هناك. ستظهر جلسات Claude Code من ذلك الحاسوب في اللوحة، مع «سماح» و«رفض»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac lain, server, atau mesin virtual Linux yang dimasuki Mac ini lewat SSH dengan kunci, tanpa kata sandi: nama dari ~/.ssh/config atau user@host. “Pasang” menaruh pelacakan AI Hub Bar di sana (entri di ~/.claude/settings.json, dengan cadangan di sebelahnya) dan skrip kecil; python3 diperlukan di sana. Sesi Claude Code dari komputer itu akan muncul di panel, dengan “Izinkan” dan “Tolak”."
+          }
+        }
+      }
+    },
+    "На том компьютере нет python3: без него AI Hub Bar там не работает.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That computer has no python3: AI Hub Bar does not work there without it."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "На тому комп'ютері немає python3: без нього AI Hub Bar там не працює."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf diesem Computer fehlt python3: Ohne es funktioniert AI Hub Bar dort nicht."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cet ordinateur n'a pas python3 : AI Hub Bar n'y fonctionne pas sans lui."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ese ordenador no tiene python3: sin él AI Hub Bar no funciona allí."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Su quel computer manca python3: senza, AI Hub Bar lì non funziona."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aquele computador não tem python3: sem ele o AI Hub Bar não funciona lá."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na tamtym komputerze nie ma python3: bez niego AI Hub Bar tam nie działa."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "そのコンピュータに python3 がありません。これがないと AI Hub Bar はそこで動作しません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그 컴퓨터에 python3가 없습니다. 없으면 AI Hub Bar가 그곳에서 동작하지 않습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يوجد python3 على ذلك الحاسوب: لا يعمل AI Hub Bar هناك بدونه."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komputer itu tidak memiliki python3: tanpa itu AI Hub Bar tidak berfungsi di sana."
+          }
+        }
+      }
+    },
+    "Подключиться снова": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connect Again"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Підключитися знову"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erneut verbinden"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se reconnecter"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectar de nuevo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riconnetti"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectar novamente"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Połącz ponownie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "再接続"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 연결"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة الاتصال"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sambungkan lagi"
+          }
+        }
+      }
+    },
+    "Показывать сессии": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show Sessions"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показувати сесії"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzungen anzeigen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les sessions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar sesiones"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostra sessioni"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar sessões"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokazuj sesje"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションを表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션 표시"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إظهار الجلسات"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilkan sesi"
+          }
+        }
+      }
+    },
+    "Резервная копия: ~/.claude/%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Backup: ~/.claude/%@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Резервна копія: ~/.claude/%@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sicherungskopie: ~/.claude/%@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copie de sauvegarde : ~/.claude/%@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copia de seguridad: ~/.claude/%@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copia di backup: ~/.claude/%@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cópia de segurança: ~/.claude/%@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopia zapasowa: ~/.claude/%@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックアップ:~/.claude/%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백업: ~/.claude/%@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نسخة احتياطية: ‎~/.claude/%@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cadangan: ~/.claude/%@"
+          }
+        }
+      }
+    },
+    "Сессии на других компьютерах": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessions on Other Computers"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесії на інших комп'ютерах"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzungen auf anderen Computern"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessions sur d'autres ordinateurs"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesiones en otros ordenadores"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessioni su altri computer"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessões em outros computadores"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesje na innych komputerach"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ほかのコンピュータのセッション"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 컴퓨터의 세션"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جلسات على حواسيب أخرى"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi di komputer lain"
+          }
+        }
+      }
+    },
+    "Сессия на другом компьютере, по SSH": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A session on another computer, over SSH"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесія на іншому комп'ютері, по SSH"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzung auf einem anderen Computer, über SSH"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session sur un autre ordinateur, via SSH"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesión en otro ordenador, por SSH"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessione su un altro computer, via SSH"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessão em outro computador, por SSH"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesja na innym komputerze, przez SSH"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SSH 経由の、別のコンピュータのセッション"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SSH로 연결된 다른 컴퓨터의 세션"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جلسة على حاسوب آخر، عبر SSH"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi di komputer lain, lewat SSH"
+          }
+        }
+      }
+    },
+    "Убрать компьютер": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove Computer"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати комп'ютер"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Computer entfernen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer l'ordinateur"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar ordenador"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi computer"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover computador"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń komputer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コンピュータを削除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "컴퓨터 제거"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة الحاسوب"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus komputer"
+          }
+        }
+      }
+    },
+    "не установлено": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "not installed"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "не встановлено"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nicht installiert"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "non installé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no instalado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "non installato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "não instalado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nie zainstalowano"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未インストール"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설치 안 됨"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "غير مثبّت"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "belum dipasang"
+          }
+        }
+      }
+    },
+    "подключение…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "connecting…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "підключення…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbindung wird hergestellt …"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "connexion…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "conectando…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "connessione…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "conectando…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "łączenie…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "接続中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "연결 중…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ الاتصال…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "menyambungkan…"
+          }
+        }
+      }
+    },
+    "подключено": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "connected"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "підключено"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "verbunden"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "connecté"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "conectado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "connesso"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "conectado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "połączono"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "接続済み"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "연결됨"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متصل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tersambung"
+          }
+        }
+      }
+    },
+    "Отслеживание установлено на том компьютере (записи в ~/.claude/settings.json).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tracking is installed on that computer (entries in ~/.claude/settings.json)."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відстеження встановлено на тому комп'ютері (записи в ~/.claude/settings.json)."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Verfolgung ist auf diesem Computer installiert (Einträge in ~/.claude/settings.json)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le suivi est installé sur cet ordinateur (entrées dans ~/.claude/settings.json)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El seguimiento está instalado en ese ordenador (entradas en ~/.claude/settings.json)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tracciamento è installato su quel computer (voci in ~/.claude/settings.json)."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O rastreamento foi instalado naquele computador (entradas em ~/.claude/settings.json)."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Śledzenie zainstalowano na tamtym komputerze (wpisy w ~/.claude/settings.json)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "そのコンピュータに追跡を設定しました(~/.claude/settings.json に追記)。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그 컴퓨터에 추적을 설치했습니다(~/.claude/settings.json에 항목 추가)."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ثُبّت التتبّع على ذلك الحاسوب (إدخالات في ~/.claude/settings.json)."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pelacakan dipasang di komputer itu (entri di ~/.claude/settings.json)."
+          }
+        }
+      }
+    },
+    "Там уже есть отслеживание AI Hub Bar — оставлено как есть.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar's tracking is already there — left as it is."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Там уже є відстеження AI Hub Bar — залишено як є."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dort gibt es bereits die Verfolgung von AI Hub Bar — unverändert gelassen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le suivi d'AI Hub Bar y est déjà — laissé tel quel."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allí ya está el seguimiento de AI Hub Bar — se deja como está."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lì c'è già il tracciamento di AI Hub Bar — lasciato com'è."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O rastreamento do AI Hub Bar já está lá — mantido como está."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Śledzenie AI Hub Bar już tam jest — pozostawiono bez zmian."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "そこには既に AI Hub Bar の追跡があります — そのままにしました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그곳에 이미 AI Hub Bar 추적이 있습니다 — 그대로 두었습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تتبّع AI Hub Bar موجود هناك بالفعل — تُرك كما هو."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pelacakan AI Hub Bar sudah ada di sana — dibiarkan apa adanya."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
