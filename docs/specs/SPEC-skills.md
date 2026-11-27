@@ -95,6 +95,11 @@ one by itself (`AIHubBar/Skills/SkillSourceFinder.swift`). Only public, document
 - **GitHub's repository search** (docs.github.com/en/rest/search) for `topic:agent-skills` or `topic:claude-skills`, most
   stars first, no forks or archived ones — only on a click (10 searches a minute without a token).
 
+**The person's own GitHub token** (Settings → Скиллы → «Вход в GitHub», optional) raises the limits to 5,000 requests an
+hour and 30 searches a minute. A token with no permissions is enough. It is checked with `/rate_limit`, kept in the
+Keychain (`ClaudePult API key` / `github-skills`), sent as `Authorization: Bearer` to `https://api.github.com` only —
+never to raw.githubusercontent.com or another host — and dropped from a redirect that leaves the API.
+
 Lists are read once in 12 hours; candidates are merged by repository, the most-named first. Everything a list says is
 untrusted text: links, HTML, control and invisible characters are removed, descriptions are cut to 200 characters and
 shown verbatim. Left out on purpose: skills.sh (its API needs a Vercel token), skillsmp.com (its docs refuse automated
@@ -117,10 +122,15 @@ Both go the AI review's way (§4): Claude Code with no tools, settings or MCP, o
   level down (`package.json`, `Package.swift`, `Podfile`, `requirements.txt`, `pyproject.toml`, `Cargo.toml`, `go.mod`,
   `Gemfile`, `composer.json`, `pubspec.yaml`). Only these names go to the model, at most 440 characters; no file's text,
   README included. The results say what was seen in the folder.
+  The picks are remembered per project with the stack they were made for (`llm_project_picks`): the same stack shows
+  them again without asking, with «Подобрано …» and «Подобрать заново»; a changed stack asks again. A remembered skill
+  that left the catalog is dropped, the others show today's verdict.
 - **«Перевести описания»** in the list, the index and a skill's card: descriptions that read as another language
   (`NLLanguageRecognizer`) go to the model, at most 40 at a time, and come back into the interface language. They are
   remembered in `llm_translations` by the text's SHA-256, the language and the prompt's version, so the same text is
   asked once. «Оригиналы» shows the authors' texts; «Переведено AI» marks the rest.
+  «Переводить описания сразу» (Settings → Скиллы → «Помощь модели», off by default) sends them as soon as a list
+  shows them, once per set of texts; after a failure only the button tries again.
 - **Untrusted both ways.** The question and every description go as one line each between markers carrying a word made
   for that request, with invisible characters spelled out, and the model is told that orders inside are data. What
   comes back is read strictly (one JSON object; unreadable is an error): picks only by number, each once; translations

@@ -44,6 +44,8 @@ enum StorageKey {
     static let panelMoreExpanded = "panelMoreExpanded"
     /// The `WhatsNew.version` whose card was closed.
     static let whatsNewSeen = "whatsNewSeen"
+    /// Skills: descriptions in another language go to the person's model as soon as they are shown.
+    static let skillsAutoTranslate = "skillsAutoTranslate"
     static let helpTopic = "helpTopic"
     static let claudeConfigTab = "claudeConfigTab"
     static let calendarScope = "calendarScope"

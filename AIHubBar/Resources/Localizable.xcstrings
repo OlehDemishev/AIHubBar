@@ -199636,6 +199636,1146 @@
           }
         }
       }
+    },
+    "Подобрано %@, проект с тех пор не изменился": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختيرت %@، ولم يتغيّر المشروع منذ ذلك الحين"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausgewählt %@, das Projekt hat sich seitdem nicht geändert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Picked %@; the project hasn't changed since"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegido %@; el proyecto no ha cambiado desde entonces"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisi %@ ; le projet n'a pas changé depuis"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dipilih %@; proyek belum berubah sejak itu"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scelti %@; il progetto da allora non è cambiato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ に選択、それ以降プロジェクトは変わっていません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@에 고름, 이후 프로젝트가 바뀌지 않았습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dobrano %@, projekt od tego czasu się nie zmienił"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolhido %@; o projeto não mudou desde então"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дібрано %@, проєкт відтоді не змінився"
+          }
+        }
+      }
+    },
+    "Подобрать заново": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختيار من جديد"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neu auswählen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick again"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volver a elegir"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir à nouveau"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilih ulang"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli di nuovo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選び直す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 고르기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dobierz ponownie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher de novo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дібрати знову"
+          }
+        }
+      }
+    },
+    "Выйти": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تسجيل الخروج"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abmelden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign out"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar sesión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se déconnecter"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keluar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esci"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サインアウト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그아웃"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyloguj"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sair"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вийти"
+          }
+        }
+      }
+    },
+    "Вход выполнен: %@ запросов в час": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم تسجيل الدخول: %@ طلب في الساعة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angemeldet: %@ Anfragen pro Stunde"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signed in: %@ requests an hour"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesión iniciada: %@ solicitudes por hora"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connecté : %@ requêtes par heure"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sudah masuk: %@ permintaan per jam"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesso eseguito: %@ richieste all'ora"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サインイン済み: 1 時間あたり %@ リクエスト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인됨: 시간당 요청 %@회"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zalogowano: %@ zapytań na godzinę"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectado: %@ solicitações por hora"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вхід виконано: %@ запитів на годину"
+          }
+        }
+      }
+    },
+    "Вход выполнен": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم تسجيل الدخول"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angemeldet"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signed in"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesión iniciada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connecté"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sudah masuk"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesso eseguito"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サインイン済み"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인됨"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zalogowano"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectado"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вхід виконано"
+          }
+        }
+      }
+    },
+    "Токен GitHub": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رمز GitHub"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub-Token"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub token"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token de GitHub"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeton GitHub"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token GitHub"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token GitHub"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub トークン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub 토큰"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token GitHub"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token do GitHub"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Токен GitHub"
+          }
+        }
+      }
+    },
+    "Создать токен…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إنشاء رمز…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token erstellen…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create a token…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crear un token…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créer un jeton…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buat token…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea un token…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トークンを作成…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "토큰 만들기…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utwórz token…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Criar um token…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Створити токен…"
+          }
+        }
+      }
+    },
+    "Страница GitHub для нового токена: доступ только к публичным репозиториям, без разрешений": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صفحة GitHub لرمز جديد: وصول إلى المستودعات العامة فقط، دون أذونات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub-Seite für ein neues Token: nur Zugriff auf öffentliche Repositorys, ohne Berechtigungen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub's page for a new token: public repositories only, no permissions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Página de GitHub para un token nuevo: solo repositorios públicos, sin permisos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Page GitHub pour un nouveau jeton : dépôts publics uniquement, sans autorisations"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Halaman GitHub untuk token baru: hanya repositori publik, tanpa izin"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pagina di GitHub per un nuovo token: solo repository pubblici, nessun permesso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいトークン用の GitHub ページ: 公開リポジトリのみ、権限なし"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 토큰을 만드는 GitHub 페이지: 공개 저장소만, 권한 없음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strona GitHub do nowego tokena: tylko publiczne repozytoria, bez uprawnień"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Página do GitHub para um novo token: só repositórios públicos, sem permissões"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сторінка GitHub для нового токена: доступ лише до публічних репозиторіїв, без дозволів"
+          }
+        }
+      }
+    },
+    "Вход в GitHub": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تسجيل الدخول إلى GitHub"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anmeldung bei GitHub"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign in to GitHub"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar sesión en GitHub"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connexion à GitHub"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masuk ke GitHub"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesso a GitHub"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub にサインイン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub 로그인"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Logowanie do GitHub"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrar no GitHub"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вхід у GitHub"
+          }
+        }
+      }
+    },
+    "GitHub не принял этот токен.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يقبل GitHub هذا الرمز."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub hat dieses Token nicht angenommen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub didn't accept this token."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub no aceptó este token."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub n'a pas accepté ce jeton."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub tidak menerima token ini."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub non ha accettato questo token."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub はこのトークンを受け付けませんでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub가 이 토큰을 받아들이지 않았습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub nie przyjął tego tokena."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O GitHub não aceitou este token."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub не прийняв цей токен."
+          }
+        }
+      }
+    },
+    "Связка ключей не сохранила токен.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم تحفظ سلسلة المفاتيح الرمز."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Schlüsselbund hat das Token nicht gespeichert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Keychain didn't save the token."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El Llavero no guardó el token."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le trousseau n'a pas enregistré le jeton."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rantai Kunci tidak menyimpan token."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il Portachiavi non ha salvato il token."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーチェーンにトークンを保存できませんでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "키체인에 토큰을 저장하지 못했습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pęk kluczy nie zapisał tokena."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As Chaves não salvaram o token."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В'язка ключів не зберегла токен."
+          }
+        }
+      }
+    },
+    "Помощь модели": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مساعدة النموذج"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hilfe des Modells"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Help from your model"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayuda del modelo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aide du modèle"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bantuan model"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aiuto del modello"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モデルの手助け"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델의 도움"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pomoc modelu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajuda do modelo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Допомога моделі"
+          }
+        }
+      }
+    },
+    "Переводить описания сразу": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ترجمة الأوصاف فورًا"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beschreibungen sofort übersetzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Translate descriptions right away"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traducir las descripciones al instante"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traduire les descriptions tout de suite"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terjemahkan deskripsi langsung"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traduci subito le descrizioni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "説明をすぐに翻訳"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설명을 바로 번역"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tłumacz opisy od razu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traduzir as descrições na hora"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перекладати описи одразу"
+          }
+        }
+      }
+    },
+    "Описания на другом языке уходят в вашу модель, как только появляются в списке, по 40 за раз: Claude Code по подписке или Anthropic API с вашим ключом. Переводы запоминаются, одно описание переводится один раз. Выключено — переводы только по кнопке «Перевести описания».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُرسل الأوصاف بلغة أخرى إلى نموذجك فور ظهورها في القائمة، 40 في كل مرة: Claude Code باشتراكك أو Anthropic API بمفتاحك. تُحفظ الترجمات، ويُترجم كل وصف مرة واحدة. عند الإيقاف تكون الترجمة بزر «ترجمة الأوصاف» فقط."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beschreibungen in einer anderen Sprache gehen an Ihr Modell, sobald sie in der Liste erscheinen, je 40: Claude Code mit Ihrem Abo oder die Anthropic API mit Ihrem Schlüssel. Übersetzungen werden gespeichert, jede Beschreibung wird einmal übersetzt. Aus: nur über die Taste „Beschreibungen übersetzen“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descriptions in another language go to your model as soon as they appear in a list, 40 at a time: Claude Code on your subscription or the Anthropic API with your key. Translations are remembered; each description is translated once. Off: only with the «Translate descriptions» button."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las descripciones en otro idioma van a tu modelo en cuanto aparecen en la lista, de 40 en 40: Claude Code con tu suscripción o la API de Anthropic con tu clave. Las traducciones se guardan; cada descripción se traduce una vez. Desactivado: solo con el botón «Traducir descripciones»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les descriptions dans une autre langue partent vers votre modèle dès qu'elles apparaissent dans la liste, 40 à la fois : Claude Code avec votre abonnement ou l'API Anthropic avec votre clé. Les traductions sont conservées ; chaque description est traduite une fois. Désactivé : seulement avec le bouton « Traduire les descriptions »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deskripsi dalam bahasa lain dikirim ke model Anda begitu muncul di daftar, 40 sekaligus: Claude Code dengan langganan Anda atau Anthropic API dengan kunci Anda. Terjemahan disimpan; tiap deskripsi diterjemahkan sekali. Mati: hanya lewat tombol “Terjemahkan deskripsi”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le descrizioni in un'altra lingua vanno al tuo modello appena compaiono nell'elenco, 40 alla volta: Claude Code con il tuo abbonamento o l'API Anthropic con la tua chiave. Le traduzioni vengono ricordate; ogni descrizione si traduce una volta. Disattivato: solo con il pulsante «Traduci descrizioni»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "別の言語の説明は、リストに表示されるとすぐに 40 件ずつあなたのモデルに送られます: サブスクリプションの Claude Code、またはあなたのキーでの Anthropic API。翻訳は保存され、各説明の翻訳は 1 回だけです。オフ: 「説明を翻訳」ボタンでのみ翻訳します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 언어로 된 설명은 목록에 나타나는 즉시 40개씩 내 모델로 전송됩니다: 구독 중인 Claude Code 또는 내 키를 쓰는 Anthropic API. 번역은 저장되며 설명마다 한 번만 번역합니다. 끄면 «설명 번역» 버튼으로만 번역합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opisy w innym języku trafiają do Twojego modelu, gdy tylko pojawią się na liście, po 40 naraz: Claude Code w ramach subskrypcji lub Anthropic API z Twoim kluczem. Tłumaczenia są zapamiętywane; każdy opis tłumaczy się raz. Wyłączone: tylko przyciskiem „Przetłumacz opisy”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descrições em outro idioma vão para o seu modelo assim que aparecem na lista, 40 por vez: Claude Code pela sua assinatura ou a API da Anthropic com a sua chave. As traduções ficam guardadas; cada descrição é traduzida uma vez. Desligado: só pelo botão “Traduzir descrições”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Описи іншою мовою йдуть у вашу модель, щойно з'являються в списку, по 40 за раз: Claude Code за підпискою або Anthropic API з вашим ключем. Переклади запам'ятовуються, кожен опис перекладається один раз. Вимкнено — лише кнопкою «Перекласти описи»."
+          }
+        }
+      }
+    },
+    "С токеном GitHub разрешает 5000 запросов в час вместо 60, и источники проверяются без ожидания. Это необязательно, и подойдёт токен без разрешений: он нужен только чтобы читать публичные репозитории. Токен хранится в Связке ключей и уходит только на api.github.com.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مع رمز يسمح GitHub بـ 5000 طلب في الساعة بدلًا من 60، فتُفحص المصادر دون انتظار. هذا اختياري، ويكفي رمز بلا أذونات: فهو لقراءة المستودعات العامة فقط. يُحفظ الرمز في سلسلة المفاتيح ولا يُرسل إلا إلى api.github.com."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit Token erlaubt GitHub 5000 Anfragen pro Stunde statt 60, und Quellen werden ohne Warten geprüft. Das ist optional, und ein Token ohne Berechtigungen reicht: Es dient nur zum Lesen öffentlicher Repositorys. Das Token liegt im Schlüsselbund und geht nur an api.github.com."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With a token GitHub allows 5,000 requests an hour instead of 60, and sources are checked without waiting. It's optional, and a token with no permissions will do: it is only for reading public repositories. The token is kept in the Keychain and goes to api.github.com only."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con un token GitHub permite 5000 solicitudes por hora en lugar de 60, y las fuentes se revisan sin esperar. Es opcional y sirve un token sin permisos: solo hace falta para leer repositorios públicos. El token se guarda en el Llavero y solo va a api.github.com."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec un jeton, GitHub autorise 5 000 requêtes par heure au lieu de 60, et les sources sont vérifiées sans attendre. C'est facultatif, et un jeton sans autorisations suffit : il sert seulement à lire des dépôts publics. Le jeton est conservé dans le trousseau et n'est envoyé qu'à api.github.com."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dengan token, GitHub mengizinkan 5.000 permintaan per jam alih-alih 60, dan sumber diperiksa tanpa menunggu. Ini opsional, dan token tanpa izin sudah cukup: hanya untuk membaca repositori publik. Token disimpan di Rantai Kunci dan hanya dikirim ke api.github.com."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con un token GitHub consente 5000 richieste all'ora invece di 60, e le fonti vengono controllate senza attese. È facoltativo e basta un token senza permessi: serve solo a leggere repository pubblici. Il token è conservato nel Portachiavi e va solo ad api.github.com."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トークンがあると GitHub は 1 時間に 60 ではなく 5000 リクエストまで許可し、ソースを待たずにチェックできます。任意で、権限なしのトークンで十分です。公開リポジトリを読むためだけに使います。トークンはキーチェーンに保存され、api.github.com にだけ送られます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "토큰이 있으면 GitHub가 시간당 60회 대신 5000회 요청을 허용하므로 소스를 기다리지 않고 검사합니다. 선택 사항이며 권한 없는 토큰이면 충분합니다. 공개 저장소를 읽는 데만 씁니다. 토큰은 키체인에 보관되고 api.github.com으로만 전송됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Z tokenem GitHub pozwala na 5000 zapytań na godzinę zamiast 60, a źródła są sprawdzane bez czekania. To opcjonalne i wystarczy token bez uprawnień: służy tylko do czytania publicznych repozytoriów. Token jest przechowywany w pęku kluczy i trafia tylko do api.github.com."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com um token, o GitHub permite 5.000 solicitações por hora em vez de 60, e as fontes são verificadas sem espera. É opcional, e um token sem permissões basta: serve só para ler repositórios públicos. O token fica nas Chaves e vai apenas para api.github.com."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З токеном GitHub дозволяє 5000 запитів на годину замість 60, і джерела перевіряються без очікування. Це необов'язково, і підійде токен без дозволів: він потрібен лише щоб читати публічні репозиторії. Токен зберігається у В'язці ключів і йде лише на api.github.com."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

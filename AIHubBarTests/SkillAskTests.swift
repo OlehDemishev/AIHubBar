@@ -111,4 +111,37 @@ struct SkillAskTests {
         #expect(prompt.user.hasPrefix("<<<PROJECT \(Self.nonce)>>>\n") && prompt.user.split(separator: "\n").count == 3)
         #expect(SkillAsk.projectQuestion("Languages: Swift.").hasSuffix("Languages: Swift."))
     }
+
+    @Test func theGitHubTokenGoesToTheAPIOnly() throws {
+        let token = "github_pat_test0000"
+        let api = SkillGitHub.request(URL(string: "https://api.github.com/repos/a/b")!, token: token)
+        #expect(api.value(forHTTPHeaderField: "Authorization") == "Bearer \(token)")
+        for other in ["https://raw.githubusercontent.com/a/b/HEAD/README.md", "http://api.github.com/repos/a/b", "https://api.github.com.evil.example/x"] {
+            #expect(SkillGitHub.request(URL(string: other)!, token: token).value(forHTTPHeaderField: "Authorization") == nil, "\(other)")
+        }
+        #expect(SkillGitHub.request(URL(string: "https://api.github.com/x")!, token: nil).value(forHTTPHeaderField: "Authorization") == nil)
+
+        var moved = api
+        moved.url = URL(string: "https://codeload.github.com/a/b")!
+        let followed = try #require(SkillGitHub.redirect(moved))
+        #expect(followed.value(forHTTPHeaderField: "Authorization") == nil, "a redirect off the API drops the token")
+        moved.url = URL(string: "https://example.com/steal")!
+        #expect(SkillGitHub.redirect(moved) == nil)
+        moved.url = URL(string: "https://api.github.com/repositories/1")!
+        #expect(SkillGitHub.redirect(moved)?.value(forHTTPHeaderField: "Authorization") == "Bearer \(token)")
+    }
+
+    @Test func aProjectsPicksAreRememberedForTheSameStack() throws {
+        let catalog = try SkillCatalog(path: ":memory:")
+        let picks: [SkillAsk.Pick] = [
+            .init(item: .init(kind: .skill(999), name: "gone", description: "left the catalog", verdict: .safe), why: "x"),
+            .init(item: .init(kind: .repo("prisma/skills"), name: "prisma/skills", description: "Official Prisma skills"), why: "Prisma"),
+        ]
+        try catalog.saveProjectPicks(picks, path: "/p", summary: "Languages: TypeScript.", now: "2026-11-27T20:00:00Z")
+        let remembered = try #require(try catalog.projectPicks(path: "/p", summary: "Languages: TypeScript."))
+        #expect(remembered.pickedAt == "2026-11-27T20:00:00Z")
+        #expect(remembered.picks.map(\.item.kind) == [.repo("prisma/skills")], "a skill no longer in the catalog is dropped")
+        #expect(remembered.picks.first?.why == "Prisma")
+        #expect(try catalog.projectPicks(path: "/p", summary: "Languages: Swift.") == nil, "another stack is asked again")
+    }
 }

@@ -79,6 +79,8 @@ final class SkillStore {
     func start() {
         guard loop == nil else { return }
         loop = Task { [weak self] in
+            // The GitHub token first, when the person signed in: the sources' checks below use it.
+            if self?.isActive() == true { await self?.loadGitHubToken() }
             while !Task.isCancelled {
                 if self?.isActive() == true {
                     await self?.refresh()
@@ -450,13 +452,30 @@ final class SkillStore {
 
     /// «Скиллы для проекта»: the project's stack is read here (names only) and the model picks from the catalog and the
     /// index what would help an agent work on it.
-    func askForProject(_ path: String) async -> Outcome<(SkillProjectStack, [SkillAsk.Pick])> {
+    /// The picks for a project, remembered or new: `pickedAt` is when the model made them.
+    struct ProjectPicks: Sendable {
+        var stack: SkillProjectStack
+        var picks: [SkillAsk.Pick]
+        var pickedAt: String
+        var remembered: Bool
+    }
+
+    func askForProject(_ path: String, fresh: Bool = false) async -> Outcome<ProjectPicks> {
         let stack = await Task.detached(priority: .userInitiated) { SkillProjectStack.read(URL(fileURLWithPath: path)) }.value
         guard !stack.isEmpty else { return .failure(.init(code: "empty-project")) }
         let summary = stack.summary()
+        if !fresh, let (picks, at) = await worker.run({ try? $0.projectPicks(path: path, summary: summary) }) ?? nil {
+            return .success(ProjectPicks(stack: stack, picks: picks, pickedAt: at, remembered: true))
+        }
         let result = await pick(question: SkillAsk.projectQuestion(summary), wordsPrompt: SkillAsk.projectWordsPrompt(stack: summary, nonce: SkillReview.nonce()),
                                 extraWords: stack.searchWords)
-        return result.map { (stack, $0) }
+        guard case .success(let picks) = result else {
+            if case .failure(let refusal) = result { return .failure(refusal) }
+            return .failure(.missing)
+        }
+        let now = SkillCatalog.now()
+        await worker.run { try? $0.saveProjectPicks(picks, path: path, summary: summary, now: now) }
+        return .success(ProjectPicks(stack: stack, picks: picks, pickedAt: now, remembered: false))
     }
 
     /// The two requests of a search: words from the model, a local search, the model's picks by number.
@@ -529,6 +548,44 @@ final class SkillStore {
     /// The text to show: its translation when there is one and the person hasn't asked for originals.
     func shown(_ text: String) -> String {
         showsOriginals ? text : translated[text] ?? text
+    }
+
+    // MARK: - The person's GitHub token (SkillGitHub)
+
+    static let githubAccount = "github-skills"
+    /// Signed in to GitHub: what GitHub allows the token an hour, 0 while unknown; nil when not signed in.
+    private(set) var githubLimit: Int?
+
+    /// Reads the token from the Keychain once, at start, and hands it to `SkillGitHub`.
+    func loadGitHubToken() async {
+        guard await APIKeyStore.exists(account: Self.githubAccount), let token = await APIKeyStore.read(account: Self.githubAccount) else { return }
+        SkillGitHub.token.withLock { $0 = token }
+        githubLimit = (try? await SkillGitHub.limit(token: token)) ?? 0
+    }
+
+    /// Checks a token with GitHub (`/rate_limit`) and keeps it in the Keychain. It is never logged.
+    func signInToGitHub(_ token: String) async -> Outcome<Int> {
+        let token = token.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard APIKeyStore.isValid(token) else { return .failure(.init(code: "bad-token")) }
+        let limit: Int
+        do { limit = try await SkillGitHub.limit(token: token) } catch let failure as SkillGitHub.Failure {
+            return .failure(.init(code: failure.reason))
+        } catch {
+            return .failure(.init(code: "network"))
+        }
+        do { try await APIKeyStore.save(token, account: Self.githubAccount, label: "GitHub (Skills)") } catch {
+            return .failure(.init(code: "keychain"))
+        }
+        SkillGitHub.token.withLock { $0 = token }
+        githubLimit = limit
+        AppLog.info("skills: signed in to GitHub, \(limit) requests an hour")
+        return .success(limit)
+    }
+
+    func signOutOfGitHub() async {
+        await APIKeyStore.delete(account: Self.githubAccount)
+        SkillGitHub.token.withLock { $0 = nil }
+        githubLimit = nil
     }
 
     // MARK: - Order: conflicts, copies, unused skills, sets, export (SkillHousekeeping)

@@ -418,3 +418,75 @@ struct SkillIndexView: View {
         }
     }
 }
+
+/// «Вход в GitHub» in Settings → Скиллы: the person's own token raises GitHub's limit from 60 requests an hour to 5,000.
+/// Optional; kept in the Keychain and sent to api.github.com only.
+struct SkillsGitHubSection: View {
+    @Environment(SkillStore.self) private var skills
+    @State private var token = ""
+    @State private var failure: String?
+    @State private var busy = false
+
+    static let newTokenPage = URL(string: "https://github.com/settings/personal-access-tokens/new")!
+
+    var body: some View {
+        Section {
+            if let limit = skills.githubLimit {
+                LabeledContent {
+                    Button("Выйти") { Task { await skills.signOutOfGitHub() } }
+                } label: {
+                    Text(limit > 0 ? String(localized: "Вход выполнен: \(limit.formatted()) запросов в час") : String(localized: "Вход выполнен"))
+                }
+            } else {
+                HStack {
+                    SecureField("", text: $token, prompt: Text("Токен GitHub").foregroundStyle(.tertiary))
+                        .labelsHidden()
+                        .textFieldStyle(.roundedBorder)
+                        .onSubmit { signIn() }
+                    if busy { ProgressView().controlSize(.small) }
+                    Button("Войти") { signIn() }.disabled(busy || token.trimmingCharacters(in: .whitespaces).isEmpty)
+                    Button("Создать токен…") { NSWorkspace.shared.open(Self.newTokenPage) }
+                        .help(String(localized: "Страница GitHub для нового токена: доступ только к публичным репозиториям, без разрешений"))
+                }
+                if let failure { Text(verbatim: failure).foregroundStyle(.red) }
+            }
+        } header: {
+            Text("Вход в GitHub")
+        } footer: {
+            Footnote(text: String(localized: "С токеном GitHub разрешает 5000 запросов в час вместо 60, и источники проверяются без ожидания. Это необязательно, и подойдёт токен без разрешений: он нужен только чтобы читать публичные репозитории. Токен хранится в Связке ключей и уходит только на api.github.com."))
+        }
+    }
+
+    private func signIn() {
+        failure = nil
+        busy = true
+        let typed = token
+        Task {
+            switch await skills.signInToGitHub(typed) {
+            case .success: token = ""
+            case .failure(let refusal):
+                failure = switch refusal.code {
+                case "bad-token": String(localized: "GitHub не принял этот токен.")
+                case "keychain": String(localized: "Связка ключей не сохранила токен.")
+                default: SkillSourceText.failure(refusal.code)
+                }
+            }
+            busy = false
+        }
+    }
+}
+
+/// «Помощь модели» in Settings → Скиллы: translations without a click.
+struct SkillsAISection: View {
+    @AppStorage(StorageKey.skillsAutoTranslate) private var autoTranslate = false
+
+    var body: some View {
+        Section {
+            Toggle("Переводить описания сразу", isOn: $autoTranslate)
+        } header: {
+            Text("Помощь модели")
+        } footer: {
+            Footnote(text: String(localized: "Описания на другом языке уходят в вашу модель, как только появляются в списке, по 40 за раз: Claude Code по подписке или Anthropic API с вашим ключом. Переводы запоминаются, одно описание переводится один раз. Выключено — переводы только по кнопке «Перевести описания»."))
+        }
+    }
+}

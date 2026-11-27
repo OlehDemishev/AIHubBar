@@ -1,9 +1,12 @@
 import Foundation
+import os
 
 /// Reading a GitHub repository for the Skills Catalog: its default branch, stars and license, the commit at the tip,
 /// the tree at that commit, and the files of each skill folder — downloaded into the app's own cache, never run.
-/// Public repositories only, no token: the REST API allows 60 requests an hour without one, and a check costs three
-/// (`/repos`, `/commits`, `/git/trees`); the files come from raw.githubusercontent.com, which is not counted.
+/// Public repositories only. Without a token the REST API allows 60 requests an hour, and a check costs three
+/// (`/repos`, `/commits`, `/git/trees`); the files come from raw.githubusercontent.com, which is not counted. With the
+/// person's own token (Settings → Скиллы → «Вход в GitHub», kept in the Keychain) it allows 5,000; the token goes to
+/// api.github.com only, never to another host or along a redirect.
 /// Documented at docs.github.com/rest (repos, commits, git trees).
 enum SkillGitHub {
     /// Gets a URL's bytes; the app uses URLSession, the tests a table.
@@ -23,9 +26,28 @@ enum SkillGitHub {
     final class StayOnGitHub: NSObject, URLSessionTaskDelegate, Sendable {
         func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse,
                         newRequest request: URLRequest) async -> URLRequest? {
-            guard request.url?.scheme == "https", let host = request.url?.host?.lowercased(), SkillGitHub.hosts.contains(host) else { return nil }
-            return request
+            SkillGitHub.redirect(request)
         }
+    }
+
+    /// Where a redirect may go: an https GitHub host, and the token only to the API.
+    static func redirect(_ request: URLRequest) -> URLRequest? {
+        guard request.url?.scheme == "https", let host = request.url?.host?.lowercased(), hosts.contains(host) else { return nil }
+        var request = request
+        if host != "api.github.com" { request.setValue(nil, forHTTPHeaderField: "Authorization") }
+        return request
+    }
+
+    /// The person's GitHub token, when they signed in; set by `SkillStore`.
+    static let token = OSAllocatedUnfairLock<String?>(initialState: nil)
+
+    /// The request for a URL: the token rides along only to api.github.com over https.
+    static func request(_ url: URL, token: String?) -> URLRequest {
+        var request = URLRequest(url: url)
+        if let token, url.scheme == "https", url.host?.lowercased() == "api.github.com" {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        return request
     }
 
     static let session: URLSession = {
@@ -40,8 +62,23 @@ enum SkillGitHub {
     }()
 
     static let fetch: Fetch = { url in
-        let (data, response) = try await session.data(from: url)
+        let (data, response) = try await session.data(for: request(url, token: token.withLock { $0 }))
         return (data, (response as? HTTPURLResponse)?.statusCode ?? 0)
+    }
+
+    /// What GitHub allows a token an hour (`/rate_limit`, not counted itself): the limit, or a failure — `bad-token`
+    /// when GitHub doesn't know it.
+    static func limit(token: String) async throws -> Int {
+        let (data, response) = try await session.data(for: request(URL(string: "\(api)/rate_limit")!, token: token))
+        switch (response as? HTTPURLResponse)?.statusCode ?? 0 {
+        case 200: break
+        case 401: throw Failure(reason: "bad-token")
+        case 403, 429: throw Failure(reason: "rate-limit")
+        case let status: throw Failure(reason: "HTTP \(status)")
+        }
+        let root = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any]
+        let core = ((root?["resources"] as? [String: Any])?["core"] as? [String: Any])?["limit"] as? NSNumber
+        return core?.intValue ?? 0
     }
 
     struct Repository: Equatable, Sendable {

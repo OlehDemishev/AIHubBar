@@ -8,6 +8,11 @@ struct SkillAskResultsView: View {
     /// Set for «Скиллы для проекта»: the project's name and what was read from its folder.
     var project: String?
     var stack: SkillProjectStack?
+    /// When the model made these picks, and whether they were remembered rather than asked for now.
+    var pickedAt: String?
+    var remembered = false
+    /// «Подобрать заново»: asks the model again for the project.
+    var redo: (() -> Void)?
     let picks: [SkillAsk.Pick]
     var openSkill: (Int) -> Void
     var openRepo: (String) -> Void
@@ -25,6 +30,16 @@ struct SkillAskResultsView: View {
             if let stack, !stack.isEmpty {
                 Text(verbatim: String(localized: "Что видно в папке: \(Self.stackLine(stack))"))
                     .scaledFont(.caption2).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+            }
+            if remembered, let when = pickedAt.flatMap(ISO8601DateFormatter.flexible) {
+                HStack(spacing: 6) {
+                    Text(verbatim: String(localized: "Подобрано \(when.formatted(date: .abbreviated, time: .shortened)), проект с тех пор не изменился"))
+                        .scaledFont(.caption2).foregroundStyle(.secondary)
+                    if let redo {
+                        Button("Подобрать заново", action: redo).buttonStyle(.borderless).scaledFont(.caption2)
+                    }
+                    Spacer(minLength: 0)
+                }
             }
             SkillTranslateBar(texts: picks.map(\.item.description))
             if picks.isEmpty {
@@ -92,6 +107,7 @@ struct SkillAskResultsView: View {
 struct SkillTranslateBar: View {
     @Environment(SkillStore.self) private var skills
     let texts: [String]
+    @AppStorage(StorageKey.skillsAutoTranslate) private var autoTranslate = false
     @State private var available: String?
     @State private var failure: String?
 
@@ -135,6 +151,13 @@ struct SkillTranslateBar: View {
         .task(id: texts) {
             await skills.loadTranslations(texts)
             available = await SkillReviewer.available()
+            // «Переводить описания сразу»: once per set of texts; a failure waits for a click.
+            let missing = skills.untranslated(texts)
+            if autoTranslate, available != nil, failure == nil, !missing.isEmpty {
+                try? await Task.sleep(for: .milliseconds(600))
+                guard !Task.isCancelled else { return }
+                await translate(missing)
+            }
         }
     }
 
