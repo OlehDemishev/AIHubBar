@@ -275,7 +275,7 @@ extension SkillCatalog {
     /// A folder that changed since it was checked is refused: the review is remembered for the content that was checked.
     func reviewRequest(_ id: Int, language: String) throws -> (contentHash: String, request: SkillReview.Request) {
         guard let (source, path, hash) = try db.first("SELECT source, path, content_hash FROM skills WHERE id = ?1", .int(Int64(id)), map: { ($0.text(0), $0.text(1), $0.text(2)) }),
-              source == "local" || source == "folder", let files = try? SkillFolder.read(URL(fileURLWithPath: path)) else { throw Refusal.missing }
+              Self.isReadable(source), let files = try? SkillFolder.read(URL(fileURLWithPath: path)) else { throw Refusal.missing }
         guard files.contentHash == hash else { throw Refusal.changed }
         return (hash, SkillReview.request(files, report: SkillScanner.scan(files), nonce: SkillReview.nonce(), language: language))
     }

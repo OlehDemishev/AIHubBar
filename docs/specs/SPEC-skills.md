@@ -14,12 +14,23 @@ follows it (`AIHubBar/Skills/`, Swift; the reference port in `desktop/skill-scan
 - **Limits**: 3,000 files, 64 MB, 2 MB per file. A larger file is hashed, not read, and that is a finding; bundled
   `node_modules` and virtual environments are not walked, and that is a finding too.
 
+## Rules 3 (Mac, 2026-11-27)
+
+Found on anthropics/skills, the first real source: its document skills (docx, pptx, xlsx) and claude-api read «dangerous».
+Changed: a Unix domain socket (`AF_UNIX`) is not network; `os.environ.copy()` (an environment for a child process) is not
+an environment dump; `curl | sh` with nothing between the tool and the pipe names the practice and is not a command; «do
+not tell the user they need to…» and «never … without asking the user» are not concealment; «a new system prompt» is not
+one being set (unless announced with `:`, «is», «follows», «below»); a match in a comment line of a script weighs two
+steps less, except the rules aimed at the agent (`pi-…`); the medium and low findings add 34 at most; `rm-rf-home` is
+critical. The Rust scanner in desktop/ stays at rules 2 until the Windows work resumes.
+
 ## 2. From findings to a verdict
 
 1. Each rule that matches gives a **finding**: rule, severity, file, line, the line itself.
 2. **Severity weights**: info 0, low 5, medium 15, high 35, critical 80.
 3. **The risk score (0–100)**: every rule counts once at its worst severity; up to three more findings of the same rule
-   add a fifth of its weight each; the sum stops at 100.
+   add a fifth of their own weight each. Since rules 3 (2026-11-27) the medium and low findings together add 34 at most, so a
+   long skill full of examples can't reach «dangerous» without one serious finding; the sum stops at 100.
 4. **The verdict**:
    - 🔴 **Dangerous** — any critical finding, or a score of 70 or more.
    - 🟡 **Review** — a score of 5 or more: scripts, network, settings or anything else worth reading.
@@ -89,7 +100,7 @@ verdict can only make the static one **stricter**, never milder. Reviews are rem
 | secrets | `env-secret` | medium; in a document one step lower | Reads a key or token from the environment |
 | secrets | `dotenv-read` | low; in a document not checked | Works with a .env file |
 | secrets | `exfil-combo` | critical in code; high in a document when within 3 lines | Reads secrets and sends data out |
-| system | `rm-rf-home` | high; in a document same | Can erase your files or a disk |
+| system | `rm-rf-home` | critical (high before rules 3); in a document same | Can erase your files or a disk |
 | system | `rm-rf` | medium; in a document one step lower | Deletes folders without asking |
 | system | `sudo` | medium; in a document one step lower | Asks for administrator rights |
 | system | `chmod-open` | medium; in a document one step lower | Weakens the system's protection |

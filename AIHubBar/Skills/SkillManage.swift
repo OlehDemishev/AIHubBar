@@ -119,11 +119,13 @@ extension SkillCatalog {
     /// last check is checked again. Returns the source as it is after that and whether it changed.
     private func current(_ id: Int, _ place: Place) throws -> (Source, SkillFiles, SkillReport, Bool) {
         let row = try source(id)
-        guard row.source == "local" || row.source == "folder" else { throw Refusal.missing }
+        guard Self.isReadable(row.source) else { throw Refusal.missing }
         let folder = URL(fileURLWithPath: row.path)
         guard let files = try? SkillFolder.read(folder) else { throw Refusal.missing }
         let hash = files.contentHash
         if hash == row.contentHash, let report = try storedReport(id) { return (row, files, report, false) }
+        // A downloaded copy never changes: different bytes mean someone touched the cache.
+        guard row.source != "github" else { throw Refusal.changed }
         let newID: Int
         if row.source == "folder" {
             newID = try importFolder(folder, now: place.now)
@@ -408,7 +410,10 @@ extension SkillCatalog {
         guard !Self.exists(target) else { throw Refusal.exists }
         try FileManager.default.moveItem(at: stage, to: target)
 
-        try saveManaged(Managed(installPath: plan.target, name: plan.name, originKind: "path", origin: source.path, sourceHash: report.contentHash,
+        // A copy from a source follows the source's newest commit; a copy from a folder follows the folder.
+        let remote = try db.first("SELECT repo_url, coalesce(repo_path, '') FROM skills WHERE id = ?1 AND source = 'github'", .int(Int64(source.id)), map: { ($0.text(0), $0.text(1)) })
+        try saveManaged(Managed(installPath: plan.target, name: plan.name, originKind: remote == nil ? "path" : "github",
+                                origin: remote.map { "\($0.0)#\($0.1)" } ?? source.path, sourceHash: report.contentHash,
                                 installedHash: files.contentHashWithoutLinks, installedAt: place.now))
         let journalID = try log(place, Entry(action: "install", name: plan.name, agent: agent.rawValue, installPath: plan.target, report: report,
                                              acknowledged: plan.needsAck && acknowledged, origin: source.path))
@@ -550,8 +555,27 @@ extension SkillCatalog {
         var id: String { installPath }
     }
 
-    private static func originFiles(_ row: Managed) -> SkillFiles? {
-        row.originKind == "path" ? try? SkillFolder.read(URL(fileURLWithPath: row.origin)) : nil
+    /// The source a copy follows, as it is now: its folder, or a source's skill at its newest commit.
+    private func originFiles(_ row: Managed) -> SkillFiles? {
+        switch row.originKind {
+        case "path": return try? SkillFolder.read(URL(fileURLWithPath: row.origin))
+        case "github":
+            let parts = row.origin.split(separator: "#", maxSplits: 1, omittingEmptySubsequences: false).map(String.init)
+            guard parts.count == 2, let folder = try? remoteFolder(repoURL: parts[0], repoPath: parts[1]) else { return nil }
+            return try? SkillFolder.read(folder)
+        default: return nil
+        }
+    }
+
+    /// The folder a copy's source is read from now (for `writeCopy`'s large files).
+    private func originFolder(_ row: Managed) -> URL? {
+        switch row.originKind {
+        case "path": return URL(fileURLWithPath: row.origin)
+        case "github":
+            let parts = row.origin.split(separator: "#", maxSplits: 1, omittingEmptySubsequences: false).map(String.init)
+            return parts.count == 2 ? try? remoteFolder(repoURL: parts[0], repoPath: parts[1]) : nil
+        default: return nil
+        }
     }
 
     /// The installed copies whose source has changed since they were made. A source that is gone is no update.
@@ -559,7 +583,7 @@ extension SkillCatalog {
         let rows = try db.query("SELECT install_path FROM managed_installs ORDER BY name, install_path") { $0.text(0) }.compactMap { try managed($0) }
         var found: [Update] = []
         for row in rows {
-            guard let origin = Self.originFiles(row) else { continue }
+            guard let origin = originFiles(row) else { continue }
             let toHash = origin.contentHash
             var isFolder: ObjCBool = false
             guard toHash != row.sourceHash, FileManager.default.fileExists(atPath: row.installPath, isDirectory: &isFolder), isFolder.boolValue else { continue }
@@ -636,7 +660,7 @@ extension SkillCatalog {
 
     /// What an update would change in an installed copy, file by file.
     func diff(_ installPath: String) throws -> [FileDiff] {
-        guard let row = try managed(installPath), let origin = Self.originFiles(row), let installed = try? SkillFolder.read(URL(fileURLWithPath: installPath)) else { throw Refusal.missing }
+        guard let row = try managed(installPath), let origin = originFiles(row), let installed = try? SkillFolder.read(URL(fileURLWithPath: installPath)) else { throw Refusal.missing }
         let paths = Set(installed.files.map(\.path) + origin.files.filter { $0.symlink == nil }.map(\.path)).sorted()
         var changes: [FileDiff] = []
         for path in paths {
@@ -663,7 +687,7 @@ extension SkillCatalog {
     /// What bringing the newer version in would do: the newer version's own check, to be confirmed like an install.
     func planUpdate(_ installPath: String, _ place: Place) throws -> Plan {
         let found = try installed(installPath, place)
-        guard let row = try managed(installPath), let origin = Self.originFiles(row) else { throw Refusal.missing }
+        guard let row = try managed(installPath), let origin = originFiles(row) else { throw Refusal.missing }
         let report = SkillScanner.scan(origin)
         let newName = Self.describe(origin, folder: row.origin, listedName: nil).name
         let blocked: String? = if try isBlocked(kind: "skill", name: newName, contentHash: report.contentHash) || isBlocked(kind: "skill", name: row.name, contentHash: report.contentHash) { "blocked" } else if origin.file("SKILL.md") == nil { "no-skill-md" } else if origin.truncated { "too-large" } else if report.contentHash == row.sourceHash { "already" } else { nil }
@@ -683,7 +707,7 @@ extension SkillCatalog {
         if let reason = plan.blocked { throw Refusal(code: reason) }
         guard plan.contentHash == contentHash else { throw Refusal.changed }
         guard !plan.needsAck || acknowledged else { throw Refusal.confirmation }
-        guard let was = try managed(installPath), let origin = Self.originFiles(was) else { throw Refusal.missing }
+        guard let was = try managed(installPath), let origin = originFiles(was) else { throw Refusal.missing }
         let report = SkillScanner.scan(origin)
         guard report.contentHash == contentHash else { throw Refusal.changed }
         let target = URL(fileURLWithPath: installPath)
@@ -691,7 +715,8 @@ extension SkillCatalog {
         try? FileManager.default.removeItem(at: stage)
         defer { Self.cleanStaging(stage) }
         let backup = Self.backupPlace(place, plan.name)
-        try Self.writeCopy(origin, from: URL(fileURLWithPath: was.origin), into: stage)
+        guard let originFolder = originFolder(was) else { throw Refusal.missing }
+        try Self.writeCopy(origin, from: originFolder, into: stage)
         try Self.move(target, to: backup)
         do {
             try FileManager.default.moveItem(at: stage, to: target)

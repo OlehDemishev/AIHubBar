@@ -78,7 +78,10 @@ final class SkillStore {
         guard loop == nil else { return }
         loop = Task { [weak self] in
             while !Task.isCancelled {
-                if self?.isActive() == true { await self?.refresh() }
+                if self?.isActive() == true {
+                    await self?.refresh()
+                    self?.checkSourcesIfStale()
+                }
                 try? await Task.sleep(for: .seconds(30 * 60))
             }
         }
@@ -86,6 +89,7 @@ final class SkillStore {
 
     func refreshIfStale() {
         guard isActive() else { return }
+        checkSourcesIfStale()
         if let lastUpdated, Date.now.timeIntervalSince(lastUpdated) < 5 * 60 { return }
         Task { await refresh() }
     }
@@ -458,6 +462,99 @@ final class SkillStore {
 
     func compare(with data: Data) async -> Outcome<SkillCatalog.Comparison> {
         await act(changes: false) { catalog, _ in try catalog.compare(with: SkillCatalog.readExport(data)) }
+    }
+
+    // MARK: - Sources: GitHub repositories (SkillRemote, SkillGitHub)
+
+    /// Where downloaded skills are kept: one folder per repository and commit.
+    static var remoteCache: URL { SessionFiles.supportDirectory.appending(path: "skills/remote") }
+
+    private(set) var sources: [SkillCatalog.RemoteSource] = []
+    /// Sources being checked now.
+    private(set) var checking: Set<Int> = []
+    @ObservationIgnored private var lastSourceCheck: Date?
+    @ObservationIgnored private var checkingAll = false
+    /// How sources are read; the tests give a table.
+    @ObservationIgnored var fetch: SkillGitHub.Fetch = SkillGitHub.fetch
+
+    func loadSources() async {
+        sources = await worker.run { (try? $0.sources()) ?? [] }
+    }
+
+    /// Adds a repository by `owner/repo` or its address and checks it at once.
+    func addSource(_ text: String) async -> Outcome<Void> {
+        guard let repo = SkillCatalog.GitHubRepo.parse(text) else { return .failure(.init(code: "repo")) }
+        let added: Outcome<Int> = await act(changes: false) { catalog, place in try catalog.addSource(repo, now: place.now) }
+        guard case .success(let id) = added else { return .failure(.init(code: "repo")) }
+        await loadSources()
+        if let source = sources.first(where: { $0.id == id }) { await check(source) }
+        return .success(())
+    }
+
+    func removeSource(_ id: Int) async {
+        _ = await act(changes: true) { catalog, _ in try catalog.removeSource(id) }
+        await pruneCache()
+        await loadSources()
+    }
+
+    /// Checks every source: a new commit is downloaded and checked, an unchanged one only gets its stars.
+    func checkSources() async {
+        lastSourceCheck = .now
+        await loadSources()
+        for source in sources { await check(source) }
+    }
+
+    /// At most twice a day by itself: each check costs three of the 60 API requests GitHub allows an hour.
+    func checkSourcesIfStale() {
+        guard isActive(), !checkingAll else { return }
+        if let last = lastSourceCheck, Date.now.timeIntervalSince(last) < 12 * 3600 { return }
+        checkingAll = true
+        Task {
+            await checkSources()
+            checkingAll = false
+        }
+    }
+
+    func check(_ source: SkillCatalog.RemoteSource) async {
+        guard !checking.contains(source.id) else { return }
+        checking.insert(source.id)
+        defer { checking.remove(source.id) }
+        let repo = source.repo
+        do {
+            let found = try await SkillGitHub.repository(repo, fetch: fetch)
+            let skills = SkillCatalog.remoteSkills(in: found.tree)
+            var downloaded: [(folder: String, cache: URL, truncated: Bool)] = []
+            for skill in skills {
+                let folder = try await SkillGitHub.download(skill, of: repo, sha: found.sha, into: Self.remoteCache, fetch: fetch)
+                downloaded.append((skill.folder, folder, skill.truncated || found.treeTruncated))
+            }
+            let ready = downloaded
+            let imported: Outcome<Int> = await act(changes: true) { catalog, place in
+                try catalog.importRemote(repo, sha: found.sha, branch: found.branch, stars: found.stars, license: found.license, skills: ready, now: place.now)
+            }
+            if case .success(let count) = imported { AppLog.info("skills: \(repo.slug) at \(found.sha.prefix(7)): \(count) skills") }
+            await pruneCache()
+        } catch {
+            let reason = (error as? SkillGitHub.Failure)?.reason ?? "network"
+            AppLog.error("skills: checking \(repo.slug) failed: \(reason)")
+            _ = await act(changes: false) { catalog, place in try catalog.noteSourceFailed(source.id, error: reason, now: place.now) }
+        }
+        await loadSources()
+    }
+
+    /// Deletes downloaded commits the catalog no longer points at.
+    private func pruneCache() async {
+        let kept: Set<String> = await worker.run { (try? $0.remoteCacheFolders()) ?? [] }
+        let root = Self.remoteCache
+        let manager = FileManager.default
+        for owner in (try? manager.contentsOfDirectory(atPath: root.path)) ?? [] {
+            for repo in (try? manager.contentsOfDirectory(atPath: root.appending(path: owner).path)) ?? [] {
+                for sha in (try? manager.contentsOfDirectory(atPath: root.appending(path: owner).appending(path: repo).path)) ?? [] {
+                    let folder = root.appending(path: owner).appending(path: repo).appending(path: sha).path
+                    if !kept.contains(where: { $0.hasPrefix(folder + "/") }) { try? manager.removeItem(atPath: folder) }
+                }
+            }
+        }
     }
 
     func forget(_ id: Int) async {

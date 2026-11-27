@@ -687,6 +687,7 @@ private struct SkillRowView: View {
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
                     }
+                    SkillOriginBadge(row: row)
                 }
                 .contentShape(Rectangle())
             }
@@ -775,6 +776,13 @@ private struct SkillFilterPanel: View {
                         SkillChip(title: Self.scopeTitle(scope), isOn: filters.scopes.contains(scope)) { filters.scopes.toggle(scope) }
                     }
                 }
+            }
+            group("Откуда") {
+                SkillChip(title: String(localized: "Установленные"), isOn: filters.origin == .installed) { filters.origin = filters.origin == .installed ? .any : .installed }
+                SkillChip(title: String(localized: "Из источников, не установленные"), isOn: filters.origin == .available) { filters.origin = filters.origin == .available ? .any : .available }
+                SkillChip(title: String(localized: "Официальные"), symbol: "checkmark.seal", isOn: filters.officialOnly) { filters.officialOnly.toggle() }
+                SkillChip(title: "★ 100+", isOn: filters.minStars == 100) { filters.minStars = filters.minStars == 100 ? nil : 100 }
+                SkillChip(title: "★ 1000+", isOn: filters.minStars == 1000) { filters.minStars = filters.minStars == 1000 ? nil : 1000 }
             }
             group("Тип и состояние") {
                 SkillChip(title: String(localized: "Скиллы"), isOn: filters.kind == "skill") { filters.kind = filters.kind == "skill" ? nil : "skill" }
@@ -940,6 +948,7 @@ struct SkillCardView: View {
                 if !card.row.description.isEmpty {
                     Text(verbatim: card.row.description).scaledFont(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
                 }
+                SkillOriginLine(row: card.row)
                 if let about = Self.about(card.row) {
                     HStack(spacing: 6) {
                         Text(verbatim: about).scaledFont(.caption2).foregroundStyle(.secondary)
