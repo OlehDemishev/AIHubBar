@@ -364,6 +364,12 @@ struct SkillsSectionView: View {
     @State private var showsIndex = false
     @State private var indexQuery = ""
     @State private var indexMatches = 0
+    /// What the person's model picked for the typed words (SkillAsk); nil for the ordinary search.
+    @State private var askPicks: [SkillAsk.Pick]?
+    @State private var askedQuestion = ""
+    @State private var askFailure: String?
+    /// Claude Code or an API key is there to ask: `claude-code`, `api` or nil.
+    @State private var askAvailable: String?
     /// The name being typed for «Сохранить фильтр»; nil while the field is hidden.
     @State private var savingName: String?
 
@@ -405,9 +411,17 @@ struct SkillsSectionView: View {
                 }
             } else {
                 filtersBar
-                updatesList
-                list
-                if !filters.query.trimmingCharacters(in: .whitespaces).isEmpty && indexMatches > 0 {
+                if let askPicks {
+                    SkillAskResultsView(question: askedQuestion, picks: askPicks, openSkill: { id in section = .skills(id) }, openRepo: { slug in
+                        indexQuery = slug
+                        showsIndex = true
+                    }, close: { self.askPicks = nil })
+                } else {
+                    updatesList
+                    SkillTranslateBar(texts: result.rows.prefix(SkillAsk.maxTexts).map(\.description))
+                    list
+                }
+                if askPicks == nil, !filters.query.trimmingCharacters(in: .whitespaces).isEmpty && indexMatches > 0 {
                     Button {
                         indexQuery = filters.query
                         showsIndex = true
@@ -424,6 +438,7 @@ struct SkillsSectionView: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(10)
+        .task { askAvailable = await SkillReviewer.available() }
         .task(id: filters) {
             result = await skills.search(filters)
             let words = filters.query.trimmingCharacters(in: .whitespaces)
@@ -531,16 +546,54 @@ struct SkillsSectionView: View {
         }
     }
 
+    /// The search in plain words: the person's model picks from the catalog and the index (SkillAsk).
+    private func ask() async {
+        let question = filters.query.trimmingCharacters(in: .whitespaces)
+        guard !question.isEmpty else { return }
+        askFailure = nil
+        switch await skills.ask(question) {
+        case .success(let picks):
+            askedQuestion = question
+            askPicks = picks
+        case .failure(let refusal):
+            if refusal != .state { askFailure = SkillAskText.failure(refusal) }
+        }
+    }
+
     private var filtersBar: some View {
         VStack(alignment: .leading, spacing: 6) {
             TextField("Поиск по названию, описанию и заметке", text: $filters.query)
                 .textFieldStyle(.roundedBorder)
-            HStack(spacing: 4) {
-                verdictChip(nil, title: String(localized: "Все \(result.total)"))
-                ForEach(SkillVerdict.allCases.reversed(), id: \.self) { verdict in
-                    verdictChip(verdict, title: "\(verdict.title) \(result.byVerdict[verdict] ?? 0)")
+                .onSubmit { if askPicks != nil { Task { await ask() } } }
+            if !filters.query.trimmingCharacters(in: .whitespaces).isEmpty {
+                HStack(spacing: 6) {
+                    if skills.asking {
+                        ProgressView().controlSize(.small)
+                        Text("Спрашиваю модель…").scaledFont(.caption2).foregroundStyle(.secondary)
+                    } else {
+                        Button {
+                            Task { await ask() }
+                        } label: {
+                            Label("Найти по смыслу с AI", systemImage: "sparkles").scaledFont(.caption)
+                        }
+                        .buttonStyle(.borderless)
+                        .disabled(askAvailable == nil)
+                        .help(askAvailable == nil
+                              ? String(localized: "Нужен Claude Code на этом Mac или ключ Anthropic в Настройках → «Сервисы AI».")
+                              : String(localized: "Опишите задачу своими словами: ваша модель подберёт скиллы из каталога и открытых источников. Запрос уйдёт в Claude Code по подписке или в Anthropic API с вашим ключом."))
+                    }
+                    Spacer(minLength: 0)
                 }
-                Spacer(minLength: 0)
+                if let askFailure { Text(verbatim: askFailure).scaledFont(.caption2).foregroundStyle(.orange).fixedSize(horizontal: false, vertical: true) }
+            }
+            if askPicks == nil {
+                HStack(spacing: 4) {
+                    verdictChip(nil, title: String(localized: "Все \(result.total)"))
+                    ForEach(SkillVerdict.allCases.reversed(), id: \.self) { verdict in
+                        verdictChip(verdict, title: "\(verdict.title) \(result.byVerdict[verdict] ?? 0)")
+                    }
+                    Spacer(minLength: 0)
+                }
             }
             HStack(spacing: 8) {
                 SkillChip(title: String(localized: "Избранное"), symbol: filters.favoritesOnly ? "star.fill" : "star", isOn: filters.favoritesOnly) {
@@ -724,7 +777,7 @@ private struct SkillRowView: View {
                         SkillCounts(counts: row.counts)
                     }
                     if !row.description.isEmpty {
-                        Text(verbatim: row.description)
+                        Text(verbatim: skills.shown(row.description))
                             .scaledFont(.caption)
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
@@ -988,7 +1041,8 @@ struct SkillCardView: View {
                     Text("Риск \(assessment.riskScore) из 100").scaledFont(.caption).foregroundStyle(.secondary)
                 }
                 if !card.row.description.isEmpty {
-                    Text(verbatim: card.row.description).scaledFont(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                    Text(verbatim: skills.shown(card.row.description)).scaledFont(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                    SkillTranslateBar(texts: [card.row.description])
                 }
                 SkillOriginLine(row: card.row)
                 if let about = Self.about(card.row) {

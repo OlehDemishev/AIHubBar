@@ -113,6 +113,8 @@ final class SkillCatalog {
         remoteMigration,
         // The index of repositories the open lists name (SkillSourceFinder).
         indexMigration,
+        // Descriptions translated by the person's model (SkillAsk).
+        translationsMigration,
     ]
 
     init(path: String) throws {
