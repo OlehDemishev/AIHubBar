@@ -5,6 +5,7 @@
 **Updated:** 2026-11-27
 
 **Now:**
+- 2026-11-27: Mac — Skills Catalog: «Открытые источники» — an index of every repository the open lists name (911 live), searchable without downloading; «Скачать и проверить» makes one a source, «Скиллы: N» lists its skills; a search in the list offers «В открытых источниках ещё: N» (branch `feat/mac-skills-index`; seen live in an isolated copy)
 - 2026-11-27: Mac — Skills Catalog: security pass over remote sources and «Найти источники…» (`docs/SECURITY-AUDIT.md`); fixed: case-only name clashes, a 256 MB cap a repository, the root skill's own folder, redirects only to GitHub — merged as PR #658 on Oleh's «Да, вливай», not in a build yet
 - 2026-11-27: Mac — Skills scanner rules 4: a Slack/Discord/Telegram webhook with a placeholder for its secret (`T.../xxx`, `<token>`, `YOUR_…`) is no exfiltration endpoint; zxkane/aws-skills' `aws-agentic-ai` reads «review» 69 instead of «dangerous» 100 — merged as PR #656 on Oleh's «Да, вливай», not in a build yet
 - 2026-11-27: Mac — **0.14.0 published** to everyone on Oleh's «Место освободил, пока смержи и выпусти релиз» (out of the Tuesday schedule, on his word): everything from betas 1–2 plus GitHub sources (#648), «Найти источники…» (#651), the «Скиллы» header chip (#650); notes and What's New updated in #654; the header chip and the card seen live in an isolated copy before; build 1555, signed and notarized, beta testers get it too; https://github.com/OlehDemishev/AIHubBar/releases/tag/v0.14.0
@@ -251,6 +252,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-27 — Mac: Skills Catalog — the index of open sources (branch `feat/mac-skills-index`)
+
+Done: Oleh asked whether every open skill could be in the catalog; downloading all of them is out (GitHub's 60 requests an hour, gigabytes of disk), so a light index instead. Layout 9: `skill_index` keeps what the five awesome lists and Anthropic's plugin marketplace say about each repository (name, title, description, lists, folders, order); it is filled by `SkillStore.findSources` and by itself twice a day (`refreshIndexIfStale`, six raw files, not counted by the API limit), an empty answer keeps the old index. Nothing of a repository is downloaded until the person asks. UI: a globe button in the Skills section opens «Открытые источники» — search over name, title, description and folders (every word, `%`/`_` are characters), most-named first, the first 100 shown; «Скачать и проверить» adds the repository as a source (download + check as before), then «Скиллы: N» opens the list filtered to that source (a new «Источник: owner/repo» chip clears it); a source's error shows under its row. In the main list, a search shows «В открытых источниках ещё: N», which opens the index with the same words. 13 new texts in 13 languages.
+Checked: `scripts/check.sh` — all passed, incl. a new index test (search by words and folders, `%`/`_`/SQL as text, the limit, a source matched whatever its case, an empty refresh keeps the old index) and layout 9. Live in an isolated copy: the index filled itself at launch (911), the view listed it with anthropics/skills and zxkane/aws-skills as «Скиллы: 20/6», «Скачать и проверить» on jthack/ffuf_claude_skill downloaded and checked it (1 skill, «review»), «Скиллы: 1» opened the list with the «Источник» chip.
+Left: not seen live — the «В открытых источниках ещё» line under a typed search (typing can't be driven). Next on Oleh's question: search by a plain-words description and translation of descriptions through the person's own model.
 
 ## 2026-11-27 — Herdr comparison: its features into Next (branch `chore/status-herdr-next`)
 

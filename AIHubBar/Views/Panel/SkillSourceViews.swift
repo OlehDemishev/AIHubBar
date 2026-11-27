@@ -300,3 +300,120 @@ struct SkillsSourceFinderSheet: View {
         }
     }
 }
+
+/// «Открытые источники» in the Skills section: every repository the open lists name, searchable without downloading
+/// anything. «Скачать и проверить» makes one a source (its skills are downloaded and checked); «Показать скиллы» lists them.
+struct SkillIndexView: View {
+    @Environment(SkillStore.self) private var skills
+    @Binding var query: String
+    /// Lists the skills of `owner/repo` in the catalog.
+    var showRepo: (String) -> Void
+    @State private var page = SkillCatalog.IndexPage()
+    @State private var adding: Set<String> = []
+    @State private var failure: String?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            TextField("Поиск в открытых источниках", text: $query)
+                .textFieldStyle(.roundedBorder)
+            Text(verbatim: summary)
+                .scaledFont(.caption2)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            if page.total == 0 {
+                VStack(spacing: 6) {
+                    if skills.findingSources { ProgressView().controlSize(.small) }
+                    Text(skills.findingSources ? "Читаю списки…" : "Индекс ещё не собран.").scaledFont(.caption).foregroundStyle(.secondary)
+                    if !skills.findingSources { Button("Собрать") { Task { await skills.findSources(force: true) } }.controlSize(.small) }
+                }
+                .frame(maxWidth: .infinity)
+            } else if page.entries.isEmpty {
+                Text("Ничего не нашлось.").scaledFont(.caption).foregroundStyle(.secondary)
+            } else {
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    ForEach(page.entries) { entry in
+                        row(entry)
+                        Divider()
+                    }
+                }
+                if page.matches > page.entries.count {
+                    Text(verbatim: String(localized: "Показаны первые \(page.entries.count) из \(page.matches): уточните поиск."))
+                        .scaledFont(.caption2).foregroundStyle(.secondary)
+                }
+            }
+            if let failure { Text(verbatim: failure).scaledFont(.caption).foregroundStyle(.orange) }
+        }
+        .task(id: "\(query)|\(skills.indexVersion)|\(skills.sources.count)|\(skills.checking.count)") {
+            try? await Task.sleep(for: .milliseconds(150))
+            guard !Task.isCancelled else { return }
+            page = await skills.index(query: query)
+        }
+        .task {
+            await skills.loadSources()
+            skills.refreshIndexIfStale()
+        }
+    }
+
+    private var summary: String {
+        var text = String(localized: "Репозиториев в индексе: \(page.total). Это подсказки из открытых списков: файлы скачиваются и проверяются, только когда вы попросите.")
+        if let fetched = page.fetchedAt.flatMap(ISO8601DateFormatter.flexible) {
+            text += " " + String(localized: "Обновлён \(fetched.formatted(date: .abbreviated, time: .shortened)).")
+        }
+        return text
+    }
+
+    private func row(_ entry: SkillCatalog.IndexEntry) -> some View {
+        let candidate = entry.candidate
+        return HStack(alignment: .top, spacing: 6) {
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 4) {
+                    if candidate.official { Image(systemName: "checkmark.seal.fill").foregroundStyle(Color.accentColor).help(String(localized: "Официальный: репозиторий разработчика агента")) }
+                    Text(verbatim: candidate.repo.slug).scaledFont(.callout, weight: .medium).lineLimit(1).truncationMode(.middle)
+                }
+                if let title = candidate.title, candidate.paths.count <= 1 {
+                    Text(verbatim: title).scaledFont(.caption).foregroundStyle(.secondary).lineLimit(1)
+                }
+                if let summary = candidate.summary {
+                    Text(verbatim: summary).scaledFont(.caption).foregroundStyle(.secondary).lineLimit(2)
+                }
+                Text(verbatim: String(localized: "В списках: \(candidate.lists.count)")).scaledFont(.caption2).foregroundStyle(.tertiary)
+                if let id = entry.sourceID, let error = skills.sources.first(where: { $0.id == id })?.error {
+                    Text(verbatim: SkillSourceText.failure(error)).scaledFont(.caption2).foregroundStyle(.orange)
+                }
+            }
+            Spacer(minLength: 4)
+            VStack(alignment: .trailing, spacing: 4) {
+                if entry.sourceID != nil {
+                    if let id = entry.sourceID, skills.checking.contains(id) {
+                        ProgressView().controlSize(.small)
+                    } else {
+                        Button(String(localized: "Скиллы: \(entry.skills)")) { showRepo(candidate.repo.slug) }
+                            .controlSize(.small)
+                            .disabled(entry.skills == 0)
+                            .help(String(localized: "Показать скиллы этого источника"))
+                    }
+                } else if adding.contains(candidate.id) {
+                    ProgressView().controlSize(.small)
+                } else {
+                    Button("Скачать и проверить") { add(candidate) }
+                        .controlSize(.small)
+                        .help(String(localized: "Добавить репозиторий в источники: его скиллы скачаются в папку приложения и проверятся сканером"))
+                }
+                Button { NSWorkspace.shared.open(URL(string: candidate.repo.url)!) } label: { Image(systemName: "arrow.up.right.square") }
+                    .buttonStyle(.borderless)
+                    .help(String(localized: "Открыть на GitHub"))
+            }
+        }
+        .padding(.vertical, 5)
+    }
+
+    private func add(_ candidate: SkillSourceFinder.Candidate) {
+        failure = nil
+        adding.insert(candidate.id)
+        Task {
+            if case .failure(let refusal) = await skills.addSource(candidate.repo.slug) { failure = SkillSourceText.failure(refusal.code) }
+            adding.remove(candidate.id)
+            page = await skills.index(query: query)
+        }
+    }
+}
