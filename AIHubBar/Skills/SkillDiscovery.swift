@@ -9,6 +9,11 @@ import Foundation
 /// | Cursor | `~/.cursor/skills`, `~/.agents/skills`, and it reads `~/.claude/skills`, `~/.codex/skills` | the same four |
 /// | Gemini CLI | `~/.gemini/skills`, `~/.agents/skills`, extensions in `~/.gemini/extensions` | `.gemini/skills`, `.agents/skills` |
 ///
+/// Claude Code also keeps the skills of the person's Claude account, synced from claude.ai, two levels down:
+/// `~/.claude/skills/synced/<id>/<skill>/SKILL.md`, with a `manifest.json` beside (seen on this Mac on 2026-11-27,
+/// Claude Code 2.1.330: pdf, docx, skill-creator and ten more). They are listed with the scope `synced`: checked like
+/// the rest, but the catalog doesn't switch them off or remove them — the account's sync would put them back.
+///
 /// Port of `desktop/skill-catalog/src/local.rs`. Only lists folders: nothing is opened for writing.
 enum SkillAgent: String, CaseIterable, Codable, Sendable {
     case claude, codex, cursor, gemini
@@ -126,6 +131,9 @@ enum SkillDiscovery {
         }
 
         for (folder, agents) in roots.userSkillFolders { skillsFolder(folder, agents, scope: "user") }
+        for account in subfolders(roots.claudeDir.appending(path: "skills/synced")) {
+            for skill in subfolders(account).filter(hasSkillMD) { add("skill", skill, agents: [.claude], scope: "synced") }
+        }
         for (name, path) in claudePlugins(roots.claudeDir) where FileManager.default.fileExists(atPath: path.path) {
             add("plugin", path, listedName: name, agents: [.claude], scope: "plugin")
         }

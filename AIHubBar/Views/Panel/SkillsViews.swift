@@ -1236,6 +1236,7 @@ struct SkillCardView: View {
         switch scope {
         case "plugin": String(localized: "плагин")
         case "extension": String(localized: "расширение")
+        case "synced": String(localized: "из аккаунта Claude")
         default: String(localized: "для вас")
         }
     }

@@ -33,6 +33,12 @@ one being set (unless announced with `:`, «is», «follows», «below»); a mat
 steps less, except the rules aimed at the agent (`pi-…`); the medium and low findings add 34 at most; `rm-rf-home` is
 critical. The Rust scanner in desktop/ stays at rules 2 until the Windows work resumes.
 
+**Where skills are found** (`AIHubBar/Skills/SkillDiscovery.swift`): each agent's documented folders, and since
+2026-11-27 the skills of the person's Claude account that Claude Code syncs from claude.ai into
+`~/.claude/skills/synced/<id>/<skill>/` (found missing on Oleh's Mac: 13 skills — pdf, docx, skill-creator… — went
+unchecked). They show as «из аккаунта Claude»; the catalog checks them but doesn't switch them off or remove them, since
+the sync would put them back.
+
 ## 2. From findings to a verdict
 
 1. Each rule that matches gives a **finding**: rule, severity, file, line, the line itself.
