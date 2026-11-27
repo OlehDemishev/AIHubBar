@@ -120,7 +120,7 @@ struct AIHubBarApp: App {
                 .preferredColorScheme(app.settings.panelTheme.colorScheme)
         }
         .handlesExternalEvents(matching: [])
-        .defaultSize(width: 900, height: 640)
+        .defaultSize(width: 1000, height: 660)
 
         Window("Сравнение", id: WindowID.compare.rawValue) {
             CompareView()
@@ -138,6 +138,15 @@ struct AIHubBarApp: App {
         }
         .handlesExternalEvents(matching: [])
         .defaultSize(width: 720, height: 680)
+
+        Window("Экономика AI", id: WindowID.economics.rawValue) {
+            EconomicsWindow()
+                .appEnvironment(app)
+                .preferredColorScheme(app.settings.panelTheme.colorScheme)
+                .debugSnapshot("economics")
+        }
+        .handlesExternalEvents(matching: [])
+        .defaultSize(width: 900, height: 640)
 
         Window("Очистка сборок", id: WindowID.cleanupOutput.rawValue) {
             CleanupOutputView()
