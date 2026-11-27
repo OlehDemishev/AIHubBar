@@ -417,6 +417,101 @@ final class SkillStore {
         return .success(result)
     }
 
+    // MARK: - The person's model: search in plain words and translation (SkillAsk)
+
+    /// A search in plain words is running.
+    private(set) var asking = false
+    /// Remembered translations into the interface language, keyed by the original text.
+    private(set) var translated: [String: String] = [:]
+    /// Texts being translated now.
+    private(set) var translating: Set<String> = []
+    /// Shows the originals instead of the translations everywhere.
+    var showsOriginals = false
+
+    private var askScratch: URL { SessionFiles.supportDirectory.appending(path: "skills/ask") }
+
+    private func spend(_ answer: SkillReviewer.Answer, _ who: SkillReviewer.Who) {
+        if case .api = who {
+            recordSpend(SpendRecord(date: .now, provider: .anthropic, model: answer.model, inputTokens: answer.inputTokens, outputTokens: answer.outputTokens))
+        }
+    }
+
+    /// Finds skills and repositories for what the person wrote: the model gives search words, the catalog and the index
+    /// are searched here, the model picks the best of what was found. Two short requests; nothing is downloaded.
+    func ask(_ question: String) async -> Outcome<[SkillAsk.Pick]> {
+        let question = question.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !question.isEmpty, !asking else { return .failure(.state) }
+        asking = true
+        defer { asking = false }
+        guard let who = await SkillReviewer.who() else { return .failure(.init(code: "no-reviewer")) }
+        let wordsAnswer = await SkillReviewer.ask(SkillAsk.wordsPrompt(question: question, nonce: SkillReview.nonce()), who: who, model: SkillAsk.model, scratch: askScratch)
+        guard case .success(let first) = wordsAnswer else {
+            if case .failure(let refusal) = wordsAnswer { AppLog.error("skills: plain-words search failed: \(refusal.code)"); return .failure(refusal) }
+            return .failure(.missing)
+        }
+        spend(first, who)
+        guard let words = SkillAsk.words(from: first.text) else { return .failure(.init(code: "unreadable")) }
+        // The person's own words count too: a skill named as they wrote it is found without the model.
+        let typed = question.components(separatedBy: CharacterSet.alphanumerics.inverted).filter { $0.count >= 3 }.prefix(6)
+        let all = words + typed.filter { word in !words.contains { $0.caseInsensitiveCompare(word) == .orderedSame } }
+        let items: [SkillAsk.Item] = await worker.run { (try? $0.askCandidates(words: all)) ?? [] }
+        AppLog.info("skills: plain-words search via \(who.via): \(words.count) words, \(items.count) candidates")
+        guard !items.isEmpty else { return .success([]) }
+        let rankAnswer = await SkillReviewer.ask(SkillAsk.rankPrompt(question: question, items: items, nonce: SkillReview.nonce(), language: SkillReviewer.languageName),
+                                                 who: who, model: SkillAsk.model, scratch: askScratch)
+        guard case .success(let second) = rankAnswer else {
+            if case .failure(let refusal) = rankAnswer { AppLog.error("skills: plain-words search failed: \(refusal.code)"); return .failure(refusal) }
+            return .failure(.missing)
+        }
+        spend(second, who)
+        guard let picks = SkillAsk.picks(from: second.text, items: items) else { return .failure(.init(code: "unreadable")) }
+        return .success(picks)
+    }
+
+    /// Reads the remembered translations of these texts into the interface language.
+    func loadTranslations(_ texts: [String]) async {
+        let language = SkillReviewer.languageName
+        let wanted = texts.filter { !$0.isEmpty && translated[$0] == nil }
+        guard !wanted.isEmpty else { return }
+        let found: [String: String] = await worker.run { (try? $0.translations(of: wanted, language: language)) ?? [:] }
+        if !found.isEmpty { translated.merge(found) { _, new in new } }
+    }
+
+    /// Texts among these that read as another language and have no translation yet.
+    func untranslated(_ texts: [String]) -> [String] {
+        let code = SkillReviewer.languageCode
+        var seen: Set<String> = []
+        return texts.filter { !$0.isEmpty && translated[$0] == nil && !translating.contains($0) && seen.insert($0).inserted && SkillAsk.needsTranslation($0, to: code) }
+    }
+
+    /// Asks the model to translate texts into the interface language, `SkillAsk.maxTexts` at a time, and remembers them.
+    func translate(_ texts: [String]) async -> Outcome<Void> {
+        let wanted = Array(untranslated(texts).prefix(SkillAsk.maxTexts))
+        guard !wanted.isEmpty else { return .success(()) }
+        guard let who = await SkillReviewer.who() else { return .failure(.init(code: "no-reviewer")) }
+        translating.formUnion(wanted)
+        defer { translating.subtract(wanted) }
+        let language = SkillReviewer.languageName
+        let answer = await SkillReviewer.ask(SkillAsk.translatePrompt(texts: wanted, nonce: SkillReview.nonce(), language: language),
+                                             who: who, model: SkillAsk.model, scratch: askScratch)
+        guard case .success(let reply) = answer else {
+            if case .failure(let refusal) = answer { AppLog.error("skills: translation failed: \(refusal.code)"); return .failure(refusal) }
+            return .failure(.missing)
+        }
+        spend(reply, who)
+        guard let found = SkillAsk.translations(from: reply.text, texts: wanted) else { return .failure(.init(code: "unreadable")) }
+        AppLog.info("skills: translated \(found.count) of \(wanted.count) descriptions via \(who.via)")
+        let model = reply.model
+        let saved: Outcome<Void> = await act(changes: false) { catalog, _ in try catalog.saveTranslations(found, language: language, model: model) }
+        translated.merge(found) { _, new in new }
+        return saved
+    }
+
+    /// The text to show: its translation when there is one and the person hasn't asked for originals.
+    func shown(_ text: String) -> String {
+        showsOriginals ? text : translated[text] ?? text
+    }
+
     // MARK: - Order: conflicts, copies, unused skills, sets, export (SkillHousekeeping)
 
     struct Order: Equatable, Sendable {

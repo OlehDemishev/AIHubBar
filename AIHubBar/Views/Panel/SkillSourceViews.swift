@@ -320,6 +320,7 @@ struct SkillIndexView: View {
                 .scaledFont(.caption2)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
+            SkillTranslateBar(texts: page.entries.prefix(SkillAsk.maxTexts).compactMap(\.candidate.summary))
             if page.total == 0 {
                 VStack(spacing: 6) {
                     if skills.findingSources { ProgressView().controlSize(.small) }
@@ -374,7 +375,7 @@ struct SkillIndexView: View {
                     Text(verbatim: title).scaledFont(.caption).foregroundStyle(.secondary).lineLimit(1)
                 }
                 if let summary = candidate.summary {
-                    Text(verbatim: summary).scaledFont(.caption).foregroundStyle(.secondary).lineLimit(2)
+                    Text(verbatim: skills.shown(summary)).scaledFont(.caption).foregroundStyle(.secondary).lineLimit(2)
                 }
                 Text(verbatim: String(localized: "В списках: \(candidate.lists.count)")).scaledFont(.caption2).foregroundStyle(.tertiary)
                 if let id = entry.sourceID, let error = skills.sources.first(where: { $0.id == id })?.error {
