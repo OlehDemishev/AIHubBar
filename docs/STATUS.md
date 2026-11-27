@@ -268,6 +268,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-27 — Release 0.15.0 prepared (branch `chore/release-0.15.0`)
+
+Done: on Oleh's «релиз». `docs/release-notes/0.15.0.md` (Skills: plain words, for a project, open sources, translations, GitHub sign-in; AI economics, Stop All, what a background task used, sessions on other computers (beta), the MCP server; fixed: placeholder webhooks, safer sources, the notch's ears over a full-screen video). What's New 0.15 with five lines in 12 languages (the 0.14 lines removed), `DemoData` 0.15: the finished demo tasks show what they used.
+Checked: `scripts/check.sh` green; before the release, in an isolated copy: «Экономика AI» (prices from models.dev, the table), Settings → «Сессии агентов» → «Сессии на других компьютерах» (beta) — both look right; the Skills features were seen live when merged.
+Left: not seen live — the run's cost in «Журнал» (no run with usage in the test folder; the demo now has some), sessions over a real SSH connection, the ears at a real notch, the MCP server with clients other than Claude Code.
+
 ## 2026-11-27 — Skills: auto-translation, remembered project picks, GitHub sign-in (branch `feat/mac-skills-three`)
 
 Done: «Переводить описания сразу» in a new «Помощь модели» section (off by default; `SkillTranslateBar` translates on its own once per set of texts, a failure waits for the button). A project's picks are kept in the new `llm_project_picks` table (layout 11) with the stack they were made for; the same stack shows them at once with «Подобрано …, проект с тех пор не изменился» and «Подобрать заново». «Вход в GitHub»: a token checked with `/rate_limit`, kept in the Keychain (`github-skills`), read once at start; `SkillGitHub.request` adds it only for https api.github.com and `SkillGitHub.redirect` drops it when a redirect leaves the API; «Выйти» deletes it. SPEC §4a/§4b; 15 new strings in 12 languages.

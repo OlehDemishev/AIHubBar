@@ -8853,82 +8853,6 @@
         }
       }
     },
-    "Жалобы, блок-лист, политика установки, AI-проверка по кнопке и уведомления о скиллах, изменённых не через каталог.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "شكاوى وقائمة حظر وسياسة تثبيت ومراجعة بالذكاء الاصطناعي عند الطلب وإشعارات بالمهارات المعدّلة خارج الكتالوج."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Beschwerden, Sperrliste, Installationsrichtlinie, KI-Prüfung per Knopfdruck und Mitteilungen über Skills, die außerhalb des Katalogs geändert wurden."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Complaints, a block list, an install policy, an AI review on request, and notifications about skills changed outside the catalog."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quejas, lista de bloqueo, política de instalación, revisión con IA a petición y avisos de skills cambiadas fuera del catálogo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Signalements, liste de blocage, politique d’installation, vérification par l’IA sur demande et notifications pour les skills modifiés hors du catalogue."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Laporan, daftar blokir, kebijakan pemasangan, pemeriksaan AI sesuai permintaan, dan notifikasi skill yang berubah di luar katalog."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Segnalazioni, lista di blocco, politica di installazione, verifica con IA su richiesta e notifiche per le skill cambiate fuori dal catalogo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "報告、ブロックリスト、インストールのポリシー、ボタンひとつの AI 確認、カタログ外で変わったスキルの通知。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "신고, 차단 목록, 설치 정책, 버튼 한 번으로 하는 AI 검토, 카탈로그 밖에서 바뀐 스킬 알림."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skargi, lista blokad, polityka instalacji, sprawdzenie AI na żądanie i powiadomienia o skillach zmienionych poza katalogiem."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reclamações, lista de bloqueio, política de instalação, verificação por IA sob demanda e notificações de skills alteradas fora do catálogo."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Скарги, блок-лист, політика встановлення, перевірка AI за кнопкою та сповіщення про скіли, змінені не через каталог."
-          }
-        }
-      }
-    },
     "Журнал изменений": {
       "localizations": {
         "ar": {
@@ -13641,82 +13565,6 @@
         }
       }
     },
-    "Новый модуль «Скиллы»: все скиллы и плагины Claude Code, Codex, Cursor и Gemini CLI с проверкой безопасности и объяснением оценки. Включите его в Настройках → «Что показывать».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "وحدة جديدة «المهارات»: كل مهارات وإضافات Claude Code وCodex وCursor وGemini CLI مع فحص الأمان وشرح التقييم. فعّلها من الإعدادات ← «ما يُعرض»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Neues Modul „Skills“: alle Skills und Plugins von Claude Code, Codex, Cursor und Gemini CLI mit Sicherheitsprüfung und Begründung der Bewertung. Einschalten unter Einstellungen → „Was anzeigen“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A new module, Skills: every skill and plugin of Claude Code, Codex, Cursor and Gemini CLI, checked for safety, with the reasons for each verdict. Switch it on in Settings → What to Show."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nuevo módulo «Skills»: todas las skills y plugins de Claude Code, Codex, Cursor y Gemini CLI con revisión de seguridad y la explicación de cada valoración. Actívelo en Ajustes → Qué mostrar."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nouveau module « Skills » : tous les skills et plugins de Claude Code, Codex, Cursor et Gemini CLI, vérifiés pour la sécurité, avec l’explication du verdict. Activez-le dans Réglages → Ce qu’il faut afficher."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modul baru “Skill”: semua skill dan plugin Claude Code, Codex, Cursor, dan Gemini CLI dengan pemeriksaan keamanan dan alasan penilaiannya. Aktifkan di Pengaturan → Yang ditampilkan."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nuovo modulo «Skill»: tutte le skill e i plugin di Claude Code, Codex, Cursor e Gemini CLI con controllo di sicurezza e spiegazione del giudizio. Attivalo in Impostazioni → Cosa mostrare."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "新しいモジュール「スキル」：Claude Code、Codex、Cursor、Gemini CLI のすべてのスキルとプラグインを安全性チェックと評価の理由つきで表示します。設定 →「表示する項目」でオンにしてください。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "새 모듈 “스킬”: Claude Code, Codex, Cursor, Gemini CLI의 모든 스킬과 플러그인을 안전성 검사와 평가 이유와 함께 보여 줍니다. 설정 → “표시할 항목”에서 켜세요."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nowy moduł „Skille”: wszystkie skille i wtyczki Claude Code, Codex, Cursor i Gemini CLI ze sprawdzeniem bezpieczeństwa i wyjaśnieniem oceny. Włącz go w Ustawieniach → „Co pokazywać”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Novo módulo “Skills”: todas as skills e plugins do Claude Code, Codex, Cursor e Gemini CLI com verificação de segurança e explicação da avaliação. Ative em Ajustes → O que mostrar."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Новий модуль «Скіли»: усі скіли й плагіни Claude Code, Codex, Cursor і Gemini CLI з перевіркою безпеки та поясненням оцінки. Увімкніть його в Налаштуваннях → «Що показувати»."
-          }
-        }
-      }
-    },
     "Новый набор…": {
       "localizations": {
         "ar": {
@@ -18125,82 +17973,6 @@
         }
       }
     },
-    "Скилл можно поставить другому агенту, выключить, убрать и вернуть из журнала, а новую версию — сравнить построчно перед обновлением.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يمكن تثبيت المهارة لوكيل آخر وإيقافها وإزالتها واستعادتها من السجل، ومقارنة الإصدار الجديد سطرًا بسطر قبل التحديث."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein Skill lässt sich für einen anderen Agenten installieren, ausschalten, entfernen und über das Protokoll zurückholen; eine neue Version vor dem Update zeilenweise vergleichen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A skill can be installed for another agent, switched off, removed and put back from the journal; a newer version can be compared line by line before updating."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una skill se puede instalar para otro agente, desactivar, quitar y recuperar desde el registro; una versión nueva se compara línea a línea antes de actualizar."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un skill peut être installé pour un autre agent, désactivé, retiré et restauré depuis le journal ; une nouvelle version se compare ligne à ligne avant la mise à jour."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skill bisa dipasang untuk agen lain, dimatikan, dihapus, dan dikembalikan dari jurnal; versi baru bisa dibandingkan baris per baris sebelum diperbarui."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una skill si può installare per un altro agente, disattivare, rimuovere e ripristinare dal registro; una nuova versione si confronta riga per riga prima di aggiornare."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "スキルは別のエージェントにインストールしたり、オフにしたり、取り外して履歴から戻したりでき、新しいバージョンは更新前に行ごとに比較できます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "스킬을 다른 에이전트에 설치하고, 끄고, 제거한 뒤 기록에서 되돌릴 수 있으며, 새 버전은 업데이트 전에 줄 단위로 비교할 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skill można zainstalować innemu agentowi, wyłączyć, usunąć i przywrócić z dziennika, a nową wersję porównać wiersz po wierszu przed aktualizacją."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma skill pode ser instalada para outro agente, desativada, removida e restaurada pelo registro; uma versão nova pode ser comparada linha a linha antes de atualizar."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Скіл можна встановити іншому агенту, вимкнути, прибрати й повернути з журналу, а нову версію — порівняти порядково перед оновленням."
-          }
-        }
-      }
-    },
     "Скилл не указывает свой репозиторий на GitHub": {
       "localizations": {
         "ar": {
@@ -20097,82 +19869,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Прибрати джерело: його скіли зникнуть зі списку, встановлені копії залишаться"
-          }
-        }
-      }
-    },
-    "Уведомление «агент мог застрять» не приходит, пока сессия ждёт одну долгую команду: на неё даётся час.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لم يعد إشعار «ربما علِق الوكيل» يصل ما دامت الجلسة تنتظر أمرًا طويلًا واحدًا: يُمنح ساعة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Mitteilung „Agent hängt womöglich“ kommt nicht mehr, solange eine Sitzung auf einen langen Befehl wartet: Er bekommt eine Stunde."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The “agent may be stuck” notification no longer comes while a session waits for one long command: it gets an hour."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El aviso «el agente puede estar atascado» ya no llega mientras una sesión espera un comando largo: tiene una hora."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La notification « l’agent est peut-être bloqué » ne vient plus pendant qu’une session attend une longue commande : elle a une heure."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notifikasi “agen mungkin macet” tidak datang selama sesi menunggu satu perintah panjang: diberi waktu satu jam."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La notifica «l’agente potrebbe essere bloccato» non arriva più mentre una sessione attende un comando lungo: ha un’ora."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "セッションが長いコマンドを待っている間は「エージェントが止まっているかも」の通知は来ません。1 時間待ちます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "세션이 긴 명령 하나를 기다리는 동안에는 “에이전트가 멈췄을 수 있음” 알림이 오지 않습니다. 한 시간을 줍니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Powiadomienie „agent mógł utknąć” nie przychodzi, gdy sesja czeka na jedno długie polecenie: dostaje godzinę."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A notificação “o agente pode estar travado” não chega enquanto a sessão espera um comando longo: ele tem uma hora."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сповіщення «агент міг застрягти» не приходить, поки сесія чекає на одну довгу команду: на неї дається година."
           }
         }
       }
@@ -192547,82 +192243,6 @@
         }
       }
     },
-    "Скиллы из репозиториев GitHub: добавьте источник или найдите его через «Найти источники…» — скиллы скачиваются, проверяются и обновляются вместе с источником.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مهارات من مستودعات GitHub: أضف مصدرًا أو ابحث عنه عبر «العثور على مصادر…» — تُنزَّل المهارات وتُفحص وتُحدَّث مع المصدر."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skills aus GitHub-Repositorys: Fügen Sie eine Quelle hinzu oder suchen Sie sie über „Quellen finden…“ – die Skills werden heruntergeladen, geprüft und mit der Quelle aktualisiert."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skills from GitHub repositories: add a source or look for one with “Find sources…” — its skills are downloaded, checked and updated along with the source."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skills de repositorios de GitHub: añade una fuente o búscala con «Buscar fuentes…»; las skills se descargan, se revisan y se actualizan junto con la fuente."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Des skills depuis des dépôts GitHub : ajoutez une source ou trouvez-en une avec « Trouver des sources… » — ses skills sont téléchargés, vérifiés et mis à jour avec la source."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skill dari repositori GitHub: tambahkan sumber atau cari lewat “Cari sumber…” — skill diunduh, diperiksa, dan diperbarui bersama sumbernya."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skill dai repository GitHub: aggiungi una fonte o cercala con «Trova fonti…»: le skill vengono scaricate, controllate e aggiornate insieme alla fonte."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "GitHub リポジトリのスキル:ソースを追加するか「ソースを探す…」で見つけると、スキルがダウンロード・チェックされ、ソースと一緒に更新されます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "GitHub 저장소의 스킬: 소스를 추가하거나 「소스 찾기…」로 찾으면 스킬이 다운로드되고 검사되며 소스와 함께 업데이트됩니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skille z repozytoriów GitHub: dodaj źródło albo znajdź je przez „Znajdź źródła…” — skille są pobierane, sprawdzane i aktualizowane razem ze źródłem."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skills de repositórios do GitHub: adicione uma fonte ou encontre uma em “Encontrar fontes…” — as skills são baixadas, verificadas e atualizadas junto com a fonte."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Скіли з репозиторіїв GitHub: додайте джерело або знайдіть його через «Знайти джерела…» — скіли завантажуються, перевіряються й оновлюються разом із джерелом."
-          }
-        }
-      }
-    },
     "Поиск в открытых источниках": {
       "localizations": {
         "ar": {
@@ -200773,6 +200393,386 @@
           "stringUnit": {
             "state": "translated",
             "value": "З токеном GitHub дозволяє 5000 запитів на годину замість 60, і джерела перевіряються без очікування. Це необов'язково, і підійде токен без дозволів: він потрібен лише щоб читати публічні репозиторії. Токен зберігається у В'язці ключів і йде лише на api.github.com."
+          }
+        }
+      }
+    },
+    "Скиллы можно искать своими словами: «Найти по смыслу с AI» под поиском, а кнопка «Скиллы» в карточке проекта подбирает их под проект.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن البحث عن المهارات بكلماتك: «البحث بالمعنى مع الذكاء الاصطناعي» تحت البحث، وزر «المهارات» في بطاقة المشروع يختارها له."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills lassen sich mit eigenen Worten finden: „Mit AI nach Bedeutung suchen“ unter der Suche, und „Skills“ in der Karte eines Projekts wählt passende aus."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find skills in your own words: «Find by meaning with AI» under the search, and «Skills» in a project's card picks them for that project."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Busca skills con tus palabras: «Buscar por significado con IA» bajo la búsqueda, y «Skills» en la tarjeta de un proyecto las elige para él."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cherchez des skills avec vos mots : « Chercher par le sens avec l'IA » sous la recherche, et « Skills » dans la fiche d'un projet les choisit pour lui."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cari skill dengan kata-kata sendiri: “Cari berdasarkan makna dengan AI” di bawah pencarian, dan “Skill” di kartu proyek memilihkannya untuk proyek itu."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerca le skill con parole tue: «Cerca per significato con l'AI» sotto la ricerca, e «Skill» nella scheda di un progetto le sceglie per quel progetto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキルを自分の言葉で探せます。検索の下の「AI で意味から探す」、プロジェクトのカードの「スキル」はそのプロジェクト向けに選びます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스킬을 내 말로 찾을 수 있습니다: 검색 아래 «AI로 의미 검색», 프로젝트 카드의 «스킬»은 그 프로젝트에 맞게 고릅니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szukaj skilli własnymi słowami: „Szukaj po znaczeniu z AI” pod wyszukiwaniem, a „Skille” w karcie projektu dobiera je do projektu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encontre skills com suas palavras: «Buscar pelo sentido com IA» sob a busca, e «Skills» no cartão de um projeto escolhe para ele."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скіли можна шукати своїми словами: «Знайти за змістом з AI» під пошуком, а кнопка «Скіли» в картці проєкту добирає їх під проєкт."
+          }
+        }
+      }
+    },
+    "«Открытые источники» (глобус в разделе «Скиллы»): около 900 репозиториев со скиллами, поиск без скачивания.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«المصادر المفتوحة» (الكرة الأرضية في قسم «المهارات»): نحو 900 مستودع للمهارات، والبحث دون تنزيل."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Offene Quellen“ (Globus im Bereich „Skills“): rund 900 Repositorys mit Skills, durchsuchbar ohne Download."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Open sources» (the globe in the Skills section): about 900 repositories with skills, searchable without downloading."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Fuentes abiertas» (el globo en la sección Skills): unos 900 repositorios con skills, con búsqueda sin descargar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Sources ouvertes » (le globe dans la section Skills) : environ 900 dépôts de skills, à chercher sans rien télécharger."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Sumber terbuka” (globe di bagian Skill): sekitar 900 repositori skill, bisa dicari tanpa mengunduh."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Fonti aperte» (il globo nella sezione Skill): circa 900 repository di skill, cercabili senza scaricare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「公開ソース」(「スキル」セクションの地球儀): スキルのリポジトリ約 900 件を、ダウンロードせずに検索できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«공개 소스» («스킬» 섹션의 지구본): 스킬 저장소 약 900개를 다운로드 없이 검색합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Otwarte źródła” (globus w sekcji „Skille”): około 900 repozytoriów ze skillami, wyszukiwanie bez pobierania."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Fontes abertas» (o globo na seção Skills): cerca de 900 repositórios de skills, com busca sem baixar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Відкриті джерела» (глобус у розділі «Скіли»): близько 900 репозиторіїв зі скілами, пошук без завантаження."
+          }
+        }
+      }
+    },
+    "Описания скиллов переводятся на ваш язык вашей моделью — по кнопке или сразу (Настройки → «Скиллы»).": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يترجم نموذجك أوصاف المهارات إلى لغتك — بزر أو فورًا (الإعدادات ← «المهارات»)."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ihr Modell übersetzt die Beschreibungen der Skills in Ihre Sprache — per Taste oder sofort (Einstellungen → „Skills“)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your model translates skill descriptions into your language — with a button or right away (Settings → Skills)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu modelo traduce las descripciones de las skills a tu idioma, con un botón o al instante (Ajustes → Skills)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre modèle traduit les descriptions des skills dans votre langue — par un bouton ou tout de suite (Réglages → Skills)."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model Anda menerjemahkan deskripsi skill ke bahasa Anda — lewat tombol atau langsung (Pengaturan → Skill)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo modello traduce le descrizioni delle skill nella tua lingua, con un pulsante o subito (Impostazioni → Skill)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキルの説明をあなたのモデルが母語に翻訳します。ボタンで、またはすぐに(設定 → 「スキル」)。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "내 모델이 스킬 설명을 내 언어로 번역합니다 — 버튼으로 또는 바로 (설정 → «스킬»)."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Twój model tłumaczy opisy skilli na Twój język — przyciskiem albo od razu (Ustawienia → „Skille”)."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu modelo traduz as descrições das skills para o seu idioma — por botão ou na hora (Ajustes → Skills)."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Описи скілів перекладає ваша модель вашою мовою — кнопкою або одразу (Налаштування → «Скіли»)."
+          }
+        }
+      }
+    },
+    "«Экономика AI»: цены моделей рядом и сколько стоили бы ваши 30 дней — в меню «Ещё» и под лимитами.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«اقتصاديات الذكاء الاصطناعي»: أسعار النماذج جنبًا إلى جنب وكم كانت ستكلّف أيامك الثلاثون — في قائمة «المزيد» وتحت الحدود."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„AI-Ökonomie“: Modellpreise nebeneinander und was Ihre letzten 30 Tage gekostet hätten — im Menü „Mehr“ und unter den Limits."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«AI economics»: model prices side by side and what your 30 days would have cost — in the «More» menu and under the limits."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Economía de la IA»: precios de modelos lado a lado y cuánto habrían costado tus 30 días, en el menú «Más» y bajo los límites."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Économie de l’IA » : les prix des modèles côte à côte et ce qu'auraient coûté vos 30 jours — dans le menu « Plus » et sous les limites."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Ekonomi AI”: harga model berdampingan dan berapa biaya 30 hari Anda — di menu “Lainnya” dan di bawah batas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Economia dell'AI»: prezzi dei modelli a confronto e quanto sarebbero costati i tuoi 30 giorni, nel menu «Altro» e sotto i limiti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「AIエコノミクス」: モデルの価格の比較と、直近 30 日がいくらになったか。「その他」メニューと制限の下にあります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«AI 경제»: 모델 가격 비교와 최근 30일이 얼마였을지 — «더 보기» 메뉴와 한도 아래에 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Ekonomia AI”: ceny modeli obok siebie i ile kosztowałoby Twoje 30 dni — w menu „Więcej” i pod limitami."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Economia da IA»: preços dos modelos lado a lado e quanto custariam seus 30 dias — no menu «Mais» e sob os limites."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Економіка AI»: ціни моделей поруч і скільки коштували б ваші 30 днів — у меню «Ще» та під лімітами."
+          }
+        }
+      }
+    },
+    "«Остановить все» для фоновых задач и сессии на других компьютерах по SSH (бета, Настройки → «Сессии агентов»).": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«إيقاف الكل» للمهام في الخلفية، وجلسات على حواسيب أخرى عبر SSH (تجريبي، الإعدادات ← «جلسات الوكلاء»)."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Alle stoppen“ für Hintergrundaufgaben und Sitzungen auf anderen Computern per SSH (Beta, Einstellungen → „Agentensitzungen“)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Stop All» for background tasks, and sessions on other computers over SSH (beta, Settings → Agent sessions)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Detener todo» para tareas en segundo plano, y sesiones en otros ordenadores por SSH (beta, Ajustes → Sesiones de agentes)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Tout arrêter » pour les tâches en arrière-plan, et les sessions sur d'autres ordinateurs par SSH (bêta, Réglages → Sessions des agents)."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Hentikan semua” untuk tugas latar belakang, dan sesi di komputer lain lewat SSH (beta, Pengaturan → Sesi agen)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Ferma tutto» per le attività in background, e sessioni su altri computer via SSH (beta, Impostazioni → Sessioni degli agenti)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンドタスクの「すべて停止」と、SSH で他のコンピュータのセッション(ベータ、設定 → 「エージェントのセッション」)。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 작업 «모두 중지», SSH로 다른 컴퓨터의 세션 보기 (베타, 설정 → «에이전트 세션»)."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Zatrzymaj wszystkie” dla zadań w tle i sesje na innych komputerach przez SSH (beta, Ustawienia → „Sesje agentów”)."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Parar tudo» para tarefas em segundo plano, e sessões em outros computadores por SSH (beta, Ajustes → Sessões de agentes)."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Зупинити всі» для фонових задач і сесії на інших комп'ютерах через SSH (бета, Налаштування → «Сесії агентів»)."
           }
         }
       }

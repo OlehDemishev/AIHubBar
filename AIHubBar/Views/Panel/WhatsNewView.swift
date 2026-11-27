@@ -6,14 +6,14 @@ import SwiftUI
 /// `docs/release-notes/` and goes to the release page and Sparkle's window (scripts/release.sh).
 enum WhatsNew {
     /// Changes with a release that has something to say; a release without news keeps the old value and shows nothing.
-    static let version = "0.14"
+    static let version = "0.15"
 
     static var items: [String] {
-        [String(localized: "Новый модуль «Скиллы»: все скиллы и плагины Claude Code, Codex, Cursor и Gemini CLI с проверкой безопасности и объяснением оценки. Включите его в Настройках → «Что показывать»."),
-         String(localized: "Скилл можно поставить другому агенту, выключить, убрать и вернуть из журнала, а новую версию — сравнить построчно перед обновлением."),
-         String(localized: "Скиллы из репозиториев GitHub: добавьте источник или найдите его через «Найти источники…» — скиллы скачиваются, проверяются и обновляются вместе с источником."),
-         String(localized: "Жалобы, блок-лист, политика установки, AI-проверка по кнопке и уведомления о скиллах, изменённых не через каталог."),
-         String(localized: "Уведомление «агент мог застрять» не приходит, пока сессия ждёт одну долгую команду: на неё даётся час.")]
+        [String(localized: "Скиллы можно искать своими словами: «Найти по смыслу с AI» под поиском, а кнопка «Скиллы» в карточке проекта подбирает их под проект."),
+         String(localized: "«Открытые источники» (глобус в разделе «Скиллы»): около 900 репозиториев со скиллами, поиск без скачивания."),
+         String(localized: "Описания скиллов переводятся на ваш язык вашей моделью — по кнопке или сразу (Настройки → «Скиллы»)."),
+         String(localized: "«Экономика AI»: цены моделей рядом и сколько стоили бы ваши 30 дней — в меню «Ещё» и под лимитами."),
+         String(localized: "«Остановить все» для фоновых задач и сессии на других компьютерах по SSH (бета, Настройки → «Сессии агентов»).")]
     }
 
     /// Shown to whoever already had a profile and has not seen this version's card. A new person has nothing to compare
