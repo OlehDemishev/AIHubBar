@@ -5,7 +5,7 @@
 **Updated:** 2026-11-27
 
 **Now:**
-- 2026-11-27: Mac — Skills Catalog: security pass over remote sources and «Найти источники…» (`docs/SECURITY-AUDIT.md`); fixed: case-only name clashes, a 256 MB cap a repository, the root skill's own folder, redirects only to GitHub (branch `chore/skills-sources-security-audit`)
+- 2026-11-27: Mac — Skills Catalog: security pass over remote sources and «Найти источники…» (`docs/SECURITY-AUDIT.md`); fixed: case-only name clashes, a 256 MB cap a repository, the root skill's own folder, redirects only to GitHub — merged as PR #658 on Oleh's «Да, вливай», not in a build yet
 - 2026-11-27: Mac — Skills scanner rules 4: a Slack/Discord/Telegram webhook with a placeholder for its secret (`T.../xxx`, `<token>`, `YOUR_…`) is no exfiltration endpoint; zxkane/aws-skills' `aws-agentic-ai` reads «review» 69 instead of «dangerous» 100 — merged as PR #656 on Oleh's «Да, вливай», not in a build yet
 - 2026-11-27: Mac — **0.14.0 published** to everyone on Oleh's «Место освободил, пока смержи и выпусти релиз» (out of the Tuesday schedule, on his word): everything from betas 1–2 plus GitHub sources (#648), «Найти источники…» (#651), the «Скиллы» header chip (#650); notes and What's New updated in #654; the header chip and the card seen live in an isolated copy before; build 1555, signed and notarized, beta testers get it too; https://github.com/OlehDemishev/AIHubBar/releases/tag/v0.14.0
 - 2026-11-27: Mac — Skills Catalog: «Найти источники…» in Settings → Скиллы → «Источники» suggests repositories from five awesome lists and Anthropic's official plugin marketplace (911 found live) and searches GitHub by topic; one click adds one as a source — merged as PR #651 on Oleh's «Да, вливай» (seen live in an isolated copy), not in a build yet
