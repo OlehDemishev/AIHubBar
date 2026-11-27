@@ -192546,6 +192546,82 @@
           }
         }
       }
+    },
+    "Скиллы из репозиториев GitHub: добавьте источник или найдите его через «Найти источники…» — скиллы скачиваются, проверяются и обновляются вместе с источником.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مهارات من مستودعات GitHub: أضف مصدرًا أو ابحث عنه عبر «العثور على مصادر…» — تُنزَّل المهارات وتُفحص وتُحدَّث مع المصدر."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills aus GitHub-Repositorys: Fügen Sie eine Quelle hinzu oder suchen Sie sie über „Quellen finden…“ – die Skills werden heruntergeladen, geprüft und mit der Quelle aktualisiert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills from GitHub repositories: add a source or look for one with “Find sources…” — its skills are downloaded, checked and updated along with the source."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills de repositorios de GitHub: añade una fuente o búscala con «Buscar fuentes…»; las skills se descargan, se revisan y se actualizan junto con la fuente."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des skills depuis des dépôts GitHub : ajoutez une source ou trouvez-en une avec « Trouver des sources… » — ses skills sont téléchargés, vérifiés et mis à jour avec la source."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill dari repositori GitHub: tambahkan sumber atau cari lewat “Cari sumber…” — skill diunduh, diperiksa, dan diperbarui bersama sumbernya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill dai repository GitHub: aggiungi una fonte o cercala con «Trova fonti…»: le skill vengono scaricate, controllate e aggiornate insieme alla fonte."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub リポジトリのスキル:ソースを追加するか「ソースを探す…」で見つけると、スキルがダウンロード・チェックされ、ソースと一緒に更新されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub 저장소의 스킬: 소스를 추가하거나 「소스 찾기…」로 찾으면 스킬이 다운로드되고 검사되며 소스와 함께 업데이트됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skille z repozytoriów GitHub: dodaj źródło albo znajdź je przez „Znajdź źródła…” — skille są pobierane, sprawdzane i aktualizowane razem ze źródłem."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills de repositórios do GitHub: adicione uma fonte ou encontre uma em “Encontrar fontes…” — as skills são baixadas, verificadas e atualizadas junto com a fonte."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скіли з репозиторіїв GitHub: додайте джерело або знайдіть його через «Знайти джерела…» — скіли завантажуються, перевіряються й оновлюються разом із джерелом."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
