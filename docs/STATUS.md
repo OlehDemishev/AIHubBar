@@ -5,6 +5,7 @@
 **Updated:** 2026-11-27
 
 **Now:**
+- 2026-11-27: Mac — the ears at the notch go away over a full-screen video: a full-screen window under the notch counts as full screen when the menu bar is not there (branch `fix/notch-ears-full-screen`, PR open); not seen at a real notch
 - 2026-11-27: Mac — Skills Catalog: security pass over remote sources and «Найти источники…» (`docs/SECURITY-AUDIT.md`); fixed: case-only name clashes, a 256 MB cap a repository, the root skill's own folder, redirects only to GitHub — merged as PR #658 on Oleh's «Да, вливай», not in a build yet
 - 2026-11-27: Mac — Skills scanner rules 4: a Slack/Discord/Telegram webhook with a placeholder for its secret (`T.../xxx`, `<token>`, `YOUR_…`) is no exfiltration endpoint; zxkane/aws-skills' `aws-agentic-ai` reads «review» 69 instead of «dangerous» 100 — merged as PR #656 on Oleh's «Да, вливай», not in a build yet
 - 2026-11-27: Mac — **0.14.0 published** to everyone on Oleh's «Место освободил, пока смержи и выпусти релиз» (out of the Tuesday schedule, on his word): everything from betas 1–2 plus GitHub sources (#648), «Найти источники…» (#651), the «Скиллы» header chip (#650); notes and What's New updated in #654; the header chip and the card seen live in an isolated copy before; build 1555, signed and notarized, beta testers get it too; https://github.com/OlehDemishev/AIHubBar/releases/tag/v0.14.0
@@ -203,6 +204,7 @@
 - from the Herdr comparison (2026-11-27, Oleh: «внести функционал конкурента»; Herdr is where agents run, AI Hub Bar watches them — journal 2026-11-27), what Herdr has and the Mac app lacks, in the agent's suggested order, each to be agreed with Oleh before code: (1) sessions on other machines over SSH (a server, a VM) in the panel's list; (2) one agent starting and prompting another from a command (Herdr's `hc run` / `hc send`), on top of handover and review; (3) the phone: Herdr has a native iPhone / Android app with «needs you / done / working» — ours is the 1.1 item above; (4) the panel changed by files an agent can edit (Herdr's mods and layouts) — the furthest, maybe never. Dropped on Oleh's «убирай этот функционал» (2026-11-27): reading OSC 7501 and showing Herdr's own sessions — both work only for a client who has Herdr installed
 
 **Needs Oleh:**
+- Notch ears over a full-screen video (branch `fix/notch-ears-full-screen`): on the MacBook Air open a video in full screen (Safari or YouTube, and the player you saw it in) and say whether the ears are gone; and that they are still there over a zoomed window with the Dock hidden
 - 0.14.0-beta.2: update through Sparkle with «Бета-версии» on (beta 1 is replaced), switch on «Скиллы» in «Что показывать», use it a day; then say whether 0.14.0 goes out on Tuesday
 - Skills Catalog on the Mac: in a Debug build switch on «Скиллы» in Settings → «Что показывать» (it is not added to profiles by itself), open the panel and say what to change in the block and the section
 - Skills Catalog, desktop/ (paused): say what to change in the window (it runs on the Mac from `.claude/worktrees/skills-catalog/desktop/target/debug/AIHubBar`; menu bar icon → «Каталог скиллов…»); on the Windows laptop check the same and that Defender is quiet about the build; say whether stages 3–4 are wanted in full
@@ -251,6 +253,13 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-27 — Notch ears stay over a full-screen video (branch `fix/notch-ears-full-screen`)
+
+Done: Oleh: with a video in full screen the ears at the notch do not go away. `FullScreenDetector` took only a window as large as the whole screen for full screen; on a screen with a notch macOS puts a full-screen window under the notch and leaves a black strip beside it, so the ears stayed on that strip. Now on a notch screen a full-width window down to the bottom that starts within the notch's height (+8 pt) counts too, when the menu bar's own window (layer 24) is not on that screen — that is what tells it from a zoomed window with the Dock hidden. The island also looks once more a second after a space or app change, when the windows have settled.
+Checked: `scripts/check.sh` green (new test `fullScreenUnderTheNotchIsToldFromZoomedByTheMenuBar`: under the notch, as low as the menu bar, zoomed with the menu bar there, no notch, above the Dock, half width, too low, our own, a game over the whole screen). On the Mac mini the window list read live: the menu bar is `Window Server` layer 24 at the top, full width.
+Left: not seen live — the mini has no notch, and full screen at a real notch was never tried before either. That a full-screen desktop on the Air has no menu bar window in the list is taken from how macOS behaves, not measured there. With the menu bar set to hide always, a zoomed window with the Dock hidden also hides the ears.
+
 
 ## 2026-11-27 — Herdr steps that need Herdr dropped from Next (branch `chore/status-drop-herdr-only-steps`)
 
