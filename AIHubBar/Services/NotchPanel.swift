@@ -58,7 +58,10 @@ final class NotchPanel: NSPanel {
 }
 
 /// Whether a full-screen app fills a screen (SPEC-notch §5): a normal window of another app as large as the whole
-/// screen, menu bar included. Window bounds need no permission (only titles would).
+/// screen, menu bar included. On a screen with a notch macOS puts a full-screen window (a video too) under the notch
+/// and leaves a black strip beside it, so there the window may start below the top — as a zoomed window does with the
+/// Dock hidden; what tells them apart is the menu bar, which a full-screen desktop doesn't show. Window bounds need
+/// no permission (only titles would).
 enum FullScreenDetector {
     struct Window: Equatable, Sendable {
         var bounds: CGRect
@@ -66,16 +69,27 @@ enum FullScreenDetector {
         var pid: Int32
     }
 
+    /// The layer of the menu bar's own window (24).
+    static let menuBarLayer = Int(CGWindowLevelForKey(.mainMenuWindow))
+    /// How much lower than the notch's bottom a full-screen window may start: the menu bar there is a few points
+    /// taller than the safe-area inset.
+    static let notchSlack: CGFloat = 8
+
     /// `windows` in Quartz coordinates (origin top-left of the main display, y down); `screen` in AppKit's.
-    static func covers(_ windows: [Window], screen: CGRect, mainHeight: CGFloat, ownPID: Int32) -> Bool {
+    /// `notchHeight`: the strip at the top a full-screen window leaves free, 0 on a screen without a notch.
+    static func covers(_ windows: [Window], screen: CGRect, mainHeight: CGFloat, ownPID: Int32, notchHeight: CGFloat = 0) -> Bool {
         let target = CGRect(x: screen.minX, y: mainHeight - screen.maxY, width: screen.width, height: screen.height)
-        return windows.contains { window in
-            window.layer == 0 && window.pid != ownPID && abs(window.bounds.minX - target.minX) < 1 && abs(window.bounds.minY - target.minY) < 1
-                && abs(window.bounds.width - target.width) < 1 && abs(window.bounds.height - target.height) < 1
+        func spansWidth(_ window: Window) -> Bool {
+            abs(window.bounds.minX - target.minX) < 1 && abs(window.bounds.width - target.width) < 1
         }
+        let normal = windows.filter { $0.layer == 0 && $0.pid != ownPID && spansWidth($0) && abs($0.bounds.maxY - target.maxY) < 1 }
+        if normal.contains(where: { abs($0.bounds.minY - target.minY) < 1 }) { return true }
+        guard notchHeight > 0 else { return false }
+        let menuBar = windows.contains { $0.layer == menuBarLayer && spansWidth($0) && abs($0.bounds.minY - target.minY) < 1 }
+        return !menuBar && normal.contains { $0.bounds.minY - target.minY <= notchHeight + notchSlack }
     }
 
-    @MainActor static func isFullScreen(screen: CGRect) -> Bool {
+    @MainActor static func isFullScreen(screen: CGRect, notchHeight: CGFloat = 0) -> Bool {
         guard let info = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]],
               let mainHeight = NSScreen.screens.first?.frame.height else { return false }
         let windows = info.compactMap { entry -> Window? in
@@ -84,6 +98,6 @@ enum FullScreenDetector {
             return Window(bounds: CGRect(x: bounds["X"] ?? 0, y: bounds["Y"] ?? 0, width: bounds["Width"] ?? 0, height: bounds["Height"] ?? 0),
                           layer: layer, pid: pid)
         }
-        return covers(windows, screen: screen, mainHeight: mainHeight, ownPID: ProcessInfo.processInfo.processIdentifier)
+        return covers(windows, screen: screen, mainHeight: mainHeight, ownPID: ProcessInfo.processInfo.processIdentifier, notchHeight: notchHeight)
     }
 }
