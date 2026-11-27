@@ -542,6 +542,40 @@ final class SkillStore {
         await loadSources()
     }
 
+    // MARK: - Finding sources (SkillSourceFinder)
+
+    /// Repositories the awesome lists and the official marketplace name, merged; read once and kept for 12 hours.
+    private(set) var candidates: [SkillSourceFinder.Candidate] = []
+    private(set) var findingSources = false
+    /// Lists that could not be read last time, with the reason.
+    private(set) var unreadLists: [String: String] = [:]
+    @ObservationIgnored private var candidatesAt: Date?
+
+    func findSources(force: Bool = false) async {
+        guard !findingSources else { return }
+        if !force, let at = candidatesAt, Date.now.timeIntervalSince(at) < 12 * 3600 { return }
+        findingSources = true
+        defer { findingSources = false }
+        var groups: [[SkillSourceFinder.Candidate]] = []
+        var failed: [String: String] = [:]
+        for list in SkillSourceFinder.lists {
+            do { groups.append(try await SkillGitHub.candidates(of: list, fetch: fetch)) } catch {
+                failed[list.repo.slug] = (error as? SkillGitHub.Failure)?.reason ?? "network"
+            }
+        }
+        candidates = SkillSourceFinder.merge(groups)
+        unreadLists = failed
+        if groups.count > 0 { candidatesAt = .now }
+        AppLog.info("skills: \(candidates.count) candidate sources from \(groups.count) lists, \(failed.count) unread")
+    }
+
+    /// GitHub's repository search, only on a click: 10 searches a minute without a token.
+    func searchSources(topic: String, words: String) async -> Outcome<[SkillSourceFinder.Candidate]> {
+        do { return .success(try await SkillGitHub.search(topic: topic, words: words, fetch: fetch)) } catch {
+            return .failure(.init(code: (error as? SkillGitHub.Failure)?.reason ?? "network"))
+        }
+    }
+
     /// Deletes downloaded commits the catalog no longer points at.
     private func pruneCache() async {
         let kept: Set<String> = await worker.run { (try? $0.remoteCacheFolders()) ?? [] }

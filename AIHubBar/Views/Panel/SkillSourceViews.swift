@@ -21,6 +21,7 @@ struct SkillsSourcesSection: View {
     @Environment(SkillStore.self) private var skills
     @State private var newSource = ""
     @State private var failure: String?
+    @State private var finding = false
 
     var body: some View {
         Section {
@@ -41,6 +42,7 @@ struct SkillsSourcesSection: View {
                     .textFieldStyle(.roundedBorder)
                     .onSubmit { add(newSource) }
                 Button("Добавить") { add(newSource) }.disabled(newSource.trimmingCharacters(in: .whitespaces).isEmpty)
+                Button("Найти источники…") { finding = true }
                 if !skills.sources.isEmpty {
                     Button("Проверить все") { Task { await skills.checkSources() } }.disabled(!skills.checking.isEmpty)
                 }
@@ -52,6 +54,7 @@ struct SkillsSourcesSection: View {
             Footnote(text: String(localized: "Публичные репозитории GitHub со скиллами. Скиллы скачиваются в папку приложения на конкретном коммите и проверяются тем же сканером — ничего из них не запускается, в папки агентов они попадают, только если вы их установите. Источники проверяются дважды в день; без входа GitHub разрешает 60 запросов в час, одна проверка — три запроса."))
         }
         .task { await skills.loadSources() }
+        .sheet(isPresented: $finding) { SkillsSourceFinderSheet() }
     }
 
     private func row(_ source: SkillCatalog.RemoteSource) -> some View {
@@ -143,5 +146,157 @@ struct SkillOriginLine: View {
         let path = (row.repoPath ?? "").split(separator: "/").map { String($0).addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? String($0) }.joined(separator: "/")
         let sha = (row.commitSHA ?? "").filter(\.isHexDigit)
         return URL(string: sha.isEmpty ? repo.url : "\(repo.url)/tree/\(sha)/\(path)") ?? URL(string: repo.url)!
+    }
+}
+
+/// «Найти источники…»: repositories the awesome lists and Anthropic's plugin marketplace name, and GitHub's search by
+/// topic. Each is only a suggestion until it is added; then it is checked like any source.
+struct SkillsSourceFinderSheet: View {
+    @Environment(SkillStore.self) private var skills
+    @Environment(\.dismiss) private var dismiss
+    @State private var mode = Mode.lists
+    @State private var filter = ""
+    @State private var topic = SkillSourceFinder.topics[0]
+    @State private var words = ""
+    @State private var results: [SkillSourceFinder.Candidate]?
+    @State private var searching = false
+    @State private var failure: String?
+
+    enum Mode: Hashable { case lists, search }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Где искать источники").font(.headline)
+            Picker("", selection: $mode) {
+                Text("Из списков").tag(Mode.lists)
+                Text("Поиск на GitHub").tag(Mode.search)
+            }
+            .pickerStyle(.segmented)
+            .labelsHidden()
+            switch mode {
+            case .lists: lists
+            case .search: search
+            }
+            Text("Это подсказки из чужих списков и поиска GitHub, а не проверка: ничего не скачивается, пока вы не добавите источник. После добавления его скиллы скачиваются в папку приложения и проверяются сканером, как любой источник.")
+                .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+            HStack {
+                Spacer()
+                Button("Готово") { dismiss() }.keyboardShortcut(.defaultAction)
+            }
+        }
+        .padding(16)
+        .frame(width: 640, height: 600)
+        .task {
+            await skills.loadSources()
+            await skills.findSources()
+        }
+    }
+
+    private var added: Set<String> { Set(skills.sources.map { $0.repo.slug.lowercased() }) }
+
+    @ViewBuilder private var lists: some View {
+        TextField("", text: $filter, prompt: Text("Искать в списках"))
+            .textFieldStyle(.roundedBorder)
+        let shown = Self.matching(skills.candidates, filter)
+        if skills.findingSources && skills.candidates.isEmpty {
+            ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+            rows(shown)
+        }
+        HStack(spacing: 6) {
+            Text(verbatim: String(localized: "Репозиториев: \(shown.count) · списки: \(SkillSourceFinder.lists.map(\.repo.slug).joined(separator: ", "))"))
+                .lineLimit(3)
+            Spacer()
+            if skills.findingSources { ProgressView().controlSize(.small) }
+            Button("Обновить") { Task { await skills.findSources(force: true) } }.controlSize(.small).disabled(skills.findingSources)
+        }
+        .font(.caption).foregroundStyle(.secondary)
+        ForEach(skills.unreadLists.sorted(by: { $0.key < $1.key }), id: \.key) { slug, reason in
+            Text(verbatim: "\(slug): \(SkillSourceText.failure(reason))").font(.caption).foregroundStyle(.orange)
+        }
+    }
+
+    @ViewBuilder private var search: some View {
+        HStack {
+            Picker("", selection: $topic) {
+                ForEach(SkillSourceFinder.topics, id: \.self) { Text(verbatim: "topic:\($0)").tag($0) }
+            }
+            .labelsHidden()
+            .fixedSize()
+            TextField("", text: $words, prompt: Text("Слова, необязательно"))
+                .textFieldStyle(.roundedBorder)
+                .onSubmit(runSearch)
+            Button("Искать", action: runSearch).disabled(searching)
+        }
+        if searching {
+            ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else if let results {
+            if results.isEmpty { Text("Ничего не нашлось.").foregroundStyle(.secondary).frame(maxWidth: .infinity, maxHeight: .infinity) } else { rows(results) }
+        } else {
+            Text("Самые популярные репозитории с этой темой. Без входа GitHub разрешает 10 поисков в минуту.")
+                .foregroundStyle(.secondary).frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        if let failure { Text(verbatim: failure).font(.caption).foregroundStyle(.orange) }
+    }
+
+    private func runSearch() {
+        searching = true
+        failure = nil
+        Task {
+            switch await skills.searchSources(topic: topic, words: words) {
+            case .success(let found): results = found
+            case .failure(let refusal): failure = SkillSourceText.failure(refusal.code)
+            }
+            searching = false
+        }
+    }
+
+    private func rows(_ items: [SkillSourceFinder.Candidate]) -> some View {
+        List(items) { candidate in row(candidate) }
+            .listStyle(.inset)
+            .frame(maxHeight: .infinity)
+    }
+
+    private func row(_ candidate: SkillSourceFinder.Candidate) -> some View {
+        HStack(alignment: .top, spacing: 8) {
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 5) {
+                    if candidate.official { Image(systemName: "checkmark.seal.fill").foregroundStyle(Color.accentColor).help(String(localized: "Официальный: репозиторий разработчика агента")) }
+                    Text(verbatim: candidate.repo.slug).fontWeight(.medium)
+                    // One skill's name beside a repository of many would read as the repository's name.
+                    if let title = candidate.title, candidate.paths.count <= 1 { Text(verbatim: title).foregroundStyle(.secondary).lineLimit(1) }
+                    if let stars = candidate.stars { Text(verbatim: "★ \(stars.formatted())").foregroundStyle(.secondary) }
+                }
+                if let summary = candidate.summary { Text(verbatim: summary).font(.caption).foregroundStyle(.secondary).lineLimit(2) }
+                if !candidate.lists.isEmpty {
+                    Text(verbatim: Self.where(candidate)).font(.caption2).foregroundStyle(.tertiary).lineLimit(1).truncationMode(.middle)
+                }
+            }
+            Spacer(minLength: 6)
+            Button { NSWorkspace.shared.open(URL(string: candidate.repo.url)!) } label: { Image(systemName: "arrow.up.right.square") }
+                .buttonStyle(.borderless)
+                .help(String(localized: "Открыть на GitHub"))
+            if added.contains(candidate.id) {
+                Label("Добавлен", systemImage: "checkmark").labelStyle(.titleAndIcon).foregroundStyle(.secondary).font(.caption)
+            } else {
+                Button("Добавить") { Task { _ = await skills.addSource(candidate.repo.slug) } }.controlSize(.small)
+            }
+        }
+        .padding(.vertical, 2)
+    }
+
+    static func `where`(_ candidate: SkillSourceFinder.Candidate) -> String {
+        var text = String(localized: "В списках: \(candidate.lists.count)") + " — " + candidate.lists.joined(separator: ", ")
+        if !candidate.paths.isEmpty { text += " · " + candidate.paths.prefix(3).joined(separator: ", ") + (candidate.paths.count > 3 ? "…" : "") }
+        return text
+    }
+
+    static func matching(_ items: [SkillSourceFinder.Candidate], _ filter: String) -> [SkillSourceFinder.Candidate] {
+        let words = filter.lowercased().split(separator: " ").map(String.init)
+        guard !words.isEmpty else { return items }
+        return items.filter { candidate in
+            let text = [candidate.repo.slug, candidate.title ?? "", candidate.summary ?? "", candidate.paths.joined(separator: " ")].joined(separator: " ").lowercased()
+            return words.allSatisfy(text.contains)
+        }
     }
 }

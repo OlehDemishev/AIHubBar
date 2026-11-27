@@ -66,6 +66,27 @@ Optional, on request, one skill at a time. The skill goes to Claude as untrusted
 for that one request; the answer must be one JSON object of a fixed shape, else it counts as «Review». A model's
 verdict can only make the static one **stricter**, never milder. Reviews are remembered by content hash.
 
+## 4a. Where to find sources (Mac, 2026-11-27)
+
+«Найти источники…» in Settings → Скиллы → «Источники» suggests GitHub repositories; it never adds, downloads or trusts
+one by itself (`AIHubBar/Skills/SkillSourceFinder.swift`). Only public, documented ways without a token:
+
+- **Awesome lists**, read as Markdown from raw.githubusercontent.com at `HEAD` (not counted against the API's 60 an
+  hour): ComposioHQ/awesome-claude-skills, VoltAgent/awesome-agent-skills, travisvn/awesome-claude-skills,
+  BehiSecc/awesome-claude-skills, heilcheng/awesome-agent-skills. Every `[text](https://github.com/<owner>/<repo>…)` in a
+  list item or a table row is a candidate, the text after it its description; GitHub's own pages and the list itself
+  are not.
+- **The official plugin marketplace**, `anthropics/claude-plugins-official/.claude-plugin/marketplace.json`
+  (code.claude.com/docs/en/plugins/marketplace-reference): `github`, `url` (github.com only), `git-subdir` and `./path`
+  sources give repositories; `command`, `npm` and the rest are ignored.
+- **GitHub's repository search** (docs.github.com/en/rest/search) for `topic:agent-skills` or `topic:claude-skills`, most
+  stars first, no forks or archived ones — only on a click (10 searches a minute without a token).
+
+Lists are read once in 12 hours; candidates are merged by repository, the most-named first. Everything a list says is
+untrusted text: links, HTML, control and invisible characters are removed, descriptions are cut to 200 characters and
+shown verbatim. Left out on purpose: skills.sh (its API needs a Vercel token), skillsmp.com (its docs refuse automated
+reading), GitHub code search (needs a token).
+
 ## 5. Versions and the shared contract
 
 - `SkillReport.scannerVersion` (2) rises with every change of rules or scoring; results of an older version are made
