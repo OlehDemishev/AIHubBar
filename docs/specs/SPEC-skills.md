@@ -121,6 +121,10 @@ Both go the AI review's way (§4): Claude Code with no tools, settings or MCP, o
   person's own words; the model then picks at most 10 of the 40 best matches, with one line on why. It never sees the
   whole catalog, and a pick is a number from the list it was given: it can't name or invent anything else. It is told
   that safety is not its to judge; the picks show the static verdict as before and the lines are marked as the model's.
+  The words are also looked for in the skills' instructions (2026-11-28): each skill's SKILL.md without its header, at
+  most 20,000 characters, is kept in `skill_texts` (FTS5), read before a search from the catalog's readable folders
+  (512 KB at most, no links) and read again only when the skill's content hash changed. A skill found by its name or
+  description counts once. The model sees the first 300 characters of each candidate's instructions as data.
 - **«Скиллы» in a project's card** (when the Skills module is on): the same two requests for a project instead of a
   question. What the project is made of is read on this Mac (`SkillProjectStack`): up to five languages by file count
   (four levels deep, at most 20,000 entries, no hidden folders, dependencies or build output), tools seen from files
@@ -137,6 +141,12 @@ Both go the AI review's way (§4): Claude Code with no tools, settings or MCP, o
   asked once. «Оригиналы» shows the authors' texts; «Переведено AI» marks the rest.
   «Переводить описания сразу» (Settings → Скиллы → «Помощь модели», off by default) sends them as soon as a list
   shows them, once per set of texts; after a failure only the button tries again.
+- **«Перевести инструкции»** in a skill's card (2026-11-28), under the files when SKILL.md reads as another language;
+  only on a click, never automatically. The file's text (as the preview shows it, invisible characters spelled out),
+  at most 12,000 characters, goes to the model as one document between markers; it keeps Markdown, code, commands,
+  paths, names and the header's keys. The answer keeps its line breaks, loses control and invisible characters, and is
+  dropped when longer than three times what was sent. Remembered in `llm_translations` like descriptions; shown as
+  plain text in place of the preview, «Оригиналы» brings the original back, and the findings stay marked on the original.
 - **Untrusted both ways.** The question and every description go as one line each between markers carrying a word made
   for that request, with invisible characters spelled out, and the model is told that orders inside are data. What
   comes back is read strictly (one JSON object; unreadable is an error): picks only by number, each once; translations

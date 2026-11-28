@@ -178,3 +178,86 @@ enum SkillAskText {
         }
     }
 }
+
+/// «Перевести инструкции»: a skill's SKILL.md into the interface language by the person's model, only on a click.
+struct SkillDocumentTranslateBar: View {
+    @Environment(SkillStore.self) private var skills
+    let text: String
+    @State private var available: String?
+    @State private var failure: String?
+
+    var body: some View {
+        let sent = SkillAsk.documentPart(text)
+        let hasTranslation = skills.translated[sent] != nil
+        let busy = skills.translating.contains(sent)
+        Group {
+            if hasTranslation || busy || failure != nil || SkillAsk.needsTranslation(String(text.prefix(2000)), to: SkillReviewer.languageCode) {
+                VStack(alignment: .leading, spacing: 3) {
+                    HStack(spacing: 8) {
+                        if busy {
+                            ProgressView().controlSize(.small)
+                            Text("Перевожу инструкции…").scaledFont(.caption2).foregroundStyle(.secondary)
+                        } else if !hasTranslation {
+                            Button {
+                                Task { await translate() }
+                            } label: {
+                                Label("Перевести инструкции", systemImage: "character.bubble")
+                            }
+                            .buttonStyle(.borderless)
+                            .disabled(available == nil)
+                            .help(available == nil
+                                  ? String(localized: "Нужен Claude Code на этом Mac или ключ Anthropic в Настройках → «Сервисы AI».")
+                                  : String(localized: "Текст SKILL.md уйдёт в вашу модель: Claude Code по подписке или Anthropic API с вашим ключом. Перевод запоминается."))
+                        } else {
+                            Toggle(isOn: Binding(get: { skills.showsOriginals }, set: { skills.showsOriginals = $0 })) { Text("Оригиналы") }
+                                .toggleStyle(.checkbox)
+                                .help(String(localized: "Показывать описания так, как их написали авторы"))
+                            if !skills.showsOriginals { Text("Инструкции переведены AI").scaledFont(.caption2).foregroundStyle(.tertiary) }
+                        }
+                        Spacer(minLength: 0)
+                    }
+                    .scaledFont(.caption)
+                    if let failure { Text(verbatim: failure).scaledFont(.caption2).foregroundStyle(.orange).fixedSize(horizontal: false, vertical: true) }
+                }
+            }
+        }
+        .task(id: sent) {
+            failure = nil
+            await skills.loadTranslations([sent])
+            available = await SkillReviewer.available()
+        }
+    }
+
+    private func translate() async {
+        failure = nil
+        if case .failure(let refusal) = await skills.translateDocument(text) { failure = SkillAskText.failure(refusal) }
+    }
+}
+
+/// The translated SKILL.md, as plain text: the model's words, so the findings' lines are shown on the original only.
+struct SkillTranslatedDocumentView: View {
+    let text: String
+    let isPart: Bool
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("SKILL.md — перевод AI")
+                .scaledFont(.caption, weight: .semibold)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 3)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.primary.opacity(0.08))
+            ScrollView {
+                Text(verbatim: text)
+                    .scaledFont(.caption2)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(6)
+                    .textSelection(.enabled)
+            }
+            .frame(maxHeight: 260)
+            Text(isPart ? "Переведено только начало файла. Находки проверки отмечены в оригинале." : "Находки проверки отмечены в оригинале.")
+                .scaledFont(.caption2).foregroundStyle(.secondary).padding(4)
+        }
+        .background(RoundedRectangle(cornerRadius: 6).strokeBorder(Color.primary.opacity(0.1)))
+    }
+}
