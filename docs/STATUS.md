@@ -5,8 +5,7 @@
 **Updated:** 2026-11-28
 
 **Now:**
-- Skills: SKILL.md translation in the card and the search over the instructions (branch `feat/skills-translate-body`, PR open)
-- merged, not in a build: «Передать Codex» on the limit pause notification (#688); Skills gaps — account skills out of «unused», built-in Claude Code skills labelled, «Для проекта…» in the Skills section (#690)
+- merged, not in a build: «Передать Codex» on the limit pause notification (#688); Skills gaps — account skills out of «unused», built-in Claude Code skills labelled, «Для проекта…» in the Skills section (#690); Skills — «Перевести инструкции» in a skill's card and the AI search over the instructions (#692)
 
 **Next:**
 - time per task in «Экономика AI» — waits for Oleh's choice of the speed source
