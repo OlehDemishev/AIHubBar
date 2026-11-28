@@ -545,6 +545,30 @@ final class SkillStore {
         return saved
     }
 
+    /// Asks the model to translate a skill's SKILL.md into the interface language and remembers it by the text sent.
+    /// Only on the person's click: a whole file is a bigger request than a description.
+    func translateDocument(_ text: String) async -> Outcome<Void> {
+        let sent = SkillAsk.documentPart(text)
+        guard translated[sent] == nil, !translating.contains(sent) else { return .success(()) }
+        guard let who = await SkillReviewer.who() else { return .failure(.init(code: "no-reviewer")) }
+        translating.insert(sent)
+        defer { translating.remove(sent) }
+        let language = SkillReviewer.languageName
+        let answer = await SkillReviewer.ask(SkillAsk.documentPrompt(text: sent, nonce: SkillReview.nonce(), language: language),
+                                             who: who, model: SkillAsk.model, scratch: askScratch)
+        guard case .success(let reply) = answer else {
+            if case .failure(let refusal) = answer { AppLog.error("skills: SKILL.md translation failed: \(refusal.code)"); return .failure(refusal) }
+            return .failure(.missing)
+        }
+        spend(reply, who)
+        guard let found = SkillAsk.document(from: reply.text, original: sent) else { return .failure(.init(code: "unreadable")) }
+        AppLog.info("skills: translated a SKILL.md of \(sent.count) characters via \(who.via)")
+        let model = reply.model
+        let saved: Outcome<Void> = await act(changes: false) { catalog, _ in try catalog.saveTranslations([sent: found], language: language, model: model) }
+        translated[sent] = found
+        return saved
+    }
+
     /// The text to show: its translation when there is one and the person hasn't asked for originals.
     func shown(_ text: String) -> String {
         showsOriginals ? text : translated[text] ?? text

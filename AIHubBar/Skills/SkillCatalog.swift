@@ -127,6 +127,8 @@ final class SkillCatalog {
         );
         DELETE FROM log_offsets;
         """,
+        // The text of the instructions, for the search in plain words (SkillAsk).
+        instructionsMigration,
     ]
 
     init(path: String) throws {

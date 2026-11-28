@@ -1165,7 +1165,15 @@ struct SkillCardView: View {
             SkillReportBox(card: card)
             findings
             files
-            if let preview { SkillPreviewView(preview: preview, focusLine: focusLine) }
+            if let preview {
+                let document = preview.path == "SKILL.md" ? preview.lines.joined(separator: "\n") : ""
+                if !document.isEmpty { SkillDocumentTranslateBar(text: document) }
+                if !document.isEmpty, !skills.showsOriginals, let translation = skills.translated[SkillAsk.documentPart(document)] {
+                    SkillTranslatedDocumentView(text: translation, isPart: document.count > SkillAsk.documentChars)
+                } else {
+                    SkillPreviewView(preview: preview, focusLine: focusLine)
+                }
+            }
         }
         .task(id: card.row.id) {
             note = card.row.note

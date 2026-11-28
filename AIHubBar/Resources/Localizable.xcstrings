@@ -201308,6 +201308,538 @@
           }
         }
       }
+    },
+    "Перевести инструкции": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ترجمة التعليمات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anleitung übersetzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Translate instructions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traducir instrucciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traduire les instructions"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terjemahkan instruksi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traduci istruzioni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "手順を翻訳"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지침 번역"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przetłumacz instrukcje"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traduzir instruções"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перекласти інструкції"
+          }
+        }
+      }
+    },
+    "Перевожу инструкции…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ ترجمة التعليمات…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anleitung wird übersetzt…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Translating instructions…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traduciendo instrucciones…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traduction des instructions…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menerjemahkan instruksi…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traduzione delle istruzioni…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "手順を翻訳中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지침 번역 중…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tłumaczę instrukcje…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traduzindo instruções…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перекладаю інструкції…"
+          }
+        }
+      }
+    },
+    "Инструкции переведены AI": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التعليمات مترجمة بالذكاء الاصطناعي"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anleitung von KI übersetzt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instructions translated by AI"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instrucciones traducidas por IA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instructions traduites par l'IA"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instruksi diterjemahkan AI"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Istruzioni tradotte dall'IA"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "手順は AI が翻訳"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI가 번역한 지침"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instrukcje przetłumaczone przez AI"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instruções traduzidas por IA"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Інструкції перекладено AI"
+          }
+        }
+      }
+    },
+    "SKILL.md — перевод AI": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md — ترجمة بالذكاء الاصطناعي"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md – KI-Übersetzung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md — AI translation"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md — traducción de IA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md — traduction IA"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md — terjemahan AI"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md — traduzione IA"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md — AI 翻訳"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md — AI 번역"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md — tłumaczenie AI"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md — tradução por IA"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md — переклад AI"
+          }
+        }
+      }
+    },
+    "Находки проверки отмечены в оригинале.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نتائج الفحص معلَّمة في النص الأصلي."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Funde der Prüfung sind im Original markiert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The check's findings are marked in the original."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los hallazgos de la revisión están marcados en el original."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les constats de la vérification sont marqués dans l'original."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temuan pemeriksaan ditandai di teks asli."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I risultati del controllo sono segnati nell'originale."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "チェックの指摘は原文に示されています。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "검사 결과는 원문에 표시되어 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustalenia kontroli są zaznaczone w oryginale."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os achados da verificação estão marcados no original."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Знахідки перевірки позначено в оригіналі."
+          }
+        }
+      }
+    },
+    "Переведено только начало файла. Находки проверки отмечены в оригинале.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُرجمت بداية الملف فقط. نتائج الفحص معلَّمة في النص الأصلي."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur der Anfang der Datei ist übersetzt. Die Funde der Prüfung sind im Original markiert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only the beginning of the file is translated. The check's findings are marked in the original."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo se tradujo el principio del archivo. Los hallazgos de la revisión están marcados en el original."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seul le début du fichier est traduit. Les constats de la vérification sont marqués dans l'original."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya awal file yang diterjemahkan. Temuan pemeriksaan ditandai di teks asli."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "È tradotto solo l'inizio del file. I risultati del controllo sono segnati nell'originale."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "翻訳したのはファイルの冒頭だけです。チェックの指摘は原文に示されています。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일의 앞부분만 번역했습니다. 검사 결과는 원문에 표시되어 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przetłumaczono tylko początek pliku. Ustalenia kontroli są zaznaczone w oryginale."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Só o início do arquivo foi traduzido. Os achados da verificação estão marcados no original."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перекладено лише початок файлу. Знахідки перевірки позначено в оригіналі."
+          }
+        }
+      }
+    },
+    "Текст SKILL.md уйдёт в вашу модель: Claude Code по подписке или Anthropic API с вашим ключом. Перевод запоминается.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سيُرسل نص SKILL.md إلى نموذجك: Claude Code باشتراكك أو Anthropic API بمفتاحك. تُحفظ الترجمة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Text von SKILL.md geht an Ihr Modell: Claude Code mit Ihrem Abo oder die Anthropic API mit Ihrem Schlüssel. Die Übersetzung wird gespeichert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The text of SKILL.md goes to your model: Claude Code on your subscription or the Anthropic API with your key. The translation is remembered."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El texto de SKILL.md irá a tu modelo: Claude Code con tu suscripción o la API de Anthropic con tu clave. La traducción se guarda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le texte de SKILL.md partira vers votre modèle : Claude Code avec votre abonnement ou l'API Anthropic avec votre clé. La traduction est conservée."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teks SKILL.md dikirim ke model Anda: Claude Code dengan langganan Anda atau Anthropic API dengan kunci Anda. Terjemahan disimpan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il testo di SKILL.md andrà al tuo modello: Claude Code con il tuo abbonamento o l'API Anthropic con la tua chiave. La traduzione viene ricordata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md の本文があなたのモデルに送られます: サブスクリプションの Claude Code、またはあなたのキーでの Anthropic API。翻訳は保存されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SKILL.md 텍스트가 모델로 전송됩니다: 구독의 Claude Code 또는 내 키를 쓰는 Anthropic API. 번역은 저장됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tekst SKILL.md trafi do Twojego modelu: Claude Code w ramach subskrypcji lub Anthropic API z Twoim kluczem. Tłumaczenie zostanie zapamiętane."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O texto do SKILL.md vai para o seu modelo: Claude Code pela assinatura ou a API da Anthropic com sua chave. A tradução fica salva."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Текст SKILL.md піде у вашу модель: Claude Code за підпискою або Anthropic API з вашим ключем. Переклад запам'ятовується."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
