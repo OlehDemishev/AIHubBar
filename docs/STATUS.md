@@ -2,10 +2,11 @@
 
 <!-- summary:start -->
 **Stage:** Mac 0.15.1 published 2026-11-27 (build 1631; 0.15.0 the same day — Skills from plain words, for a project, open sources, translations, GitHub sign-in; AI economics, Stop All, a task's cost, sessions over SSH (beta), the MCP server). Releases once a week on Tuesday, on Oleh's word. Windows paused at desktop 0.1.14.
-**Updated:** 2026-11-27
+**Updated:** 2026-11-28
 
 **Now:**
-- nothing in progress; merged, not in a build: «Передать Codex» on the limit pause notification (#688)
+- Skills gaps (branch `fix/skills-gaps`, PR #690): account skills out of «unused», built-in Claude Code skills labelled, «Для проекта…» in the Skills section
+- merged, not in a build: «Передать Codex» on the limit pause notification (#688)
 
 **Next:**
 - time per task in «Экономика AI» — waits for Oleh's choice of the speed source
@@ -24,6 +25,12 @@
 - Windows: SignPath application, Telegram with a new bot, a copy of the updater key in the password manager
 - older open checks (0.7–0.14, Windows details) are listed in the journal entry «STATUS header tidied» below
 <!-- summary:end -->
+
+## 2026-11-28 — Skills: three gaps from the real catalog (branch `fix/skills-gaps`)
+
+Done: from a read-only look at Oleh's catalog (39 entries: 25 his, 13 synced from the Claude account, 1 in a project). (1) «Не использовались 30 дней» (the panel's count and the Order list) leaves out copies synced from the Claude account — the catalog can't switch them off, the sync brings them back; 7 of Oleh's 20 were such. (2) Skills built into Claude Code (`dataviz`, `claude-api`) showed in «Используются за 7 дней» with no verdict; the usage reader now also notes the `"path":"bundled:<name>"` Claude Code writes when it hands a built-in skill to the model, and the row says «встроен в Claude Code». Catalog layout 12: table `skill_builtins`, and `log_offsets` emptied once so the logs are read again (uses already counted are not counted twice — UNIQUE (log, at, name)). (3) «Для проекта…» menu under the Skills search: the folders of the projects folder plus «Другая папка…»; it runs the same picks as the project row's «Скиллы», so they work with the Projects block off (it is off in Oleh's profile). Strings in 13 languages.
+Checked: `scripts/check.sh` green (strings, relay, Mac tests, strings against the code); new expectations in `SkillCatalogTests.usesAreReadFromTheAgentsLogsOnce` (built-in found, an installed skill never «built in»), `SkillHousekeepingTests.conflictsCopiesAndUnusedSkills` (a synced skill neither listed nor counted), layout 12. Live in an isolated copy (test home): migration 11 → 12 ran, the `dataviz` row reads «встроен в Claude Code», the synced `xlsx` is not in the unused list, the «Для проекта…» menu lists the test projects and «Другая папка…».
+Left: choosing a folder from the menu was not pressed live — the open menu can't be driven through Accessibility; it sets the same `pendingProject` the project row's button does, which was checked live before.
 
 ## 2026-11-27 — STATUS header tidied (branch `chore/status-header-tidy`)
 
