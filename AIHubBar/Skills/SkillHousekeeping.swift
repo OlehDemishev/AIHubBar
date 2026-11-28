@@ -94,11 +94,13 @@ extension SkillCatalog {
     }
 
     /// Installed, switched-on skills (not plugins) nobody used since a date, with the places they could be switched off.
+    /// Copies synced from the Claude account are left out: the catalog can't switch them off, the next sync brings them back.
     func unusedSkills(since: Date) throws -> [Group] {
         let since = ISO8601DateFormatter().string(from: since)
         let used = Set(try db.query("SELECT DISTINCT name FROM skill_uses WHERE at >= ?1", .text(since)) { $0.text(0) })
-        return try groups().filter { $0.kind == "skill" && !used.contains($0.name) && $0.copies.contains(where: \.isEnabled) }
-            .map { Group(kind: $0.kind, name: $0.name, copies: $0.copies.filter(\.isEnabled)) }
+        return try groups().filter { $0.kind == "skill" && !used.contains($0.name) }
+            .map { Group(kind: $0.kind, name: $0.name, copies: $0.copies.filter { $0.isEnabled && $0.scope != "synced" }) }
+            .filter { !$0.copies.isEmpty }
     }
 
     // MARK: - Sets

@@ -35,6 +35,8 @@ struct SkillHousekeepingTests {
         home.skill(".codex/skills", "same")
         home.skill(".agents/skills", "linked")
         try FileManager.default.createSymbolicLink(atPath: home.url.appending(path: ".claude/skills/linked").path, withDestinationPath: home.url.appending(path: ".agents/skills/linked").path)
+        // «pdf»: synced from the Claude account — the catalog can't switch it off, so it is never «unused».
+        home.skill(".claude/skills/synced/acc_1", "pdf")
         let catalog = try SkillCatalog(path: ":memory:")
         try catalog.refreshInstalled(home.roots)
         #expect(names(try catalog.conflicts()) == ["notes"])
@@ -52,7 +54,8 @@ struct SkillHousekeepingTests {
         home.write(".claude/projects/p/a.jsonl", #"{"type":"assistant","timestamp":"\#(now)","message":{"content":[{"type":"tool_use","name":"Skill","input":{"skill":"same"}}]}}"# + "\n")
         try catalog.readUsage(home.roots, since: .now.addingTimeInterval(-86400))
         let unused = names(try catalog.unusedSkills(since: .now.addingTimeInterval(-30 * 86400)))
-        #expect(unused == ["deploy", "linked", "notes"], "«same» was used; «notes» stays for its project copy")
+        #expect(unused == ["deploy", "linked", "notes"], "«same» was used; «notes» stays for its project copy; «pdf» is the account's")
+        #expect(try catalog.unused(since: .now.addingTimeInterval(-30 * 86400)) == 4, "the panel counts each version (deploy twice, linked, notes), not the account's pdf")
     }
 
     @Test func setsShowAndSwitchTheirSkillsTogether() throws {
