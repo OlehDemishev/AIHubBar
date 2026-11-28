@@ -5,8 +5,7 @@
 **Updated:** 2026-11-28
 
 **Now:**
-- Skills gaps (branch `fix/skills-gaps`, PR #690): account skills out of «unused», built-in Claude Code skills labelled, «Для проекта…» in the Skills section
-- merged, not in a build: «Передать Codex» on the limit pause notification (#688)
+- nothing in progress; merged, not in a build: «Передать Codex» on the limit pause notification (#688); Skills gaps — account skills out of «unused», built-in Claude Code skills labelled, «Для проекта…» in the Skills section (#690)
 
 **Next:**
 - time per task in «Экономика AI» — waits for Oleh's choice of the speed source
