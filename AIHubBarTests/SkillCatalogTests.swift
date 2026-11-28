@@ -175,6 +175,12 @@ struct SkillCatalogTests {
         #expect(used.map(\.name) == ["notes"] && used[0].count == 3 && Set(used[0].agents) == [.claude, .codex] && used[0].verdict == .safe)
         #expect(try catalog.uses(of: "counter", since: since).count == 1, "the plugin prefix is dropped; the Codex skills list is not a use")
         #expect(try catalog.unused(since: week) == 3, "counter (used 20 days ago), syncer and deploy; sleeper is switched off")
+        // A skill built into Claude Code: used, named `bundled:` when handed to the model, no folder of its own.
+        home.write(".claude/projects/p/two.jsonl", [call("dataviz", now), #"{"type":"attachment","timestamp":"\#(now)","attachment":{"type":"invoked_skills","skills":[{"name":"dataviz","path":"bundled:dataviz","content":"…"},{"name":"notes","path":"userSettings:notes"}]}}"#].joined(separator: "\n") + "\n")
+        #expect(try catalog.readUsage(home.roots, since: since) == 1)
+        let shown = try catalog.mostUsed(since: week, limit: 5)
+        #expect(shown.first { $0.name == "dataviz" }?.isBuiltIn == true && shown.first { $0.name == "dataviz" }?.skillID == nil)
+        #expect(shown.first { $0.name == "notes" }?.isBuiltIn == false, "an installed skill is never «built in»")
         // A log that got a new line is read from where it stopped.
         let path = home.url.appending(path: ".claude/projects/p/one.jsonl")
         let handle = try FileHandle(forWritingTo: path)
@@ -194,7 +200,7 @@ struct SkillCatalogTests {
         // As a file of layout 1 had it: nothing known about what the skills can do.
         try SkillCatalog(path: file).db.execute("UPDATE scan_results SET capabilities = NULL")
         let again = try SkillCatalog(path: file)
-        #expect(again.db.userVersion == 11)
+        #expect(again.db.userVersion == 12)
         #expect(try names(again, { var f = SkillCatalog.Filters(); f.can = [.network]; return f }()) == ["fetcher"])
     }
 

@@ -117,6 +117,16 @@ final class SkillCatalog {
         translationsMigration,
         // What the person's model picked for a project (SkillAsk).
         projectPicksMigration,
+        // Skills built into an agent (Claude Code's `bundled:` skills): used, but with no folder to check. The logs are
+        // read once more from the start to find them; a use already counted is not counted again.
+        """
+        CREATE TABLE skill_builtins (
+            name   TEXT NOT NULL,
+            agent  TEXT NOT NULL,
+            PRIMARY KEY (name, agent)
+        );
+        DELETE FROM log_offsets;
+        """,
     ]
 
     init(path: String) throws {
@@ -875,6 +885,8 @@ final class SkillCatalog {
         /// The installed skill of that name, when there is one.
         var skillID: Int?
         var verdict: SkillVerdict?
+        /// Built into Claude Code: no folder of its own, nothing to check.
+        var isBuiltIn = false
         var id: String { name }
     }
 
@@ -889,15 +901,18 @@ final class SkillCatalog {
                 SELECT s.id, r.effective FROM skills s JOIN scan_results r ON r.skill_id = s.id
                 WHERE s.name = ?1 AND EXISTS (SELECT 1 FROM installations i WHERE i.skill_id = s.id) ORDER BY s.id LIMIT 1
                 """, .text(name)) { ($0.int(0), SkillVerdict(rawValue: $0.text(1))) }
-            return Used(name: name, count: count, agents: agents.split(separator: ",").compactMap { SkillAgent(rawValue: String($0)) }, skillID: skill?.0, verdict: skill?.1 ?? nil)
+            let builtIn = try skill == nil && db.first("SELECT 1 FROM skill_builtins WHERE name = ?1", .text(name)) { $0.int(0) } != nil
+            return Used(name: name, count: count, agents: agents.split(separator: ",").compactMap { SkillAgent(rawValue: String($0)) }, skillID: skill?.0, verdict: skill?.1 ?? nil,
+                        isBuiltIn: builtIn)
         }
     }
 
-    /// Installed skills (not plugins) nobody used since a date.
+    /// Installed skills (not plugins) nobody used since a date. Skills synced from the Claude account are left out:
+    /// the catalog can't switch them off, the next sync brings them back.
     func unused(since: Date) throws -> Int {
         try db.first("""
             SELECT count(*) FROM skills s WHERE s.kind = 'skill' AND \(Self.onePerContent)
-            AND EXISTS (SELECT 1 FROM installations i JOIN skills c ON c.id = i.skill_id WHERE c.content_hash = s.content_hash AND i.enabled = 1)
+            AND EXISTS (SELECT 1 FROM installations i JOIN skills c ON c.id = i.skill_id WHERE c.content_hash = s.content_hash AND i.enabled = 1 AND i.scope <> 'synced')
             AND NOT EXISTS (SELECT 1 FROM skill_uses u WHERE u.name = s.name AND u.at >= ?1)
             """, .text(ISO8601DateFormatter().string(from: since))) { $0.int(0) } ?? 0
     }
@@ -921,10 +936,13 @@ final class SkillCatalog {
                 var start = known?.1 ?? 0
                 if let known, known.0 == size { continue }
                 if start > size { start = 0 }
-                let (uses, end) = SkillUsage.read(url, from: start, extract: extract)
+                let (uses, builtins, end) = SkillUsage.read(url, from: start, extract: extract, builtins: agent == .claude)
                 try db.transaction {
                     for (name, at) in uses {
                         added += try db.run("INSERT OR IGNORE INTO skill_uses (name, agent, at, log) VALUES (?1, ?2, ?3, ?4)", .text(name), .text(agent.rawValue), .text(at), .text(url.path))
+                    }
+                    for name in builtins {
+                        try db.run("INSERT OR IGNORE INTO skill_builtins (name, agent) VALUES (?1, ?2)", .text(name), .text(agent.rawValue))
                     }
                     try db.run("INSERT OR REPLACE INTO log_offsets (path, size, offset) VALUES (?1, ?2, ?3)", .text(url.path), .int(Int64(size)), .int(Int64(end)))
                 }
@@ -938,6 +956,15 @@ final class SkillCatalog {
 enum SkillUsage {
     private static let claudeMarker = Data(#""name":"Skill","input":{"skill":""#.utf8)
     private static let codexMarker = Data("SKILL.md".utf8)
+    /// Claude Code names a built-in skill's path `bundled:<name>` when it hands the skill to the model.
+    private static let bundledMarker = Data(#""path":"bundled:"#.utf8)
+    // swiftlint:disable:next force_try
+    private static let bundledPath = try! NSRegularExpression(pattern: #""path":"bundled:([A-Za-z0-9._-]+)""#)
+
+    /// The built-in skills a Claude Code log line names.
+    static func claudeBuiltins(_ line: String) -> [String] {
+        bundledPath.matches(in: line, range: NSRange(line.startIndex..., in: line)).compactMap { Range($0.range(at: 1), in: line).map { String(line[$0]) } }
+    }
 
     /// The skill's name in a Claude Code log line, without a plugin prefix (`plugin:name` → `name`).
     static func claudeSkill(_ line: String) -> String? {
@@ -965,18 +992,25 @@ enum SkillUsage {
         return rest.firstIndex(of: "\"").map { String(rest[..<$0]) }
     }
 
-    /// The uses in a log from a byte offset on, and the offset after the last whole line.
-    static func read(_ url: URL, from start: Int, extract: (String) -> String?) -> ([(String, String)], Int) {
-        guard let handle = try? FileHandle(forReadingFrom: url) else { return ([], start) }
+    /// The uses in a log from a byte offset on, the built-in skills it names (when `builtins`), and the offset after
+    /// the last whole line.
+    static func read(_ url: URL, from start: Int, extract: (String) -> String?, builtins: Bool = false) -> ([(String, String)], Set<String>, Int) {
+        guard let handle = try? FileHandle(forReadingFrom: url) else { return ([], [], start) }
         defer { try? handle.close() }
         try? handle.seek(toOffset: UInt64(start))
         var uses: [(String, String)] = []
+        var named: Set<String> = []
         var offset = start
         var pending = Data()
         while let chunk = try? handle.read(upToCount: 4 * 1024 * 1024), !chunk.isEmpty {
             pending.append(chunk)
             guard let lastBreak = pending.lastIndex(of: 0x0A) else { continue }
             let whole = pending[pending.startIndex...lastBreak]
+            if builtins, whole.range(of: bundledMarker) != nil {
+                for line in whole.split(separator: 0x0A) where line.range(of: bundledMarker) != nil {
+                    named.formUnion(claudeBuiltins(String(decoding: line, as: UTF8.self)))
+                }
+            }
             if whole.range(of: claudeMarker) != nil || whole.range(of: codexMarker) != nil {
                 for line in whole.split(separator: 0x0A) where line.range(of: claudeMarker) != nil || line.range(of: codexMarker) != nil {
                     let text = String(decoding: line, as: UTF8.self)
@@ -986,7 +1020,7 @@ enum SkillUsage {
             offset += whole.count
             pending = Data(pending[pending.index(after: lastBreak)...])
         }
-        return (uses, offset)
+        return (uses, named, offset)
     }
 }
 

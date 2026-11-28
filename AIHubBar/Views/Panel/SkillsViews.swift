@@ -305,6 +305,12 @@ struct SkillsBlockView: View {
                                 HStack(spacing: 6) {
                                     if let verdict = used.verdict { SkillVerdictBadge(verdict: verdict) }
                                     Text(verbatim: used.name).lineLimit(1)
+                                    if used.isBuiltIn {
+                                        Text("встроен в Claude Code")
+                                            .foregroundStyle(.secondary)
+                                            .lineLimit(1)
+                                            .help(String(localized: "Скилл встроен в сам Claude Code: своей папки у него нет, проверять в каталоге нечего."))
+                                    }
                                     Spacer(minLength: 4)
                                     Text(Self.usedLine(used))
                                         .foregroundStyle(.secondary)
@@ -347,6 +353,7 @@ struct SkillsBlockView: View {
 /// The «Скиллы» section in place of the blocks: a search, filters and the list; a skill's card above it all.
 struct SkillsSectionView: View {
     @Environment(SkillStore.self) private var skills
+    @Environment(AppSettings.self) private var settings
     @Binding var section: PanelSection?
     @State private var filters = SkillCatalog.Filters()
     @State private var result = SkillCatalog.Result()
@@ -378,6 +385,8 @@ struct SkillsSectionView: View {
     @State private var askFailure: String?
     /// Claude Code or an API key is there to ask: `claude-code`, `api` or nil.
     @State private var askAvailable: String?
+    /// The folders in the projects folder, for «Для проекта…»: picks work without the Projects block.
+    @State private var projectFolders: [ProjectRef] = []
     /// The name being typed for «Сохранить фильтр»; nil while the field is hidden.
     @State private var savingName: String?
 
@@ -447,7 +456,10 @@ struct SkillsSectionView: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(10)
-        .task { askAvailable = await SkillReviewer.available() }
+        .task {
+            askAvailable = await SkillReviewer.available()
+            projectFolders = await Self.projectFolders(in: settings.projectsDirectory)
+        }
         .task(id: filters) {
             result = await skills.search(filters)
             let words = filters.query.trimmingCharacters(in: .whitespaces)
@@ -605,7 +617,7 @@ struct SkillsSectionView: View {
             TextField("Поиск по названию, описанию и заметке", text: $filters.query)
                 .textFieldStyle(.roundedBorder)
                 .onSubmit { if askPicks != nil { Task { await ask() } } }
-            if !filters.query.trimmingCharacters(in: .whitespaces).isEmpty || askingProject != nil || askFailure != nil {
+            if askAvailable != nil || !filters.query.trimmingCharacters(in: .whitespaces).isEmpty || askingProject != nil || askFailure != nil {
                 HStack(spacing: 6) {
                     if let askingProject {
                         ProgressView().controlSize(.small)
@@ -626,6 +638,7 @@ struct SkillsSectionView: View {
                               : String(localized: "Опишите задачу своими словами: ваша модель подберёт скиллы из каталога и открытых источников. Запрос уйдёт в Claude Code по подписке или в Anthropic API с вашим ключом."))
                     }
                     Spacer(minLength: 0)
+                    if askAvailable != nil && askingProject == nil && !skills.asking { projectMenu }
                 }
                 if let askFailure { Text(verbatim: askFailure).scaledFont(.caption2).foregroundStyle(.orange).fixedSize(horizontal: false, vertical: true) }
             }
@@ -699,6 +712,45 @@ struct SkillsSectionView: View {
             }
             if showsFilters { SkillFilterPanel(filters: $filters, facets: facets) }
         }
+    }
+
+    /// «Для проекта…»: the model picks skills for a project read from its folder, the same as the project row's «Скиллы».
+    private var projectMenu: some View {
+        Menu {
+            ForEach(projectFolders, id: \.path) { project in
+                Button(project.name) { skills.pendingProject = project }
+            }
+            if !projectFolders.isEmpty { Divider() }
+            Button("Другая папка…", action: chooseProjectFolder)
+        } label: {
+            Label("Для проекта…", systemImage: "folder")
+        }
+        .menuStyle(.borderlessButton)
+        .controlSize(.small)
+        .scaledFont(.caption)
+        .fixedSize()
+        .help(String(localized: "Подобрать скиллы для проекта: на этом Mac читается, из чего он сделан, и ваша модель выбирает из каталога и открытых источников."))
+    }
+
+    private func chooseProjectFolder() {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.directoryURL = URL(filePath: PathText.expand(settings.projectsDirectory))
+        panel.prompt = String(localized: "Подобрать")
+        NSApp.activate()
+        guard panel.runModal() == .OK, let url = panel.url else { return }
+        skills.pendingProject = ProjectRef(name: url.lastPathComponent, path: url.path)
+    }
+
+    /// The visible folders in the projects folder, by name, at most 40.
+    nonisolated static func projectFolders(in directory: String) async -> [ProjectRef] {
+        let root = URL(filePath: PathText.expand(directory))
+        let children = (try? FileManager.default.contentsOfDirectory(at: root, includingPropertiesForKeys: [.isDirectoryKey], options: [.skipsHiddenFiles])) ?? []
+        return children.filter { (try? $0.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true }
+            .sorted { $0.lastPathComponent.localizedStandardCompare($1.lastPathComponent) == .orderedAscending }
+            .prefix(40)
+            .map { ProjectRef(name: $0.lastPathComponent, path: $0.path) }
     }
 
     private var savedMenu: some View {

@@ -200852,6 +200852,462 @@
           }
         }
       }
+    },
+    "встроен в Claude Code": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مدمج في Claude Code"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in Claude Code integriert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "built into Claude Code"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "integrado en Claude Code"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "intégré à Claude Code"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bawaan Claude Code"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "integrato in Claude Code"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code に内蔵"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code에 내장"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wbudowany w Claude Code"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "integrado ao Claude Code"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "вбудований у Claude Code"
+          }
+        }
+      }
+    },
+    "Скилл встроен в сам Claude Code: своей папки у него нет, проверять в каталоге нечего.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المهارة مدمجة في Claude Code نفسه: ليس لها مجلد خاص، فلا شيء يُفحص في الكتالوج."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Skill ist in Claude Code selbst integriert: Er hat keinen eigenen Ordner, im Katalog gibt es nichts zu prüfen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The skill is built into Claude Code itself: it has no folder of its own, so there is nothing for the catalog to check."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El skill está integrado en el propio Claude Code: no tiene carpeta propia, así que el catálogo no tiene nada que revisar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le skill est intégré à Claude Code lui-même : il n'a pas de dossier, le catalogue n'a donc rien à vérifier."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill ini bawaan Claude Code sendiri: tidak punya folder sendiri, jadi tidak ada yang diperiksa katalog."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La skill è integrata in Claude Code stesso: non ha una cartella propria, quindi il catalogo non ha nulla da controllare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このスキルは Claude Code 自体に内蔵されています。専用のフォルダがないため、カタログでチェックするものはありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 스킬은 Claude Code 자체에 내장되어 있습니다. 자체 폴더가 없어 카탈로그에서 검사할 것이 없습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill jest wbudowany w sam Claude Code: nie ma własnego folderu, więc katalog nie ma czego sprawdzać."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O skill é integrado ao próprio Claude Code: não tem pasta própria, então não há nada para o catálogo verificar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скіл вбудований у сам Claude Code: власної папки в нього немає, перевіряти в каталозі нічого."
+          }
+        }
+      }
+    },
+    "Для проекта…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لمشروع…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für ein Projekt…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For a project…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para un proyecto…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour un projet…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Untuk proyek…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per un progetto…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクト用…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트용…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dla projektu…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para um projeto…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Для проєкту…"
+          }
+        }
+      }
+    },
+    "Другая папка…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مجلد آخر…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anderer Ordner…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Another folder…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otra carpeta…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autre dossier…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder lain…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altra cartella…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "別のフォルダ…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 폴더…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inny folder…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outra pasta…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Інша папка…"
+          }
+        }
+      }
+    },
+    "Подобрать": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختيار"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auswählen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegir"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilih"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選ぶ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "고르기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dobierz"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дібрати"
+          }
+        }
+      }
+    },
+    "Подобрать скиллы для проекта: на этом Mac читается, из чего он сделан, и ваша модель выбирает из каталога и открытых источников.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختيار مهارات لمشروع: يُقرأ على هذا الـ Mac مما يتكوّن، ويختار نموذجك من الكتالوج والمصادر المفتوحة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills für ein Projekt auswählen: Auf diesem Mac wird gelesen, woraus es besteht, und Ihr Modell wählt aus dem Katalog und offenen Quellen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick skills for a project: what it is made of is read on this Mac, and your model picks from the catalog and open sources."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegir skills para un proyecto: en este Mac se lee de qué está hecho y tu modelo elige del catálogo y de fuentes abiertas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir des skills pour un projet : ce qui le compose est lu sur ce Mac, et votre modèle choisit dans le catalogue et les sources ouvertes."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilih skill untuk proyek: isi proyek dibaca di Mac ini, lalu model Anda memilih dari katalog dan sumber terbuka."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli skill per un progetto: su questo Mac si legge di cosa è fatto, e il tuo modello sceglie dal catalogo e dalle fonti aperte."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクト向けのスキルを選びます: この Mac で構成を読み取り、あなたのモデルがカタログと公開ソースから選びます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트용 스킬 고르기: 이 Mac에서 무엇으로 만들어졌는지 읽고, 모델이 카탈로그와 공개 소스에서 고릅니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dobierz skille do projektu: na tym Macu odczytywane jest, z czego się składa, a Twój model wybiera z katalogu i otwartych źródeł."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher skills para um projeto: neste Mac é lido do que ele é feito, e seu modelo escolhe no catálogo e em fontes abertas."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дібрати скіли для проєкту: на цьому Mac читається, з чого він зроблений, і ваша модель обирає з каталогу та відкритих джерел."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
